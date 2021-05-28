@@ -1,24 +1,24 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import Vue from 'vue';
+import Vuex from 'vuex';
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 export default new Vuex.Store({
   modules: {
     splitter: {
       namespaced: true,
       state: {
-        open: false
+        open: false,
       },
       mutations: {
-        toggle (state, shouldOpen) {
+        toggle(state, shouldOpen) {
           if (typeof shouldOpen === 'boolean') {
-            state.open = shouldOpen
+            state.open = shouldOpen;
           } else {
-            state.open = !state.open
+            state.open = !state.open;
           }
-        }
-      }
-    }
-  }
-})
+        },
+      },
+    },
+  },
+});

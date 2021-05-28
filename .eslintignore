@@ -1,4 +1,7 @@
-/build/
-/config/
-/dist/
-/*.js
+/vue.config.js
+/babel.config.js
+/jest.config.js
+/tests
+/plugins
+/platforms
+/sdk
