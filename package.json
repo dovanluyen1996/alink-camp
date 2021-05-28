@@ -9,7 +9,7 @@
     "start": "npm run dev",
     "build": "node build/build.js",
     "build:watch": "cross-env WEBPACK_WATCH=true node build/build.js",
-    "lint": "eslint --ext .js,.vue src"
+    "lint": "vue-cli-service lint"
   },
   "dependencies": {
     "onsenui": "2.10.8",

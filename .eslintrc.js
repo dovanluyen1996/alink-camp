@@ -36,7 +36,7 @@ module.exports = {
     'no-new': 0,
     // アロー関数の() {}の使い方
     'arrow-parens': [2, 'as-needed', {
-      requireForBlockBody: true
+      requireForBlockBody: true,
     }],
     // 関数内で、引数のオブジェクトのプロパティへ再代入することを許可する
     'no-param-reassign': 0,
@@ -49,7 +49,7 @@ module.exports = {
     // switchとcaseは同じインデントにする
     indent: ['error', 2],
     'no-mixed-operators': ['error', {
-      allowSamePrecedence: true
+      allowSamePrecedence: true,
     }],
     'no-await-in-loop': 'off',
     'no-unneeded-ternary': 'off',
