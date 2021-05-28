@@ -1,4 +1,4 @@
-import navigators from './navigators'
+import navigators from 'stores/modules/navigators'
 
 export default {
   ...navigators

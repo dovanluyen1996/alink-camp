@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import WindForecastIndexPage from './index'
+import WindForecastIndexPage from 'views/wind-forecast/index'
 
 export default {
   beforeCreate () {

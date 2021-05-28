@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import ScoresIndexPage from './index'
+import ScoresIndexPage from 'views/scores/index'
 
 export default {
   beforeCreate () {

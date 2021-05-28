@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import CourseWeatherIndexPage from './index'
+import CourseWeatherIndexPage from 'views/course-weather/index'
 
 export default {
   beforeCreate () {

@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import AppNavigator from '@/components/app-navigator'
+import AppNavigator from 'components/app-navigator'
 
 export default {
   name: 'app',
