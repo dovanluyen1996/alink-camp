@@ -1,9 +1,9 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-import modules from 'stores/modules'
+import Vue from 'vue';
+import Vuex from 'vuex';
+import modules from 'stores/modules';
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 export default new Vuex.Store({
-  modules
-})
+  modules,
+});

@@ -1,14 +1,14 @@
 <template>
-  <app-navigator></app-navigator>
+  <app-navigator />
 </template>
 
 <script>
-import AppNavigator from 'components/app-navigator'
+import AppNavigator from 'components/app-navigator';
 
 export default {
-  name: 'app',
+  name: 'App',
   components: {
-    AppNavigator
-  }
-}
+    AppNavigator,
+  },
+};
 </script>

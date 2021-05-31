@@ -2,25 +2,25 @@
   <v-ons-navigator
     :page-stack="pageStack"
     :pop-page="popPage"
-  ></v-ons-navigator>
+  />
 </template>
 
 <script>
-import AppTabbar from 'components/app-tabbar'
+import AppTabbar from 'components/app-tabbar';
 
 export default {
-  beforeCreate () {
-    this.$store.dispatch('appNavigator/push', AppTabbar)
-  },
   computed: {
-    pageStack () {
-      return this.$store.state.appNavigator.stack
-    }
+    pageStack() {
+      return this.$store.state.appNavigator.stack;
+    },
+  },
+  beforeCreate() {
+    this.$store.dispatch('appNavigator/push', AppTabbar);
   },
   methods: {
-    popPage () {
-      this.$store.dispatch('appNavigator/pop')
-    }
-  }
-}
+    popPage() {
+      this.$store.dispatch('appNavigator/pop');
+    },
+  },
+};
 </script>
