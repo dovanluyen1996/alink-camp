@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import CourseSearchIndexPage from 'views/course-search/index';
+import CourseSearchIndexPage from '@/views/course-search/index';
 
 export default {
   computed: {
