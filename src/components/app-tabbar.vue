@@ -32,27 +32,27 @@ export default {
       tabs: [
         {
           label: 'コース天気',
-          icon: 'cloud',
+          icon: 'weather',
           page: CourseWeatherNavigator,
         },
         {
           label: 'コース検索',
-          icon: 'bullseye',
+          icon: 'search',
           page: CourseSearchNavigator,
         },
         {
           label: 'スコア',
-          icon: 'golf-ball',
+          icon: 'score',
           page: ScoresNavigator,
         },
         {
           label: '風予報',
-          icon: 'smile',
+          icon: 'wind',
           page: WindForecastNavigator,
         },
         {
           label: 'メニュー',
-          icon: 'bars',
+          icon: 'menu',
           page: Menu,
         },
       ],
@@ -60,3 +60,21 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+$tabs: weather, search, score, wind, menu;
+
+/deep/ .tabbar {
+  ons-icon {
+    display: none;
+  }
+  @each $tab in $tabs {
+    .tabbar__item[icon="#{$tab}"] .tabbar__icon {
+      margin-bottom: 6px;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-image: url(~@/assets/images/tabbar/#{$tab}.png);
+    }
+  }
+}
+</style>
