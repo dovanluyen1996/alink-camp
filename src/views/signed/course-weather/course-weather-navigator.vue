@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import CourseWeatherIndexPage from '@/views/course-weather/index';
+import CourseWeatherIndexPage from '@/views/signed/course-weather/index';
 
 export default {
   computed: {

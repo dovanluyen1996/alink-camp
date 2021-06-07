@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import AppTabbar from '@/views/app-tabbar';
+import AppTabbar from '@/views/signed/app-tabbar';
 
 export default {
   computed: {
