@@ -14,4 +14,7 @@ new Vue({
   store,
   components: { App },
   template: '<App/>',
+  beforeCreate () {
+    this.$ons.disableAutoStyling();
+  }
 });
