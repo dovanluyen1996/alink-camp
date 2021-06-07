@@ -1,0 +1,13 @@
+.tabbar {
+  height: $--tabbar-height;
+}
+.tabbar__content {
+  bottom: $--tabbar-height;
+}
+.tabbar--top__content {
+  top: $--tabbar-height;
+}
+.tabbar__button {
+  height: $--tabbar-button-line-height;
+  line-height: $--tabbar-button-line-height;
+}

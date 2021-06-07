@@ -1,0 +1,15 @@
+@import "../_variables.scss";
+@import "./_variables.scss";
+
+@media (orientation: landscape) {
+  html[onsflag-iphonex-landscape] .page__content {
+    padding-left: $--iphonex-safe-area-inset-left-landscape;
+    padding-right: $--iphonex-safe-area-inset-right-landscape;
+  }
+  /* Ignore if the page is in dialogs or modals */
+  html[onsflag-iphonex-landscape] .dialog .page__content,
+  html[onsflag-iphonex-landscape] .modal .page__content {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}

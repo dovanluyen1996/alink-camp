@@ -1,0 +1,11 @@
+// onsenUIのカスタマイズの中でも
+// 根幹のレイアウトに関わるの
+// NOTE: onsen-overrideの設置場所を変えるとしても
+// 配下のディレクトリ構成を変えたくないのであえて相対パスにしている
+@import './toolbar.scss';
+@import './toolbar-button.scss';
+@import './tabbar.scss';
+@import './combination.scss';
+@import './iphonex-support/page.scss';
+@import './iphonex-support/toolbar.scss';
+@import './iphonex-support/combination.scss';

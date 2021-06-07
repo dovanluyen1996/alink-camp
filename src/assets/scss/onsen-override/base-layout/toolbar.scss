@@ -1,0 +1,37 @@
+@import "./_variables.scss";
+
+.toolbar {
+  height: $--toolbar-height;
+}
+
+.toolbar__item {
+  height: $--toolbar-height;
+}
+
+.toolbar__left {
+  line-height: $--toolbar-height;
+}
+
+.toolbar__right {
+  line-height: $--toolbar-height;
+}
+
+.toolbar__center {
+  line-height: $--toolbar-height;
+}
+
+.toolbar__title {
+  line-height: $--toolbar-height;
+}
+
+.bottom-bar {
+  height: $--toolbar-height;
+}
+
+.bottom-bar__line-height {
+  line-height: $--toolbar-height;
+}
+
+.bottom-bar--aligned {
+  line-height: $--toolbar-height;
+}

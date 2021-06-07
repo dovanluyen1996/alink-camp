@@ -1,0 +1,17 @@
+@import "../_variables.scss";
+@import "./_variables.scss";
+
+@media (orientation: landscape) {
+  html[onsflag-iphonex-landscape] .toolbar__left {
+    padding-left: $--iphonex-safe-area-inset-left-landscape;
+  }
+
+  html[onsflag-iphonex-landscape] .toolbar__right {
+    padding-right: $--iphonex-safe-area-inset-right-landscape;
+  }
+
+  html[onsflag-iphonex-landscape] .bottom-bar {
+    padding-right: $--iphonex-safe-area-inset-right-landscape;
+    padding-left: $--iphonex-safe-area-inset-left-landscape;
+  }
+}

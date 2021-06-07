@@ -1,0 +1,38 @@
+@import "./_variables.scss";
+
+/* ------- */
+/* Default */
+/* ------- */
+
+/* All page__background with a ordinal toolbar */
+.toolbar+.page__background {
+  top: $--toolbar-height;
+}
+
+/* All page__content with a toolbar */
+.toolbar+.page__background+.page__content {
+  top: $--toolbar-height;
+  padding-top: 0;
+}
+
+/* -------- */
+/*  Others  */
+/* -------- */
+
+/* All page__content with a transparent cover-content toolbar and its direct descendant page_content */
+.toolbar.toolbar--transparent.toolbar--cover-content+.page__background+.page__content,
+.toolbar.toolbar--transparent.toolbar--cover-content+.page__background+.page__content .page_content {
+  top: 0;
+  padding-top: $--toolbar-height;
+}
+
+/* -------- */
+/*  status-bar-fill  */
+/* -------- */
+.page[status-bar-fill] > .toolbar:not(.toolbar--transparent) + .page__background,
+.page[status-bar-fill] > .toolbar:not(.toolbar--cover-content) + .page__background + .page__content {
+  top: #{$--toolbar-height + 20px};
+}
+.toolbar + .page__background + .page__content ons-tabbar[status-bar-fill] > .tabbar--top__content {
+  top: #{$--toolbar-height + 5px};
+}
