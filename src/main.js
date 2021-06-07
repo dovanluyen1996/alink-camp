@@ -9,8 +9,9 @@ import App from '@/app';
 
 Vue.config.productionTip = false;
 
-// NOTE: enableAutoStatusBarFillは、$ons.isReady() = falseで動作するが、
-//       vueのbeforeCreateではtrueになってしまうため、先に実行する
+// NOTE: iPhoneX対応を行うとiPhone8以下にも影響するのでこれを入れる
+//       enableAutoStatusBarFillは、$ons.isReady() = falseで動作するが、
+//       vueのbeforeCreateではtrueになっているため先に実行する
 if (/iP(hone|(o|a)d)/.test(navigator.userAgent)) {
   console.log('isIOS', VueOnsen);
   VueOnsen.enableAutoStatusBarFill();
