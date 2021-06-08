@@ -7,7 +7,7 @@
 
 <script>
 import AppTabbar from '@/views/signed/app-tabbar';
-import PurchaseInfo from '@/views/unsigned/purchase-info';
+import PurchaseInformation from '@/views/unsigned/purchase-information';
 
 export default {
   computed: {
@@ -17,7 +17,7 @@ export default {
     isSigned: () => false,
   },
   beforeCreate() {
-    this.$store.dispatch('appNavigator/push', this.isSigned ? AppTabbar : PurchaseInfo);
+    this.$store.dispatch('appNavigator/push', this.isSigned ? AppTabbar : PurchaseInformation);
   },
   methods: {
     popPage() {
