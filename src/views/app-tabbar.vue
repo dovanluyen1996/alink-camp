@@ -11,11 +11,11 @@
 </template>
 
 <script>
-import CourseWeatherNavigator from '@/views/signed/course-weather/course-weather-navigator';
-import CourseSearchNavigator from '@/views/signed/course-search/course-search-navigator';
-import ScoresNavigator from '@/views/signed/scores/scores-navigator';
-import WindForecastNavigator from '@/views/signed/wind-forecast/wind-forecast-navigator';
-import Menu from '@/views/signed/menu/index';
+import CourseWeatherNavigator from '@/views/course-weather/course-weather-navigator';
+import CourseSearchNavigator from '@/views/course-search/course-search-navigator';
+import ScoresNavigator from '@/views/scores/scores-navigator';
+import WindForecastNavigator from '@/views/wind-forecast/wind-forecast-navigator';
+import Menu from '@/views/menu/index';
 
 const TAB_INDEXES = {
   COURSE_WEATHER: 0,

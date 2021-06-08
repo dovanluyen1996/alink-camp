@@ -6,8 +6,8 @@
 </template>
 
 <script>
-import AppTabbar from '@/views/signed/app-tabbar';
-import PurchaseInformation from '@/views/unsigned/purchase-information';
+import AppTabbar from '@/views/app-tabbar';
+import PurchaseInformation from '@/views/purchase-information';
 
 export default {
   computed: {
