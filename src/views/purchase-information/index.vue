@@ -32,7 +32,11 @@
 </template>
 
 <script>
+// components
 import FixedFooter from '@/components/organisms/fixed-footer';
+
+// pages
+import StartIndex from '@/views/start';
 
 export default {
   name: 'PurchaseInformation',
@@ -41,7 +45,9 @@ export default {
   },
   methods: {
     callToPurchase() {
-      console.log('callToPurchase');
+      // TODO: 仮でスタートページに飛ばしているので
+      // サブスクリプションを呼んでください
+      this.$store.dispatch('appNavigator/replace', StartIndex);
     },
   },
 };
