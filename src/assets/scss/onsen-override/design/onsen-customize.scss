@@ -57,6 +57,7 @@ $button-height--rounded: 36px;
   height: $button-height;
   min-width: $button-height;
   border-radius: 4px;
+  line-height: 36px;
   &--large--quiet {
     color: inherit;
   }
