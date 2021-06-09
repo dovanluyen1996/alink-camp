@@ -64,13 +64,22 @@ $button-height--rounded: 36px;
   height: $button-height;
   line-height: 36px;
   border-radius: 4px;
+  font-size: 14px;
 
   &--large--quiet {
     color: inherit;
   }
 
   &--quiet {
+    font-size: 14px;
+  }
+
+  &--quiet-dark {
     color: inherit;
+  }
+
+  &--cta {
+    font-size: 14px;
   }
 
   &--rounded {
@@ -84,7 +93,7 @@ $button-height--rounded: 36px;
 .text-input,
 .select-input {
   padding: 0 5px;
-  border: 2px solid #999;
+  border: 2px solid #d9d9d9;
 }
 
 /* ----------

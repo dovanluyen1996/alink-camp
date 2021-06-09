@@ -31,6 +31,8 @@
 </template>
 
 <script>
+import SignIn from '@/views/auth/sign-in';
+
 export default {
   name: 'StartIndex',
   methods: {
@@ -48,13 +50,13 @@ export default {
     //   console.log('goToAuth');
     // },
     goToAuth() {
-      console.log('goToAuth');
+      this.$store.dispatch('appNavigator/push', SignIn);
     },
   },
 };
 
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 .background {
   background-image: url('~@/assets/images/start/background.jpg');
   background-position: center;
