@@ -19,14 +19,10 @@
         </div>
       </div>
       <div class="start-page__bottom">
-        <v-ons-button
-          @click="handleClickStart"
-        >
+        <v-ons-button @click="handleClickStart">
           早速天気を確認
         </v-ons-button>
-        <v-ons-button
-          @click="goToAuth"
-        >
+        <v-ons-button @click="goToAuth">
           アプリデータを引き継ぐ
         </v-ons-button>
       </div>
@@ -60,35 +56,41 @@ export default {
 </script>
 <style lang="scss">
 .background {
-  background-image: url(~@/assets/images/start/background.jpg);
+  background-image: url('~@/assets/images/start/background.jpg');
   background-position: center;
   background-size: cover;
 }
+
 .start-page {
+  align-content: stretch;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-content: stretch;
   text-align: center;
+
   &__top {
     margin-bottom: 112px;
   }
+
   &__bottom {
     .button {
-      width: 87%;
-      max-width: 325px;
       margin-bottom: 20px;
+      max-width: 325px;
+      width: 87%;
     }
   }
 }
+
 .app-logo {
   margin-bottom: 20px;
 }
+
 .app-name {
   font-size: 20px;
   font-weight: 600;
   line-height: 34px;
 }
+
 .app-version {
   font-size: 15px;
   font-weight: 600;
