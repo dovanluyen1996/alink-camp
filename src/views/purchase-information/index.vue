@@ -35,6 +35,7 @@
 import FixedFooter from '@/components/organisms/fixed-footer';
 
 export default {
+  name: 'PurchaseInformation',
   components: {
     FixedFooter,
   },
