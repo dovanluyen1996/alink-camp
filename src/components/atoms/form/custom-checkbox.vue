@@ -48,6 +48,7 @@ export default {
     height: 24px;
     border: 2px solid #d9d9d9;
     box-sizing: border-box;
+    background: #fff;
   }
 }
 </style>

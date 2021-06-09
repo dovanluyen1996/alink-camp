@@ -8,27 +8,27 @@
       :type="type"
     />
     <template v-if="canShowPassword">
-      <label class="password-field-swich">
-        <custom-checkbox v-model="isShownPassword" />
-        <span class="password-field-swich__label-text">
-          パスワードを表示
-        </span>
-      </label>
-      <p class="password-field-help">
-        ※6文字以上の半角英数字で登録して下さい
-      </p>
+      <check-field v-model="isShownPassword">
+        パスワードを表示
+      </check-field>
     </template>
+    <p
+      v-if="help"
+      class="password-field-help"
+    >
+      ※6文字以上の半角英数字で登録して下さい
+    </p>
   </input-base-layout>
 </template>
 
 <script>
-import CustomCheckbox from '@/components/atoms/form/custom-checkbox';
 import InputBaseLayout from './base-layout';
+import CheckField from '@/components/organisms/form/check-field';
 
 export default {
   components: {
     InputBaseLayout,
-    CustomCheckbox,
+    CheckField,
   },
   props: {
     value: {
@@ -39,6 +39,10 @@ export default {
     title: {
       type: String,
       default: null,
+    },
+    help: {
+      type: String,
+      default: '※6文字以上の半角英数字で登録して下さい',
     },
     canShowPassword: {
       type: Boolean,
@@ -67,16 +71,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.password-field-swich {
-  display: inline-flex;
-  align-items: center;
-  margin-top: 20px;
-  font-weight: 600;
-  &__label-text {
-    margin-left: 8px;
-  }
-}
 .password-field-help {
   margin-bottom: 0;
+}
+.check-field {
+  margin-top: 20px;
 }
 </style>

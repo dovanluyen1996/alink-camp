@@ -53,7 +53,8 @@ export default {
 .social-login {
   display: flex;
   flex-wrap: wrap;
-  margin: 40px 13px 0;
+  margin-left: 13px;
+  margin-right: 13px;
 }
 .social-login-title {
   width: 100%;
