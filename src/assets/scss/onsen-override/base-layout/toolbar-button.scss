@@ -1,5 +1,8 @@
 @import "./_variables.scss";
 
+.back-button {
+  height: $--toolbar-height;
+}
 .back-button__label {
   line-height: $--toolbar-height;
 }

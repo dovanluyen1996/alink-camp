@@ -1,8 +1,6 @@
 <template>
   <v-ons-page class="sign-in">
-    <custom-toolbar>
-      データを引き継ぐ
-    </custom-toolbar>
+    <custom-toolbar title="データを引き継ぐ" />
     <text-field
       v-model="email"
       title="メールアドレス"
@@ -72,18 +70,22 @@ export default {
 .sign-in {
   text-align: center;
 }
+
 .password-field {
   /deep/ .card {
     margin-bottom: 15px;
   }
 }
+
 .remember-password {
   margin: 0 40px 60px;
   text-align: left;
+
   /deep/ .custom-input__visual {
     border-color: #222;
   }
 }
+
 .social-login {
   margin-top: 40px;
 }
