@@ -70,10 +70,10 @@ $tabs: weather, search, score, wind, menu;
   }
   @each $tab in $tabs {
     .tabbar__item[icon="#{$tab}"] .tabbar__icon {
-      margin-bottom: 6px;
+      background-image: url(~@/assets/images/tabbar/#{$tab}.png);
       background-position: center;
       background-repeat: no-repeat;
-      background-image: url(~@/assets/images/tabbar/#{$tab}.png);
+      margin-bottom: 6px;
     }
   }
 }

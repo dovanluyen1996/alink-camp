@@ -30,11 +30,11 @@ export default {
 
 <style scoped lang="scss">
 .fixed-footer {
-  position: fixed;
   bottom: 0;
-  z-index: 10;
   padding: 16px 0;
-  width: 100%;
+  position: fixed;
   text-align: center;
+  width: 100%;
+  z-index: 10;
 }
 </style>

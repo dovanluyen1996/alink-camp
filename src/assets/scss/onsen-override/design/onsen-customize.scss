@@ -11,18 +11,21 @@
  Control
 ---------- */
 $segment-height: 34px;
+
 .segment {
   &__button {
     height: $segment-height;
     line-height: $segment-height;
   }
+
   &__item:first-child > .segment__button {
-    border-top-left-radius: $segment-height / 2;
     border-bottom-left-radius: $segment-height / 2;
+    border-top-left-radius: $segment-height / 2;
   }
+
   &__item:last-child > .segment__button {
-    border-top-right-radius: $segment-height / 2;
     border-bottom-right-radius: $segment-height / 2;
+    border-top-right-radius: $segment-height / 2;
   }
 }
 
@@ -30,21 +33,23 @@ $segment-height: 34px;
  Dialog
 ---------- */
 $alert-dialog-radius: 8px;
+
 .alert-dialog-title {
-  display: flex;
-  justify-content: center;
   align-items: center;
-  height: 50px;
-  margin-top: -16px;
-  margin-bottom: 20px;
+  background: #d3f0ff;
   border-top-left-radius: $alert-dialog-radius;
   border-top-right-radius: $alert-dialog-radius;
-  background: #d3f0ff;
+  display: flex;
+  height: 50px;
+  justify-content: center;
+  margin-bottom: 20px;
+  margin-top: -16px;
 }
+
 .alert-dialog-footer {
+  box-sizing: border-box;
   justify-content: center;
   padding: 17px 20px;
-  box-sizing: border-box;
   text-align: center;
 }
 
@@ -53,28 +58,33 @@ $alert-dialog-radius: 8px;
 ---------- */
 $button-height: 44px;
 $button-height--rounded: 36px;
+
 .button {
-  height: $button-height;
-  min-width: $button-height;
   border-radius: 4px;
+  height: $button-height;
   line-height: 36px;
+  min-width: $button-height;
+
   &--large--quiet {
     color: inherit;
   }
+
   &--quiet {
     color: inherit;
   }
+
   &--rounded {
     border-radius: 18px;
     height: $button-height--rounded;
-    min-width: $button-height--rounded;
     line-height: 28px;
+    min-width: $button-height--rounded;
   }
 }
+
 .text-input,
 .select-input {
-  padding: 0 5px;
   border: 2px solid #999;
+  padding: 0 5px;
 }
 
 /* ----------
@@ -97,12 +107,10 @@ $button-height--rounded: 36px;
  Page
 ---------- */
 .page__background {
-  background-image: linear-gradient(
-    180deg,
-    rgba(168,215,255,1) 0%,
-    rgba(176,237,176,1) 90%,
-    rgba(148,235,148,1) 100%
-  );
+  background-image: linear-gradient(180deg,
+  rgba(168, 215, 255, 1) 0%,
+  rgba(176, 237, 176, 1) 90%,
+  rgba(148, 235, 148, 1) 100%);
 }
 
 /* ----------
@@ -114,7 +122,7 @@ $button-height--rounded: 36px;
 ---------- */
 .card {
   border-radius: 10px;
+  box-shadow: none;
   margin: 20px;
   padding: 20px;
-  box-shadow: none;
 }
