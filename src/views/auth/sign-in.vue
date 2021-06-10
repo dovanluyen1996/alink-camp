@@ -11,9 +11,10 @@
         title="パスワード"
       />
       <div class="remember-password">
-        <check-field v-model="rememberPassword">
-          パスワードを保存
-        </check-field>
+        <check-field
+          v-model="rememberPassword"
+          label="パスワードを保存"
+        />
         <div>
           ※6文字以上の半角英数字で登録して下さい
         </div>

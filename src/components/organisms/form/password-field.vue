@@ -16,7 +16,7 @@
       v-if="help"
       class="password-field-help"
     >
-      ※6文字以上の半角英数字で登録して下さい
+      {{ help }}
     </p>
   </input-base-layout>
 </template>
@@ -42,7 +42,7 @@ export default {
     },
     help: {
       type: String,
-      default: '※6文字以上の半角英数字で登録して下さい',
+      default: null,
     },
     canShowPassword: {
       type: Boolean,

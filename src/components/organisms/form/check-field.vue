@@ -1,8 +1,11 @@
 <template>
   <label class="check-field">
     <custom-checkbox v-model="checkedValue" />
-    <span class="check-field__label-text">
-      <slot />
+    <span
+      v-if="label"
+      class="check-field__label-text"
+    >
+      {{ label }}
     </span>
   </label>
 </template>

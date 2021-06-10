@@ -23,3 +23,9 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.button {
+  text-align: center;
+}
+</style>
