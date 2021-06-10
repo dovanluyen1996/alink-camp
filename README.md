@@ -27,4 +27,7 @@ yarn stylelint [file|directory]
 
 # Automatically fix
 yarn stylelint --fix [file|directory]
+
+# regexp
+yarn stylelint src/**/*\[\.s*css\|\.vue\]
 ```
