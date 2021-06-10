@@ -62,9 +62,9 @@ export default {
 }
 
 .start-page {
-  align-content: stretch;
   display: flex;
   flex-direction: column;
+  align-content: stretch;
   justify-content: center;
   text-align: center;
 
@@ -74,9 +74,9 @@ export default {
 
   &__bottom {
     .button {
-      margin-bottom: 20px;
-      max-width: 325px;
       width: 87%;
+      max-width: 325px;
+      margin-bottom: 20px;
     }
   }
 }
