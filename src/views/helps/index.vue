@@ -11,9 +11,15 @@
     <v-ons-card>
       <v-ons-list>
         <v-ons-list-item
+<<<<<<< HEAD
           v-for="help in helps"
           :key="help.id"
           @click="showHelp(help.id)"
+=======
+          v-for="help in list"
+          :key="help.id"
+          @click="showhelp(help.id)"
+>>>>>>> a787c93 (mock api helps)
         >
           <div>
             <p>{{ help.title }}</p>
@@ -28,7 +34,11 @@
 export default {
   data() {
     return {
+<<<<<<< HEAD
       helps: [
+=======
+      list: [
+>>>>>>> a787c93 (mock api helps)
         {
           id: 1,
           title: 'Help 1',
