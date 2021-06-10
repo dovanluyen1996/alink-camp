@@ -15,7 +15,7 @@ import CourseWeatherNavigator from '@/views/course-weather/course-weather-naviga
 import CourseSearchNavigator from '@/views/course-search/course-search-navigator';
 import ScoresNavigator from '@/views/scores/scores-navigator';
 import WindForecastNavigator from '@/views/wind-forecast/wind-forecast-navigator';
-import Menu from '@/views/menu/index';
+import MenuNavigator from '@/views/menu/menu-navigator';
 
 const TAB_INDEXES = {
   COURSE_WEATHER: 0,
@@ -53,7 +53,7 @@ export default {
         {
           label: 'メニュー',
           icon: 'menu',
-          page: Menu,
+          page: MenuNavigator,
         },
       ],
     };
