@@ -19,13 +19,13 @@ $segment-height: 34px;
   }
 
   &__item:first-child > .segment__button {
-    border-bottom-left-radius: $segment-height / 2;
     border-top-left-radius: $segment-height / 2;
+    border-bottom-left-radius: $segment-height / 2;
   }
 
   &__item:last-child > .segment__button {
-    border-bottom-right-radius: $segment-height / 2;
     border-top-right-radius: $segment-height / 2;
+    border-bottom-right-radius: $segment-height / 2;
   }
 }
 
@@ -35,15 +35,15 @@ $segment-height: 34px;
 $alert-dialog-radius: 8px;
 
 .alert-dialog-title {
+  display: flex;
   align-items: center;
+  justify-content: center;
+  height: 50px;
+  margin-top: -16px;
+  margin-bottom: 20px;
   background: #d3f0ff;
   border-top-left-radius: $alert-dialog-radius;
   border-top-right-radius: $alert-dialog-radius;
-  display: flex;
-  height: 50px;
-  justify-content: center;
-  margin-bottom: 20px;
-  margin-top: -16px;
 }
 
 .alert-dialog-footer {
@@ -60,10 +60,10 @@ $button-height: 44px;
 $button-height--rounded: 36px;
 
 .button {
-  border-radius: 4px;
+  min-width: $button-height;
   height: $button-height;
   line-height: 36px;
-  min-width: $button-height;
+  border-radius: 4px;
 
   &--large--quiet {
     color: inherit;
@@ -74,17 +74,17 @@ $button-height--rounded: 36px;
   }
 
   &--rounded {
-    border-radius: 18px;
+    min-width: $button-height--rounded;
     height: $button-height--rounded;
     line-height: 28px;
-    min-width: $button-height--rounded;
+    border-radius: 18px;
   }
 }
 
 .text-input,
 .select-input {
-  border: 2px solid #999;
   padding: 0 5px;
+  border: 2px solid #999;
 }
 
 /* ----------
@@ -123,8 +123,8 @@ $button-height--rounded: 36px;
  Visual
 ---------- */
 .card {
+  padding: 20px;
+  margin: 20px;
   border-radius: 10px;
   box-shadow: none;
-  margin: 20px;
-  padding: 20px;
 }
