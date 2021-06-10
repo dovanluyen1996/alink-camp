@@ -22,8 +22,8 @@
 </template>
 
 <script>
-import InputBaseLayout from './base-layout';
 import CheckField from '@/components/organisms/form/check-field';
+import InputBaseLayout from './base-layout';
 
 export default {
   components: {

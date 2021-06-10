@@ -28,7 +28,7 @@
       パスワードを忘れた方はこちら
     </v-ons-button>
 
-    <social-login/>
+    <social-login />
   </v-ons-page>
 </template>
 

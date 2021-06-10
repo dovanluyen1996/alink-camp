@@ -7,4 +7,4 @@ import CustomToolbar from '@/components/organisms/custom-toolbar.vue';
 // style
 import '@/assets/scss/style.scss';
 
-Vue.component('custom-toolbar', CustomToolbar);
+Vue.component('CustomToolbar', CustomToolbar);

@@ -3,7 +3,10 @@
     <div class="social-login-title">
       他サービスでログイン
     </div>
-    <v-ons-card v-for="(service, index) in services">
+    <v-ons-card
+      v-for="(service, index) in services"
+      :key="index"
+    >
       <img
         :src="service.image"
         class="social-login-image"
@@ -16,8 +19,12 @@
 </template>
 
 <script>
+const YahooImage = require('@/assets/images/social/yahoo.png');
+const GoogleImage = require('@/assets/images/social/google.png');
+const TwitterImage = require('@/assets/images/social/twitter.png');
+const FacebookImage = require('@/assets/images/social/facebook.png');
+
 export default {
-  inject: ['navigator'],
   props: {
     title: {
       type: String,
@@ -29,19 +36,19 @@ export default {
       services: [
         {
           name: 'Yahoo! JAPAN',
-          image: require('@/assets/images/social/yahoo.png'),
+          image: YahooImage,
         },
         {
           name: 'Google',
-          image: require('@/assets/images/social/google.png'),
+          image: GoogleImage,
         },
         {
           name: 'Twitter',
-          image: require('@/assets/images/social/twitter.png'),
+          image: TwitterImage,
         },
         {
           name: 'Facobook',
-          image: require('@/assets/images/social/facebook.png'),
+          image: FacebookImage,
         },
       ],
     };

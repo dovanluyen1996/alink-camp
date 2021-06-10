@@ -17,7 +17,7 @@ export default {
   props: {
     value: {
       type: Boolean,
-      default: '',
+      default: false,
       requier: true,
     },
     label: {
