@@ -1,5 +1,5 @@
 <template>
-  <input-base-layout
+  <base-field
     :title="title"
     class="password-field"
   >
@@ -18,16 +18,16 @@
     >
       {{ help }}
     </p>
-  </input-base-layout>
+  </base-field>
 </template>
 
 <script>
 import CheckField from '@/components/organisms/form/check-field';
-import InputBaseLayout from './base-layout';
+import BaseField from './base-field';
 
 export default {
   components: {
-    InputBaseLayout,
+    BaseField,
     CheckField,
   },
   props: {

@@ -1,5 +1,5 @@
 <template>
-  <input-base-layout
+  <base-field
     :title="title"
     class="text-field"
   >
@@ -7,15 +7,15 @@
       v-model="inputedValue"
       type="text"
     />
-  </input-base-layout>
+  </base-field>
 </template>
 
 <script>
-import InputBaseLayout from './base-layout';
+import BaseField from './base-field';
 
 export default {
   components: {
-    InputBaseLayout,
+    BaseField,
   },
   props: {
     value: {

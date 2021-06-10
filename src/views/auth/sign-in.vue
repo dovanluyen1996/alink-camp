@@ -2,33 +2,28 @@
   <v-ons-page>
     <custom-toolbar title="データを引き継ぐ" />
     <div class="content">
-      <text-field
-        v-model="email"
-        title="メールアドレス"
-      />
-      <password-field
-        v-model="password"
-        title="パスワード"
-      />
-      <div class="remember-password">
-        <check-field
-          v-model="rememberPassword"
-          label="パスワードを保存"
+      <base-form>
+        <text-field
+          v-model="email"
+          title="メールアドレス"
         />
-        <div>
-          ※6文字以上の半角英数字で登録して下さい
-        </div>
-      </div>
-      <custom-submit @click="signIn">
-        ログイン
-      </custom-submit>
-      <v-ons-button
-        modifier="quiet"
-        class="go-to-password-reminder"
-        @click="goToPasswordReminder"
-      >
-        パスワードを忘れた方はこちら
-      </v-ons-button>
+        <password-field
+          v-model="password"
+          title="パスワード"
+        />
+        <template v-slot:buttons>
+          <custom-submit @click="signIn">
+            ログイン
+          </custom-submit>
+          <v-ons-button
+            modifier="quiet"
+            class="go-to-password-reminder"
+            @click="goToPasswordReminder"
+          >
+            パスワードを忘れた方はこちら
+          </v-ons-button>
+        </template>
+      </base-form>
 
       <social-login />
     </div>
@@ -36,18 +31,22 @@
 </template>
 
 <script>
+// components
+import BaseForm from '@/components/organisms/form/base-form';
 import TextField from '@/components/organisms/form/text-field';
 import PasswordField from '@/components/organisms/form/password-field';
-import CheckField from '@/components/organisms/form/check-field';
-import CustomSubmit from '@/components/atoms/form/custom-submit';
+import CustomSubmit from '@/components/organisms/form/custom-submit';
 import SocialLogin from '@/components/organisms/social-login';
+
+// pages
+import PasswordReminder from '@/views/auth/password-reminder';
 
 export default {
   name: 'SignIn',
   components: {
+    BaseForm,
     TextField,
     PasswordField,
-    CheckField,
     CustomSubmit,
     SocialLogin,
   },
@@ -55,7 +54,6 @@ export default {
     return {
       email: '',
       password: '',
-      rememberPassword: true,
     };
   },
   methods: {
@@ -63,7 +61,7 @@ export default {
       console.log('signIn');
     },
     goToPasswordReminder() {
-      console.log('goToPasswordReminder');
+      this.$store.dispatch('appNavigator/push', PasswordReminder);
     },
   },
 };
@@ -72,22 +70,9 @@ export default {
 <style lang="scss" scoped>
 @import '@/assets/scss/_variables.scss';
 
-.content {
-  text-align: center;
-}
-
 .password-field {
   /deep/ .card {
     margin-bottom: 15px;
-  }
-}
-
-.remember-password {
-  margin: 0 40px 60px;
-  text-align: left;
-
-  /deep/ .custom-input__visual {
-    border-color: $color-default;
   }
 }
 
@@ -95,7 +80,7 @@ export default {
   margin-top: 10px;
 }
 
-.social-login {
-  margin-top: 40px;
+.form {
+  margin-bottom: 40px;
 }
 </style>

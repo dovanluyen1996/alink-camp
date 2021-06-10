@@ -14,7 +14,7 @@
 
 <script>
 export default {
-  name: 'InputBaseLayout',
+  name: 'BaseFiled',
   props: {
     title: {
       type: String,
