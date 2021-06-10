@@ -7,7 +7,7 @@
           v-model="email"
           title="メールアドレス"
         />
-        <template v-slot:buttons>
+        <template #buttons>
           <custom-submit @click="sendAuthCode">
             認証コードを送信
           </custom-submit>

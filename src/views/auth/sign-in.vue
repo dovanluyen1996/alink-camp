@@ -11,7 +11,7 @@
           v-model="password"
           title="パスワード"
         />
-        <template v-slot:buttons>
+        <template #buttons>
           <custom-submit @click="signIn">
             ログイン
           </custom-submit>

@@ -15,6 +15,12 @@
   padding-top: 0;
 }
 
+/* All page__content with a bottom-bar */
+.page-with-bottom-toolbar > .page__content {
+  bottom: $--toolbar-height;
+}
+
+
 /* -------- */
 /*  Others  */
 /* -------- */

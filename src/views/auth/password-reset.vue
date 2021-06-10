@@ -12,7 +12,7 @@
           title="新しいパスワードを設定"
           class="new-password"
         />
-        <template v-slot:buttons>
+        <template #buttons>
           <custom-submit @click="submitPassword">
             設定する
           </custom-submit>

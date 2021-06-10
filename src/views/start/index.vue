@@ -31,18 +31,20 @@
 </template>
 
 <script>
+// pages
 import SignIn from '@/views/auth/sign-in';
+import TermsOfService from '@/views/terms-of-service/unsigned';
 
 export default {
   name: 'StartIndex',
   methods: {
     start() {
       // TODO: 状態によってgoToTermsOfService、goToFirstGuidance、goToUserNewに分岐
-      console.log('handleClickStart');
+      this.goToTermsOfService();
     },
-    // goToTermsOfService() {
-    //   console.log('goToTermsOfService');
-    // },
+    goToTermsOfService() {
+      this.$store.dispatch('appNavigator/push', TermsOfService);
+    },
     // goToFirstGuidance() {
     //   console.log('goToFirstGuidance');
     // },
