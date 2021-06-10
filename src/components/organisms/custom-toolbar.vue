@@ -38,23 +38,27 @@ export default {
 
 <style lang="scss" scoped>
 /deep/ .back-button__icon {
+  justify-content: center;
   width: 40px;
   text-align: center;
-  justify-content: center;
+
   svg {
     width: 10px;
   }
 }
+
 .center {
-  line-height: inherit;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  line-height: inherit;
 }
+
 .custom-toolbar-title {
   font-size: 16px;
   font-weight: 600;
 }
+
 .custom-toolbar-subtitle {
   font-size: 12px;
 }

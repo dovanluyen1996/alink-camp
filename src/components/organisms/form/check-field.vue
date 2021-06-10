@@ -43,6 +43,7 @@ export default {
   display: inline-flex;
   align-items: center;
   font-weight: 600;
+
   &__label-text {
     margin-left: 8px;
   }

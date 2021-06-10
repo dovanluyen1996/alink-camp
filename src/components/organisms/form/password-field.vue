@@ -74,6 +74,7 @@ export default {
 .password-field-help {
   margin-bottom: 0;
 }
+
 .check-field {
   margin-top: 20px;
 }

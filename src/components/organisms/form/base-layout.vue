@@ -27,15 +27,18 @@ export default {
 <style lang="scss" scoped>
 .input-field-title {
   margin-top: 20px;
-  text-align: center;
   font-size: 18px;
   font-weight: 600;
-  ~ .input-field-card {
-    margin-top: 14px;
-  }
+  text-align: center;
 }
+
 .input-field-card {
   padding: 19px 20px 18px;
+
+  .input-field-title ~ & {
+    margin-top: 14px;
+  }
+
   /deep/ {
     ons-input,
     ons-select,

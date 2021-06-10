@@ -53,27 +53,30 @@ export default {
 .social-login {
   display: flex;
   flex-wrap: wrap;
-  margin-left: 13px;
   margin-right: 13px;
+  margin-left: 13px;
 }
+
 .social-login-title {
   width: 100%;
   margin-bottom: 30px;
-  // TODO: mixin化したい
-  text-align: center;
+  // TODO: タイトル系のスタイルをmixin化したい
   font-size: 18px;
   font-weight: 600;
+  text-align: center;
 }
+
 .social-login-image {
   width: 32px;
   margin-bottom: 9px;
 }
+
 .card {
   width: calc(50% - 15px);
-  margin: 0 7px 15px;
   padding: 10px 0 15px;
-  text-align: center;
+  margin: 0 7px 15px;
   font-weight: 600;
   line-height: 1;
+  text-align: center;
 }
 </style>
