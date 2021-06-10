@@ -57,6 +57,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '@/assets/scss/_mixins.scss';
+
 .social-login {
   display: flex;
   flex-wrap: wrap;
@@ -65,12 +67,10 @@ export default {
 }
 
 .social-login-title {
+  @include title-style;
+
   width: 100%;
   margin-bottom: 30px;
-  // TODO: タイトル系のスタイルをmixin化したい
-  font-size: 18px;
-  font-weight: 600;
-  text-align: center;
 }
 
 .social-login-image {

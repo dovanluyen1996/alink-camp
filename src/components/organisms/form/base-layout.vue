@@ -25,11 +25,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '@/assets/scss/_mixins.scss';
+
 .input-field-title {
+  @include title-style;
+
   margin-top: 20px;
-  font-size: 18px;
-  font-weight: 600;
-  text-align: center;
 }
 
 .input-field-card {

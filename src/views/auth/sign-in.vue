@@ -1,34 +1,36 @@
 <template>
-  <v-ons-page class="sign-in">
+  <v-ons-page>
     <custom-toolbar title="データを引き継ぐ" />
-    <text-field
-      v-model="email"
-      title="メールアドレス"
-    />
-    <password-field
-      v-model="password"
-      title="パスワード"
-      :help="null"
-    />
-    <div class="remember-password">
-      <check-field v-model="rememberPassword">
-        パスワードを保存
-      </check-field>
-      <div>
-        ※6文字以上の半角英数字で登録して下さい
+    <div class="content">
+      <text-field
+        v-model="email"
+        title="メールアドレス"
+      />
+      <password-field
+        v-model="password"
+        title="パスワード"
+      />
+      <div class="remember-password">
+        <check-field v-model="rememberPassword">
+          パスワードを保存
+        </check-field>
+        <div>
+          ※6文字以上の半角英数字で登録して下さい
+        </div>
       </div>
-    </div>
-    <custom-submit @click="signIn">
-      ログイン
-    </custom-submit>
-    <v-ons-button
-      modifier="quiet"
-      @click="goToPasswordReminder"
-    >
-      パスワードを忘れた方はこちら
-    </v-ons-button>
+      <custom-submit @click="signIn">
+        ログイン
+      </custom-submit>
+      <v-ons-button
+        modifier="quiet"
+        class="go-to-password-reminder"
+        @click="goToPasswordReminder"
+      >
+        パスワードを忘れた方はこちら
+      </v-ons-button>
 
-    <social-login />
+      <social-login />
+    </div>
   </v-ons-page>
 </template>
 
@@ -67,7 +69,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.sign-in {
+@import '@/assets/scss/_variables.scss';
+
+.content {
   text-align: center;
 }
 
@@ -82,8 +86,12 @@ export default {
   text-align: left;
 
   /deep/ .custom-input__visual {
-    border-color: #222;
+    border-color: $color-default;
   }
+}
+
+.go-to-password-reminder {
+  margin-top: 10px;
 }
 
 .social-login {

@@ -79,6 +79,7 @@ export default {
       width: 87%;
       max-width: 325px;
       margin-bottom: 20px;
+      font-size: 18px;
     }
   }
 }

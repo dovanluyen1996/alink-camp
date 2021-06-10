@@ -2,6 +2,7 @@
  onsenUIのカスタマイズの中でも
  ビジュアルに関わるもの
  ---------- */
+@import '@/assets/scss/_variables.scss';
 
 /* ----------
  Carousel
@@ -62,7 +63,8 @@ $button-height--rounded: 36px;
 .button {
   min-width: $button-height;
   height: $button-height;
-  font-size: 14px;
+  font-size: $font-size-default;
+  font-weight: 600;
   line-height: 36px;
   border-radius: 4px;
 
@@ -71,7 +73,7 @@ $button-height--rounded: 36px;
   }
 
   &--quiet {
-    font-size: 14px;
+    font-size: $font-size-default;
   }
 
   &--quiet-dark {
@@ -79,7 +81,7 @@ $button-height--rounded: 36px;
   }
 
   &--cta {
-    font-size: 14px;
+    font-size: $font-size-default;
   }
 
   &--rounded {
