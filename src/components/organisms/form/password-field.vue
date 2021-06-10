@@ -26,6 +26,7 @@ import CheckField from '@/components/organisms/form/check-field';
 import BaseField from './base-field';
 
 export default {
+  name: 'PasswordField',
   components: {
     BaseField,
     CheckField,

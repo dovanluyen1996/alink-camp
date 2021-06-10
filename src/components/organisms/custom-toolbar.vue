@@ -23,6 +23,7 @@
 
 <script>
 export default {
+  name: 'CustomToolbar',
   props: {
     title: {
       type: String,

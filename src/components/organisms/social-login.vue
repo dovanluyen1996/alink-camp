@@ -25,12 +25,7 @@ const TwitterImage = require('@/assets/images/social/twitter.png');
 const FacebookImage = require('@/assets/images/social/facebook.png');
 
 export default {
-  props: {
-    title: {
-      type: String,
-      default: '',
-    },
-  },
+  name: 'SocialLogin',
   data() {
     return {
       services: [

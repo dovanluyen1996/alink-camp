@@ -14,6 +14,7 @@
 import CustomCheckbox from '@/components/atoms/form/custom-checkbox';
 
 export default {
+  name: 'CheckField',
   components: {
     CustomCheckbox,
   },

@@ -2,7 +2,7 @@
   <v-ons-button
     :style="{width}"
     modifier="cta"
-    @click="handleClickButton"
+    @click="clickButton"
   >
     <slot />
   </v-ons-button>
@@ -10,6 +10,7 @@
 
 <script>
 export default {
+  name: 'CustomSubmit',
   props: {
     width: {
       type: String,
@@ -17,7 +18,7 @@ export default {
     },
   },
   methods: {
-    handleClickButton() {
+    clickButton() {
       this.$emit('click');
     },
   },

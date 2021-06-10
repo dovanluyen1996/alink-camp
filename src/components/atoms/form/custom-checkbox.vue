@@ -11,6 +11,7 @@
 
 <script>
 export default {
+  name: 'CustomCheckbox',
   props: {
     value: {
       type: Boolean,

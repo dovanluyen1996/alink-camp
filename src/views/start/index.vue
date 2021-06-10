@@ -22,7 +22,7 @@
         <v-ons-button @click="start">
           早速天気を確認
         </v-ons-button>
-        <v-ons-button @click="goToAuth">
+        <v-ons-button @click="goToSignIn">
           アプリデータを引き継ぐ
         </v-ons-button>
       </div>
@@ -47,9 +47,9 @@ export default {
     //   console.log('goToFirstGuidance');
     // },
     // goToUserNew() {
-    //   console.log('goToAuth');
+    //   console.log('goToUserNew');
     // },
-    goToAuth() {
+    goToSignIn() {
       this.$store.dispatch('appNavigator/push', SignIn);
     },
   },
