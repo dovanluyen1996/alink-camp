@@ -5,6 +5,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+    - name: restore cache node_modules
+      uses: actions/cache@v1
+      with:
+        path: node_modules
+        key: ${{ env.cache-version }}-yarn-${{ hashFiles('**/yarn.lock') }}
     - name: Install modules
       run: yarn
     - name: Run ESLint
