@@ -19,7 +19,7 @@
         </div>
       </div>
       <div class="start-page__bottom">
-        <v-ons-button @click="handleClickStart">
+        <v-ons-button @click="start">
           早速天気を確認
         </v-ons-button>
         <v-ons-button @click="goToAuth">
@@ -34,19 +34,19 @@
 export default {
   name: 'StartIndex',
   methods: {
-    handleClickStart() {
-      // TODO: 状態によって利用規約、初回案内、会員登録を分岐
+    start() {
+      // TODO: 状態によってgoToTermsOfService、goToFirstGuidance、goToUserNewに分岐
       console.log('handleClickStart');
     },
-    goToTermsOfService() {
-      console.log('goToTermsOfService');
-    },
-    goToFirstGuidance() {
-      console.log('goToFirstGuidance');
-    },
-    goToUserNew() {
-      console.log('goToAuth');
-    },
+    // goToTermsOfService() {
+    //   console.log('goToTermsOfService');
+    // },
+    // goToFirstGuidance() {
+    //   console.log('goToFirstGuidance');
+    // },
+    // goToUserNew() {
+    //   console.log('goToAuth');
+    // },
     goToAuth() {
       console.log('goToAuth');
     },
