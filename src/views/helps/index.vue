@@ -13,7 +13,7 @@
         <v-ons-list-item
           v-for="help in list"
           :key="help.id"
-          @click="showhelp(help.id)"
+          @click="showHelp(help.id)"
         >
           <div>
             <p>{{ help.title }}</p>

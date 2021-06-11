@@ -7,13 +7,6 @@ export default {
   state: {
     helps: [],
     isLoading: false,
-<<<<<<< HEAD
-  },
-  getters: {
-    all: state => state.helps,
-    findById: state => helpId => state.helps.find(help => help.id === helpId),
-=======
->>>>>>> b256adf (Remove call api show)
   },
   getters: {
     all: state => state.helps,
