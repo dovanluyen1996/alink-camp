@@ -29,32 +29,13 @@
 import ShowNoticeView from '@/views/notices/show';
 
 export default {
-  data() {
-    return {
-      notices: [
-        {
-          id: 1,
-          title: 'Notice 1',
-          description: 'Notice 1',
-          image: 'https://via.placeholder.com/150',
-          started_at: '2020-02-02 11:11',
-        },
-        {
-          id: 2,
-          title: 'Notice 2',
-          description: 'Notice 2',
-          image: 'https://via.placeholder.com/150',
-          started_at: '2020-02-03 11:11',
-        },
-        {
-          id: 3,
-          title: 'Notice 2',
-          description: 'Notice 2',
-          image: 'https://via.placeholder.com/150',
-          started_at: '2020-02-04 11:11',
-        },
-      ],
-    };
+  computed: {
+    list() {
+      return this.$store.state.models.notice.notices;
+    },
+  },
+  created: async function () {
+    await this.getNotices();
   },
   methods: {
     showNotice(noticeId) {
@@ -64,6 +45,9 @@ export default {
           noticeId,
         },
       });
+    },
+    async getNotices() {
+      await this.$store.dispatch('models/notice/getNotices');
     },
   },
 };
