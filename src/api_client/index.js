@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import settings from '@/config/settings';
 import HttpClient from '@/lib/http_client';
 import ObjectKeyConverter from '@/lib/object_key_converter';
@@ -14,7 +15,7 @@ class ApiClient extends HttpClient {
     this.storageKey = settings.localStorage.keys.session;
 
     this.axios.interceptors.request.use((config) => {
-      this.log(`[${config.method.toUpperCase()}] ${config.url}`);
+      this._log(`[${config.method.toUpperCase()}] ${config.url}`);
 
       if (config.data) {
         config.data = FormDataBuilder.toFormData(ObjectKeyConverter.camelToSnake(config.data));
@@ -24,36 +25,13 @@ class ApiClient extends HttpClient {
     });
 
     this.axios.interceptors.response.use((response) => {
-      this.log(`Response: ${response.status}`);
+      this._log([`[${response.config.method.toUpperCase()}] ${response.config.url} Response: ${response.status}`, response.data]);
 
       if (response && response.data) {
-        this.log(response.data);
         response.data = ObjectKeyConverter.snakeToCamel(response.data);
       }
 
       return response;
-    }, (error) => {
-      const { status } = error.response;
-      this.log(`Response: ${status}`);
-
-      switch (status) {
-      case 500:
-        // TODO: redirect to 500 page
-        break;
-      case 404:
-        // TODO: redirect to 404 page
-        break;
-      case 422:
-        // TODO: redirect to 422 page
-        break;
-      default:
-        return {
-          hasError: true,
-          data: error.response.data,
-        };
-      }
-
-      return error;
     });
   }
 }
@@ -63,3 +41,4 @@ Object.keys(modules).forEach((key) => {
 });
 
 export default new ApiClient();
+/* eslint-enable no-underscore-dangle */

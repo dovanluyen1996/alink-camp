@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle, class-methods-use-this */
 import axios from 'axios';
 
 export default class HttpClient {
@@ -22,7 +23,7 @@ export default class HttpClient {
 
       return response;
     } catch (e) {
-      this.log(e, 'error');
+      this._log(e, 'error');
       throw e;
     }
   }
@@ -37,7 +38,7 @@ export default class HttpClient {
 
       return response;
     } catch (e) {
-      this.log(e, 'error');
+      this._log(e, 'error');
       throw e;
     }
   }
@@ -52,7 +53,7 @@ export default class HttpClient {
 
       return response;
     } catch (e) {
-      this.log(e, 'error');
+      this._log(e, 'error');
       throw e;
     }
   }
@@ -66,54 +67,56 @@ export default class HttpClient {
 
       return response;
     } catch (e) {
-      this.log(e, 'error');
+      this._log(e, 'error');
       throw e;
     }
   }
 
-  log(message, level) {
+  _log(message, level) {
     if (level === 'error') {
-      this.logError(message);
+      this._logError(message);
     } else {
-      this.logInfo(message);
+      this._logInfo(message);
     }
   }
 
-  logInfo(message) {
-    if (message instanceof Object) {
+  _logInfo(message) {
+    if (message instanceof Array) {
+      message[0] = this._logPrefix() + message[0];
+      console.info(...message);
+    } else if (message instanceof Object) {
       console.info(message);
     } else {
-      console.info(`${this.logPrefix()} ${message}`);
+      console.info(`${this._logPrefix()} ${message}`);
     }
   }
 
-  logError(message) {
+  _logError(message) {
     if (message instanceof Object) {
       console.error(message);
     } else {
-      console.error(`${this.logPrefix()} ${message}`);
+      console.error(`${this._logPrefix()} ${message}`);
     }
   }
 
-  logPrefix() {
-    return `${this.logDate()} [API CLIENT]`;
+  _logPrefix() {
+    return `${this._logDate()} [API CLIENT]`;
   }
 
-  logDate() {
+  _logDate() {
     const now = new Date();
     const year = now.getFullYear();
-    const month = this.padZero(now.getMonth() + 1);
-    const day = this.padZero(now.getDate());
-    const hour = this.padZero(now.getHours());
-    const minute = this.padZero(now.getMinutes());
-    const second = this.padZero(now.getSeconds());
+    const month = this._padZero(now.getMonth() + 1);
+    const day = this._padZero(now.getDate());
+    const hour = this._padZero(now.getHours());
+    const minute = this._padZero(now.getMinutes());
+    const second = this._padZero(now.getSeconds());
 
     return `${year}-${month}-${day} ${hour}:${minute}:${second}`;
   }
 
-  /* eslint-disable class-methods-use-this */
-  padZero(value) {
+  _padZero(value) {
     return value.toString().padStart(2, '0');
   }
-  /* eslint-enable class-methods-use-this */
 }
+/* eslint-enable no-underscore-dangle, class-methods-use-this */
