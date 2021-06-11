@@ -41,7 +41,6 @@ export default {
   },
   data() {
     return {
-      carouselIndex: 0,
       isShownIdfaAlert: false,
     };
   },
