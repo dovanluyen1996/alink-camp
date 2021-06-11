@@ -4,7 +4,7 @@
     <div class="content">
       <base-form>
         <text-field
-          v-model="code"
+          v-model="confirm_code"
           title="認証コード"
         />
         <password-field
@@ -39,7 +39,7 @@ export default {
   },
   data() {
     return {
-      code: '',
+      confirm_code: '',
       email: '',
     };
   },
