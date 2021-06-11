@@ -62,12 +62,18 @@ export default {
     padding: 10px 0;
     text-align: center;
   }
+
+  :checked + .radio-button--material__checkmark::before {
+    border-color: #d9d9d9;
+  }
 }
 
 .radio-field-label {
   display: inline-block;
   padding: 10px 0;
   margin: 0 20px;
+  font-size: 16px;
+  font-weight: 600;
 }
 
 .radio-button {

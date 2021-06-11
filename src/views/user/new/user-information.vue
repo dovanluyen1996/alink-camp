@@ -36,8 +36,11 @@ import DateField from '@/components/organisms/form/date-field';
 import SelectField from '@/components/organisms/form/select-field';
 import CustomSubmit from '@/components/organisms/form/custom-submit';
 
+// pages
+import UserNewConfirm from '@/views/user/new/confirm';
+
 export default {
-  name: 'PasswordReset',
+  name: 'UserNewUserInformation',
   components: {
     BaseForm,
     RadioField,
@@ -78,7 +81,7 @@ export default {
   },
   methods: {
     goToConfirm() {
-      console.log('submitAutoCode');
+      this.$store.dispatch('appNavigator/push', UserNewConfirm);
     },
   },
 };

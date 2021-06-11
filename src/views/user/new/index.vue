@@ -34,7 +34,7 @@ import CustomSubmit from '@/components/organisms/form/custom-submit';
 import SocialLogin from '@/components/organisms/social-login';
 
 // pages
-import ConfirmCode from '@/views/user/new/confirm-code';
+import UerNewConfirmCode from '@/views/user/new/confirm-code';
 
 export default {
   name: 'UserNew',
@@ -62,7 +62,7 @@ export default {
       this.$store.commit('appNavigator/setOptions', {
         animation: 'fade',
       });
-      this.$store.dispatch('appNavigator/reset', ConfirmCode);
+      this.$store.dispatch('appNavigator/reset', UerNewConfirmCode);
       this.$nextTick(() => {
         this.$store.commit('appNavigator/setOptions', {});
       });

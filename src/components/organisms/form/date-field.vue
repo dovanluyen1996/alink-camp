@@ -1,7 +1,7 @@
 <template>
   <base-field
     :title="title"
-    class="text-field"
+    class="date-field"
   >
     <v-ons-input
       v-model="inputedValue"
@@ -46,6 +46,8 @@ export default {
 
 /deep/ {
   input[type="date"] {
+    font-size: 16px;
+    font-weight: 600;
     background-image: url('~@/assets/images/form/date.png');
     background-repeat: no-repeat;
     background-position: right center;

@@ -71,6 +71,8 @@ export default {
 }
 
 /deep/ .select-input {
+  font-size: 16px;
+  font-weight: 600;
   background-image: url('~@/assets/images/form/select-arrow.png');
   background-size: 30px;
 }
