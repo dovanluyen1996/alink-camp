@@ -3,6 +3,7 @@ export default {
   namespaced: true,
   state: {
     stack: [],
+    options: {},
   },
   mutations: {
     push(state, page) {
@@ -19,6 +20,9 @@ export default {
     },
     reset(state, page) {
       state.stack = [page || state.stack[0]];
+    },
+    setOptions(state, options) {
+      state.options = options;
     },
   },
   actions: {
