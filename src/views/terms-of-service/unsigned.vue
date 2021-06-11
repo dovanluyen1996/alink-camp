@@ -12,7 +12,7 @@
       >
         同意しない
       </v-ons-button>
-      <v-ons-button @click="clickAgree">
+      <v-ons-button @click="goToFirstGuidance">
         同意する
       </v-ons-button>
     </ons-bottom-toolbar>
@@ -20,7 +20,11 @@
 </template>
 
 <script>
+// components
 import TermsOfServiceDescription from '@/components/organisms/terms-of-service/description';
+
+// pages
+import FirstGuidance from '@/views/first-guidance';
 
 export default {
   name: 'TermsOfServiceUnsigned',
@@ -31,8 +35,8 @@ export default {
     disagree() {
       this.$store.dispatch('appNavigator/pop');
     },
-    clickAgree() {
-      console.log('clickAgree');
+    goToFirstGuidance() {
+      this.$store.dispatch('appNavigator/push', FirstGuidance);
     },
   },
 };
