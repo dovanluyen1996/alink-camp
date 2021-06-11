@@ -39,18 +39,11 @@ export default {
   name: 'StartIndex',
   methods: {
     start() {
-      // TODO: 状態によってgoToTermsOfService、goToFirstGuidance、goToUserNewに分岐
       this.goToTermsOfService();
     },
     goToTermsOfService() {
       this.$store.dispatch('appNavigator/push', TermsOfService);
     },
-    // goToFirstGuidance() {
-    //   console.log('goToFirstGuidance');
-    // },
-    // goToUserNew() {
-    //   console.log('goToUserNew');
-    // },
     goToSignIn() {
       this.$store.dispatch('appNavigator/push', SignIn);
     },
