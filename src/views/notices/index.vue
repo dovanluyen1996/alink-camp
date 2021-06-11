@@ -26,6 +26,8 @@
 </template>
 
 <script>
+import ShowNoticePage from '@/views/notices/show';
+
 export default {
   data() {
     return {
@@ -55,8 +57,16 @@ export default {
     };
   },
   methods: {
-    showNotice() {
-      // TODO: move to show notice page
+    showNotice(id) {
+      const selectedNotice = this.list.find(notice => notice.id === id);
+      this.$store.dispatch('menuNavigator/push', {
+        extends: ShowNoticePage,
+        data() {
+          return {
+            notice: selectedNotice,
+          };
+        },
+      });
     },
   },
 };
