@@ -7,7 +7,7 @@
 
 <script>
 export default {
-  name: 'TermsOfServiceTextData',
+  name: 'TermsOfServiceDescription',
   data() {
     return {
       descriptions: `

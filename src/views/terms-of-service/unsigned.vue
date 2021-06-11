@@ -3,7 +3,7 @@
     <custom-toolbar title="利用規約" />
     <div class="background" />
     <div class="content">
-      <terms-of-service-text-data />
+      <terms-of-service-description />
     </div>
     <ons-bottom-toolbar modifier="transparent">
       <v-ons-button
@@ -20,12 +20,12 @@
 </template>
 
 <script>
-import TermsOfServiceTextData from '@/components/organisms/terms-of-service/text-data.vue';
+import TermsOfServiceDescription from '@/components/organisms/terms-of-service/description';
 
 export default {
-  name: 'App',
+  name: 'TermsOfServiceUnsigned',
   components: {
-    TermsOfServiceTextData,
+    TermsOfServiceDescription,
   },
   methods: {
     disagree() {
