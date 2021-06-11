@@ -40,6 +40,7 @@ import SocialLogin from '@/components/organisms/social-login';
 
 // pages
 import PasswordReminder from '@/views/auth/password-reminder';
+import UserStampsCampaign from '@/views/user/stamps/campaign';
 
 export default {
   name: 'SignIn',
@@ -58,7 +59,7 @@ export default {
   },
   methods: {
     signIn() {
-      console.log('signIn');
+      this.$store.dispatch('appNavigator/push', UserStampsCampaign);
     },
     goToPasswordReminder() {
       this.$store.dispatch('appNavigator/push', PasswordReminder);

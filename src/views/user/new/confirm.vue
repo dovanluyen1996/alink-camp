@@ -44,6 +44,9 @@ import BaseForm from '@/components/organisms/form/base-form';
 import ConfirmField from '@/components/organisms/form/confirm-field';
 import CustomSubmit from '@/components/organisms/form/custom-submit';
 
+// pages
+import UserStampsCampaign from '@/views/user/stamps/campaign';
+
 export default {
   name: 'UserNewConfirm',
   components: {
@@ -63,7 +66,7 @@ export default {
       this.$store.dispatch('appNavigator/pop');
     },
     submitUserData() {
-      console.log('submitUserData');
+      this.$store.dispatch('appNavigator/push', UserStampsCampaign);
     },
   },
 };
