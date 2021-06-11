@@ -1,6 +1,9 @@
 <template>
   <v-ons-page>
-    <custom-toolbar title="ユーザー情報の登録" />
+    <custom-toolbar
+      title="ユーザー情報の登録"
+      :dinable-buck-button="true"
+    />
     <div class="content">
       <base-form>
         <text-field
@@ -24,7 +27,7 @@ import TextField from '@/components/organisms/form/text-field';
 import CustomSubmit from '@/components/organisms/form/custom-submit';
 
 // pages
-import UserInformation from '@/views/user/new/user-information';
+import UserData from '@/views/user/new/user-data';
 
 export default {
   name: 'UserNewConfirmCode',
@@ -41,10 +44,10 @@ export default {
   methods: {
     submitConfirmCode() {
       console.log('submitConfirmCode');
-      this.goToUserInformation();
+      this.goToUserData();
     },
-    goToUserInformation() {
-      this.$store.dispatch('appNavigator/push', UserInformation);
+    goToUserData() {
+      this.$store.dispatch('appNavigator/push', UserData);
     },
   },
 };

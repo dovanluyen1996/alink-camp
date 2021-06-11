@@ -1,6 +1,9 @@
 <template>
   <v-ons-page>
-    <custom-toolbar title="ユーザー情報の登録" />
+    <custom-toolbar
+      title="ユーザー情報の登録"
+      :dinable-buck-button="true"
+    />
     <div class="content">
       <base-form>
         <confirm-field
@@ -25,7 +28,7 @@
           </v-ons-button>
           <custom-submit
             width="180px"
-            @click="goToConfirm"
+            @click="submitUserData"
           >
             設定完了
           </custom-submit>
@@ -59,8 +62,8 @@ export default {
     clickBack() {
       this.$store.dispatch('appNavigator/pop');
     },
-    goToConfirm() {
-      console.log('submitAutoCode');
+    submitUserData() {
+      console.log('submitUserData');
     },
   },
 };

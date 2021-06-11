@@ -2,7 +2,7 @@
   <v-ons-toolbar class="custom-toolbar">
     <div class="left">
       <slot name="left">
-        <v-ons-back-button />
+        <v-ons-back-button v-if="!dinableBuckButton" />
       </slot>
     </div>
     <div class="center">
@@ -32,6 +32,10 @@ export default {
     subtitle: {
       type: String,
       default: '',
+    },
+    dinableBuckButton: {
+      type: Boolean,
+      default: false,
     },
   },
 };

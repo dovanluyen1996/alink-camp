@@ -56,16 +56,7 @@ export default {
       this.goToConfirmCode();
     },
     goToConfirmCode() {
-      // NOTE: 認証コードを受け取った後は戻れないようにresetしているが
-      //       popのアニメーションになってしまい不自然なので一時的にfadeにしている
-      //       dispatchにonsNavigatorOptionsで設定しても効かないのでstoreの変更にしている
-      this.$store.commit('appNavigator/setOptions', {
-        animation: 'fade',
-      });
-      this.$store.dispatch('appNavigator/reset', UerNewConfirmCode);
-      this.$nextTick(() => {
-        this.$store.commit('appNavigator/setOptions', {});
-      });
+      this.$store.dispatch('appNavigator/push', UerNewConfirmCode);
     },
   },
 };

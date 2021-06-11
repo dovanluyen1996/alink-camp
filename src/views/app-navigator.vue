@@ -1,7 +1,6 @@
 <template>
   <v-ons-navigator
     :page-stack="pageStack"
-    :options="options"
     :pop-page="popPage"
   />
 </template>
@@ -14,9 +13,6 @@ export default {
   computed: {
     pageStack() {
       return this.$store.state.appNavigator.stack;
-    },
-    options() {
-      return this.$store.state.appNavigator.options;
     },
     isSigned: () => false,
   },

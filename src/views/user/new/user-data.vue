@@ -1,6 +1,9 @@
 <template>
   <v-ons-page>
-    <custom-toolbar title="ユーザー情報の登録" />
+    <custom-toolbar
+      title="ユーザー情報の登録"
+      :dinable-buck-button="true"
+    />
     <div class="content">
       <base-form>
         <radio-field
@@ -40,7 +43,7 @@ import CustomSubmit from '@/components/organisms/form/custom-submit';
 import UserNewConfirm from '@/views/user/new/confirm';
 
 export default {
-  name: 'UserNewUserInformation',
+  name: 'UserNewUserData',
   components: {
     BaseForm,
     RadioField,
