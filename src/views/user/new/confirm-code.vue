@@ -41,6 +41,10 @@ export default {
   methods: {
     submitConfirmCode() {
       console.log('submitConfirmCode');
+      this.goToUserInformation();
+    },
+    goToUserInformation() {
+      this.$store.dispatch('appNavigator/push', UserInformation);
     },
   },
 };
