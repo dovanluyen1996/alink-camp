@@ -43,7 +43,7 @@ export default {
   background: #fff;
 }
 
-.content {
+.terms-of-service-description {
   padding: 20px;
   font-size: 16px;
 }
