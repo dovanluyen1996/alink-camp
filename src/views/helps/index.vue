@@ -11,18 +11,9 @@
     <v-ons-card>
       <v-ons-list>
         <v-ons-list-item
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 08c55f2 (Fix convention)
           v-for="help in helps"
           :key="help.id"
           @click="showHelp(help.id)"
-=======
-          v-for="help in list"
-          :key="help.id"
-          @click="showhelp(help.id)"
->>>>>>> a787c93 (mock api helps)
         >
           <div>
             <p>{{ help.title }}</p>
@@ -39,15 +30,7 @@ import ShowHelpView from '@/views/helps/show';
 export default {
   data() {
     return {
-<<<<<<< HEAD
-<<<<<<< HEAD
       helps: [
-=======
-      list: [
->>>>>>> a787c93 (mock api helps)
-=======
-      helps: [
->>>>>>> 08c55f2 (Fix convention)
         {
           id: 1,
           title: 'Help 1',
@@ -83,6 +66,9 @@ export default {
           helpId,
         },
       });
+    },
+    async getHelps() {
+      await this.$store.dispatch('models/help/getHelps');
     },
   },
 };
