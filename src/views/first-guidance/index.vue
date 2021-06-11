@@ -10,25 +10,25 @@
       >
         <v-ons-carousel-item>
           <v-ons-card>
-            初回案内1
+            説明文
           </v-ons-card>
         </v-ons-carousel-item>
 
         <v-ons-carousel-item>
           <v-ons-card>
-            初回案内2
+            位置情報取得の説明文
           </v-ons-card>
         </v-ons-carousel-item>
 
         <v-ons-carousel-item>
           <v-ons-card>
-            初回案内3
+            push通知の説明文
           </v-ons-card>
         </v-ons-carousel-item>
 
         <v-ons-carousel-item>
           <v-ons-card>
-            初回案内4
+            IDFAの説明文
           </v-ons-card>
         </v-ons-carousel-item>
       </v-ons-carousel>
@@ -59,11 +59,11 @@
 // components
 import FixedFooter from '@/components/organisms/fixed-footer';
 
-const CAROUSEL_INDEXES = {
-  TOP: 0,
-  LOCATION_SERVICES: 1,
-  PUSH_NOTIFICATIONS: 2,
-  IDFA: 3,
+const carouselIndexes = {
+  home: 0,
+  locationServices: 1,
+  pushNotifications: 2,
+  idfa: 3,
 };
 
 export default {
@@ -77,22 +77,27 @@ export default {
       isShownIdfaAlert: false,
     };
   },
+  computed: {
+    getCurrentCarouselKey() {
+      return Object.keys(carouselIndexes).find(key => carouselIndexes[key] === this.carouselIndex);
+    },
+  },
   methods: {
     clickNext() {
-      switch (this.carouselIndex) {
-      case CAROUSEL_INDEXES.TOP:
+      switch (this.getCurrentCarouselKey) {
+      case 'home':
         this.showNextCaroudel();
         break;
 
-      case CAROUSEL_INDEXES.LOCATION_SERVICES:
+      case 'locationServices':
         this.callToLocationServicesDialog();
         break;
 
-      case CAROUSEL_INDEXES.PUSH_NOTIFICATIONS:
+      case 'pushNotifications':
         this.callToPushNotificationDialog();
         break;
 
-      case CAROUSEL_INDEXES.IDFA:
+      case 'idfa':
         this.showIdfaAlert();
         break;
 
