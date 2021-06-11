@@ -2,7 +2,7 @@
   <v-ons-page>
     <custom-toolbar
       title="ユーザー情報の登録"
-      :dinable-buck-button="true"
+      :disabled-back-button="true"
     />
     <div class="content">
       <base-form>
