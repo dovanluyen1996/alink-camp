@@ -10,12 +10,4 @@ export default new Vuex.Store({
     ...modules,
     models,
   },
-  state: {
-    isLoading: false,
-  },
-  mutations: {
-    setIsLoading(state, isLoading) {
-      state.isLoading = isLoading;
-    },
-  },
 });

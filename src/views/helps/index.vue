@@ -34,6 +34,8 @@
 </template>
 
 <script>
+import ShowHelpPage from '@/views/helps/show';
+
 export default {
   data() {
     return {
@@ -74,8 +76,16 @@ export default {
     };
   },
   methods: {
-    showHelp() {
-      // TODO: move to show help page
+    showHelp(id) {
+      const selectedHelp = this.list.find(help => help.id === id);
+      this.$store.dispatch('menuNavigator/push', {
+        extends: ShowHelpPage,
+        data() {
+          return {
+            help: selectedHelp,
+          };
+        },
+      });
     },
   },
 };
