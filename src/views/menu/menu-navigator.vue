@@ -1,7 +1,6 @@
 <template>
   <v-ons-navigator
     :page-stack="pageStack"
-    :pop-page="popPage"
   />
 </template>
 
@@ -16,11 +15,6 @@ export default {
   },
   beforeCreate() {
     this.$store.dispatch('menuNavigator/push', MenuPage);
-  },
-  methods: {
-    popPage() {
-      this.$store.dispatch('menuNavigator/pop');
-    },
   },
 };
 </script>
