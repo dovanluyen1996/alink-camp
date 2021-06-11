@@ -5,7 +5,9 @@
 </template>
 
 <script>
-import MenuPage from '@/views/menu/index';
+// For test
+// TODO: change to Menu page after implement Menu
+import ListNotices from '@/views/notices/index';
 
 export default {
   computed: {
@@ -14,7 +16,9 @@ export default {
     },
   },
   beforeCreate() {
-    this.$store.dispatch('menuNavigator/push', MenuPage);
+    // For test
+    // TODO: change to Menu page after implement Menu
+    this.$store.dispatch('menuNavigator/push', ListNotices);
   },
 };
 </script>
