@@ -1,15 +1,6 @@
 import Vue from 'vue';
 import ApiClient from '@/api_client';
 
-const attributes = () => (
-  {
-    id: null,
-    title: null,
-    description: null,
-    image: null,
-  }
-);
-
 export default {
   strict: true,
   namespaced: true,
