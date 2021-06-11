@@ -36,8 +36,8 @@ $segment-height: 34px;
 $alert-dialog-radius: 8px;
 
 .alert-dialog {
-  max-width: 335px;
   width: 90%;
+  max-width: 335px;
 }
 
 .alert-dialog-title {
@@ -45,14 +45,14 @@ $alert-dialog-radius: 8px;
   align-items: center;
   justify-content: center;
   min-height: 50px;
+  padding: 15px 20px;
   margin-top: -16px;
   margin-bottom: 15px;
-  padding: 15px 20px;
+  font-size: 16px;
+  font-weight: 600;
   background: #d3f0ff;
   border-top-left-radius: $alert-dialog-radius;
   border-top-right-radius: $alert-dialog-radius;
-  font-size: 16px;
-  font-weight: 600;
 }
 
 .alert-dialog-footer {
@@ -60,10 +60,6 @@ $alert-dialog-radius: 8px;
   justify-content: center;
   padding: 17px 0;
   text-align: center;
-
-  .button {
-    min-width: 140px;
-  }
 }
 
 /* ----------
@@ -101,6 +97,10 @@ $button-height--rounded: 36px;
     height: $button-height--rounded;
     line-height: 28px;
     border-radius: 18px;
+  }
+
+  .alert-dialog-footer & {
+    min-width: 140px;
   }
 }
 

@@ -48,7 +48,9 @@
         </template>
         許可の設定により、今後も各種機能改善のご参考にさせていただきます。次へのボタン押下後のポップアップで選択してください
         <template #footer>
-          <v-ons-button @click="callToIdfaDialog()">次へ</v-ons-button>
+          <v-ons-button @click="callToIdfaDialog()">
+            次へ
+          </v-ons-button>
         </template>
       </v-ons-alert-dialog>
     </div>
