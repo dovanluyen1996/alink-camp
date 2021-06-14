@@ -10,9 +10,10 @@
         <img src="@/assets/images/user/stamps/campaign/sponsor-sample.png">
       </div>
       <div class="user_stamps-number">
-        所持応募券：<span>{{ user_stamps.number }}</span>枚
+        所持応募券：<span>{{ user.ticket_count }}</span>枚
       </div>
       <div class="campaign-stamps">
+        <!-- TODO: アニメーションを付けたい -->
         <div
           v-for="number in 10"
           :key="number"
@@ -42,17 +43,17 @@ export default {
   name: 'UserStampsCampaign',
   data() {
     return {
-      user_stamps: {
-        number: 30,
+      user: {
+        ticket_count: 30,
+        user_stamps: {
+          number: 4,
+        },
       },
-      // TODO: ERDに情報がなかったので仮で作っています
-      //       実装時に適切に変更してください
-      stamp_count: 4,
     };
   },
   methods: {
     hasStamp(number) {
-      return number < this.stamp_count;
+      return number <= this.user.user_stamps.number;
     },
     closeCampaign() {
       console.log('closeCampaign');
@@ -79,10 +80,12 @@ export default {
 }
 
 .sponsor {
+  height: 80px;
   margin-bottom: 20px;
 
   img {
     max-width: 100%;
+    max-height: 100%;
   }
 }
 
