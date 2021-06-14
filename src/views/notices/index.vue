@@ -30,11 +30,11 @@ import ShowNoticeView from '@/views/notices/show';
 
 export default {
   computed: {
-    list() {
-      return this.$store.state.models.notice.notices;
+    notices() {
+      return this.$store.getters['models/notice/all'];
     },
   },
-  created: async function () {
+  async created() {
     await this.getNotices();
   },
   methods: {
