@@ -1,4 +1,5 @@
 <template>
+  <!-- TODO: 部品化してどこでも呼び出せるようにする -->
   <v-ons-page>
     <v-ons-alert-dialog
       :visible="true"
