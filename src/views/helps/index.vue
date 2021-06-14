@@ -12,6 +12,9 @@
       <v-ons-list>
         <v-ons-list-item
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 08c55f2 (Fix convention)
           v-for="help in helps"
           :key="help.id"
           @click="showHelp(help.id)"
@@ -35,10 +38,14 @@ export default {
   data() {
     return {
 <<<<<<< HEAD
+<<<<<<< HEAD
       helps: [
 =======
       list: [
 >>>>>>> a787c93 (mock api helps)
+=======
+      helps: [
+>>>>>>> 08c55f2 (Fix convention)
         {
           id: 1,
           title: 'Help 1',
