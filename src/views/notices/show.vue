@@ -26,8 +26,14 @@
 
 <script>
 export default {
+  props: {
+    noticeId: {
+      type: Number,
+      required: true,
+    },
+  },
   computed: {
-    // TODO: get notice from store by id
+    // TODO: get notice from store by noticeId
     notice() {
       return {
         id: 1,

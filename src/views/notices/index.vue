@@ -57,13 +57,11 @@ export default {
     };
   },
   methods: {
-    showNotice(id) {
+    showNotice(noticeId) {
       this.$store.dispatch('menuNavigator/push', {
         extends: ShowNoticeView,
-        data() {
-          return {
-            id,
-          };
+        onsNavigatorProps: {
+          noticeId,
         },
       });
     },
