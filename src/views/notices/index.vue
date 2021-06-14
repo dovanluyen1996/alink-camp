@@ -11,7 +11,7 @@
     <v-ons-card>
       <v-ons-list>
         <v-ons-list-item
-          v-for="notice in list"
+          v-for="notice in notices"
           :key="notice.id"
           @click="showNotice(notice.id)"
         >
@@ -29,7 +29,7 @@
 export default {
   data() {
     return {
-      list: [
+      notices: [
         {
           id: 1,
           title: 'Notice 1',

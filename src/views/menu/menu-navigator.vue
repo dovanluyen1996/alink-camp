@@ -7,7 +7,7 @@
 <script>
 // For test
 // TODO: change to Menu page after implement Menu
-import ListNotices from '@/views/notices/index';
+import NoticesView from '@/views/notices/index';
 
 export default {
   computed: {
@@ -18,7 +18,7 @@ export default {
   beforeCreate() {
     // For test
     // TODO: change to Menu page after implement Menu
-    this.$store.dispatch('menuNavigator/push', ListNotices);
+    this.$store.dispatch('menuNavigator/push', NoticesView);
   },
 };
 </script>
