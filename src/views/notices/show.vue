@@ -23,3 +23,20 @@
     </v-ons-card>
   </v-ons-page>
 </template>
+
+<script>
+export default {
+  computed: {
+    // TODO: get notice from store by id
+    notice() {
+      return {
+        id: 1,
+        title: 'Notice 1',
+        description: 'Notice 1',
+        image: 'https://via.placeholder.com/150',
+        started_at: '2020-02-02 11:11',
+      };
+    },
+  },
+};
+</script>
