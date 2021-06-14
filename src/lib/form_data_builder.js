@@ -8,7 +8,10 @@ export default class FormDataBuilder {
   }
 
   static buildFormData(formData, appendKey, params) {
-    Object.entries(params).forEach((key, value) => {
+    Object.entries(params).forEach((param) => {
+      let key = param[0];
+      const value = param[1];
+
       if (Array.isArray(params)) key = '';
       if (appendKey) key = `${appendKey}[${key}]`;
 
