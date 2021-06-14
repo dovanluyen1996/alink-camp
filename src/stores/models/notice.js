@@ -8,6 +8,10 @@ export default {
     notices: [],
     isLoading: false,
   },
+  getters: {
+    all: state => state.notices,
+    findById: state => noticeId => state.notices.find(notice => notice.id === noticeId),
+  },
   mutations: {
     setNotices(state, notices) {
       Vue.set(state, 'notices', notices);
