@@ -33,17 +33,8 @@ export default {
     },
   },
   computed: {
-    // TODO: get notice from store by noticeId
     notice() {
-      return {
-        id: 1,
-        title: 'Notice 1',
-        description: 'Notice 1',
-        image: {
-          url: 'https://via.placeholder.com/150',
-        },
-        started_at: '2020-02-02 11:11',
-      };
+      return this.$store.getters['models/notice/findById'](this.noticeId);
     },
   },
 };
