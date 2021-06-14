@@ -3,6 +3,7 @@ import TermOfServiceApi from './term_of_service_api';
 import PrivacyPolicyApi from './privacy_policy_api';
 import HelpsApi from './helps_api';
 import GiftsApi from './gifts_api';
+import UserGiftsApi from './user_gifts_api';
 
 export default {
   NoticesApi,
@@ -10,4 +11,5 @@ export default {
   PrivacyPolicyApi,
   HelpsApi,
   GiftsApi,
+  UserGiftsApi,
 };

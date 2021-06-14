@@ -3,6 +3,7 @@ import termOfService from './term_of_service';
 import privacyPolicy from './privacy_policy';
 import help from './help';
 import gift from './gift';
+import userGift from './user_gift';
 
 export default {
   strict: true,
@@ -13,5 +14,6 @@ export default {
     privacyPolicy,
     help,
     gift,
+    userGift,
   },
 };
