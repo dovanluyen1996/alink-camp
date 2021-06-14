@@ -11,7 +11,7 @@
     <v-ons-card>
       <v-ons-list>
         <v-ons-list-item
-          v-for="help in list"
+          v-for="help in helps"
           :key="help.id"
           @click="showHelp(help.id)"
         >
@@ -28,7 +28,7 @@
 export default {
   data() {
     return {
-      list: [
+      helps: [
         {
           id: 1,
           title: 'Help 1',

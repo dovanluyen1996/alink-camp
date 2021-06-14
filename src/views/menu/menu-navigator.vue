@@ -7,7 +7,7 @@
 <script>
 // For test
 // TODO: change to Menu page after implement Menu
-import ListHelps from '@/views/helps/index';
+import HelpsView from '@/views/helps/index';
 
 export default {
   computed: {
@@ -15,10 +15,10 @@ export default {
       return this.$store.state.menuNavigator.stack;
     },
   },
-  beforeCreate() {
+  created() {
     // For test
     // TODO: change to Menu page after implement Menu
-    this.$store.dispatch('menuNavigator/push', ListHelps);
+    this.$store.dispatch('menuNavigator/push', HelpsView);
   },
 };
 </script>
