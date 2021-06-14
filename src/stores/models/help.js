@@ -15,6 +15,10 @@ export default {
 =======
 >>>>>>> b256adf (Remove call api show)
   },
+  getters: {
+    all: state => state.helps,
+    findById: state => helpId => state.helps.find(help => help.id === helpId),
+  },
   mutations: {
     setHelps(state, helps) {
       Vue.set(state, 'helps', helps);
