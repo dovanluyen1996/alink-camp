@@ -17,7 +17,7 @@ export default {
       Vue.set(state, 'helps', helps);
     },
     setIsLoading(state, isLoading) {
-      state.isLoading = isLoading
+      state.isLoading = isLoading;
     },
   },
   actions: {
