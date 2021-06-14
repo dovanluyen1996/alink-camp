@@ -29,16 +29,8 @@ export default {
     },
   },
   computed: {
-    // TODO: get help from store by helpId
     help() {
-      return {
-        id: 1,
-        title: 'Help 1',
-        description: 'Help 1',
-        image: {
-          url: 'https://via.placeholder.com/150',
-        },
-      };
+      return this.$store.getters['models/help/findById'](this.helpId);
     },
   },
 };
