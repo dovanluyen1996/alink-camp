@@ -31,14 +31,16 @@ export default {
   align-items: center;
   justify-content: center;
   height: 100%;
+  padding: 0 30px;
   font-size: 18px;
   font-weight: 600;
   text-align: center;
-  padding: 0 30px;
 }
+
 .no-data-contents {
   position: relative;
   width: 100%;
+
   &__message {
     position: absolute;
     bottom: 100%;
