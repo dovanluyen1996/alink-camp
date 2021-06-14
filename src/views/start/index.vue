@@ -1,6 +1,5 @@
 <template>
-  <ons-page>
-    <div class="background"></div>
+  <v-ons-page modifier="background-photo">
     <div class="content start-page">
       <div class="start-page__top">
         <img
@@ -27,7 +26,7 @@
         </v-ons-button>
       </div>
     </div>
-  </ons-page>
+  </v-ons-page>
 </template>
 
 <script>
@@ -52,12 +51,6 @@ export default {
 
 </script>
 <style lang="scss" scoped>
-.background {
-  background-image: url('~@/assets/images/start/background.jpg');
-  background-position: center;
-  background-size: cover;
-}
-
 .start-page {
   display: flex;
   flex-direction: column;

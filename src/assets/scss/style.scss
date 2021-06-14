@@ -6,3 +6,12 @@ body {
   height: 100vh;
   font-size: $font-size-default;
 }
+
+/* ----------
+ Page
+---------- */
+.page--background-photo__background {
+  background-image: url('~@/assets/images/background.jpg');
+  background-position: center;
+  background-size: cover;
+}
