@@ -13,7 +13,7 @@ export default {
       Vue.set(state, 'privacyPolicy', privacyPolicy);
     },
     setIsLoading(state, isLoading) {
-      Vue.set(state, 'isLoading', isLoading);
+      state.isLoading = isLoading;
     },
   },
   actions: {
