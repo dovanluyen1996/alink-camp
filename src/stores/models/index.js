@@ -1,5 +1,6 @@
 import notice from './notice';
 import termOfService from './term_of_service';
+import privacyPolicy from './privacy_policy';
 
 export default {
   strict: true,
@@ -7,5 +8,6 @@ export default {
   modules: {
     notice,
     termOfService,
+    privacyPolicy,
   },
 };
