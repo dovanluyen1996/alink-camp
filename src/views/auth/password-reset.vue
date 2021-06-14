@@ -1,5 +1,5 @@
 <template>
-  <v-ons-page>
+  <v-ons-page modifier="background-photo">
     <custom-toolbar title="パスワードを忘れた方" />
     <div class="content">
       <base-form>
