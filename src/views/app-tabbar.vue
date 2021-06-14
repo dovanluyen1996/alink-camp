@@ -17,18 +17,9 @@ import ScoresNavigator from '@/views/scores/scores-navigator';
 import WindForecastNavigator from '@/views/wind-forecast/wind-forecast-navigator';
 import MenuNavigator from '@/views/menu/menu-navigator';
 
-const TAB_INDEXES = {
-  COURSE_WEATHER: 0,
-  COURSE_SEARCH: 1,
-  SCORES: 2,
-  WIND_FORECAST: 3,
-  MENU: 4,
-};
-
 export default {
   data() {
     return {
-      activeIndex: TAB_INDEXES.COURSE_WEATHER,
       tabs: [
         {
           label: 'コース天気',
@@ -57,6 +48,16 @@ export default {
         },
       ],
     };
+  },
+  computed: {
+    activeIndex: {
+      get() {
+        return this.$store.state.appTabbar.activeIndex;
+      },
+      set(index) {
+        this.$store.commit('appTabbar/setActiveIndex', index);
+      },
+    },
   },
 };
 </script>

@@ -39,6 +39,8 @@
 </template>
 
 <script>
+import AppTabbar from '@/views/app-tabbar';
+
 export default {
   name: 'UserStampsCampaign',
   data() {
@@ -56,7 +58,7 @@ export default {
       return number <= this.user.user_stamps.number;
     },
     closeCampaign() {
-      console.log('closeCampaign');
+      this.$store.dispatch('appNavigator/reset', AppTabbar);
     },
   },
 };
