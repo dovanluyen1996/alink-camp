@@ -8,9 +8,10 @@
       :type="type"
     />
     <template v-if="canShowPassword">
-      <check-field v-model="isShownPassword">
-        パスワードを表示
-      </check-field>
+      <check-field
+        v-model="isShownPassword"
+        label="パスワードを表示"
+      />
     </template>
     <p
       v-if="help"

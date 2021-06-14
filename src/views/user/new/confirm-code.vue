@@ -1,20 +1,18 @@
 <template>
   <v-ons-page>
-    <custom-toolbar title="パスワードを忘れた方" />
+    <custom-toolbar
+      title="ユーザー情報の登録"
+      :disabled-back-button="true"
+    />
     <div class="content">
       <base-form>
         <text-field
           v-model="confirm_code"
-          title="認証コード"
-        />
-        <password-field
-          v-model="email"
-          title="新しいパスワードを設定"
-          class="new-password"
+          title="認証コードの入力"
         />
         <template #buttons>
-          <custom-submit @click="submitPassword">
-            設定する
+          <custom-submit @click="submitConfirmCode">
+            認証完了
           </custom-submit>
         </template>
       </base-form>
@@ -26,34 +24,31 @@
 // components
 import BaseForm from '@/components/organisms/form/base-form';
 import TextField from '@/components/organisms/form/text-field';
-import PasswordField from '@/components/organisms/form/password-field';
 import CustomSubmit from '@/components/organisms/form/custom-submit';
 
+// pages
+import UserData from '@/views/user/new/user-data';
+
 export default {
-  name: 'PasswordReset',
+  name: 'UserNewConfirmCode',
   components: {
     BaseForm,
     TextField,
-    PasswordField,
     CustomSubmit,
   },
   data() {
     return {
       confirm_code: '',
-      email: '',
     };
   },
   methods: {
-    submitPassword() {
-      console.log('submitPassword');
+    submitConfirmCode() {
+      console.log('submitConfirmCode');
+      this.goToUserData();
+    },
+    goToUserData() {
+      this.$store.dispatch('appNavigator/push', UserData);
     },
   },
 };
 </script>
-
-<style lang="scss" scoped>
-.new-password {
-  margin-top: 45px;
-  margin-bottom: 40px;
-}
-</style>

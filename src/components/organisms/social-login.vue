@@ -1,7 +1,7 @@
 <template>
   <div class="social-login">
     <div class="social-login-title">
-      他サービスでログイン
+      {{ title }}
     </div>
     <v-ons-card
       v-for="(service, index) in services"
@@ -26,6 +26,12 @@ const FacebookImage = require('@/assets/images/social/facebook.png');
 
 export default {
   name: 'SocialLogin',
+  props: {
+    title: {
+      type: String,
+      default: '他サービスでログイン',
+    },
+  },
   data() {
     return {
       services: [

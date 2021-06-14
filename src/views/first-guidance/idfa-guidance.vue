@@ -34,6 +34,9 @@
 // components
 import FixedFooter from '@/components/organisms/fixed-footer';
 
+// pages
+import UserNew from '@/views/user/new';
+
 export default {
   name: 'FirstGuidanceIDFA',
   components: {
@@ -45,9 +48,6 @@ export default {
     };
   },
   methods: {
-    goToUserNew() {
-      console.log('goToUserNew');
-    },
     showIdfaAlert() {
       this.isShownIdfaAlert = true;
     },
@@ -55,6 +55,10 @@ export default {
       this.isShownIdfaAlert = false;
       // TODO: IDFAのダイアログを出してください
       console.log('callToIdfaDialog');
+      this.goToUserNew();
+    },
+    goToUserNew() {
+      this.$store.dispatch('appNavigator/push', UserNew);
     },
   },
 };
