@@ -26,6 +26,7 @@
 
 <script>
 import ShowHelpView from '@/views/helps/show';
+
 export default {
   computed: {
     helps() {
