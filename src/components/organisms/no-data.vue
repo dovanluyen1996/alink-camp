@@ -44,6 +44,7 @@ export default {
   &__message {
     position: absolute;
     bottom: 100%;
+    width: 100%;
   }
 }
 </style>
