@@ -1,3 +1,4 @@
+import Vue from 'vue';
 import ApiClient from '@/api_client';
 
 export default {
@@ -5,22 +6,26 @@ export default {
   namespaced: true,
   state: {
     termOfService: {},
+    isLoading: false,
   },
   mutations: {
     setTermOfService(state, termOfService) {
-      state.termOfService = termOfService;
+      Vue.set(state, 'termOfService', termOfService);
+    },
+    setIsLoading(state, isLoading) {
+      Vue.set(state, 'isLoading', isLoading);
     },
   },
   actions: {
     async getTermOfService(context) {
-      context.commit('setIsLoading', true, { root: true });
+      context.commit('setIsLoading', true);
 
       try {
         const termOfService = await ApiClient.getTermOfService();
 
         context.commit('setTermOfService', termOfService);
       } finally {
-        context.commit('setIsLoading', false, { root: true });
+        context.commit('setIsLoading', false);
       }
     },
   },
