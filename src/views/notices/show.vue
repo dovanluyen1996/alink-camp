@@ -11,7 +11,7 @@
     <v-ons-card>
       <div>
         <div>
-          <img :src="notice.image">
+          <img :src="notice.image.url">
         </div>
         <div>
           {{ notice.startedAt }}
@@ -33,7 +33,9 @@ export default {
         id: 1,
         title: 'Notice 1',
         description: 'Notice 1',
-        image: 'https://via.placeholder.com/150',
+        image: {
+          url: 'https://via.placeholder.com/150',
+        },
         started_at: '2020-02-02 11:11',
       };
     },
