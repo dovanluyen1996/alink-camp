@@ -45,7 +45,7 @@ import ConfirmField from '@/components/organisms/form/confirm-field';
 import CustomSubmit from '@/components/organisms/form/custom-submit';
 
 // pages
-import UserStampsCampaign from '@/views/user/stamps/campaign';
+import UserStampsCampaign from '@/views/user/user-stamps/campaign';
 
 export default {
   name: 'UserNewConfirm',
