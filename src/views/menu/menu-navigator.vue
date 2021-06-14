@@ -15,7 +15,7 @@ export default {
       return this.$store.state.menuNavigator.stack;
     },
   },
-  beforeCreate() {
+  created() {
     // For test
     // TODO: change to Menu page after implement Menu
     this.$store.dispatch('menuNavigator/push', NoticesView);
