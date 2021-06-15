@@ -29,7 +29,6 @@
       </div>
       <template #footer>
         <v-ons-button
-          modifier="quiet quiet-dark"
           class="close-button"
           @click="closeCampaign"
         >
