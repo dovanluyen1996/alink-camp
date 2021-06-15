@@ -40,8 +40,6 @@ export default {
   },
   methods: {
     showNotice(noticeId) {
-      this.updateReadNoticeIds(noticeId);
-
       this.$store.dispatch('menuNavigator/push', {
         extends: ShowNoticeView,
         onsNavigatorProps: {
@@ -51,13 +49,6 @@ export default {
     },
     async getNotices() {
       await this.$store.dispatch('models/notice/getNotices');
-    },
-    updateReadNoticeIds(noticeId) {
-      const readNoticeIds = JSON.parse(localStorage.getItem('readNoticeIds')) || [];
-      readNoticeIds.push(noticeId);
-      localStorage.setItem('readNoticeIds', JSON.stringify([...new Set(readNoticeIds)]));
-
-      this.$store.dispatch('models/notice/readNotice', noticeId);
     },
   },
 };

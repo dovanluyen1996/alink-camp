@@ -37,5 +37,13 @@ export default {
       return this.$store.getters['models/notice/findById'](this.noticeId);
     },
   },
+  created() {
+    this.read();
+  },
+  methods: {
+    read() {
+      this.$store.dispatch('models/notice/readNotice', this.notice);
+    },
+  },
 };
 </script>

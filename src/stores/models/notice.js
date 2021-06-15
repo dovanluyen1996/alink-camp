@@ -19,11 +19,10 @@ export default {
     setIsLoading(state, isLoading) {
       Vue.set(state, 'isLoading', isLoading);
     },
-    updateNotice(state, targetNotice) {
-      const index = state.notices.map(notice => notice.id).indexOf(targetNotice.id);
+    updateNotice(state, notice) {
+      const index = state.notices.findIndex(_notice => _notice.id === notice.id);
       if (index < 0) return;
-
-      Vue.set(state.notices, index, targetNotice);
+      Vue.set(state.notices, index, notice);
     },
   },
   actions: {
@@ -40,11 +39,19 @@ export default {
         context.commit('setIsLoading', false);
       }
     },
-    readNotice(context, noticeId) {
-      const notice = context.getters.findById(noticeId);
-      const targetNotice = { ...notice, isRead: true };
+    readNotice(context, notice) {
+      if (!notice) return;
 
+      const targetNotice = { ...notice, isRead: true };
       context.commit('updateNotice', targetNotice);
+      context.dispatch('setReadNoticeIds', [notice.id]);
+    },
+    setReadNoticeIds(_context, noticeIds) {
+      const readNoticeIds = JSON.parse(localStorage.getItem('readNoticeIds')) || [];
+      let ids = [...readNoticeIds, ...noticeIds];
+      ids = [...new Set(ids)];
+
+      localStorage.setItem('readNoticeIds', JSON.stringify(ids));
     },
   },
 };
