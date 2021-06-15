@@ -8,6 +8,9 @@ export default {
     sponsors: [],
     isLoading: false,
   },
+  getters: {
+    all: state => state.sponsors,
+  },
   mutations: {
     setSponsors(state, sponsors) {
       Vue.set(state, 'sponsors', sponsors);
