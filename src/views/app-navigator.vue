@@ -16,7 +16,7 @@ export default {
     },
     isSigned: () => false,
   },
-  beforeCreate() {
+  created() {
     this.$store.dispatch('appNavigator/push', this.isSigned ? AppTabbar : PurchaseInformation);
   },
   methods: {
