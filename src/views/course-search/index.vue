@@ -35,7 +35,7 @@ import CourseList from '@/components/organisms/course-list.vue';
 import FixedFooter from '@/components/organisms/fixed-footer';
 
 export default {
-  name: 'RadioField',
+  name: 'CourseSearch',
   components: {
     SearchField,
     CourseList,
