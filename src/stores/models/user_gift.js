@@ -7,10 +7,6 @@ export default {
     userGifts: [],
     isLoading: false,
   },
-  getters: {
-    all: state => state.userGifts,
-    findById: state => userGiftId => state.userGifts.find(userGift => userGift.id === userGiftId),
-  },
   mutations: {
     addUserGift(state, userGift) {
       state.userGifts.push(userGift);
