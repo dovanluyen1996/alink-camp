@@ -1,5 +1,5 @@
 <template>
-  <v-ons-page modifier="background-photo">
+  <v-ons-page>
     <div class="content start-page">
       <div class="start-page__top">
         <img

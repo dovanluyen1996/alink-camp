@@ -1,5 +1,5 @@
 <template>
-  <v-ons-page modifier="background-photo">
+  <v-ons-page>
     <custom-toolbar title="データを引き継ぐ" />
     <div class="content">
       <base-form>
