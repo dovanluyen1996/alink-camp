@@ -21,6 +21,16 @@ export default {
 <style lang="scss" scoped>
 @import '@/assets/scss/_mixins.scss';
 
+.card-width-title[fullscreen] {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  .card {
+    overflow: auto;
+    flex: 1;
+  }
+}
+
 .card-title {
   @include title-style;
 

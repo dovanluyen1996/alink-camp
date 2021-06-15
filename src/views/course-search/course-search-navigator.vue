@@ -14,7 +14,7 @@ export default {
       return this.$store.state.courseSearchNavigator.stack;
     },
   },
-  beforeCreate() {
+  created() {
     this.$store.dispatch('courseSearchNavigator/push', CourseSearchIndexPage);
   },
   methods: {

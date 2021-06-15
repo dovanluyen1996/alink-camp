@@ -162,4 +162,8 @@ $button-height--rounded: 36px;
   margin: 20px;
   border-radius: 10px;
   box-shadow: none;
+  &[fullscreen] {
+    overflow: auto;
+    height: calc(100% - 40px);
+  }
 }

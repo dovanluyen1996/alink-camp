@@ -13,7 +13,7 @@
       <fixed-footer>
         <v-ons-button
           modifier="cta rounded"
-          @click="goToLocationSearch"
+          @click="goToPrefecturesSearch"
         >
           地域より選択
         </v-ons-button>
@@ -34,6 +34,9 @@ import SearchField from '@/components/organisms/form/search-field.vue';
 import CourseList from '@/components/organisms/course-list.vue';
 import FixedFooter from '@/components/organisms/fixed-footer';
 
+// pages
+import PrefecturesSearch from '@//views/course-search/prefectures-search';
+
 export default {
   name: 'CourseSearch',
   components: {
@@ -47,8 +50,8 @@ export default {
     };
   },
   methods: {
-    goToLocationSearch() {
-      console.log('goToLocationSearch');
+    goToPrefecturesSearch() {
+      this.$store.dispatch('courseSearchNavigator/push', PrefecturesSearch);
     },
     goToConditionsSearch() {
       console.log('goToConditionsSearch');
