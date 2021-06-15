@@ -28,6 +28,8 @@
 </template>
 
 <script>
+import ShowGiftView from '@/views/gifts/show';
+
 export default {
   computed: {
     gifts() {
@@ -38,8 +40,13 @@ export default {
     await this.getGifts();
   },
   methods: {
-    goToGift() {
-      // TODO: move to gift page
+    goToGift(giftId) {
+      this.$store.dispatch('menuNavigator/push', {
+        extends: ShowGiftView,
+        onsNavigatorProps: {
+          giftId,
+        },
+      });
     },
     async getGifts() {
       await this.$store.dispatch('models/gift/getGifts');
