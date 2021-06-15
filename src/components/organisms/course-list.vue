@@ -1,6 +1,9 @@
 <template>
   <card-with-title>
-    <template #title>
+    <template
+      v-if="title"
+      #title
+    >
       {{ title }}
     </template>
 
