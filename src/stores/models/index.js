@@ -7,6 +7,7 @@ import userGift from './user_gift';
 import sponsor from './sponsor';
 import currentUser from './current_user';
 import course from './course';
+import userCourse from './user_course';
 
 export default {
   strict: true,
@@ -21,5 +22,6 @@ export default {
     sponsor,
     currentUser,
     course,
+    userCourse,
   },
 };
