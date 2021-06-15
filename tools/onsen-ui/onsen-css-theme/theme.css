@@ -1,5 +1,7 @@
 /* Custom Theme for Onsen UI 2.11.2 */
 
+/* Custom Theme for Onsen UI 2.11.2 */
+
 
 :root {
   /* variables for iOS components */
@@ -14,7 +16,7 @@
   --toolbar-background-color: #2693CC;
   --toolbar-button-color: rgba(255,255,255,1);
   --toolbar-text-color: rgba(255,255,255,1);
-  --toolbar-border-color: #b2b2b2;
+  --toolbar-border-color: rgba(255,255,255,0);
   --button-bar-color: #2693CC;
   --button-bar-active-text-color: #fff;
   --button-bar-active-background-color: color-mod(var(--button-bar-color) tint(70%));
