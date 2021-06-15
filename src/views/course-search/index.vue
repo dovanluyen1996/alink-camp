@@ -36,6 +36,7 @@ import FixedFooter from '@/components/organisms/fixed-footer';
 
 // pages
 import PrefecturesSearch from '@//views/course-search/prefectures-search';
+import SearchResult from '@/views/course-search/search-result';
 
 export default {
   name: 'CourseSearch',
@@ -57,7 +58,13 @@ export default {
       console.log('goToConditionsSearch');
     },
     goToSearchResult() {
-      console.log('goToSearchResult');
+      console.log('goToSearchResult', this.searchText);
+      this.$store.dispatch('courseSearchNavigator/push', {
+        extends: SearchResult,
+        onsNavigatorProps: {
+          title: `コース検索結果`,
+        },
+      });
     },
   },
 };
