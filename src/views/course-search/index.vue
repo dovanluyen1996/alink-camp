@@ -13,13 +13,13 @@
       <fixed-footer>
         <v-ons-button
           modifier="cta rounded"
-          @click="goToSearchLocations"
+          @click="goToLocationSearch"
         >
           地域より選択
         </v-ons-button>
         <v-ons-button
           modifier="cta rounded"
-          @click="goToSearchConditions"
+          @click="goToConditionsSearch"
         >
           絞り込み選択
         </v-ons-button>
@@ -47,11 +47,11 @@ export default {
     };
   },
   methods: {
-    goToSearchLocations() {
-      console.log('goToSearchLocations');
+    goToLocationSearch() {
+      console.log('goToLocationSearch');
     },
-    goToSearchConditions() {
-      console.log('goToSearchConditions');
+    goToConditionsSearch() {
+      console.log('goToConditionsSearch');
     },
     goToSearchResult() {
       console.log('goToSearchResult');
