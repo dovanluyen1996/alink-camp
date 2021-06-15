@@ -4,6 +4,7 @@ import privacyPolicy from './privacy_policy';
 import help from './help';
 import gift from './gift';
 import userGift from './user_gift';
+import sponsor from './sponsor';
 
 export default {
   strict: true,
@@ -15,5 +16,6 @@ export default {
     help,
     gift,
     userGift,
+    sponsor,
   },
 };

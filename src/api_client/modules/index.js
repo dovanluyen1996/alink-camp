@@ -4,6 +4,7 @@ import PrivacyPolicyApi from './privacy_policy_api';
 import HelpsApi from './helps_api';
 import GiftsApi from './gifts_api';
 import UserGiftsApi from './user_gifts_api';
+import SponsorsApi from './sponsors_api';
 
 export default {
   NoticesApi,
@@ -12,4 +13,5 @@ export default {
   HelpsApi,
   GiftsApi,
   UserGiftsApi,
+  SponsorsApi,
 };
