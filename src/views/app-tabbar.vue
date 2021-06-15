@@ -76,6 +76,7 @@ $tabs: weather, search, score, wind, menu;
       background-image: url('~@/assets/images/tabbar/#{$tab}.png');
       background-repeat: no-repeat;
       background-position: center;
+      background-size: 28px;
     }
   }
 }
