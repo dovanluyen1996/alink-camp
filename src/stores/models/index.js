@@ -12,6 +12,7 @@ import userCourse from './user_course';
 import userSetting from './user_setting';
 import userCoursePlan from './user_course_plan';
 import contact from './contact';
+import userCourseResult from './user_course_result';
 
 export default {
   strict: true,
@@ -31,5 +32,6 @@ export default {
     userSetting,
     userCoursePlan,
     contact,
+    userCourseResult,
   },
 };
