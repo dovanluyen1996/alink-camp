@@ -9,6 +9,7 @@ import currentUser from './current_user';
 import course from './course';
 import userStamp from './user_stamp';
 import userCourse from './user_course';
+import userSetting from './user_setting';
 
 export default {
   strict: true,
@@ -25,5 +26,6 @@ export default {
     course,
     userStamp,
     userCourse,
+    userSetting,
   },
 };
