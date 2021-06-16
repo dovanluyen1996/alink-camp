@@ -18,7 +18,7 @@
         {{ gift.overview }}
         <v-ons-button
           modifier="cta"
-          @click="applyGift(gift.id)"
+          @click="goToGift(gift.id)"
         >
           抽選応募する
         </v-ons-button>
@@ -38,8 +38,8 @@ export default {
     await this.getGifts();
   },
   methods: {
-    applyGift() {
-      // TODO: move to apply gift page
+    goToGift() {
+      // TODO: move to gift page
     },
     async getGifts() {
       await this.$store.dispatch('models/gift/getGifts');
