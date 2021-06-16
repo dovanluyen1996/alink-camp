@@ -13,6 +13,10 @@
     <v-ons-button @click="goToHelps">
       ヘルプ&サポート
     </v-ons-button>
+
+    <v-ons-button @click="goPrivacyPolicy">
+      プライバシーポリシー
+    </v-ons-button>
   </v-ons-page>
 </template>
 
@@ -20,6 +24,7 @@
 import HelpsView from '@/views/helps/index';
 import NoticesView from '@/views/notices/index';
 import GiftsView from '@/views/gifts/index';
+import PrivacyPolicyView from '@/views/privacy-policy/index.vue';
 
 export default {
   methods: {
@@ -31,6 +36,9 @@ export default {
     },
     goToGifts() {
       this.$store.dispatch('menuNavigator/push', GiftsView);
+    },
+    goPrivacyPolicy() {
+      this.$store.dispatch('menuNavigator/push', PrivacyPolicyView);
     },
   },
 };

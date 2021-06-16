@@ -8,6 +8,9 @@ export default {
     privacyPolicy: {},
     isLoading: false,
   },
+  getters: {
+    description: state => state.privacyPolicy && state.privacyPolicy.description,
+  },
   mutations: {
     setPrivacyPolicy(state, privacyPolicy) {
       Vue.set(state, 'privacyPolicy', privacyPolicy);
