@@ -6,6 +6,10 @@
       お知らせ
     </v-ons-button>
 
+    <v-ons-button @click="goToGifts">
+      特典交換
+    </v-ons-button>
+
     <v-ons-button @click="goToHelps">
       ヘルプ&サポート
     </v-ons-button>
@@ -15,6 +19,7 @@
 <script>
 import HelpsView from '@/views/helps/index';
 import NoticesView from '@/views/notices/index';
+import GiftsView from '@/views/gifts/index';
 
 export default {
   methods: {
@@ -23,6 +28,9 @@ export default {
     },
     goToNotices() {
       this.$store.dispatch('menuNavigator/push', NoticesView);
+    },
+    goToGifts() {
+      this.$store.dispatch('menuNavigator/push', GiftsView);
     },
   },
 };

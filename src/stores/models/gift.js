@@ -21,7 +21,7 @@ export default {
     },
   },
   actions: {
-    async setGifts(context) {
+    async getGifts(context) {
       context.commit('setIsLoading', true);
 
       try {
