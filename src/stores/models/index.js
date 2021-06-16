@@ -5,6 +5,7 @@ import help from './help';
 import gift from './gift';
 import userGift from './user_gift';
 import sponsor from './sponsor';
+import currentUser from './current_user';
 
 export default {
   strict: true,
@@ -17,5 +18,6 @@ export default {
     gift,
     userGift,
     sponsor,
+    currentUser,
   },
 };
