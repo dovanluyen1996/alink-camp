@@ -4,36 +4,36 @@ export default {
   strict: true,
   namespaced: true,
   state: {
-    profile: {},
+    user: {},
     isLoading: false,
   },
   mutations: {
     setIsLoading(state, isLoading) {
       state.isLoading = isLoading;
     },
-    setProfile(state, profile) {
-      state.profile = profile;
+    setUser(state, user) {
+      state.user = user;
     },
   },
   actions: {
-    async getProfile(context) {
+    async getUser(context) {
       context.commit('setIsLoading', true);
 
       try {
-        const profile = await ApiClient.getCurrentUser();
+        const user = await ApiClient.getCurrentUser();
 
-        context.commit('setProfile', profile);
+        context.commit('setUser', user);
       } finally {
         context.commit('setIsLoading', false);
       }
     },
-    async updateProfile(context, params) {
+    async updateUser(context, params) {
       context.commit('setIsLoading', true);
 
       try {
-        const profile = await ApiClient.updateCurrentUser(params);
+        const user = await ApiClient.updateCurrentUser(params);
 
-        context.commit('setProfile', profile);
+        context.commit('setUser', user);
       } finally {
         context.commit('setIsLoading', false);
       }
