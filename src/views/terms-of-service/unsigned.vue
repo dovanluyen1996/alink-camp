@@ -33,9 +33,11 @@ export default {
   },
   methods: {
     disagree() {
+      // TODO: force quit app if disagree term
       this.$store.dispatch('appNavigator/pop');
     },
     goToFirstGuidance() {
+      localStorage.setItem('acceptedTermOfService', true);
       this.$store.dispatch('appNavigator/push', FirstGuidance);
     },
   },

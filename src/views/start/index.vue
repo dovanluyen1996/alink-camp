@@ -33,6 +33,7 @@
 // pages
 import SignIn from '@/views/auth/sign-in';
 import TermsOfService from '@/views/terms-of-service/unsigned';
+import FirstGuidance from '@/views/first-guidance';
 
 export default {
   name: 'StartIndex',
@@ -41,7 +42,13 @@ export default {
       this.goToTermsOfService();
     },
     goToTermsOfService() {
-      this.$store.dispatch('appNavigator/push', TermsOfService);
+      const acceptedTermOfService = JSON.parse(localStorage.getItem('acceptedTermOfService'));
+
+      if (acceptedTermOfService) {
+        this.$store.dispatch('appNavigator/push', FirstGuidance);
+      } else {
+        this.$store.dispatch('appNavigator/push', TermsOfService);
+      }
     },
     goToSignIn() {
       this.$store.dispatch('appNavigator/push', SignIn);

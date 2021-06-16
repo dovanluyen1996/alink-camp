@@ -8,6 +8,9 @@ export default {
     termOfService: {},
     isLoading: false,
   },
+  getters: {
+    description: state => state.termOfService && state.termOfService.description,
+  },
   mutations: {
     setTermOfService(state, termOfService) {
       Vue.set(state, 'termOfService', termOfService);
