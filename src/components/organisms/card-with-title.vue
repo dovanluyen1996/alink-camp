@@ -25,19 +25,21 @@ export default {
   display: flex;
   flex-direction: column;
   height: 100%;
-  .card {
-    overflow: auto;
-    flex: 1;
-  }
+}
+
+.card {
+  flex: 1;
+  overflow: auto;
 }
 
 .card-title {
   @include title-style;
 
   margin-top: 25px;
+
+  + .card {
+    margin-top: 14px;
+  }
 }
 
-.card {
-  margin-top: 14px;
-}
 </style>

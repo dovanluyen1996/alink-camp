@@ -35,8 +35,8 @@ import CourseList from '@/components/organisms/course-list.vue';
 import FixedFooter from '@/components/organisms/fixed-footer';
 
 // pages
-import PrefecturesSearch from '@//views/course-search/prefectures-search';
 import SearchResult from '@/views/course-search/search-result';
+import PrefecturesSearch from '@//views/course-search/prefectures-search';
 
 export default {
   name: 'CourseSearch',
@@ -62,7 +62,7 @@ export default {
       this.$store.dispatch('courseSearchNavigator/push', {
         extends: SearchResult,
         onsNavigatorProps: {
-          title: `コース検索結果`,
+          title: 'コース検索結果',
         },
       });
     },
