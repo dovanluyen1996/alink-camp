@@ -2,8 +2,10 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 
 import Vue from 'vue';
+import { ValidationProvider, ValidationObserver } from 'vee-validate';
 import VueOnsen from '@/plugins/vue_onsenui_plugin';
 import '@/plugins/global_component_plugin';
+import '@/lib/vee_validate';
 import store from '@/stores';
 import App from '@/app';
 
@@ -23,6 +25,9 @@ onDeviceReady() {
   }
 }
 */
+
+Vue.component('ValidationProvider', ValidationProvider);
+Vue.component('ValidationObserver', ValidationObserver);
 
 /* eslint-disable no-new */
 new Vue({

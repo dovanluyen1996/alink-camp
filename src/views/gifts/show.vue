@@ -1,22 +1,35 @@
 <template>
   <v-ons-page>
-    <div>
-      {{ gift.name }}
-      応募必要枚数：{{ gift.requiredTicketNumber }}枚
-      <img :src="gift.image.url">
-      {{ gift.overview }}
-      <input
-        v-model="email"
-        placeholder="連絡先メールアドレス"
-      >
-    </div>
-
-    <v-ons-button
-      modifier="cta"
-      @click="showConfirmApplyGift()"
+    <validation-observer
+      ref="guidanceForm"
+      v-slot="{ handleSubmit }"
     >
-      抽選応募する
-    </v-ons-button>
+      <div>
+        {{ gift.name }}
+        応募必要枚数：{{ gift.requiredTicketNumber }}枚
+        <img :src="gift.image.url">
+        {{ gift.overview }}
+
+        <validation-provider
+          v-slot="{ errors }"
+          rules="required|email"
+        >
+          <input
+            v-model="email"
+            placeholder="連絡先メールアドレス"
+            name="メールアドレス"
+          >
+          <span>{{ errors[0] }}</span>
+        </validation-provider>
+      </div>
+
+      <v-ons-button
+        modifier="cta"
+        @click="handleSubmit(showConfirmApplyGift)"
+      >
+        抽選応募する
+      </v-ons-button>
+    </validation-observer>
 
     <v-ons-alert-dialog
       :visible.sync="confirmApplyGiftVisible"
