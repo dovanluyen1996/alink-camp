@@ -8,6 +8,9 @@ export default {
     userSetting: {},
     isLoading: false,
   },
+  getters: {
+    userSetting: state => state.userSetting,
+  },
   mutations: {
     setUserSetting(state, userSetting) {
       Vue.set(state, 'userSetting', userSetting);
