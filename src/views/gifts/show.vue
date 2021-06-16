@@ -105,8 +105,14 @@ export default {
     closeCompletedApplyGift() {
       this.completedApplyGiftVisible = false;
     },
-    submitApplyGift() {
-      // TODO: submit apply gift
+    async submitApplyGift() {
+      const params = {
+        giftId: this.giftId,
+        email: this.email,
+      };
+
+      await this.$store.dispatch('models/userGift/createUserGift', params);
+
       this.confirmApplyGiftVisible = false;
       this.completedApplyGiftVisible = true;
     },

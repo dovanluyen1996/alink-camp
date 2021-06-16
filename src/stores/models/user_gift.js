@@ -22,6 +22,8 @@ export default {
       try {
         const userGift = await ApiClient.createUserGift(params);
 
+        // TODO: Update currentUser.ticketCount
+
         context.commit('addUserGift', userGift);
       } finally {
         context.commit('setIsLoading', false);
