@@ -17,6 +17,10 @@
     <v-ons-button @click="goPrivacyPolicy">
       プライバシーポリシー
     </v-ons-button>
+
+    <v-ons-button @click="goToUserSetting">
+      設定
+    </v-ons-button>
   </v-ons-page>
 </template>
 
@@ -25,6 +29,7 @@ import HelpsView from '@/views/helps/index';
 import NoticesView from '@/views/notices/index';
 import GiftsView from '@/views/gifts/index';
 import PrivacyPolicyView from '@/views/privacy-policy/index.vue';
+import UserSettingView from '@/views/user-setting/index';
 
 export default {
   methods: {
@@ -39,6 +44,9 @@ export default {
     },
     goPrivacyPolicy() {
       this.$store.dispatch('menuNavigator/push', PrivacyPolicyView);
+    },
+    goToUserSetting() {
+      this.$store.dispatch('menuNavigator/push', UserSettingView);
     },
   },
 };
