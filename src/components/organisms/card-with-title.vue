@@ -6,8 +6,11 @@
     >
       <slot name="title" />
     </div>
+
     <v-ons-card>
-      <slot />
+      <div class="content">
+        <slot />
+      </div>
     </v-ons-card>
   </div>
 </template>

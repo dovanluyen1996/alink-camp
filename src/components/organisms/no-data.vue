@@ -1,15 +1,15 @@
 <template>
   <div class="no-data">
     <div class="no-data-contents">
+      <div
+        v-if="$slots.actions"
+        class="no-data-contents__actions"
+      >
+        <slot name="actions" />
+      </div>
       <div class="no-data-contents__message">
         <slot />
       </div>
-      <v-ons-button
-        modifier="cta"
-        @click="goToCourseSearch"
-      >
-        早速コース検索
-      </v-ons-button>
     </div>
   </div>
 </template>
@@ -17,11 +17,6 @@
 <script>
 export default {
   name: 'NoData',
-  methods: {
-    goToCourseSearch() {
-      this.$store.commit('appTabbar/setActiveIndexFromTabName', 'courseSearch');
-    },
-  },
 };
 </script>
 
@@ -41,7 +36,7 @@ export default {
   position: relative;
   width: 100%;
 
-  &__message {
+  &__actions + &__message {
     position: absolute;
     bottom: 100%;
     width: 100%;
