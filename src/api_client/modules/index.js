@@ -10,6 +10,7 @@ import CoursesApi from './courses_api';
 import UserStampApi from './user_stamp_api';
 import UserCoursesApi from './user_courses_api';
 import UserSettingApi from './user_setting_api';
+import UserCoursePlansApi from './user_course_plans_api';
 
 export default {
   NoticesApi,
@@ -24,4 +25,5 @@ export default {
   UserStampApi,
   UserCoursesApi,
   UserSettingApi,
+  UserCoursePlansApi,
 };
