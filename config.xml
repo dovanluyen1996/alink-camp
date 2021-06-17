@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="io.cordova.alink-golf-tenki-client" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>alink-golf-tenki-client</name>
+<widget id="io.cordova.alink.golf_tenki" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>alink.golf_tenki</name>
     <description>
-      Vue.js + Onsen UI + Cordova sample app
+      Alink GolfTenki Client
     </description>
     <author email="dev@cordova.apache.org" href="http://cordova.io">
-      Vue.js + Onsen UI + Cordova teams
+      Alink GolfTenki Client
     </author>
     <content src="index.html" />
     <plugin name="cordova-plugin-whitelist" spec="1" />

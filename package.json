@@ -1,7 +1,7 @@
 {
-  "name": "alink-golf-tenki-client",
+  "name": "alink.golf_tenki",
   "version": "1.0.0",
-  "description": "alink-golf-tenki-client",
+  "description": "alink.golf_tenki",
   "author": "TAKUMA KIMISHIMA <takuma.kimishima@rights-s.jp>",
   "private": true,
   "scripts": {
@@ -9,6 +9,12 @@
     "start": "npm run dev",
     "build": "node build/build.js",
     "build:watch": "cross-env WEBPACK_WATCH=true node build/build.js",
+    "ios": "cordova run ios",
+    "ios:dev": "cordova run ios",
+    "ios:prd": "cordova run ios --release",
+    "android": "cordova run android",
+    "android:dev": "cordova run android",
+    "android:prd": "cordova run android --release",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
@@ -38,6 +44,9 @@
     "babel-preset-stage-2": "^6.22.0",
     "chalk": "^2.0.1",
     "copy-webpack-plugin": "^4.0.1",
+    "cordova-android": "^9.1.0",
+    "cordova-ios": "^6.2.0",
+    "cordova-plugin-whitelist": "1",
     "cross-env": "^5.0.1",
     "css-loader": "^0.28.0",
     "eslint": "^7.27.0",
@@ -87,5 +96,14 @@
     "Safari >= 9",
     "Firefox ESR",
     "Opera 12.1"
-  ]
+  ],
+  "cordova": {
+    "plugins": {
+      "cordova-plugin-whitelist": {}
+    },
+    "platforms": [
+      "ios",
+      "android"
+    ]
+  }
 }
