@@ -7,8 +7,16 @@
       <template #title>
         ログインキャンペーン
       </template>
-      <div class="sponsor">
-        <img src="@/assets/images/user/stamps/campaign/sponsor-sample.png">
+      <div
+        v-if="sponsors.length"
+        class="sponsor"
+      >
+        <a
+          :href="sponsor.url"
+          target="_blank"
+        >
+          <img :src="sponsor.image.url">
+        </a>
       </div>
       <div class="user_stamps-number">
         所持応募券：<span>{{ user.ticket_count }}</span>枚
@@ -16,12 +24,12 @@
       <div class="campaign-stamps">
         <!-- TODO: アニメーションを付けたい -->
         <div
-          v-for="number in 10"
-          :key="number"
-          :class="['campaign-stamps__count', {'has-stamp' : hasStamp(number)}]"
+          v-for="stampArea in stampAreaLimit"
+          :key="stampArea"
+          :class="['campaign-stamps__count', {'has-stamp' : hasStamp(stampArea)}]"
         >
           <img
-            v-if="hasStamp(number)"
+            v-if="hasStamp(stampArea)"
             src="@/assets/images/user/stamps/campaign/flag.png"
             width="40"
           >
@@ -41,6 +49,7 @@
 
 <script>
 import AppTabbar from '@/views/app-tabbar';
+import settings from '@/config/settings';
 
 export default {
   name: 'UserStampsCampaign',
@@ -48,15 +57,30 @@ export default {
     return {
       user: {
         ticket_count: 30,
-        user_stamps: {
-          number: 4,
-        },
       },
+      stampAreaLimit: settings.campaign.stampAreaLimit,
     };
   },
+  computed: {
+    userStamp() {
+      return this.$store.state.models.userStamp.userStamp;
+    },
+    sponsors() {
+      return this.$store.state.models.sponsor.sponsors;
+    },
+    sponsor() {
+      const sponsor = this.sponsors[Math.floor(Math.random() * this.sponsors.length)];
+      return sponsor.image.url;
+    },
+  },
+  async created() {
+    // TODO: ログインユーザの取得
+    await this.$store.dispatch('models/userStamp/getUserStamp');
+    await this.$store.dispatch('models/sponsor/getSponsors');
+  },
   methods: {
-    hasStamp(number) {
-      return number <= this.user.user_stamps.number;
+    hasStamp(stampArea) {
+      return stampArea <= this.userStamp.number;
     },
     closeCampaign() {
       this.$store.dispatch('appNavigator/reset', AppTabbar);
