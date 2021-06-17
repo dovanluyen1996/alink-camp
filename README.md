@@ -31,3 +31,37 @@ yarn stylelint --fix [file|directory]
 # regexp
 yarn stylelint src/**/*\[\.s*css\|\.vue\]
 ```
+
+## Setup cordova
+
+### install Cordova on Global
+
+```
+sudo yarn install -g cordova
+```
+
+### run iOS
+
+```
+cordova platform add ios
+cordova run ios
+```
+
+### run Android
+
+```
+cordova platform add android
+cordova run android
+```
+
+### Usage yarn commands
+
+```
+yarn run ios
+yarn run ios:dev
+yarn run ios:prd
+
+yarn run android
+yarn run android:dev
+yarn run android:prd
+```
