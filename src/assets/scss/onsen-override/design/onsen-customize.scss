@@ -56,6 +56,10 @@ $alert-dialog-radius: 8px;
   border-top-right-radius: $alert-dialog-radius;
 }
 
+.alert-dialog-content {
+  text-align: left;
+}
+
 .alert-dialog-footer {
   box-sizing: border-box;
   justify-content: center;
