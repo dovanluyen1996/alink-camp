@@ -3,15 +3,10 @@
     <custom-toolbar title="ユーザー情報の登録" />
     <div class="content">
       <base-form>
-        <text-field
-          v-model="email"
-          title="メールアドレス"
-        />
-        <password-field
-          v-model="password"
+        <user-email v-model="user.email" />
+        <user-password
+          v-model="user.password"
           :can-show-password="true"
-          title="パスワード"
-          help="※6文字以上の半角英数字で登録して下さい"
         />
         <template #buttons>
           <custom-submit @click="getConfirmCode">
@@ -28,8 +23,8 @@
 <script>
 // components
 import BaseForm from '@/components/organisms/form/base-form';
-import TextField from '@/components/organisms/form/text-field';
-import PasswordField from '@/components/organisms/form/password-field';
+import UserEmail from '@/components/organisms/user/user-email';
+import UserPassword from '@/components/organisms/user/user-password';
 import CustomSubmit from '@/components/organisms/form/custom-submit';
 import SocialLogin from '@/components/organisms/social-login';
 
@@ -40,15 +35,17 @@ export default {
   name: 'UserNew',
   components: {
     BaseForm,
-    TextField,
-    PasswordField,
+    UserEmail,
+    UserPassword,
     CustomSubmit,
     SocialLogin,
   },
   data() {
     return {
-      email: '',
-      password: '',
+      user: {
+        email: '',
+        password: '',
+      },
     };
   },
   methods: {

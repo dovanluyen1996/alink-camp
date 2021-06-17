@@ -3,11 +3,8 @@
     <custom-toolbar title="パスワードを忘れた方" />
     <div class="content">
       <base-form>
-        <text-field
-          v-model="confirm_code"
-          title="認証コード"
-        />
-        <password-field
+        <auth-comfirm-code v-model="confirm_code" />
+        <user-password-new
           v-model="email"
           title="新しいパスワードを設定"
           class="new-password"
@@ -25,16 +22,16 @@
 <script>
 // components
 import BaseForm from '@/components/organisms/form/base-form';
-import TextField from '@/components/organisms/form/text-field';
-import PasswordField from '@/components/organisms/form/password-field';
+import AuthComfirmCode from '@/components/organisms/auth/comfirm-code';
+import UserPasswordNew from '@/components/organisms/user/user-password-new';
 import CustomSubmit from '@/components/organisms/form/custom-submit';
 
 export default {
   name: 'PasswordReset',
   components: {
     BaseForm,
-    TextField,
-    PasswordField,
+    AuthComfirmCode,
+    UserPasswordNew,
     CustomSubmit,
   },
   data() {

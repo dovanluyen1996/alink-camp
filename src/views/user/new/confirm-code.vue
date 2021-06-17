@@ -6,10 +6,7 @@
     />
     <div class="content">
       <base-form>
-        <text-field
-          v-model="confirm_code"
-          title="認証コードの入力"
-        />
+        <auth-comfirm-code v-model="confirm_code" />
         <template #buttons>
           <custom-submit @click="submitConfirmCode">
             認証完了
@@ -23,7 +20,7 @@
 <script>
 // components
 import BaseForm from '@/components/organisms/form/base-form';
-import TextField from '@/components/organisms/form/text-field';
+import AuthComfirmCode from '@/components/organisms/auth/comfirm-code';
 import CustomSubmit from '@/components/organisms/form/custom-submit';
 
 // pages
@@ -33,7 +30,7 @@ export default {
   name: 'UserNewConfirmCode',
   components: {
     BaseForm,
-    TextField,
+    AuthComfirmCode,
     CustomSubmit,
   },
   data() {

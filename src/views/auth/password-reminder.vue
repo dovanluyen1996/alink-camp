@@ -3,12 +3,9 @@
     <custom-toolbar title="パスワードを忘れた方" />
     <div class="content">
       <base-form>
-        <text-field
-          v-model="email"
-          title="メールアドレス"
-        />
+        <user-email v-model="user.email" />
         <template #buttons>
-          <custom-submit @click="sendAuthCode">
+          <custom-submit @click="sendComfirmCode">
             認証コードを送信
           </custom-submit>
         </template>
@@ -20,7 +17,7 @@
 <script>
 // components
 import BaseForm from '@/components/organisms/form/base-form';
-import TextField from '@/components/organisms/form/text-field';
+import UserEmail from '@/components/organisms/user/user-email';
 import CustomSubmit from '@/components/organisms/form/custom-submit';
 
 // pages
@@ -30,16 +27,18 @@ export default {
   name: 'PasswordReminder',
   components: {
     BaseForm,
-    TextField,
+    UserEmail,
     CustomSubmit,
   },
   data() {
     return {
-      email: '',
+      user: {
+        email: '',
+      },
     };
   },
   methods: {
-    sendAuthCode() {
+    sendComfirmCode() {
       this.$store.dispatch('appNavigator/push', PasswordReset);
     },
   },

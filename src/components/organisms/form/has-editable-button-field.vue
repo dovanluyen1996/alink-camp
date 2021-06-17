@@ -47,20 +47,22 @@ export default {
 
 .has-editable-button-field /deep/ .card {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   padding-top: 13px;
   padding-bottom: 13px;
   font-size: $font-size-large;
   font-weight: 600;
 }
+
 .button-edit {
   padding: 10px 0;
+
   .button {
     width: 80px;
     height: auto;
-    line-height: 16px;
     font-size: $font-size-small;
+    line-height: 16px;
     text-align: center;
   }
 }
