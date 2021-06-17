@@ -4,14 +4,17 @@
       <input
         v-model="userSetting.isReceivableWeatherForecast"
         type="checkbox"
+        @change="updateUserSetting"
       >
       <input
-        v-model="userSetting.is_receivable_daily_whether_forecast"
+        v-model="userSetting.isReceivableDailyWhetherForecast"
         type="checkbox"
+        @change="updateUserSetting"
       >
       <input
-        v-model="userSetting.is_receivable_warning"
+        v-model="userSetting.isReceivableWarning"
         type="checkbox"
+        @change="updateUserSetting"
       >
     </div>
   </v-ons-page>
@@ -38,7 +41,7 @@ export default {
         isReceivableDailyWhetherForecast: this.userSetting.isReceivableDailyWhetherForecast,
         isReceivableWarning: this.userSetting.isReceivableWarning,
       };
-      await this.$store.dispatch('models/userSetting/getUserSetting', params);
+      await this.$store.dispatch('models/userSetting/updateUserSetting', params);
     },
   },
 };
