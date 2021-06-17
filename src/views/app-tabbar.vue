@@ -21,6 +21,8 @@ import ScoresNavigator from '@/views/scores/scores-navigator';
 import WindForecastNavigator from '@/views/wind-forecast/wind-forecast-navigator';
 import MenuNavigator from '@/views/menu/menu-navigator';
 
+const menuTabIndex = settings.views.appTabbar.tabIndexes.menu;
+
 export default {
   data() {
     return {
@@ -67,11 +69,10 @@ export default {
   },
   methods: {
     prechange(event) {
-      // stylelint-disable-line max-line-length
-      if (event.activeIndex === settings.views.appTabbar.tabIndexes.menu) this.openMenu(event.lastActiveIndex);
+      if (event.activeIndex === menuTabIndex) this.openMenu(event.lastActiveIndex);
     },
     reactive(event) {
-      if (event.activeIndex === settings.views.appTabbar.tabIndexes.menu) this.closeMenu();
+      if (event.activeIndex === menuTabIndex) this.closeMenu();
     },
     openMenu(lastActiveIndex) {
       // NOTE: @reactiveでは前のタブがとれないので
