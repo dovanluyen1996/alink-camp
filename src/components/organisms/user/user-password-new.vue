@@ -2,8 +2,9 @@
   <password-field
     v-model="inputedValue"
     :can-show-password="true"
-    help="'※6文字以上の半角英数字で登録して下さい'"
+    help="※6文字以上の半角英数字で登録して下さい"
     title="新しいパスワード"
+    class="password-new"
   />
 </template>
 
@@ -11,7 +12,7 @@
 import PasswordField from '@/components/organisms/form/password-field';
 
 export default {
-  name: 'UserPassword',
+  name: 'UserPasswordNew',
   components: {
     PasswordField,
   },

@@ -91,10 +91,10 @@ export default {
       this.isShownComfirmDialog = false;
     },
     cancel() {
-      this.isShownComfirmDialog = false;
+      this.closeConfirmDialog();
     },
     update() {
-      this.isShownComfirmDialog = false;
+      this.closeConfirmDialog();
     },
   },
 };

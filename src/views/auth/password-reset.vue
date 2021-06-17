@@ -4,11 +4,7 @@
     <div class="content">
       <base-form>
         <auth-comfirm-code v-model="confirm_code" />
-        <user-password-new
-          v-model="email"
-          title="新しいパスワードを設定"
-          class="new-password"
-        />
+        <user-password-new v-model="email" />
         <template #buttons>
           <custom-submit @click="submitPassword">
             設定する
@@ -49,7 +45,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.new-password {
+.password-new {
   margin-top: 45px;
   margin-bottom: 40px;
 }
