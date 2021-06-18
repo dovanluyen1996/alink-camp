@@ -7,6 +7,7 @@ import UserGiftsApi from './user_gifts_api';
 import SponsorsApi from './sponsors_api';
 import CurrentUserApi from './current_user_api';
 import CoursesApi from './courses_api';
+import UserStampApi from './user_stamp_api';
 import UserCoursesApi from './user_courses_api';
 
 export default {
@@ -19,5 +20,6 @@ export default {
   SponsorsApi,
   CurrentUserApi,
   CoursesApi,
+  UserStampApi,
   UserCoursesApi,
 };
