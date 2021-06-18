@@ -41,6 +41,7 @@ import FixedFooter from '@/components/organisms/fixed-footer';
 // pages
 import SearchResult from '@/views/course-search/search-result';
 import PrefecturesSearch from '@//views/course-search/prefectures-search';
+import ConditionsSearch from '@//views/course-search/conditions-search';
 
 export default {
   name: 'CourseSearch',
@@ -95,7 +96,7 @@ export default {
       this.$store.dispatch('courseSearchNavigator/push', PrefecturesSearch);
     },
     goToConditionsSearch() {
-      console.log('goToConditionsSearch');
+      this.$store.dispatch('courseSearchNavigator/push', ConditionsSearch);
     },
     goToSearchResult() {
       console.log('goToSearchResult', this.searchText);
