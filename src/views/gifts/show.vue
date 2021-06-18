@@ -61,7 +61,7 @@
       cancelable
     >
       <template #title>
-        応募完了
+        {{ hasError ? '応募失敗' : '応募完了' }}
       </template>
       {{ hasError ? 'チケット枚数が足りません' : '応募が完了しました。' }}
       <template #footer>
