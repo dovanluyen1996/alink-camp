@@ -61,9 +61,9 @@
       cancelable
     >
       <template #title>
-        {{ hasError ? '応募失敗' : '応募完了' }}
+        {{ result ? '応募完了' : '応募失敗' }}
       </template>
-      {{ hasError ? 'チケット枚数が足りません' : '応募が完了しました。' }}
+      {{ result ? '応募が完了しました。' : 'チケット枚数が足りません' }}
       <template #footer>
         <v-ons-button
           @click="closeCompletedApplyGift()"
@@ -88,7 +88,7 @@ export default {
       email: '',
       confirmApplyGiftVisible: false,
       completedApplyGiftVisible: false,
-      hasError: false,
+      result: true,
     };
   },
   computed: {
@@ -113,9 +113,7 @@ export default {
         email: this.email,
       };
 
-      const success = await this.$store.dispatch('models/userGift/createUserGift', params);
-
-      this.hasError = !success;
+      this.result = await this.$store.dispatch('models/userGift/createUserGift', params);
       this.confirmApplyGiftVisible = false;
       this.completedApplyGiftVisible = true;
     },
