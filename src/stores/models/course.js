@@ -20,11 +20,11 @@ export default {
     },
   },
   actions: {
-    async getCourses(context, searchParams) {
+    async getCourses(context, params) {
       context.commit('setIsLoading', true);
 
       try {
-        const courses = await ApiClient.getCourses(searchParams);
+        const courses = await ApiClient.getCourses(params);
 
         context.commit('setCourses', courses);
       } finally {

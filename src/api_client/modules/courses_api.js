@@ -1,6 +1,6 @@
 export default {
-  async getCourses(searchParams) {
-    const response = await this.get('/courses', searchParams);
+  async getCourses(params) {
+    const response = await this.get('/courses', params);
     return response.data;
   },
   async getCourse(id) {
