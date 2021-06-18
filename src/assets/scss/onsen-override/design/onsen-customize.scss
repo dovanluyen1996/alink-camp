@@ -104,12 +104,13 @@ $button-height--rounded: 36px;
     display: flex;
     align-items: center;
     justify-content: center;
+
     &::before {
       display: inline-block;
-      content: '';
       width: 12px;
       height: 12px;
       margin-right: 10px;
+      content: '';
       background-image: url('~@/assets/images/plus.png');
       background-position: center;
       background-size: 100%;

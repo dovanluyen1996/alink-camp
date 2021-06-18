@@ -26,6 +26,12 @@ export default {
     NoData,
     CourseList,
   },
+  props: {
+    title: {
+      type: String,
+      default: '検索結果',
+    },
+  },
   data() {
     return {
       courses: [
@@ -65,12 +71,6 @@ export default {
         },
       ],
     };
-  },
-  props: {
-    title: {
-      type: String,
-      default: '検索結果',
-    },
   },
   methods: {
     goToCourseShow(course) {

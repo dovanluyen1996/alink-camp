@@ -38,10 +38,10 @@ export default {
 
   /deep/ {
     .button[class*="button--large"] {
-      margin-left: auto;
-      margin-right: auto;
       width: 75%;
       max-width: 280px;
+      margin-right: auto;
+      margin-left: auto;
     }
   }
 }
