@@ -8,6 +8,7 @@ import sponsor from './sponsor';
 import currentUser from './current_user';
 import course from './course';
 import userStamp from './user_stamp';
+import userCourse from './user_course';
 
 export default {
   strict: true,
@@ -23,5 +24,6 @@ export default {
     currentUser,
     course,
     userStamp,
+    userCourse,
   },
 };
