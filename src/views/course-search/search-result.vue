@@ -19,7 +19,10 @@
 <script>
 // components
 import NoData from '@/components/organisms/no-data';
-import CourseList from '@/components/organisms/course-list.vue';
+import CourseList from '@/components/organisms/course-list';
+
+// pages
+import CourseShow from '@/views/courses/show';
 
 export default {
   name: 'CourseSearchResult',
@@ -79,7 +82,8 @@ export default {
   },
   methods: {
     goToCourseShow(course) {
-      console.log('goToCourseShow', course);
+      console.log(course);
+      this.$store.dispatch('courseSearchNavigator/push', CourseShow);
     },
   },
 };
