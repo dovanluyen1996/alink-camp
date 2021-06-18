@@ -18,6 +18,9 @@ export default {
     setIsLoading(state, isLoading) {
       state.isLoading = isLoading;
     },
+    setUserCourses(state, userCourses) {
+      Vue.set(state, 'userCourses', userCourses);
+    },
     addUserCourse(state, userCourse) {
       state.userCourses.push(userCourse);
     },
@@ -29,6 +32,17 @@ export default {
     },
   },
   actions: {
+    async getUserCourses(context) {
+      context.commit('setIsLoading', true);
+
+      try {
+        const userCourses = await ApiClient.getUserCourses();
+
+        context.commit('setUserCourses', userCourses);
+      } finally {
+        context.commit('setIsLoading', false);
+      }
+    },
     async createUserCourse(context, params) {
       context.commit('setIsLoading', true);
 

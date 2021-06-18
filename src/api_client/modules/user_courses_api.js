@@ -1,4 +1,8 @@
 export default {
+  async getUserCourses() {
+    const response = await this.get('/user_courses');
+    return response.data;
+  },
   async createUserCourse(params) {
     const response = await this.post('/user_courses', params);
     return response.data;
