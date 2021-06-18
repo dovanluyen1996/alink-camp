@@ -1,6 +1,7 @@
 <template>
   <div class="search-field">
     <v-ons-search-input
+      v-model="inputedValue"
       placeholder="コース名などを入力"
       class="search-form"
     />
@@ -20,7 +21,7 @@ export default {
     value: {
       type: String,
       default: '',
-      requier: true,
+      required: true,
     },
   },
   computed: {

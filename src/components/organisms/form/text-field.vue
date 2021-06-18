@@ -22,7 +22,7 @@ export default {
     value: {
       type: String,
       default: '',
-      requier: true,
+      required: true,
     },
     title: {
       type: String,

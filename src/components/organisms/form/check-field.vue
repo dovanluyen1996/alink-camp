@@ -22,7 +22,7 @@ export default {
     value: {
       type: Boolean,
       default: false,
-      requier: true,
+      required: true,
     },
     label: {
       type: String,
