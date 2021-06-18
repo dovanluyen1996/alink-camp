@@ -12,6 +12,7 @@
         class="sponsor"
       >
         <a
+          v-if="sponsor.image && sponsor.image.url"
           :href="sponsor.url"
           target="_blank"
         >
@@ -70,7 +71,7 @@ export default {
     },
     sponsor() {
       const sponsor = this.sponsors[Math.floor(Math.random() * this.sponsors.length)];
-      return sponsor.image.url;
+      return sponsor;
     },
   },
   async created() {
