@@ -35,5 +35,14 @@ export default {
   width: 100%;
   padding: 16px 0;
   text-align: center;
+
+  /deep/ {
+    .button[class*="button--large"] {
+      margin-left: auto;
+      margin-right: auto;
+      width: 75%;
+      max-width: 280px;
+    }
+  }
 }
 </style>

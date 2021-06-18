@@ -9,7 +9,6 @@
       <course-list
         v-else
         :courses="courses"
-        fullscreen
         @click="goToCourseShow"
       />
     </div>
