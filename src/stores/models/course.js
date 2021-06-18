@@ -5,25 +5,28 @@ export default {
   strict: true,
   namespaced: true,
   state: {
-    course: {},
+    courses: [],
     isLoading: false,
+  },
+  getters: {
+    all: state => state.courses,
   },
   mutations: {
     setIsLoading(state, isLoading) {
       state.isLoading = isLoading;
     },
-    setCourse(state, course) {
-      Vue.set(state, 'course', course);
+    setCourses(state, courses) {
+      Vue.set(state, 'courses', courses);
     },
   },
   actions: {
-    async getCourse(context, { courseId }) {
+    async getCourses(context, searchParams) {
       context.commit('setIsLoading', true);
 
       try {
-        const course = await ApiClient.getCourse(courseId);
+        const courses = await ApiClient.getCourses(searchParams);
 
-        context.commit('setCourse', course);
+        context.commit('setCourses', courses);
       } finally {
         context.commit('setIsLoading', false);
       }
