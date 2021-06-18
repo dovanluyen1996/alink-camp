@@ -36,12 +36,12 @@ export default {
       // NOTE: htmlのinputはString, サーバーではintで持っているので両方許可する
       type: [Number, String],
       default: -1,
-      requier: true,
+      required: true,
     },
     options: {
       type: Array,
       default: () => [],
-      requier: true,
+      required: true,
     },
     title: {
       type: String,
