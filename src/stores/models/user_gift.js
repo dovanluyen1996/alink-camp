@@ -24,10 +24,6 @@ export default {
 
         context.commit('addUserGift', userGift);
         context.dispatch('models/currentUser/getUser', null, { root: true });
-
-        return true;
-      } catch (_err) {
-        return false;
       } finally {
         context.commit('setIsLoading', false);
       }

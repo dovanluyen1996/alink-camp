@@ -25,31 +25,33 @@
 
       <v-ons-button
         modifier="cta"
-        @click="handleSubmit(showConfirmApplyGift)"
+        @click="handleSubmit(showConfirm)"
       >
         抽選応募する
       </v-ons-button>
     </validation-observer>
 
     <v-ons-alert-dialog
-      :visible.sync="confirmApplyGiftVisible"
+      :visible.sync="confirmVisible"
       cancelable
     >
       <template #title>
         応募確認
       </template>
-      {{ gift.name }}の応募をします。よろしいですか？
-      連絡先は{{ email }}です。
+
+      {{ gift.name }}の応募をします。よろしいですか？<br>
+      連絡先は{{ email }}です。<br>
       当選時に連絡が必要な場合がありますので、お間違え無いかご確認ください。
+
       <template #footer>
         <v-ons-button
           modifier="quiet quiet-dark"
-          @click="closeConfirmApplyGift()"
+          @click="closeConfirm()"
         >
           キャンセル
         </v-ons-button>
         <v-ons-button
-          @click="submitApplyGift()"
+          @click="submit()"
         >
           応募する
         </v-ons-button>
@@ -57,16 +59,36 @@
     </v-ons-alert-dialog>
 
     <v-ons-alert-dialog
-      :visible.sync="completedApplyGiftVisible"
-      cancelable
+      :visible.sync="completedVisible"
     >
       <template #title>
-        {{ result ? '応募完了' : '応募失敗' }}
+        応募完了
       </template>
-      {{ result ? '応募が完了しました。' : 'チケット枚数が足りません' }}
+
+      応募が完了しました。
+
       <template #footer>
         <v-ons-button
-          @click="closeCompletedApplyGift()"
+          @click="closeCompleted()"
+        >
+          OK
+        </v-ons-button>
+      </template>
+    </v-ons-alert-dialog>
+
+    <v-ons-alert-dialog
+      :visible.sync="errorVisible"
+    >
+      <template #title>
+        応募失敗
+      </template>
+
+      応募に失敗しました。<br>
+      {{ errorMessage }}
+
+      <template #footer>
+        <v-ons-button
+          @click="closeError()"
         >
           OK
         </v-ons-button>
@@ -85,37 +107,61 @@ export default {
   },
   data() {
     return {
+      // https://github.com/rights-s/alink-golf_tenki-client/issues/266
+      // TODO: currentUser.user.emailをデフォルトでセットする
+      // email: this.$store.state.model.currentUser.user.email,
       email: '',
-      confirmApplyGiftVisible: false,
-      completedApplyGiftVisible: false,
-      result: true,
+      confirmVisible: false,
+      completedVisible: false,
+      errorVisible: false,
+      error: null,
     };
   },
   computed: {
     gift() {
       return this.$store.getters['models/gift/findById'](this.giftId);
     },
+    errorMessage() {
+      if (!this.error || !this.error.response) return null;
+      return this.error.response.data.error;
+    },
   },
   methods: {
-    showConfirmApplyGift() {
-      this.confirmApplyGiftVisible = true;
+    showConfirm() {
+      this.confirmVisible = true;
     },
-    closeConfirmApplyGift() {
-      this.confirmApplyGiftVisible = false;
+    closeConfirm() {
+      this.confirmVisible = false;
     },
-    closeCompletedApplyGift() {
-      this.completedApplyGiftVisible = false;
+    showCompleted() {
+      this.completedVisible = true;
+    },
+    closeCompleted() {
+      this.completedVisible = false;
       this.$store.dispatch('menuNavigator/pop');
     },
-    async submitApplyGift() {
+    showError(e) {
+      this.errorVisible = true;
+      this.error = e;
+    },
+    closeError() {
+      this.errorVisible = false;
+      this.error = null;
+    },
+    async submit() {
       const params = {
         giftId: this.giftId,
         email: this.email,
       };
 
-      this.result = await this.$store.dispatch('models/userGift/createUserGift', params);
-      this.confirmApplyGiftVisible = false;
-      this.completedApplyGiftVisible = true;
+      try {
+        await this.$store.dispatch('models/userGift/createUserGift', params);
+
+        this.closeConfirm();
+        this.showCompleted();
+      } catch (e) {
+        this.showError(e);
+      }
     },
   },
 };
