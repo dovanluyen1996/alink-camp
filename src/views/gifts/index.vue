@@ -2,9 +2,9 @@
   <v-ons-page>
     <div>
       所持応募券
-      999枚 <!-- TODO: currentUser.ticket_count -->
+      {{ currentUser.ticketCount }}枚
       スタンプ
-      1/10 <!-- TODO: currentUser.userStamp.number -->
+      {{ userStamp.number }}/10
       あと〜個で応募券
     </div>
     <div>
@@ -35,9 +35,17 @@ export default {
     gifts() {
       return this.$store.getters['models/gift/all'];
     },
+    currentUser() {
+      return this.$store.state.models.currentUser.user;
+    },
+    userStamp() {
+      return this.$store.state.models.userStamp.userStamp;
+    },
   },
   async created() {
     await this.getGifts();
+    await this.getCurrentUser();
+    await this.getUserStamp();
   },
   methods: {
     goToGift(giftId) {
@@ -50,6 +58,12 @@ export default {
     },
     async getGifts() {
       await this.$store.dispatch('models/gift/getGifts');
+    },
+    async getCurrentUser() {
+      await this.$store.dispatch('models/currentUser/getUser');
+    },
+    async getUserStamp() {
+      await this.$store.dispatch('models/userStamp/getUserStamp');
     },
   },
 };
