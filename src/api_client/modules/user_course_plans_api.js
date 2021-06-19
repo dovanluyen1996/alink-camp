@@ -4,7 +4,7 @@ export default {
     return response.data;
   },
   async updateUserCoursePlan(userCourseId, userCoursePlanId, params) {
-    const response = await this.post(
+    const response = await this.put(
       `/user_courses/${userCourseId}/user_course_plans/${userCoursePlanId}`, params,
     );
     return response.data;
