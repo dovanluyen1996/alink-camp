@@ -5,7 +5,7 @@ import Vue from 'vue';
 import { ValidationProvider, ValidationObserver } from 'vee-validate';
 import VueOnsen from '@/plugins/vue_onsenui_plugin';
 import '@/plugins/global_component_plugin';
-import '@/lib/vee_validate';
+import '@/config/vee_validate';
 import store from '@/stores';
 import App from '@/app';
 
