@@ -9,7 +9,7 @@ export default {
     isLoading: false,
   },
   getters: {
-    description: state => state.termOfService && state.termOfService.description,
+    current: state => state.termOfService,
   },
   mutations: {
     setTermOfService(state, termOfService) {

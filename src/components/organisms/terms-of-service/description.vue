@@ -1,7 +1,7 @@
 <template>
   <div class="terms-of-service-description">
     <!-- eslint-disable-next-line vue/no-v-html -->
-    <div v-html="descriptions" />
+    <div v-html="description" />
   </div>
 </template>
 
@@ -9,8 +9,12 @@
 export default {
   name: 'TermsOfServiceDescription',
   computed: {
-    descriptions() {
-      return this.$store.getters['models/termOfService/description'];
+    termOfService() {
+      return this.$store.getters['models/termOfService/current'];
+    },
+    description() {
+      if (!this.termOfService) return "";
+      return this.termOfService.description;
     },
   },
   async created() {

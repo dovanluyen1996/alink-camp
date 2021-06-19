@@ -12,7 +12,7 @@
       >
         同意しない
       </v-ons-button>
-      <v-ons-button @click="goToFirstGuidance">
+      <v-ons-button @click="agree">
         同意する
       </v-ons-button>
     </ons-bottom-toolbar>
@@ -33,11 +33,13 @@ export default {
   },
   methods: {
     disagree() {
-      // TODO: force quit app if disagree term
       this.$store.dispatch('appNavigator/pop');
     },
-    goToFirstGuidance() {
+    agree() {
       localStorage.setItem('acceptedTermOfService', true);
+      this.goToFirstGuidance();
+    },
+    goToFirstGuidance() {
       this.$store.dispatch('appNavigator/push', FirstGuidance);
     },
   },
