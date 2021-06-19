@@ -2,15 +2,19 @@
   <v-ons-page>
     <custom-toolbar title="プライバシーポリシー" />
     <!-- eslint-disable-next-line vue/no-v-html -->
-    <div v-html="descriptions" />
+    <div v-html="description" />
   </v-ons-page>
 </template>
 
 <script>
 export default {
   computed: {
-    descriptions() {
-      return this.$store.getters['models/privacyPolicy/description'];
+    privacyPolicy() {
+      return this.$store.getters['models/privacyPolicy/current'];
+    },
+    description() {
+      if (!this.privacyPolicy) return '';
+      return this.privacyPolicy.description;
     },
   },
   async created() {

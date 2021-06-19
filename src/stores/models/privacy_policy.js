@@ -9,7 +9,7 @@ export default {
     isLoading: false,
   },
   getters: {
-    description: state => state.privacyPolicy && state.privacyPolicy.description,
+    current: state => state.privacyPolicy,
   },
   mutations: {
     setPrivacyPolicy(state, privacyPolicy) {
