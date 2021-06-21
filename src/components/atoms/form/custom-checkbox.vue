@@ -34,24 +34,28 @@ export default {
 <style lang="scss" scoped>
 .custom-input {
   display: inline-block;
+  box-sizing: border-box;
+  width: 24px;
+  height: 24px;
+  border: 2px solid #d9d9d9;
 
   &__field {
     display: none;
   }
 
   &__visual {
-    box-sizing: border-box;
     display: inline-block;
-    width: 24px;
-    height: 24px;
+    width: 100%;
+    height: 100%;
     background: #fff;
-    border: 2px solid #d9d9d9;
+    background-image: url('~@/assets/images/form/check-icon.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 23px;
+    opacity: 0;
 
     .custom-input__field:checked + & {
-      background-image: url('~@/assets/images/form/check-icon.png');
-      background-repeat: no-repeat;
-      background-position: center;
-      background-size: 23px;
+      opacity: 1;
     }
   }
 }
