@@ -41,7 +41,7 @@
 
         <v-ons-list-item
           modifier="nodivider chevron"
-          @click="goToTermOfService"
+          @click="goToTermsOfService"
         >
           利用規約
         </v-ons-list-item>
@@ -65,7 +65,7 @@ import UserSettingView from '@/views/user-setting/index';
 import HelpsView from '@/views/helps/index';
 import UserEdit from '@/views/user/edit';
 import PrivacyPolicyView from '@/views/privacy-policy/index.vue';
-import TermOfServiceView from '@/views/terms-of-service/signed';
+import TermsOfServiceView from '@/views/terms-of-service/signed';
 
 export default {
   methods: {
@@ -87,8 +87,8 @@ export default {
     goPrivacyPolicy() {
       this.$store.dispatch('menuNavigator/push', PrivacyPolicyView);
     },
-    goToTermOfService() {
-      this.$store.dispatch('menuNavigator/push', TermOfServiceView);
+    goToTermsOfService() {
+      this.$store.dispatch('menuNavigator/push', TermsOfServiceView);
     },
   },
 };
