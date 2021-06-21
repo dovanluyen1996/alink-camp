@@ -3,6 +3,7 @@
     <custom-toolbar title="コース検索" />
     <div class="content">
       <card-with-tab
+        ref="tabContents"
         :tabs="tabs"
       />
       <fixed-footer>
@@ -22,12 +23,17 @@
 import CardWithTab from '@/components/organisms/card-with-tab';
 import FixedFooter from '@/components/organisms/fixed-footer';
 
+// pages
+import SearchResult from '@/views/course-search/search-result';
+
 // tab contents
 import CourseSearchAreaTab from '@/components/organisms/course-search/area-tab';
 import CourseSearchLocationTab from '@/components/organisms/course-search/location-tab';
 
-// pages
-import SearchResult from '@/views/course-search/search-result';
+const tabIndexes = {
+  area: 0,
+  location: 1,
+};
 
 export default {
   name: 'CourseConditionsSearch',
@@ -59,7 +65,10 @@ export default {
   },
   methods: {
     goToSearchResult() {
-      console.log('goToSearchResult', this.searchConditions);
+      // eslint-disable-next-line max-len
+      const activeTab = Object.keys(tabIndexes).filter(key => tabIndexes[key] === this.$refs.tabContents.activeIndex)[0];
+
+      console.log('goToSearchResult', activeTab, this.searchConditions);
 
       this.$store.dispatch('courseSearchNavigator/push', {
         extends: SearchResult,

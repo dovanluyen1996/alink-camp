@@ -3,6 +3,7 @@ export default {
   namespaced: true,
   state: {
     stack: [],
+    // TODO: 天気APIの仕様がわからないためダミーデータなので変更してください
     searchConditions: {
       prefecture: -1,
       date: '',
@@ -10,6 +11,7 @@ export default {
       temperature: 0,
       wind: false,
       uv: false,
+      distance: -1,
     },
   },
   mutations: {
@@ -44,6 +46,7 @@ export default {
         temperature: 0,
         wind: false,
         uv: false,
+        distance: -1,
       };
     },
   },

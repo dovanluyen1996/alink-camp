@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="card__title card__title--center">
-      エリアを指定
+      エリアを指定（必須）
     </div>
     <custom-select
       v-model="prefectureValue"
@@ -37,8 +37,7 @@ export default {
   },
   data() {
     return {
-      // TODO: src/components/organisms/user/user-prefecture.vue
-      //       にも都道府県リストがあるので一元管理してください
+      // TODO: ダミーデータなので変更してください
       prefectureOptions: [
         {
           value: 0,
