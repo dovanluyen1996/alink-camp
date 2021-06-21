@@ -160,6 +160,7 @@ export default {
         this.closeConfirm();
         this.showCompleted();
       } catch (e) {
+        this.closeConfirm();
         this.showError(e);
       }
     },
