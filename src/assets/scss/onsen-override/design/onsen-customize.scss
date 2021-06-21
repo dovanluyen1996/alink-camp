@@ -139,6 +139,23 @@ $button-height--rounded: 36px;
   border-radius: 10px;
 }
 
+.switch {
+  width: 38px;
+  min-width: 38px;
+
+  &__toggle {
+    top: 6px;
+    bottom: 6px;
+  }
+
+  &__handle {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.25), 0 1px 4px rgba(0, 0, 0, 0.25);
+  }
+}
+
 /* ----------
  Grid
 ---------- */
