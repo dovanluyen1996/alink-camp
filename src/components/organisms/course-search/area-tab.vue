@@ -1,11 +1,21 @@
 <template>
   <div>
-    エリアを指定
-    <select-field
-      v-model="selectedValue"
+    <div class="card__title">
+      エリアを指定
+    </div>
+    <custom-select
+      v-model="prefectureValue"
       :options="prefectureOptions"
       placeholder="都道府県を選択してください"
-      title="エリアを指定（必須）"
+    />
+    <div class="card__title">
+      天候を知りたい日付選択（必須）
+    </div>
+    <custom-datetime-input
+      :value="dateValue"
+      type="date"
+      placeholder="日にち"
+      @input="inputDate"
     />
     <course-search-conditions-fields />
   </div>
@@ -13,21 +23,16 @@
 
 <script>
 // components
-import SelectField from '@/components/organisms/form/select-field';
+import CustomSelect from '@/components/atoms/form/custom-select';
+import CustomDatetimeInput from '@/components/atoms/form/custom-datetime-input';
 import CourseSearchConditionsFields from '@/components/organisms/course-search/conditions-fields.vue';
 
 export default {
   name: 'CourseSearch',
   components: {
-    SelectField,
+    CustomSelect,
+    CustomDatetimeInput,
     CourseSearchConditionsFields,
-  },
-  props: {
-    value: {
-      type: [Number, String],
-      default: -1,
-      requier: true,
-    },
   },
   data() {
     return {
@@ -47,16 +52,40 @@ export default {
           text: '沖縄',
         },
       ],
+      prefectureValue: -1,
     };
   },
   computed: {
-    selectedValue: {
+    searchConditions: {
       get() {
-        return this.value;
+        return this.$store.state.courseSearchNavigator.searchConditions;
+      },
+      set(newValue, oldValue) {
+        // NOTE: eslintのルールに従うとjsエラーがでるので除外
+        /* eslint-disable-next-line prefer-object-spread */
+        const newConditions = Object.assign({}, oldValue);
+        Object.assign(newConditions, newValue);
+
+        this.$store.commit('courseSearchNavigator/setSearchConditions', newConditions);
+      },
+    },
+    dateValue: {
+      get() {
+        return this.searchConditions.date;
       },
       set(newValue) {
-        this.$emit('input', newValue);
+        this.searchConditions = { date: newValue };
       },
+    },
+  },
+  watch: {
+    prefectureValue(newValue) {
+      this.searchConditions = { prefecture: newValue };
+    },
+  },
+  methods: {
+    inputDate(value) {
+      this.dateValue = value;
     },
   },
 };

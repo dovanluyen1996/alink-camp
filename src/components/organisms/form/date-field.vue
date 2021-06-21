@@ -3,7 +3,7 @@
     :title="title"
     class="date-field"
   >
-    <v-ons-input
+    <custom-datetime-input
       v-model="inputedValue"
       type="date"
     />
@@ -11,12 +11,14 @@
 </template>
 
 <script>
+import CustomDatetimeInput from '@/components/atoms/form/custom-datetime-input';
 import BaseField from './base-field';
 
 export default {
   name: 'DateField',
   components: {
     BaseField,
+    CustomDatetimeInput,
   },
   props: {
     value: {
@@ -41,21 +43,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped>
-
-/deep/ {
-  input[type="date"] {
-    font-size: 16px;
-    font-weight: 600;
-    background-image: url('~@/assets/images/form/date.png');
-    background-repeat: no-repeat;
-    background-position: right center;
-    background-size: 34px 30px;
-  }
-
-  input[type="date"]::-webkit-calendar-picker-indicator {
-    background: none;
-  }
-}
-</style>

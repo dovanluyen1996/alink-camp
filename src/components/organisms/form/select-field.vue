@@ -3,33 +3,23 @@
     :title="title"
     class="select-field"
   >
-    <v-ons-select v-model="selectedValue">
-      <option
-        value="-1"
-        disabled
-        selected
-        class="placeholder"
-      >
-        {{ placeholder }}
-      </option>
-      <option
-        v-for="option in options"
-        :key="option.value"
-        :value="option.value"
-      >
-        {{ option.text }}
-      </option>
-    </v-ons-select>
+    <custom-select
+      v-model="selectedValue"
+      :options="options"
+      :placeholder="placeholder"
+    />
   </base-field>
 </template>
 
 <script>
+import CustomSelect from '@/components/atoms/form/custom-select';
 import BaseField from './base-field';
 
 export default {
   name: 'SelectField',
   components: {
     BaseField,
+    CustomSelect,
   },
   props: {
     value: {
@@ -64,16 +54,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped>
-.placeholder {
-  display: none;
-}
-
-/deep/ .select-input {
-  font-size: 16px;
-  font-weight: 600;
-  background-image: url('~@/assets/images/form/select-arrow.png');
-  background-size: 30px;
-}
-</style>

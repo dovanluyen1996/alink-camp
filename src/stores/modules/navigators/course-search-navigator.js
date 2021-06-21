@@ -3,6 +3,10 @@ export default {
   namespaced: true,
   state: {
     stack: [],
+    searchConditions: {
+      prefecture: -1,
+      date: '',
+    },
   },
   mutations: {
     push(state, page) {
@@ -19,6 +23,15 @@ export default {
     },
     reset(state, page) {
       state.stack = [page || state.stack[0]];
+    },
+    setSearchConditions(state, conditions) {
+      state.searchConditions = conditions;
+    },
+    resetSearchConditions(state) {
+      state.searchConditions = {
+        prefecture: -1,
+        date: '',
+      };
     },
   },
   actions: {
