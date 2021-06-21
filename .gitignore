@@ -16,3 +16,5 @@ yarn-error.log*
 # For Cordova
 /platforms/
 /plugins/
+/www/*
+!/www/.gitkeep
