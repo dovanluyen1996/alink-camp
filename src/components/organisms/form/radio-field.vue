@@ -50,7 +50,7 @@ export default {
 
 <style lang="scss" scoped>
 /deep/ {
- :checked + .radio-button--material__checkmark::before {
+  :checked + .radio-button--material__checkmark::before {
     border-color: #d9d9d9;
   }
 }

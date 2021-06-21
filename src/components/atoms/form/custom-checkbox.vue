@@ -33,8 +33,8 @@ export default {
 
 <style lang="scss" scoped>
 .custom-input {
-  display: inline-block;
   box-sizing: border-box;
+  display: inline-block;
   width: 24px;
   height: 24px;
   border: 2px solid #d9d9d9;

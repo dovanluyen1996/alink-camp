@@ -10,7 +10,7 @@
 import CourseSearchConditionsFields from '@/components/organisms/course-search/conditions-fields.vue';
 
 export default {
-  name: 'CourseSearch',
+  name: 'CourseSearchLocationTab',
   components: {
     CourseSearchConditionsFields,
   },

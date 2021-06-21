@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="card__title">
+    <div class="card__title card__title--center">
       エリアを指定
     </div>
     <custom-select
@@ -8,15 +8,14 @@
       :options="prefectureOptions"
       placeholder="都道府県を選択してください"
     />
-    <div class="card__title">
-      天候を知りたい日付選択（必須）
-    </div>
-    <custom-datetime-input
-      :value="dateValue"
-      type="date"
-      placeholder="日にち"
-      @input="inputDate"
-    />
+
+    <course-search-date-field />
+
+    <annotations-block>
+      ※予報は本日から10日目までとなります。それ以上は過去のお天気をもとに予測したデータとなります。<br>
+      ※紫外線、風の強さに関しては10日目までの予報となります。
+    </annotations-block>
+
     <course-search-conditions-fields />
   </div>
 </template>
@@ -24,14 +23,16 @@
 <script>
 // components
 import CustomSelect from '@/components/atoms/form/custom-select';
-import CustomDatetimeInput from '@/components/atoms/form/custom-datetime-input';
+import CourseSearchDateField from '@/components/organisms/course-search/date-field';
+import AnnotationsBlock from '@/components/atoms/form/annotations-block';
 import CourseSearchConditionsFields from '@/components/organisms/course-search/conditions-fields.vue';
 
 export default {
-  name: 'CourseSearch',
+  name: 'CourseSearchAreaTab',
   components: {
     CustomSelect,
-    CustomDatetimeInput,
+    CourseSearchDateField,
+    AnnotationsBlock,
     CourseSearchConditionsFields,
   },
   data() {
@@ -52,44 +53,26 @@ export default {
           text: '沖縄',
         },
       ],
-      prefectureValue: -1,
     };
   },
   computed: {
-    searchConditions: {
+    searchConditions() {
+      return this.$store.state.courseSearchNavigator.searchConditions;
+    },
+    prefectureValue: {
       get() {
-        return this.$store.state.courseSearchNavigator.searchConditions;
+        return this.searchConditions.prefecture;
       },
-      set(newValue, oldValue) {
-        // NOTE: eslintのルールに従うとjsエラーがでるので除外
-        /* eslint-disable-next-line prefer-object-spread */
-        const newConditions = Object.assign({}, oldValue);
-        Object.assign(newConditions, newValue);
-
-        this.$store.commit('courseSearchNavigator/setSearchConditions', newConditions);
+      set(prefecture) {
+        this.$store.commit('courseSearchNavigator/setSearchConditions', { prefecture });
       },
-    },
-    dateValue: {
-      get() {
-        return this.searchConditions.date;
-      },
-      set(newValue) {
-        this.searchConditions = { date: newValue };
-      },
-    },
-  },
-  watch: {
-    prefectureValue(newValue) {
-      this.searchConditions = { prefecture: newValue };
-    },
-  },
-  methods: {
-    inputDate(value) {
-      this.dateValue = value;
     },
   },
 };
 </script>
 
 <style scoped lang="scss">
+.select {
+  width: 100%;
+}
 </style>

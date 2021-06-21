@@ -54,6 +54,9 @@ export default {
       return this.$store.state.courseSearchNavigator.searchConditions;
     },
   },
+  created() {
+    this.$store.commit('courseSearchNavigator/resetSearchConditions');
+  },
   methods: {
     goToSearchResult() {
       console.log('goToSearchResult', this.searchConditions);
@@ -68,6 +71,3 @@ export default {
   },
 };
 </script>
-
-<style scoped lang="scss">
-</style>

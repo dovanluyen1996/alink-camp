@@ -6,6 +6,10 @@ export default {
     searchConditions: {
       prefecture: -1,
       date: '',
+      rainy: false,
+      temperature: 0,
+      wind: false,
+      uv: false,
     },
   },
   mutations: {
@@ -25,12 +29,21 @@ export default {
       state.stack = [page || state.stack[0]];
     },
     setSearchConditions(state, conditions) {
-      state.searchConditions = conditions;
+      // NOTE: eslintのルールに従うとjsエラーがでるので除外
+      // eslint-disable-next-line prefer-object-spread
+      const newConditions = Object.assign({ ...state.searchConditions });
+      Object.assign(newConditions, conditions);
+
+      state.searchConditions = newConditions;
     },
     resetSearchConditions(state) {
       state.searchConditions = {
         prefecture: -1,
         date: '',
+        rainy: false,
+        temperature: 0,
+        wind: false,
+        uv: false,
       };
     },
   },

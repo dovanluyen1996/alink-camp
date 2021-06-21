@@ -206,4 +206,14 @@ $button-height--rounded: 36px;
     height: calc(100% - 40px);
     overflow: auto;
   }
+
+  &__title {
+    font-size: $font-size-large;
+    font-weight: 600;
+    color: $color-subtext;
+
+    &--center {
+      text-align: center;
+    }
+  }
 }
