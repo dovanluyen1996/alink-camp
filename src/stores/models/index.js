@@ -11,7 +11,6 @@ import userStamp from './user_stamp';
 import userCourse from './user_course';
 import userSetting from './user_setting';
 import userCoursePlan from './user_course_plan';
-import userSetting from './user_setting';
 
 export default {
   strict: true,
@@ -30,6 +29,5 @@ export default {
     userCourse,
     userSetting,
     userCoursePlan,
-    userSetting,
   },
 };

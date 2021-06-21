@@ -22,7 +22,7 @@
           @change="updateUserSetting"
         >
         <div>
-          ※予定日10日前より定期的に該当コースの天気をご連絡します <br/>
+          ※予定日10日前より定期的に該当コースの天気をご連絡します <br>
           ※急な変化の際のキャンセルの判断にご利用ください
         </div>
       </div>
@@ -43,26 +43,24 @@
 
 <script>
 export default {
-  data() {
-    return {
-      userSetting: {},
-    };
+  computed: {
+    userSetting() {
+      return this.$store.getters['models/userSetting/userSetting'];
+    },
   },
   async created() {
     await this.getUserSetting();
-    this.userSetting = { ...this.$store.getters['models/userSetting/userSetting'] };
   },
   methods: {
     async getUserSetting() {
       await this.$store.dispatch('models/userSetting/getUserSetting');
     },
     async updateUserSetting() {
-      const params = {
-        isReceivableWeatherForecast: this.userSetting.isReceivableWeatherForecast,
-        isReceivableDailyWhetherForecast: this.userSetting.isReceivableDailyWhetherForecast,
-        isReceivableWarning: this.userSetting.isReceivableWarning,
-      };
-      await this.$store.dispatch('models/userSetting/updateUserSetting', params);
+      try {
+        await this.$store.dispatch('models/userSetting/updateUserSetting', this.userSetting);
+      } catch (e) {
+        this.getUserSetting();
+      }
     },
   },
 };
