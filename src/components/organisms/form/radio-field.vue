@@ -1,12 +1,9 @@
 <template>
-  <base-field
-    :title="title"
-    class="radio-field"
-  >
+  <div>
     <label
       v-for="label in labels"
       :key="label.value"
-      class="radio-field-label"
+      class="radio-field"
     >
       <v-ons-radio
         v-model="selectedValue"
@@ -15,17 +12,12 @@
       />
       {{ label.text }}
     </label>
-  </base-field>
+  </div>
 </template>
 
 <script>
-import BaseField from './base-field';
-
 export default {
   name: 'RadioField',
-  components: {
-    BaseField,
-  },
   props: {
     value: {
       // NOTE: htmlのinputはString, サーバーではintで持っているので両方許可する
@@ -58,25 +50,19 @@ export default {
 
 <style lang="scss" scoped>
 /deep/ {
-  .card {
-    padding: 10px 0;
-    text-align: center;
-  }
-
-  :checked + .radio-button--material__checkmark::before {
+ :checked + .radio-button--material__checkmark::before {
     border-color: #d9d9d9;
   }
 }
 
-.radio-field-label {
+.radio-field {
   display: inline-block;
-  padding: 10px 0;
-  margin: 0 20px;
-  font-size: 16px;
+  padding: 5px 0;
   font-weight: 600;
 }
 
 .radio-button {
   margin-right: 5px;
+  vertical-align: baseline;
 }
 </style>
