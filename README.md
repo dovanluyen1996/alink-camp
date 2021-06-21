@@ -54,6 +54,12 @@ cordova platform add android
 cordova run android
 ```
 
+### run Browser(debug)
+
+```
+cordova build browser && yarn run browser
+```
+
 ### Usage yarn commands
 
 ```

@@ -15,6 +15,9 @@
     "android": "cordova run android",
     "android:dev": "cordova run android",
     "android:prd": "cordova run android --release",
+    "browser": "cordova run browser",
+    "browser:dev": "cordova run browser",
+    "browser:prd": "cordova run browser --release",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
@@ -45,7 +48,9 @@
     "chalk": "^2.0.1",
     "copy-webpack-plugin": "^4.0.1",
     "cordova-android": "^9.1.0",
+    "cordova-browser": "^6.0.0",
     "cordova-ios": "^6.2.0",
+    "cordova-plugin-device": "^2.0.3",
     "cordova-plugin-whitelist": "1",
     "cross-env": "^5.0.1",
     "css-loader": "^0.28.0",
@@ -99,11 +104,13 @@
   ],
   "cordova": {
     "plugins": {
-      "cordova-plugin-whitelist": {}
+      "cordova-plugin-whitelist": {},
+      "cordova-plugin-device": {}
     },
     "platforms": [
       "ios",
-      "android"
+      "android",
+      "browser"
     ]
   }
 }
