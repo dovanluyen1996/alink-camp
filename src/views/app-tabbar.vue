@@ -4,6 +4,7 @@
       :tabs="tabs"
       :visible="true"
       :index.sync="activeIndex"
+      animation="none"
       position="bottom"
       @prechange="prechange"
       @reactive="reactive"
