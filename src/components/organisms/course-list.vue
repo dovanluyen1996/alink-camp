@@ -17,7 +17,15 @@
             @click="clickCourse(course)"
           >
             <div class="center">
-              <span class="list-item__title">{{ course.name }}</span>
+              <div class="list-item__title">
+                {{ course.name }}
+                <span
+                  v-if="currentLocation"
+                  class="course-distance"
+                >
+                  {{ getDistance(course.latitude, course.longitude) }}
+                </span>
+              </div>
               <span class="list-item__subtitle">{{ course.address }}</span>
             </div>
           </v-ons-list-item>
@@ -49,6 +57,11 @@ export default {
       isFullscreen: false,
     };
   },
+  computed: {
+    currentLocation() {
+      return true;
+    },
+  },
   mounted() {
     this.setFullscreen();
   },
@@ -64,6 +77,9 @@ export default {
     },
     clickCourse(course) {
       this.$emit('click', course);
+    },
+    getDistance(lat, lon) {
+      return '999m';
     },
   },
 };
@@ -102,6 +118,8 @@ export default {
 
 .list-item {
   &__title {
+    display: flex;
+    align-items: center;
     margin-bottom: 5px;
     font-size: 18px;
     line-height: 1.2;
@@ -111,5 +129,19 @@ export default {
     font-size: $font-size-small;
     color: $color-subtext;
   }
+}
+
+.course-distance {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 60px;
+  height: 18px;
+  padding: 0 12px;
+  margin-left: 8px;
+  font-size: $font-size-small;
+  background: #f2f2f2;
+  border-radius: 9px;
 }
 </style>
