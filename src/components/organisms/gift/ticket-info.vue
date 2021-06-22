@@ -37,6 +37,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '@/assets/scss/_variables.scss';
+@import '@/assets/scss/_mixins.scss';
+
 .card {
   padding-top: 14px;
   padding-right: 5px;
@@ -57,7 +60,7 @@ export default {
     display: block;
     width: 100%;
     height: 20px;
-    font-size: 12px;
+    font-size: $font-size-small;
     font-weight: 600;
     line-height: 1.7;
     background-color: #f4f4ee;
@@ -65,21 +68,21 @@ export default {
   }
 
   &__content {
+    @include title-style;
+
     margin: 10px 0;
-    font-size: 18px;
-    font-weight: 600;
     line-height: 1;
 
     span {
       margin-right: 3px;
-      font-size: 24px;
+      font-size: $font-size-xlarge;
       font-weight: 600;
       color: #f53939;
     }
   }
 
   &__subcontent {
-    font-size: 10px;
+    font-size: $font-size-xsmall;
     font-weight: 300;
   }
 }

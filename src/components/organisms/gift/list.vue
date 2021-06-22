@@ -51,21 +51,22 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '@/assets/scss/_mixins.scss';
+
 .gift-item {
   &__title {
+    @include title-style;
+
     margin-top: 0;
     margin-bottom: 12px;
-    font-size: 18px;
-    font-weight: 600;
+    text-align: left;
   }
 
   &__subtitle {
-    font-size: 14px;
     font-weight: 300;
   }
 
   &__content {
-    font-size: 14px;
     font-weight: 300;
 
     img {
