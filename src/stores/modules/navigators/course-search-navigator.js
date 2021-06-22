@@ -31,9 +31,8 @@ export default {
       state.stack = [page || state.stack[0]];
     },
     setSearchConditions(state, conditions) {
-      // NOTE: eslintのルールに従うとjsエラーがでるので除外
-      // eslint-disable-next-line prefer-object-spread
-      const newConditions = Object.assign({ ...state.searchConditions });
+      const newConditions = {};
+      Object.assign(newConditions, state.searchConditions);
       Object.assign(newConditions, conditions);
 
       state.searchConditions = newConditions;

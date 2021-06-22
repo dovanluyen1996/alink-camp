@@ -2,7 +2,6 @@
   <v-ons-select v-model="selectedValue">
     <option
       value="-1"
-      disabled
       selected
       class="placeholder"
     >
@@ -51,6 +50,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+/* NOTE: selectはplaceholder非対応なので
+         optionの1件目にplaceholder表示したいテキストを入れ
+         かつ選択肢には出ないようにしている */
 .placeholder {
   display: none;
 }

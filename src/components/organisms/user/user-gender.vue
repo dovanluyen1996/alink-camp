@@ -57,6 +57,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '@/assets/scss/_variables.scss';
+
 /deep/ {
   .card {
     padding: 10px 0;
@@ -69,7 +71,7 @@ export default {
   }
 
   :checked + .radio-button--material__checkmark::before {
-    border-color: #d9d9d9;
+    border-color: $color-border;
   }
 }
 </style>

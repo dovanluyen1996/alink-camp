@@ -46,6 +46,7 @@ export default {
 .check-field {
   display: inline-flex;
   align-items: center;
+  padding: 5px 0;
   font-weight: 600;
 
   &__label-text {

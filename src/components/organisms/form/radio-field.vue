@@ -49,9 +49,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '@/assets/scss/_variables.scss';
+
 /deep/ {
   :checked + .radio-button--material__checkmark::before {
-    border-color: #d9d9d9;
+    border-color: $color-border;
   }
 }
 

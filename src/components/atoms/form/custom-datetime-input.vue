@@ -23,6 +23,7 @@ export default {
     type: {
       type: String,
       default: 'date',
+      validator: value => ['date', 'time'].includes(value),
     },
   },
   computed: {
@@ -46,13 +47,17 @@ export default {
 @import '@/assets/scss/_variables.scss';
 
 .custom-input-date {
-  border: 2px solid #d9d9d9;
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-size: 34px 30px;
+  border: 2px solid $color-border;
 
   &[type="date"] {
     background-image: url('~@/assets/images/form/date.png');
-    background-repeat: no-repeat;
-    background-position: right center;
-    background-size: 34px 30px;
+  }
+
+  &[type="time"] {
+    background-image: url('~@/assets/images/form/time.png');
   }
 
   /deep/ {
@@ -65,6 +70,7 @@ export default {
     }
   }
 
+  /* NOTE: date, time はplaceholder非対応なのでvalueが空の時に独自で作っている */
   &.is-shown-placeholder {
     &::before {
       position: absolute;

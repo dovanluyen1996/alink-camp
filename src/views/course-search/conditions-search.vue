@@ -30,11 +30,6 @@ import SearchResult from '@/views/course-search/search-result';
 import CourseSearchAreaTab from '@/components/organisms/course-search/area-tab';
 import CourseSearchLocationTab from '@/components/organisms/course-search/location-tab';
 
-const tabIndexes = {
-  area: 0,
-  location: 1,
-};
-
 export default {
   name: 'CourseConditionsSearch',
   components: {
@@ -45,10 +40,12 @@ export default {
     return {
       tabs: [
         {
+          name: 'area',
           label: 'エリアより検索',
           component: CourseSearchAreaTab,
         },
         {
+          name: 'location',
           label: '現在位置より検索',
           component: CourseSearchLocationTab,
         },
@@ -65,8 +62,9 @@ export default {
   },
   methods: {
     goToSearchResult() {
-      // eslint-disable-next-line max-len
-      const activeTab = Object.keys(tabIndexes).filter(key => tabIndexes[key] === this.$refs.tabContents.activeIndex)[0];
+      // NOTE: タブによって変わる検索項目の判別に使う
+      const activeTabIndex = this.$refs.tabContents.activeIndex;
+      const activeTab = this.tabs.find((tab, index) => index === activeTabIndex).name;
 
       console.log('goToSearchResult', activeTab, this.searchConditions);
 

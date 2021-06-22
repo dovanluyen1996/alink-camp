@@ -32,15 +32,25 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '@/assets/scss/_variables.scss';
+
 .custom-input {
+  position: relative;
   box-sizing: border-box;
   display: inline-block;
   width: 24px;
   height: 24px;
-  border: 2px solid #d9d9d9;
+  border: 2px solid $color-border;
 
   &__field {
-    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    opacity: 0;
   }
 
   &__visual {
