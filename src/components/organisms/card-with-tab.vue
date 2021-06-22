@@ -97,6 +97,7 @@ export default {
 .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
   position: absolute;
   top: 0;
+  width: 100%;
   opacity: 0;
 }
 </style>

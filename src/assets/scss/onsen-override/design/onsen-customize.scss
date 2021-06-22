@@ -16,7 +16,9 @@ $segment-height: 34px;
 .segment {
   &__button {
     height: $segment-height;
-    line-height: $segment-height;
+    font-weight: 600;
+    line-height: $segment-height - 1px;
+    border-width: 2px !important;
   }
 
   &__item:first-child > .segment__button {

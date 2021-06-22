@@ -1,0 +1,41 @@
+<template>
+  <tr>
+    <th
+      scope="row"
+      class="th"
+    >
+      日
+    </th>
+    <template v-for="(date, index) in dates">
+      <td
+        :key="index"
+        v-html="displayDate(date)"
+      >
+      </td>
+    </template>
+  </tr>
+</template>
+
+<script>
+
+export default {
+  name: 'ForecastTableDateRow',
+  props: {
+    forecastData: {
+      type: Array,
+      default: () => [],
+      required: true,
+    },
+  },
+  computed: {
+    dates() {
+      return this.forecastData.map(data => data.date);
+    },
+  },
+  methods: {
+    displayDate() {
+      return '7日<br>（木）';
+    },
+  },
+};
+</script>

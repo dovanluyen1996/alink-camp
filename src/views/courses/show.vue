@@ -39,8 +39,8 @@
 import CardWithTab from '@/components/organisms/card-with-tab';
 
 // tab contents
-import CoursesWeatherForecast from '@/components/organisms/courses/weather-forecast';
-import CoursesInformation from '@/components/organisms/courses/information';
+import CoursesForecastTab from '@/components/organisms/courses/forecast-tab';
+import CoursesCourseTab from '@/components/organisms/courses/course-tab';
 
 export default {
   name: 'CourseShow',
@@ -54,11 +54,11 @@ export default {
       tabs: [
         {
           label: '天気予報詳細',
-          component: CoursesWeatherForecast,
+          component: CoursesForecastTab,
         },
         {
           label: '詳細情報',
-          component: CoursesInformation,
+          component: CoursesCourseTab,
         },
       ],
     };
@@ -88,15 +88,16 @@ export default {
 <style scoped lang="scss">
 .course-show-header {
   margin: 30px 0 35px;
+
   .button {
+    width: 75%;
+    margin-right: auto;
     margin-bottom: 16px;
     margin-left: auto;
-    margin-right: auto;
-    width: 75%;
-    max-width: 280px;
+
     &[configured] {
-      background: #d9d9d9;
       color: inherit;
+      background: #d9d9d9;
     }
   }
 }
