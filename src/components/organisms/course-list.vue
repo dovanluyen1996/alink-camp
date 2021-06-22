@@ -13,7 +13,7 @@
           <v-ons-list-item
             v-for="course in courses"
             :key="course.id"
-            :modifier="['longdivider', { 'chevron' : hasChevron }]"
+            :modifier="modifier"
             @click="clickCourse(course)"
           >
             <div class="center">
@@ -36,6 +36,8 @@
 </template>
 
 <script>
+import LatLon from 'geodesy/latlon-ellipsoidal-vincenty.js';
+
 export default {
   name: 'CourseList',
   props: {
@@ -51,6 +53,10 @@ export default {
       type: Boolean,
       default: true,
     },
+    currentLocation: {
+      type: Object,
+      default: () => null,
+    },
   },
   data() {
     return {
@@ -58,8 +64,8 @@ export default {
     };
   },
   computed: {
-    currentLocation() {
-      return true;
+    modifier() {
+      return `longdivider ${this.hasChevron ? 'chevron' : ''}`;
     },
   },
   mounted() {
@@ -76,10 +82,24 @@ export default {
       }
     },
     clickCourse(course) {
+      console.log(this);
       this.$emit('click', course);
     },
-    getDistance(lat, lon) {
-      return '999m';
+    getDistance(latitude, longitude) {
+      // eslint-disable-next-line max-len
+      const currentPoint = new LatLon(this.currentLocation.longitude, this.currentLocation.latitude);
+      const coursePoint = new LatLon(longitude, latitude);
+      let distance = currentPoint.distanceTo(coursePoint);
+
+      if (distance >= 1000) {
+        const convertKm = distance / 1000;
+        const converFirstDecimal = Math.round(convertKm * 10) / 10;
+        distance = `${converFirstDecimal} km`;
+      } else {
+        distance = `${Math.round(distance)} m`;
+      }
+
+      return distance;
     },
   },
 };

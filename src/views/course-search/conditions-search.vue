@@ -62,16 +62,23 @@ export default {
   },
   methods: {
     goToSearchResult() {
-      // NOTE: タブによって変わる検索項目の判別に使う
       const activeTabIndex = this.$refs.tabContents.activeIndex;
       const activeTab = this.tabs.find((tab, index) => index === activeTabIndex).name;
+      let currentLocation = null;
 
-      console.log('goToSearchResult', activeTab, this.searchConditions);
+      if (activeTab === 'location') {
+        // TODO: 現在位置を取得してください
+        currentLocation = {
+          latitude: 139.77987364521508,
+          longitude: 35.67688853405839,
+        };
+      }
 
       this.$store.dispatch('courseSearchNavigator/push', {
         extends: SearchResult,
         onsNavigatorProps: {
           title: 'コース検索結果',
+          currentLocation,
         },
       });
     },

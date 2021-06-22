@@ -9,6 +9,7 @@
       <course-list
         v-else
         :courses="courses"
+        :current-location="currentLocation"
         @click="goToCourseShow"
       />
     </div>
@@ -31,6 +32,10 @@ export default {
       type: String,
       default: '検索結果',
     },
+    currentLocation: {
+      type: Object,
+      default: () => null,
+    },
   },
   data() {
     return {
@@ -42,8 +47,8 @@ export default {
           name: '新東京都民ゴルフ場',
           name_kana: 'シントウキョウトミンゴルフジョウ',
           address: '東京都足立区新田１丁目１５−１',
-          latitude: 0,
-          longitude: 0,
+          latitude: 139.7399279567286,
+          longitude: 35.781503655083256,
           phone: '000-0000-0000',
           phone2: '000-0000-0000',
           url: 'http://',
@@ -59,8 +64,8 @@ export default {
           name: '新東京都民ゴルフ場',
           name_kana: 'シントウキョウトミンゴルフジョウ',
           address: '東京都足立区新田１丁目１５−１',
-          latitude: 0,
-          longitude: 0,
+          latitude: 139.78006801778602,
+          longitude: 35.67992838270606,
           phone: '000-0000-0000',
           phone2: '000-0000-0000',
           url: 'http://',
