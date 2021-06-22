@@ -1,36 +1,34 @@
 <template>
   <v-ons-page>
-    <div>
-      所持応募券
-      {{ currentUser.ticketCount }}枚
-      スタンプ
-      {{ userStamp.number }}/10
-      あと〜個で応募券
-    </div>
-    <div>
-      <div
-        v-for="gift in gifts"
-        :key="gift.id"
-      >
-        {{ gift.name }}
-        応募必要枚数：{{ gift.requiredTicketNumber }}枚
-        <img :src="gift.image.url">
-        {{ gift.overview }}
-        <v-ons-button
-          modifier="cta"
-          @click="goToGift(gift.id)"
-        >
-          抽選応募する
-        </v-ons-button>
-      </div>
+    <custom-toolbar title="特典交換" />
+    <div class="content">
+      <ticket-info
+        :ticket-count="currentUser.ticketCount"
+        :user-stamp-number="userStamp.number"
+      />
+      <gift-list
+        v-if="gifts.length > 0"
+        :gifts="gifts"
+        @click="goToGift"
+      />
     </div>
   </v-ons-page>
 </template>
 
 <script>
+// components
+import TicketInfo from '@/components/organisms/gift/ticket-info';
+import GiftList from '@/components/organisms/gift/list';
+
+// pages
 import ShowGiftView from '@/views/gifts/show';
 
 export default {
+  name: 'GiftsIndex',
+  components: {
+    TicketInfo,
+    GiftList,
+  },
   computed: {
     gifts() {
       return this.$store.getters['models/gift/all'];
