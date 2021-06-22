@@ -25,6 +25,13 @@
 
       <social-login />
     </div>
+
+    <error-dialog
+      title="ログインに失敗しました"
+      :is-visible="signInErrorVisible"
+      :error-message="errorMessage"
+      @close="closeSignInError"
+    />
   </v-ons-page>
 </template>
 
@@ -35,6 +42,7 @@ import UserEmail from '@/components/organisms/user/user-email';
 import UserPassword from '@/components/organisms/user/user-password';
 import CustomSubmit from '@/components/organisms/form/custom-submit';
 import SocialLogin from '@/components/organisms/social-login';
+import ErrorDialog from '@/components/organisms/error-dialog';
 
 // pages
 import PasswordReminder from '@/views/auth/password-reminder';
@@ -48,6 +56,7 @@ export default {
     UserPassword,
     CustomSubmit,
     SocialLogin,
+    ErrorDialog,
   },
   data() {
     return {
@@ -55,14 +64,44 @@ export default {
         email: '',
         password: '',
       },
+      error: null,
+      signInErrorVisible: false,
     };
   },
-  methods: {
-    signIn() {
-      this.$store.dispatch('appNavigator/push', UserStampsCampaign);
+  computed: {
+    errorMessage() {
+      if (!this.error) return null;
+
+      switch (this.error.code) {
+      case 'NotAuthorizedException':
+        return 'メールアドレスまたはパスワードが違います。';
+      case 'InvalidParameterException':
+        return 'メールアドレスが不正です。';
+      default:
+        return 'ログインに失敗しました';
+      }
     },
+  },
+  methods: {
     goToPasswordReminder() {
       this.$store.dispatch('appNavigator/push', PasswordReminder);
+    },
+    signIn() {
+      this.$cognito.login(this.user.email, this.user.password)
+        .then(async(result) => {
+          console.log(result);
+          this.$store.dispatch('appNavigator/push', UserStampsCampaign);
+        })
+        .catch((err) => {
+          this.error = err;
+          this.showSignInError();
+        });
+    },
+    showSignInError() {
+      this.signInErrorVisible = true;
+    },
+    closeSignInError() {
+      this.signInErrorVisible = false;
     },
   },
 };

@@ -8,6 +8,7 @@ import '@/plugins/global_component_plugin';
 import '@/config/vee_validate';
 import store from '@/stores';
 import App from '@/app';
+import cognito from '@/cognito';
 
 Vue.config.productionTip = false;
 
@@ -31,6 +32,7 @@ const initializeVue = () => {
   new Vue({
     el: '#app',
     store,
+    cognito,
     components: { App },
     beforeCreate() {
       this.$ons.disableAutoStyling();

@@ -11,4 +11,10 @@ export default {
     },
   },
   views,
+  authorization: {
+    accessToken: {
+      accessToken: 'Authorization',
+      valuePrefix: 'Bearer',
+    },
+  },
 };
