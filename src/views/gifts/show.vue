@@ -1,35 +1,42 @@
 <template>
   <v-ons-page>
-    <validation-observer
-      ref="guidanceForm"
-      v-slot="{ handleSubmit }"
-    >
-      <div>
-        {{ gift.name }}
-        応募必要枚数：{{ gift.requiredTicketNumber }}枚
-        <img :src="gift.image.url">
-        {{ gift.overview }}
-
-        <validation-provider
-          v-slot="{ errors }"
-          rules="required|email"
-        >
-          <input
-            v-model="email"
-            placeholder="連絡先メールアドレス"
-            name="メールアドレス"
-          >
-          <span>{{ errors[0] }}</span>
-        </validation-provider>
-      </div>
-
-      <v-ons-button
-        modifier="cta"
-        @click="handleSubmit(showConfirm)"
+    <custom-toolbar title="特典交換" />
+    <div class="content">
+      <validation-observer
+        ref="guidanceForm"
+        v-slot="{ handleSubmit }"
       >
-        抽選応募する
-      </v-ons-button>
-    </validation-observer>
+        <card-gift :gift="gift">
+          <!-- TODO: show gift's description -->
+          {{ gift.overview }}
+
+          <template slot="footer">
+            <validation-provider
+              v-slot="{ errors }"
+              rules="required|email"
+              name="メールアドレス"
+            >
+              <base-field>
+                <v-ons-input
+                  v-model="email"
+                  placeholder="連絡先メールアドレス"
+                />
+              </base-field>
+              <span>{{ errors[0] }}</span>
+            </validation-provider>
+          </template>
+        </card-gift>
+
+        <fixed-footer>
+          <v-ons-button
+            modifier="large--cta rounded"
+            @click="handleSubmit(showConfirm)"
+          >
+            抽選応募する
+          </v-ons-button>
+        </fixed-footer>
+      </validation-observer>
+    </div>
 
     <v-ons-alert-dialog
       :visible.sync="confirmVisible"
@@ -98,7 +105,17 @@
 </template>
 
 <script>
+// components
+import CardGift from '@/components/organisms/gift/card-gift';
+import BaseField from '@/components/organisms/form/base-field';
+import FixedFooter from '@/components/organisms/fixed-footer';
+
 export default {
+  components: {
+    CardGift,
+    BaseField,
+    FixedFooter,
+  },
   props: {
     giftId: {
       type: Number,
@@ -167,3 +184,18 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+/deep/ {
+  .gift-item {
+    &__footer {
+      margin-top: 20px;
+    }
+  }
+
+  .input-field-card {
+    padding: 0;
+    margin: 5px 0;
+  }
+}
+</style>
