@@ -44,44 +44,46 @@ export default {
     },
   },
   actions: {
-    async getUserCourseResults(context) {
+    async getUserCourseResult(context, userCourseId) {
       context.commit('setIsLoading', true);
 
       try {
-        const res = await ApiClient.getUserCourseResults();
+        const res = await ApiClient.getUserCourseResult(userCourseId);
 
         context.commit('setUserCourseResults', res);
       } finally {
         context.commit('setIsLoading', false);
       }
     },
-    async createUserCourseResult(context, userCourseResult) {
+    async createUserCourseResult(context, { userCourseId, params }) {
       context.commit('setIsLoading', true);
 
       try {
-        const res = await ApiClient.createUserCourseResult(userCourseResult);
+        const res = await ApiClient.createUserCourseResult(userCourseId, params);
 
         context.commit('addUserCourseResult', res);
       } finally {
         context.commit('setIsLoading', false);
       }
     },
-    async updateUserCourseResult(context, payload) {
+    async updateUserCourseResult(context, { userCourseId, userCourseResultId, params }) {
       context.commit('setIsLoading', true);
 
       try {
-        const res = await ApiClient.updateUserCourseResult(payload.userCourseResult.id, payload);
+        const res = await ApiClient.updateUserCourseResult(
+          userCourseId, userCourseResultId, params,
+        );
 
         context.commit('updateUserCourseResult', res);
       } finally {
         context.commit('setIsLoading', false);
       }
     },
-    async destroyUserCourseResult(context, userCourseResultId) {
+    async destroyUserCourseResult(context, { userCourseId, userCourseResultId }) {
       context.commit('setIsLoading', true);
 
       try {
-        const res = await ApiClient.destroyUserCourseResult(userCourseResultId);
+        const res = await ApiClient.destroyUserCourseResult(userCourseId, userCourseResultId);
 
         context.commit('deleteUserCourseResult', res);
       } finally {
