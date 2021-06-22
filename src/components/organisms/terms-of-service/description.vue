@@ -13,7 +13,7 @@ export default {
       return this.$store.getters['models/termOfService/current'];
     },
     description() {
-      if (!this.termOfService) return "";
+      if (!this.termOfService) return '';
       return this.termOfService.description;
     },
   },
