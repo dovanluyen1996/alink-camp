@@ -14,11 +14,15 @@
     <v-ons-card class="card-tab__content">
       <div class="content">
         <template v-for="(tab, index) in tabs">
-          <component
-            :is="tab.component"
-            v-show="isActive(index)"
+          <transition
             :key="index"
-          />
+            name="fade"
+          >
+            <component
+              :is="tab.component"
+              v-show="isActive(index)"
+            />
+          </transition>
         </template>
       </div>
     </v-ons-card>
@@ -62,6 +66,10 @@ export default {
   }
 }
 
+.card__content {
+  position: relative;
+}
+
 .card-tab-button {
   display: flex;
   flex: 1;
@@ -78,5 +86,17 @@ export default {
     color: inherit;
     background: #fff;
   }
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+
+.fade-enter,
+.fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  position: absolute;
+  top: 0;
+  opacity: 0;
 }
 </style>

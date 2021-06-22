@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="course-search-area-tab">
     <div class="card__title card__title--center">
       エリアを指定（必須）
     </div>
@@ -71,6 +71,10 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.course-search-area-tab {
+  overflow: hidden;
+}
+
 .select {
   width: 100%;
 }

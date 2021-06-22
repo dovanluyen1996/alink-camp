@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="course-search-location-tab">
     <div class="card__title card__title--center">
       検索範囲選択（必須）
     </div>
@@ -71,6 +71,10 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.course-search-location-tab {
+  overflow: hidden;
+}
+
 .select {
   width: 100%;
 }
