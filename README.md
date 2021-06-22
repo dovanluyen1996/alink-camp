@@ -49,6 +49,21 @@ cordova run ios
 
 ### run Android
 
+#### 環境
+
+##### JDKインストール
+brew install adoptopenjdk8
+
+##### パスを通す
+export JAVA_HOME=`/usr/libexec/java_home -v "1.8"`
+PATH=${JAVA_HOME}/bin:${PATH}
+
+##### Gradleインストール
+brew install gradle
+
+##### Android SDK API 29をインストール
+Android Studio > SDK Manager > 29を指定
+
 ```
 cordova platform add android
 cordova run android
