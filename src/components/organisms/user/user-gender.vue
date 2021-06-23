@@ -1,25 +1,19 @@
 <template>
-  <base-field
+  <radio-field
+    v-model="selectedValue"
+    :labels="genderLabels"
     title="性別"
-    class="user-gender"
-  >
-    <radio-field
-      v-model="selectedValue"
-      :labels="genderLabels"
-      class="user-gender__field"
-    />
-  </base-field>
+    class="user-gender__field"
+  />
 </template>
 
 <script>
 // components
-import BaseField from '@/components/organisms/form/base-field';
 import RadioField from '@/components/organisms/form/radio-field';
 
 export default {
   name: 'UserGender',
   components: {
-    BaseField,
     RadioField,
   },
   props: {
@@ -65,7 +59,11 @@ export default {
     text-align: center;
   }
 
-  .radio-field {
+  .custom-radio {
+    display: inline-block;
+  }
+
+  .custom-radio-label {
     margin: 0 20px;
     font-size: 16px;
   }

@@ -11,7 +11,7 @@
     <div class="card__title">
       気温
     </div>
-    <radio-field
+    <custom-radio
       v-model="temperatureValue"
       :labels="temperatureLabels"
     />
@@ -32,13 +32,13 @@
 
 <script>
 import CheckField from '@/components/organisms/form/check-field';
-import RadioField from '@/components/organisms/form/radio-field';
+import CustomRadio from '@/components/atoms/form/custom-radio';
 
 export default {
   name: 'CourseSearchConditionsFields',
   components: {
     CheckField,
-    RadioField,
+    CustomRadio,
   },
   data() {
     return {

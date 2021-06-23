@@ -1,23 +1,25 @@
 <template>
-  <div>
-    <label
-      v-for="label in labels"
-      :key="label.value"
-      class="radio-field"
-    >
-      <v-ons-radio
-        v-model="selectedValue"
-        :value="label.value"
-        modifier="material"
-      />
-      {{ label.text }}
-    </label>
-  </div>
+  <base-field
+    :title="title"
+    class="radio-field"
+  >
+    <custom-radio
+      v-model="selectedValue"
+      :labels="labels"
+    />
+  </base-field>
 </template>
 
 <script>
+import CustomRadio from '@/components/atoms/form/custom-radio';
+import BaseField from './base-field';
+
 export default {
   name: 'RadioField',
+  components: {
+    BaseField,
+    CustomRadio,
+  },
   props: {
     value: {
       // NOTE: htmlのinputはString, サーバーではintで持っているので両方許可する
@@ -47,24 +49,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped>
-@import '@/assets/scss/_variables.scss';
-
-/deep/ {
-  :checked + .radio-button--material__checkmark::before {
-    border-color: $color-border;
-  }
-}
-
-.radio-field {
-  display: inline-block;
-  padding: 5px 0;
-  font-weight: 600;
-}
-
-.radio-button {
-  margin-right: 5px;
-  vertical-align: baseline;
-}
-</style>
