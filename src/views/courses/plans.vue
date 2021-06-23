@@ -6,6 +6,7 @@
     >
       <template #right>
         <div
+          v-if="isCanDelete"
           class="delete-plan"
           @click="openDeleteDialog"
         >
@@ -75,6 +76,12 @@ export default {
       timeValue: '',
       isShownDeleteDialog: false,
     };
+  },
+  computed: {
+    isCanDelete() {
+      // TODO: 予定登録されているか判定してください
+      return true;
+    },
   },
   methods: {
     openDeleteDialog() {
