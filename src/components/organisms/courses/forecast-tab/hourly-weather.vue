@@ -6,7 +6,7 @@
 
     <slot name="switcher" />
 
-    <sticky-table>
+    <sticky-table class="hourly-weather-table">
       <tr class="date-row">
         <th
           scope="row"
@@ -14,7 +14,7 @@
         >
           日
         </th>
-        <td :colspan="margedForecastsSndSuns.length - 1">
+        <td :colspan="margedForecastsAndSuns.length - 1">
           {{ displayDate }}
           <span
             v-if="isToday"
@@ -24,8 +24,8 @@
           </span>
         </td>
       </tr>
-      <time-row :forecast-data="margedForecastsSndSuns" />
-      <weather-row :forecast-data="margedForecastsSndSuns" />
+      <time-row :forecast-data="margedForecastsAndSuns" />
+      <weather-row :forecast-data="margedForecastsAndSuns" />
       <precipitation-row :forecast-data="forecasts" />
       <temperature-row :forecast-data="forecasts" />
       <wind-direction-row :forecast-data="forecasts" />
@@ -58,6 +58,7 @@ export default {
   data() {
     return {
       // TODO: デミーデータです
+      //       データと合わないようだったらconvertMinutesも修正してください
       date: '2021-6-22',
       sunrise: '6:30',
       sunset: '19:30',
@@ -290,7 +291,7 @@ export default {
       // TODO: 当日チェックしてください
       return true;
     },
-    margedForecastsSndSuns() {
+    margedForecastsAndSuns() {
       const suns = [
         {
           isSunrise: true,
@@ -306,9 +307,15 @@ export default {
       return margeData.sort((a, b) => this.convertMinutes(a.time) - this.convertMinutes(b.time));
     },
   },
+  mounted() {
+    this.tableScrollNow();
+  },
   methods: {
+    tableScrollNow() {
+    },
     convertMinutes(time) {
-      // NOTE: hh:mmをmmにする
+      // NOTE: 日の出日の入りを天気予報にマージするため
+      //       時間を比較できるように分にする
       const newTime = time.split(':');
       return (Number(newTime[0]) * 60) + Number(newTime[1]);
     },

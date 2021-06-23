@@ -82,7 +82,7 @@ export default {
   },
   methods: {
     goToCourseShow(course) {
-      console.log(course);
+      console.log('goToCourseShow', course);
       this.$store.dispatch('courseSearchNavigator/push', CourseShow);
     },
   },

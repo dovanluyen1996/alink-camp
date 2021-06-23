@@ -3,25 +3,13 @@
     <transition name="fade">
       <hourly-weather v-if="isShownHourly">
         <template #switcher>
-          <v-ons-segment
-            :index.sync="segmentIndex"
-            class="forecast-switcher"
-          >
-            <button>時間ごと</button>
-            <button>10日間</button>
-          </v-ons-segment>
+          <forecast-switcher :segment-index.sync="segmentIndex" />
         </template>
       </hourly-weather>
 
       <ten-days-weather v-if="isShownTenDays">
         <template #switcher>
-          <v-ons-segment
-            :index.sync="segmentIndex"
-            class="forecast-switcher"
-          >
-            <button>時間ごと</button>
-            <button>10日間</button>
-          </v-ons-segment>
+          <forecast-switcher :segment-index.sync="segmentIndex" />
         </template>
       </ten-days-weather>
     </transition>
@@ -39,6 +27,7 @@
 
 <script>
 // components
+import ForecastSwitcher from '@/components/organisms/courses/forecast-tab/forecast-switcher';
 import HourlyWeather from '@/components/organisms/courses/forecast-tab/hourly-weather';
 import TenDaysWeather from '@/components/organisms/courses/forecast-tab/ten-days-weather';
 import MonthlyWeather from '@/components/organisms/courses/forecast-tab/monthly-weather';
@@ -51,6 +40,7 @@ const segmentIndexes = {
 export default {
   name: 'CoursesForecastTab',
   components: {
+    ForecastSwitcher,
     HourlyWeather,
     TenDaysWeather,
     MonthlyWeather,

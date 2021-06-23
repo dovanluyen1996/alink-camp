@@ -1,12 +1,12 @@
 <template>
-  <div class="hourly-weather">
+  <div class="ten-days-weather">
     <div class="card__title card__title--center">
       10日間の天気
     </div>
 
     <slot name="switcher" />
 
-    <sticky-table>
+    <sticky-table class="ten-days-weather-table">
       <date-row :forecast-data="forecasts" />
       <weather-row :forecast-data="forecasts" />
       <prob-precip-row :forecast-data="forecasts" />
@@ -267,6 +267,13 @@ export default {
         },
       ],
     };
+  },
+  mounted() {
+    this.tableScrollToday();
+  },
+  methods: {
+    tableScrollToday() {
+    },
   },
 };
 </script>

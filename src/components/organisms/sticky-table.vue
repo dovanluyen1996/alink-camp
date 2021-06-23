@@ -1,4 +1,5 @@
 <template>
+  <!-- スクロールでthが固定化されるコンポーネント -->
   <div class="sticky-table">
     <table class="table">
       <slot />

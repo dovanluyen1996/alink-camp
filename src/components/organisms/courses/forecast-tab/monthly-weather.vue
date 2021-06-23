@@ -59,7 +59,7 @@ export default {
 .chart-update {
   align-self: flex-end;
   padding-right: 7px;
-  padding-bottom: 7px;
+  padding-bottom: 5px;
   font-size: $font-size-small;
   text-align: right;
 }

@@ -33,7 +33,9 @@ export default {
     },
   },
   methods: {
-    displayDate() {
+    displayDate(date) {
+      // TODO: dateを元に成形してください
+      console.log(date);
       return '7日<br>（木）';
     },
   },

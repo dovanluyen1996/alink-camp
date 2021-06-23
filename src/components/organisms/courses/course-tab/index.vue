@@ -9,6 +9,3 @@ export default {
   name: 'CoursesCourseTab',
 };
 </script>
-
-<style scoped lang="scss">
-</style>
