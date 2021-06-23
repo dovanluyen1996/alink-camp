@@ -9,14 +9,14 @@
           @click="clickNotice(notice)"
         >
           <div class="center">
-            <span class="list-item__title">{{ notice.title }}</span>
-            <span class="list-item__subtitle">
+            <div class="notice-started-at">
               {{ notice.startedAt }}
-              <label
+              <span
                 v-if="!notice.isRead"
                 class="label-unread"
               />
-            </span>
+            </div>
+            <span class="list-item__title">{{ notice.title }}</span>
           </div>
         </v-ons-list-item>
       </v-ons-list>
@@ -50,7 +50,6 @@ export default {
 }
 
 .center {
-  flex-flow: wrap-reverse;
   min-width: 0;
   padding-top: 20px;
   padding-right: 0;
@@ -58,8 +57,6 @@ export default {
 }
 
 .list-item {
-  padding-left: 0;
-
   &__title {
     overflow: hidden;
     font-size: 18px;
@@ -67,17 +64,17 @@ export default {
     text-overflow: ellipsis;
     white-space: nowrap;
   }
+}
 
-  &__subtitle {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 12px;
-    font-size: $font-size-small;
-    font-weight: 300;
-    color: $color-subtext;
-    opacity: 1;
-  }
+.notice-started-at {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 12px;
+  font-size: $font-size-small;
+  font-weight: 300;
+  color: $color-subtext;
 }
 
 .label-unread {
