@@ -2,10 +2,7 @@
   <v-ons-page>
     <custom-toolbar title="設定" />
     <div class="content">
-      <user-setting-list
-        :user-setting="userSetting"
-        @updateUserSetting="updateUserSetting"
-      />
+      <user-setting-list />
     </div>
   </v-ons-page>
 </template>
@@ -18,26 +15,6 @@ export default {
   name: 'UserSetting',
   components: {
     UserSettingList,
-  },
-  computed: {
-    userSetting() {
-      return this.$store.getters['models/userSetting/userSetting'];
-    },
-  },
-  async created() {
-    await this.getUserSetting();
-  },
-  methods: {
-    async getUserSetting() {
-      await this.$store.dispatch('models/userSetting/getUserSetting');
-    },
-    async updateUserSetting(userSetting) {
-      try {
-        await this.$store.dispatch('models/userSetting/updateUserSetting', userSetting);
-      } catch (e) {
-        this.getUserSetting();
-      }
-    },
   },
 };
 </script>

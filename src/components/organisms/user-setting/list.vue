@@ -3,15 +3,16 @@
     <template #title>
       PUSH設定
     </template>
+
     <v-ons-list modifier="noborder">
       <v-ons-list-item modifier="nodivider">
         <div class="center">
           <span class="list-item__title">
             天気予報
             <v-ons-switch
-              v-model="settingValue.isReceivableWeatherForecast"
+              v-model="userSetting.isReceivableWeatherForecast"
               data-model="isReceivableWeatherForecast"
-              @change="event => setUserSetting(event)"
+              @change="event => updateUserSetting(event)"
             />
           </span>
           <span class="list-item__subtitle">
@@ -24,9 +25,9 @@
           <span class="list-item__title">
             予定日の天気を毎日ご連絡
             <v-ons-switch
-              v-model="settingValue.isReceivableDailyWhetherForecast"
+              v-model="userSetting.isReceivableDailyWhetherForecast"
               data-model="isReceivableDailyWhetherForecast"
-              @change="event => setUserSetting(event)"
+              @change="event => updateUserSetting(event)"
             />
           </span>
           <span class="list-item__subtitle">
@@ -40,9 +41,9 @@
           <span class="list-item__title">
             落雷、雨雲警報
             <v-ons-switch
-              v-model="settingValue.isReceivableWarning"
+              v-model="userSetting.isReceivableWarning"
               data-model="isReceivableWarning"
-              @change="event => setUserSetting(event)"
+              @change="event => updateUserSetting(event)"
             />
           </span>
           <span class="list-item__subtitle">
@@ -62,27 +63,26 @@ export default {
   components: {
     CardWithTitle,
   },
-  props: {
-    userSetting: {
-      type: Object,
-      default: () => {},
-      required: true,
+  computed: {
+    userSetting() {
+      return this.$store.getters['models/userSetting/userSetting'];
     },
   },
-  computed: {
-    settingValue: {
-      get() {
-        return { ...this.userSetting };
-      },
-      set(newValue) {
-        this.$emit('updateUserSetting', newValue);
-      },
-    },
+  async created() {
+    await this.getUserSetting();
   },
   methods: {
-    setUserSetting(event) {
-      const targetSettingModel = event.switch.dataset.model;
-      this.settingValue = { ...this.settingValue, [targetSettingModel]: event.value };
+    async getUserSetting() {
+      await this.$store.dispatch('models/userSetting/getUserSetting');
+    },
+    async updateUserSetting(event) {
+      this.userSetting[event.switch.dataset.model] = event.value;
+
+      try {
+        await this.$store.dispatch('models/userSetting/updateUserSetting', this.userSetting);
+      } catch (e) {
+        this.getUserSetting();
+      }
     },
   },
 };
