@@ -75,7 +75,7 @@ export default {
 
     span {
       margin-right: 3px;
-      font-size: $font-size-xlarge;
+      font-size: 24px;
       font-weight: 600;
       color: #f53939;
     }
