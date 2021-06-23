@@ -7,8 +7,7 @@
         v-slot="{ handleSubmit }"
       >
         <card-gift :gift="gift">
-          <!-- TODO: show gift's description -->
-          {{ gift.overview }}
+          {{ gift.description }}
 
           <template #footer>
             <validation-provider
