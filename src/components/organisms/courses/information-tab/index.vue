@@ -106,6 +106,7 @@ export default {
 }
 
 .th {
+  text-align: left;
   white-space: nowrap;
 }
 
