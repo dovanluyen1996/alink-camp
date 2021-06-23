@@ -57,6 +57,7 @@ export default {
   flex-direction: column;
   justify-content: center;
   line-height: inherit;
+  white-space: normal;
 }
 
 .custom-toolbar-title {
