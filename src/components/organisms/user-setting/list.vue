@@ -1,10 +1,7 @@
 <template>
   <card-with-title>
-    <template
-      v-if="title"
-      slot="title"
-    >
-      {{ title }}
+    <template #title>
+      PUSH設定
     </template>
     <v-ons-list modifier="noborder">
       <v-ons-list-item modifier="nodivider">
@@ -66,10 +63,6 @@ export default {
     CardWithTitle,
   },
   props: {
-    title: {
-      type: String,
-      default: null,
-    },
     userSetting: {
       type: Object,
       default: () => {},

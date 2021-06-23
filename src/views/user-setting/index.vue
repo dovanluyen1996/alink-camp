@@ -3,7 +3,6 @@
     <custom-toolbar title="設定" />
     <div class="content">
       <user-setting-list
-        title="PUSH設定"
         :user-setting="userSetting"
         @updateUserSetting="updateUserSetting"
       />
