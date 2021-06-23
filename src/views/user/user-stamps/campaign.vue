@@ -73,8 +73,8 @@ export default {
     },
   },
   async created() {
-    await this.$store.dispatch('models/currentUser/getUser');
     await this.$store.dispatch('models/userStamp/getUserStamp');
+    await this.$store.dispatch('models/currentUser/getUser');
     await this.$store.dispatch('models/sponsor/getSponsors');
   },
   methods: {
