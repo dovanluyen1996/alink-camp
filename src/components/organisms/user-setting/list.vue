@@ -9,10 +9,7 @@
         <div class="center">
           <span class="list-item__title">
             天気予報
-            <v-ons-switch
-              v-model="isReceivableWeatherForecast"
-              @change="updateUserSetting"
-            />
+            <v-ons-switch v-model="isReceivableWeatherForecast" />
           </span>
           <span class="list-item__subtitle">
             ※予定日当日の予報が発表された際にご連絡します（最速で10日前となります）
@@ -23,10 +20,7 @@
         <div class="center">
           <span class="list-item__title">
             予定日の天気を毎日ご連絡
-            <v-ons-switch
-              v-model="isReceivableDailyWhetherForecast"
-              @change="updateUserSetting"
-            />
+            <v-ons-switch v-model="isReceivableDailyWhetherForecast" />
           </span>
           <span class="list-item__subtitle">
             ※予定日10日前より定期的に該当コースの天気をご連絡します<br>
@@ -38,10 +32,7 @@
         <div class="center">
           <span class="list-item__title">
             落雷、雨雲警報
-            <v-ons-switch
-              v-model="isReceivableWarning"
-              @change="updateUserSetting"
-            />
+            <v-ons-switch v-model="isReceivableWarning" />
           </span>
           <span class="list-item__subtitle">
             ※予定日当日に該当コースで落雷警報が出た場合にご連絡します
