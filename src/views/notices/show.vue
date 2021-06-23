@@ -1,31 +1,20 @@
 <template>
   <v-ons-page>
-    <v-ons-toolbar>
-      <div class="left">
-        <v-ons-back-button />
-      </div>
-      <div class="center">
-        {{ notice.title }}
-      </div>
-    </v-ons-toolbar>
-    <v-ons-card>
-      <div>
-        <div>
-          <img :src="notice.image.url">
-        </div>
-        <div>
-          {{ notice.startedAt }}
-        </div>
-        <div>
-          {{ notice.description }}
-        </div>
-      </div>
-    </v-ons-card>
+    <custom-toolbar :title="notice.title" />
+
+    <div class="content">
+      <notice-detail :notice="notice" />
+    </div>
   </v-ons-page>
 </template>
 
 <script>
+import NoticeDetail from '@/components/organisms/notice/detail';
+
 export default {
+  components: {
+    NoticeDetail,
+  },
   props: {
     noticeId: {
       type: Number,
