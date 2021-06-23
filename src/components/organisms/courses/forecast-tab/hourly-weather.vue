@@ -14,14 +14,17 @@
         >
           日
         </th>
-        <td :colspan="margedForecastsAndSuns.length - 1">
-          {{ displayDate }}
-          <span
-            v-if="isToday"
-            class="is-today"
-          >
-            ゴルフ予定日
-          </span>
+        <!-- NOTE: stick表示にしたいのであえてcolspanはつけない -->
+        <td class="date-col">
+          <div class="date-col__display-date">
+            {{ displayDate }}
+            <span
+              v-if="isToday"
+              class="is-today"
+            >
+              ゴルフ予定日
+            </span>
+          </div>
         </td>
       </tr>
       <time-row :forecast-data="margedForecastsAndSuns" />
@@ -308,10 +311,21 @@ export default {
     },
   },
   mounted() {
+    // TODO: 予定が入っているときに実行するようにしてください
     this.tableScrollNow();
   },
   methods: {
     tableScrollNow() {
+      // NOTE: セルのdate-time属性に時刻を入れてスクロール位置を取得している
+      const table = this.$el.querySelector('.hourly-weather-table');
+      const timeRow = table.querySelector('.time-row');
+      const th = timeRow.querySelector('th');
+      // TODO: targetAtのフォーマットをAPIのデータに合わせてください
+      const targetAt = '6:00';
+      const nowCol = timeRow.querySelector(`[date-time="${targetAt}"]`);
+      const x = nowCol.offsetLeft - th.offsetWidth;
+
+      table.scrollTo(x, 0);
     },
     convertMinutes(time) {
       // NOTE: 日の出日の入りを天気予報にマージするため
@@ -338,6 +352,20 @@ export default {
 
 .date-row {
   text-align: left;
+}
+
+.date-col {
+  position: sticky;
+  left: 63px;
+
+  &__display-date {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+  }
 }
 
 .is-today {

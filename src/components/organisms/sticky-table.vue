@@ -17,6 +17,7 @@ export default {
 @import '@/assets/scss/_variables.scss';
 
 .sticky-table {
+  box-sizing: border-box;
   width: 100%;
   overflow: auto;
   border: 1px solid $color-border;

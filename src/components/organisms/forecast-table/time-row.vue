@@ -1,5 +1,5 @@
 <template>
-  <tr>
+  <tr class="time-row">
     <th
       scope="row"
       class="th"
@@ -11,7 +11,7 @@
         :key="index"
         :date-time="time"
       >
-        {{ time }}
+        {{ displayTime(time) }}
       </td>
     </template>
   </tr>
@@ -33,5 +33,20 @@ export default {
       return this.forecastData.map(data => data.time);
     },
   },
+  methods: {
+    displayTime(time) {
+      console.log(time);
+      // TODO: timeを元に整形してください
+      return '01';
+    },
+  },
 };
 </script>
+
+<style scoped lang="scss">
+.time-row {
+  td {
+    font-weight: 600;
+  }
+}
+</style>

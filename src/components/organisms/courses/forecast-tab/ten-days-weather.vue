@@ -273,6 +273,16 @@ export default {
   },
   methods: {
     tableScrollToday() {
+      // NOTE: セルのdate-day属性に時刻を入れてスクロール位置を取得している
+      const table = this.$el.querySelector('.ten-days-table');
+      const dateRow = table.querySelector('.date-row');
+      const th = dateRow.querySelector('th');
+      // TODO: todayのフォーマットをAPIのデータに合わせてください
+      const today = '2021-6-23';
+      const todayCol = dateRow.querySelector(`[date-time="${today}"]`);
+      const x = todayCol.offsetLeft - th.offsetWidth;
+
+      table.scrollTo(x, 0);
     },
   },
 };

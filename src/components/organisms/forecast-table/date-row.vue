@@ -9,6 +9,7 @@
     <template v-for="(date, index) in dates">
       <td
         :key="index"
+        :date-day="date"
         v-html="displayDate(date)"
       >
       </td>
