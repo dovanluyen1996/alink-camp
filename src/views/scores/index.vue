@@ -1,6 +1,6 @@
 <template>
   <v-ons-page>
-    <custom-toolbar title="コースお天気" />
+    <custom-toolbar title="スコア" />
     <div
       v-show="userCourses.length"
       class="content"
