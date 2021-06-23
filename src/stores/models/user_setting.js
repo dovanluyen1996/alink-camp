@@ -42,5 +42,23 @@ export default {
         context.commit('setIsLoading', false);
       }
     },
+    setIsReceivableWeatherForecast(context, value) {
+      const userSetting = { ...context.state.userSetting };
+      userSetting.isReceivableWeatherForecast = value;
+
+      context.commit('setUserSetting', userSetting);
+    },
+    setIsReceivableDailyWhetherForecast(context, value) {
+      const userSetting = { ...context.state.userSetting };
+      userSetting.isReceivableDailyWhetherForecast = value;
+
+      context.commit('setUserSetting', userSetting);
+    },
+    setIsReceivableWarning(context, value) {
+      const userSetting = { ...context.state.userSetting };
+      userSetting.isReceivableWarning = value;
+
+      context.commit('setUserSetting', userSetting);
+    },
   },
 };

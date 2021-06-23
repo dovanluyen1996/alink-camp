@@ -10,9 +10,8 @@
           <span class="list-item__title">
             天気予報
             <v-ons-switch
-              v-model="userSetting.isReceivableWeatherForecast"
-              data-model="isReceivableWeatherForecast"
-              @change="event => updateUserSetting(event)"
+              v-model="isReceivableWeatherForecast"
+              @change="updateUserSetting"
             />
           </span>
           <span class="list-item__subtitle">
@@ -25,9 +24,8 @@
           <span class="list-item__title">
             予定日の天気を毎日ご連絡
             <v-ons-switch
-              v-model="userSetting.isReceivableDailyWhetherForecast"
-              data-model="isReceivableDailyWhetherForecast"
-              @change="event => updateUserSetting(event)"
+              v-model="isReceivableDailyWhetherForecast"
+              @change="updateUserSetting"
             />
           </span>
           <span class="list-item__subtitle">
@@ -41,9 +39,8 @@
           <span class="list-item__title">
             落雷、雨雲警報
             <v-ons-switch
-              v-model="userSetting.isReceivableWarning"
-              data-model="isReceivableWarning"
-              @change="event => updateUserSetting(event)"
+              v-model="isReceivableWarning"
+              @change="updateUserSetting"
             />
           </span>
           <span class="list-item__subtitle">
@@ -67,6 +64,33 @@ export default {
     userSetting() {
       return this.$store.getters['models/userSetting/userSetting'];
     },
+    isReceivableWeatherForecast: {
+      get() {
+        return this.userSetting && this.userSetting.isReceivableWeatherForecast;
+      },
+      async set(newValue) {
+        this.$store.dispatch('models/userSetting/setIsReceivableWeatherForecast', newValue);
+        await this.updateUserSetting();
+      },
+    },
+    isReceivableDailyWhetherForecast: {
+      get() {
+        return this.userSetting && this.userSetting.isReceivableDailyWhetherForecast;
+      },
+      async set(newValue) {
+        this.$store.dispatch('models/userSetting/setIsReceivableDailyWhetherForecast', newValue);
+        await this.updateUserSetting();
+      },
+    },
+    isReceivableWarning: {
+      get() {
+        return this.userSetting && this.userSetting.isReceivableWarning;
+      },
+      async set(newValue) {
+        this.$store.dispatch('models/userSetting/setIsReceivableWarning', newValue);
+        await this.updateUserSetting();
+      },
+    },
   },
   async created() {
     await this.getUserSetting();
@@ -75,9 +99,7 @@ export default {
     async getUserSetting() {
       await this.$store.dispatch('models/userSetting/getUserSetting');
     },
-    async updateUserSetting(event) {
-      this.userSetting[event.switch.dataset.model] = event.value;
-
+    async updateUserSetting() {
       try {
         await this.$store.dispatch('models/userSetting/updateUserSetting', this.userSetting);
       } catch (e) {
