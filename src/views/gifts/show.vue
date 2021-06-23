@@ -10,7 +10,7 @@
           <!-- TODO: show gift's description -->
           {{ gift.overview }}
 
-          <template slot="footer">
+          <template #footer>
             <validation-provider
               v-slot="{ errors }"
               rules="required|email"
