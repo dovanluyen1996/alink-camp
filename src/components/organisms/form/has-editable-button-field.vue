@@ -43,7 +43,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~@/assets/scss/_variables.scss';
+@import '@/assets/scss/_variables.scss';
 
 .has-editable-button-field /deep/ .card {
   display: flex;

@@ -82,7 +82,6 @@ export default {
       }
     },
     clickCourse(course) {
-      console.log(this);
       this.$emit('click', course);
     },
     getDistance(latitude, longitude) {
