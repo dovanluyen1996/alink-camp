@@ -8,19 +8,16 @@
       >
         <card-gift :gift="gift">
           {{ gift.description }}
-
           <template #footer>
             <validation-provider
               v-slot="{ errors }"
               rules="required|email"
               name="メールアドレス"
             >
-              <base-field>
-                <v-ons-input
-                  v-model="email"
-                  placeholder="連絡先メールアドレス"
-                />
-              </base-field>
+              <v-ons-input
+                v-model="email"
+                placeholder="連絡先メールアドレス"
+              />
               <span>{{ errors[0] }}</span>
             </validation-provider>
           </template>
@@ -106,13 +103,11 @@
 <script>
 // components
 import CardGift from '@/components/organisms/gift/card-gift';
-import BaseField from '@/components/organisms/form/base-field';
 import FixedFooter from '@/components/organisms/fixed-footer';
 
 export default {
   components: {
     CardGift,
-    BaseField,
     FixedFooter,
   },
   props: {
@@ -189,12 +184,12 @@ export default {
   .gift-item {
     &__footer {
       margin-top: 20px;
+      margin-bottom: 4px;
     }
   }
 
-  .input-field-card {
-    padding: 0;
-    margin: 5px 0;
+  ons-input {
+    width: 100%;
   }
 }
 </style>
