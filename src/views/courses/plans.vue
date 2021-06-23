@@ -31,6 +31,15 @@
         title="プレイ開始時刻"
         placeholder="時刻設定"
       />
+
+      <fixed-footer>
+        <v-ons-button
+          modifier="large--cta rounded"
+          @click="update"
+        >
+          設定完了
+        </v-ons-button>
+      </fixed-footer>
     </div>
 
     <v-ons-alert-dialog
@@ -62,12 +71,14 @@
 // components
 import DateField from '@/components/organisms/form/date-field';
 import TimeField from '@/components/organisms/form/time-field';
+import FixedFooter from '@/components/organisms/fixed-footer';
 
 export default {
   name: 'CoursePlans',
   components: {
     DateField,
     TimeField,
+    FixedFooter,
   },
   data() {
     return {
