@@ -6,7 +6,7 @@
       :gift="gift"
     >
       {{ gift.overview }}
-      <template slot="footer">
+      <template #footer>
         <v-ons-button
           modifier="large--cta rounded"
           @click="clickGift(gift)"
