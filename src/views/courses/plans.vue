@@ -101,7 +101,6 @@ export default {
   justify-content: center;
   width: 44px;
   height: 44px;
-  padding: 8px;
   margin: 8px 6px;
 }
 
@@ -112,7 +111,7 @@ export default {
 
   .custom-input-date {
     width: auto;
-    min-width: 8em;
+    min-width: 180px;
   }
 
   .date-field-help {
