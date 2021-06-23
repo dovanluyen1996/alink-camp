@@ -13,7 +13,7 @@
         <ons-button
           :configured="user_course_plans"
           modifier="large rounded"
-          @click="goToSettingsCoursePlans"
+          @click="goToCoursePlans"
         >
           {{ plansButtonText }}
         </ons-button>
@@ -41,6 +41,9 @@ import CardWithTab from '@/components/organisms/card-with-tab';
 // tab contents
 import CoursesForecastTab from '@/components/organisms/courses/forecast-tab';
 import CoursesInformationTab from '@/components/organisms/courses/information-tab';
+
+// pages
+import CoursePlans from '@/views/courses/plans/';
 
 export default {
   name: 'CourseShow',
@@ -76,8 +79,8 @@ export default {
     toggleFavorite() {
       this.is_favorited = !this.is_favorited;
     },
-    goToSettingsCoursePlans() {
-      console.log('goToSettingsCoursePlans');
+    goToCoursePlans() {
+      this.$store.dispatch('courseSearchNavigator/push', CoursePlans);
     },
     goToScore() {
       console.log('goToScore');

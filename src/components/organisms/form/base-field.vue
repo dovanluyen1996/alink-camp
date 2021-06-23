@@ -40,13 +40,13 @@ export default {
   .input-field-title ~ & {
     margin-top: 14px;
   }
+}
 
-  /deep/ {
-    ons-input,
-    ons-select,
-    ons-search-input {
-      width: 100%;
-    }
+/deep/ {
+  ons-input,
+  ons-select,
+  ons-search-input {
+    width: 100%;
   }
 }
 </style>

@@ -36,7 +36,14 @@ export default {
       },
     },
     isShownPlaceholder() {
-      const isInvalid = new Date(this.inputedValue).toString() === 'Invalid Date';
+      let isInvalid = true;
+
+      if (this.type === 'date') {
+        isInvalid = new Date(this.inputedValue).toString() === 'Invalid Date';
+      } else if (this.type === 'time') {
+        isInvalid = !this.inputedValue.match(/\d{1,2}:\d{1,2}/g);
+      }
+
       return this.placeholder && isInvalid;
     },
   },
