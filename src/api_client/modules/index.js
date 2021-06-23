@@ -11,6 +11,7 @@ import UserStampApi from './user_stamp_api';
 import UserCoursesApi from './user_courses_api';
 import UserSettingApi from './user_setting_api';
 import UserCoursePlansApi from './user_course_plans_api';
+import ContactApi from './contact_api';
 
 export default {
   NoticesApi,
@@ -26,4 +27,5 @@ export default {
   UserCoursesApi,
   UserSettingApi,
   UserCoursePlansApi,
+  ContactApi,
 };
