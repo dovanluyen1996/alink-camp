@@ -52,10 +52,6 @@ cordova run ios
 #### 環境
 
 ##### JDKインストール
-brew install adoptopenjdk8
-
-上記で出来ない （`Error: No similarly named formulae found.` が表示される） 場合
-
 brew tap AdoptOpenJDK/openjdk  
 brew install --cask adoptopenjdk8
 
