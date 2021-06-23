@@ -1,5 +1,5 @@
 <template>
-  <tr>
+  <tr class="date-row">
     <th
       scope="row"
       class="th"

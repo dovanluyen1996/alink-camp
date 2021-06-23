@@ -274,13 +274,13 @@ export default {
   methods: {
     tableScrollToday() {
       // NOTE: セルのdate-day属性に時刻を入れてスクロール位置を取得している
-      const table = this.$el.querySelector('.ten-days-table');
+      const table = this.$el.querySelector('.ten-days-weather-table');
       const dateRow = table.querySelector('.date-row');
       const th = dateRow.querySelector('th');
-      // TODO: todayのフォーマットをAPIのデータに合わせてください
-      const today = '2021-6-23';
-      const todayCol = dateRow.querySelector(`[date-time="${today}"]`);
-      const x = todayCol.offsetLeft - th.offsetWidth;
+      // TODO: plansのフォーマットをAPIのデータに合わせてください
+      const plans = '2021-6-23';
+      const plansCol = dateRow.querySelector(`[date-day="${plans}"]`);
+      const x = plansCol.offsetLeft - th.offsetWidth;
 
       table.scrollTo(x, 0);
     },
