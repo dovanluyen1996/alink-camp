@@ -1,35 +1,28 @@
 <template>
   <v-ons-page>
-    <v-ons-toolbar>
-      <div class="left">
-        <v-ons-back-button />
-      </div>
-      <div class="center">
-        お知らせ
-      </div>
-    </v-ons-toolbar>
-    <v-ons-card>
-      <v-ons-list>
-        <v-ons-list-item
-          v-for="notice in notices"
-          :key="notice.id"
-          @click="showNotice(notice.id)"
-        >
-          <div>
-            <p>{{ notice.startedAt }}</p>
-            <p>{{ notice.title }}</p>
-            <p>{{ notice.isRead }}</p>
-          </div>
-        </v-ons-list-item>
-      </v-ons-list>
-    </v-ons-card>
+    <custom-toolbar title="お知らせ" />
+    <div class="content">
+      <notice-list
+        v-if="notices.length > 0"
+        :notices="notices"
+        @click="showNotice"
+      />
+    </div>
   </v-ons-page>
 </template>
 
 <script>
+// components
+import NoticeList from '@/components/organisms/notice/list';
+
+// views
 import ShowNoticeView from '@/views/notices/show';
 
 export default {
+  name: 'NoticesIndex',
+  components: {
+    NoticeList,
+  },
   computed: {
     notices() {
       return this.$store.getters['models/notice/all'];
