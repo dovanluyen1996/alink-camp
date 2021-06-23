@@ -1,6 +1,6 @@
 <template>
   <v-ons-page>
-    <custom-toolbar title="コースお天気" />
+    <custom-toolbar :title="title" />
     <div class="content">
       <div class="course-show-header">
         <ons-button
@@ -40,7 +40,7 @@ import CardWithTab from '@/components/organisms/card-with-tab';
 
 // tab contents
 import CoursesForecastTab from '@/components/organisms/courses/forecast-tab';
-import CoursesCourseTab from '@/components/organisms/courses/course-tab';
+import CoursesInformationTab from '@/components/organisms/courses/information-tab';
 
 export default {
   name: 'CourseShow',
@@ -49,6 +49,7 @@ export default {
   },
   data() {
     return {
+      title: '〇〇ゴルフ場',
       is_favorited: true,
       user_course_plans: '2021/06/18',
       tabs: [
@@ -58,7 +59,7 @@ export default {
         },
         {
           label: '詳細情報',
-          component: CoursesCourseTab,
+          component: CoursesInformationTab,
         },
       ],
     };
