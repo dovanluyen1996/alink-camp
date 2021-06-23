@@ -11,7 +11,4 @@ export default {
     },
   },
   views,
-  campaign: {
-    stampAreaLimit: 10,
-  },
 };

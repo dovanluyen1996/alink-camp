@@ -20,7 +20,7 @@
         </a>
       </div>
       <div class="user_stamps-number">
-        所持応募券：<span>{{ user.ticket_count }}</span>枚
+        所持応募券：<span>{{ currentUser.ticketCount }}</span>枚
       </div>
       <div class="campaign-stamps">
         <!-- TODO: アニメーションを付けたい -->
@@ -50,19 +50,18 @@
 
 <script>
 import AppTabbar from '@/views/app-tabbar';
-import settings from '@/config/settings';
 
 export default {
   name: 'UserStampsCampaign',
   data() {
     return {
-      user: {
-        ticket_count: 30,
-      },
-      stampAreaLimit: settings.campaign.stampAreaLimit,
+      stampAreaLimit: 10,
     };
   },
   computed: {
+    currentUser() {
+      return this.$store.state.models.currentUser.user;
+    },
     userStamp() {
       return this.$store.state.models.userStamp.userStamp;
     },
@@ -70,12 +69,11 @@ export default {
       return this.$store.state.models.sponsor.sponsors;
     },
     sponsor() {
-      const sponsor = this.sponsors[Math.floor(Math.random() * this.sponsors.length)];
-      return sponsor;
+      return this.sponsors[Math.floor(Math.random() * this.sponsors.length)];
     },
   },
   async created() {
-    // TODO: ログインユーザの取得
+    await this.$store.dispatch('models/currentUser/getUser');
     await this.$store.dispatch('models/userStamp/getUserStamp');
     await this.$store.dispatch('models/sponsor/getSponsors');
   },
