@@ -1,8 +1,11 @@
 <template>
   <v-ons-page>
     <custom-toolbar title="プライバシーポリシー" />
-    <!-- eslint-disable-next-line vue/no-v-html -->
-    <div v-html="description" />
+
+    <v-ons-card fullscreen>
+      <!-- eslint-disable-next-line vue/no-v-html -->
+      <div v-html="description" />
+    </v-ons-card>
   </v-ons-page>
 </template>
 
