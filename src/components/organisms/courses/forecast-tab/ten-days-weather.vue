@@ -269,10 +269,10 @@ export default {
     };
   },
   mounted() {
-    this.tableScrollToday();
+    this.tableScrollPlans();
   },
   methods: {
-    tableScrollToday() {
+    tableScrollPlans() {
       // NOTE: セルのdate-day属性に時刻を入れてスクロール位置を取得している
       const table = this.$el.querySelector('.ten-days-weather-table');
       const dateRow = table.querySelector('.date-row');
