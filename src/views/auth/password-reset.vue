@@ -65,7 +65,7 @@ export default {
       case 'CodeMismatchException':
         return '確認コードが正しくありません';
       case 'InvalidParameterException':
-        return '無効な確認コードまたはパスワード';
+        return '無効な確認コードまたはパスワードが違います。';
       default:
         return 'パスワードの変更に失敗しました';
       }
