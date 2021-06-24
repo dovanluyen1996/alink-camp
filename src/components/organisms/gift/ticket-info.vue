@@ -10,9 +10,9 @@
       <div class="ticket-info-item">
         <label class="ticket-info-item__label">スタンプ</label>
         <p class="ticket-info-item__content">
-          <span>{{ userStampNumber }}</span>/10
+          <span>{{ userStampNumber }}</span>/{{ stampAreaLimit }}
         </p>
-        <span class="ticket-info-item__subcontent">あと〜個で応募券</span>
+        <span class="ticket-info-item__subcontent">{{ `あと${neededStampRemain}個で応募券` }}</span>
       </div>
     </div>
   </v-ons-card>
@@ -31,6 +31,16 @@ export default {
       type: Number,
       default: 0,
       required: true,
+    },
+  },
+  data() {
+    return {
+      stampAreaLimit: 10,
+    };
+  },
+  computed: {
+    neededStampRemain() {
+      return this.stampAreaLimit - this.userStampNumber;
     },
   },
 };
