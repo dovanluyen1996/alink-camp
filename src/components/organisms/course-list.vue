@@ -81,8 +81,8 @@ export default {
         this.isFullscreen = true;
       }
     },
-    clickCourse(course) {
-      this.$emit('click', course);
+    goToSummary() {
+      this.$store.dispatch('scoresNavigator/push', Summary);
     },
     getDistance(latitude, longitude) {
       // eslint-disable-next-line max-len
