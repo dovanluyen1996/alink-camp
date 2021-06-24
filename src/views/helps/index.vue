@@ -21,11 +21,18 @@
         </v-ons-list-item>
       </v-ons-list>
     </v-ons-card>
+    <v-ons-button
+
+      @click="goToContact"
+    >
+      お問い合わせ
+    </v-ons-button>
   </v-ons-page>
 </template>
 
 <script>
 import ShowHelpView from '@/views/helps/show';
+import ContactView from '@/views/contact/index';
 
 export default {
   computed: {
@@ -47,6 +54,9 @@ export default {
     },
     async getHelps() {
       await this.$store.dispatch('models/help/getHelps');
+    },
+    goToContact() {
+      this.$store.dispatch('menuNavigator/push', ContactView);
     },
   },
 };
