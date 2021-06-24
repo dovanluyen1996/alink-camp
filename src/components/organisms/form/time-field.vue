@@ -1,25 +1,18 @@
 <template>
   <base-field
     :title="title"
-    class="date-field"
+    class="time-field"
   >
     <custom-datetime-input
       v-model="inputedValue"
       :placeholder="placeholder"
-      type="date"
+      type="time"
     />
-    <annotations-block
-      v-if="help"
-      class="date-field-help"
-    >
-      {{ help }}
-    </annotations-block>
   </base-field>
 </template>
 
 <script>
 import CustomDatetimeInput from '@/components/atoms/form/custom-datetime-input';
-import AnnotationsBlock from '@/components/atoms/form/annotations-block';
 import BaseField from './base-field';
 
 export default {
@@ -27,7 +20,6 @@ export default {
   components: {
     BaseField,
     CustomDatetimeInput,
-    AnnotationsBlock,
   },
   props: {
     value: {
@@ -40,10 +32,6 @@ export default {
       default: null,
     },
     placeholder: {
-      type: String,
-      default: null,
-    },
-    help: {
       type: String,
       default: null,
     },
@@ -60,9 +48,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped>
-.date-field-help {
-  margin-top: 13px;
-}
-</style>
