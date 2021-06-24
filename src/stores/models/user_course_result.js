@@ -22,7 +22,13 @@ export default {
       state.isLoading = isLoading;
     },
     addUserCourseResult(state, userCourseResult) {
-      state.userCourseResults.push(userCourseResult);
+      const index = state.userCourseResults.findIndex(
+        _userCourseResult => _userCourseResult.id === userCourseResult.id,
+      );
+
+      if (index < 0) return;
+
+      Vue.set(state.userCourseResults, index, userCourseResult);
     },
     updateUserCourseResult(state, userCourseResult) {
       const index = state.userCourseResults.findIndex(
