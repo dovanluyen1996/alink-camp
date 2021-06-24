@@ -1,40 +1,41 @@
 <template>
   <v-ons-page>
-    <v-ons-toolbar>
-      <div class="left">
-        <v-ons-back-button />
-      </div>
-      <div class="center">
-        ヘルプ
-      </div>
-    </v-ons-toolbar>
-    <v-ons-card>
-      <v-ons-list>
-        <v-ons-list-item
-          v-for="help in helps"
-          :key="help.id"
-          @click="showHelp(help.id)"
-        >
-          <div>
-            <p>{{ help.title }}</p>
-          </div>
-        </v-ons-list-item>
-      </v-ons-list>
-    </v-ons-card>
-    <v-ons-button
+    <custom-toolbar title="ヘルプ" />
 
-      @click="goToContact"
-    >
-      お問い合わせ
-    </v-ons-button>
+    <div class="content">
+      <help-list
+        v-if="helps.length > 0"
+        :helps="helps"
+        @click="showHelp"
+      />
+
+      <fixed-footer>
+        <v-ons-button
+          modifier="large--cta rounded"
+          @click="goToContactUs"
+        >
+          お問い合わせ
+        </v-ons-button>
+      </fixed-footer>
+    </div>
   </v-ons-page>
 </template>
 
 <script>
+// components
+import HelpList from '@/components/organisms/help/list';
+import FixedFooter from '@/components/organisms/fixed-footer';
+
+// views
 import ShowHelpView from '@/views/helps/show';
 import ContactView from '@/views/contact/index';
 
 export default {
+  name: 'HelpsIndex',
+  components: {
+    HelpList,
+    FixedFooter,
+  },
   computed: {
     helps() {
       return this.$store.getters['models/help/all'];
@@ -51,6 +52,9 @@ export default {
           helpId,
         },
       });
+    },
+    goToContactUs() {
+      // TODO: handle go to contact us page
     },
     async getHelps() {
       await this.$store.dispatch('models/help/getHelps');
