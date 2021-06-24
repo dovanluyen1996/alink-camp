@@ -8,7 +8,12 @@
           class="notice-detail__thumbnail"
         >
         <span class="notice-detail__started-at">{{ notice.startedAt }}</span>
-        <span class="notice-detail__description">{{ notice.description }} </span>
+        <!-- eslint-disable vue/no-v-html -->
+        <div
+          class="notice-detail__description"
+          v-html="notice.description"
+        />
+        <!-- eslint-enable vue/no-v-html -->
       </div>
     </div>
   </v-ons-card>
