@@ -22,6 +22,9 @@ export default {
       state.isLoading = isLoading;
     },
     addUserCourseResult(state, userCourseResult) {
+      state.userCourseResults.push(userCourseResult);
+    },
+    updateUserCourseResult(state, userCourseResult) {
       const index = state.userCourseResults.findIndex(
         _userCourseResult => _userCourseResult.id === userCourseResult.id,
       );
@@ -29,15 +32,6 @@ export default {
       if (index < 0) return;
 
       Vue.set(state.userCourseResults, index, userCourseResult);
-    },
-    updateUserCourseResult(state, userCourseResult) {
-      const userCourseResultTarget = state.userCourseResults.find(
-        _userCourseResult => _userCourseResult.id === userCourseResult.id,
-      );
-
-      if (userCourseResultTarget === undefined) return;
-
-      Object.assign(userCourseResultTarget, userCourseResult);
     },
     deleteUserCourseResult(state, userCourseResult) {
       const index = state.userCourseResults.findIndex(
