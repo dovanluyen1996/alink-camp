@@ -1,14 +1,14 @@
 export default {
-  async getUserCourseResult(userCourseId) {
+  async getUserCourseResults(userCourseId) {
     const response = await this.get(`/user_courses/${userCourseId}/user_course_results`);
     return response.data;
   },
-  async createUserCourseResult(userCourseId, userCourseResult) {
-    const response = await this.post(`/user_courses/${userCourseId}/user_course_results`, userCourseResult);
+  async createUserCourseResult(userCourseId, params) {
+    const response = await this.post(`/user_courses/${userCourseId}/user_course_results`, params);
     return response.data;
   },
-  async updateUserCourseResult(userCourseId, userCourseResultId, userCourseResult) {
-    const response = await this.put(`/user_courses/${userCourseId}/user_course_results/${userCourseResultId}`, userCourseResult);
+  async updateUserCourseResult(userCourseId, userCourseResultId, params) {
+    const response = await this.put(`/user_courses/${userCourseId}/user_course_results/${userCourseResultId}`, params);
     return response.data;
   },
   async destroyUserCourseResult(userCourseId, userCourseResultsId) {

@@ -22,7 +22,13 @@ export default {
       state.isLoading = isLoading;
     },
     addUserCourseResult(state, userCourseResult) {
-      state.userCourseResults.push(userCourseResult);
+      const index = state.userCourseResults.findIndex(
+        _userCourseResult => _userCourseResult.id === userCourseResult.id,
+      );
+
+      if (index < 0) return;
+
+      Vue.set(state.userCourseResults, index, userCourseResult);
     },
     updateUserCourseResult(state, userCourseResult) {
       const userCourseResultTarget = state.userCourseResults.find(
@@ -40,15 +46,15 @@ export default {
 
       if (index < 0) return;
 
-      state.userCourseResults.splice(index, 1);
+      Vue.delete(state.userCourseResults, index);
     },
   },
   actions: {
-    async getUserCourseResult(context, userCourseId) {
+    async getUserCourseResults(context, userCourseId) {
       context.commit('setIsLoading', true);
 
       try {
-        const res = await ApiClient.getUserCourseResult(userCourseId);
+        const res = await ApiClient.getUserCourseResults(userCourseId);
 
         context.commit('setUserCourseResults', res);
       } finally {
