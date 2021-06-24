@@ -121,5 +121,43 @@ export default class Cognito {
       });
     });
   }
+
+  /**
+   * forgotPassword
+   */
+  forgotPassword(username) {
+    const userData = { Username: username, Pool: this.userPool };
+    const cognitoUser = new CognitoUser(userData);
+
+    return new Promise((resolve, reject) => {
+      cognitoUser.forgotPassword({
+        onSuccess: (result) => {
+          resolve(result);
+        },
+        onFailure: (err) => {
+          reject(err);
+        },
+      });
+    });
+  }
+
+  /**
+   * confirmPassword
+   */
+  confirmPassword(username, verificationCode, newPassword) {
+    const userData = { Username: username, Pool: this.userPool };
+    const cognitoUser = new CognitoUser(userData);
+
+    return new Promise((resolve, reject) => {
+      cognitoUser.confirmPassword(verificationCode, newPassword, {
+        onSuccess: (result) => {
+          resolve(result);
+        },
+        onFailure: (err) => {
+          reject(err);
+        },
+      });
+    });
+  }
 }
 /* eslint-enable no-underscore-dangle, no-unused-vars, consistent-return */

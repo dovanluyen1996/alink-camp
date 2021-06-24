@@ -3,8 +3,8 @@
     <custom-toolbar title="パスワードを忘れた方" />
     <div class="content">
       <base-form>
-        <auth-comfirm-code v-model="confirm_code" />
-        <user-password-new v-model="email" />
+        <auth-comfirm-code v-model="confirmCode" />
+        <user-password-new v-model="newPassword" />
         <template #buttons>
           <custom-submit @click="submitPassword">
             設定する
@@ -12,6 +12,13 @@
         </template>
       </base-form>
     </div>
+
+    <error-dialog
+      title="パスワードの変更に失敗しました"
+      :is-visible="resetPasswordErrorVisible"
+      :error-message="errorMessage"
+      @close="closeResetPasswordError"
+    />
   </v-ons-page>
 </template>
 
@@ -21,6 +28,10 @@ import BaseForm from '@/components/organisms/form/base-form';
 import AuthComfirmCode from '@/components/organisms/auth/comfirm-code';
 import UserPasswordNew from '@/components/organisms/user/user-password-new';
 import CustomSubmit from '@/components/organisms/form/custom-submit';
+import ErrorDialog from '@/components/organisms/error-dialog';
+
+// pages
+import SignIn from '@/views/auth/sign-in';
 
 export default {
   name: 'PasswordReset',
@@ -29,16 +40,54 @@ export default {
     AuthComfirmCode,
     UserPasswordNew,
     CustomSubmit,
+    ErrorDialog,
+  },
+  props: {
+    email: {
+      type: String,
+      default: '',
+      requier: true,
+    },
   },
   data() {
     return {
-      confirm_code: '',
-      email: '',
+      confirmCode: '',
+      newPassword: '',
+      error: null,
+      resetPasswordErrorVisible: false,
     };
+  },
+  computed: {
+    errorMessage() {
+      if (!this.error) return null;
+
+      switch (this.error.code) {
+      case 'CodeMismatchException':
+        return '確認コードが正しくありません';
+      case 'InvalidParameterException':
+        return '無効な確認コードまたはパスワード';
+      default:
+        return 'パスワードの変更に失敗しました';
+      }
+    },
   },
   methods: {
     submitPassword() {
-      console.log('submitPassword');
+      this.$cognito.confirmPassword(this.email, this.confirmCode, this.newPassword)
+        .then((result) => {
+          console.log(result);
+          this.$store.dispatch('appNavigator/reset', SignIn);
+        })
+        .catch((err) => {
+          this.error = err;
+          this.showResetPasswordError();
+        });
+    },
+    showResetPasswordError() {
+      this.resetPasswordErrorVisible = true;
+    },
+    closeResetPasswordError() {
+      this.resetPasswordErrorVisible = false;
     },
   },
 };
