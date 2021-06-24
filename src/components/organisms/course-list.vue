@@ -14,7 +14,7 @@
             v-for="course in courses"
             :key="course.id"
             :modifier="modifier"
-            @click="clickCourse(course)"
+            @click="goToSummary(course.id, course.name)"
           >
             <div class="center">
               <div class="list-item__title">
@@ -36,7 +36,9 @@
 </template>
 
 <script>
+// pages
 import LatLon from 'geodesy/latlon-ellipsoidal-vincenty.js';
+import Summary from '@//views/scores/summary';
 
 export default {
   name: 'CourseList',
@@ -86,7 +88,7 @@ export default {
         extends: Summary,
         onsNavigatorProps: {
           courseId,
-          courseName
+          courseName,
         },
       });
     },

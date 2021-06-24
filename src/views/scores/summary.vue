@@ -17,7 +17,7 @@
             @click="goToResultEdit(userCourseResult)"
           >
             <div class="center">
-              <span>{{ userCourseResult.targetDate }}</span>
+              <span>{{ targetDateFormat(userCourseResult.targetDate) }}</span>
             </div>
           </v-ons-list-item>
         </v-ons-list>
@@ -40,19 +40,19 @@ import FixedFooter from '@/components/organisms/fixed-footer';
 
 export default {
   name: 'Summary',
+  components: {
+    FixedFooter,
+  },
   props: {
     courseId: {
       type: Number,
       default: null,
       required: true,
     },
-    courseName : {
+    courseName: {
       type: String,
       default: null,
     },
-  },
-  components: {
-    FixedFooter,
   },
   computed: {
     userCourseResults() {
@@ -60,9 +60,20 @@ export default {
     },
   },
   async created() {
-    await this.$store.dispatch('models/userCourseResult/getUserCourseResult', this.courseId);
+    await this.getUserCourseResults();
   },
   methods: {
+    async getUserCourseResults() {
+      await this.$store.dispatch('models/userCourseResult/getUserCourseResults', this.courseId);
+    },
+    targetDateFormat(targetDate) {
+      const date = new Date(targetDate);
+      const year = date.getFullYear();
+      const month = (`00${(date.getMonth() + 1)}`).slice(-2);
+      const day = (`00${date.getDate()}`).slice(-2);
+      const dayOfWeekStr = ['日', '月', '火', '水', '木', '金', '土'][date.getDay()];
+      return `${year}/${month}/${day} (${dayOfWeekStr})`;
+    },
     goToResultEdit() {
       // TODO: issue#133 スコア編集画面に遷移
     },

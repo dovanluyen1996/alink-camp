@@ -17,9 +17,15 @@
         </template>
       </no-data>
 
-      <div v-else>
-        <course-list
-          :courses="courses"
+      <course-list
+        v-else
+        :courses="courses"
+        @click="goToCourseSearch"
+      />
+
+      <fixed-footer>
+        <v-ons-button
+          modifier="large--cta add rounded"
           @click="goToCourseSearch"
         />
 
