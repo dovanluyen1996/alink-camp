@@ -56,9 +56,12 @@ export default {
     },
   },
   async created() {
-    await this.$store.dispatch('models/userCourse/getUserCourses');
+    await this.getUserCourses();
   },
   methods: {
+    async getUserCourses() {
+      await this.$store.dispatch('models/userCourse/getUserCourses');
+    },
     goToCourseSearch() {
       this.$store.commit('appTabbar/setActiveIndexFromTabName', 'courseSearch');
     },
