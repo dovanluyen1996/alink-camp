@@ -16,12 +16,9 @@
             :modifier="modifier"
             @click="clickCourse(course)"
           >
-            <div
-              v-if="course.course"
-              class="center"
-            >
+            <div class="center">
               <div class="list-item__title">
-                {{ course.course.name }}
+                {{ course.name }}
                 <span
                   v-if="currentLocation"
                   class="course-distance"
@@ -29,7 +26,7 @@
                   {{ getDistance(course.latitude, course.longitude) }}
                 </span>
               </div>
-              <span class="list-item__subtitle">{{ course.course.address }}</span>
+              <span class="list-item__subtitle">{{ course.address }}</span>
             </div>
           </v-ons-list-item>
         </v-ons-list>

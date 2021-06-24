@@ -1,11 +1,8 @@
 <template>
   <v-ons-page>
     <custom-toolbar title="スコア" />
-    <div
-      v-show="userCourses.length"
-      class="content"
-    >
-      <no-data v-if="userCourses.length === 0">
+    <div class="content">
+      <no-data v-if="courses.length === 0">
         <p>
           まだスコア登録がありません。<br>
           コース検索より、追加したいコースを選択してください
@@ -22,7 +19,7 @@
 
       <course-list
         v-else
-        :courses="userCourses"
+        :courses="courses"
         @click="goToCourseSearch"
       />
 
@@ -52,8 +49,10 @@ export default {
     FixedFooter,
   },
   computed: {
-    userCourses() {
-      return this.$store.getters['models/userCourse/all'];
+    courses() {
+      const userCourses = this.$store.getters['models/userCourse/all'];
+
+      return userCourses.map(userCourse => userCourse.course);
     },
   },
   async created() {
