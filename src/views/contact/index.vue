@@ -16,6 +16,12 @@
               name="カテゴリー"
             >
               <option
+                disabled
+                value=""
+              >
+                選択してください
+              </option>
+              <option
                 v-for="category in categories"
                 :key="category.index"
               >
@@ -90,8 +96,11 @@ export default {
         category: '',
       },
       categories: [
-        // TODO: Change real categories
-        'How to use app', 'Information',
+        '不具合報告',
+        'tenki.jpへのご要望',
+        '天気に関するお問い合わせ',
+        'ビジネスに関するお問い合わせ',
+        'その他',
       ],
       confirmSendContact: false,
     };
