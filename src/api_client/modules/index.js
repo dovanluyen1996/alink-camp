@@ -1,5 +1,5 @@
 import NoticesApi from './notices_api';
-import TermOfServiceApi from './term_of_service_api';
+import TermsOfServiceApi from './terms_of_service_api';
 import PrivacyPolicyApi from './privacy_policy_api';
 import HelpsApi from './helps_api';
 import GiftsApi from './gifts_api';
@@ -15,7 +15,7 @@ import ContactApi from './contact_api';
 
 export default {
   NoticesApi,
-  TermOfServiceApi,
+  TermsOfServiceApi,
   PrivacyPolicyApi,
   HelpsApi,
   GiftsApi,

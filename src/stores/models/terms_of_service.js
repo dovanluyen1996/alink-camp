@@ -5,28 +5,28 @@ export default {
   strict: true,
   namespaced: true,
   state: {
-    termOfService: {},
+    termsOfService: {},
     isLoading: false,
   },
   getters: {
-    current: state => state.termOfService,
+    current: state => state.termsOfService,
   },
   mutations: {
-    setTermOfService(state, termOfService) {
-      Vue.set(state, 'termOfService', termOfService);
+    setTermsOfService(state, termsOfService) {
+      Vue.set(state, 'termsOfService', termsOfService);
     },
     setIsLoading(state, isLoading) {
       state.isLoading = isLoading;
     },
   },
   actions: {
-    async getTermOfService(context) {
+    async getTermsOfService(context) {
       context.commit('setIsLoading', true);
 
       try {
-        const termOfService = await ApiClient.getTermOfService();
+        const termsOfService = await ApiClient.getTermsOfService();
 
-        context.commit('setTermOfService', termOfService);
+        context.commit('setTermsOfService', termsOfService);
       } finally {
         context.commit('setIsLoading', false);
       }

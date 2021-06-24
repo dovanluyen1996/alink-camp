@@ -36,7 +36,7 @@ export default {
       this.$store.dispatch('appNavigator/pop');
     },
     agree() {
-      localStorage.setItem('acceptedTermOfService', true);
+      localStorage.setItem('acceptedTermsOfService', true);
       this.goToFirstGuidance();
     },
     goToFirstGuidance() {

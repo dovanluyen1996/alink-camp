@@ -1,5 +1,5 @@
 export default {
-  async getTermOfService() {
+  async getTermsOfService() {
     const response = await this.get('/term_of_service');
     return response.data;
   },

@@ -9,20 +9,20 @@
 export default {
   name: 'TermsOfServiceDescription',
   computed: {
-    termOfService() {
-      return this.$store.getters['models/termOfService/current'];
+    termsOfService() {
+      return this.$store.getters['models/termsOfService/current'];
     },
     description() {
-      if (!this.termOfService) return '';
-      return this.termOfService.description;
+      if (!this.termsOfService) return '';
+      return this.termsOfService.description;
     },
   },
   async created() {
-    await this.getTermOfService();
+    await this.getTermsOfService();
   },
   methods: {
-    async getTermOfService() {
-      await this.$store.dispatch('models/termOfService/getTermOfService');
+    async getTermsOfService() {
+      await this.$store.dispatch('models/termsOfService/getTermsOfService');
     },
   },
 };

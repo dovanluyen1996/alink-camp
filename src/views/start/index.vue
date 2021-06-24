@@ -42,9 +42,9 @@ export default {
       this.goToTermsOfService();
     },
     goToTermsOfService() {
-      const acceptedTermOfService = JSON.parse(localStorage.getItem('acceptedTermOfService'));
+      const acceptedTermsOfService = JSON.parse(localStorage.getItem('acceptedTermsOfService'));
 
-      if (acceptedTermOfService) {
+      if (acceptedTermsOfService) {
         this.$store.dispatch('appNavigator/push', FirstGuidance);
       } else {
         this.$store.dispatch('appNavigator/push', TermsOfService);
