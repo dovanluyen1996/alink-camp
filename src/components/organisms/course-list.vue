@@ -81,8 +81,14 @@ export default {
         this.isFullscreen = true;
       }
     },
-    goToSummary() {
-      this.$store.dispatch('scoresNavigator/push', Summary);
+    goToSummary(courseId, courseName) {
+      this.$store.dispatch('scoresNavigator/push', {
+        extends: Summary,
+        onsNavigatorProps: {
+          courseId,
+          courseName
+        },
+      });
     },
     getDistance(latitude, longitude) {
       // eslint-disable-next-line max-len
