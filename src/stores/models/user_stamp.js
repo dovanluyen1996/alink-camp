@@ -24,6 +24,8 @@ export default {
         const userStamp = await ApiClient.getUserStamp();
 
         context.commit('setUserStamp', userStamp);
+      } catch (error) {
+        context.commit('api/setError', error, { root: true });
       } finally {
         context.commit('setIsLoading', false);
       }

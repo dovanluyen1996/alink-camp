@@ -36,6 +36,20 @@ class ApiClient extends HttpClient {
       }
 
       return response;
+    }, (error) => {
+      let errorObject = {};
+
+      if (!error.response || !error.response.data) {
+        errorObject = { status: 500, message: '何かがうまくいかなかった' };
+      } else {
+        const errorResponse = error.response;
+        errorObject = {
+          status: errorResponse.status,
+          message: errorResponse.data.error || errorResponse.data.messages,
+        };
+      }
+
+      throw errorObject;
     });
   }
 

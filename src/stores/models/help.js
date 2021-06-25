@@ -28,6 +28,8 @@ export default {
         const helps = await ApiClient.getHelps();
 
         context.commit('setHelps', helps);
+      } catch (error) {
+        context.commit('api/setError', error, { root: true });
       } finally {
         context.commit('setIsLoading', false);
       }

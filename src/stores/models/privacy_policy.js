@@ -27,6 +27,8 @@ export default {
         const privacyPolicy = await ApiClient.getPrivacyPolicy();
 
         context.commit('setPrivacyPolicy', privacyPolicy);
+      } catch (error) {
+        context.commit('api/setError', error, { root: true });
       } finally {
         context.commit('setIsLoading', false);
       }

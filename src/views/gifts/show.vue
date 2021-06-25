@@ -86,25 +86,6 @@
         </v-ons-button>
       </template>
     </v-ons-alert-dialog>
-
-    <v-ons-alert-dialog
-      :visible.sync="errorVisible"
-    >
-      <template #title>
-        応募失敗
-      </template>
-
-      応募に失敗しました。<br>
-      {{ errorMessage }}
-
-      <template #footer>
-        <v-ons-button
-          @click="closeError()"
-        >
-          OK
-        </v-ons-button>
-      </template>
-    </v-ons-alert-dialog>
   </v-ons-page>
 </template>
 
@@ -129,17 +110,12 @@ export default {
       email: this.$store.state.models.currentUser.user.email,
       confirmVisible: false,
       completedVisible: false,
-      errorVisible: false,
       error: null,
     };
   },
   computed: {
     gift() {
       return this.$store.getters['models/gift/findById'](this.giftId);
-    },
-    errorMessage() {
-      if (!this.error || !this.error.response) return null;
-      return this.error.response.data.error;
     },
   },
   methods: {
@@ -156,29 +132,15 @@ export default {
       this.completedVisible = false;
       this.$store.dispatch('menuNavigator/pop');
     },
-    showError(e) {
-      this.errorVisible = true;
-      this.error = e;
-    },
-    closeError() {
-      this.errorVisible = false;
-      this.error = null;
-    },
     async submit() {
       const params = {
         giftId: this.giftId,
         email: this.email,
       };
 
-      try {
-        await this.$store.dispatch('models/userGift/createUserGift', params);
-
-        this.closeConfirm();
-        this.showCompleted();
-      } catch (e) {
-        this.closeConfirm();
-        this.showError(e);
-      }
+      this.closeConfirm();
+      const success = await this.$store.dispatch('models/userGift/createUserGift', params);
+      if (success) this.showCompleted();
     },
   },
 };

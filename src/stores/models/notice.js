@@ -35,6 +35,8 @@ export default {
         notices.forEach((notice) => { notice.isRead = readNoticeIds.includes(notice.id); });
 
         context.commit('setNotices', notices);
+      } catch (error) {
+        context.commit('api/setError', error, { root: true });
       } finally {
         context.commit('setIsLoading', false);
       }

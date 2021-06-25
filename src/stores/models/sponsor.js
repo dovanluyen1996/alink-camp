@@ -27,6 +27,8 @@ export default {
         const sponsors = await ApiClient.getSponsors();
 
         context.commit('setSponsors', sponsors);
+      } catch (error) {
+        context.commit('api/setError', error, { root: true });
       } finally {
         context.commit('setIsLoading', false);
       }

@@ -23,6 +23,8 @@ export default {
         const user = await ApiClient.getCurrentUser();
 
         context.commit('setUser', user);
+      } catch (error) {
+        context.commit('api/setError', error, { root: true });
       } finally {
         context.commit('setIsLoading', false);
       }
@@ -34,6 +36,8 @@ export default {
         const user = await ApiClient.updateCurrentUser(params);
 
         context.commit('setUser', user);
+      } catch (error) {
+        context.commit('api/setError', error, { root: true });
       } finally {
         context.commit('setIsLoading', false);
       }

@@ -27,6 +27,8 @@ export default {
         const userSetting = await ApiClient.getUserSetting();
 
         context.commit('setUserSetting', userSetting);
+      } catch (error) {
+        context.commit('api/setError', error, { root: true });
       } finally {
         context.commit('setIsLoading', false);
       }
@@ -38,6 +40,8 @@ export default {
         const userSetting = await ApiClient.updateUserSetting(params);
 
         context.commit('setUserSetting', userSetting);
+      } catch (error) {
+        context.commit('api/setError', error, { root: true });
       } finally {
         context.commit('setIsLoading', false);
       }

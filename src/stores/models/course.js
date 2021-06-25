@@ -28,6 +28,8 @@ export default {
         const courses = await ApiClient.getCourses(params);
 
         context.commit('setCourses', courses);
+      } catch (error) {
+        context.commit('api/setError', error, { root: true });
       } finally {
         context.commit('setIsLoading', false);
       }

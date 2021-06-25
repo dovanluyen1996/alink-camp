@@ -27,6 +27,8 @@ export default {
         const termsOfService = await ApiClient.getTermsOfService();
 
         context.commit('setTermsOfService', termsOfService);
+      } catch (error) {
+        context.commit('api/setError', error, { root: true });
       } finally {
         context.commit('setIsLoading', false);
       }

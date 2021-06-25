@@ -28,6 +28,8 @@ export default {
         const gifts = await ApiClient.getGifts();
 
         context.commit('setGifts', gifts);
+      } catch (error) {
+        context.commit('api/setError', error, { root: true });
       } finally {
         context.commit('setIsLoading', false);
       }
