@@ -43,7 +43,7 @@ import CourseList from '@/components/organisms/course-list.vue';
 import FixedFooter from '@/components/organisms/fixed-footer';
 
 // pages
-import Summary from '@//views/scores/summary';
+import Summary from '@/views/scores/summary';
 
 export default {
   name: 'ScoresIndex',
