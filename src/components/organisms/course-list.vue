@@ -36,7 +36,6 @@
 </template>
 
 <script>
-// pages
 import LatLon from 'geodesy/latlon-ellipsoidal-vincenty.js';
 
 export default {

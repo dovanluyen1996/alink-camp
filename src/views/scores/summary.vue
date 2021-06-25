@@ -1,7 +1,6 @@
 <template>
   <v-ons-page>
     <custom-toolbar :title="course.name" />
-    <!-- TODO: this.courseNameでtitleにゴルフ場の名前が渡せない問題がある -->
     <span>スコアのサマリー情報</span>
     <v-ons-card>
       <div class="content">
