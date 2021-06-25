@@ -1,5 +1,5 @@
 <template>
-  <v-ons-card>
+  <v-ons-card v-if="helps.length > 0">
     <div class="content">
       <v-ons-list modifier="noborder">
         <v-ons-list-item
@@ -20,16 +20,20 @@
 <script>
 export default {
   name: 'HelpList',
-  props: {
-    helps: {
-      type: Array,
-      default: () => [],
-      required: true,
+  computed: {
+    helps() {
+      return this.$store.getters['models/help/all'];
     },
+  },
+  async created() {
+    await this.getHelps();
   },
   methods: {
     clickHelp(help) {
       this.$emit('click', help.id);
+    },
+    async getHelps() {
+      await this.$store.dispatch('models/help/getHelps');
     },
   },
 };

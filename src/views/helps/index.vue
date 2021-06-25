@@ -3,16 +3,12 @@
     <custom-toolbar title="ヘルプ" />
 
     <div class="content">
-      <help-list
-        v-if="helps.length > 0"
-        :helps="helps"
-        @click="showHelp"
-      />
+      <help-list @click="showHelp" />
 
       <fixed-footer>
         <v-ons-button
           modifier="large--cta rounded"
-          @click="goToContactUs"
+          @click="goToContact"
         >
           お問い合わせ
         </v-ons-button>
@@ -36,14 +32,6 @@ export default {
     HelpList,
     FixedFooter,
   },
-  computed: {
-    helps() {
-      return this.$store.getters['models/help/all'];
-    },
-  },
-  async created() {
-    await this.getHelps();
-  },
   methods: {
     showHelp(helpId) {
       this.$store.dispatch('menuNavigator/push', {
@@ -52,12 +40,6 @@ export default {
           helpId,
         },
       });
-    },
-    goToContactUs() {
-      // TODO: handle go to contact us page
-    },
-    async getHelps() {
-      await this.$store.dispatch('models/help/getHelps');
     },
     goToContact() {
       this.$store.dispatch('menuNavigator/push', ContactView);
