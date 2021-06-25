@@ -1,7 +1,7 @@
 {
-  "name": "alink.golf_tenki",
+  "name": "jp.rights.alink.golf_tenki_dev",
   "version": "1.0.0",
-  "description": "alink.golf_tenki",
+  "description": "jp.rights.alink.golf_tenki_dev",
   "author": "TAKUMA KIMISHIMA <takuma.kimishima@rights-s.jp>",
   "private": true,
   "scripts": {
