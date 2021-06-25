@@ -17,20 +17,21 @@
         </template>
       </no-data>
 
-      <course-list
-        v-else
-        :courses="courses"
-        @click="goToCourseSearch"
-      />
-
-      <fixed-footer>
-        <v-ons-button
-          modifier="large--cta add rounded"
+      <div v-else>
+        <course-list
+          :courses="courses"
           @click="goToCourseSearch"
-        >
-          別コースでスコア追加
-        </v-ons-button>
-      </fixed-footer>
+        />
+
+        <fixed-footer>
+          <v-ons-button
+            modifier="large--cta add rounded"
+            @click="goToCourseSearch"
+          >
+            別コースでスコア追加
+          </v-ons-button>
+        </fixed-footer>
+      </div>
     </div>
   </v-ons-page>
 </template>
