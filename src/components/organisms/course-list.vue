@@ -14,7 +14,7 @@
             v-for="course in courses"
             :key="course.id"
             :modifier="modifier"
-            @click="goToSummary(course.id, course.name)"
+            @click="clickCourse(course)"
           >
             <div class="center">
               <div class="list-item__title">
@@ -38,7 +38,6 @@
 <script>
 // pages
 import LatLon from 'geodesy/latlon-ellipsoidal-vincenty.js';
-import Summary from '@//views/scores/summary';
 
 export default {
   name: 'CourseList',
@@ -83,14 +82,8 @@ export default {
         this.isFullscreen = true;
       }
     },
-    goToSummary(courseId, courseName) {
-      this.$store.dispatch('scoresNavigator/push', {
-        extends: Summary,
-        onsNavigatorProps: {
-          courseId,
-          courseName,
-        },
-      });
+    clickCourse(course) {
+      this.$emit('click', course);
     },
     getDistance(latitude, longitude) {
       // eslint-disable-next-line max-len

@@ -1,6 +1,6 @@
 <template>
   <v-ons-page>
-    <custom-toolbar title="ゴルフ場" />
+    <custom-toolbar :title="course.name" />
     <!-- TODO: this.courseNameでtitleにゴルフ場の名前が渡せない問題がある -->
     <span>スコアのサマリー情報</span>
     <v-ons-card>
@@ -17,7 +17,7 @@
             @click="goToResultEdit(userCourseResult)"
           >
             <div class="center">
-              <span>{{ targetDateFormat(userCourseResult.targetDate) }}</span>
+              <span>{{ displayTargetDate(userCourseResult.targetDate) }}</span>
             </div>
           </v-ons-list-item>
         </v-ons-list>
@@ -35,23 +35,21 @@
 </template>
 
 <script>
+import DateConverter from '@/lib/date_converter';
+
 // components
 import FixedFooter from '@/components/organisms/fixed-footer';
 
 export default {
-  name: 'Summary',
+  name: 'ScoreSummary',
   components: {
     FixedFooter,
   },
   props: {
-    courseId: {
-      type: Number,
-      default: null,
+    course: {
+      type: Object,
+      default: () => {},
       required: true,
-    },
-    courseName: {
-      type: String,
-      default: null,
     },
   },
   computed: {
@@ -64,15 +62,10 @@ export default {
   },
   methods: {
     async getUserCourseResults() {
-      await this.$store.dispatch('models/userCourseResult/getUserCourseResults', this.courseId);
+      await this.$store.dispatch('models/userCourseResult/getUserCourseResults', this.course.id);
     },
-    targetDateFormat(targetDate) {
-      const date = new Date(targetDate);
-      const year = date.getFullYear();
-      const month = (`00${(date.getMonth() + 1)}`).slice(-2);
-      const day = (`00${date.getDate()}`).slice(-2);
-      const dayOfWeekStr = ['日', '月', '火', '水', '木', '金', '土'][date.getDay()];
-      return `${year}/${month}/${day} (${dayOfWeekStr})`;
+    displayTargetDate(targetDate) {
+      return DateConverter.toLongString(targetDate);
     },
     goToResultEdit() {
       // TODO: issue#133 スコア編集画面に遷移
