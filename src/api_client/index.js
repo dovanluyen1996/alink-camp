@@ -23,7 +23,7 @@ class ApiClient extends HttpClient {
       }
 
       const accessToken = await this.buildAccessToken();
-      if (accessToken) config.headers[settings.authorization.accessToken.accessToken] = accessToken;
+      if (accessToken) config.headers[settings.authorization.accessToken.header] = accessToken;
 
       return config;
     });

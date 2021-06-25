@@ -1,4 +1,4 @@
-/* eslint-disable no-underscore-dangle, no-unused-vars */
+/* eslint-disable no-underscore-dangle, no-unused-vars, consistent-return */
 import {
   CognitoUserPool,
   CognitoUser,
@@ -80,8 +80,6 @@ export default class Cognito {
    * username, passwordでログイン
    */
   login(username, password) {
-    console.log(Config.credentials);
-
     const userData = { Username: username, Pool: this.userPool };
     const cognitoUser = new CognitoUser(userData);
     const authenticationData = { Username: username, Password: password };
@@ -89,7 +87,6 @@ export default class Cognito {
     return new Promise((resolve, reject) => {
       cognitoUser.authenticateUser(authenticationDetails, {
         onSuccess: (result) => {
-          // 実際にはクレデンシャルなどをここで取得する(今回は省略)
           resolve(result);
         },
         onFailure: (err) => {
@@ -112,7 +109,7 @@ export default class Cognito {
   isAuthenticated() {
     const cognitoUser = this.userPool.getCurrentUser();
     return new Promise((resolve, reject) => {
-      if (cognitoUser === null) { reject(cognitoUser); }
+      if (cognitoUser === null) { return reject(cognitoUser); }
       cognitoUser.getSession((err, session) => {
         if (err) {
           reject(err);
@@ -125,4 +122,4 @@ export default class Cognito {
     });
   }
 }
-/* eslint-enable no-underscore-dangle, no-unused-vars */
+/* eslint-enable no-underscore-dangle, no-unused-vars, consistent-return */

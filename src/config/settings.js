@@ -13,7 +13,7 @@ export default {
   views,
   authorization: {
     accessToken: {
-      accessToken: 'Authorization',
+      header: 'Authorization',
       valuePrefix: 'Bearer',
     },
   },
