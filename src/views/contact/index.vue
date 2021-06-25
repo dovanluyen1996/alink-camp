@@ -62,7 +62,7 @@
       </validation-observer>
 
       <v-ons-alert-dialog
-        :visible.sync="confirmSendContact"
+        :visible.sync="confirmVisible"
         cancelable
       >
         <template #title>
@@ -105,22 +105,20 @@ export default {
         'ビジネスに関するお問い合わせ',
         'その他',
       ],
-      confirmSendContact: false,
+      confirmVisible: false,
     };
   },
   methods: {
     showConfirm() {
-      this.confirmSendContact = true;
+      this.confirmVisible = true;
     },
     closeConfirm() {
-      this.confirmSendContact = false;
+      this.confirmVisible = false;
     },
     async submit() {
       // TODO: change app version
       const appVersion = '1.0';
-      const osVersion = window.device.version;
-      const deviceName = window.device.model;
-      const { platform } = window.device;
+      const { platform, version: osVersion, model: deviceName } = window.device || {};
       const params = {
         ...this.contact,
         deviceName,
