@@ -49,8 +49,9 @@
         <div>
           留意事項
           <div>
-            <!-- TODO: 文言は確認中 -->
-            テストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテストテスト
+            ご報告内容に個別にお答えすることをお約束するものではありません。<br />
+            ご報告内容に基づいて対応、処置することをお約束するものではありません。<br />
+            アプリ操作に関するご質問に関してはお手数ですが、メニュー⇒ヘルプをご覧いただいてからお問い合わせください。<br />
           </div>
         </div>
 
@@ -115,6 +116,10 @@ export default {
     closeConfirm() {
       this.confirmVisible = false;
     },
+    showComplete() {
+      // TODO: 実装
+      // https://github.com/rights-s/alink-golf_tenki-client/issues/320
+    },
     async submit() {
       // TODO: change app version
       const appVersion = '1.0';
@@ -128,6 +133,8 @@ export default {
       };
       this.closeConfirm();
       await this.$store.dispatch('models/contact/sendContact', params);
+
+      this.showComplete();
     },
   },
 };
