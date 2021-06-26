@@ -1,5 +1,5 @@
 <template>
-  <v-ons-page>
+  <v-ons-page @show="show">
     <custom-toolbar title="スコア" />
     <div class="content">
       <no-data v-if="courses.length === 0">
@@ -56,10 +56,10 @@ export default {
       return userCourses.map(userCourse => userCourse.course);
     },
   },
-  async created() {
-    await this.getUserCourses();
-  },
   methods: {
+    async show() {
+      await this.getUserCourses();
+    },
     async getUserCourses() {
       await this.$store.dispatch('models/userCourse/getUserCourses');
     },
