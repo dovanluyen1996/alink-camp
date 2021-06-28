@@ -11,7 +11,10 @@
         v-if="weather.weatherId"
         :key="index"
       >
-        <weather-image :weather-id="weather.weatherId" />
+        <weather-image
+          :weather-id="weather.weatherId"
+          image-width="40px"
+        />
       </td>
 
       <td
@@ -76,10 +79,6 @@ export default {
 
 <style scoped lang="scss">
 @import '@/assets/scss/_variables.scss';
-
-/deep/ .weather-image {
-  width: 40px;
-}
 
 .weather-row-sunrise,
 .weather-row-sunset {

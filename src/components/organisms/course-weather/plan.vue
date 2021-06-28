@@ -36,6 +36,7 @@ export default {
 
 .course-weather-plan {
   padding: 5px 10px;
+  margin-top: 5px;
   margin-bottom: 10px;
   font-size: $font-size-small;
   background: #f2f2f2;

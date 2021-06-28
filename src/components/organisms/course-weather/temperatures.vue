@@ -1,14 +1,18 @@
 <template>
   <div class="course-weather-temperatures">
     <div class="temperature-high">
-      最高
+      <span class="temperature-label">
+        最高
+      </span>
       <temperature-component
         :value="high"
         :font-size="fontSize"
       />
     </div>
     <div class="temperature-low">
-      最低
+      <span class="temperature-label">
+        最低
+      </span>
       <temperature-component
         :value="low"
         :font-size="fontSize"
@@ -50,6 +54,10 @@ export default {
 
 .course-weather-temperatures {
   white-space: nowrap;
+}
+
+.temperature-label {
+  font-size: $font-size-small;
 }
 
 .temperature-high {

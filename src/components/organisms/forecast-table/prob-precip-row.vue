@@ -2,7 +2,7 @@
   <tr>
     <th
       scope="row"
-      class="th"
+      :class="{th : colorTh}"
     >
       降水確率
     </th>
@@ -23,6 +23,10 @@ export default {
       type: Array,
       default: () => [],
       required: true,
+    },
+    colorTh: {
+      type: Boolean,
+      default: true,
     },
   },
   computed: {

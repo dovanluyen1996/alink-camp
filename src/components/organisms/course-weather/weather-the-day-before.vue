@@ -1,7 +1,7 @@
 <template>
   <div class="course-weather-the-day-before">
     <div class="course-weather-the-day-before-title">
-      予定日前日の<br>お天気
+      <span>予定日前日の</span><span>お天気</span>
     </div>
     <weather-image
       :weather-id="forecast.weather"
@@ -51,6 +51,9 @@ export default {
   @include title-style;
   margin-bottom: 10px;
   font-size: $font-size-small;
+  span {
+    display: inline-block;
+  }
 }
 .weather {
   margin-bottom: 10px;

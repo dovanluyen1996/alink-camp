@@ -46,7 +46,6 @@ export default {
 }
 
 .course-address {
-  margin-bottom: 5px;
   color: #888;
 }
 </style>

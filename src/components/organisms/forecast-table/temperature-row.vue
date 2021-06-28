@@ -8,16 +8,24 @@
     </th>
     <template v-for="(temperature, index) in temperatures">
       <td :key="index">
-        {{ temperature }} ℃
+        <temperature-component
+          :value="temperature"
+          font-size="12px"
+        />
       </td>
     </template>
   </tr>
 </template>
 
 <script>
+// components
+import TemperatureComponent from '@/components/atoms/temperature';
 
 export default {
   name: 'ForecastTableTemperatureRow',
+  components: {
+    TemperatureComponent,
+  },
   props: {
     forecastData: {
       type: Array,

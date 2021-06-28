@@ -2,12 +2,13 @@
   <tr>
     <th
       scope="row"
-      class="th"
+      :class="{th : colorTh}"
     >
       風速
     </th>
     <template v-for="(windSpeed, index) in windSpeeds">
       <td :key="index">
+        <!-- TODO: 単位は天気APIと合わせてください -->
         {{ windSpeed }} m/h
       </td>
     </template>
@@ -23,6 +24,10 @@ export default {
       type: Array,
       default: () => [],
       required: true,
+    },
+    colorTh: {
+      type: Boolean,
+      default: true,
     },
   },
   computed: {

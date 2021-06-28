@@ -69,6 +69,7 @@ export default {
 @import '@/assets/scss/_variables.scss';
 
 .course-weather-of-the-day {
+  margin-bottom: 10px;
   text-align: center;
 }
 
@@ -82,6 +83,7 @@ export default {
 }
 
 .weather-indexes {
+  flex-wrap: nowrap;
   margin-top: 15px;
   color: #017f45;
   white-space: nowrap;
