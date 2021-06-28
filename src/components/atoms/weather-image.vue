@@ -3,6 +3,7 @@
     <img
       :src="image"
       :alt="alt"
+      :width="imageWidth"
       class="weather-image"
     >
     <div
@@ -30,6 +31,10 @@ export default {
     isShownName: {
       type: Boolean,
       default: false,
+    },
+    imageWidth: {
+      type: String,
+      default: 'auto',
     },
   },
   computed: {

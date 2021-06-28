@@ -4,14 +4,14 @@
       最高
       <temperature-component
         :value="high"
-        font-size="18px"
+        :font-size="fontSize"
       />
     </div>
     <div class="temperature-low">
       最低
       <temperature-component
         :value="low"
-        font-size="18px"
+        :font-size="fontSize"
       />
     </div>
   </div>
@@ -26,6 +26,7 @@ export default {
     TemperatureComponent,
   },
   props: {
+    // TODO: high, lowは天気APIと合わせてください
     high: {
       type: Number,
       default: null,
@@ -36,21 +37,26 @@ export default {
       default: null,
       require: true,
     },
+    fontSize: {
+      type: String,
+      default: null,
+    },
   },
 };
 </script>
 
 <style scoped lang="scss">
+@import '@/assets/scss/_variables.scss';
+
 .course-weather-temperatures {
-  font-size: 11px;
   white-space: nowrap;
 }
 
 .temperature-high {
-  color: #f53939;
+  color: $color-temperature-high;
 }
 
 .temperature-low {
-  color: #0097ff;
+  color: $color-temperature-low;
 }
 </style>

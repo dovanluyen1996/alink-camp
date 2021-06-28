@@ -5,14 +5,18 @@
     </div>
     <v-ons-row>
       <v-ons-col>
-        <img
-          src="@/assets/images/weathers/weather/days_31.png"
-          width="66px"
-        >
-        <div>晴れ時々雨</div>
+        <weather-image
+          :weather-id="forecast.weather"
+          :is-shown-name="true"
+          image-width="66px"
+        />
       </v-ons-col>
       <v-ons-col>
-        <course-weather-temperatures />
+        <course-weather-temperatures
+          :high="20"
+          :low="10"
+          font-size="18px"
+        />
         <course-weather-sun
           :sunrise="forecast.sunrise"
           :sunset="forecast.sunset"
@@ -23,14 +27,17 @@
 </template>
 
 <script>
+// components
+import WeatherImage from '@/components/atoms/weather-image';
 import CourseWeatherTemperatures from '@/components/organisms/course-weather/temperatures';
 import CourseWeatherSun from '@/components/organisms/course-weather/sun';
 
 export default {
   name: 'CourseWeatherOfTheDay',
   components: {
+    WeatherImage,
     CourseWeatherTemperatures,
-    CourseWeatherSun,
+    CourseWeatherSun
   },
   props: {
     forecast: {

@@ -1,6 +1,6 @@
 <template>
   <div :class="['course-weather-plan', {'is-today' : isToday}]">
-    {{ user_course_plans.target_at }}〜
+    {{ target_at }}〜
     <span class="course-weather-plan__count-down">
       {{ showCountDown }}
     </span>
@@ -10,19 +10,16 @@
 <script>
 export default {
   name: 'CourseWeatherPlan',
-  data() {
-    return {
-      user_course_plans: {
-        id: 1,
-        user_course_id: 1,
-        user_id: 1,
-        course_id: 1,
-        target_at: '2021/06/14 9:00',
-      },
-    };
+  props: {
+    target_at: {
+      type: String,
+      default: null,
+      require: true,
+    },
   },
   computed: {
     isToday() {
+      // TODO: 当日判定を入れてください
       return true;
     },
     showCountDown() {
@@ -35,10 +32,12 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import '@/assets/scss/_variables.scss';
+
 .course-weather-plan {
   padding: 5px 10px;
   margin-bottom: 10px;
-  font-size: 12px;
+  font-size: $font-size-small;
   background: #f2f2f2;
 
   &__count-down {

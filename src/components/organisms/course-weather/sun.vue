@@ -41,7 +41,7 @@ export default {
   flex-wrap: nowrap;
   padding-top: 5px;
   margin-top: 5px;
-  font-size: 12px;
+  font-size: $font-size-small;
   white-space: nowrap;
   border-top: 1px solid $color-border;
 }

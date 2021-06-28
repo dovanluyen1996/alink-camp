@@ -9,7 +9,7 @@
       v-if="weatherForecast"
       class="course-weather-detail"
     >
-      <course-weather-plan />
+      <course-weather-plan :target_at="`2021/06/14 9:00`" />
       <course-weather-of-the-day :forecast="weatherForecast" />
       <course-weather-the-day-before :forecast="weatherForecastBefore" />
       <course-weather-time-table />
@@ -47,7 +47,7 @@ export default {
   },
   data() {
     return {
-      // TODO: weatherForecast, weatherForecastBeforeはダミーデータなので
+      // TODO: weatherForecast, weatherForecastBeforeのはデータは適当なので
       //       天気が取得できたら適切に変更してください
       weatherForecast: {
         weather: 1,
