@@ -46,26 +46,26 @@ export default {
     email: {
       type: String,
       default: '',
-      requier: true,
+      required: true,
     },
   },
   data() {
     return {
       confirmCode: '',
       newPassword: '',
-      error: null,
+      error: '',
       resetPasswordErrorVisible: false,
     };
   },
   computed: {
     errorMessage() {
-      if (!this.error) return null;
+      if (!this.error) return '';
 
       switch (this.error.code) {
       case 'CodeMismatchException':
-        return '確認コードが正しくありません';
+        return '認証コードが正しくありません';
       case 'InvalidParameterException':
-        return '無効な確認コードまたはパスワードが違います。';
+        return '無効な認証コードまたはパスワードが違います。';
       default:
         return 'パスワードの変更に失敗しました';
       }

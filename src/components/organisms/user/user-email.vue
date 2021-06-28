@@ -1,8 +1,11 @@
 <template>
-  <text-field
-    v-model="inputedValue"
-    title="メールアドレス"
-  />
+  <div>
+    <text-field
+      v-model="inputedValue"
+      title="メールアドレス"
+      :errors="errors"
+    />
+  </div>
 </template>
 
 <script>
@@ -17,7 +20,11 @@ export default {
     value: {
       type: String,
       default: '',
-      requier: true,
+      required: true,
+    },
+    errors: {
+      type: Array,
+      default: () => [],
     },
   },
   computed: {

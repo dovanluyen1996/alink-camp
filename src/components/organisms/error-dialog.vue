@@ -25,17 +25,17 @@ export default {
     isVisible: {
       type: Boolean,
       default: false,
-      requier: true,
+      required: true,
     },
     errorMessage: {
       type: String,
       default: '',
-      requier: true,
+      required: true,
     },
     title: {
       type: String,
       default: '',
-      requier: true,
+      required: true,
     },
   },
   methods: {

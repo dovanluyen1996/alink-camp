@@ -7,6 +7,9 @@
       v-model="inputedValue"
       type="text"
     />
+    <div v-if="errors.length">
+      {{ errors[0] }}
+    </div>
   </base-field>
 </template>
 
@@ -27,6 +30,10 @@ export default {
     title: {
       type: String,
       default: null,
+    },
+    errors: {
+      type: Array,
+      default: () => [],
     },
   },
   computed: {

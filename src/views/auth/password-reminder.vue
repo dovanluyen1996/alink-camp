@@ -2,18 +2,31 @@
   <v-ons-page>
     <custom-toolbar title="パスワードを忘れた方" />
     <div class="content">
-      <base-form>
-        <user-email v-model="user.email" />
-        <template #buttons>
-          <custom-submit @click="sendComfirmCode">
-            認証コードを送信
-          </custom-submit>
-        </template>
-      </base-form>
+      <validation-observer
+        v-slot="{ handleSubmit }"
+      >
+        <base-form>
+          <validation-provider
+            v-slot="{ errors }"
+            rules="required|email"
+            name="メールアドレス"
+          >
+            <user-email
+              v-model="user.email"
+              :errors="errors"
+            />
+          </validation-provider>
+          <template #buttons>
+            <custom-submit @click="handleSubmit(sendComfirmCode)">
+              認証コードを送信
+            </custom-submit>
+          </template>
+        </base-form>
+      </validation-observer>
     </div>
 
     <error-dialog
-      title="確認コードの送信に失敗しました"
+      title="認証コードの送信に失敗しました"
       :is-visible="remindPasswordErrorVisible"
       :error-message="errorMessage"
       @close="closeRemindPasswordError"
@@ -50,13 +63,13 @@ export default {
   },
   computed: {
     errorMessage() {
-      if (!this.error) return null;
+      if (!this.error) return '';
 
       switch (this.error.code) {
       case 'InvalidParameterException':
         return 'メールアドレスが不正です。';
       default:
-        return '確認コードの送信に失敗しました';
+        return '認証コードの送信に失敗しました';
       }
     },
   },

@@ -70,7 +70,7 @@ export default {
   },
   computed: {
     errorMessage() {
-      if (!this.error) return null;
+      if (!this.error) return '';
 
       switch (this.error.code) {
       case 'NotAuthorizedException':
