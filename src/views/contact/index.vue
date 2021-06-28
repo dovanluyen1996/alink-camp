@@ -87,6 +87,29 @@
           </v-ons-button>
         </template>
       </v-ons-alert-dialog>
+
+      <v-ons-alert-dialog
+        :visible.sync="completeVisible"
+        cancelable
+      >
+        お問い合わせ頂きありがとうございました。<br>
+        お問い合わせフォオームにご記入いただいたメールアドレス宛に、お問い合わせ受付の確認メールを送信させていただきました。<br><br>
+
+        通常2営業日以内に弊社サポートセンターまたは弊社各製品担当よりお問い合わせの返信をさせて頂きますが、お問い合わせ内容や、
+        混雑状況等によって前後する場合もきざいますので予めご了承ください。<br>
+        お問い合わせ受付確認の自動返信メールが24時間以内に届かない場合は、メールアドレスの入カミス等が考えられます。
+        その場合は大変お手数ですが、下記の弊社サポートセンターまで一度お問い合わせいただきますようよろしくお願いいたします。<br><br>
+
+        ※迷惑メールフォルダに受信されている場合もございますので一度ご確認ください。<br>
+
+        <template #footer>
+          <v-ons-button
+            @click="closeComplete()"
+          >
+            キャンセル
+          </v-ons-button>
+        </template>
+      </v-ons-alert-dialog>
     </div>
   </v-ons-page>
 </template>
@@ -107,6 +130,7 @@ export default {
         'その他',
       ],
       confirmVisible: false,
+      completeVisible: false,
     };
   },
   methods: {
@@ -117,8 +141,10 @@ export default {
       this.confirmVisible = false;
     },
     showComplete() {
-      // TODO: 実装
-      // https://github.com/rights-s/alink-golf_tenki-client/issues/320
+      this.completeVisible = true;
+    },
+    closeComplete() {
+      this.completeVisible = false;
     },
     async submit() {
       // TODO: change app version
