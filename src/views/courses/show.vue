@@ -64,11 +64,18 @@ export default {
       tabs: [
         {
           label: '天気予報詳細',
-          component: CoursesForecastTab,
+          component: {
+            view: CoursesForecastTab,
+          },
         },
         {
           label: '詳細情報',
-          component: CoursesInformationTab,
+          component: {
+            view: CoursesInformationTab,
+            options: {
+              courseId: this.course.id,
+            },
+          },
         },
       ],
     };

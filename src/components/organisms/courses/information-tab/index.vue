@@ -96,6 +96,8 @@
 </template>
 
 <script>
+import ApiClient from '@/api_client';
+
 export default {
   name: 'CoursesInformationTab',
   computed: {
