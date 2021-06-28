@@ -15,7 +15,7 @@ export default {
   name: 'FixedFooter',
   mounted() {
     // NOTE: 親のmopunted完了後にfixedFooterを読み込み場合があるので分岐
-    if (this.$parent.$el) {
+    if (this.$parent && this.$parent.$el) {
       this.setFooterMargin();
     } else {
       this.$parent.$once('hook:mounted', () => {
