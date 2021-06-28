@@ -55,7 +55,11 @@ module.exports = {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
         loader: 'url-loader',
         options: {
-          limit: 10000,
+          // NOTE: デフォルトだと10KB以上のファイルはurl-loaderの対象とならずリソースファイルがそのまま出力されるが、
+          //       iOSで動作させた場合にurl(static/img/xxx.jpg)のようになってしまい、ファイルが参照できない。
+          //       期待するURLはurl(../../static/img/xxx.jpg)で、publicPath: (Function)によって対処を試みるが、正常に動作しない。
+          //       そのため、ひとまずこの制限を解除することですべてのリソースファイルをBase64 URI化する
+          // limit: 10000,
           name: utils.assetsPath('img/[name].[hash:7].[ext]')
         }
       },
