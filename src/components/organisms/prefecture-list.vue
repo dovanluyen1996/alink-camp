@@ -16,24 +16,13 @@
 </template>
 
 <script>
+import settings from '@/config/settings';
+
 export default {
   name: 'PrefectureList',
   data() {
     return {
-      prefectures: [
-        {
-          value: 0,
-          text: '北海道',
-        },
-        {
-          value: 1,
-          text: '東京',
-        },
-        {
-          value: 2,
-          text: '沖縄',
-        },
-      ],
+      prefectures: settings.views.prefectures,
     };
   },
   methods: {

@@ -4,7 +4,7 @@
     <div class="content">
       <prefecture-list
         fullscreen
-        @click="goToSearchResult"
+        @click="searchByPrefecture"
       />
     </div>
   </v-ons-page>
@@ -23,8 +23,18 @@ export default {
     PrefectureList,
   },
   methods: {
+    async searchByPrefecture(prefecture) {
+      // Clear before search result
+      this.$store.dispatch('models/course/resetCourses');
+
+      const params = {
+        prefecture_id: prefecture.value,
+      };
+
+      await this.$store.dispatch('models/course/getCourses', params);
+      this.goToSearchResult(prefecture);
+    },
     goToSearchResult(prefecture) {
-      console.log('goToSearchResult', prefecture);
       this.$store.dispatch('courseSearchNavigator/push', {
         extends: SearchResult,
         onsNavigatorProps: {
