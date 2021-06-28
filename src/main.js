@@ -50,7 +50,7 @@ document.addEventListener('deviceready', initializeVue, false);
 
 const plugin = {
   install () {
-      Vue.prototype.$helpers = helpers;
+    Vue.prototype.$helpers = helpers;
   }
 };
 
