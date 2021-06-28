@@ -10,6 +10,7 @@ export default {
   },
   getters: {
     all: state => state.courses,
+    size: state => state.courses.length,
   },
   mutations: {
     setIsLoading(state, isLoading) {
@@ -27,6 +28,15 @@ export default {
         const courses = await ApiClient.getCourses(params);
 
         context.commit('setCourses', courses);
+      } finally {
+        context.commit('setIsLoading', false);
+      }
+    },
+    resetCourses(context) {
+      context.commit('setIsLoading', true);
+
+      try {
+        context.commit('setCourses', []);
       } finally {
         context.commit('setIsLoading', false);
       }

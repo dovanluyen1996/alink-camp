@@ -7,9 +7,10 @@
     />
     <v-ons-button
       modifier="large rounded"
+      :disabled="isDisableSearchResult"
       @click="goToSearchResult"
     >
-      12345件の検索結果があります
+      {{ recordCount }}件の検索結果があります
     </v-ons-button>
   </div>
 </template>
@@ -24,6 +25,11 @@ export default {
       required: true,
     },
   },
+  data() {
+    return {
+      isDisableSearchResult: true,
+    };
+  },
   computed: {
     inputedValue: {
       get() {
@@ -33,10 +39,47 @@ export default {
         this.$emit('input', newValue);
       },
     },
+    recordCount() {
+      return this.$store.getters['models/course/size'];
+    },
+  },
+  watch: {
+    inputedValue() {
+      // 検索条件
+      if (this.inputedValue.length < 1) {
+        this.clearSearchResult();
+        return;
+      }
+      if (this.timeoutId) clearTimeout(this.timeoutId);
+
+      this.timeoutId = setTimeout(() => {
+        this.timeoutId = null;
+        this.searchByName();
+      }, 500);
+    },
   },
   methods: {
     goToSearchResult() {
       this.$emit('goToSearchResult');
+    },
+    searchByName() {
+      if (this.inputedValue.length < 1) {
+        this.clearSearchResult();
+        return;
+      }
+
+      const params = {
+        name: this.inputedValue,
+      };
+
+      this.$store.dispatch('models/course/getCourses', params)
+        .then(() => {
+          this.isDisableSearchResult = this.recordCount > 0 ? false : true;
+        });
+    },
+    clearSearchResult() {
+      this.$store.dispatch('models/course/resetCourses');
+      this.isDisableSearchResult = true;
     },
   },
 };
