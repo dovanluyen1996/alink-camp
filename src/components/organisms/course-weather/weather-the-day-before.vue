@@ -1,6 +1,6 @@
 <template>
   <div class="course-weather-the-day-before">
-    <div class="course-weather-the-day-before__title">
+    <div class="course-weather-the-day-before-title">
       予定日前日の<br>お天気
     </div>
     <weather-image
@@ -40,18 +40,22 @@ export default {
 @import '@/assets/scss/_variables.scss';
 
 .course-weather-the-day-before {
+  display: grid;
   box-sizing: border-box;
   padding: 8px 10px 10px;
   border: 1px solid #d9d9d9;
   text-align: center;
+}
 
-  &__title {
-    @include title-style;
-    margin-bottom: 10px;
-    font-size: $font-size-small;
-  }
+.course-weather-the-day-before-title {
+  @include title-style;
+  margin-bottom: 10px;
+  font-size: $font-size-small;
 }
 .weather {
   margin-bottom: 10px;
+}
+.course-weather-temperatures {
+  align-self: flex-end;
 }
 </style>
