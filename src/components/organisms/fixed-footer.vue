@@ -14,14 +14,19 @@
 export default {
   name: 'FixedFooter',
   mounted() {
-    this.setFooterMargin();
+    // NOTE: 親のmopunted完了後にfixedFooterを読み込み場合があるので分岐
+    if (this.$parent.$el) {
+      this.setFooterMargin();
+    } else {
+      this.$parent.$once('hook:mounted', () => {
+        this.setFooterMargin();
+      });
+    }
   },
   methods: {
     setFooterMargin() {
       // NOTE: コンテンツとフッターが被らないようにフッターの高さ分親にpaddingを取る
-      this.$parent.$once('hook:mounted', () => {
-        this.$el.closest('.page').querySelector('.page__content').style.paddingBottom = `${this.$el.offsetHeight}px`;
-      });
+      this.$el.closest('.page').querySelector('.page__content').style.paddingBottom = `${this.$el.offsetHeight}px`;
     },
   },
 };
