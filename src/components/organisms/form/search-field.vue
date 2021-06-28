@@ -4,7 +4,6 @@
       v-model="inputedValue"
       placeholder="コース名などを入力"
       class="search-form"
-      @keyup.enter="searchByName"
     />
     <v-ons-button
       modifier="large rounded"
