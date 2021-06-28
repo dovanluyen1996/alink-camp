@@ -19,8 +19,9 @@
             name="fade"
           >
             <component
-              :is="tab.component"
+              :is="tab.component.view"
               v-show="isActive(index)"
+              :options="tab.component.options"
             />
           </transition>
         </template>

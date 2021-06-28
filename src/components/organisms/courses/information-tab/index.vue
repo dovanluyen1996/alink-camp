@@ -9,15 +9,16 @@
           住所
         </th>
         <td>
-          〒297-0231 千葉県長生郡長柄町山之郷754-32
+          {{ course.address }}
           <!-- NOTE: テキストリンクは当たり判定が小さすぎるので広げる処置 -->
           <span class="map-link">
             MAP
             <a
-              href="#"
+              :href="mapUrl"
               class="map-link__target"
-            />
-          </span>
+              :target="target()"
+            >
+            </a></span>
         </td>
       </tr>
       <tr>
@@ -28,7 +29,7 @@
           電話番号&#9312;
         </th>
         <td>
-          03-9999-9999
+          {{ course.phone }}
         </td>
       </tr>
       <tr>
@@ -39,7 +40,7 @@
           電話番号&#9313;
         </th>
         <td>
-          03-9999-9999
+          {{ course.phone2 }}
         </td>
       </tr>
       <tr>
@@ -50,7 +51,7 @@
           ホームページ
         </th>
         <td>
-          https://www.hogehoge.com
+          {{ course.url }}
         </td>
       </tr>
       <tr>
@@ -61,7 +62,7 @@
           予約
         </th>
         <td>
-          https://www.hogehoge.com
+          {{ course.jalanUrl }}
         </td>
       </tr>
       <tr>
@@ -72,7 +73,7 @@
           コース紹介
         </th>
         <td>
-          ほげほげほげほげほげほげほげほげほげほげほげほげほげほげほげほげほげほげほげほげ
+          {{ course.jalanDescription }}
         </td>
       </tr>
       <tr>
@@ -83,20 +84,52 @@
           備考
         </th>
         <td>
-          ほげほげほげほげほげほげほげほげほげほげほげほげほげほげほげほげほげほげほげほげ
+          {{ course.note }}
         </td>
       </tr>
     </table>
 
     <div class="course-image">
-      <img src="@/assets/images/course-sample.jpg">
+      <img :src="course.jalanImagePath">
     </div>
   </div>
 </template>
 
 <script>
+import ApiClient from '@/api_client';
+
 export default {
   name: 'CoursesInformationTab',
+  props: {
+    options: {
+      type: Object,
+      required: true,
+      default: () => {},
+    },
+  },
+  data() {
+    return {
+      course: {},
+    };
+  },
+  computed: {
+    mapUrl() {
+      return `https://maps.google.com/?q=${this.course.latitude},${this.course.longitude}`;
+    },
+  },
+  async created() {
+    await this.getCourseInfor();
+  },
+  methods: {
+    async getCourseInfor() {
+      if (!this.options.courseId) return;
+
+      this.course = await ApiClient.getCourse(this.options.courseId);
+    },
+    target() {
+      return (cordova.platformId === 'browser') ? '_self' : '_blank';
+    },
+  },
 };
 </script>
 

@@ -48,7 +48,13 @@ export default {
   methods: {
     goToCourseShow(course) {
       console.log('goToCourseShow', course);
-      this.$store.dispatch('courseSearchNavigator/push', CourseShow);
+
+      this.$store.dispatch('courseSearchNavigator/push', {
+        extends: CourseShow,
+        onsNavigatorProps: {
+          course,
+        },
+      });
     },
   },
 };
