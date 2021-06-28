@@ -48,9 +48,9 @@ export default {
       default: () => {},
       required: true,
     },
-    userCourse: {
-      type: Object,
-      default: () => {},
+    userCourseId: {
+      type: Number,
+      default: 0,
       required: true,
     },
   },
@@ -64,7 +64,7 @@ export default {
   },
   methods: {
     async getUserCourseResults() {
-      await this.$store.dispatch('models/userCourseResult/getUserCourseResults', this.userCourse.id);
+      await this.$store.dispatch('models/userCourseResult/getUserCourseResults', this.userCourseId);
     },
     displayTargetDate(targetDate) {
       return this.$helpers.toLongString(targetDate);

@@ -70,13 +70,13 @@ export default {
       return this.$store.getters['models/userCourse/findByCourseId'](courseId);
     },
     goToScoreSummary(course) {
-      const userCourse = this.getUserCourse(course.id);
+      const userCourseId = this.getUserCourse(course.id).id;
 
       this.$store.dispatch('scoresNavigator/push', {
         extends: Summary,
         onsNavigatorProps: {
           course,
-          userCourse,
+          userCourseId,
         },
       });
     },
