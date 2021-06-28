@@ -2,6 +2,7 @@
   <v-ons-row class="course-weather-calendar">
     <v-ons-col
       v-for="(forecast, index) in forecasts"
+      :key="index"
       width="25%"
       class="course-weather-day"
     >
@@ -67,9 +68,10 @@ export default {
 .course-weather-day {
   margin-top: 20px;
   text-align: center;
-  border-left: 1px solid $color-border;
   border-top: 1px solid $color-border;
   border-bottom: 1px solid $color-border;
+  border-left: 1px solid $color-border;
+
   &:nth-child(4n),
   &:last-child {
     border-right: 1px solid $color-border;
@@ -78,18 +80,21 @@ export default {
 
 .course-weather-day-date {
   @include colum-style;
+
   height: 24px;
-  background: $color-th;
   font-size: $font-size-small;
+  background: $color-th;
 }
 
 .course-weather-day-weather {
   @include colum-style;
+
   height: 50px;
 }
 
 .course-weather-day-temperature {
   @include colum-style;
+
   height: 30px;
   font-size: $font-size-small;
   white-space: nowrap;

@@ -7,11 +7,13 @@
       日
     </th>
     <template v-for="(date, index) in dates">
+      <!-- eslint-disable vue/no-v-html -->
       <td
         :key="index"
         :date-day="date"
         v-html="displayDate(date)"
       >
+      <!-- eslint-enable vue/no-v-html -->
       </td>
     </template>
   </tr>

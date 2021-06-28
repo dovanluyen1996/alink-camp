@@ -9,7 +9,7 @@
       v-if="DailyWeatherForecast"
       class="course-weather-detail"
     >
-      <course-weather-plan :target_at="`2021/06/14 9:00`" />
+      <course-weather-plan :target-at="`2021/06/14 9:00`" />
       <course-weather-of-the-day :forecast="DailyWeatherForecast" />
       <course-weather-the-day-before :forecast="beforeDayWeatherForecast" />
       <course-weather-hourly-weather />

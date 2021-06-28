@@ -40,24 +40,28 @@ export default {
 @import '@/assets/scss/_variables.scss';
 
 .course-weather-the-day-before {
-  display: grid;
   box-sizing: border-box;
+  display: grid;
   padding: 8px 10px 10px;
-  border: 1px solid #d9d9d9;
   text-align: center;
+  border: 1px solid #d9d9d9;
 }
 
 .course-weather-the-day-before-title {
   @include title-style;
+
   margin-bottom: 10px;
   font-size: $font-size-small;
+
   span {
     display: inline-block;
   }
 }
+
 .weather {
   margin-bottom: 10px;
 }
+
 .course-weather-temperatures {
   align-self: flex-end;
 }

@@ -42,6 +42,7 @@ export default {
 
 .uv-title {
   @include title-style;
+
   font-size: $font-size-small;
 }
 

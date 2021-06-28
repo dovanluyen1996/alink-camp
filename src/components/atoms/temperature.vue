@@ -48,6 +48,7 @@ export default {
 
   &__unit {
     width: 1em;
+
     /* NOTE: フォントサイズの最小は12pxとしているが温度と明らかなため
      *       多少見えづらくても問題ないと判断して9px指定 */
     font-size: 9px;

@@ -1,6 +1,6 @@
 <template>
   <div :class="['course-weather-plan', {'is-today' : isToday}]">
-    {{ target_at }}〜
+    {{ targetAt }}〜
     <span class="course-weather-plan__count-down">
       {{ showCountDown }}
     </span>
@@ -11,7 +11,7 @@
 export default {
   name: 'CourseWeatherPlan',
   props: {
-    target_at: {
+    targetAt: {
       type: String,
       default: null,
       require: true,

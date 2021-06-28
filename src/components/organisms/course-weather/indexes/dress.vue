@@ -47,6 +47,7 @@ export default {
 
 .dress-title {
   @include title-style;
+
   font-size: $font-size-small;
 }
 

@@ -18,19 +18,19 @@
           scope="col"
           class="th"
         >
-        06 - 12
+          06 - 12
         </th>
         <th
           scope="col"
           class="th"
         >
-        12 - 18
+          12 - 18
         </th>
         <th
           scope="col"
           class="th"
         >
-        18 - 24
+          18 - 24
         </th>
       </tr>
     </thead>
