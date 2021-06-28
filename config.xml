@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="jp.rights.alink.golf_tenki_dev" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>jp.rights.alink.golf_tenki_dev</name>
+<widget id="jp.rights.alink.golftenki.dev" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>jp.rights.alink.golftenki_dev</name>
     <description>
       Alink GolfTenki Client
     </description>
