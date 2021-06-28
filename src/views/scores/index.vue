@@ -66,11 +66,17 @@ export default {
     async getUserCourses() {
       await this.$store.dispatch('models/userCourse/getUserCourses');
     },
+    getUserCourse(courseId) {
+      return this.$store.getters['models/userCourse/findByCourseId'](courseId);
+    },
     goToScoreSummary(course) {
+      const userCourse = this.getUserCourse(course.id);
+
       this.$store.dispatch('scoresNavigator/push', {
         extends: Summary,
         onsNavigatorProps: {
           course,
+          userCourse,
         },
       });
     },

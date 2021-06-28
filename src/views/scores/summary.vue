@@ -34,8 +34,6 @@
 </template>
 
 <script>
-import DateConverter from '@/lib/date_converter';
-
 // components
 import FixedFooter from '@/components/organisms/fixed-footer';
 
@@ -46,6 +44,11 @@ export default {
   },
   props: {
     course: {
+      type: Object,
+      default: () => {},
+      required: true,
+    },
+    userCourse: {
       type: Object,
       default: () => {},
       required: true,
@@ -61,10 +64,10 @@ export default {
   },
   methods: {
     async getUserCourseResults() {
-      await this.$store.dispatch('models/userCourseResult/getUserCourseResults', this.course.id);
+      await this.$store.dispatch('models/userCourseResult/getUserCourseResults', this.userCourse.id);
     },
     displayTargetDate(targetDate) {
-      return DateConverter.toLongString(targetDate);
+      return this.$helpers.toLongString(targetDate);
     },
     goToResultEdit() {
       // TODO: issue#133 スコア編集画面に遷移

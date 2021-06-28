@@ -9,6 +9,7 @@ import '@/config/vee_validate';
 import store from '@/stores';
 import App from '@/app';
 import cognito from '@/cognito';
+import helpers from '@/helpers/helper';
 
 Vue.config.productionTip = false;
 
@@ -46,3 +47,11 @@ const initializeVue = () => {
 };
 
 document.addEventListener('deviceready', initializeVue, false);
+
+const plugin = {
+  install () {
+      Vue.prototype.$helpers = helpers;
+  }
+};
+
+Vue.use(plugin);

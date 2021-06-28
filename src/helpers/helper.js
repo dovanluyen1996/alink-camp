@@ -1,5 +1,5 @@
-export default class DateConverter {
-  static toLongString(targetDate) {
+export default {
+  toLongString: function(targetDate) {
     const date = new Date(targetDate);
     const year = date.getFullYear();
     const month = (`00${(date.getMonth() + 1)}`).slice(-2);
