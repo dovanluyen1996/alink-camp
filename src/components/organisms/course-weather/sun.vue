@@ -20,7 +20,7 @@
 
 <script>
 export default {
-  name: 'CourseWeatherTemperatures',
+  name: 'CourseWeatherSun',
   props: {
     sunrise: {
       type: String,

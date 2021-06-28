@@ -1,5 +1,5 @@
 <template>
-  <v-ons-page modifier="background-photo">
+  <v-ons-page>
     <custom-toolbar title="コースお天気" />
     <div class="content">
       <no-data v-if="user.user_courses.length === 0">

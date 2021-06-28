@@ -15,7 +15,7 @@
 
 <script>
 export default {
-  name: 'CourseWeatherDress',
+  name: 'CourseWeatherDressIndex',
   props: {
     value: {
       type: Number,

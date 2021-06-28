@@ -15,7 +15,7 @@
 
 <script>
 export default {
-  name: 'CourseWeatherThunder',
+  name: 'CourseWeatherThunderIndex',
   props: {
     value: {
       type: Number,
