@@ -1,8 +1,8 @@
 <template>
-  <v-ons-page>
+  <v-ons-page @show="show">
     <custom-toolbar title="コースお天気" />
     <div class="content">
-      <no-data v-if="user.user_courses.length === 0">
+      <no-data v-if="userCourses.length === 0">
         <p>
           まだお気に入りや予定日設定しているコースがありません。<br>
           コース検索より、設定してください
@@ -18,9 +18,9 @@
       </no-data>
       <template v-else>
         <course-weather-content
-          v-for="courses in user.user_courses"
-          :key="courses.index"
-          :user-courses="courses"
+          v-for="userCourse in userCourses"
+          :key="userCourse.index"
+          :user-course="userCourse"
         />
       </template>
     </div>
@@ -38,27 +38,21 @@ export default {
     NoData,
     CourseWeatherContent,
   },
-  data() {
-    return {
-      user: {
-        user_courses: [
-          {
-            id: 1,
-            user_id: 1,
-            course_id: 1,
-            is_favorited: true,
-          },
-          {
-            id: 2,
-            user_id: 2,
-            course_id: 2,
-            is_favorited: false,
-          },
-        ],
-      },
-    };
+  computed: {
+    userCourses() {
+      const userCourses = this.$store.getters['models/userCourse/all'];
+
+      return userCourses;
+    },
   },
   methods: {
+    async show() {
+      // TODO: 予定日天気APIを呼び出す
+      await this.getUserCourses();
+    },
+    async getUserCourses() {
+      await this.$store.dispatch('models/userCourse/getUserCourses');
+    },
     goToCourseSearch() {
       this.$store.commit('appTabbar/setActiveIndexFromTabName', 'courseSearch');
     },

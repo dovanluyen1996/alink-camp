@@ -1,16 +1,17 @@
 <template>
   <v-ons-card class="course-weather-show">
     <course-weather-header
-      :name="courses.name"
-      :address="courses.address"
-      :user-courses="userCourses"
+      :user-course="userCourse"
     />
     <div
       v-if="DailyWeatherForecast"
       class="course-weather-detail"
     >
       <!-- TODO: データの渡し方はStoreに合わせて変更してください -->
-      <course-weather-plan :target-at="user_course_plans.target_at" />
+      <course-weather-plan
+        v-if="userCoursePlan"
+        :user-course-plan="userCoursePlan"
+      />
       <course-weather-of-the-day :forecast="DailyWeatherForecast" />
       <course-weather-the-day-before :forecast="beforeDayWeatherForecast" />
       <course-weather-hourly-weather />
@@ -43,7 +44,7 @@ export default {
     CourseWeatherCalendar,
   },
   props: {
-    userCourses: {
+    userCourse: {
       type: Object,
       default: () => {},
       required: true,
@@ -51,29 +52,78 @@ export default {
   },
   data() {
     return {
-      user_course_plans: {
-        target_at: '2021/06/14 9:00',
-      },
-      courses: {
-        id: 1,
-        poi_id: 1,
-        jalan_code: 'shintoukyou',
-        name: '新東京都民ゴルフ場',
-        name_kana: 'シントウキョウトミンゴルフジョウ',
-        address: '東京都足立区新田１丁目１５−１',
-        latitude: 0,
-        longitude: 0,
-        phone: '000-0000-0000',
-        phone2: '000-0000-0000',
-        url: 'http://',
-        jalan_description: 'じゃらんコース紹介',
-        jalan_image_path: 'jaran_image_path',
-        jalan_url: 'jaran_url',
-        note: '備考',
-      },
       // TODO: DailyWeatherForecast, beforeDayWeatherForecast
       //       weatherForecastsのデータは適当なので
       //       天気が取得できたら適切に変更してください
+      ForecastScheduledDate: {
+        course_id: 2,
+        scheduled_date: {
+          date: '2021-06-29',
+          forecast_telop: '晴れのち曇り',
+          weather_image_name: '1.jpg',
+          wind_speed_0: '1',
+          wind_direction_0: '北北西',
+          precip_0: '10',
+          wind_speed_6: '2',
+          wind_direction_6: '北',
+          precip_6: '20',
+          wind_speed_12: '3',
+          wind_direction_12: '北西',
+          precip_12: '30',
+          wind_speed_18: '4',
+          wind_direction_18: '北',
+          precip_18: '40',
+          max_temp: '4.7',
+          min_temp: '-2.1',
+          thunder_index: 2,
+          mountain_dress_index: 1,
+          uv_index_ranking: 3,
+        },
+        sunrize: '6:58',
+        sunset: '16:50',
+        day_before: {
+          date: '2021-06-28',
+          forecast_telop: '晴れのち曇り',
+          weather_image_name: '1.jpg',
+          max_temp: '4.7',
+          min_temp: '-2.1',
+        },
+      },
+      Forecast10Days: {
+        course_id: 2,
+        items: [
+          {
+            date: '2021-06-29', forecast_telop: '晴れのち曇り', weather_image_name: '1.jpg', wind_speed: '3.2', wind_direction: '北北西', wind_image_name: '3.jpg', precip: '30', humidity: '10', max_temp: '4.7', min_temp: '-2.1',
+          },
+          {
+            date: '2021-06-30', forecast_telop: '晴れのち曇り', weather_image_name: '1.jpg', wind_speed: '3.2', wind_direction: '北北西', wind_image_name: '3.jpg', precip: '30', humidity: '10', max_temp: '4.7', min_temp: '-2.1',
+          },
+          {
+            date: '2021-07-01', forecast_telop: '晴れのち曇り', weather_image_name: '1.jpg', wind_speed: '3.2', wind_direction: '北北西', wind_image_name: '3.jpg', precip: '30', humidity: '10', max_temp: '4.7', min_temp: '-2.1',
+          },
+          {
+            date: '2021-07-02', forecast_telop: '晴れのち曇り', weather_image_name: '1.jpg', wind_speed: '3.2', wind_direction: '北北西', wind_image_name: '3.jpg', precip: '30', humidity: '10', max_temp: '4.7', min_temp: '-2.1',
+          },
+          {
+            date: '2021-07-03', forecast_telop: '晴れのち曇り', weather_image_name: '1.jpg', wind_speed: '3.2', wind_direction: '北北西', wind_image_name: '3.jpg', precip: '30', humidity: '10', max_temp: '4.7', min_temp: '-2.1',
+          },
+          {
+            date: '2021-07-04', forecast_telop: '晴れのち曇り', weather_image_name: '1.jpg', wind_speed: '3.2', wind_direction: '北北西', wind_image_name: '3.jpg', precip: '30', humidity: '10', max_temp: '4.7', min_temp: '-2.1',
+          },
+          {
+            date: '2021-07-05', forecast_telop: '晴れのち曇り', weather_image_name: '1.jpg', wind_speed: '3.2', wind_direction: '北北西', wind_image_name: '3.jpg', precip: '30', humidity: '10', max_temp: '4.7', min_temp: '-2.1',
+          },
+          {
+            date: '2021-07-06', forecast_telop: '晴れのち曇り', weather_image_name: '1.jpg', wind_speed: '3.2', wind_direction: '北北西', wind_image_name: '3.jpg', precip: '30', humidity: '10', max_temp: '4.7', min_temp: '-2.1',
+          },
+          {
+            date: '2021-07-07', forecast_telop: '晴れのち曇り', weather_image_name: '1.jpg', wind_speed: '3.2', wind_direction: '北北西', wind_image_name: '3.jpg', precip: '30', humidity: '10', max_temp: '4.7', min_temp: '-2.1',
+          },
+          {
+            date: '2021-07-08', forecast_telop: '晴れのち曇り', weather_image_name: '1.jpg', wind_speed: '3.2', wind_direction: '北北西', wind_image_name: '3.jpg', precip: '30', humidity: '10', max_temp: '4.7', min_temp: '-2.1',
+          },
+        ],
+      },
       DailyWeatherForecast: {
         weather: 1,
         tempereture_high: 32,
@@ -177,6 +227,13 @@ export default {
         },
       ],
     };
+  },
+  computed: {
+    userCoursePlan() {
+      const plans = this.userCourse.userCoursePlans;
+
+      return (!plans || plans.length === 0) ? null : plans[0];
+    },
   },
 };
 </script>

@@ -11,21 +11,32 @@
 export default {
   name: 'CourseWeatherPlan',
   props: {
-    targetAt: {
-      type: String,
+    userCoursePlan: {
+      type: Object,
       default: null,
       require: true,
     },
   },
   computed: {
+    targetAt() {
+      const strTargetAt = this.userCoursePlan.targetAt;
+
+      return this.$helpers.toDateTimeString(strTargetAt);
+    },
     isToday() {
-      // TODO: 当日判定を入れてください
-      return true;
+      const targetDate = this.$helpers.toDate(this.userCoursePlan.targetAt);
+      const today = this.$helpers.toDate(new Date());
+
+      return targetDate.getTime() === today.getTime();
     },
     showCountDown() {
       if (this.isToday) return '予定日当日';
 
-      return '予定日まで6日';
+      const targetDate = this.$helpers.toDate(this.userCoursePlan.targetAt);
+      const today = this.$helpers.toDate(new Date());
+      const remainingDays = (targetDate.getTime() - today.getTime()) / 86400000;
+
+      return `予定日まで${remainingDays}日`;
     },
   },
 };

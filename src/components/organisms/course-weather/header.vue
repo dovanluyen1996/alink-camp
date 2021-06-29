@@ -1,15 +1,15 @@
 <template>
   <div class="course-weather-header">
     <div class="course-name">
-      {{ name }}
+      {{ course.name }}
       <img
-        v-if="userCourses.is_favorited"
+        v-if="userCourse.isFavorited"
         src="@/assets/images/user/user-course/favorite.png"
         width="18px"
       >
     </div>
     <div class="course-address">
-      {{ address }}
+      {{ course.address }}
     </div>
   </div>
 </template>
@@ -18,18 +18,15 @@
 export default {
   name: 'CourseWeatherHeader',
   props: {
-    name: {
-      type: String,
-      default: '',
-    },
-    address: {
-      type: String,
-      default: '',
-    },
-    userCourses: {
+    userCourse: {
       type: Object,
       default: () => {},
       required: true,
+    },
+  },
+  computed: {
+    course() {
+      return this.userCourse.course;
     },
   },
 };
