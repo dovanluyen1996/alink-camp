@@ -2,20 +2,47 @@
   <v-ons-page>
     <custom-toolbar title="ユーザー情報の登録" />
     <div class="content">
-      <base-form>
-        <user-email v-model="user.email" />
-        <user-password
-          v-model="user.password"
-          :can-show-password="true"
-        />
-        <template #buttons>
-          <custom-submit @click="getConfirmCode">
-            認証コードを送信
-          </custom-submit>
-        </template>
-      </base-form>
+      <validation-observer
+        v-slot="{ handleSubmit }"
+      >
+        <base-form>
+          <validation-provider
+            v-slot="{ errors }"
+            rules="required|email"
+            name="メールアドレス"
+          >
+            <user-email
+              v-model="user.email"
+              :errors="errors"
+            />
+          </validation-provider>
+          <validation-provider
+            v-slot="{ errors }"
+            rules="required|password"
+            name="パスワード"
+          >
+            <user-password
+              v-model="user.password"
+              :can-show-password="true"
+              :errors="errors"
+            />
+          </validation-provider>
+          <template #buttons>
+            <custom-submit @click="handleSubmit(getConfirmCode)">
+              認証コードを送信
+            </custom-submit>
+          </template>
+        </base-form>
+      </validation-observer>
 
       <social-login title="他サービスで設定" />
+
+      <error-dialog
+        title="登録に失敗しました"
+        :is-visible="signUpErrorVisible"
+        :error-message="errorMessage"
+        @close="closeSignUpError"
+      />
     </div>
   </v-ons-page>
 </template>
@@ -27,6 +54,7 @@ import UserEmail from '@/components/organisms/user/user-email';
 import UserPassword from '@/components/organisms/user/user-password';
 import CustomSubmit from '@/components/organisms/form/custom-submit';
 import SocialLogin from '@/components/organisms/social-login';
+import ErrorDialog from '@/components/organisms/error-dialog';
 
 // pages
 import UerNewConfirmCode from '@/views/user/new/confirm-code';
@@ -39,6 +67,7 @@ export default {
     UserPassword,
     CustomSubmit,
     SocialLogin,
+    ErrorDialog,
   },
   data() {
     return {
@@ -46,14 +75,49 @@ export default {
         email: '',
         password: '',
       },
+      error: null,
+      signUpErrorVisible: false,
     };
+  },
+  computed: {
+    errorMessage() {
+      if (!this.error) return '';
+
+      switch (this.error.code) {
+      case 'UsernameExistsException':
+        return '指定されたメールアドレスのアカウントは既に存在します。';
+      case 'InvalidPasswordException':
+        return 'パスワードの条件を満たしていません。';
+      default:
+        return '登録に失敗しました';
+      }
+    },
   },
   methods: {
     getConfirmCode() {
-      this.goToConfirmCode();
+      this.$cognito.signUp(this.user.email, this.user.password)
+        .then(async(result) => {
+          console.log(result);
+          this.goToConfirmCode();
+        })
+        .catch((err) => {
+          this.error = err;
+          this.showSignUpError();
+        });
     },
     goToConfirmCode() {
-      this.$store.dispatch('appNavigator/push', UerNewConfirmCode);
+      this.$store.dispatch('appNavigator/push', {
+        extends: UerNewConfirmCode,
+        onsNavigatorProps: {
+          email: this.user.email,
+        },
+      });
+    },
+    showSignUpError() {
+      this.signUpErrorVisible = true;
+    },
+    closeSignUpError() {
+      this.signUpErrorVisible = false;
     },
   },
 };

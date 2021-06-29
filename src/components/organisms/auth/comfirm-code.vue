@@ -2,6 +2,7 @@
   <text-field
     v-model="inputedValue"
     title="認証コードの入力"
+    :errors="errors"
   />
 </template>
 
@@ -18,6 +19,10 @@ export default {
       type: String,
       default: '',
       requier: true,
+    },
+    errors: {
+      type: Array,
+      default: () => [],
     },
   },
   computed: {

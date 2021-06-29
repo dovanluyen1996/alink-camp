@@ -5,15 +5,35 @@
       :disabled-back-button="true"
     />
     <div class="content">
-      <base-form>
-        <auth-comfirm-code v-model="confirm_code" />
-        <template #buttons>
-          <custom-submit @click="submitConfirmCode">
-            認証完了
-          </custom-submit>
-        </template>
-      </base-form>
+      <validation-observer
+        v-slot="{ handleSubmit }"
+      >
+        <base-form>
+          <validation-provider
+            v-slot="{ errors }"
+            rules="required"
+            name="認証コード"
+          >
+            <auth-comfirm-code
+              v-model="confirmCode"
+              :errors="errors"
+            />
+          </validation-provider>
+          <template #buttons>
+            <custom-submit @click="handleSubmit(submitConfirmCode)">
+              認証完了
+            </custom-submit>
+          </template>
+        </base-form>
+      </validation-observer>
     </div>
+
+    <error-dialog
+      title="失敗を確認する"
+      :is-visible="confirmErrorVisible"
+      :error-message="errorMessage"
+      @close="closeConfirmError"
+    />
   </v-ons-page>
 </template>
 
@@ -22,6 +42,7 @@
 import BaseForm from '@/components/organisms/form/base-form';
 import AuthComfirmCode from '@/components/organisms/auth/comfirm-code';
 import CustomSubmit from '@/components/organisms/form/custom-submit';
+import ErrorDialog from '@/components/organisms/error-dialog';
 
 // pages
 import UserData from '@/views/user/new/user-data';
@@ -32,19 +53,49 @@ export default {
     BaseForm,
     AuthComfirmCode,
     CustomSubmit,
+    ErrorDialog,
+  },
+  props: {
+    email: {
+      type: String,
+      default: '',
+      required: true,
+    },
   },
   data() {
     return {
-      confirm_code: '',
+      confirmCode: '',
+      error: null,
+      confirmErrorVisible: false,
     };
+  },
+  computed: {
+    errorMessage() {
+      if (!this.error) return '';
+
+      return '認証コードが一致しません';
+    },
   },
   methods: {
     submitConfirmCode() {
-      console.log('submitConfirmCode');
-      this.goToUserData();
+      this.$cognito.confirmation(this.email, this.confirmCode)
+        .then(async(result) => {
+          console.log(result);
+          this.goToUserData();
+        })
+        .catch((err) => {
+          this.error = err;
+          this.showConfirmError();
+        });
     },
     goToUserData() {
       this.$store.dispatch('appNavigator/push', UserData);
+    },
+    showConfirmError() {
+      this.confirmErrorVisible = true;
+    },
+    closeConfirmError() {
+      this.confirmErrorVisible = false;
     },
   },
 };

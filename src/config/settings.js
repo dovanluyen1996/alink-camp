@@ -17,4 +17,7 @@ export default {
       valuePrefix: 'Bearer',
     },
   },
+  regex: {
+    password: /^(?=.*?[a-z])(?=.*?\d).{8,}$/,
+  },
 };

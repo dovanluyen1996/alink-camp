@@ -1,20 +1,25 @@
 <template>
-  <v-ons-select v-model="selectedValue">
-    <option
-      value="-1"
-      selected
-      class="placeholder"
-    >
-      {{ placeholder }}
-    </option>
-    <option
-      v-for="option in options"
-      :key="option.value"
-      :value="option.value"
-    >
-      {{ option.text }}
-    </option>
-  </v-ons-select>
+  <div>
+    <v-ons-select v-model="selectedValue">
+      <option
+        value="-1"
+        selected
+        class="placeholder"
+      >
+        {{ placeholder }}
+      </option>
+      <option
+        v-for="option in options"
+        :key="option.value"
+        :value="option.value"
+      >
+        {{ option.text }}
+      </option>
+    </v-ons-select>
+    <div v-if="errors.length">
+      {{ errors[0] }}
+    </div>
+  </div>
 </template>
 
 <script>
@@ -34,6 +39,10 @@ export default {
     placeholder: {
       type: String,
       default: '',
+    },
+    errors: {
+      type: Array,
+      default: () => [],
     },
   },
   computed: {

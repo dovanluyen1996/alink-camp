@@ -7,6 +7,7 @@
       v-model="selectedValue"
       :options="options"
       :placeholder="placeholder"
+      :errors="errors"
     />
     <div v-if="errors.length">
       {{ errors[0] }}

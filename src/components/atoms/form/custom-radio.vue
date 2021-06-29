@@ -14,6 +14,9 @@
         {{ label.text }}
       </label>
     </div>
+    <div v-if="errors.length">
+      {{ errors[0] }}
+    </div>
   </div>
 </template>
 
@@ -30,6 +33,10 @@ export default {
       type: Array,
       default: () => [],
       required: true,
+    },
+    errors: {
+      type: Array,
+      default: () => [],
     },
   },
   computed: {

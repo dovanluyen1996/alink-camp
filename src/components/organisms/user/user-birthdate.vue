@@ -2,6 +2,7 @@
   <date-field
     v-model="inputedValue"
     title="生年月日"
+    :errors="errors"
   />
 </template>
 
@@ -18,6 +19,10 @@ export default {
       type: String,
       default: '',
       requier: true,
+    },
+    errors: {
+      type: Array,
+      default: () => [],
     },
   },
   computed: {

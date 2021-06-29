@@ -4,10 +4,12 @@
     :options="prefectureOptions"
     placeholder="都道府県を選択してください"
     title="お住まい"
+    :errors="errors"
   />
 </template>
 
 <script>
+import settings from '@/config/settings';
 import SelectField from '@/components/organisms/form/select-field';
 
 export default {
@@ -21,23 +23,14 @@ export default {
       default: -1,
       requier: true,
     },
+    errors: {
+      type: Array,
+      default: () => [],
+    },
   },
   data() {
     return {
-      prefectureOptions: [
-        {
-          value: 0,
-          text: '北海道',
-        },
-        {
-          value: 1,
-          text: '東京',
-        },
-        {
-          value: 2,
-          text: '沖縄',
-        },
-      ],
+      prefectureOptions: settings.views.prefectures,
     };
   },
   computed: {

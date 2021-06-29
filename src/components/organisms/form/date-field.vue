@@ -7,6 +7,7 @@
       v-model="inputedValue"
       :placeholder="placeholder"
       type="date"
+      :errors="errors"
     />
     <annotations-block
       v-if="help"
@@ -46,6 +47,10 @@ export default {
     help: {
       type: String,
       default: null,
+    },
+    errors: {
+      type: Array,
+      default: () => [],
     },
   },
   computed: {

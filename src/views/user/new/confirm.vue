@@ -7,15 +7,15 @@
     <div class="content">
       <base-form>
         <confirm-field
-          :value="gender"
+          :value="genderText"
           title="性別"
         />
         <confirm-field
-          :value="birthdate"
+          :value="user.birthdate"
           title="生年月日"
         />
         <confirm-field
-          :value="prefecture"
+          :value="prefectureText"
           title="お住まい"
         />
         <template #buttons>
@@ -39,6 +39,8 @@
 </template>
 
 <script>
+import settings from '@/config/settings';
+
 // components
 import BaseForm from '@/components/organisms/form/base-form';
 import ConfirmField from '@/components/organisms/form/confirm-field';
@@ -54,19 +56,33 @@ export default {
     ConfirmField,
     CustomSubmit,
   },
-  data() {
-    return {
-      gender: '男性',
-      birthdate: '1982/12/31',
-      prefecture: '東京',
-    };
+  props: {
+    user: {
+      type: Object,
+      default: () => {},
+      required: true,
+    },
+  },
+  computed: {
+    genderText() {
+      const gender = settings.views.genders.find(_gender => _gender.value === this.user.gender);
+      return gender ? gender.text : '';
+    },
+    prefectureText() {
+      const prefecture = settings.views.prefectures.find(
+        _prefecture => _prefecture.value === this.user.prefecture,
+      );
+      return prefecture ? prefecture.text : '';
+    },
   },
   methods: {
     clickBack() {
       this.$store.dispatch('appNavigator/pop');
     },
-    submitUserData() {
-      this.$store.dispatch('appNavigator/push', UserStampsCampaign);
+    async submitUserData() {
+      const success = await this.$store.dispatch('models/currentUser/updateUser', this.user);
+
+      if (success) this.$store.dispatch('appNavigator/push', UserStampsCampaign);
     },
   },
 };

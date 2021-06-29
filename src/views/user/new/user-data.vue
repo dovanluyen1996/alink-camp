@@ -5,16 +5,47 @@
       :disabled-back-button="true"
     />
     <div class="content">
-      <base-form>
-        <user-gender v-model="user.gender" />
-        <user-birthdate v-model="user.birthdate" />
-        <user-prefecture v-model="user.prefecture" />
-        <template #buttons>
-          <custom-submit @click="goToConfirm">
-            設定確認
-          </custom-submit>
-        </template>
-      </base-form>
+      <validation-observer
+        v-slot="{ handleSubmit }"
+      >
+        <base-form>
+          <validation-provider
+            v-slot="{ errors }"
+            rules="required-select"
+            name="性別"
+          >
+            <user-gender
+              v-model="user.gender"
+              :errors="errors"
+            />
+          </validation-provider>
+          <validation-provider
+            v-slot="{ errors }"
+            rules="required"
+            name="生年月日"
+          >
+            <user-birthdate
+              v-model="user.birthdate"
+              :errors="errors"
+            />
+          </validation-provider>
+          <validation-provider
+            v-slot="{ errors }"
+            rules="required-select"
+            name="お住まい"
+          >
+            <user-prefecture
+              v-model="user.prefecture"
+              :errors="errors"
+            />
+          </validation-provider>
+          <template #buttons>
+            <custom-submit @click="handleSubmit(goToConfirm)">
+              設定確認
+            </custom-submit>
+          </template>
+        </base-form>
+      </validation-observer>
     </div>
   </v-ons-page>
 </template>
@@ -42,7 +73,7 @@ export default {
   data() {
     return {
       user: {
-        gender: 0,
+        gender: -1,
         birthdate: '',
         prefecture: -1,
       },
@@ -50,7 +81,12 @@ export default {
   },
   methods: {
     goToConfirm() {
-      this.$store.dispatch('appNavigator/push', UserNewConfirm);
+      this.$store.dispatch('appNavigator/push', {
+        extends: UserNewConfirm,
+        onsNavigatorProps: {
+          user: this.user,
+        },
+      });
     },
   },
 };

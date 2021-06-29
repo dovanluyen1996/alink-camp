@@ -4,10 +4,13 @@
     :labels="genderLabels"
     title="性別"
     class="user-gender__field"
+    :errors="errors"
   />
 </template>
 
 <script>
+import settings from '@/config/settings';
+
 // components
 import RadioField from '@/components/organisms/form/radio-field';
 
@@ -22,19 +25,14 @@ export default {
       default: -1,
       requier: true,
     },
+    errors: {
+      type: Array,
+      default: () => [],
+    },
   },
   data() {
     return {
-      genderLabels: [
-        {
-          value: 0,
-          text: '男性',
-        },
-        {
-          value: 1,
-          text: '女性',
-        },
-      ],
+      genderLabels: settings.views.genders,
     };
   },
   computed: {

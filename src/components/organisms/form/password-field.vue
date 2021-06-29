@@ -7,6 +7,9 @@
       v-model="inputedValue"
       :type="type"
     />
+    <div v-if="errors.length">
+      {{ errors[0] }}
+    </div>
     <template v-if="canShowPassword">
       <check-field
         v-model="isShownPassword"
@@ -49,6 +52,10 @@ export default {
     canShowPassword: {
       type: Boolean,
       default: false,
+    },
+    errors: {
+      type: Array,
+      default: () => [],
     },
   },
   data() {

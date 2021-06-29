@@ -4,6 +4,7 @@
     :can-show-password="canShowPassword"
     :help="help"
     title="パスワード"
+    :errors="errors"
   />
 </template>
 
@@ -28,6 +29,10 @@ export default {
     hasHelp: {
       type: Boolean,
       default: true,
+    },
+    errors: {
+      type: Array,
+      default: () => [],
     },
   },
   computed: {

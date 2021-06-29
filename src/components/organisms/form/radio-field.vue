@@ -6,6 +6,7 @@
     <custom-radio
       v-model="selectedValue"
       :labels="labels"
+      :errors="errors"
     />
   </base-field>
 </template>
@@ -35,6 +36,10 @@ export default {
     title: {
       type: String,
       default: null,
+    },
+    errors: {
+      type: Array,
+      default: () => [],
     },
   },
   computed: {

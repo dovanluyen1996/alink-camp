@@ -1,10 +1,15 @@
 <template>
-  <v-ons-input
-    v-model="inputedValue"
-    :type="type"
-    :placeholder="placeholder"
-    :class="['custom-input-date', {'is-shown-placeholder' : isShownPlaceholder}]"
-  />
+  <div>
+    <v-ons-input
+      v-model="inputedValue"
+      :type="type"
+      :placeholder="placeholder"
+      :class="['custom-input-date', {'is-shown-placeholder' : isShownPlaceholder}]"
+    />
+    <div v-if="errors.length">
+      {{ errors[0] }}
+    </div>
+  </div>
 </template>
 
 <script>
@@ -24,6 +29,10 @@ export default {
       type: String,
       default: 'date',
       validator: value => ['date', 'time'].includes(value),
+    },
+    errors: {
+      type: Array,
+      default: () => [],
     },
   },
   computed: {
