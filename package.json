@@ -55,6 +55,7 @@
     "cordova-browser": "^6.0.0",
     "cordova-ios": "^6.2.0",
     "cordova-plugin-device": "^2.0.3",
+    "cordova-plugin-firebasex": "^13.0.0-cli",
     "cordova-plugin-whitelist": "1",
     "cross-env": "^5.0.1",
     "css-loader": "^0.28.0",
@@ -110,7 +111,8 @@
     "plugins": {
       "cordova-plugin-whitelist": {},
       "cordova-plugin-device": {},
-      "cordova-plugin-app-version": {}
+      "cordova-plugin-app-version": {},
+      "cordova-plugin-firebasex": {}
     },
     "platforms": [
       "ios",

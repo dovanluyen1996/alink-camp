@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "851322130660",
+    "project_id": "alinkgolfweather",
+    "storage_bucket": "alinkgolfweather.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:851322130660:android:cc971bc85091867fae1cf1",
+        "android_client_info": {
+          "package_name": "jp.rights.alink.golftenki.dev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "851322130660-jg98a719ri19lk6pt5eapov6l77vj23f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBYTnJfc9LJXFf_KdzOEb0iVBiLIApnwDQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "851322130660-jg98a719ri19lk6pt5eapov6l77vj23f.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "851322130660-f85plnag26p9upnkknelvkm891cirkbb.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "jp.rights.alink.golftenki.dev"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
