@@ -9,6 +9,7 @@
       v-if="DailyWeatherForecast"
       class="course-weather-detail"
     >
+      <!-- TODO: データの渡し方はStoreに合わせて変更してください -->
       <course-weather-plan :target-at="user_course_plans.target_at" />
       <course-weather-of-the-day :forecast="DailyWeatherForecast" />
       <course-weather-the-day-before :forecast="beforeDayWeatherForecast" />
