@@ -4,13 +4,13 @@
       <span>予定日前日</span><span>のお天気</span>
     </div>
     <weather-image
-      :weather-id="forecast.weather"
+      :weather-image-name="forecast.weather_image_name"
+      :weather-name="forecast.forecast_telop"
       :is-shown-name="true"
       image-width="66px"
     />
     <course-weather-temperatures
-      :high="20"
-      :low="10"
+      :forecast="forecast"
     />
   </div>
 </template>

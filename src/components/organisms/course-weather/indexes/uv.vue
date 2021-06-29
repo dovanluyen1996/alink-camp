@@ -29,7 +29,7 @@ export default {
       return require(`@/assets/images/weathers/uv/uv_large_${this.value}.png`);
     },
     label() {
-      // TODO: 画像と対応させてください
+      // TODO: 文言確認する,画像と対応させる
       return '弱い';
     },
   },

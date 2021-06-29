@@ -14,8 +14,8 @@ export default {
   name: 'TemperatureComponent',
   props: {
     value: {
-      type: Number,
-      default: null,
+      type: String,
+      default: '',
       require: true,
     },
     fontSize: {
@@ -25,7 +25,7 @@ export default {
   },
   computed: {
     displayValue() {
-      return this.value || '--';
+      return this.value.toString() || '--';
     },
   },
 };

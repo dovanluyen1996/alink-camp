@@ -25,7 +25,7 @@ export default {
   },
   computed: {
     isRainy() {
-      // TODO: 雨の日判定を入れてください
+      // TODO: 雨の日判定の仕様を確認する
       return false;
     },
     image() {
@@ -34,7 +34,7 @@ export default {
       return require(`@/assets/images/weathers/dress/dress_large_${weather}_${this.value}.png`);
     },
     label() {
-      // TODO: 画像と対応させてください
+      // TODO: 文言確認する,画像と対応させる
       return '冬山の準備を';
     },
   },

@@ -5,7 +5,7 @@
         最高
       </span>
       <temperature-component
-        :value="high"
+        :value="forecast.max_temp"
         :font-size="fontSize"
       />
     </div>
@@ -14,7 +14,7 @@
         最低
       </span>
       <temperature-component
-        :value="low"
+        :value="forecast.min_temp"
         :font-size="fontSize"
       />
     </div>
@@ -30,14 +30,8 @@ export default {
     TemperatureComponent,
   },
   props: {
-    // TODO: high, lowは天気APIと合わせてください
-    high: {
-      type: Number,
-      default: null,
-      require: true,
-    },
-    low: {
-      type: Number,
+    forecast: {
+      type: Object,
       default: null,
       require: true,
     },

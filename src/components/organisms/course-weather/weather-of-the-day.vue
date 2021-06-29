@@ -6,15 +6,15 @@
     <v-ons-row>
       <v-ons-col>
         <weather-image
-          :weather-id="forecast.weather"
+          :weather-image-name="forecast.scheduled_date.weather_image_name"
+          :weather-name="forecast.scheduled_date.forecast_telop"
           :is-shown-name="true"
           image-width="66px"
         />
       </v-ons-col>
       <v-ons-col>
         <course-weather-temperatures
-          :high="20"
-          :low="10"
+          :forecast="forecast.scheduled_date"
           font-size="18px"
         />
         <course-weather-sun
@@ -25,13 +25,13 @@
     </v-ons-row>
     <v-ons-row class="weather-indexes">
       <v-ons-col>
-        <course-weather-thunder-index :value="1" />
+        <course-weather-thunder-index :value="forecast.scheduled_date.thunder_index" />
       </v-ons-col>
       <v-ons-col>
-        <course-weather-dress-index :value="5" />
+        <course-weather-dress-index :value="forecast.scheduled_date.mountain_dress_index" />
       </v-ons-col>
       <v-ons-col>
-        <course-weather-uv-index :value="3" />
+        <course-weather-uv-index :value="forecast.scheduled_date.uv_index_ranking" />
       </v-ons-col>
     </v-ons-row>
   </div>

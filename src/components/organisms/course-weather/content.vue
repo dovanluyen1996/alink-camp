@@ -12,8 +12,8 @@
         v-if="userCoursePlan"
         :user-course-plan="userCoursePlan"
       />
-      <course-weather-of-the-day :forecast="DailyWeatherForecast" />
-      <course-weather-the-day-before :forecast="beforeDayWeatherForecast" />
+      <course-weather-of-the-day :forecast="ForecastScheduledDate" />
+      <course-weather-the-day-before :forecast="ForecastScheduledDate.day_before" />
       <course-weather-hourly-weather />
     </div>
     <template v-else-if="weatherForecasts">
@@ -60,7 +60,7 @@ export default {
         scheduled_date: {
           date: '2021-06-29',
           forecast_telop: '晴れのち曇り',
-          weather_image_name: '1.jpg',
+          weather_image_name: '1.png',
           wind_speed_0: '1',
           wind_direction_0: '北北西',
           precip_0: '10',
@@ -79,12 +79,12 @@ export default {
           mountain_dress_index: 1,
           uv_index_ranking: 3,
         },
-        sunrize: '6:58',
+        sunrise: '6:58',
         sunset: '16:50',
         day_before: {
           date: '2021-06-28',
           forecast_telop: '晴れのち曇り',
-          weather_image_name: '1.jpg',
+          weather_image_name: '1.png',
           max_temp: '4.7',
           min_temp: '-2.1',
         },
@@ -93,34 +93,34 @@ export default {
         course_id: 2,
         items: [
           {
-            date: '2021-06-29', forecast_telop: '晴れのち曇り', weather_image_name: '1.jpg', wind_speed: '3.2', wind_direction: '北北西', wind_image_name: '3.jpg', precip: '30', humidity: '10', max_temp: '4.7', min_temp: '-2.1',
+            date: '2021-06-29', forecast_telop: '晴れのち曇り', weather_image_name: '1.png', wind_speed: '3.2', wind_direction: '北北西', wind_image_name: '3.png', precip: '30', humidity: '10', max_temp: '4.7', min_temp: '-2.1',
           },
           {
-            date: '2021-06-30', forecast_telop: '晴れのち曇り', weather_image_name: '1.jpg', wind_speed: '3.2', wind_direction: '北北西', wind_image_name: '3.jpg', precip: '30', humidity: '10', max_temp: '4.7', min_temp: '-2.1',
+            date: '2021-06-30', forecast_telop: '晴れのち曇り', weather_image_name: '1.png', wind_speed: '3.2', wind_direction: '北北西', wind_image_name: '3.png', precip: '30', humidity: '10', max_temp: '4.7', min_temp: '-2.1',
           },
           {
-            date: '2021-07-01', forecast_telop: '晴れのち曇り', weather_image_name: '1.jpg', wind_speed: '3.2', wind_direction: '北北西', wind_image_name: '3.jpg', precip: '30', humidity: '10', max_temp: '4.7', min_temp: '-2.1',
+            date: '2021-07-01', forecast_telop: '晴れのち曇り', weather_image_name: '1.png', wind_speed: '3.2', wind_direction: '北北西', wind_image_name: '3.png', precip: '30', humidity: '10', max_temp: '4.7', min_temp: '-2.1',
           },
           {
-            date: '2021-07-02', forecast_telop: '晴れのち曇り', weather_image_name: '1.jpg', wind_speed: '3.2', wind_direction: '北北西', wind_image_name: '3.jpg', precip: '30', humidity: '10', max_temp: '4.7', min_temp: '-2.1',
+            date: '2021-07-02', forecast_telop: '晴れのち曇り', weather_image_name: '1.png', wind_speed: '3.2', wind_direction: '北北西', wind_image_name: '3.png', precip: '30', humidity: '10', max_temp: '4.7', min_temp: '-2.1',
           },
           {
-            date: '2021-07-03', forecast_telop: '晴れのち曇り', weather_image_name: '1.jpg', wind_speed: '3.2', wind_direction: '北北西', wind_image_name: '3.jpg', precip: '30', humidity: '10', max_temp: '4.7', min_temp: '-2.1',
+            date: '2021-07-03', forecast_telop: '晴れのち曇り', weather_image_name: '1.png', wind_speed: '3.2', wind_direction: '北北西', wind_image_name: '3.png', precip: '30', humidity: '10', max_temp: '4.7', min_temp: '-2.1',
           },
           {
-            date: '2021-07-04', forecast_telop: '晴れのち曇り', weather_image_name: '1.jpg', wind_speed: '3.2', wind_direction: '北北西', wind_image_name: '3.jpg', precip: '30', humidity: '10', max_temp: '4.7', min_temp: '-2.1',
+            date: '2021-07-04', forecast_telop: '晴れのち曇り', weather_image_name: '1.png', wind_speed: '3.2', wind_direction: '北北西', wind_image_name: '3.png', precip: '30', humidity: '10', max_temp: '4.7', min_temp: '-2.1',
           },
           {
-            date: '2021-07-05', forecast_telop: '晴れのち曇り', weather_image_name: '1.jpg', wind_speed: '3.2', wind_direction: '北北西', wind_image_name: '3.jpg', precip: '30', humidity: '10', max_temp: '4.7', min_temp: '-2.1',
+            date: '2021-07-05', forecast_telop: '晴れのち曇り', weather_image_name: '1.png', wind_speed: '3.2', wind_direction: '北北西', wind_image_name: '3.png', precip: '30', humidity: '10', max_temp: '4.7', min_temp: '-2.1',
           },
           {
-            date: '2021-07-06', forecast_telop: '晴れのち曇り', weather_image_name: '1.jpg', wind_speed: '3.2', wind_direction: '北北西', wind_image_name: '3.jpg', precip: '30', humidity: '10', max_temp: '4.7', min_temp: '-2.1',
+            date: '2021-07-06', forecast_telop: '晴れのち曇り', weather_image_name: '1.png', wind_speed: '3.2', wind_direction: '北北西', wind_image_name: '3.png', precip: '30', humidity: '10', max_temp: '4.7', min_temp: '-2.1',
           },
           {
-            date: '2021-07-07', forecast_telop: '晴れのち曇り', weather_image_name: '1.jpg', wind_speed: '3.2', wind_direction: '北北西', wind_image_name: '3.jpg', precip: '30', humidity: '10', max_temp: '4.7', min_temp: '-2.1',
+            date: '2021-07-07', forecast_telop: '晴れのち曇り', weather_image_name: '1.png', wind_speed: '3.2', wind_direction: '北北西', wind_image_name: '3.png', precip: '30', humidity: '10', max_temp: '4.7', min_temp: '-2.1',
           },
           {
-            date: '2021-07-08', forecast_telop: '晴れのち曇り', weather_image_name: '1.jpg', wind_speed: '3.2', wind_direction: '北北西', wind_image_name: '3.jpg', precip: '30', humidity: '10', max_temp: '4.7', min_temp: '-2.1',
+            date: '2021-07-08', forecast_telop: '晴れのち曇り', weather_image_name: '1.png', wind_speed: '3.2', wind_direction: '北北西', wind_image_name: '3.png', precip: '30', humidity: '10', max_temp: '4.7', min_temp: '-2.1',
           },
         ],
       },
