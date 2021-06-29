@@ -18,26 +18,38 @@
 
     <div class="content">
       <content-with-footer>
-        <date-field
-          v-model="dateValue"
-          title="プレイ予定日（必須）"
-          placeholder="予定日を選択"
-          help="※天気予報のPUSHは予報が確定してからになります"
-        />
-        <time-field
-          v-model="timeValue"
-          title="プレイ開始時刻"
-          placeholder="時刻設定"
-        />
-
-        <template #footer>
-          <v-ons-button
-            modifier="large--cta rounded"
-            @click="update"
+        <validation-observer
+          v-slot="{ handleSubmit }"
+        >
+          <validation-provider
+            v-slot="{ errors }"
+            rules="required"
+            name="プレイ予定日"
           >
-            設定完了
-          </v-ons-button>
-        </template>
+            <date-field
+              v-model="dateValue"
+              title="プレイ予定日（必須）"
+              placeholder="予定日を選択"
+              help="※天気予報のPUSHは予報が確定してからになります"
+              :errors="errors"
+            />
+          </validation-provider>
+
+          <time-field
+            v-model="timeValue"
+            title="プレイ開始時刻"
+            placeholder="時刻設定"
+          />
+
+          <template #footer>
+            <v-ons-button
+              modifier="large--cta rounded"
+              @click="handleSubmit(settingPlan)"
+            >
+              設定完了
+            </v-ons-button>
+          </template>
+        </validation-observer>
       </content-with-footer>
     </div>
   </v-ons-page>
@@ -58,27 +70,112 @@ export default {
     TimeField,
     ContentWithFooter,
   },
+  props: {
+    course: {
+      type: Object,
+      required: true,
+      default: () => {},
+    },
+    userCourse: {
+      type: Object,
+      required: true,
+      default: () => {},
+    },
+    userCoursePlan: {
+      type: Object,
+      required: true,
+      default: () => {},
+    },
+  },
   data() {
     return {
-      title: '〇〇ゴルフ場',
       dateValue: '',
       timeValue: '',
       isShownDeleteDialog: false,
+      error: null,
     };
   },
   computed: {
-    isCanDelete() {
-      // TODO: 予定登録されているか判定してください
-      return true;
+    title() {
+      return this.course.name;
+    },
+    isPersisted() {
+      return Object.keys(this.userCoursePlan).length === 0 ? false : true;
     },
   },
+  created() {
+    this.getPlanInfo();
+  },
   methods: {
+    getPlanInfo() {
+      if (!this.userCoursePlan.targetAt) return;
+
+      this.dateValue = this.$helpers.toLongStringWithoutDayOfWeek(this.userCoursePlan.targetAt);
+      this.timeValue = this.$helpers.toTimeString(this.userCoursePlan.targetAt);
+    },
+    openDeleteDialog() {
+      this.isShownDeleteDialog = true;
+    },
+    closeDeleteDialog() {
+      this.isShownDeleteDialog = false;
+    },
     deletePlans() {
       console.log('delete plans');
       this.isShownDeleteDialog = false;
     },
-    update() {
-      console.log('update plans');
+    async settingPlan() {
+      if (this.isPersisted) {
+        await this.updateUserCoursePlan();
+      } else {
+        await this.createUserCoursePlan();
+      }
+
+      // 現状、UserCourseのStoreを使っています。
+      // そのため、UserCoursePlanを変更する時に、UserCourseのStoreを変更しないといけないです。
+      await this.$store.dispatch('models/userCourse/getUserCourses');
+      await this.$store.dispatch('courseSearchNavigator/pop');
+    },
+    async updateUserCoursePlan() {
+      const params = {
+        targetAt: this.targetAt(),
+      };
+
+      await this.$store.dispatch('models/userCoursePlan/updateUserCoursePlan', {
+        userCourseId: this.userCourse.id,
+        userCoursePlanId: this.userCoursePlan.id,
+        params,
+      });
+    },
+    async createUserCoursePlan() {
+      let userCourseId = this.userCourse.id;
+
+      // If UserCourse is not exsited, create UserCourse
+      const isUserCourseNotExisted = Object.keys(this.userCourse).length === 0;
+      if (isUserCourseNotExisted) {
+        await this.createUserCourse();
+        const createdUserCourse = this.$store.getters['models/userCourse/findByCourseId'](this.course.id);
+        userCourseId = createdUserCourse && createdUserCourse.id;
+      }
+
+      // Create UserCoursePlan
+      const params = {
+        courseId: this.course.id,
+        targetAt: this.targetAt(),
+      };
+      await this.$store.dispatch('models/userCoursePlan/createUserCoursePlan', {
+        userCourseId,
+        params,
+      });
+    },
+    async createUserCourse() {
+      const params = {
+        courseId: this.course.id,
+      };
+
+      await this.$store.dispatch('models/userCourse/createUserCourse', params);
+    },
+    targetAt() {
+      return `${this.dateValue} ${this.timeValue}`;
     },
   },
 };

@@ -9,6 +9,9 @@
       type="date"
       :errors="errors"
     />
+    <div v-if="errors.length">
+      {{ errors[0] }}
+    </div>
     <annotations-block
       v-if="help"
       class="date-field-help"

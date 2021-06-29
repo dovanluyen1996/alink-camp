@@ -11,7 +11,7 @@
           {{ favoriteButtonText }}
         </ons-button>
         <ons-button
-          :configured="user_course_plans"
+          :configured="userCoursePlan"
           modifier="large rounded"
           @click="goToCoursePlans"
         >
@@ -60,7 +60,6 @@ export default {
     return {
       title: '〇〇ゴルフ場',
       is_favorited: true,
-      user_course_plans: '2021/06/18',
       tabs: [
         {
           label: '天気予報詳細',
@@ -78,8 +77,18 @@ export default {
       return this.is_favorited ? 'お気に入り追加済' : 'お気に入り追加';
     },
     plansButtonText() {
-      return this.user_course_plans ? `予定日：${this.user_course_plans}` : '予定日設定';
+      return this.userCoursePlan ? `予定日：${this.$helpers.toLongStringWithoutDayOfWeek(this.userCoursePlan.targetAt)}` : '予定日設定';
     },
+    userCourse() {
+      return this.$store.getters['models/userCourse/findByCourseId'](this.course.id);
+    },
+    userCoursePlan() {
+      return this.userCourse && this.userCourse.userCoursePlans[0];
+    },
+  },
+  async created() {
+    // TODO: コース天気TOP画面を実装したら、削除します。
+    await this.getUserCourses();
   },
   async created() {
     await this.getCourse();
@@ -89,13 +98,28 @@ export default {
       this.is_favorited = !this.is_favorited;
     },
     goToCoursePlans() {
-      this.$store.dispatch('courseSearchNavigator/push', CoursePlans);
+      this.$store.dispatch('courseSearchNavigator/push', {
+        extends: CoursePlans,
+        onsNavigatorProps: {
+          course: this.course,
+          userCourse: this.userCourse || {},
+          userCoursePlan: this.userCoursePlan || {},
+        },
+      });
     },
     goToScore() {
       console.log('goToScore');
     },
     async getCourse() {
       await this.$store.dispatch('course/getChoosenCourse', this.course.id);
+    },
+    // TODO: user_course_plan情報を取得するために、UserCourse一覧は必要です。
+    // UserCourse一覧はコース天気画面でUserCourseを取得して、Storeに保存します。
+    // この画面でUserCourseのStoreを使って、user_course_plan情報を取得します。
+    //
+    // => コース天気TOP画面を実装したら、削除します。
+    async getUserCourses() {
+      await this.$store.dispatch('models/userCourse/getUserCourses');
     },
   },
 };
