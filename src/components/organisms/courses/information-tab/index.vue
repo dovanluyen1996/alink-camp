@@ -108,7 +108,8 @@ export default {
   },
   methods: {
     target() {
-      return (cordova.platformId === 'browser') ? '_self' : '_blank';
+      return '_blank';
+      // return (cordova.platformId === 'browser') ? '_self' : '_blank';
     },
   },
 };

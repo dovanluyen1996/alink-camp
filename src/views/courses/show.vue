@@ -9,9 +9,15 @@
           @click="toggleFavorite"
         >
           {{ favoriteButtonText }}
+<<<<<<< HEAD
         </v-ons-button>
         <v-ons-button
           :configured="planned"
+=======
+        </ons-button>
+        <ons-button
+          :configured="userCoursePlan"
+>>>>>>> be0fcd1 (create, update user_course_plan)
           modifier="large rounded"
           @click="goToCoursePlans"
         >
@@ -99,6 +105,10 @@ export default {
     planned() {
       return this.$helpers.isPresentObject(this.userCoursePlan);
     },
+  },
+  async created() {
+    // TODO: コース天気TOP画面を実装したら、削除します。
+    await this.getUserCourses();
   },
   async created() {
     await this.getCourse();
