@@ -20,7 +20,7 @@
         <course-weather-content
           v-for="courses in user.user_courses"
           :key="courses.index"
-          :is-favorited="courses.is_favorited"
+          :user-courses="courses"
         />
       </template>
     </div>

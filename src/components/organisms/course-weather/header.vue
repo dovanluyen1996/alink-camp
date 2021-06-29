@@ -3,7 +3,7 @@
     <div class="course-name">
       {{ name }}
       <img
-        v-if="isFavorited"
+        v-if="userCourses.is_favorited"
         src="@/assets/images/user/user-course/favorite.png"
         width="18px"
       >
@@ -26,9 +26,10 @@ export default {
       type: String,
       default: '',
     },
-    isFavorited: {
-      type: Boolean,
-      default: false,
+    userCourses: {
+      type: Object,
+      default: () => {},
+      required: true,
     },
   },
 };

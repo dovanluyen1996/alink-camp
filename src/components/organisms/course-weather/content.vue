@@ -3,7 +3,7 @@
     <course-weather-header
       :name="courses.name"
       :address="courses.address"
-      :is-favorited="isFavorited"
+      :user-courses="userCourses"
     />
     <div
       v-if="DailyWeatherForecast"
@@ -42,9 +42,10 @@ export default {
     CourseWeatherCalendar,
   },
   props: {
-    isFavorited: {
-      type: Boolean,
-      default: false,
+    userCourses: {
+      type: Object,
+      default: () => {},
+      required: true,
     },
   },
   data() {
