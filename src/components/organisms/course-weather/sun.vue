@@ -39,7 +39,7 @@ export default {
 
 .course-weather-sun {
   flex-wrap: nowrap;
-  padding-top: 5px;
+  padding: 5px 6px 0;
   margin-top: 5px;
   font-size: $font-size-small;
   white-space: nowrap;
