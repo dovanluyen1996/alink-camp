@@ -129,7 +129,8 @@ $button-height--rounded: 36px;
 }
 
 .text-input,
-.select-input {
+.select-input,
+.textarea-input {
   padding: 0 5px;
   font-size: 16px;
   font-weight: 600;
@@ -144,6 +145,12 @@ $button-height--rounded: 36px;
   background-position: 14px center;
   background-size: 18px;
   border-radius: 10px;
+}
+
+.textarea-input {
+  box-sizing: border-box;
+  width: 100%;
+  font-family: inherit;
 }
 
 .switch {

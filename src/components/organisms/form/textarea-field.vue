@@ -1,11 +1,12 @@
 <template>
   <base-field
     :title="title"
-    class="select-field"
+    class="text-field"
   >
-    <custom-select
-      v-model="selectedValue"
-      :options="options"
+    <textarea
+      v-model="inputedValue"
+      class="textarea-input"
+      :rows="rows"
       :placeholder="placeholder"
     />
     <div v-if="errors.length">
@@ -15,30 +16,26 @@
 </template>
 
 <script>
-import CustomSelect from '@/components/atoms/form/custom-select';
 import BaseField from './base-field';
 
 export default {
-  name: 'SelectField',
+  name: 'TextAreaField',
   components: {
     BaseField,
-    CustomSelect,
   },
   props: {
     value: {
-      // NOTE: htmlのinputはString, サーバーではintで持っているので両方許可する
-      type: [Number, String],
-      default: -1,
-      required: true,
-    },
-    options: {
-      type: Array,
-      default: () => [],
+      type: String,
+      default: '',
       required: true,
     },
     title: {
       type: String,
       default: null,
+    },
+    rows: {
+      type: Number,
+      default: 3,
     },
     placeholder: {
       type: String,
@@ -50,7 +47,7 @@ export default {
     },
   },
   computed: {
-    selectedValue: {
+    inputedValue: {
       get() {
         return this.value;
       },

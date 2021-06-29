@@ -10,3 +10,11 @@ extend('email', {
   ...email,
   message: '{_field_}は不正な値です',
 });
+
+extend('required-select', (value) => {
+  if (typeof value === 'string' || value >= 0) {
+    return true;
+  }
+
+  return '{_field_}を選択してください';
+});
