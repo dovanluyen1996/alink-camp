@@ -57,6 +57,7 @@ export default {
 }
 
 .temperature-label {
+  margin-right: 3px;
   font-size: $font-size-small;
 }
 

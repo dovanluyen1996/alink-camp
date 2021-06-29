@@ -5,10 +5,7 @@
       :style="{ fontSize }"
     >
       {{ displayValue }}
-    </span>
-    <span class="temperature__unit">
-      ℃
-    </span>
+    </span><span class="temperature__unit">℃</span>
   </div>
 </template>
 
@@ -42,12 +39,12 @@ export default {
 
   &__value {
     display: inline-block;
-    width: 1.5em;
     text-align: right;
   }
 
   &__unit {
     width: 1em;
+    margin-left: 3px;
 
     /* NOTE: フォントサイズの最小は12pxとしているが温度と明らかなため
      *       多少見えづらくても問題ないと判断して9px指定 */

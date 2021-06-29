@@ -20,7 +20,7 @@
           :value="forecast.high"
           font-size="12px"
           class="temperature-high"
-        /> &nbsp;/
+        />&nbsp;/&nbsp;
         <temperature-component
           :value="forecast.low"
           font-size="12px"
@@ -62,7 +62,7 @@ export default {
 }
 
 .course-weather-calendar {
-  margin-top: -5px;
+  margin-top: -10px;
 }
 
 .course-weather-day {
@@ -98,6 +98,12 @@ export default {
   height: 30px;
   font-size: $font-size-small;
   white-space: nowrap;
+
+  /deep/ {
+    .temperature__unit {
+      margin-left: 0;
+    }
+  }
 }
 
 .temperature-high {

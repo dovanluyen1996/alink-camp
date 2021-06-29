@@ -1,7 +1,7 @@
 <template>
   <div class="course-weather-the-day-before">
     <div class="course-weather-the-day-before-title">
-      <span>予定日前日の</span><span>お天気</span>
+      <span>予定日前日</span><span>のお天気</span>
     </div>
     <weather-image
       :weather-id="forecast.weather"
