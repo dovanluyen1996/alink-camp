@@ -7,7 +7,7 @@
       @click="goToResultEdit(userCourseResult)"
     >
       <div class="center user-course-result">
-        <span>{{ displayTargetDate(userCourseResult.targetDate) }}</span>
+        {{ displayTargetDate(userCourseResult.targetDate) }}
       </div>
     </v-ons-list-item>
   </v-ons-list>
