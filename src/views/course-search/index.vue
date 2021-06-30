@@ -77,10 +77,11 @@ export default {
         },
       });
     },
-    goToCourseShow(course) {
+    async goToCourseShow(course) {
       console.log('goToCourseShow', course);
 
-      this.$store.dispatch('courseSearchNavigator/push', {
+      await this.$store.dispatch('models/course/setChosenCourse', course);
+      await this.$store.dispatch('courseSearchNavigator/push', {
         extends: CourseShow,
         onsNavigatorProps: {
           course,

@@ -100,13 +100,6 @@ import ApiClient from '@/api_client';
 
 export default {
   name: 'CoursesInformationTab',
-  props: {
-    options: {
-      type: Object,
-      required: true,
-      default: () => {},
-    },
-  },
   data() {
     return {
       course: {},
@@ -122,9 +115,10 @@ export default {
   },
   methods: {
     async getCourseInfor() {
-      if (!this.options.courseId) return;
+      const chosenCourse = this.$store.getters['models/course/chosenCourse'];
+      if (!chosenCourse) return;
 
-      this.course = await ApiClient.getCourse(this.options.courseId);
+      this.course = await ApiClient.getCourse(chosenCourse.id);
     },
     target() {
       return (cordova.platformId === 'browser') ? '_self' : '_blank';
