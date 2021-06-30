@@ -32,6 +32,18 @@ const initializeVue = () => {
     VueOnsen.enableAutoStatusBarFill();
   }
 
+  if (window.device.platform !== 'browser') {
+    const shouldSetEnabled = true;
+
+    FirebasePlugin.setCrashlyticsCollectionEnabled(shouldSetEnabled, () => {
+      console.log('Crashlytics data collection is enabled');
+    }, (error) => {
+      console.error(`Crashlytics data collection couldn't be enabled: ${error}`);
+    });
+
+    FirebasePlugin.setAnalyticsCollectionEnabled(true);
+  }
+
   new Vue({
     el: '#app',
     store,

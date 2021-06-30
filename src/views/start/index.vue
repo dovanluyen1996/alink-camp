@@ -38,6 +38,13 @@ import FirstGuidance from '@/views/first-guidance';
 export default {
   name: 'StartIndex',
   methods: {
+    created() {
+      // NOTE: Firebase Analytics Sample
+      // if (window.device.platform != 'browser') {
+      //   FirebasePlugin.setScreenName('PurchaseInformation');
+      //   FirebasePlugin.logEvent('screen_view', { content_type: 'page_view', item_id: 'home' });
+      // }
+    },
     start() {
       this.goToTermsOfService();
     },
