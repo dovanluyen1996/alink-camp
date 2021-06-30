@@ -4,18 +4,18 @@
     <course-name :course-name="course.name" />
     <v-ons-card>
       <div class="content">
-        <v-ons-list modifier="noborder">
-          <v-ons-list-item>
-            <!-- TODO: スコアチャートの表示 -->
-            <!-- TODO: 過去の予定日の天気を表示 -->
-          </v-ons-list-item>
+        <score-summary-chart />
 
+        <course-weather />
+
+        <v-ons-list>
           <v-ons-list-item
             v-for="userCourseResult in userCourseResults"
             :key="userCourseResult.id"
+            modifier="chevron"
             @click="goToResultEdit(userCourseResult)"
           >
-            <div class="center">
+            <div class="center user-course-result">
               <span>{{ displayTargetDate(userCourseResult.targetDate) }}</span>
             </div>
           </v-ons-list-item>
@@ -36,12 +36,16 @@
 <script>
 // components
 import CourseName from '@/components/organisms/course-name';
+import ScoreSummaryChart from '@/components/organisms/scores/summary-chart';
+import CourseWeather from '@/components/organisms/scores/course-weather';
 import FixedFooter from '@/components/organisms/fixed-footer';
 
 export default {
   name: 'ScoreSummary',
   components: {
     CourseName,
+    ScoreSummaryChart,
+    CourseWeather,
     FixedFooter,
   },
   props: {
@@ -80,3 +84,9 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.user-course-result {
+  justify-content: center;
+}
+</style>

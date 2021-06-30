@@ -2,7 +2,12 @@
   <!-- スクロールでthが固定化されるコンポーネント -->
   <div class="sticky-table">
     <table class="table">
-      <slot />
+      <thead v-if="$slots.thead">
+        <slot name="thead" />
+      </thead>
+      <tbody>
+        <slot />
+      </tbody>
     </table>
   </div>
 </template>
@@ -24,6 +29,7 @@ export default {
 }
 
 .table {
+  width: 100%;
   font-size: $font-size-small;
   border-spacing: 0;
   border-collapse: separate;
@@ -43,6 +49,7 @@ export default {
       left: 0;
     }
 
+    th:last-child,
     td:last-child {
       border-right: none;
     }
@@ -51,6 +58,13 @@ export default {
       th,
       td {
         border-top: none;
+      }
+    }
+
+    thead tr:last-child {
+      th,
+      td {
+        border-bottom: 1px solid $color-border;
       }
     }
   }
