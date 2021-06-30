@@ -3,7 +3,10 @@
     <custom-toolbar title="定期購読に関して" />
 
     <div class="content">
-      <card-with-tab :tabs="tabs" />
+      <card-with-tab
+        :tabs="tabs"
+        fullscreen
+      />
     </div>
   </v-ons-page>
 </template>

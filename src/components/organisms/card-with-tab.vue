@@ -100,4 +100,24 @@ export default {
   width: 100%;
   opacity: 0;
 }
+
+/* NOTE: onsenUIの仕様に合わせて
+ * propsではなくattributeでstyleをあてる
+ */
+.card-width-tab[fullscreen] {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+
+  .card-tab__content {
+    flex: 1;
+    overflow: hidden;
+  }
+
+  .card__content {
+    height: 100%;
+    overflow: auto;
+  }
+}
 </style>
