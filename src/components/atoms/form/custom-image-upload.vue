@@ -69,7 +69,13 @@ export default {
   },
   computed: {
     imagePath() {
-      return this.selectedFile.image;
+      let imagePath;
+      if (typeof this.value === 'string') {
+        imagePath = this.value;
+      } else {
+        imagePath = this.selectedFile.image;
+      }
+      return imagePath;
     },
   },
   methods: {
