@@ -34,7 +34,7 @@
         <input
           class="file-input"
           type="file"
-          @change="onImageUploaded"
+          @change="selectImage"
         >
       </label>
     </div>
@@ -73,7 +73,7 @@ export default {
     },
   },
   methods: {
-    onImageUploaded(e) {
+    selectImage(e) {
       const image = e.target.files[0];
       this.createImage(image);
     },
@@ -81,16 +81,18 @@ export default {
       const reader = new FileReader();
       reader.readAsDataURL(image);
       reader.onload = () => {
-        this.updateImage(reader.result);
+        this.updateSelectedFile(reader.result);
       };
     },
-    updateImage(image) {
+    updateSelectedFile(image) {
       this.$set(this.selectedFile, 'image', image);
       this.$emit('input', this.selectedFile);
     },
     deleteImage() {
       this.$emit('input', '');
       this.$set(this.selectedFile, 'image', null);
+      // NOTE: v-bindでvalueをバインドさせても書き換わらないためDOM操作する
+      // おそらくtype="file"が読み取り専用のため
       this.$el.querySelector('.file-input').value = null;
     },
   },

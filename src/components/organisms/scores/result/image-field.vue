@@ -1,6 +1,6 @@
 <template>
   <image-field
-    v-model="uploadedValue"
+    v-model="selectedFile"
     title="写真"
   />
 </template>
@@ -22,7 +22,7 @@ export default {
     },
   },
   computed: {
-    uploadedValue: {
+    selectedFile: {
       get() {
         return this.value;
       },

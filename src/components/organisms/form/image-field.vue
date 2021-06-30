@@ -4,8 +4,7 @@
     class="image-field"
   >
     <custom-image-upload
-      v-model="uploadedValue"
-      :image-path="imagePath"
+      v-model="selectedFile"
       :errors="errors"
     />
   </base-field>
@@ -31,17 +30,13 @@ export default {
       type: String,
       default: null,
     },
-    imagePath: {
-      type: String,
-      default: null,
-    },
     errors: {
       type: Array,
       default: () => [],
     },
   },
   computed: {
-    uploadedValue: {
+    selectedFile: {
       get() {
         return this.value;
       },
