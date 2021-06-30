@@ -19,7 +19,7 @@
 export default {
   name: 'ForecastTableWindDirectionRow',
   props: {
-    forecastData: {
+    windDirections: {
       type: Array,
       default: () => [],
       required: true,
@@ -27,11 +27,6 @@ export default {
     colorTh: {
       type: Boolean,
       default: true,
-    },
-  },
-  computed: {
-    windDirections() {
-      return this.forecastData.map(data => data.wind_direction);
     },
   },
 };

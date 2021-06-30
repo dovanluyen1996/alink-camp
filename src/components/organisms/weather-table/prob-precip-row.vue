@@ -19,7 +19,7 @@
 export default {
   name: 'ForecastTableWindProbPrecipsRow',
   props: {
-    forecastData: {
+    probPrecips: {
       type: Array,
       default: () => [],
       required: true,
@@ -27,11 +27,6 @@ export default {
     colorTh: {
       type: Boolean,
       default: true,
-    },
-  },
-  computed: {
-    probPrecips() {
-      return this.forecastData.map(data => data.prob_precip);
     },
   },
 };

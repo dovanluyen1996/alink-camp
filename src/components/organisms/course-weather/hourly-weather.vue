@@ -36,15 +36,15 @@
     </thead>
     <tbody>
       <prob-precip-row
-        :forecast-data="forecasts"
+        :prob-precips="probPrecips"
         :color-th="false"
       />
       <wind-direction-row
-        :forecast-data="forecasts"
+        :wind-directions="windDirections"
         :color-th="false"
       />
       <wind-speed-row
-        :forecast-data="forecasts"
+        :wind-speeds="windSpeeds"
         :color-th="false"
       />
     </tbody>
@@ -64,32 +64,45 @@ export default {
     WindDirectionRow,
     WindSpeedRow,
   },
-  data() {
-    return {
-      forecasts: [
-        {
-          prob_precip: 10,
-          wind_direction: '南',
-          wind_speed: 2,
-        },
-        {
-          prob_precip: 20,
-          wind_direction: '南東',
-          wind_speed: 3,
-        },
-        {
-          prob_precip: 30,
-          wind_direction: '南',
-          wind_speed: 4,
-        },
-        {
-          prob_precip: 40,
-          wind_direction: '南西',
-          wind_speed: 5,
-        },
-      ],
-    };
+  props: {
+    forecast: {
+      type: Object,
+      default: () => {},
+      required: true,
+    },
   },
+  computed: {
+    probPrecips() {
+      const precips = [];
+
+      precips.push(this.forecast.precip_0);
+      precips.push(this.forecast.precip_6);
+      precips.push(this.forecast.precip_12);
+      precips.push(this.forecast.precip_18);
+
+      return precips;
+    },
+    windDirections() {
+      const drectoins = [];
+
+      drectoins.push(this.forecast.wind_direction_0);
+      drectoins.push(this.forecast.wind_direction_6);
+      drectoins.push(this.forecast.wind_direction_12);
+      drectoins.push(this.forecast.wind_direction_18);
+
+      return drectoins;
+    },
+    windSpeeds() {
+      const speeds = [];
+
+      speeds.push(this.forecast.wind_speed_0);
+      speeds.push(this.forecast.wind_speed_6);
+      speeds.push(this.forecast.wind_speed_12);
+      speeds.push(this.forecast.wind_speed_18);
+
+      return speeds;
+    },
+  }
 };
 </script>
 
