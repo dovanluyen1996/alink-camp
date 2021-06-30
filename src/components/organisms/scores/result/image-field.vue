@@ -1,11 +1,48 @@
 <template>
-  <div>
-    image upload
-  </div>
+  <image-field
+    v-model="uploadedValue"
+    title="写真"
+  />
 </template>
 
 <script>
+// components
+import ImageField from '@/components/organisms/form/image-field';
+
 export default {
   name: 'ScoreResultImageField',
+  components: {
+    ImageField,
+  },
+  props: {
+    value: {
+      type: [String, Object],
+      default: () => '',
+      required: true,
+    },
+  },
+  computed: {
+    uploadedValue: {
+      get() {
+        return this.value;
+      },
+      set(newValue) {
+        this.$emit('input', newValue);
+      },
+    },
+  },
 };
 </script>
+
+<style lang="scss" scoped>
+/deep/ {
+  .card {
+    text-align: center;
+  }
+
+  .custom-input-date {
+    margin: 0 auto;
+    width: 180px;
+  }
+}
+</style>
