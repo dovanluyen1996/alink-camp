@@ -93,6 +93,7 @@ export default {
   /deep/ tbody th {
     width: 50px;
     min-width: 50px;
+    background: #fff;
   }
 }
 </style>
