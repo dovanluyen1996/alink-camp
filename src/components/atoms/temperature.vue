@@ -25,7 +25,7 @@ export default {
   },
   computed: {
     displayValue() {
-      return this.value.toString() || '--';
+      return this.value || '--';
     },
   },
 };
