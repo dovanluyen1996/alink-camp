@@ -15,10 +15,6 @@ export default class DateTimeHelper {
     return this.momentWithTimezoneOf(time).format('HH:mm');
   }
 
-  static localDateTimeFrom(time) {
-    return this.momentWithTimezoneOf(time).format('YYYY/MM/DD HH:mm');
-  }
-
   // 日付を取得するため。javascriptにはyyyy-mm-ddのフォーマットを使わないといけないです。
   static localDateWithHyphenFrom(time) {
     return this.momentWithTimezoneOf(time).format('YYYY-MM-DD');

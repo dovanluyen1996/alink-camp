@@ -5,14 +5,17 @@
       subtitle="（予定日設定）"
     >
       <template #right>
-        <delete-dialog-with-icon
-          v-if="isCanDelete"
-          :is-shown.sync="isShownDeleteDialog"
-          @clickDelete="deletePlans"
+        <div
+          v-if="isPersisted"
+          class="delete-plan"
+          @click="openDeleteConfirmDialog"
         >
-          この予定日設定を削除します。<br>
-          よろしいですか？
-        </delete-dialog-with-icon>
+          <img
+            src="@/assets/images/trash.png"
+            width="24px"
+            alt="予定を削除"
+          >
+        </div>
       </template>
     </custom-toolbar>
 
@@ -52,12 +55,52 @@
         </validation-observer>
       </content-with-footer>
     </div>
+
+    <v-ons-alert-dialog
+      :visible="deleteConfirmDialogVisible"
+    >
+      <template #title>
+        削除確認
+      </template>
+
+      この予定日設定を削除します。<br>
+      よろしいですか？
+
+      <template #footer>
+        <v-ons-button
+          modifier="quiet quiet-dark"
+          @click="closeDeleteConfirmDialog"
+        >
+          キャンセル
+        </v-ons-button>
+        <v-ons-button @click="deleteUserCoursePlan">
+          削除する
+        </v-ons-button>
+      </template>
+    </v-ons-alert-dialog>
+
+    <v-ons-alert-dialog
+      :visible.sync="errorVisible"
+    >
+      <template #title>
+        削除失敗
+      </template>
+
+      削除に失敗しました。
+
+      <template #footer>
+        <v-ons-button
+          @click="closeError()"
+        >
+          OK
+        </v-ons-button>
+      </template>
+    </v-ons-alert-dialog>
   </v-ons-page>
 </template>
 
 <script>
 // components
-import DeleteDialogWithIcon from '@/components/organisms/dialog/delete-dialog-with-icon';
 import DateField from '@/components/organisms/form/date-field';
 import TimeField from '@/components/organisms/form/time-field';
 import ContentWithFooter from '@/components/organisms/content-with-footer';
@@ -65,7 +108,6 @@ import ContentWithFooter from '@/components/organisms/content-with-footer';
 export default {
   name: 'CoursePlans',
   components: {
-    DeleteDialogWithIcon,
     DateField,
     TimeField,
     ContentWithFooter,
@@ -91,7 +133,8 @@ export default {
     return {
       dateValue: '',
       timeValue: '',
-      isShownDeleteDialog: false,
+      deleteConfirmDialogVisible: false,
+      errorVisible: false,
       error: null,
     };
   },
@@ -102,6 +145,10 @@ export default {
     isPersisted() {
       return Object.keys(this.userCoursePlan).length === 0 ? false : true;
     },
+    errorMessage() {
+      if (!this.error || !this.error.response) return null;
+      return this.error.response.data.error;
+    },
   },
   created() {
     this.getPlanInfo();
@@ -109,28 +156,42 @@ export default {
   methods: {
     getPlanInfo() {
       if (!this.userCoursePlan.targetAt) return;
-
       // yyyy-mm-ddのフォーマットを使わないといけないです。
       this.dateValue = this.$datetimeHelper.localDateWithHyphenFrom(this.userCoursePlan.targetAt);
       this.timeValue = this.$datetimeHelper.localTimeFrom(this.userCoursePlan.targetAt);
     },
-    openDeleteDialog() {
-      this.isShownDeleteDialog = true;
+    openDeleteConfirmDialog() {
+      this.deleteConfirmDialogVisible = true;
     },
-    closeDeleteDialog() {
-      this.isShownDeleteDialog = false;
+    closeDeleteConfirmDialog() {
+      this.deleteConfirmDialogVisible = false;
     },
-    deletePlans() {
-      console.log('delete plans');
-      this.isShownDeleteDialog = false;
+    showError() {
+      this.errorVisible = true;
     },
-    async settingPlan() {
+    closeError() {
+      this.errorVisible = false;
+    },
+    async deleteUserCoursePlan() {
+      try {
+        await this.destroyUserCoursePlan();
+        this.closeDeleteConfirmDialog();
+        // 現状、UserCourseのStoreを使っています。
+        // そのため、UserCoursePlanを変更する時に、UserCourseのStoreを変更しないといけないです。
+        await this.$store.dispatch('models/userCourse/getUserCourses');
+        await this.$store.dispatch('courseSearchNavigator/pop');
+      } catch (e) {
+        console.log(e);
+        this.closeDeleteConfirmDialog();
+        this.showError();
+      }
+    },
+    async settingUserCoursePlan() {
       if (this.isPersisted) {
         await this.updateUserCoursePlan();
       } else {
         await this.createUserCoursePlan();
       }
-
       // 現状、UserCourseのStoreを使っています。
       // そのため、UserCoursePlanを変更する時に、UserCourseのStoreを変更しないといけないです。
       await this.$store.dispatch('models/userCourse/getUserCourses');
@@ -140,7 +201,6 @@ export default {
       const params = {
         targetAt: this.targetAt(),
       };
-
       await this.$store.dispatch('models/userCoursePlan/updateUserCoursePlan', {
         userCourseId: this.userCourse.id,
         userCoursePlanId: this.userCoursePlan.id,
@@ -149,20 +209,16 @@ export default {
     },
     async createUserCoursePlan() {
       let userCourseId = this.userCourse.id;
-
       // If UserCourse is not exsited, create UserCourse
       const isUserCourseNotExisted = Object.keys(this.userCourse).length === 0;
       if (isUserCourseNotExisted) {
         await this.createUserCourse();
         const createdUserCourse = this.$store.getters['models/userCourse/findByCourseId'](this.course.id);
-
         // If can not create UserCourse, dont create UserCoursePlan
         if (!createdUserCourse) return;
-
         // Get created UserCourse.id
         userCourseId = createdUserCourse.id;
       }
-
       // Create UserCoursePlan
       const params = {
         courseId: this.course.id,
@@ -173,11 +229,16 @@ export default {
         params,
       });
     },
+    async destroyUserCoursePlan() {
+      await this.$store.dispatch('models/userCoursePlan/destroyUserCoursePlan', {
+        userCourseId: this.userCourse.id,
+        userCoursePlanId: this.userCoursePlan.id,
+      });
+    },
     async createUserCourse() {
       const params = {
         courseId: this.course.id,
       };
-
       await this.$store.dispatch('models/userCourse/createUserCourse', params);
     },
     targetAt() {
@@ -188,16 +249,22 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.delete-plan {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  margin: 8px 6px;
+}
 /deep/ {
   .card {
     text-align: center;
   }
-
   .custom-input-date {
     width: auto;
     min-width: 180px;
   }
-
   .date-field-help {
     text-align: left;
   }

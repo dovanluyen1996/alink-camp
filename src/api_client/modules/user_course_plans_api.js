@@ -9,4 +9,10 @@ export default {
     );
     return response.data;
   },
+  async destroyUserCoursePlan(userCourseId, userCoursePlanId) {
+    const response = await this.delete(
+      `/user_courses/${userCourseId}/user_course_plans/${userCoursePlanId}`,
+    );
+    return response.data;
+  },
 };

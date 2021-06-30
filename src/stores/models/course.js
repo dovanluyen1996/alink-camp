@@ -6,13 +6,11 @@ export default {
   namespaced: true,
   state: {
     courses: [],
-    choosenCourse: {},
     isLoading: false,
   },
   getters: {
     all: state => state.courses,
     size: state => state.courses.length,
-    choosenCourse: state => state.choosenCourse,
   },
   mutations: {
     setIsLoading(state, isLoading) {

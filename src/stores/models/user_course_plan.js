@@ -20,6 +20,15 @@ export default {
 
       Vue.set(state.userCoursePlans, index, userCoursePlan);
     },
+    deleteUserCoursePlan(state, userCoursePlan) {
+      const index = state.userCoursePlans.findIndex(
+        _userCoursePlan => _userCoursePlan.id === userCoursePlan.id,
+      );
+
+      if (index < 0) return;
+
+      Vue.delete(state.userCoursePlans, index);
+    },
     setIsLoading(state, isLoading) {
       state.isLoading = isLoading;
     },
@@ -51,6 +60,19 @@ export default {
       } catch (error) {
         context.commit('api/setError', error, { root: true });
         throw error;
+      } finally {
+        context.commit('setIsLoading', false);
+      }
+    },
+    async destroyUserCoursePlan(context, { userCourseId, userCoursePlanId }) {
+      context.commit('setIsLoading', true);
+
+      try {
+        const userCoursePlan = await ApiClient.destroyUserCoursePlan(
+          userCourseId, userCoursePlanId,
+        );
+
+        context.commit('updateUserCoursePlan', userCoursePlan);
       } finally {
         context.commit('setIsLoading', false);
       }
