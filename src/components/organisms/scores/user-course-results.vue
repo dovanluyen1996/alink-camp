@@ -13,7 +13,6 @@
   </v-ons-list>
 </template>
 
-
 <script>
 export default {
   name: 'ScoreUserCourseResults',
@@ -31,7 +30,7 @@ export default {
       this.$emit('goToResultEdit', userCourseResult);
     },
   },
-}
+};
 </script>
 
 <style lang="scss" scoped>

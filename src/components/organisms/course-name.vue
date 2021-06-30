@@ -27,8 +27,8 @@ export default {
 
   padding: 7px 30px;
   margin: 30px 0 20px;
-  background: #fff;
   word-break: break-all;
+  background: #fff;
 
   &__inner {
     display: inline-block;

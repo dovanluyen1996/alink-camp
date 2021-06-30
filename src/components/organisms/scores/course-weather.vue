@@ -9,7 +9,7 @@
           scope="col"
           class="th"
         >
-        {{ weather.date }}
+          {{ weather.date }}
         </th>
       </tr>
     </template>
@@ -89,6 +89,7 @@ export default {
   margin: 15px 0 20px;
   font-size: $font-size-small;
   text-align: center;
+
   /deep/ tbody th {
     width: 50px;
     min-width: 50px;
