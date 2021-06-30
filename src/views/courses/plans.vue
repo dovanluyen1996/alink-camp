@@ -110,8 +110,9 @@ export default {
     getPlanInfo() {
       if (!this.userCoursePlan.targetAt) return;
 
-      this.dateValue = this.$helpers.toLongStringWithoutDayOfWeek(this.userCoursePlan.targetAt);
-      this.timeValue = this.$helpers.toTimeString(this.userCoursePlan.targetAt);
+      // yyyy-mm-ddのフォーマットを使わないといけないです。
+      this.dateValue = this.$datetimeHelper.localDateWithHyphenFrom(this.userCoursePlan.targetAt);
+      this.timeValue = this.$datetimeHelper.localTimeFrom(this.userCoursePlan.targetAt);
     },
     openDeleteDialog() {
       this.isShownDeleteDialog = true;
@@ -154,7 +155,12 @@ export default {
       if (isUserCourseNotExisted) {
         await this.createUserCourse();
         const createdUserCourse = this.$store.getters['models/userCourse/findByCourseId'](this.course.id);
-        userCourseId = createdUserCourse && createdUserCourse.id;
+
+        // If can not create UserCourse, dont create UserCoursePlan
+        if (!createdUserCourse) return;
+
+        // Get created UserCourse.id
+        userCourseId = createdUserCourse.id;
       }
 
       // Create UserCoursePlan

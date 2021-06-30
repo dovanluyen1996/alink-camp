@@ -77,7 +77,7 @@ export default {
       return this.is_favorited ? 'お気に入り追加済' : 'お気に入り追加';
     },
     plansButtonText() {
-      return this.userCoursePlan ? `予定日：${this.$helpers.toLongStringWithoutDayOfWeek(this.userCoursePlan.targetAt)}` : '予定日設定';
+      return this.userCoursePlan ? `予定日：${this.$datetimeHelper.localDateFrom(this.userCoursePlan.targetAt)}` : '予定日設定';
     },
     userCourse() {
       return this.$store.getters['models/userCourse/findByCourseId'](this.course.id);
