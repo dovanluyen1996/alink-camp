@@ -17,8 +17,8 @@
 export default {
   name: 'CourseWeatherUvIndex',
   props: {
-    value: {
-      type: Number,
+    forecast: {
+      type: Object,
       default: null,
       required: true,
     },
@@ -26,11 +26,30 @@ export default {
   computed: {
     image() {
       // eslint-disable-next-line global-require, import/no-dynamic-require
-      return require(`@/assets/images/weathers/uv/uv_large_${this.value}.png`);
+      return require(`@/assets/images/weathers/uv/uv_large_${this.forecast.uv_index}.png`);
     },
     label() {
-      // TODO: 文言確認する,画像と対応させる
-      return '弱い';
+      let text = '';
+      switch(this.forecast.uv_index) {
+        case 1:
+          text = '弱い';
+          break;
+        case 2:
+          text = 'やや強い';
+          break;
+        case 3:
+          text = '強い';
+          break;
+        case 4:
+          text = '非常に強い';
+          break;
+        case 5:
+          text = 'きわめて強い';
+          break;
+        default:
+          text = '';
+      }
+      return text;
     },
   },
 };

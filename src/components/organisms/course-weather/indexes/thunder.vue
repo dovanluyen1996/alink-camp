@@ -17,8 +17,8 @@
 export default {
   name: 'CourseWeatherThunderIndex',
   props: {
-    value: {
-      type: Number,
+    forecast: {
+      type: Object,
       default: null,
       required: true,
     },
@@ -26,11 +26,33 @@ export default {
   computed: {
     image() {
       // eslint-disable-next-line global-require, import/no-dynamic-require
-      return require(`@/assets/images/weathers/thunder/thunder_large_${this.value}.png`);
+      return require(`@/assets/images/weathers/thunder/thunder_large_${this.getImageFileName()}.png`);
     },
     label() {
       // TODO: 文言確認する,画像と対応させる
-      return '弱い';
+      let text = '';
+      switch(this.forecast.thunder_index) {
+        case 1:
+          text = '低い';
+          break;
+        case 2:
+          text = 'やや低い';
+          break;
+        case 3:
+          text = 'やや高い';
+          break;
+        case 4:
+          text = '高い';
+          break;
+        default:
+          text = '';
+      }
+      return text;
+    },
+  },
+  methods: {
+    getImageFileName() {
+      return this.forecast.thunder_index || 'none'
     },
   },
 };

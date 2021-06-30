@@ -25,13 +25,13 @@
     </v-ons-row>
     <v-ons-row class="weather-indexes">
       <v-ons-col>
-        <course-weather-thunder-index :value="forecast.scheduled_date.thunder_index" />
+        <course-weather-thunder-index :forecast="forecast.scheduled_date" />
       </v-ons-col>
       <v-ons-col>
-        <course-weather-dress-index :value="forecast.scheduled_date.mountain_dress_index" />
+        <course-weather-dress-index :forecast="forecast.scheduled_date" />
       </v-ons-col>
       <v-ons-col>
-        <course-weather-uv-index :value="forecast.scheduled_date.uv_index_ranking" />
+        <course-weather-uv-index :forecast="forecast.scheduled_date" />
       </v-ons-col>
     </v-ons-row>
   </div>
@@ -86,6 +86,9 @@ export default {
   flex-wrap: nowrap;
   margin-top: 15px;
   color: #017f45;
-  white-space: nowrap;
+
+  ons-col {
+    padding: 0 2px;
+  }
 }
 </style>
