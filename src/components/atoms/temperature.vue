@@ -15,8 +15,7 @@ export default {
   props: {
     value: {
       type: String,
-      default: '',
-      require: true,
+      default: null,
     },
     fontSize: {
       type: String,

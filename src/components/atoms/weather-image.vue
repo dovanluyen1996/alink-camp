@@ -7,6 +7,7 @@
       class="weather-image"
     >
     <div
+      v-if="isShownName"
       class="weather-name"
     >
       {{ weatherName }}
@@ -20,12 +21,10 @@ export default {
   props: {
     weatherImageName: {
       type: String,
-      default: '',
       required: true,
     },
     weatherName: {
       type: String,
-      default: '',
       required: true,
     },
     isShownName: {
@@ -39,14 +38,24 @@ export default {
   },
   computed: {
     image() {
-      // NOTE: 画像のため依存関係が明らかなのでrequireのルールを除外
-      //       枚数も多いので従うと却って見づらくなる
-      // eslint-disable-next-line global-require, import/no-dynamic-require
-      return require(`@/assets/images/weathers/weather/${this.weatherImageName}`);
+      return this.getImage();
     },
     alt() {
       if (this.isShownName) return null;
       return this.weatherName;
+    },
+  },
+  methods: {
+    getImage() {
+      try {
+        // NOTE: 画像のため依存関係が明らかなのでrequireのルールを除外
+        //       枚数も多いので従うと却って見づらくなる
+        // eslint-disable-next-line global-require, import/no-dynamic-require
+        return require(`@/assets/images/weathers/weather/${this.weatherImageName}`);
+      } catch (e) {
+        console.error(`天気画像ファイル（@/assets/images/weathers/weather/${this.weatherImageName}）の読み込みに失敗しました`);
+        return null;
+      }
     },
   },
 };
