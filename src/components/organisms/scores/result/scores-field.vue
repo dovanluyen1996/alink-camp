@@ -3,18 +3,49 @@
     title="総合スコア"
     class="scores-field"
   >
-    <v-ons-row>
-      <v-ons-col>
-        <v-ons-input
-          v-model="inputedTotalScoreValue"
-          type="text"
-        />
+    <v-ons-row vertical-align="bottom">
+      <v-ons-col width="55%">
+        <v-ons-row
+          vertical-align="bottom"
+          class="total-score-field"
+        >
+          <v-ons-col class="total-score-label">
+            合計打数
+          </v-ons-col>
+          <v-ons-col>
+            <v-ons-input
+              v-model="inputedTotalScoreValue"
+              type="text"
+              class="total-score-input"
+            />
+          </v-ons-col>
+          <v-ons-col class="score-unit">
+            打
+          </v-ons-col>
+        </v-ons-row>
       </v-ons-col>
       <v-ons-col>
-        <v-ons-input
-          v-model="inputedPattingScoreValue"
-          type="text"
-        />
+        <v-ons-row
+          vertical-align="bottom"
+          class="patting-score-field"
+        >
+          <v-ons-col
+            width="100%"
+            class="patting-score-label"
+          >
+            内パター（任意）
+          </v-ons-col>
+          <v-ons-col>
+            <v-ons-input
+              v-model="inputedPattingScoreValue"
+              type="text"
+              class="patting-score-input"
+            />
+          </v-ons-col>
+          <v-ons-col class="score-unit">
+            打
+          </v-ons-col>
+        </v-ons-row>
       </v-ons-col>
     </v-ons-row>
   </base-field>
@@ -62,14 +93,45 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-/deep/ {
-  .card {
+@import '@/assets/scss/_variables.scss';
+
+/deep/ .card {
+  color: $color-subtext;
+  font-size: $font-size-small;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.score-unit {
+  flex: 0;
+  margin-left: 7px;
+  font-size: $font-size-small;
+}
+
+.total-score-label {
+  align-self: flex-start;
+  flex: 0;
+  margin-right: 13px;
+  padding-top: 3px;
+}
+
+.total-score-input {
+  /deep/ input {
+    height: 50px;
+    font-size: 28px;
     text-align: center;
   }
+}
 
-  .custom-input-date {
-    margin: 0 auto;
-    width: 180px;
+.patting-score-field {
+  padding-left: 25%;
+}
+
+.patting-score-input {
+  /deep/ input {
+    font-size: $font-size-large;
+    text-align: center;
   }
 }
+
 </style>

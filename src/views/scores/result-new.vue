@@ -2,11 +2,6 @@
   <v-ons-page>
     <custom-toolbar title="スコアの新規登録" />
     <course-name :course-name="course.name" />
-    {{ target_date }}<br>
-    {{ total_score }}<br>
-    {{ patting_score }}<br>
-    {{ image }}<br>
-    {{ note }}<br>
     <target-date-field
       v-model="target_date"
       title="プレイ日（必須）"
