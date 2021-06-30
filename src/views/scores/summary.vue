@@ -35,6 +35,7 @@ import FixedFooter from '@/components/organisms/fixed-footer';
 
 // pages
 import ResultsNew from '@/views/scores/result-new';
+import ResultsEdit from '@/views/scores/result-edit';
 
 export default {
   name: 'ScoreSummary',
@@ -70,8 +71,12 @@ export default {
       await this.$store.dispatch('models/userCourseResult/getUserCourseResults', this.userCourseId);
     },
     goToResultEdit(userCourseResult) {
-      // TODO: issue#133 スコア編集画面に遷移
-      console.log(userCourseResult);
+      this.$store.dispatch('scoresNavigator/push', {
+        extends: ResultsEdit,
+        onsNavigatorProps: {
+          userCourseResult,
+        },
+      });
     },
     goToResultNew() {
       this.$store.dispatch('scoresNavigator/push', {
