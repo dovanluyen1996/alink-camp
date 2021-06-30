@@ -6,6 +6,7 @@
       :placeholder="placeholder"
       :class="['custom-input-date', {'is-shown-placeholder' : isShownPlaceholder}]"
     />
+    <!-- TODO: エラーメッセージの表示を修正する必要があります。 -->
     <div v-if="errors.length">
       {{ errors[0] }}
     </div>

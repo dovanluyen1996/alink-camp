@@ -5,9 +5,7 @@
       :disabled-back-button="true"
     />
     <div class="content">
-      <validation-observer
-        v-slot="{ handleSubmit }"
-      >
+      <validation-observer v-slot="{ handleSubmit }">
         <base-form>
           <validation-provider
             v-slot="{ errors }"

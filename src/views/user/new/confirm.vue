@@ -11,7 +11,7 @@
           title="性別"
         />
         <confirm-field
-          :value="user.birthdate"
+          :value="birthdateText"
           title="生年月日"
         />
         <confirm-field
@@ -39,6 +39,7 @@
 </template>
 
 <script>
+import moment from 'moment';
 import settings from '@/config/settings';
 
 // components
@@ -67,6 +68,9 @@ export default {
     genderText() {
       const gender = settings.views.genders.find(_gender => _gender.value === this.user.gender);
       return gender ? gender.text : '';
+    },
+    birthdateText() {
+      return moment(this.user.birthdate).format('YYYYMMDD');
     },
     prefectureText() {
       const prefecture = settings.views.prefectures.find(

@@ -2,9 +2,7 @@
   <v-ons-page>
     <custom-toolbar title="ユーザー情報の登録" />
     <div class="content">
-      <validation-observer
-        v-slot="{ handleSubmit }"
-      >
+      <validation-observer v-slot="{ handleSubmit }">
         <base-form>
           <validation-provider
             v-slot="{ errors }"
