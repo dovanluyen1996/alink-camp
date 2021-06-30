@@ -1,10 +1,23 @@
 <template>
   <div class="custom-image-upload">
-    <img
+    <div
       v-if="imagePath"
-      :src="imagePath"
-      class="image"
+      class="image-content"
     >
+      <img
+        :src="imagePath"
+        class="image"
+      >
+      <div
+        class="delete-image"
+        @click="deleteImage"
+      >
+        <img
+          src="@/assets/images/form/delete.png"
+          width="18px"
+        >
+      </div>
+    </div>
     <img
       v-else
       src="@/assets/images/noimage.png"
@@ -14,6 +27,10 @@
     <div>
       <label class="upload-button">
         写真をアップロード
+        <!-- NOTE: v-modelがtype="file"に非対応のため changeイベントで処理する
+        - <input v-model="image" type="file">:
+        File inputs are read only. Use a v-on:change listener instead.
+        -->
         <input
           class="file-input"
           type="file"
@@ -48,12 +65,11 @@ export default {
         description: '',
         image: null,
       },
-      imagePath: null,
     };
   },
   computed: {
-    hasImage() {
-      return typeof this.value === 'string' && this.value !== '';
+    imagePath() {
+      return this.selectedFile.image;
     },
   },
   methods: {
@@ -65,10 +81,17 @@ export default {
       const reader = new FileReader();
       reader.readAsDataURL(image);
       reader.onload = () => {
-        this.selectedFile.image = reader.result;
-        this.imagePath = this.selectedFile.image;
-        this.$emit('input', this.selectedFile);
+        this.updateImage(reader.result);
       };
+    },
+    updateImage(image) {
+      this.$set(this.selectedFile, 'image', image);
+      this.$emit('input', this.selectedFile);
+    },
+    deleteImage() {
+      this.$emit('input', '');
+      this.$set(this.selectedFile, 'image', null);
+      this.$el.querySelector('.file-input').value = null;
     },
   },
 };
@@ -79,6 +102,22 @@ export default {
 
 .image-field {
   text-align: center;
+}
+
+.image-content {
+  position: relative;
+  display: inline-block;
+}
+
+.delete-image {
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
 }
 
 .image {
