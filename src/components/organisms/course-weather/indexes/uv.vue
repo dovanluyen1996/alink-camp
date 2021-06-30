@@ -30,24 +30,24 @@ export default {
     },
     label() {
       let text = '';
-      switch(this.forecast.uv_index) {
-        case 1:
-          text = '弱い';
-          break;
-        case 2:
-          text = 'やや強い';
-          break;
-        case 3:
-          text = '強い';
-          break;
-        case 4:
-          text = '非常に強い';
-          break;
-        case 5:
-          text = 'きわめて強い';
-          break;
-        default:
-          text = '';
+      switch (this.forecast.uv_index) {
+      case 1:
+        text = '弱い';
+        break;
+      case 2:
+        text = 'やや強い';
+        break;
+      case 3:
+        text = '強い';
+        break;
+      case 4:
+        text = '非常に強い';
+        break;
+      case 5:
+        text = 'きわめて強い';
+        break;
+      default:
+        text = '';
       }
       return text;
     },

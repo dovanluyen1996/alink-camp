@@ -31,28 +31,28 @@ export default {
     label() {
       // TODO: 文言確認する,画像と対応させる
       let text = '';
-      switch(this.forecast.thunder_index) {
-        case 1:
-          text = '低い';
-          break;
-        case 2:
-          text = 'やや低い';
-          break;
-        case 3:
-          text = 'やや高い';
-          break;
-        case 4:
-          text = '高い';
-          break;
-        default:
-          text = '';
+      switch (this.forecast.thunder_index) {
+      case 1:
+        text = '低い';
+        break;
+      case 2:
+        text = 'やや低い';
+        break;
+      case 3:
+        text = 'やや高い';
+        break;
+      case 4:
+        text = '高い';
+        break;
+      default:
+        text = '';
       }
       return text;
     },
   },
   methods: {
     getImageFileName() {
-      return this.forecast.thunder_index || 'none'
+      return this.forecast.thunder_index || 'none';
     },
   },
 };

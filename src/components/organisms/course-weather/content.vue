@@ -14,7 +14,7 @@
       />
       <course-weather-of-the-day :forecast="ForecastScheduledDate" />
       <course-weather-the-day-before :forecast="ForecastScheduledDate.day_before" />
-      <course-weather-hourly-weather :forecast="ForecastScheduledDate.scheduled_date"/>
+      <course-weather-hourly-weather :forecast="ForecastScheduledDate.scheduled_date" />
     </div>
     <template v-else-if="weatherForecasts">
       <course-weather-calendar

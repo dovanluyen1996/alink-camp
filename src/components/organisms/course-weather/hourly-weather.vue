@@ -102,7 +102,7 @@ export default {
 
       return speeds;
     },
-  }
+  },
 };
 </script>
 
