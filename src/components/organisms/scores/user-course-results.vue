@@ -19,7 +19,7 @@ export default {
   props: {
     userCourseResults: {
       type: Array,
-      defalut: () => [],
+      default: () => [],
     },
   },
   methods: {
