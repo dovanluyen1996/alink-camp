@@ -34,9 +34,18 @@
 import SignIn from '@/views/auth/sign-in';
 import TermsOfService from '@/views/terms-of-service/unsigned';
 import FirstGuidance from '@/views/first-guidance';
+import AppTabbar from '@/views/app-tabbar';
 
 export default {
   name: 'StartIndex',
+  data() {
+    return {
+      loginStatus: false,
+    };
+  },
+  created() {
+    this.isLogin();
+  },
   methods: {
     created() {
       // NOTE: Firebase Analytics Sample
@@ -59,6 +68,13 @@ export default {
     },
     goToSignIn() {
       this.$store.dispatch('appNavigator/push', SignIn);
+    },
+    isLogin() {
+      // TODO: ログイン情報がマージされ次第修正
+      if (this.loginStatus) this.goAppTop();
+    },
+    goAppTop() {
+      this.$store.dispatch('appNavigator/reset', AppTabbar);
     },
   },
 };
