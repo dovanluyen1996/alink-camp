@@ -33,11 +33,16 @@
           />
         </validation-provider>
 
-        <base-field title="留意事項">
-          ご報告内容に個別にお答えすることをお約束するものではありません。<br>
-          ご報告内容に基づいて対応、処置することをお約束するものではありません。<br>
-          アプリ操作に関するご質問に関してはお手数ですが、メニュー⇒ヘルプをご覧いただいてからお問い合わせください。<br>
-        </base-field>
+        <card-with-title>
+          <template #title>
+            留意事項
+          </template>
+          <div>
+            ご報告内容に個別にお答えすることをお約束するものではありません。<br>
+            ご報告内容に基づいて対応、処置することをお約束するものではありません。<br>
+            アプリ操作に関するご質問に関してはお手数ですが、メニュー⇒ヘルプをご覧いただいてからお問い合わせください。<br>
+          </div>
+        </card-with-title>
 
         <fixed-footer>
           <v-ons-button
@@ -105,14 +110,15 @@
 
 <script>
 // components
-import BaseField from '@/components/organisms/form/base-field';
+import CardWithTitle from '@/components/organisms/card-with-title';
 import SelectField from '@/components/organisms/form/select-field';
 import TextareaField from '@/components/organisms/form/textarea-field';
 import FixedFooter from '@/components/organisms/fixed-footer';
 
+
 export default {
   components: {
-    BaseField,
+    CardWithTitle,
     SelectField,
     TextareaField,
     FixedFooter,
@@ -168,10 +174,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-/deep/ .alert-dialog-title {
-  &--notitle {
-    display: none;
+/deep/ {
+  .alert-dialog-title {
+    &--notitle {
+      display: none;
+    }
+  }
+
+  .card-width-title {
+    .card-title {
+      margin-top: 20px;
+    }
   }
 }
-
 </style>
