@@ -40,12 +40,12 @@
 <script>
 // components
 import StickyTable from '@/components/organisms/sticky-table';
-import TimeRow from '@/components/organisms/forecast-table/time-row';
-import WeatherRow from '@/components/organisms/forecast-table/weather-row';
-import PrecipitationRow from '@/components/organisms/forecast-table/precipitation-row';
-import TemperatureRow from '@/components/organisms/forecast-table/temperature-row';
-import WindDirectionRow from '@/components/organisms/forecast-table/wind-direction-row';
-import WindSpeedRow from '@/components/organisms/forecast-table/wind-speed-row';
+import TimeRow from '@/components/organisms/weather-table/time-row';
+import WeatherRow from '@/components/organisms/weather-table/weather-row';
+import PrecipitationRow from '@/components/organisms/weather-table/precipitation-row';
+import TemperatureRow from '@/components/organisms/weather-table/temperature-row';
+import WindDirectionRow from '@/components/organisms/weather-table/wind-direction-row';
+import WindSpeedRow from '@/components/organisms/weather-table/wind-speed-row';
 
 export default {
   name: 'CoursesForecastTabHourlyWeather',

@@ -28,8 +28,8 @@
 <script>
 // components
 import StickyTable from '@/components/organisms/sticky-table';
-import WeatherRow from '@/components/organisms/forecast-table/weather-row';
-import TemperatureRow from '@/components/organisms/forecast-table/temperature-row';
+import WeatherRow from '@/components/organisms/weather-table/weather-row';
+import TemperatureRow from '@/components/organisms/weather-table/temperature-row';
 
 export default {
   name: 'ScoresCourseWeather',

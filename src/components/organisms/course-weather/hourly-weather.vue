@@ -53,9 +53,9 @@
 
 <script>
 // components
-import ProbPrecipRow from '@/components/organisms/forecast-table/prob-precip-row';
-import WindDirectionRow from '@/components/organisms/forecast-table/wind-direction-row';
-import WindSpeedRow from '@/components/organisms/forecast-table/wind-speed-row';
+import ProbPrecipRow from '@/components/organisms/weather-table/prob-precip-row';
+import WindDirectionRow from '@/components/organisms/weather-table/wind-direction-row';
+import WindSpeedRow from '@/components/organisms/weather-table/wind-speed-row';
 
 export default {
   name: 'CourseWeatherHourlyWeather',
