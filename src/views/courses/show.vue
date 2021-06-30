@@ -9,15 +9,9 @@
           @click="toggleFavorite"
         >
           {{ favoriteButtonText }}
-<<<<<<< HEAD
         </v-ons-button>
         <v-ons-button
           :configured="planned"
-=======
-        </ons-button>
-        <ons-button
-          :configured="userCoursePlan"
->>>>>>> be0fcd1 (create, update user_course_plan)
           modifier="large rounded"
           @click="goToCoursePlans"
         >
