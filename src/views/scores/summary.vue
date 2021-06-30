@@ -8,18 +8,10 @@
 
         <course-weather />
 
-        <v-ons-list>
-          <v-ons-list-item
-            v-for="userCourseResult in userCourseResults"
-            :key="userCourseResult.id"
-            modifier="chevron"
-            @click="goToResultEdit(userCourseResult)"
-          >
-            <div class="center user-course-result">
-              <span>{{ displayTargetDate(userCourseResult.targetDate) }}</span>
-            </div>
-          </v-ons-list-item>
-        </v-ons-list>
+        <user-course-results
+          :user-course-results="userCourseResults"
+          @goToResultEdit="goToResultEdit"
+        />
       </div>
     </v-ons-card>
     <fixed-footer>
@@ -38,6 +30,7 @@
 import CourseName from '@/components/organisms/course-name';
 import ScoreSummaryChart from '@/components/organisms/scores/summary-chart';
 import CourseWeather from '@/components/organisms/scores/course-weather';
+import UserCourseResults from '@/components/organisms/scores/user-course-results';
 import FixedFooter from '@/components/organisms/fixed-footer';
 
 export default {
@@ -46,6 +39,7 @@ export default {
     CourseName,
     ScoreSummaryChart,
     CourseWeather,
+    UserCourseResults,
     FixedFooter,
   },
   props: {
@@ -72,11 +66,9 @@ export default {
     async getUserCourseResults() {
       await this.$store.dispatch('models/userCourseResult/getUserCourseResults', this.userCourseId);
     },
-    displayTargetDate(targetDate) {
-      return this.$helpers.toLongString(targetDate);
-    },
-    goToResultEdit() {
+    goToResultEdit(userCourseResult) {
       // TODO: issue#133 スコア編集画面に遷移
+      console.log(userCourseResult);
     },
     goToResultCreate() {
       // TODO: issue#134 スコア新規登録画面に遷移
@@ -84,9 +76,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped>
-.user-course-result {
-  justify-content: center;
-}
-</style>
