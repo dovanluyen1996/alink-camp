@@ -17,7 +17,7 @@
     <fixed-footer>
       <v-ons-button
         modifier="large--cta add rounded"
-        @click="goToResultCreate"
+        @click="goToResultNew"
       >
         スコア追加
       </v-ons-button>
@@ -32,6 +32,9 @@ import ScoreSummaryChart from '@/components/organisms/scores/summary-chart';
 import CourseWeather from '@/components/organisms/scores/course-weather';
 import UserCourseResults from '@/components/organisms/scores/user-course-results';
 import FixedFooter from '@/components/organisms/fixed-footer';
+
+// pages
+import ResultsNew from '@/views/scores/result-new';
 
 export default {
   name: 'ScoreSummary',
@@ -70,7 +73,13 @@ export default {
       // TODO: issue#133 スコア編集画面に遷移
       console.log(userCourseResult);
     },
-    goToResultCreate() {
+    goToResultNew() {
+      this.$store.dispatch('scoresNavigator/push', {
+        extends: ResultsNew,
+        onsNavigatorProps: {
+          course: this.course,
+        },
+      });
       // TODO: issue#134 スコア新規登録画面に遷移
     },
   },
