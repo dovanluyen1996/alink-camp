@@ -47,7 +47,7 @@
         <fixed-footer>
           <v-ons-button
             modifier="large--cta rounded"
-            @click="handleSubmit(showConfirm)"
+            @click="handleSubmit(showConfirmDialog)"
           >
             送信確認
           </v-ons-button>
@@ -56,7 +56,7 @@
     </div>
 
     <v-ons-alert-dialog
-      :visible.sync="confirmVisible"
+      :visible.sync="confirmDialogVisible"
       cancelable
     >
       <template #title>
@@ -69,7 +69,7 @@
       <template #footer>
         <v-ons-button
           modifier="quiet quiet-dark"
-          @click="closeConfirm()"
+          @click="closeConfirmDialog()"
         >
           キャンセル
         </v-ons-button>
@@ -82,7 +82,7 @@
     </v-ons-alert-dialog>
 
     <v-ons-alert-dialog
-      :visible.sync="completeVisible"
+      :visible.sync="completeDialogVisible"
       cancelable
       modifier="notitle"
     >
@@ -99,7 +99,7 @@
       <template #footer>
         <v-ons-button
           modifier="cta"
-          @click="closeComplete()"
+          @click="closeCompleteDialog()"
         >
           キャンセル
         </v-ons-button>
@@ -136,22 +136,22 @@ export default {
         'ビジネスに関するお問い合わせ',
         'その他',
       ],
-      confirmVisible: false,
-      completeVisible: false,
+      confirmDialogVisible: false,
+      completeDialogVisible: false,
     };
   },
   methods: {
-    showConfirm() {
-      this.confirmVisible = true;
+    showConfirmDialog() {
+      this.confirmDialogVisible = true;
     },
-    closeConfirm() {
-      this.confirmVisible = false;
+    closeConfirmDialog() {
+      this.confirmDialogVisible = false;
     },
-    showComplete() {
-      this.completeVisible = true;
+    showCompleteDialog() {
+      this.completeDialogVisible = true;
     },
-    closeComplete() {
-      this.completeVisible = false;
+    closeCompleteDialog() {
+      this.completeDialogVisible = false;
     },
     async submit() {
       // TODO: change app version
@@ -164,10 +164,10 @@ export default {
         osVersion,
         platform,
       };
-      this.closeConfirm();
+      this.closeConfirmDialog();
       await this.$store.dispatch('models/contact/sendContact', params);
 
-      this.showComplete();
+      this.showCompleteDialog();
     },
   },
 };
