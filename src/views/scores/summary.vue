@@ -1,7 +1,7 @@
 <template>
   <v-ons-page>
-    <custom-toolbar :title="course.name" />
-    <span>スコアのサマリー情報</span>
+    <custom-toolbar title="サマリー情報" />
+    <course-name :course-name="course.name" />
     <v-ons-card>
       <div class="content">
         <v-ons-list modifier="noborder">
@@ -35,11 +35,13 @@
 
 <script>
 // components
+import CourseName from '@/components/organisms/course-name';
 import FixedFooter from '@/components/organisms/fixed-footer';
 
 export default {
   name: 'ScoreSummary',
   components: {
+    CourseName,
     FixedFooter,
   },
   props: {
