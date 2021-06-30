@@ -86,6 +86,11 @@
       cancelable
       modifier="notitle"
     >
+      <span
+        class="alert-dialog-close-btn"
+        @click="closeCompleteDialog()"
+      />
+
       お問い合わせ頂きありがとうございました。<br>
       お問い合わせフォオームにご記入いただいたメールアドレス宛に、お問い合わせ受付の確認メールを送信させていただきました。<br><br>
 
@@ -101,7 +106,7 @@
           modifier="cta"
           @click="closeCompleteDialog()"
         >
-          キャンセル
+          閉じる
         </v-ons-button>
       </template>
     </v-ons-alert-dialog>
@@ -114,7 +119,6 @@ import CardWithTitle from '@/components/organisms/card-with-title';
 import SelectField from '@/components/organisms/form/select-field';
 import TextareaField from '@/components/organisms/form/textarea-field';
 import FixedFooter from '@/components/organisms/fixed-footer';
-
 
 export default {
   components: {
@@ -175,9 +179,17 @@ export default {
 
 <style lang="scss" scoped>
 /deep/ {
-  .alert-dialog-title {
-    &--notitle {
+  .alert-dialog--notitle {
+    .alert-dialog-title {
       display: none;
+    }
+
+    .alert-dialog-content {
+      padding: 18px 20px 8px;
+    }
+
+    .alert-dialog-footer {
+      padding: 24px 0;
     }
   }
 

@@ -69,6 +69,24 @@ $alert-dialog-radius: 8px;
   text-align: center;
 }
 
+.alert-dialog-close-btn {
+  position: absolute;
+  top: -12px;
+  right: -8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  background-color: #191818;
+  border-radius: 50%;
+
+  &::before {
+    line-height: 0;
+    content: url('~@/assets/images/cross.png');
+  }
+}
+
 /* ----------
  Form
 ---------- */
