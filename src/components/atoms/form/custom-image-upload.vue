@@ -24,7 +24,7 @@
       width="150px"
       class="image"
     >
-    <div>
+    <div v-show="!imagePath">
       <label class="upload-button">
         写真をアップロード
         <!-- NOTE: v-modelがtype="file"に非対応のため changeイベントで処理する
@@ -92,8 +92,8 @@ export default {
       this.$emit('input', '');
       this.$set(this.selectedFile, 'image', null);
       // NOTE: v-bindでvalueをバインドさせても書き換わらないためDOM操作する
-      // おそらくtype="file"が読み取り専用のため
-      this.$el.querySelector('.file-input').value = null;
+      //       原因はおそらくtype="file"が読み取り専用のため
+      this.$el.querySelector('.file-input').value = '';
     },
   },
 };

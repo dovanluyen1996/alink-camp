@@ -49,7 +49,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-/deep/ .card {
-  padding-bottom: 0;
+/deep/ .upload-button {
+  margin-bottom: -20px;
 }
 </style>
