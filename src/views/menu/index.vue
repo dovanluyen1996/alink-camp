@@ -52,6 +52,13 @@
         >
           プライバシーポリシー
         </v-ons-list-item>
+
+        <v-ons-list-item
+          modifier="nodivider chevron"
+          @click="goToAboutSubscription"
+        >
+          定期購読に関して
+        </v-ons-list-item>
       </v-ons-list>
     </div>
   </v-ons-page>
@@ -66,6 +73,7 @@ import HelpsView from '@/views/helps/index';
 import UserEdit from '@/views/user/edit';
 import PrivacyPolicyView from '@/views/privacy-policy/index.vue';
 import TermsOfServiceView from '@/views/terms-of-service/signed';
+import AboutSubscriptionView from '@/views/about-subscription/index';
 
 export default {
   methods: {
@@ -89,6 +97,9 @@ export default {
     },
     goToTermsOfService() {
       this.$store.dispatch('menuNavigator/push', TermsOfServiceView);
+    },
+    goToAboutSubscription() {
+      this.$store.dispatch('menuNavigator/push', AboutSubscriptionView);
     },
   },
 };
