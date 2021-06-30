@@ -46,8 +46,8 @@ export default {
   }
 
   .custom-input-date {
-    margin: 0 auto;
     width: 180px;
+    margin: 0 auto;
   }
 }
 </style>

@@ -131,9 +131,9 @@ export default {
   align-items: center;
   justify-content: center;
   height: 40px;
-  color: #0061ca;
   font-size: $font-size-small;
   font-weight: 600;
+  color: #0061ca;
 }
 
 .file-input {

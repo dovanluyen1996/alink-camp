@@ -96,9 +96,9 @@ export default {
 @import '@/assets/scss/_variables.scss';
 
 /deep/ .card {
-  color: $color-subtext;
   font-size: $font-size-small;
   font-weight: 600;
+  color: $color-subtext;
   white-space: nowrap;
 }
 
@@ -109,10 +109,10 @@ export default {
 }
 
 .total-score-label {
-  align-self: flex-start;
   flex: 0;
-  margin-right: 13px;
+  align-self: flex-start;
   padding-top: 3px;
+  margin-right: 13px;
 }
 
 .total-score-input {
