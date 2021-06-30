@@ -7,11 +7,29 @@
     />
     <v-ons-button
       modifier="large rounded"
-      :disabled="isDisableSearchResult"
-      @click="goToSearchResult"
+      @click="searchByName"
     >
-      {{ recordCount }}件の検索結果があります
+      検索する
     </v-ons-button>
+
+    <v-ons-alert-dialog
+      :visible.sync="isSearchResultEmpty"
+    >
+      <template #title>
+        該当するコースがありません
+      </template>
+
+      検索した結果、条件に合うゴルフコースがありませんでした。<br>
+      お手数ですが、再度検索条件を設定してください。
+
+      <template #footer>
+        <v-ons-button
+          @click="closeSearchResultEmptyDialog()"
+        >
+          OK
+        </v-ons-button>
+      </template>
+    </v-ons-alert-dialog>
   </div>
 </template>
 
@@ -27,7 +45,7 @@ export default {
   },
   data() {
     return {
-      isDisableSearchResult: true,
+      isSearchResultEmpty: false,
     };
   },
   computed: {
@@ -43,43 +61,32 @@ export default {
       return this.$store.getters['models/course/size'];
     },
   },
-  watch: {
-    inputedValue() {
-      // 検索条件
-      if (this.inputedValue.length < 1) {
-        this.clearSearchResult();
-        return;
-      }
-      if (this.timeoutId) clearTimeout(this.timeoutId);
-
-      this.timeoutId = setTimeout(() => {
-        this.timeoutId = null;
-        this.searchByName();
-      }, 500);
-    },
-  },
   methods: {
-    goToSearchResult() {
-      this.$emit('goToSearchResult');
-    },
     searchByName() {
-      if (this.inputedValue.length < 1) {
-        this.clearSearchResult();
-        return;
-      }
+      // If search textbox is empty, don't do anything
+      if (this.inputedValue.length < 1) return;
 
       const params = {
         name: this.inputedValue,
       };
-
       this.$store.dispatch('models/course/getCourses', params)
         .then(() => {
-          this.isDisableSearchResult = this.recordCount > 0 ? false : true;
+          if (this.recordCount === 0) {
+            this.showSearchResultEmptyDialog();
+            this.clearSearchResult();
+          } else {
+            this.$emit('goToSearchResult');
+          }
         });
     },
     clearSearchResult() {
       this.$store.dispatch('models/course/resetCourses');
-      this.isDisableSearchResult = true;
+    },
+    closeSearchResultEmptyDialog() {
+      this.isSearchResultEmpty = false;
+    },
+    showSearchResultEmptyDialog() {
+      this.isSearchResultEmpty = true;
     },
   },
 };
