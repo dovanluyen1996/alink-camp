@@ -46,11 +46,8 @@ export default {
     },
   },
   methods: {
-    async goToCourseShow(course) {
-      console.log('goToCourseShow', course);
-
-      await this.$store.dispatch('models/course/setChosenCourse', course);
-      await this.$store.dispatch('courseSearchNavigator/push', {
+    goToCourseShow(course) {
+      this.$store.dispatch('courseSearchNavigator/push', {
         extends: CourseShow,
         onsNavigatorProps: {
           course,

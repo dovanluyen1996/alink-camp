@@ -81,6 +81,9 @@ export default {
       return this.user_course_plans ? `予定日：${this.user_course_plans}` : '予定日設定';
     },
   },
+  async created() {
+    await this.getChoosenCourse();
+  },
   methods: {
     toggleFavorite() {
       this.is_favorited = !this.is_favorited;
@@ -90,6 +93,9 @@ export default {
     },
     goToScore() {
       console.log('goToScore');
+    },
+    async getChoosenCourse() {
+      await this.$store.dispatch('models/course/getChoosenCourse', this.course.id);
     },
   },
 };

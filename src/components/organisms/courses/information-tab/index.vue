@@ -96,30 +96,17 @@
 </template>
 
 <script>
-import ApiClient from '@/api_client';
-
 export default {
   name: 'CoursesInformationTab',
-  data() {
-    return {
-      course: {},
-    };
-  },
   computed: {
+    course() {
+      return this.$store.getters['models/course/choosenCourse'];
+    },
     mapUrl() {
       return `https://maps.google.com/?q=${this.course.latitude},${this.course.longitude}`;
     },
   },
-  async created() {
-    await this.getCourseInfor();
-  },
   methods: {
-    async getCourseInfor() {
-      const chosenCourse = this.$store.getters['models/course/chosenCourse'];
-      if (!chosenCourse) return;
-
-      this.course = await ApiClient.getCourse(chosenCourse.id);
-    },
     target() {
       return (cordova.platformId === 'browser') ? '_self' : '_blank';
     },
