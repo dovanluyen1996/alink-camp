@@ -40,6 +40,12 @@ yarn stylelint src/**/*\[\.s*css\|\.vue\]
 sudo yarn install -g cordova
 ```
 
+### install CocoaPods
+
+```
+gem install cocoapods
+```
+
 ### run iOS
 
 ```
