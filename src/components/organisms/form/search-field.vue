@@ -13,7 +13,7 @@
     </v-ons-button>
 
     <v-ons-alert-dialog
-      :visible.sync="isSearchResultEmpty"
+      :visible.sync="searchResultEmptyVisible"
     >
       <template #title>
         該当するコースがありません
@@ -45,7 +45,7 @@ export default {
   },
   data() {
     return {
-      isSearchResultEmpty: false,
+      searchResultEmptyVisible: false,
     };
   },
   computed: {
@@ -62,31 +62,30 @@ export default {
     },
   },
   methods: {
-    searchByName() {
+    async searchByName() {
       // If search textbox is empty, don't do anything
       if (this.inputedValue.length < 1) return;
 
       const params = {
         name: this.inputedValue,
       };
-      this.$store.dispatch('models/course/getCourses', params)
-        .then(() => {
-          if (this.recordCount === 0) {
-            this.showSearchResultEmptyDialog();
-            this.clearSearchResult();
-          } else {
-            this.$emit('goToSearchResult');
-          }
-        });
+      await this.$store.dispatch('models/course/getCourses', params);
+
+      if (this.recordCount) {
+        this.$emit('goToSearchResult');
+      } else {
+        this.showSearchResultEmptyDialog();
+        this.clearSearchResult();
+      }
     },
     clearSearchResult() {
       this.$store.dispatch('models/course/resetCourses');
     },
     closeSearchResultEmptyDialog() {
-      this.isSearchResultEmpty = false;
+      this.searchResultEmptyVisible = false;
     },
     showSearchResultEmptyDialog() {
-      this.isSearchResultEmpty = true;
+      this.searchResultEmptyVisible = true;
     },
   },
 };

@@ -33,13 +33,7 @@ export default {
       }
     },
     resetCourses(context) {
-      context.commit('setIsLoading', true);
-
-      try {
-        context.commit('setCourses', []);
-      } finally {
-        context.commit('setIsLoading', false);
-      }
+      context.commit('setCourses', []);
     },
   },
 };
