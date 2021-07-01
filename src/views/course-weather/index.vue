@@ -40,9 +40,7 @@ export default {
   },
   computed: {
     userCourses() {
-      const userCourses = this.$store.getters['models/userCourse/validUserCourses'];
-
-      return userCourses;
+      return this.$store.getters['models/userCourse/validUserCourses'];
     },
   },
   methods: {

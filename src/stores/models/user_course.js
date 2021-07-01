@@ -19,7 +19,7 @@ export default {
     ),
     validUserCourses: state => state.userCourses.filter(
       userCourse => userCourse.isFavorited || userCourse.userCoursePlans.filter(
-        (userCoursePlan) => {
+        userCoursePlan => {
           const today = moment().startOf('days');
           const targetDate = moment(userCoursePlan.targetAt).startOf('days');
 
