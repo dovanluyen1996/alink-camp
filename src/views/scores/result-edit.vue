@@ -1,7 +1,18 @@
 <template>
   <v-ons-page>
-    <custom-toolbar :title="title" />
-    <course-name :course-name="userCourseResult.name" />
+    <custom-toolbar :title="title">
+      <template #right>
+        <delete-dialog-with-icon
+          :is-shown.sync="isShownDeleteDialog"
+          @clickDelete="deleteScore"
+        >
+          このスコアデータを削除します。<br>
+          よろしいですか？
+        </delete-dialog-with-icon>
+      </template>
+    </custom-toolbar>
+
+    <course-name :course-name="course.name" />
     <weather-and-image v-model="image" />
     <target-date-field
       v-model="target_date"
@@ -12,6 +23,7 @@
       :patting-score.sync="patting_score"
     />
     <note-field v-model="note" />
+
     <fixed-footer>
       <v-ons-button
         modifier="large--cta add rounded"
@@ -25,6 +37,7 @@
 
 <script>
 // components
+import DeleteDialogWithIcon from '@/components/organisms/dialog/delete-dialog-with-icon';
 import CourseName from '@/components/organisms/course-name';
 import TargetDateField from '@/components/organisms/scores/result/target-date-field';
 import ScoresField from '@/components/organisms/scores/result/scores-field';
@@ -35,6 +48,7 @@ import FixedFooter from '@/components/organisms/fixed-footer';
 export default {
   name: 'ScoresResultNew',
   components: {
+    DeleteDialogWithIcon,
     CourseName,
     TargetDateField,
     ScoresField,
@@ -43,6 +57,11 @@ export default {
     FixedFooter,
   },
   props: {
+    course: {
+      type: Object,
+      default: () => {},
+      required: true,
+    },
     userCourseResult: {
       type: Object,
       default: () => {},
@@ -57,6 +76,7 @@ export default {
       /* eslint-disable-next-line global-require */
       image: require('@/assets/images/course-sample.jpg'),
       note: '',
+      isShownDeleteDialog: false,
     };
   },
   computed: {
@@ -66,6 +86,10 @@ export default {
     },
   },
   methods: {
+    deleteScore() {
+      this.isShownDeleteDialog = false;
+      // TODO: delete
+    },
     submitScore() {
       // TODO: スコアを保存
     },

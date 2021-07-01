@@ -74,6 +74,7 @@ export default {
       this.$store.dispatch('scoresNavigator/push', {
         extends: ResultsEdit,
         onsNavigatorProps: {
+          course: this.course,
           userCourseResult,
         },
       });
