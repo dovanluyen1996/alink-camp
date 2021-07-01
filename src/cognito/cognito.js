@@ -48,6 +48,10 @@ export default class Cognito {
     const attributeList = [];
     attributeList.push(new CognitoUserAttribute(dataEmail));
 
+    // For auto login after signUp
+    const authenticationData = { Username: username, Password: password };
+    localStorage.setItem('authenticationData', JSON.stringify(authenticationData));
+
     return new Promise((resolve, reject) => {
       this.userPool.signUp(username, password, attributeList, null, (err, result) => {
         if (err) {
@@ -72,6 +76,28 @@ export default class Cognito {
         } else {
           resolve(result);
         }
+      });
+    });
+  }
+
+  /**
+   * auto login after signup
+   */
+  autoLogin(username) {
+    const userData = { Username: username, Pool: this.userPool };
+    const cognitoUser = new CognitoUser(userData);
+    const authenticationData = JSON.parse(localStorage.getItem('authenticationData'));
+    const authenticationDetails = new AuthenticationDetails(authenticationData);
+
+    return new Promise((resolve, reject) => {
+      cognitoUser.authenticateUser(authenticationDetails, {
+        onSuccess: (result) => {
+          localStorage.removeItem('authenticationData');
+          resolve(result);
+        },
+        onFailure: (err) => {
+          reject(err);
+        },
       });
     });
   }

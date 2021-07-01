@@ -39,7 +39,6 @@
 </template>
 
 <script>
-import moment from 'moment';
 import settings from '@/config/settings';
 
 // components
@@ -70,7 +69,7 @@ export default {
       return gender ? gender.text : '';
     },
     birthdateText() {
-      return moment(this.user.birthdate).format('YYYYMMDD');
+      return this.$moment(this.user.birthdate).format('YYYYMMDD');
     },
     prefectureText() {
       const prefecture = settings.views.prefectures.find(

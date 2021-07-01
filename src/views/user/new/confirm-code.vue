@@ -79,6 +79,17 @@ export default {
       this.$cognito.confirmation(this.email, this.confirmCode)
         .then(async(result) => {
           console.log(result);
+          this.autoLogin();
+        })
+        .catch((err) => {
+          this.error = err;
+          this.showConfirmError();
+        });
+    },
+    autoLogin() {
+      this.$cognito.autoLogin(this.email)
+        .then(async(result) => {
+          console.log(result);
           this.goToUserData();
         })
         .catch((err) => {
