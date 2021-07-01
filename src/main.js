@@ -11,6 +11,8 @@ import App from '@/app';
 import cognito from '@/cognito';
 import helpers from '@/helpers/helper';
 
+Vue.use(require('vue-moment'));
+
 Vue.config.productionTip = false;
 
 Vue.component('ValidationProvider', ValidationProvider);
