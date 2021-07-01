@@ -1,6 +1,6 @@
 <template>
   <div :class="['course-weather-plan', {'is-today' : isToday}]">
-    {{ targetAt }}〜
+    {{ userCoursePlan.targetAt | moment('YYYY/MM/DD HH:mm') }}〜
     <span class="course-weather-plan__count-down">
       {{ showCountDown }}
     </span>
@@ -20,16 +20,11 @@ export default {
     },
   },
   computed: {
-    targetAt() {
-      const strTargetAt = this.userCoursePlan.targetAt;
-
-      return moment(strTargetAt).format('YYYY/MM/DD HH:mm');
-    },
     isToday() {
-      const targetDate = moment(this.userCoursePlan.targetAt).format('YYYY/MM/DD');
-      const today = moment(new Date()).format('YYYY/MM/DD');
+      const targetDate = moment(this.userCoursePlan.targetAt).startOf('days');
+      const today = moment().startOf('days');
 
-      return targetDate === today;
+      return targetDate.isSame(today);
     },
     showCountDown() {
       if (this.isToday) return '予定日当日';
