@@ -1,28 +1,28 @@
 <template>
   <v-ons-row class="course-weather-calendar">
     <v-ons-col
-      v-for="(item, index) in forecast.items"
+      v-for="(forecast, index) in forecasts"
       :key="index"
       width="25%"
       class="course-weather-day"
     >
       <div class="course-weather-day-date">
-        {{ shortDate(item.date) }}
+        {{ shortDate(forecast.date) }}
       </div>
       <div class="course-weather-day-weather">
         <weather-image
-          :weather="item"
+          :weather="forecast"
           image-width="60px"
         />
       </div>
       <div class="course-weather-day-temperature">
         <temperature-component
-          :value="item.max_temp"
+          :value="forecast.max_temp"
           font-size="12px"
           class="temperature-high"
         />&nbsp;/&nbsp;
         <temperature-component
-          :value="item.min_temp"
+          :value="forecast.min_temp"
           font-size="12px"
           class="temperature-low"
         />
@@ -43,9 +43,9 @@ export default {
     TemperatureComponent,
   },
   props: {
-    forecast: {
-      type: Object,
-      default: () => {},
+    forecasts: {
+      type: Array,
+      default: () => [],
       required: true,
     },
   },

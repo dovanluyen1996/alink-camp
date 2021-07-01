@@ -19,7 +19,7 @@
     </div>
     <template v-else-if="Forecast10Days">
       <course-weather-calendar
-        :forecast="Forecast10Days"
+        :forecasts="Forecast10Days.items"
       />
     </template>
   </v-ons-card>
