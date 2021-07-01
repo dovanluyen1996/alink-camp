@@ -11,7 +11,7 @@
 import DateField from '@/components/organisms/form/date-field';
 
 export default {
-  name: 'ScoreResultTargetDateField',
+  name: 'UserCourseResultsTargetDateField',
   components: {
     DateField,
   },

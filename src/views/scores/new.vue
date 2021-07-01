@@ -10,7 +10,10 @@
       :total-score.sync="total_score"
       :patting-score.sync="patting_score"
     />
-    <image-field v-model="image" />
+    <image-field
+      v-model="image"
+      title="写真"
+    />
     <note-field v-model="note" />
     <fixed-footer>
       <v-ons-button
@@ -28,7 +31,7 @@
 import CourseName from '@/components/organisms/course-name';
 import TargetDateField from '@/components/organisms/scores/result/target-date-field';
 import ScoresField from '@/components/organisms/scores/result/scores-field';
-import ImageField from '@/components/organisms/scores/result/image-field';
+import ImageField from '@/components/organisms/form/image-field';
 import NoteField from '@/components/organisms/scores/result/note-field';
 import FixedFooter from '@/components/organisms/fixed-footer';
 

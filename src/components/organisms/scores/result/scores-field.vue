@@ -56,7 +56,7 @@
 import BaseField from '@/components/organisms/form/base-field';
 
 export default {
-  name: 'ScoreResultScoresField',
+  name: 'UserCourseResultsScoresField',
   components: {
     BaseField,
   },

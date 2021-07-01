@@ -11,7 +11,7 @@
 import TextField from '@/components/organisms/form/text-field';
 
 export default {
-  name: 'ScoreResultNoteField',
+  name: 'UserCourseResultsNoteField',
   components: {
     TextField,
   },

@@ -33,7 +33,7 @@ import WeatherImage from '@/components/atoms/weather-image';
 import TemperatureComponent from '@/components/atoms/temperature';
 
 export default {
-  name: 'ScoreResultWeatherAndImageField',
+  name: 'UserCourseResultWeather',
   components: {
     WeatherImage,
     TemperatureComponent,
