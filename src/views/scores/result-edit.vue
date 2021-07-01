@@ -1,6 +1,6 @@
 <template>
   <v-ons-page>
-    <custom-toolbar title="スコアの新規登録" />
+    <custom-toolbar :title="title" />
     <course-name :course-name="userCourseResult.name" />
     <weather-and-image v-model="image" />
     <target-date-field
@@ -57,6 +57,12 @@ export default {
       image: require('@/assets/images/course-sample.jpg'),
       note: '',
     };
+  },
+  computed: {
+    title() {
+      // TODO: フォーマットしてください
+      return this.userCourseResult.targetDate;
+    },
   },
   methods: {
     submitScore() {
