@@ -7,6 +7,13 @@ export default {
     const dayOfWeekStr = new Intl.DateTimeFormat('ja-JP', { weekday: 'short' }).format(date);
     return `${year}/${month}/${day} (${dayOfWeekStr})`;
   },
+  toShortString(targetDate) {
+    const date = new Date(targetDate);
+    const month = date.getMonth() + 1;
+    const day = (`00${date.getDate()}`).slice(-2);
+    const dayOfWeekStr = new Intl.DateTimeFormat('ja-JP', { weekday: 'short' }).format(date);
+    return `${month}/${day} (${dayOfWeekStr})`;
+  },
   toDateTimeString(targetAt) {
     const date = new Date(targetAt);
     const year = date.getFullYear();

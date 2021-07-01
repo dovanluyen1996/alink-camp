@@ -1,28 +1,29 @@
 <template>
   <v-ons-row class="course-weather-calendar">
     <v-ons-col
-      v-for="(forecast, index) in forecasts"
+      v-for="(item, index) in forecast.items"
       :key="index"
       width="25%"
       class="course-weather-day"
     >
       <div class="course-weather-day-date">
-        {{ forecast.date }}
+        {{ shortDate(item.date) }}
       </div>
       <div class="course-weather-day-weather">
         <weather-image
-          :weather-id="forecast.weather"
+          :weather-image-name="item.weather_image_name"
+          :weather-name="item.forecast_telop"
           image-width="60px"
         />
       </div>
       <div class="course-weather-day-temperature">
         <temperature-component
-          :value="forecast.high"
+          :value="item.max_temp"
           font-size="12px"
           class="temperature-high"
         />&nbsp;/&nbsp;
         <temperature-component
-          :value="forecast.low"
+          :value="item.min_temp"
           font-size="12px"
           class="temperature-low"
         />
@@ -43,10 +44,15 @@ export default {
     TemperatureComponent,
   },
   props: {
-    forecasts: {
-      type: Array,
-      default: () => [],
+    forecast: {
+      type: Object,
+      default: () => {},
       required: true,
+    },
+  },
+  methods: {
+    shortDate(date) {
+      return this.$helpers.toShortString(date);
     },
   },
 };
@@ -90,6 +96,8 @@ export default {
   @include colum-style;
 
   height: 50px;
+  border-top: 1px solid $color-border;
+  border-bottom: 1px solid $color-border;
 }
 
 .course-weather-day-temperature {
