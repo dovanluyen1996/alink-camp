@@ -82,7 +82,7 @@ export default {
       }
     },
     clickCourse(course) {
-      this.addCourseHistories(course);
+      this.addViewedCourse(course);
       this.$emit('click', course);
     },
     getDistance(latitude, longitude) {
@@ -101,20 +101,9 @@ export default {
 
       return distance;
     },
-    addCourseHistories(course) {
-      const courseHistories = JSON.parse(localStorage.getItem('courseHistories')) || [];
-      const existedHistory = courseHistories.find(history => history.id === course.id);
-
-      // If existed in Course Histories, don't add course again
-      if (existedHistory) return;
-
-      // 閲覧履歴 will show 5 items, therefore if current 閲覧履歴 is 5, delete the first item
-      if (courseHistories.length === 5) {
-        courseHistories.splice(0, 1);
-      }
-
-      courseHistories.push(course);
-      localStorage.setItem('courseHistories', JSON.stringify(courseHistories));
+    addViewedCourse(course) {
+      // Get 閲覧履歴 from Local Storage and save to Store
+      this.$store.dispatch('models/course/addViewedCourses', course);
     },
   },
 };
