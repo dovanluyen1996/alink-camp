@@ -8,6 +8,8 @@
 </template>
 
 <script>
+const moment = require('moment');
+
 export default {
   name: 'CourseWeatherPlan',
   props: {
@@ -21,20 +23,20 @@ export default {
     targetAt() {
       const strTargetAt = this.userCoursePlan.targetAt;
 
-      return this.$helpers.toDateTimeString(strTargetAt);
+      return moment(strTargetAt).format('YYYY/MM/DD HH:mm');
     },
     isToday() {
-      const targetDate = this.$helpers.toDate(this.userCoursePlan.targetAt);
-      const today = this.$helpers.toDate(new Date());
+      const targetDate = moment(this.userCoursePlan.targetAt).format('YYYY/MM/DD');
+      const today = moment(new Date()).format('YYYY/MM/DD');
 
-      return targetDate.getTime() === today.getTime();
+      return targetDate === today;
     },
     showCountDown() {
       if (this.isToday) return '予定日当日';
 
-      const targetDate = this.$helpers.toDate(this.userCoursePlan.targetAt);
-      const today = this.$helpers.toDate(new Date());
-      const remainingDays = (targetDate.getTime() - today.getTime()) / 86400000;
+      const targetDate = moment(this.userCoursePlan.targetAt).startOf('days');
+      const today = moment().startOf('days');
+      const remainingDays = targetDate.diff(today, 'days');
 
       return `予定日まで${remainingDays}日`;
     },

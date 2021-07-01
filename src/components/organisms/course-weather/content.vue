@@ -35,6 +35,8 @@ import CourseWeatherTheDayBefore from '@/components/organisms/course-weather/wea
 import CourseWeatherHourlyWeather from '@/components/organisms/course-weather/hourly-weather';
 import CourseWeatherCalendar from '@/components/organisms/course-weather/calendar';
 
+const moment = require('moment');
+
 export default {
   name: 'CourseWeatherContent',
   components: {
@@ -133,7 +135,15 @@ export default {
     userCoursePlan() {
       const plans = this.userCourse.userCoursePlans;
 
-      return (!plans || plans.length === 0) ? null : plans[0];
+      if (!plans || plans.length === 0) return null;
+
+      const results = plans.filter(function (plan){
+        const today = moment().startOf('days');
+        const targetDate = moment(plan.targetAt).startOf('days');
+
+        return targetDate.isSameOrAfter(today);
+      });
+      return (results.length === 0) ? null : results[0];
     },
   },
 };

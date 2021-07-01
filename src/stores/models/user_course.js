@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import ApiClient from '@/api_client';
+const moment = require('moment');
 
 export default {
   strict: true,
@@ -18,15 +19,10 @@ export default {
     ),
     validUserCourses: state => state.userCourses.filter(
       userCourse => userCourse.isFavorited || userCourse.userCoursePlans.filter(function (userCoursePlan) {
-        const today = new Date(2021, 7 - 1, 1);
-        const targetAt = new Date(userCoursePlan.targetAt);
-        const targetDate = new Date(targetAt.getFullYear(), targetAt.getMonth(), targetAt.getDay());
+        const today = moment().startOf('days');
+        const targetDate = moment(userCoursePlan.targetAt).startOf('days');
 
-        console.log(userCoursePlan);
-        console.log(targetDate);
-        console.log(today);
-        console.log(targetDate.getTime() >= today.getTime());
-        return targetDate.getTime() >= today.getTime();
+        return targetDate.isSameOrAfter(today);
       }).length
     ),
   },
