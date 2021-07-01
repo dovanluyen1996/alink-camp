@@ -10,7 +10,7 @@
 
         <user-course-results
           :user-course-results="userCourseResults"
-          @clickUserCourseResult="showEditDialog"
+          @clickUserCourseResult="showEditConfirmDialog"
         />
       </div>
     </v-ons-card>
@@ -24,7 +24,7 @@
     </fixed-footer>
 
     <v-ons-alert-dialog
-      :visible.sync="isVisibleEditDialog"
+      :visible.sync="isVisibleEditConfirmDialog"
     >
       <template #title>
         編集確認
@@ -36,7 +36,7 @@
       <template #footer>
         <v-ons-button
           modifier="quiet quiet--dark"
-          @click="cancelGoToUserCourseResultsEdit()"
+          @click="hideEditConfirmDialog()"
         >
           キャンセル
         </v-ons-button>
@@ -85,7 +85,7 @@ export default {
   },
   data() {
     return {
-      isVisibleEditDialog: false,
+      isVisibleEditConfirmDialog: false,
       selectedUserCourseResults: null,
     };
   },
@@ -101,16 +101,15 @@ export default {
     async getUserCourseResults() {
       await this.$store.dispatch('models/userCourseResult/getUserCourseResults', this.userCourseId);
     },
-    showEditDialog(userCourseResult) {
-      this.isVisibleEditDialog = true;
+    showEditConfirmDialog(userCourseResult) {
+      this.isVisibleEditConfirmDialog = true;
       this.selectedUserCourseResults = userCourseResult;
     },
-    cancelGoToUserCourseResultsEdit() {
-      this.isVisibleEditDialog = false;
+    hideEditConfirmDialog() {
+      this.isVisibleEditConfirmDialog = false;
       this.selectedUserCourseResults = null;
     },
     goToUserCourseResultsEdit() {
-      this.isVisibleEditDialog = false;
       this.$store.dispatch('scoresNavigator/push', {
         extends: UserCourseResultsEdit,
         onsNavigatorProps: {
@@ -118,6 +117,7 @@ export default {
           userCourseResult: this.selectedUserCourseResults,
         },
       });
+      this.hideEditConfirmDialog();
     },
     goToUserCourseResultsNew() {
       this.$store.dispatch('scoresNavigator/push', {
