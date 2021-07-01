@@ -17,7 +17,7 @@ export default {
   created() {
     this.$store.dispatch('courseSearchNavigator/push', CourseSearchIndexPage);
     // Get 閲覧履歴 from Local Storage and save to Store
-    this.$store.dispatch('models/course/getViewedCourses');
+    this.$store.dispatch('course/getViewedCourses');
   },
   methods: {
     popPage() {

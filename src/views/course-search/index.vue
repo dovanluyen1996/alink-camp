@@ -59,7 +59,7 @@ export default {
   },
   computed: {
     viewedCourses() {
-      return this.$store.getters['models/course/viewedCourses'] || [];
+      return this.$store.getters['course/viewedCourses'] || [];
     },
   },
   methods: {
