@@ -31,10 +31,10 @@
 <script>
 // components
 import CourseName from '@/components/organisms/course-name';
-import UserCourseResultsTargetDateField from '@/components/organisms/scores/result/target-date-field';
-import UserCourseResultsScoresField from '@/components/organisms/scores/result/scores-field';
+import UserCourseResultsTargetDateField from '@/components/organisms/user-course-results/target-date-field';
+import UserCourseResultsScoresField from '@/components/organisms/user-course-results/scores-field';
 import UserCourseResultsImageField from '@/components/organisms/form/image-field';
-import UserCourseResultsNoteField from '@/components/organisms/scores/result/note-field';
+import UserCourseResultsNoteField from '@/components/organisms/user-course-results/note-field';
 import FixedFooter from '@/components/organisms/fixed-footer';
 
 export default {

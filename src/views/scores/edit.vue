@@ -46,11 +46,11 @@
 // components
 import DeleteDialogWithIcon from '@/components/organisms/dialog/delete-dialog-with-icon';
 import CourseName from '@/components/organisms/course-name';
-import UserCourseResultTargetDateField from '@/components/organisms/scores/result/target-date-field';
-import UserCourseResultScoresField from '@/components/organisms/scores/result/scores-field';
-import UserCourseResultWeather from '@/components/organisms/scores/result/weather';
-import UserCourseResultImage from '@/components/organisms/scores/result/image';
-import UserCourseResultNoteField from '@/components/organisms/scores/result/note-field';
+import UserCourseResultTargetDateField from '@/components/organisms/user-course-results/target-date-field';
+import UserCourseResultScoresField from '@/components/organisms/user-course-results/scores-field';
+import UserCourseResultWeather from '@/components/organisms/user-course-results/weather';
+import UserCourseResultImage from '@/components/organisms/user-course-results/image';
+import UserCourseResultNoteField from '@/components/organisms/user-course-results/note-field';
 import FixedFooter from '@/components/organisms/fixed-footer';
 
 export default {
