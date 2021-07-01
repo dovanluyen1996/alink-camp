@@ -57,6 +57,12 @@ export default {
       type: Array,
       default: () => [],
     },
+    // NOTE: デフォルトの動作(deleteImage)を作りたいため
+    //       v-on:clickではなくPropsで渡している
+    clickDelete: {
+      type: Function,
+      default: () => null,
+    },
   },
   data() {
     return {
@@ -95,6 +101,9 @@ export default {
       this.$emit('input', this.selectedFile);
     },
     deleteImage() {
+      const result = this.clickDelete();
+      if (result !== null) return;
+
       this.$emit('input', '');
       this.$set(this.selectedFile, 'image', null);
       // NOTE: v-bindでvalueをバインドさせても書き換わらないためDOM操作する
@@ -107,6 +116,10 @@ export default {
 
 <style lang="scss" scoped>
 @import '@/assets/scss/_variables.scss';
+
+.custom-image-upload {
+  text-align: center;
+}
 
 .image-field {
   text-align: center;

@@ -1,7 +1,7 @@
 <template>
   <v-ons-page>
     <custom-toolbar title="スコアの新規登録" />
-    <course-name :course-name="course.name" />
+    <course-name :course-name="userCourseResult.name" />
     <weather-and-image v-model="image" />
     <target-date-field
       v-model="target_date"
@@ -43,7 +43,7 @@ export default {
     FixedFooter,
   },
   props: {
-    course: {
+    userCourseResult: {
       type: Object,
       default: () => {},
       required: true,
