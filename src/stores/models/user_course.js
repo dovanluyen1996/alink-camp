@@ -16,6 +16,9 @@ export default {
     findByCourseId: state => courseId => state.userCourses.find(
       userCourse => userCourse.courseId === courseId,
     ),
+    validUserCourses: state => state.userCourses.filter(
+      userCourse => userCourse.isFavorited ||  userCourse.userCoursePlans.length,
+    ),
   },
   mutations: {
     setIsLoading(state, isLoading) {

@@ -4,7 +4,7 @@
       :user-course="userCourse"
     />
     <div
-      v-if="ForecastScheduledDate"
+      v-if="userCoursePlan"
       class="course-weather-detail"
     >
       <!-- TODO: データの渡し方はStoreに合わせて変更してください -->
@@ -12,9 +12,11 @@
         v-if="userCoursePlan"
         :user-course-plan="userCoursePlan"
       />
-      <course-weather-of-the-day :forecast="ForecastScheduledDate" />
-      <course-weather-the-day-before :forecast="ForecastScheduledDate.day_before" />
-      <course-weather-hourly-weather :forecast="ForecastScheduledDate.scheduled_date" />
+      <template v-if="ForecastScheduledDate">
+        <course-weather-of-the-day :forecast="ForecastScheduledDate" />
+        <course-weather-the-day-before :forecast="ForecastScheduledDate.day_before" />
+        <course-weather-hourly-weather :forecast="ForecastScheduledDate.scheduled_date" />
+      </template>
     </div>
     <template v-else-if="Forecast10Days">
       <course-weather-calendar
