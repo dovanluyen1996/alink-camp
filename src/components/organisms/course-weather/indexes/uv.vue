@@ -16,6 +16,13 @@
 <script>
 export default {
   name: 'CourseWeatherUvIndex',
+  props: {
+    forecast: {
+      type: Object,
+      default: null,
+      required: true,
+    },
+  },
   data() {
     return {
       uv_text: {
@@ -27,17 +34,9 @@ export default {
       },
     };
   },
-  props: {
-    forecast: {
-      type: Object,
-      default: null,
-      required: true,
-    },
-  },
   computed: {
     image() {
       return this.getImage();
-      return require(`@/assets/images/weathers/uv/uv_large_${this.getImageFileName()}.png`);
     },
     label() {
       return this.forecast.uv_index ? this.uv_text[this.forecast.uv_index] : '';

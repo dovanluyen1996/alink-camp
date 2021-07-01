@@ -16,6 +16,13 @@
 <script>
 export default {
   name: 'CourseWeatherDressIndex',
+  props: {
+    forecast: {
+      type: Object,
+      default: null,
+      required: true,
+    },
+  },
   data() {
     return {
       dress_text: {
@@ -32,19 +39,12 @@ export default {
       },
     };
   },
-  props: {
-    forecast: {
-      type: Object,
-      default: null,
-      required: true,
-    },
-  },
   computed: {
     image() {
       return this.getImage();
     },
     label() {
-      return this.dress_text[`${this.forecast.dress_index_weather}_${this.forecast.dress_index}`]
+      return this.dress_text[`${this.forecast.dress_index_weather}_${this.forecast.dress_index}`];
     },
   },
   methods: {

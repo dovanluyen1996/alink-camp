@@ -16,6 +16,13 @@
 <script>
 export default {
   name: 'CourseWeatherThunderIndex',
+  props: {
+    forecast: {
+      type: Object,
+      default: null,
+      required: true,
+    },
+  },
   data() {
     return {
       thunder_text: {
@@ -26,19 +33,12 @@ export default {
       },
     };
   },
-  props: {
-    forecast: {
-      type: Object,
-      default: null,
-      required: true,
-    },
-  },
   computed: {
     image() {
       return this.getImage();
     },
     label() {
-      return this.forecast.thunder_index ? this.thunder_text[this.forecast.thunder_index] : ''
+      return this.forecast.thunder_index ? this.thunder_text[this.forecast.thunder_index] : '';
     },
   },
   methods: {
