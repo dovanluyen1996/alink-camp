@@ -17,7 +17,7 @@
     <fixed-footer>
       <v-ons-button
         modifier="large--cta add rounded"
-        @click="goToResultNew"
+        @click="goToUserCourseResultsNew"
       >
         スコア追加
       </v-ons-button>
@@ -36,12 +36,12 @@
       <template #footer>
         <v-ons-button
           modifier="quiet quiet--dark"
-          @click="cancelGoToResultEdit()"
+          @click="cancelGoToUserCourseResultsEdit()"
         >
           キャンセル
         </v-ons-button>
         <v-ons-button
-          @click="goToResultEdit"
+          @click="goToUserCourseResultsEdit"
         >
           編集する
         </v-ons-button>
@@ -59,8 +59,8 @@ import UserCourseResults from '@/components/organisms/scores/user-course-results
 import FixedFooter from '@/components/organisms/fixed-footer';
 
 // pages
-import ResultsNew from '@/views/scores/result-new';
-import ResultsEdit from '@/views/scores/result-edit';
+import UserCourseResultsNew from '@/views/scores/new';
+import UserCourseResultsEdit from '@/views/scores/edit';
 
 export default {
   name: 'ScoreSummary',
@@ -105,23 +105,23 @@ export default {
       this.isVisibleEditDialog = true;
       this.selectedUserCourseResults = userCourseResult;
     },
-    cancelGoToResultEdit() {
+    cancelGoToUserCourseResultsEdit() {
       this.isVisibleEditDialog = false;
       this.selectedUserCourseResults = null;
     },
-    goToResultEdit() {
+    goToUserCourseResultsEdit() {
       this.isVisibleEditDialog = false;
       this.$store.dispatch('scoresNavigator/push', {
-        extends: ResultsEdit,
+        extends: UserCourseResultsEdit,
         onsNavigatorProps: {
           course: this.course,
           userCourseResult: this.selectedUserCourseResults,
         },
       });
     },
-    goToResultNew() {
+    goToUserCourseResultsNew() {
       this.$store.dispatch('scoresNavigator/push', {
-        extends: ResultsNew,
+        extends: UserCourseResultsNew,
         onsNavigatorProps: {
           course: this.course,
         },
