@@ -63,6 +63,9 @@ export default {
   },
   methods: {
     async searchByName() {
+      // Clear before search result
+      this.clearSearchResult();
+
       // If search textbox is empty, don't do anything
       if (this.inputedValue.length < 1) return;
 
@@ -75,7 +78,6 @@ export default {
         this.$emit('searched');
       } else {
         this.showSearchResultEmptyDialog();
-        this.clearSearchResult();
       }
     },
     clearSearchResult() {
