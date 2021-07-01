@@ -40,11 +40,14 @@ export default {
   name: 'StartIndex',
   data() {
     return {
-      loginStatus: false,
+      isLogin: false,
     };
   },
-  created() {
-    this.isLogin();
+  async created() {
+    await this.checkLogin();
+  },
+  mounted() {
+    if (this.isLogin) this.goToTop();
   },
   methods: {
     created() {
@@ -69,11 +72,18 @@ export default {
     goToSignIn() {
       this.$store.dispatch('appNavigator/push', SignIn);
     },
-    isLogin() {
-      // TODO: ログイン情報がマージされ次第修正
-      if (this.loginStatus) this.goAppTop();
+    async checkLogin() {
+      try {
+        const session = await this.$cognito.isAuthenticated();
+
+        this.isLogin = session ? true : false;
+      } catch (err) {
+        console.log(err);
+
+        this.isLogin = false;
+      }
     },
-    goAppTop() {
+    goToTop() {
       this.$store.dispatch('appNavigator/reset', AppTabbar);
     },
   },
