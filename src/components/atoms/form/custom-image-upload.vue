@@ -76,6 +76,7 @@ export default {
   computed: {
     imagePath() {
       let imagePath;
+      // NOTE: 画像登録済みの場合はpropsでパスが渡ってくると想定している
       if (typeof this.value === 'string') {
         imagePath = this.value;
       } else {

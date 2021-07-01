@@ -38,7 +38,7 @@
 
     <delete-dialog
       :is-shown.sync="isShownDeleteDialog"
-      @clickDelete="clickImageDelete"
+      @clickDelete="deleteImage"
     >
       この写真を削除します。<br>
       よろしいですか？
@@ -101,7 +101,7 @@ export default {
     showDeleteDialog() {
       this.isShownDeleteDialog = true;
     },
-    clickImageDelete() {
+    deleteImage() {
       this.selectedFile = '';
       this.isShownDeleteDialog = false;
     },

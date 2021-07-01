@@ -31,7 +31,6 @@ export default {
     isShown: {
       type: Boolean,
       default: false,
-      required: true,
     },
   },
   computed: {

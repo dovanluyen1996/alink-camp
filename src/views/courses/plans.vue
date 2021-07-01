@@ -5,17 +5,14 @@
       subtitle="（予定日設定）"
     >
       <template #right>
-        <div
+        <delete-dialog-with-icon
           v-if="isCanDelete"
-          class="delete-plan"
-          @click="openDeleteDialog"
+          :is-shown.sync="isShownDeleteDialog"
+          @clickDelete="deletePlans"
         >
-          <img
-            src="@/assets/images/trash.png"
-            width="24px"
-            alt="予定を削除"
-          >
-        </div>
+          この予定日設定を削除します。<br>
+          よろしいですか？
+        </delete-dialog-with-icon>
       </template>
     </custom-toolbar>
 
@@ -42,33 +39,12 @@
       </fixed-footer>
     </div>
 
-    <v-ons-alert-dialog
-      :visible="isShownDeleteDialog"
-    >
-      <template #title>
-        削除確認
-      </template>
-
-      この予定日設定を削除します。<br>
-      よろしいですか？
-
-      <template #footer>
-        <v-ons-button
-          modifier="quiet quiet-dark"
-          @click="closeDeleteDialog"
-        >
-          キャンセル
-        </v-ons-button>
-        <v-ons-button @click="deletePlans">
-          削除する
-        </v-ons-button>
-      </template>
-    </v-ons-alert-dialog>
   </v-ons-page>
 </template>
 
 <script>
 // components
+import DeleteDialogWithIcon from '@/components/organisms/dialog/delete-dialog-with-icon';
 import DateField from '@/components/organisms/form/date-field';
 import TimeField from '@/components/organisms/form/time-field';
 import FixedFooter from '@/components/organisms/fixed-footer';
@@ -76,6 +52,7 @@ import FixedFooter from '@/components/organisms/fixed-footer';
 export default {
   name: 'CoursePlans',
   components: {
+    DeleteDialogWithIcon,
     DateField,
     TimeField,
     FixedFooter,
@@ -95,15 +72,9 @@ export default {
     },
   },
   methods: {
-    openDeleteDialog() {
-      this.isShownDeleteDialog = true;
-    },
-    closeDeleteDialog() {
-      this.isShownDeleteDialog = false;
-    },
     deletePlans() {
       console.log('delete plans');
-      this.closeDeleteDialog();
+      this.isShownDeleteDialog = false;
     },
     update() {
       console.log('update plans');
@@ -113,15 +84,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.delete-plan {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 44px;
-  height: 44px;
-  margin: 8px 6px;
-}
-
 /deep/ {
   .card {
     text-align: center;
