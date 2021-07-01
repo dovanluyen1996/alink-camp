@@ -4,8 +4,7 @@
       <span>予定日前日</span><span>のお天気</span>
     </div>
     <weather-image
-      :weather-image-name="forecast.weather_image_name"
-      :weather-name="forecast.forecast_telop"
+      :weather="forecast"
       :is-shown-name="true"
       image-width="66px"
     />

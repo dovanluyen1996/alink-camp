@@ -11,8 +11,7 @@
       </div>
       <div class="course-weather-day-weather">
         <weather-image
-          :weather-image-name="item.weather_image_name"
-          :weather-name="item.forecast_telop"
+          :weather="item"
           image-width="60px"
         />
       </div>

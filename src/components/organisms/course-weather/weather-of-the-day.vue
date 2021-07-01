@@ -6,8 +6,7 @@
     <v-ons-row>
       <v-ons-col>
         <weather-image
-          :weather-image-name="forecast.scheduled_date.weather_image_name"
-          :weather-name="forecast.scheduled_date.forecast_telop"
+          :weather="forecast.scheduled_date"
           :is-shown-name="true"
           image-width="66px"
         />

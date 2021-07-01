@@ -10,7 +10,7 @@
       v-if="isShownName"
       class="weather-name"
     >
-      {{ weatherName }}
+      {{ weather.forecast_telop }}
     </div>
   </div>
 </template>
@@ -19,12 +19,8 @@
 export default {
   name: 'WeatherImage',
   props: {
-    weatherImageName: {
-      type: String,
-      required: true,
-    },
-    weatherName: {
-      type: String,
+    weather: {
+      type: Object,
       required: true,
     },
     isShownName: {
@@ -42,7 +38,7 @@ export default {
     },
     alt() {
       if (this.isShownName) return null;
-      return this.weatherName;
+      return this.weather.forecast_telop;
     },
   },
   methods: {
@@ -51,9 +47,9 @@ export default {
         // NOTE: 画像のため依存関係が明らかなのでrequireのルールを除外
         //       枚数も多いので従うと却って見づらくなる
         // eslint-disable-next-line global-require, import/no-dynamic-require
-        return require(`@/assets/images/weathers/weather/${this.weatherImageName}`);
+        return require(`@/assets/images/weathers/weather/${this.weather.weather_image_name}`);
       } catch (e) {
-        console.error(`天気画像ファイル（@/assets/images/weathers/weather/${this.weatherImageName}）の読み込みに失敗しました`);
+        console.error(`天気画像ファイル（@/assets/images/weathers/weather/${this.weather.weather_image_name}）の読み込みに失敗しました`);
         return null;
       }
     },
