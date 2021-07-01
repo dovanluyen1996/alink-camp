@@ -3,6 +3,7 @@ const AdjustPlugin = {
     let adjustConfig;
     if (process.env.NODE_ENV === 'production') {
       // TODO: 開発環境をdevelopmentでビルドできるようになったら、本番用の実装を組み込む
+      /* eslint-disable no-undef */
       adjustConfig = new AdjustConfig(
         process.env.ADJUST_TOKEN,
         AdjustConfig.EnvironmentSandbox,
@@ -14,8 +15,8 @@ const AdjustPlugin = {
         AdjustConfig.EnvironmentSandbox,
       );
     }
-
     adjustConfig.setLogLevel(AdjustConfig.LogLevelInfo);
+    /* eslint-enable no-undef */
 
     // adjustConfig.setEventTrackingSucceededCallbackListener((eventSuccess) => {
     //   // Printing all event success properties.
@@ -40,6 +41,7 @@ const AdjustPlugin = {
     //   console.log(eventFailure.jsonResponse);
     // });
 
+    // eslint-disable-next-line no-undef
     Adjust.create(adjustConfig);
   },
 };
