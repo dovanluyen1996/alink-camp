@@ -17,7 +17,17 @@ export default {
       userCourse => userCourse.courseId === courseId,
     ),
     validUserCourses: state => state.userCourses.filter(
-      userCourse => userCourse.isFavorited ||  userCourse.userCoursePlans.length,
+      userCourse => userCourse.isFavorited || userCourse.userCoursePlans.filter(function (userCoursePlan) {
+        const today = new Date(2021, 7 - 1, 1);
+        const targetAt = new Date(userCoursePlan.targetAt);
+        const targetDate = new Date(targetAt.getFullYear(), targetAt.getMonth(), targetAt.getDay());
+
+        console.log(userCoursePlan);
+        console.log(targetDate);
+        console.log(today);
+        console.log(targetDate.getTime() >= today.getTime());
+        return targetDate.getTime() >= today.getTime();
+      }).length
     ),
   },
   mutations: {
