@@ -13,16 +13,23 @@
     </custom-toolbar>
 
     <course-name :course-name="course.name" />
-    <weather-and-image v-model="image" />
-    <target-date-field
+
+    <v-ons-card class="course-weather-and-image">
+      <v-ons-row class="course-weather-and-image-row">
+        <user-course-result-weather />
+        <user-course-result-image v-model="image" />
+      </v-ons-row>
+    </v-ons-card>
+
+    <user-course-result-target-date-field
       v-model="target_date"
-      title="プレイ日（必須）"
+      title="プレイ日"
     />
-    <scores-field
+    <user-course-result-scores-field
       :total-score.sync="total_score"
       :patting-score.sync="patting_score"
     />
-    <note-field v-model="note" />
+    <user-course-result-note-field v-model="note" />
 
     <fixed-footer>
       <v-ons-button
@@ -39,10 +46,11 @@
 // components
 import DeleteDialogWithIcon from '@/components/organisms/dialog/delete-dialog-with-icon';
 import CourseName from '@/components/organisms/course-name';
-import TargetDateField from '@/components/organisms/scores/result/target-date-field';
-import ScoresField from '@/components/organisms/scores/result/scores-field';
-import WeatherAndImage from '@/components/organisms/scores/result/weather-and-image';
-import NoteField from '@/components/organisms/scores/result/note-field';
+import UserCourseResultTargetDateField from '@/components/organisms/scores/result/target-date-field';
+import UserCourseResultScoresField from '@/components/organisms/scores/result/scores-field';
+import UserCourseResultWeather from '@/components/organisms/scores/result/weather';
+import UserCourseResultImage from '@/components/organisms/scores/result/image';
+import UserCourseResultNoteField from '@/components/organisms/scores/result/note-field';
 import FixedFooter from '@/components/organisms/fixed-footer';
 
 export default {
@@ -50,10 +58,11 @@ export default {
   components: {
     DeleteDialogWithIcon,
     CourseName,
-    TargetDateField,
-    ScoresField,
-    WeatherAndImage,
-    NoteField,
+    UserCourseResultTargetDateField,
+    UserCourseResultScoresField,
+    UserCourseResultWeather,
+    UserCourseResultImage,
+    UserCourseResultNoteField,
     FixedFooter,
   },
   props: {
@@ -96,3 +105,31 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.course-weather-and-image {
+  text-align: center;
+}
+
+@media screen and (max-width: 374px) {
+  .course-weather-and-image-row {
+    flex-direction: column;
+  }
+
+  .course-weather-col {
+    margin-right: 0;
+    margin-bottom: 15px;
+  }
+}
+
+@media screen and (min-width: 375px) {
+  .course-weather-col {
+    margin-right: 15px;
+  }
+
+  .course-image-col {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+}
+</style>

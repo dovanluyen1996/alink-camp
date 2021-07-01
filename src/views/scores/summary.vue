@@ -57,7 +57,6 @@ import ScoreSummaryChart from '@/components/organisms/scores/summary-chart';
 import CourseWeather from '@/components/organisms/scores/course-weather';
 import UserCourseResults from '@/components/organisms/scores/user-course-results';
 import FixedFooter from '@/components/organisms/fixed-footer';
-import DeleteDialog from '@/components/organisms/dialog/delete-dialog';
 
 // pages
 import ResultsNew from '@/views/scores/result-new';
@@ -71,7 +70,6 @@ export default {
     CourseWeather,
     UserCourseResults,
     FixedFooter,
-    DeleteDialog,
   },
   props: {
     course: {

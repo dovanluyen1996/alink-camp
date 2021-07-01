@@ -38,7 +38,6 @@
         </v-ons-button>
       </fixed-footer>
     </div>
-
   </v-ons-page>
 </template>
 
