@@ -72,7 +72,7 @@ export default {
       await this.$store.dispatch('models/course/getCourses', params);
 
       if (this.recordCount) {
-        this.$emit('goToSearchResult');
+        this.$emit('searched');
       } else {
         this.showSearchResultEmptyDialog();
         this.clearSearchResult();

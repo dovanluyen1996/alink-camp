@@ -1,15 +1,15 @@
 <template>
-  <v-ons-page @show="show">
+  <v-ons-page>
     <custom-toolbar title="コース検索" />
     <div class="content">
       <search-field
         v-model="searchText"
-        @goToSearchResult="goToSearchResult"
+        @searched="goToSearchResult"
       />
 
       <course-list
-        v-if="courses.length > 0"
-        :courses="courses"
+        v-if="viewedCourses.length > 0"
+        :courses="viewedCourses"
         :has-chevron="false"
         title="閲覧履歴"
         @click="goToCourseShow"
@@ -55,13 +55,14 @@ export default {
   data() {
     return {
       searchText: '',
-      courses: [],
     };
   },
-  methods: {
-    show() {
-      this.getCourseHistories();
+  computed: {
+    viewedCourses() {
+      return this.$store.getters['models/course/viewedCourses'] || [];
     },
+  },
+  methods: {
     goToPrefecturesSearch() {
       this.$store.dispatch('courseSearchNavigator/push', PrefecturesSearch);
     },
@@ -69,7 +70,6 @@ export default {
       this.$store.dispatch('courseSearchNavigator/push', ConditionsSearch);
     },
     goToSearchResult() {
-      console.log('goToSearchResult', this.searchText);
       this.$store.dispatch('courseSearchNavigator/push', {
         extends: SearchResult,
         onsNavigatorProps: {
@@ -80,9 +80,6 @@ export default {
     goToCourseShow(course) {
       console.log('goToCourseShow', course);
       this.$store.dispatch('courseSearchNavigator/push', CourseShow);
-    },
-    getCourseHistories() {
-      this.courses = JSON.parse(localStorage.getItem('courseHistories')) || [];
     },
   },
 };
