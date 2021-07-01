@@ -51,6 +51,7 @@
     "babel-preset-env": "^1.3.2",
     "babel-preset-stage-2": "^6.22.0",
     "chalk": "^2.0.1",
+    "com.adjust.sdk": "^4.28.0",
     "copy-webpack-plugin": "^4.0.1",
     "cordova-android": "^9.1.0",
     "cordova-browser": "^6.0.0",
@@ -112,7 +113,8 @@
       "cordova-plugin-whitelist": {},
       "cordova-plugin-device": {},
       "cordova-plugin-app-version": {},
-      "cordova-plugin-firebasex": {}
+      "cordova-plugin-firebasex": {},
+      "com.adjust.sdk": {}
     },
     "platforms": [
       "ios",
