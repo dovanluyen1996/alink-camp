@@ -16,6 +16,22 @@
 <script>
 export default {
   name: 'CourseWeatherDressIndex',
+  data() {
+    return {
+      dress_text: {
+        fine_1: '着脱可能な服',
+        fine_2: '上着が重宝',
+        fine_3: 'しっかり保温',
+        fine_4: '厳重に防寒を',
+        fine_5: '冬山の装備を',
+        rain_1: '急な雨に備えて',
+        rain_2: '急な雨に備えて',
+        rain_3: '急な雨に備えて',
+        rain_4: '雨具の下は暖かく',
+        rain_5: '冬山の装備を',
+      },
+    };
+  },
   props: {
     forecast: {
       type: Object,
@@ -25,31 +41,27 @@ export default {
   },
   computed: {
     image() {
-      // eslint-disable-next-line global-require, import/no-dynamic-require
-      return require(`@/assets/images/weathers/dress/dress_large_${this.forecast.dress_index_weather}_${this.forecast.dress_index}.png`);
+      return this.getImage();
     },
     label() {
-      let text = '';
-      switch (this.forecast.dress_index) {
-      case 1:
-        text = this.forecast.dress_index_weather === 'rain' ? '急な雨に備えて' : '着脱可能な服';
-        break;
-      case 2:
-        text = this.forecast.dress_index_weather === 'rain' ? '急な雨に備えて' : '上着が重宝';
-        break;
-      case 3:
-        text = this.forecast.dress_index_weather === 'rain' ? '急な雨に備えて' : 'しっかり保温';
-        break;
-      case 4:
-        text = this.forecast.dress_index_weather === 'rain' ? '雨具の下は暖かく' : '厳重に防寒を';
-        break;
-      case 5:
-        text = this.forecast.dress_index_weather === 'rain' ? '冬山の装備を' : '冬山の装備を';
-        break;
-      default:
-        text = '';
+      return this.dress_text[`${this.forecast.dress_index_weather}_${this.forecast.dress_index}`]
+    },
+  },
+  methods: {
+    getImage() {
+      try {
+        // eslint-disable-next-line global-require, import/no-dynamic-require
+        return require(`@/assets/images/weathers/dress/dress_large_${this.getImageFileName()}.png`);
+      } catch (e) {
+        console.error(`服装画像ファイル（@/assets/images/weathers/dress/dress_large_${this.getImageFileName()}.png）の読み込みに失敗しました`);
+        return null;
       }
-      return text;
+    },
+    getImageFileName() {
+      const isNone = !this.forecast.dress_index || !this.forecast.dress_index_weather;
+      const imageName = `${this.forecast.dress_index_weather}_${this.forecast.dress_index}`;
+
+      return isNone ? 'none' : imageName;
     },
   },
 };

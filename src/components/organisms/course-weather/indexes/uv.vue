@@ -16,6 +16,17 @@
 <script>
 export default {
   name: 'CourseWeatherUvIndex',
+  data() {
+    return {
+      uv_text: {
+        1: '弱い',
+        2: 'やや強い',
+        3: '強い',
+        4: '非常に強い',
+        5: 'きわめて強い',
+      },
+    };
+  },
   props: {
     forecast: {
       type: Object,
@@ -25,31 +36,25 @@ export default {
   },
   computed: {
     image() {
-      // eslint-disable-next-line global-require, import/no-dynamic-require
-      return require(`@/assets/images/weathers/uv/uv_large_${this.forecast.uv_index}.png`);
+      return this.getImage();
+      return require(`@/assets/images/weathers/uv/uv_large_${this.getImageFileName()}.png`);
     },
     label() {
-      let text = '';
-      switch (this.forecast.uv_index) {
-      case 1:
-        text = '弱い';
-        break;
-      case 2:
-        text = 'やや強い';
-        break;
-      case 3:
-        text = '強い';
-        break;
-      case 4:
-        text = '非常に強い';
-        break;
-      case 5:
-        text = 'きわめて強い';
-        break;
-      default:
-        text = '';
+      return this.forecast.uv_index ? this.uv_text[this.forecast.uv_index] : '';
+    },
+  },
+  methods: {
+    getImage() {
+      try {
+        // eslint-disable-next-line global-require, import/no-dynamic-require
+        return require(`@/assets/images/weathers/uv/uv_large_${this.getImageFileName()}.png`);
+      } catch (e) {
+        console.error(`紫外線画像ファイル（@/assets/images/weathers/uv/uv_large_${this.getImageFileName()}.png）の読み込みに失敗しました`);
+        return null;
       }
-      return text;
+    },
+    getImageFileName() {
+      return this.forecast.uv_index || 'none';
     },
   },
 };

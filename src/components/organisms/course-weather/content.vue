@@ -77,7 +77,7 @@ export default {
           precip_18: '40',
           max_temp: '4.7',
           min_temp: '-2.1',
-          thunder_index: 0,
+          thunder_index: 4,
           dress_index: 1,
           dress_index_weather: 'fine',
           uv_index: 3,

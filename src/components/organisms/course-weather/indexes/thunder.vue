@@ -16,6 +16,16 @@
 <script>
 export default {
   name: 'CourseWeatherThunderIndex',
+  data() {
+    return {
+      thunder_text: {
+        1: '低い',
+        2: 'やや低い',
+        3: 'やや高い',
+        4: '高い',
+      },
+    };
+  },
   props: {
     forecast: {
       type: Object,
@@ -25,31 +35,22 @@ export default {
   },
   computed: {
     image() {
-      // eslint-disable-next-line global-require, import/no-dynamic-require
-      return require(`@/assets/images/weathers/thunder/thunder_large_${this.getImageFileName()}.png`);
+      return this.getImage();
     },
     label() {
-      let text = '';
-      switch (this.forecast.thunder_index) {
-      case 1:
-        text = '低い';
-        break;
-      case 2:
-        text = 'やや低い';
-        break;
-      case 3:
-        text = 'やや高い';
-        break;
-      case 4:
-        text = '高い';
-        break;
-      default:
-        text = '';
-      }
-      return text;
+      return this.forecast.thunder_index ? this.thunder_text[this.forecast.thunder_index] : ''
     },
   },
   methods: {
+    getImage() {
+      try {
+        // eslint-disable-next-line global-require, import/no-dynamic-require
+        return require(`@/assets/images/weathers/thunder/thunder_large_${this.getImageFileName()}.png`);
+      } catch (e) {
+        console.error(`落雷画像ファイル（@/assets/images/weathers/thunder/thunder_large_${this.getImageFileName()}.png）の読み込みに失敗しました`);
+        return null;
+      }
+    },
     getImageFileName() {
       return this.forecast.thunder_index || 'none';
     },
