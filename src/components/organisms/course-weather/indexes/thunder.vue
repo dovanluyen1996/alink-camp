@@ -29,7 +29,6 @@ export default {
       return require(`@/assets/images/weathers/thunder/thunder_large_${this.getImageFileName()}.png`);
     },
     label() {
-      // TODO: 文言確認する,画像と対応させる
       let text = '';
       switch (this.forecast.thunder_index) {
       case 1:

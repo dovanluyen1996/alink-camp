@@ -29,7 +29,6 @@ export default {
       return require(`@/assets/images/weathers/dress/dress_large_${this.forecast.dress_index_weather}_${this.forecast.dress_index}.png`);
     },
     label() {
-      // TODO: 文言確認する,画像と対応させる
       let text = '';
       switch (this.forecast.dress_index) {
       case 1:

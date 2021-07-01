@@ -7,7 +7,6 @@
       v-if="userCoursePlan"
       class="course-weather-detail"
     >
-      <!-- TODO: データの渡し方はStoreに合わせて変更してください -->
       <course-weather-plan
         v-if="userCoursePlan"
         :user-course-plan="userCoursePlan"
@@ -56,9 +55,8 @@ export default {
   },
   data() {
     return {
-      // TODO: DailyWeatherForecast, beforeDayWeatherForecast
-      //       weatherForecastsのデータは適当なので
-      //       天気が取得できたら適切に変更してください
+      // TODO: ForecastScheduledDate, Forecast10Days のデータは実際の戻り値を参考にしています。
+      //       天気が取得できたらStoreを実装します。
       ForecastScheduledDate: {
         course_id: 2,
         scheduled_date: {

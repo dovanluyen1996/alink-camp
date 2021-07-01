@@ -47,7 +47,6 @@ export default {
   },
   methods: {
     async show() {
-      // TODO: 予定日天気APIを呼び出す
       await this.getUserCourses();
     },
     async getUserCourses() {
