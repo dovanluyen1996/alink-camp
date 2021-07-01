@@ -100,7 +100,7 @@ export default {
   name: 'CoursesInformationTab',
   computed: {
     course() {
-      return this.$store.getters['models/course/choosenCourse'];
+      return this.$store.getters['course/choosenCourse'];
     },
     mapUrl() {
       return `https://maps.google.com/?q=${this.course.latitude},${this.course.longitude}`;

@@ -1,13 +1,17 @@
 import Vue from 'vue';
+import ApiClient from '@/api_client';
 
 export default {
   strict: true,
   namespaced: true,
   state: {
     viewedCourses: [],
+    choosenCourse: {},
+    isLoading: false,
   },
   getters: {
     viewedCourses: state => state.viewedCourses,
+    choosenCourse: state => state.choosenCourse,
   },
   mutations: {
     setViewedCourses(state, courses) {
@@ -33,6 +37,12 @@ export default {
       // Update 閲覧履歴 local storage
       localStorage.setItem('viewedCourses', JSON.stringify(state.viewedCourses));
     },
+    setIsLoading(state, isLoading) {
+      state.isLoading = isLoading;
+    },
+    setChoosenCourse(state, course) {
+      Vue.set(state, 'choosenCourse', course);
+    },
   },
   actions: {
     addViewedCourses(context, course) {
@@ -41,6 +51,20 @@ export default {
     setViewedCoursesByCache(context) {
       // Get viewed courses from Local Storage
       context.commit('setViewedCourses', JSON.parse(localStorage.getItem('viewedCourses')) || []);
+    },
+    setChoosenCourse(context, course) {
+      context.commit('setChoosenCourse', course);
+    },
+    async getChoosenCourse(context, courseId) {
+      context.commit('setIsLoading', true);
+
+      try {
+        const course = await ApiClient.getCourse(courseId);
+
+        context.commit('setChoosenCourse', course);
+      } finally {
+        context.commit('setIsLoading', false);
+      }
     },
   },
 };

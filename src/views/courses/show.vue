@@ -82,7 +82,7 @@ export default {
     },
   },
   async created() {
-    await this.getChoosenCourse();
+    await this.getCourse();
   },
   methods: {
     toggleFavorite() {
@@ -94,8 +94,8 @@ export default {
     goToScore() {
       console.log('goToScore');
     },
-    async getChoosenCourse() {
-      await this.$store.dispatch('models/course/getChoosenCourse', this.course.id);
+    async getCourse() {
+      await this.$store.dispatch('course/getChoosenCourse', this.course.id);
     },
   },
 };
