@@ -4,7 +4,7 @@
       v-for="userCourseResult in userCourseResults"
       :key="userCourseResult.id"
       modifier="chevron"
-      @click="goToResultEdit(userCourseResult)"
+      @click="clickUserCourseResult(userCourseResult)"
     >
       <div class="center user-course-result">
         {{ displayTargetDate(userCourseResult.targetDate) }}
@@ -26,8 +26,8 @@ export default {
     displayTargetDate(targetDate) {
       return this.$helpers.toLongString(targetDate);
     },
-    goToResultEdit(userCourseResult) {
-      this.$emit('goToResultEdit', userCourseResult);
+    clickUserCourseResult(userCourseResult) {
+      this.$emit('clickUserCourseResult', userCourseResult);
     },
   },
 };

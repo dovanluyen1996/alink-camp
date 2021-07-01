@@ -10,7 +10,7 @@
 
         <user-course-results
           :user-course-results="userCourseResults"
-          @goToResultEdit="goToResultEdit"
+          @clickUserCourseResult="showEditDialog"
         />
       </div>
     </v-ons-card>
@@ -22,6 +22,31 @@
         スコア追加
       </v-ons-button>
     </fixed-footer>
+
+    <v-ons-alert-dialog
+      :visible.sync="isVisibleEditDialog"
+    >
+      <template #title>
+        編集確認
+      </template>
+
+      編集により、登録したスコアデータ、写真が削除される可能性があります。<br>
+      よろしいすか？
+
+      <template #footer>
+        <v-ons-button
+          modifier="quiet quiet--dark"
+          @click="cancelGoToResultEdit()"
+        >
+          キャンセル
+        </v-ons-button>
+        <v-ons-button
+          @click="goToResultEdit"
+        >
+          編集する
+        </v-ons-button>
+      </template>
+    </v-ons-alert-dialog>
   </v-ons-page>
 </template>
 
@@ -32,6 +57,7 @@ import ScoreSummaryChart from '@/components/organisms/scores/summary-chart';
 import CourseWeather from '@/components/organisms/scores/course-weather';
 import UserCourseResults from '@/components/organisms/scores/user-course-results';
 import FixedFooter from '@/components/organisms/fixed-footer';
+import DeleteDialog from '@/components/organisms/dialog/delete-dialog';
 
 // pages
 import ResultsNew from '@/views/scores/result-new';
@@ -45,6 +71,7 @@ export default {
     CourseWeather,
     UserCourseResults,
     FixedFooter,
+    DeleteDialog,
   },
   props: {
     course: {
@@ -58,6 +85,12 @@ export default {
       required: true,
     },
   },
+  data() {
+    return {
+      isVisibleEditDialog: false,
+      selectedUserCourseResults: null,
+    };
+  },
   computed: {
     userCourseResults() {
       return this.$store.getters['models/userCourseResult/all'];
@@ -70,12 +103,21 @@ export default {
     async getUserCourseResults() {
       await this.$store.dispatch('models/userCourseResult/getUserCourseResults', this.userCourseId);
     },
-    goToResultEdit(userCourseResult) {
+    showEditDialog(userCourseResult) {
+      this.isVisibleEditDialog = true;
+      this.selectedUserCourseResults = userCourseResult;
+    },
+    cancelGoToResultEdit() {
+      this.isVisibleEditDialog = false;
+      this.selectedUserCourseResults = null;
+    },
+    goToResultEdit() {
+      this.isVisibleEditDialog = false;
       this.$store.dispatch('scoresNavigator/push', {
         extends: ResultsEdit,
         onsNavigatorProps: {
           course: this.course,
-          userCourseResult,
+          userCourseResult: this.selectedUserCourseResults,
         },
       });
     },

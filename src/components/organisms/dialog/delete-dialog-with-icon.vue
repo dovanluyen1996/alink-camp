@@ -22,14 +22,14 @@ import DeleteDialog from '@/components/organisms/dialog/delete-dialog';
 
 export default {
   name: 'DeleteDialogWithIcon',
+  components: {
+    DeleteDialog,
+  },
   props: {
     isShown: {
       type: Boolean,
       default: false,
     },
-  },
-  components: {
-    DeleteDialog,
   },
   computed: {
     isShownDeleteDialog: {
