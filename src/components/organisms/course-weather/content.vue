@@ -35,7 +35,7 @@ import CourseWeatherTheDayBefore from '@/components/organisms/course-weather/wea
 import CourseWeatherHourlyWeather from '@/components/organisms/course-weather/hourly-weather';
 import CourseWeatherCalendar from '@/components/organisms/course-weather/calendar';
 
-const moment = require('moment');
+import moment from 'moment';
 
 export default {
   name: 'CourseWeatherContent',
@@ -137,7 +137,7 @@ export default {
 
       if (!plans || plans.length === 0) return null;
 
-      const results = plans.filter(function (plan){
+      const results = plans.filter((plan) => {
         const today = moment().startOf('days');
         const targetDate = moment(plan.targetAt).startOf('days');
 
