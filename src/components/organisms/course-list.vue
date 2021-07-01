@@ -103,7 +103,7 @@ export default {
     },
     addViewedCourse(course) {
       // Get 閲覧履歴 from Local Storage and save to Store
-      this.$store.dispatch('models/course/addViewedCourses', course);
+      this.$store.dispatch('course/addViewedCourses', course);
     },
   },
 };
