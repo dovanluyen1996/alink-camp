@@ -4,7 +4,7 @@
       :user-course="userCourse"
     />
     <div
-      v-if="false && ForecastScheduledDate"
+      v-if="ForecastScheduledDate"
       class="course-weather-detail"
     >
       <!-- TODO: データの渡し方はStoreに合わせて変更してください -->
@@ -125,108 +125,6 @@ export default {
           },
         ],
       },
-      DailyWeatherForecast: {
-        weather: 1,
-        tempereture_high: 32,
-        tempereture_low: 12,
-        sunrise: '5:00',
-        sunset: '19:00',
-        thunder: 1,
-        dress: 1,
-        uv: 1,
-      },
-      beforeDayWeatherForecast: {
-        weather: 1,
-        tempereture_high: 32,
-        tempereture_low: 12,
-      },
-      // TODO: その日の天気が出ていない時はこちら
-      weatherForecasts: [
-        {
-          date: '6/28 (月)',
-          weather: 1,
-          high: 20,
-          low: 20,
-        },
-        {
-          date: '6/29 (火)',
-          weather: 1,
-          high: 20,
-          low: 20,
-        },
-        {
-          date: '6/30 (水)',
-          weather: 1,
-          high: 20,
-          low: 20,
-        },
-        {
-          date: '7/1 (木)',
-          weather: 1,
-          high: 20,
-          low: 20,
-        },
-        {
-          date: '7/2 (金)',
-          weather: 1,
-          high: 20,
-          low: 20,
-        },
-        {
-          date: '7/3 (土)',
-          weather: 1,
-          high: 20,
-          low: 20,
-        },
-        {
-          date: '7/4 (日)',
-          weather: 1,
-          high: 20,
-          low: 20,
-        },
-        {
-          date: '7/5 (月)',
-          weather: 1,
-          high: 20,
-          low: 20,
-        },
-        {
-          date: '7/6 (火)',
-          weather: 1,
-          high: 20,
-          low: 20,
-        },
-        {
-          date: '7/7 (水)',
-          weather: 1,
-          high: 20,
-          low: 20,
-        },
-        {
-          date: '7/8 (木)',
-          weather: 1,
-          high: 20,
-          low: 20,
-        },
-        {
-          date: '7/9 (金)',
-          weather: 1,
-          high: 20,
-          low: 20,
-        },
-        {
-          date: '7/10 (土)',
-          weather: 1,
-          high: 20,
-          low: 20,
-        },
-        {
-          date: '7/11 (日)',
-          weather: 1,
-          high: 20,
-          low: 20,
-        },
-      ],
     };
   },
   computed: {
