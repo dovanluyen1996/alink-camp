@@ -3,12 +3,13 @@
     :visible.sync="isVisible"
   >
     <template #title>
-      エラー
+      {{ errorTitle }}
     </template>
 
     <p
       v-for="(errorMessage, index) in errorMessages"
       :key="index"
+      class="error-content"
     >
       {{ errorMessage }}
     </p>
@@ -17,7 +18,7 @@
       <v-ons-button
         @click="close()"
       >
-        OK
+        {{ buttonText }}
       </v-ons-button>
     </template>
   </v-ons-alert-dialog>
@@ -25,6 +26,7 @@
 
 <script>
 import SignIn from '@/views/auth/sign-in';
+import PurchaseInformation from '@/views/purchase-information';
 
 export default {
   name: 'ApiErrorDialog',
@@ -43,6 +45,12 @@ export default {
     errorMessages() {
       return this.error.message ? this.error.message.split(',') : [];
     },
+    errorTitle() {
+      return this.isMaintainanceError ? 'メンテナンス中' : 'エラー';
+    },
+    buttonText() {
+      return this.isMaintainanceError ? 'アプリを終了する' : 'OK';
+    },
   },
   watch: {
     error(newValue) {
@@ -59,7 +67,8 @@ export default {
         this.$store.dispatch('appNavigator/reset', SignIn);
         break;
       case 503:
-        // TODO: handle maintenance
+        // TODO: fix Navigator error
+        this.$store.dispatch('appNavigator/reset', PurchaseInformation);
         break;
       default:
         break;
@@ -67,6 +76,16 @@ export default {
 
       this.$store.dispatch('api/resetError');
     },
+    isMaintainanceError() {
+      return this.errorStatus === 503;
+    },
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.error-content {
+  margin: 0;
+  white-space: pre-line;
+}
+</style>
