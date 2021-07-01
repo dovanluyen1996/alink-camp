@@ -6,32 +6,29 @@
         ref="guidanceForm"
         v-slot="{ handleSubmit }"
       >
-        <validation-provider
-          v-slot="{ errors }"
-          rules="required-select"
-          name="お問い合わせ項目"
-        >
-          <select-field
-            v-model="contact.category"
-            :options="categories.map(category => ({ value: category, text: category }))"
-            placeholder="選択してください"
-            title="お問い合わせ項目"
-            :errors="errors"
-          />
-        </validation-provider>
+        <v-ons-card>
+          <validation-provider
+            v-slot="{ errors }"
+            rules="required-select"
+            name="お問い合わせ項目"
+          >
+            <contact-inquiry
+              v-model="contact.category"
+              :errors="errors"
+            />
+          </validation-provider>
 
-        <validation-provider
-          v-slot="{ errors }"
-          rules="required"
-          name="内容"
-        >
-          <textarea-field
-            v-model="contact.message"
-            title="内容"
-            :rows="8"
-            :errors="errors"
-          />
-        </validation-provider>
+          <validation-provider
+            v-slot="{ errors }"
+            rules="required"
+            name="内容"
+          >
+            <contact-content
+              v-model="contact.message"
+              :errors="errors"
+            />
+          </validation-provider>
+        </v-ons-card>
 
         <card-with-title>
           <template #title>
@@ -115,16 +112,16 @@
 
 <script>
 // components
+import ContactInquiry from '@/components/organisms/contacts/contact-inquiry';
+import ContactContent from '@/components/organisms/contacts/contact-content';
 import CardWithTitle from '@/components/organisms/card-with-title';
-import SelectField from '@/components/organisms/form/select-field';
-import TextareaField from '@/components/organisms/form/textarea-field';
 import FixedFooter from '@/components/organisms/fixed-footer';
 
 export default {
   components: {
+    ContactInquiry,
+    ContactContent,
     CardWithTitle,
-    SelectField,
-    TextareaField,
     FixedFooter,
   },
   data() {
@@ -133,13 +130,6 @@ export default {
         message: '',
         category: -1,
       },
-      categories: [
-        '不具合報告',
-        'tenki.jpへのご要望',
-        '天気に関するお問い合わせ',
-        'ビジネスに関するお問い合わせ',
-        'その他',
-      ],
       confirmDialogVisible: false,
       completeDialogVisible: false,
     };
@@ -196,6 +186,11 @@ export default {
   .card-width-title {
     .card-title {
       margin-top: 20px;
+    }
+
+    .content {
+      font-weight: 300;
+      line-height: 1.7;
     }
   }
 }
