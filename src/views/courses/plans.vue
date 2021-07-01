@@ -249,22 +249,16 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.delete-plan {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 44px;
-  height: 44px;
-  margin: 8px 6px;
-}
 /deep/ {
   .card {
     text-align: center;
   }
+
   .custom-input-date {
     width: auto;
     min-width: 180px;
   }
+
   .date-field-help {
     text-align: left;
   }
