@@ -6,6 +6,7 @@ import { ValidationProvider, ValidationObserver } from 'vee-validate';
 import VueOnsen from '@/plugins/vue_onsenui_plugin';
 import '@/plugins/global_component_plugin';
 import '@/config/vee_validate';
+import AdjustPlugin from '@/config/adjust';
 import store from '@/stores';
 import App from '@/app';
 import cognito from '@/cognito';
@@ -44,6 +45,8 @@ const initializeVue = () => {
     FirebasePlugin.setAnalyticsCollectionEnabled(true);
   }
 
+  AdjustPlugin.init();
+
   new Vue({
     el: '#app',
     store,
@@ -63,9 +66,9 @@ const initializeVue = () => {
 document.addEventListener('deviceready', initializeVue, false);
 
 const plugin = {
-  install () {
+  install() {
     Vue.prototype.$helpers = helpers;
-  }
+  },
 };
 
 Vue.use(plugin);
