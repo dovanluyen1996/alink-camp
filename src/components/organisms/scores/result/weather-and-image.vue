@@ -61,17 +61,6 @@ export default {
     CustomImageUpload,
     DeleteDialog,
   },
-  data() {
-    return {
-      isShownDeleteDialog: false,
-      // TODO: ダミーなので天気APIに合わせてください
-      weather: {
-        weatherId: 1,
-        high: 20,
-        low: 10,
-      },
-    };
-  },
   props: {
     value: {
       type: [String, Object],
@@ -82,6 +71,17 @@ export default {
       type: Array,
       default: () => [],
     },
+  },
+  data() {
+    return {
+      isShownDeleteDialog: false,
+      // TODO: ダミーなので天気APIに合わせてください
+      weather: {
+        weatherId: 1,
+        high: 20,
+        low: 10,
+      },
+    };
   },
   computed: {
     selectedFile: {
@@ -114,13 +114,13 @@ export default {
 
 .course-weather-date {
   display: flex;
-  align-items:center;
+  align-items: center;
   justify-content: center;
   height: 24px;
   margin-bottom: 3px;
-  border-radius: 12px;
-  background: $color-th;
   font-size: $font-size-small;
+  background: $color-th;
+  border-radius: 12px;
 }
 
 .course-weather-col {
@@ -134,9 +134,11 @@ export default {
 .course-weather-temperature {
   display: inline-block;
   font-size: $font-size-small;
+
   &--high {
     color: $color-temperature-high;
   }
+
   &--low {
     color: $color-temperature-low;
   }

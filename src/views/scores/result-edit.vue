@@ -54,6 +54,7 @@ export default {
       target_date: '',
       total_score: '',
       patting_score: '',
+      /* eslint-disable-next-line global-require */
       image: require('@/assets/images/course-sample.jpg'),
       note: '',
     };
