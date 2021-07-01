@@ -1,20 +1,22 @@
 <template>
   <v-ons-page>
     <custom-toolbar title="スコアの新規登録" />
+
     <course-name :course-name="course.name" />
-    <target-date-field
+    <user-course-results-target-date-field
       v-model="target_date"
       title="プレイ日（必須）"
     />
-    <scores-field
+    <user-course-results-scores-field
       :total-score.sync="total_score"
       :patting-score.sync="patting_score"
     />
-    <image-field
+    <user-course-results-image-field
       v-model="image"
       title="写真"
     />
-    <note-field v-model="note" />
+    <user-course-results-note-field v-model="note" />
+
     <fixed-footer>
       <v-ons-button
         modifier="large--cta add rounded"
@@ -29,20 +31,20 @@
 <script>
 // components
 import CourseName from '@/components/organisms/course-name';
-import TargetDateField from '@/components/organisms/scores/result/target-date-field';
-import ScoresField from '@/components/organisms/scores/result/scores-field';
-import ImageField from '@/components/organisms/form/image-field';
-import NoteField from '@/components/organisms/scores/result/note-field';
+import UserCourseResultsTargetDateField from '@/components/organisms/scores/result/target-date-field';
+import UserCourseResultsScoresField from '@/components/organisms/scores/result/scores-field';
+import UserCourseResultsImageField from '@/components/organisms/form/image-field';
+import UserCourseResultsNoteField from '@/components/organisms/scores/result/note-field';
 import FixedFooter from '@/components/organisms/fixed-footer';
 
 export default {
   name: 'ScoresResultNew',
   components: {
     CourseName,
-    TargetDateField,
-    ScoresField,
-    ImageField,
-    NoteField,
+    UserCourseResultsTargetDateField,
+    UserCourseResultsScoresField,
+    UserCourseResultsImageField,
+    UserCourseResultsNoteField,
     FixedFooter,
   },
   props: {
