@@ -13,6 +13,8 @@ module.exports = {
   globals: {
     cordova: true,
     FirebasePlugin: true,
+    Adjust: true,
+    AdjustConfig: true,
   },
   plugins: [
     'vue',
