@@ -28,6 +28,9 @@
               </div>
               <span class="list-item__subtitle">{{ course.address }}</span>
             </div>
+            <div class="right">
+              <slot name="right" />
+            </div>
           </v-ons-list-item>
         </v-ons-list>
       </div>
