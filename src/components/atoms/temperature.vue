@@ -29,9 +29,10 @@ export default {
   },
   computed: {
     displayValue() {
-      if (!this.value) return '--';
+      const value = Math.round(this.value);
+      if (!value) return '--';
 
-      return this.isInteger ? Math.round(this.value) : this.value;
+      return this.isInteger ? value : this.value;
     },
   },
 };
