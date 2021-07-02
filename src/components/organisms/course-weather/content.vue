@@ -3,25 +3,23 @@
     <course-weather-header
       :user-course="userCourse"
     />
-    <div
-      v-if="userCoursePlan"
-      class="course-weather-detail"
-    >
+    <div class="course-weather-detail">
       <course-weather-plan
         v-if="userCoursePlan"
         :user-course-plan="userCoursePlan"
       />
-      <template v-if="ForecastScheduledDate">
+
+      <template v-if="userCoursePlan && ForecastScheduledDate">
         <course-weather-of-the-day :forecast="ForecastScheduledDate" />
         <course-weather-the-day-before :forecast="ForecastScheduledDate.day_before" />
         <course-weather-hourly-weather :forecast="ForecastScheduledDate.scheduled_date" />
       </template>
+      <template v-else-if="Forecast10Days">
+        <course-weather-calendar
+          :forecasts="Forecast10Days.items"
+        />
+      </template>
     </div>
-    <template v-else-if="Forecast10Days">
-      <course-weather-calendar
-        :forecasts="Forecast10Days.items"
-      />
-    </template>
   </v-ons-card>
 </template>
 
