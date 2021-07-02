@@ -34,21 +34,9 @@
 import SignIn from '@/views/auth/sign-in';
 import TermsOfService from '@/views/terms-of-service/unsigned';
 import FirstGuidance from '@/views/first-guidance';
-import AppTabbar from '@/views/app-tabbar';
 
 export default {
   name: 'StartIndex',
-  data() {
-    return {
-      isLogin: false,
-    };
-  },
-  async created() {
-    await this.checkLogin();
-  },
-  mounted() {
-    if (this.isLogin) this.goToTop();
-  },
   methods: {
     created() {
       // NOTE: Firebase Analytics Sample
@@ -71,20 +59,6 @@ export default {
     },
     goToSignIn() {
       this.$store.dispatch('appNavigator/push', SignIn);
-    },
-    async checkLogin() {
-      try {
-        const session = await this.$cognito.isAuthenticated();
-
-        this.isLogin = session ? true : false;
-      } catch (err) {
-        console.log(err);
-
-        this.isLogin = false;
-      }
-    },
-    goToTop() {
-      this.$store.dispatch('appNavigator/reset', AppTabbar);
     },
   },
 };
