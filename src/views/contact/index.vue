@@ -148,8 +148,7 @@ export default {
       this.completeDialogVisible = false;
     },
     async submit() {
-      // TODO: change app version
-      const appVersion = '1.0';
+      const appVersion = await cordova.getAppVersion.getVersionNumber();
       const { platform, version: osVersion, model: deviceName } = window.device || {};
       const params = {
         ...this.contact,
