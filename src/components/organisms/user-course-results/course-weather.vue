@@ -32,7 +32,7 @@ import WeatherRow from '@/components/organisms/weather-table/weather-row';
 import TemperatureRow from '@/components/organisms/weather-table/temperature-row';
 
 export default {
-  name: 'ScoresCourseWeather',
+  name: 'UserCourseReslutsCourseWeather',
   components: {
     StickyTable,
     WeatherRow,

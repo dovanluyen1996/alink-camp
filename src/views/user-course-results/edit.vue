@@ -54,7 +54,7 @@ import UserCourseResultNoteField from '@/components/organisms/user-course-result
 import FixedFooter from '@/components/organisms/fixed-footer';
 
 export default {
-  name: 'ScoresResultNew',
+  name: 'UserCourseResultsEdit',
   components: {
     DeleteDialogWithIcon,
     CourseName,

@@ -4,11 +4,11 @@
     <course-name :course-name="course.name" />
     <v-ons-card>
       <div class="content">
-        <score-summary-chart />
+        <user-course-results-summary-chart />
 
-        <course-weather />
+        <user-course-results-course-weather />
 
-        <user-course-results
+        <user-course-results-list
           :user-course-results="userCourseResults"
           @clickUserCourseResult="showEditConfirmDialog"
         />
@@ -53,22 +53,22 @@
 <script>
 // components
 import CourseName from '@/components/organisms/course-name';
-import ScoreSummaryChart from '@/components/organisms/scores/summary-chart';
-import CourseWeather from '@/components/organisms/scores/course-weather';
-import UserCourseResults from '@/components/organisms/scores/user-course-results';
+import UserCourseResultsSummaryChart from '@/components/organisms/user-course-results/summary-chart';
+import UserCourseResultsCourseWeather from '@/components/organisms/user-course-results/course-weather';
+import UserCourseResultsList from '@/components/organisms/user-course-results/result-list';
 import FixedFooter from '@/components/organisms/fixed-footer';
 
 // pages
-import UserCourseResultsNew from '@/views/scores/new';
-import UserCourseResultsEdit from '@/views/scores/edit';
+import UserCourseResultsNew from '@/views/user-course-results/new';
+import UserCourseResultsEdit from '@/views/user-course-results/edit';
 
 export default {
   name: 'ScoreSummary',
   components: {
     CourseName,
-    ScoreSummaryChart,
-    CourseWeather,
-    UserCourseResults,
+    UserCourseResultsSummaryChart,
+    UserCourseResultsCourseWeather,
+    UserCourseResultsList,
     FixedFooter,
   },
   props: {

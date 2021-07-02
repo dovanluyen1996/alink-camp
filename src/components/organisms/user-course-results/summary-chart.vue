@@ -9,6 +9,6 @@
 
 <script>
 export default {
-  name: 'ScoreSummaryChart',
+  name: 'UserCourseResultsSummaryChart',
 };
 </script>

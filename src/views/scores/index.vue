@@ -20,7 +20,7 @@
       <div v-else>
         <course-list
           :courses="courses"
-          @click="goToScoreSummary"
+          @click="goToUserCourseResults"
         />
 
         <fixed-footer>
@@ -43,7 +43,7 @@ import CourseList from '@/components/organisms/course-list.vue';
 import FixedFooter from '@/components/organisms/fixed-footer';
 
 // pages
-import Summary from '@/views/scores/summary';
+import UserCourseResultsIndex from '@/views/user-course-results/Index';
 
 export default {
   name: 'ScoresIndex',
@@ -69,11 +69,11 @@ export default {
     getUserCourse(courseId) {
       return this.$store.getters['models/userCourse/findByCourseId'](courseId);
     },
-    goToScoreSummary(course) {
+    goToUserCourseResults(course) {
       const userCourseId = this.getUserCourse(course.id).id;
 
       this.$store.dispatch('scoresNavigator/push', {
-        extends: Summary,
+        extends: UserCourseResultsIndex,
         onsNavigatorProps: {
           course,
           userCourseId,

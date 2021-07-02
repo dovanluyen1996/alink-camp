@@ -15,7 +15,7 @@
 
 <script>
 export default {
-  name: 'ScoreUserCourseResults',
+  name: 'UserCourseResultsList',
   props: {
     userCourseResults: {
       type: Array,
