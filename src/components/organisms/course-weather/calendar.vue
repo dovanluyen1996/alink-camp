@@ -18,11 +18,13 @@
       <div class="course-weather-day-temperature">
         <temperature-component
           :value="forecast.max_temp"
+          :is-integer="true"
           font-size="12px"
           class="temperature-high"
         />&nbsp;/&nbsp;
         <temperature-component
           :value="forecast.min_temp"
+          :is-integer="true"
           font-size="12px"
           class="temperature-low"
         />
