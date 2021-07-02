@@ -29,43 +29,44 @@ export default {
       ).length,
     ),
     sortedUserCoursePlans: (state, getters) => {
-      const userCourses = getters.validUserCourses
-      const results = []
+      const userCourses = getters.validUserCourses;
+      const results = [];
 
       // 予定日を全て表示するために、データ構造を変更する=> {userCourse:, userCoursePlan}
       userCourses.forEach((userCourse) => {
-        if(!userCourse.userCoursePlans.length) {
-          results.push({ userCourse: userCourse, userCoursePlan: {} });
+        if (!userCourse.userCoursePlans.length) {
+          results.push({ userCourse, userCoursePlan: {} });
         }
 
         userCourse.userCoursePlans.forEach((userCoursePlan) => {
-          results.push({ userCourse: userCourse, userCoursePlan: userCoursePlan });
+          results.push({ userCourse, userCoursePlan });
         });
       });
 
       return results.filter((result) => {
         // 予定日が過去のものは除外する
-          const userCoursePlan = result.userCoursePlan;
-          const today = moment().startOf('days');
-          const targetDate = moment(userCoursePlan.targetAt).startOf('days');
+        const { userCoursePlan } = result;
+        const today = moment().startOf('days');
+        const targetDate = moment(userCoursePlan.targetAt).startOf('days');
 
-          return targetDate.isSameOrAfter(today);
-        }
-      ).sort((a, b) => {
+        return targetDate.isSameOrAfter(today);
+      }).sort((a, b) => {
+        let sort = 0;
+
         // 予定日があるものが予定日順で、お気に入りより先にソート
-        if (a.userCoursePlan.targetAt && b.userCoursePlan.targetAt){
+        if (a.userCoursePlan.targetAt && b.userCoursePlan.targetAt) {
           const aTargetAt = moment(a.userCoursePlan.targetAt).startOf('days');
           const bTargetAt = moment(b.userCoursePlan.targetAt).startOf('days');
 
           if (aTargetAt.isSame(bTargetAt)) return a.userCourse.isFavorited ? -1 : 1;
-          return aTargetAt.isAfter(bTargetAt) ? 1 : -1;
-
-        }else if (!a.userCoursePlan.targetAt ^ !b.userCoursePlan.targetAt){
-          return  !a.userCoursePlan.targetAt ? 1 : -1
-
+          sort = aTargetAt.isAfter(bTargetAt) ? 1 : -1;
+        } if (!a.userCoursePlan.targetAt !== !b.userCoursePlan.targetAt) {
+          sort = !a.userCoursePlan.targetAt ? 1 : -1;
         }
+
+        return sort;
       });
-    }
+    },
   },
   mutations: {
     setIsLoading(state, isLoading) {

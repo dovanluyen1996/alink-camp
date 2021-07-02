@@ -31,7 +31,7 @@ export default {
     displayValue() {
       if (!this.value) return '--';
 
-      return this.isInteger ? Math.round(this.value): this.value
+      return this.isInteger ? Math.round(this.value) : this.value;
     },
   },
 };

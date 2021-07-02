@@ -32,8 +32,6 @@ import CourseWeatherTheDayBefore from '@/components/organisms/course-weather/wea
 import CourseWeatherHourlyWeather from '@/components/organisms/course-weather/hourly-weather';
 import CourseWeatherCalendar from '@/components/organisms/course-weather/calendar';
 
-import moment from 'moment';
-
 export default {
   name: 'CourseWeatherContent',
   components: {
