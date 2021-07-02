@@ -5,11 +5,11 @@
     />
     <div class="course-weather-detail">
       <course-weather-plan
-        v-if="userCoursePlan"
+        v-if="userCoursePlan.targetAt"
         :user-course-plan="userCoursePlan"
       />
 
-      <template v-if="userCoursePlan && ForecastScheduledDate">
+      <template v-if="userCoursePlan.targetAt && ForecastScheduledDate">
         <course-weather-of-the-day :forecast="ForecastScheduledDate" />
         <course-weather-the-day-before :forecast="ForecastScheduledDate.day_before" />
         <course-weather-hourly-weather :forecast="ForecastScheduledDate.scheduled_date" />
@@ -45,7 +45,7 @@ export default {
     CourseWeatherCalendar,
   },
   props: {
-    userCourse: {
+    userCourseObject: {
       type: Object,
       default: () => {},
       required: true,
@@ -128,18 +128,11 @@ export default {
     };
   },
   computed: {
+    userCourse() {
+      return this.userCourseObject.userCourse;
+    },
     userCoursePlan() {
-      const plans = this.userCourse.userCoursePlans;
-
-      if (!plans || plans.length === 0) return null;
-
-      const results = plans.filter((plan) => {
-        const today = moment().startOf('days');
-        const targetDate = moment(plan.targetAt).startOf('days');
-
-        return targetDate.isSameOrAfter(today);
-      });
-      return (results.length === 0) ? null : results[0];
+      return this.userCourseObject.userCoursePlan;
     },
   },
 };

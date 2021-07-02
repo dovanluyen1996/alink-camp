@@ -20,7 +20,7 @@
         <course-weather-content
           v-for="userCourse in userCourses"
           :key="userCourse.index"
-          :user-course="userCourse"
+          :user-course-object="userCourse"
         />
       </template>
     </div>
@@ -40,7 +40,7 @@ export default {
   },
   computed: {
     userCourses() {
-      return this.$store.getters['models/userCourse/validUserCourses'];
+      return this.$store.getters['models/userCourse/sortedUserCoursePlans'];
     },
   },
   methods: {
