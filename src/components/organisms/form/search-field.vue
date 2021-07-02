@@ -64,10 +64,7 @@ export default {
   methods: {
     async searchByName() {
       // Clear before search result
-      this.clearSearchResult();
-
-      // If search textbox is empty, don't do anything
-      if (this.inputedValue.length < 1) return;
+      this.$store.dispatch('models/course/resetCourses');
 
       const params = {
         name: this.inputedValue,
@@ -79,9 +76,6 @@ export default {
       } else {
         this.showSearchResultEmptyDialog();
       }
-    },
-    clearSearchResult() {
-      this.$store.dispatch('models/course/resetCourses');
     },
     closeSearchResultEmptyDialog() {
       this.searchResultEmptyVisible = false;
