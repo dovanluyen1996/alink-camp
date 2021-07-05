@@ -50,6 +50,7 @@ export default {
           component: CourseSearchLocationTab,
         },
       ],
+      searchResultEmptyVisible: false,
     };
   },
   computed: {

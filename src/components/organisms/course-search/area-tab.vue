@@ -57,15 +57,12 @@
 <script>
 // pages
 import SearchResult from '@/views/course-search/search-result';
-
 // components
 import CustomSelect from '@/components/atoms/form/custom-select';
 import CourseSearchDateField from '@/components/organisms/course-search/date-field';
 import AnnotationsBlock from '@/components/atoms/form/annotations-block';
 import CourseSearchConditionsFields from '@/components/organisms/course-search/conditions-fields.vue';
-
 import settings from '@/config/settings';
-
 export default {
   name: 'CourseSearchAreaTab',
   components: {
@@ -102,7 +99,6 @@ export default {
       if (!this.searched) return;
       // Reset search flag to false
       this.$store.commit('course/setSearched', false);
-
       this.search();
     },
   },
@@ -111,9 +107,7 @@ export default {
       this.$refs.searchArea.validate()
         .then(async(valid) => {
           this.$store.dispatch('models/course/resetCourses');
-
           if (!valid) return;
-
           const params = {
             prefecture_id: this.prefecture,
             target_date: this.targetDate,
@@ -122,9 +116,7 @@ export default {
             wind: this.wind ? 1 : 0,
             uv: this.uv ? 1 : 0,
           };
-
           await this.$store.dispatch('models/course/getCourses', params);
-
           if (this.$store.getters['models/course/size']) {
             this.goToSearchResult();
           } else {
@@ -154,7 +146,6 @@ export default {
 .course-search-area-tab {
   overflow: hidden;
 }
-
 .select {
   width: 100%;
 }
