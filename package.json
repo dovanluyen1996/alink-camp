@@ -57,6 +57,7 @@
     "cordova-browser": "^6.0.0",
     "cordova-ios": "^6.2.0",
     "cordova-plugin-device": "^2.0.3",
+    "cordova-plugin-geolocation": "^4.1.0",
     "cordova-plugin-whitelist": "1",
     "cross-env": "^5.0.1",
     "css-loader": "^0.28.0",
@@ -114,7 +115,10 @@
       "cordova-plugin-device": {},
       "cordova-plugin-app-version": {},
       "cordova-plugin-firebasex": {},
-      "com.adjust.sdk": {}
+      "com.adjust.sdk": {},
+      "cordova-plugin-geolocation": {
+        "GPS_REQUIRED": "true"
+      }
     },
     "platforms": [
       "ios",
