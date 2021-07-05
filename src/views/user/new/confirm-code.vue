@@ -27,7 +27,7 @@
     </div>
 
     <error-dialog
-      title="失敗を確認する"
+      title="認証エラー"
       :is-visible="confirmErrorVisible"
       :error-message="errorMessage"
       @close="closeConfirmError"
@@ -87,9 +87,12 @@ export default {
         });
     },
     autoLogin() {
-      this.$cognito.autoLogin(this.email)
+      const authenticationData = JSON.parse(localStorage.getItem('authenticationData'));
+
+      this.$cognito.login(authenticationData.username, authenticationData.password)
         .then(async(result) => {
           console.log(result);
+          localStorage.removeItem('authenticationData');
           this.goToUserData();
         })
         .catch((err) => {

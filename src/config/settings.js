@@ -18,6 +18,6 @@ export default {
     },
   },
   regex: {
-    password: /^(?=.*?[a-z])(?=.*?\d).{8,}$/,
+    password: /^(?=.*?[a-z])(?=.*?\d).{6,}$/,
   },
 };

@@ -9,9 +9,6 @@
       :placeholder="placeholder"
       :errors="errors"
     />
-    <div v-if="errors.length">
-      {{ errors[0] }}
-    </div>
   </base-field>
 </template>
 

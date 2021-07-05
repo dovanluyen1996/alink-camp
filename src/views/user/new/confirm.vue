@@ -69,7 +69,7 @@ export default {
       return gender ? gender.text : '';
     },
     birthdateText() {
-      return this.$moment(this.user.birthdate).format('YYYYMMDD');
+      return this.$moment(this.user.birthdate).format('YYYY/MM/DD');
     },
     prefectureText() {
       const prefecture = settings.views.prefectures.find(
@@ -82,10 +82,10 @@ export default {
     clickBack() {
       this.$store.dispatch('appNavigator/pop');
     },
-    async submitUserData() {
-      const success = await this.$store.dispatch('models/currentUser/updateUser', this.user);
-
-      if (success) this.$store.dispatch('appNavigator/push', UserStampsCampaign);
+    submitUserData() {
+      this.$store.dispatch('models/currentUser/updateUser', this.user).then(() => {
+        this.$store.dispatch('appNavigator/push', UserStampsCampaign);
+      });
     },
   },
 };

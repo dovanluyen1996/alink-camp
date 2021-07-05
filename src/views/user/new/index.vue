@@ -93,6 +93,8 @@ export default {
   },
   methods: {
     getConfirmCode() {
+      localStorage.removeItem('authenticationData');
+
       this.$cognito.signUp(this.user.email, this.user.password)
         .then(async(result) => {
           console.log(result);

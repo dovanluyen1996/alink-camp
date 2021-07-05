@@ -34,9 +34,6 @@ export default {
         const user = await ApiClient.updateCurrentUser(params);
 
         context.commit('setUser', user);
-        return true;
-      } catch (e) {
-        return false;
       } finally {
         context.commit('setIsLoading', false);
       }
