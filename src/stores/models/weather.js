@@ -50,77 +50,77 @@ export default {
     },
   },
   actions: {
-    async forecastScheduledDate(context, params) {
+    async getForecastScheduledDate(context, params) {
       context.commit('setIsLoading', true);
 
       try {
-        const forecastScheduledDate = await ApiClient.forecastScheduledDate(params);
+        const forecastScheduledDate = await ApiClient.getForecastScheduledDate(params);
 
         context.commit('setForcastScheduledDate', forecastScheduledDate);
       } finally {
         context.commit('setIsLoading', false);
       }
     },
-    async forecast10Days(context, params) {
+    async getForecast10Days(context, params) {
       context.commit('setIsLoading', true);
 
       try {
-        const forecast10Days = await ApiClient.forecast10Days(params);
+        const forecast10Days = await ApiClient.getForecast10Days(params);
 
         context.commit('setForecast10Days', forecast10Days);
       } finally {
         context.commit('setIsLoading', false);
       }
     },
-    async forecastHourly(context, params) {
+    async getForecastHourly(context, params) {
       context.commit('setIsLoading', true);
 
       try {
-        const forecastHourly = await ApiClient.forecastHourly(params);
+        const forecastHourly = await ApiClient.getForecastHourly(params);
 
         context.commit('setForecastHourly', forecastHourly);
       } finally {
         context.commit('setIsLoading', false);
       }
     },
-    async forecastMonthlyTemp(context, params) {
+    async getForecastMonthlyTemp(context, params) {
       context.commit('setIsLoading', true);
 
       try {
-        const forecastMonthlyTemp = await ApiClient.forecastMonthlyTemp(params);
+        const forecastMonthlyTemp = await ApiClient.getForecastMonthlyTemp(params);
 
         context.commit('setForecastMonthlyTemp', forecastMonthlyTemp);
       } finally {
         context.commit('setIsLoading', false);
       }
     },
-    async forecastMonthlyPrecip(context, params) {
+    async getForecastMonthlyPrecip(context, params) {
       context.commit('setIsLoading', true);
 
       try {
-        const forecastMonthlyPrecip = await ApiClient.forecastMonthlyPrecip(params);
+        const forecastMonthlyPrecip = await ApiClient.getForecastMonthlyPrecip(params);
 
         context.commit('setForecastMonthlyPrecip', forecastMonthlyPrecip);
       } finally {
         context.commit('setIsLoading', false);
       }
     },
-    async forecastWind(context, params) {
+    async getForecastWind(context, params) {
       context.commit('setIsLoading', true);
 
       try {
-        const forecastWind = await ApiClient.forecastWind(params);
+        const forecastWind = await ApiClient.getForecastWind(params);
 
         context.commit('setForecastWind', forecastWind);
       } finally {
         context.commit('setIsLoading', false);
       }
     },
-    async past(context, params) {
+    async getPast(context, params) {
       context.commit('setIsLoading', true);
 
       try {
-        const past = await ApiClient.past(params);
+        const past = await ApiClient.getPast(params);
 
         context.commit('setPast', past);
       } finally {

@@ -1,29 +1,29 @@
 export default {
-  async forecastScheduledDate(params) {
+  async getForecastScheduledDate(params) {
     const response = await this.get('/weather/forecast_scheduled_date', params);
     return response.data;
   },
-  async forecast10Days(params) {
+  async getForecast10Days(params) {
     const response = await this.get('/weather/forecast_10days', params);
     return response.data;
   },
-  async forecastHourly(params) {
+  async getForecastHourly(params) {
     const response = await this.get('/weather/forecast_hourly', params);
     return response.data;
   },
-  async forecastMonthlyTemp(params) {
+  async getForecastMonthlyTemp(params) {
     const response = await this.get('/weather/forecast_monthly_temp', params);
     return response.data;
   },
-  async forecastMonthlyPrecip(params) {
+  async getForecastMonthlyPrecip(params) {
     const response = await this.get('/weather/forecast_monthly_precip', params);
     return response.data;
   },
-  async forecastWind(params) {
+  async getForecastWind(params) {
     const response = await this.get('/weather/forecast_wind', params);
     return response.data;
   },
-  async past(params) {
+  async getPast(params) {
     const response = await this.get('/weather/past', params);
     return response.data;
   },
