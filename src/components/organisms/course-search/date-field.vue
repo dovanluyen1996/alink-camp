@@ -3,11 +3,19 @@
     <div class="card__title card__title--center">
       天候を知りたい日付選択（必須）
     </div>
-    <custom-datetime-input
-      v-model="dateValue"
-      type="date"
-      placeholder="日にち"
-    />
+
+    <validation-provider
+      v-slot="{ errors }"
+      rules="required"
+      name="日にち"
+    >
+      <custom-datetime-input
+        v-model="dateValue"
+        type="date"
+        placeholder="日にち"
+        :errors="errors"
+      />
+    </validation-provider>
   </div>
 </template>
 

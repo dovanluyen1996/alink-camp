@@ -7,7 +7,7 @@ export default {
     searchConditions: {
       prefecture: -1,
       date: '',
-      rainy: false,
+      sunny: false,
       temperature: 0,
       wind: false,
       uv: false,
@@ -41,7 +41,7 @@ export default {
       state.searchConditions = {
         prefecture: -1,
         date: '',
-        rainy: false,
+        sunny: false,
         temperature: 0,
         wind: false,
         uv: false,

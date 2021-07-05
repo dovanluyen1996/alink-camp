@@ -4,7 +4,7 @@
       お天気詳細情報
     </div>
     <check-field
-      v-model="rainyValue"
+      v-model="sunnyValue"
       label="雨の確率が低いゴルフコース"
     />
 
@@ -22,10 +22,12 @@
     <check-field
       v-model="windValue"
       label="風が穏やかな予報のコース"
+      :disable="isWindValueDisable"
     />
     <check-field
       v-model="uvValue"
       label="紫外線が弱い予報のコース"
+      :disable="isUvValueDisable"
     />
   </div>
 </template>
@@ -72,12 +74,18 @@ export default {
         this.$store.commit('courseSearchNavigator/setSearchConditions', newConditions);
       },
     },
-    rainyValue: {
+    isWindValueDisable() {
+      return !this.isValidDateRange(this.dateValue);
+    },
+    isUvValueDisable() {
+      return !this.isValidDateRange(this.dateValue);
+    },
+    sunnyValue: {
       get() {
-        return this.searchConditions.rainy;
+        return this.searchConditions.sunny;
       },
-      set(rainy) {
-        this.searchConditions = { rainy };
+      set(sunny) {
+        this.searchConditions = { sunny };
       },
     },
     temperatureValue: {
@@ -103,6 +111,28 @@ export default {
       set(uv) {
         this.searchConditions = { uv };
       },
+    },
+    dateValue() {
+      return this.searchConditions.date;
+    },
+  },
+  watch: {
+    dateValue(value) {
+      if (this.isValidDateRange(value)) return;
+
+      this.uvValue = false;
+      this.windValue = false;
+    },
+  },
+  methods: {
+    isValidDateRange(date) {
+      if (!date) return true;
+
+      const selectedDate = this.$moment(date);
+      const fromDate = this.$moment().startOf('day');
+      const toDate = this.$moment().add(11, 'days').endOf('day');
+
+      return selectedDate.isAfter(fromDate) && selectedDate.isBefore(toDate);
     },
   },
 };
