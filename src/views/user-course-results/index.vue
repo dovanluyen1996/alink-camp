@@ -126,6 +126,7 @@ export default {
       this.$store.dispatch('scoresNavigator/push', {
         extends: UserCourseResultsNew,
         onsNavigatorProps: {
+          userCourseId: this.userCourseId,
           course: this.course,
         },
       });

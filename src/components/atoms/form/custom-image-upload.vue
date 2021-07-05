@@ -40,6 +40,7 @@
           <input
             class="file-input"
             type="file"
+            accept=".jpg, .jpeg, .gif, .png"
             @change="selectImage($event, validate)"
           >
         </label>
@@ -100,9 +101,7 @@ export default {
     async selectImage(e, validate) {
       const image = e.target.files[0];
       const { valid } = await validate(image);
-      if (image && valid) {
-        this.createImage(image);
-      }
+      if (image && valid) this.createImage(image);
     },
     createImage(image) {
       const reader = new FileReader();
