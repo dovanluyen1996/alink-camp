@@ -22,5 +22,17 @@
     <platform name="ios">
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
+
+        <config-file target="*-Info.plist" parent="NSLocationAlwaysAndWhenInUseUsageDescription">
+          <string>need location access to find things nearby</string>
+        </config-file>
+
+        <config-file target="*-Info.plist" parent="NSLocationAlwaysUsageDescription">
+            <string>need location access to find things nearby</string>
+        </config-file>
+
+        <config-file target="*-Info.plist" parent="NSLocationWhenInUseUsageDescription">
+            <string>need location access to find things nearby</string>
+        </config-file>
     </platform>
 </widget>
