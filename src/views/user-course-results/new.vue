@@ -4,29 +4,32 @@
 
     <div class="content">
       <content-with-footer>
-        <course-name :course-name="course.name" />
-        <user-course-results-target-date-field
-          v-model="target_date"
-          title="プレイ日（必須）"
-        />
-        <user-course-results-scores-field
-          :total-score.sync="total_score"
-          :patting-score.sync="patting_score"
-        />
-        <user-course-results-image-field
-          v-model="image"
-          title="写真"
-        />
-        <user-course-results-note-field v-model="note" />
+        <!-- TODO: templateの中にtemplateがあるとvalidation-observerがうまく機能しない -->
+        <!-- <validation-observer v-slot="{ handleSubmit }"> -->
+          <course-name :course-name="course.name" />
+          <user-course-results-target-date-field
+            v-model="target_date"
+            title="プレイ日（必須）"
+          />
+          <user-course-results-scores-field
+            :total-score.sync="total_score"
+            :patting-score.sync="patting_score"
+          />
+          <user-course-results-image-field
+            v-model="image"
+            title="写真"
+          />
+          <user-course-results-note-field v-model="note" />
 
-        <template #footer>
-          <v-ons-button
-            modifier="large--cta add rounded"
-            @click="submitScore"
-          >
-            保存
-          </v-ons-button>
-        </template>
+          <template #footer>
+            <v-ons-button
+              modifier="large--cta add rounded"
+              @click="submitScore"
+            >
+              保存
+            </v-ons-button>
+          </template>
+        <!-- </validation-observer> -->
       </content-with-footer>
     </div>
   </v-ons-page>

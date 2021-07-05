@@ -25,18 +25,26 @@
       class="image"
     >
     <div v-show="!imagePath">
-      <label class="upload-button">
-        写真をアップロード
-        <!-- NOTE: v-modelがtype="file"に非対応のため changeイベントで処理する
-        - <input v-model="image" type="file">:
-        File inputs are read only. Use a v-on:change listener instead.
-        -->
-        <input
-          class="file-input"
-          type="file"
-          @change="selectImage"
-        >
-      </label>
+      <validation-provider
+        v-slot="{ errors, validate }"
+        ref="image"
+        rules="ext:jpg,jpeg,gif,png"
+        name="画像"
+      >
+        <label class="upload-button">
+          写真をアップロード
+          <!-- NOTE: v-modelがtype="file"に非対応のため changeイベントで処理する
+          - <input v-model="image" type="file">:
+          File inputs are read only. Use a v-on:change listener instead.
+          -->
+          <input
+            class="file-input"
+            type="file"
+            @change="selectImage($event, validate)"
+          >
+        </label>
+        <span>{{ errors[0] }}</span>
+      </validation-provider>
     </div>
     <div
       v-if="errors.length"
@@ -89,9 +97,12 @@ export default {
     },
   },
   methods: {
-    selectImage(e) {
+    async selectImage(e, validate) {
       const image = e.target.files[0];
-      this.createImage(image);
+      const { valid } = await validate(image);
+      if (image && valid) {
+        this.createImage(image);
+      }
     },
     createImage(image) {
       const reader = new FileReader();

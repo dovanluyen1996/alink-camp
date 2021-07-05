@@ -1,5 +1,7 @@
 import { extend } from 'vee-validate';
-import { required, email } from 'vee-validate/dist/rules';
+import {
+  required, email, ext, numeric,
+} from 'vee-validate/dist/rules';
 import settings from '@/config/settings';
 
 extend('required', {
@@ -26,4 +28,14 @@ extend('password', (value) => {
   }
 
   return 'パスワードの条件を満たしていません';
+});
+
+extend('ext', {
+  ...ext,
+  message: 'そのファイルはご利用いただけません',
+});
+
+extend('numeric', {
+  ...numeric,
+  message: '数値を入力してください',
 });

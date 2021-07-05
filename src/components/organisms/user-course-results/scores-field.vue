@@ -12,16 +12,23 @@
           <v-ons-col class="total-score-label">
             合計打数
           </v-ons-col>
-          <v-ons-col>
-            <v-ons-input
-              v-model="inputedTotalScoreValue"
-              type="text"
-              class="total-score-input"
-            />
-          </v-ons-col>
-          <v-ons-col class="score-unit">
-            打
-          </v-ons-col>
+          <validation-provider
+            v-slot="{ errors }"
+            rules="required|numeric"
+            name="合計打数"
+          >
+            <v-ons-col>
+              <v-ons-input
+                v-model="inputedTotalScoreValue"
+                type="number"
+                class="total-score-input"
+              />
+            </v-ons-col>
+            <v-ons-col class="score-unit">
+              打
+            </v-ons-col>
+            <span>{{ errors[0] }}</span>
+          </validation-provider>
         </v-ons-row>
       </v-ons-col>
       <v-ons-col>
@@ -38,7 +45,7 @@
           <v-ons-col>
             <v-ons-input
               v-model="inputedPattingScoreValue"
-              type="text"
+              type="number"
               class="patting-score-input"
             />
           </v-ons-col>

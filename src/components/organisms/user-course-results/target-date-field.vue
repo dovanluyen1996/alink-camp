@@ -1,9 +1,16 @@
 <template>
-  <date-field
-    v-model="inputedValue"
-    :title="title"
-    placeholder="ラウンド日"
-  />
+  <validation-provider
+    v-slot="{ errors }"
+    rules="required"
+    name="プレイ日"
+  >
+    <date-field
+      v-model="inputedValue"
+      :title="title"
+      placeholder="ラウンド日"
+    />
+    <span>{{ errors[0] }}</span>
+  </validation-provider>
 </template>
 
 <script>
