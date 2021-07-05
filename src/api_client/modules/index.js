@@ -13,6 +13,7 @@ import UserSettingApi from './user_setting_api';
 import UserCoursePlansApi from './user_course_plans_api';
 import ContactApi from './contact_api';
 import UserCourseResultsApi from './user_course_results_api';
+import WeatherApi from './weather_api';
 
 export default {
   NoticesApi,
@@ -30,4 +31,5 @@ export default {
   UserCoursePlansApi,
   ContactApi,
   UserCourseResultsApi,
+  WeatherApi,
 };

@@ -13,6 +13,7 @@ import userSetting from './user_setting';
 import userCoursePlan from './user_course_plan';
 import contact from './contact';
 import userCourseResult from './user_course_result';
+import weather from './weather';
 
 export default {
   strict: true,
@@ -33,5 +34,6 @@ export default {
     userCoursePlan,
     contact,
     userCourseResult,
+    weather,
   },
 };
