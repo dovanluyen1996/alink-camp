@@ -47,7 +47,6 @@ export default {
   },
   computed: {
     userCourses() {
-      console.log(this.$store.getters['models/userCourse/onlyFavoritedWithoutPlans']);
       return this.$store.getters['models/userCourse/onlyFavoritedWithoutPlans'];
     },
     userCoursePlans() {
