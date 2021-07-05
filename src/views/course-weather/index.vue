@@ -2,7 +2,7 @@
   <v-ons-page @show="show">
     <custom-toolbar title="コースお天気" />
     <div class="content">
-      <no-data v-if="userCourses.length === 0">
+      <no-data v-if="userCourses.length === 0 && userCoursePlans.length === 0">
         <p>
           まだお気に入りや予定日設定しているコースがありません。<br>
           コース検索より、設定してください
@@ -18,9 +18,16 @@
       </no-data>
       <template v-else>
         <course-weather-content
+          v-for="userCoursePlan in userCoursePlans"
+          :key="userCoursePlan.index"
+          :user-course="userCourseByPlan(userCoursePlan)"
+          :user-course-plan="userCoursePlan"
+        />
+        <course-weather-content
           v-for="userCourse in userCourses"
           :key="userCourse.index"
-          :user-course-object="userCourse"
+          :user-course="userCourse"
+          :user-course-plan="{}"
         />
       </template>
     </div>
@@ -40,7 +47,11 @@ export default {
   },
   computed: {
     userCourses() {
-      return this.$store.getters['models/userCourse/sortedUserCoursePlans'];
+      console.log(this.$store.getters['models/userCourse/onlyFavoritedWithoutPlans']);
+      return this.$store.getters['models/userCourse/onlyFavoritedWithoutPlans'];
+    },
+    userCoursePlans() {
+      return this.$store.getters['models/userCoursePlan/sortedUserCoursePlans'];
     },
   },
   methods: {
@@ -49,6 +60,9 @@ export default {
     },
     async getUserCourses() {
       await this.$store.dispatch('models/userCourse/getUserCourses');
+    },
+    userCourseByPlan(userCoursePlan) {
+      return this.$store.getters['models/userCourse/findByCourseId'](userCoursePlan.courseId);
     },
     goToCourseSearch() {
       this.$store.commit('appTabbar/setActiveIndexFromTabName', 'courseSearch');

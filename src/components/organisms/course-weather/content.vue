@@ -43,7 +43,12 @@ export default {
     CourseWeatherCalendar,
   },
   props: {
-    userCourseObject: {
+    userCourse: {
+      type: Object,
+      default: () => {},
+      required: true,
+    },
+    userCoursePlan: {
       type: Object,
       default: () => {},
       required: true,
@@ -124,14 +129,6 @@ export default {
         ],
       },
     };
-  },
-  computed: {
-    userCourse() {
-      return this.userCourseObject.userCourse;
-    },
-    userCoursePlan() {
-      return this.userCourseObject.userCoursePlan;
-    },
   },
 };
 </script>
