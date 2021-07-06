@@ -56,11 +56,13 @@ export default {
   },
   methods: {
     async isAuthenticated() {
+      let authResult = null;
       try {
-        return await this.$cognito.isAuthenticated();
+        authResult = await this.$cognito.isAuthenticated();
       } catch (err) {
         console.error(err);
       }
+      return authResult;
     },
     start() {
       this.goToTermsOfService();
