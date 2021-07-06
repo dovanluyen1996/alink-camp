@@ -5,33 +5,33 @@
   >
     <v-ons-row vertical-align="bottom">
       <v-ons-col width="55%">
-        <v-ons-row
-          vertical-align="bottom"
-          class="total-score-field"
+        <validation-provider
+          v-slot="{ errors }"
+          rules="required"
+          name="合計打数"
         >
-          <v-ons-col class="total-score-label">
-            合計打数
-          </v-ons-col>
-          <validation-provider
-            v-slot="{ errors }"
-            rules="required"
-            name="合計打数"
+          <v-ons-row
+            vertical-align="bottom"
+            class="total-score-field"
           >
-            <v-ons-col>
-              <v-ons-input
-                v-model="inputedTotalScoreValue"
-                type="text"
-                maxlength="3"
-                oninput="value = value.replace(/[^0-9]+/i,'');"
-                class="total-score-input"
-              />
+            <v-ons-col class="total-score-label">
+              合計打数
             </v-ons-col>
-            <v-ons-col class="score-unit">
-              打
-            </v-ons-col>
-            <span>{{ errors[0] }}</span>
-          </validation-provider>
-        </v-ons-row>
+              <v-ons-col>
+                <v-ons-input
+                  v-model="inputedTotalScoreValue"
+                  type="text"
+                  maxlength="3"
+                  oninput="value = value.replace(/[^0-9]+/i,'');"
+                  class="total-score-input"
+                />
+              </v-ons-col>
+              <v-ons-col class="score-unit">
+                打
+              </v-ons-col>
+          </v-ons-row>
+          <span>{{ errors[0] }}</span>
+        </validation-provider>
       </v-ons-col>
       <v-ons-col>
         <v-ons-row
