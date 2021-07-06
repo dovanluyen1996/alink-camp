@@ -46,13 +46,15 @@ export default {
     //   FirebasePlugin.logEvent('screen_view', { content_type: 'page_view', item_id: 'home' });
     // }
 
-    const isAuthenticated = await this.isAuthenticated();
-    // 1. ログイン済みかつ契約済みの場合、アプリトップに遷移
-    // 2. 未ログインかつ未契約の場合、サブスクリプションのページ
-    // // TODO 7/5現在 サブスクの契約状態の判別が出来ないため、一旦ログインしているかでページ遷移先を実装
-    const component = isAuthenticated ? AppTabbar : PurchaseInformation;
+    if (!this.isCharged()) {
+      this.$store.dispatch('appNavigator/push', PurchaseInformation);
+      return;
+    }
 
-    this.$store.dispatch('appNavigator/push', component);
+    const isAuthenticated = await this.isAuthenticated();
+    if (isAuthenticated) {
+      this.$store.dispatch('appNavigator/push', AppTabbar);
+    }
   },
   methods: {
     async isAuthenticated() {
@@ -63,6 +65,10 @@ export default {
         console.error(err);
       }
       return authResult;
+    },
+    isCharged() {
+      // TODO: 課金状態の確認
+      return true;
     },
     start() {
       this.goToTermsOfService();
