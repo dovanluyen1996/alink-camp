@@ -30,7 +30,9 @@
               打
             </v-ons-col>
           </v-ons-row>
-          <span>{{ errors[0] }}</span>
+          <div v-if="errors.length">
+            {{ errors[0] }}
+          </div>
         </validation-provider>
       </v-ons-col>
       <v-ons-col>

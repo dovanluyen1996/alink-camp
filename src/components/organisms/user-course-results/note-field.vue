@@ -5,22 +5,22 @@
     rules="max:500"
     name="メモ"
   >
-    <text-field
+    <text-area-field
       v-model="inputedValue"
       title="メモ"
+      :errors="errors"
     />
-    <span>{{ errors[0] }}</span>
   </validation-provider>
 </template>
 
 <script>
 // components
-import TextField from '@/components/organisms/form/text-field';
+import TextAreaField from '@/components/organisms/form/textarea-field';
 
 export default {
   name: 'UserCourseResultsNoteField',
   components: {
-    TextField,
+    TextAreaField,
   },
   props: {
     value: {
