@@ -3,16 +3,18 @@
     <custom-toolbar title="ヘルプ" />
 
     <div class="content">
-      <help-list @click="showHelp" />
+      <content-with-footer>
+        <help-list @click="showHelp" />
 
-      <fixed-footer>
-        <v-ons-button
-          modifier="large--cta rounded"
-          @click="goToContact"
-        >
-          お問い合わせ
-        </v-ons-button>
-      </fixed-footer>
+        <template #footer>
+          <v-ons-button
+            modifier="large--cta rounded"
+            @click="goToContact"
+          >
+            お問い合わせ
+          </v-ons-button>
+        </template>
+      </content-with-footer>
     </div>
   </v-ons-page>
 </template>
@@ -20,7 +22,7 @@
 <script>
 // components
 import HelpList from '@/components/organisms/help/list';
-import FixedFooter from '@/components/organisms/fixed-footer';
+import ContentWithFooter from '@/components/organisms/content-with-footer';
 
 // views
 import ShowHelpView from '@/views/helps/show';
@@ -30,7 +32,7 @@ export default {
   name: 'HelpsIndex',
   components: {
     HelpList,
-    FixedFooter,
+    ContentWithFooter,
   },
   methods: {
     showHelp(helpId) {

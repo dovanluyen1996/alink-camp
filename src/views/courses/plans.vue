@@ -17,26 +17,28 @@
     </custom-toolbar>
 
     <div class="content">
-      <date-field
-        v-model="dateValue"
-        title="プレイ予定日（必須）"
-        placeholder="予定日を選択"
-        help="※天気予報のPUSHは予報が確定してからになります"
-      />
-      <time-field
-        v-model="timeValue"
-        title="プレイ開始時刻"
-        placeholder="時刻設定"
-      />
+      <content-with-footer>
+        <date-field
+          v-model="dateValue"
+          title="プレイ予定日（必須）"
+          placeholder="予定日を選択"
+          help="※天気予報のPUSHは予報が確定してからになります"
+        />
+        <time-field
+          v-model="timeValue"
+          title="プレイ開始時刻"
+          placeholder="時刻設定"
+        />
 
-      <fixed-footer>
-        <v-ons-button
-          modifier="large--cta rounded"
-          @click="update"
-        >
-          設定完了
-        </v-ons-button>
-      </fixed-footer>
+        <template #footer>
+          <v-ons-button
+            modifier="large--cta rounded"
+            @click="update"
+          >
+            設定完了
+          </v-ons-button>
+        </template>
+      </content-with-footer>
     </div>
   </v-ons-page>
 </template>
@@ -46,7 +48,7 @@
 import DeleteDialogWithIcon from '@/components/organisms/dialog/delete-dialog-with-icon';
 import DateField from '@/components/organisms/form/date-field';
 import TimeField from '@/components/organisms/form/time-field';
-import FixedFooter from '@/components/organisms/fixed-footer';
+import ContentWithFooter from '@/components/organisms/content-with-footer';
 
 export default {
   name: 'CoursePlans',
@@ -54,7 +56,7 @@ export default {
     DeleteDialogWithIcon,
     DateField,
     TimeField,
-    FixedFooter,
+    ContentWithFooter,
   },
   data() {
     return {

@@ -1,36 +1,39 @@
 <template>
   <v-ons-page>
     <custom-toolbar title="特典交換" />
+
     <div class="content">
       <validation-observer
         ref="guidanceForm"
         v-slot="{ handleSubmit }"
       >
-        <card-gift :gift="gift">
-          {{ gift.description }}
-          <template #footer>
-            <validation-provider
-              v-slot="{ errors }"
-              rules="required|email"
-              name="メールアドレス"
-            >
-              <v-ons-input
-                v-model="email"
-                placeholder="連絡先メールアドレス"
-              />
-              <span>{{ errors[0] }}</span>
-            </validation-provider>
-          </template>
-        </card-gift>
+        <content-with-footer>
+          <card-gift :gift="gift">
+            {{ gift.description }}
+            <template #footer>
+              <validation-provider
+                v-slot="{ errors }"
+                rules="required|email"
+                name="メールアドレス"
+              >
+                <v-ons-input
+                  v-model="email"
+                  placeholder="連絡先メールアドレス"
+                />
+                <span>{{ errors[0] }}</span>
+              </validation-provider>
+            </template>
+          </card-gift>
 
-        <fixed-footer>
-          <v-ons-button
-            modifier="large--cta rounded"
-            @click="handleSubmit(showConfirm)"
-          >
-            抽選応募する
-          </v-ons-button>
-        </fixed-footer>
+          <template #footer>
+            <v-ons-button
+              modifier="large--cta rounded"
+              @click="handleSubmit(showConfirm)"
+            >
+              抽選応募する
+            </v-ons-button>
+          </template>
+        </content-with-footer>
       </validation-observer>
     </div>
 
@@ -103,12 +106,12 @@
 <script>
 // components
 import CardGift from '@/components/organisms/gift/card-gift';
-import FixedFooter from '@/components/organisms/fixed-footer';
+import ContentWithFooter from '@/components/organisms/content-with-footer';
 
 export default {
   components: {
     CardGift,
-    FixedFooter,
+    ContentWithFooter,
   },
   props: {
     giftId: {

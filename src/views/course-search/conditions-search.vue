@@ -1,19 +1,22 @@
 <template>
   <v-ons-page>
     <custom-toolbar title="コース検索" />
+
     <div class="content">
-      <card-with-tab
-        ref="tabContents"
-        :tabs="tabs"
-      />
-      <fixed-footer>
-        <v-ons-button
-          modifier="large--cta rounded"
-          @click="goToSearchResult"
-        >
-          絞り込み選択
-        </v-ons-button>
-      </fixed-footer>
+      <content-with-footer>
+        <card-with-tab
+          ref="tabContents"
+          :tabs="tabs"
+        />
+        <template #footer>
+          <v-ons-button
+            modifier="large--cta rounded"
+            @click="goToSearchResult"
+          >
+            絞り込み選択
+          </v-ons-button>
+        </template>
+      </content-with-footer>
     </div>
   </v-ons-page>
 </template>
@@ -21,7 +24,7 @@
 <script>
 // components
 import CardWithTab from '@/components/organisms/card-with-tab';
-import FixedFooter from '@/components/organisms/fixed-footer';
+import ContentWithFooter from '@/components/organisms/content-with-footer';
 
 // pages
 import SearchResult from '@/views/course-search/search-result';
@@ -34,7 +37,7 @@ export default {
   name: 'CourseConditionsSearch',
   components: {
     CardWithTab,
-    FixedFooter,
+    ContentWithFooter,
   },
   data() {
     return {

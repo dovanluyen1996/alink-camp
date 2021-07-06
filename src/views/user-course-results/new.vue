@@ -2,29 +2,33 @@
   <v-ons-page>
     <custom-toolbar title="スコアの新規登録" />
 
-    <course-name :course-name="course.name" />
-    <user-course-results-target-date-field
-      v-model="target_date"
-      title="プレイ日（必須）"
-    />
-    <user-course-results-scores-field
-      :total-score.sync="total_score"
-      :patting-score.sync="patting_score"
-    />
-    <user-course-results-image-field
-      v-model="image"
-      title="写真"
-    />
-    <user-course-results-note-field v-model="note" />
+    <div class="content">
+      <content-with-footer>
+        <course-name :course-name="course.name" />
+        <user-course-results-target-date-field
+          v-model="target_date"
+          title="プレイ日（必須）"
+        />
+        <user-course-results-scores-field
+          :total-score.sync="total_score"
+          :patting-score.sync="patting_score"
+        />
+        <user-course-results-image-field
+          v-model="image"
+          title="写真"
+        />
+        <user-course-results-note-field v-model="note" />
 
-    <fixed-footer>
-      <v-ons-button
-        modifier="large--cta add rounded"
-        @click="submitScore"
-      >
-        保存
-      </v-ons-button>
-    </fixed-footer>
+        <template #footer>
+          <v-ons-button
+            modifier="large--cta add rounded"
+            @click="submitScore"
+          >
+            保存
+          </v-ons-button>
+        </template>
+      </content-with-footer>
+    </div>
   </v-ons-page>
 </template>
 
@@ -35,7 +39,7 @@ import UserCourseResultsTargetDateField from '@/components/organisms/user-course
 import UserCourseResultsScoresField from '@/components/organisms/user-course-results/scores-field';
 import UserCourseResultsImageField from '@/components/organisms/form/image-field';
 import UserCourseResultsNoteField from '@/components/organisms/user-course-results/note-field';
-import FixedFooter from '@/components/organisms/fixed-footer';
+import ContentWithFooter from '@/components/organisms/content-with-footer';
 
 export default {
   name: 'ScoresResultNew',
@@ -45,7 +49,7 @@ export default {
     UserCourseResultsScoresField,
     UserCourseResultsImageField,
     UserCourseResultsNoteField,
-    FixedFooter,
+    ContentWithFooter,
   },
   props: {
     course: {

@@ -1,54 +1,57 @@
 <template>
   <v-ons-page>
     <custom-toolbar title="お問い合わせ" />
+
     <div class="content">
       <validation-observer
         ref="guidanceForm"
         v-slot="{ handleSubmit }"
       >
-        <v-ons-card>
-          <validation-provider
-            v-slot="{ errors }"
-            rules="required-select"
-            name="お問い合わせ項目"
-          >
-            <contact-inquiry
-              v-model="contact.category"
-              :errors="errors"
-            />
-          </validation-provider>
+        <content-with-footer>
+          <v-ons-card>
+            <validation-provider
+              v-slot="{ errors }"
+              rules="required-select"
+              name="お問い合わせ項目"
+            >
+              <contact-inquiry
+                v-model="contact.category"
+                :errors="errors"
+              />
+            </validation-provider>
 
-          <validation-provider
-            v-slot="{ errors }"
-            rules="required"
-            name="内容"
-          >
-            <contact-content
-              v-model="contact.message"
-              :errors="errors"
-            />
-          </validation-provider>
-        </v-ons-card>
+            <validation-provider
+              v-slot="{ errors }"
+              rules="required"
+              name="内容"
+            >
+              <contact-content
+                v-model="contact.message"
+                :errors="errors"
+              />
+            </validation-provider>
+          </v-ons-card>
 
-        <card-with-title>
-          <template #title>
-            留意事項
+          <card-with-title>
+            <template #title>
+              留意事項
+            </template>
+            <div>
+              ご報告内容に個別にお答えすることをお約束するものではありません。<br>
+              ご報告内容に基づいて対応、処置することをお約束するものではありません。<br>
+              アプリ操作に関するご質問に関してはお手数ですが、メニュー⇒ヘルプをご覧いただいてからお問い合わせください。<br>
+            </div>
+          </card-with-title>
+
+          <template #footer>
+            <v-ons-button
+              modifier="large--cta rounded"
+              @click="handleSubmit(showConfirmDialog)"
+            >
+              送信確認
+            </v-ons-button>
           </template>
-          <div>
-            ご報告内容に個別にお答えすることをお約束するものではありません。<br>
-            ご報告内容に基づいて対応、処置することをお約束するものではありません。<br>
-            アプリ操作に関するご質問に関してはお手数ですが、メニュー⇒ヘルプをご覧いただいてからお問い合わせください。<br>
-          </div>
-        </card-with-title>
-
-        <fixed-footer>
-          <v-ons-button
-            modifier="large--cta rounded"
-            @click="handleSubmit(showConfirmDialog)"
-          >
-            送信確認
-          </v-ons-button>
-        </fixed-footer>
+        </content-with-footer>
       </validation-observer>
     </div>
 
@@ -115,14 +118,14 @@
 import ContactInquiry from '@/components/organisms/contacts/contact-inquiry';
 import ContactContent from '@/components/organisms/contacts/contact-content';
 import CardWithTitle from '@/components/organisms/card-with-title';
-import FixedFooter from '@/components/organisms/fixed-footer';
+import ContentWithFooter from '@/components/organisms/content-with-footer';
 
 export default {
   components: {
     ContactInquiry,
     ContactContent,
     CardWithTitle,
-    FixedFooter,
+    ContentWithFooter,
   },
   data() {
     return {

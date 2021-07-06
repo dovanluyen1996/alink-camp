@@ -1,23 +1,26 @@
 <template>
   <v-ons-page>
     <custom-toolbar title="初回案内" />
-    <div class="content">
-      <v-ons-card>
-        位置情報取得の説明文
-      </v-ons-card>
 
-      <fixed-footer>
-        <v-ons-button @click="callToLocationServicesDialog()">
-          次へ
-        </v-ons-button>
-      </fixed-footer>
+    <div class="content">
+      <content-with-footer>
+        <v-ons-card>
+          位置情報取得の説明文
+        </v-ons-card>
+
+        <template #footer>
+          <v-ons-button @click="callToLocationServicesDialog()">
+            次へ
+          </v-ons-button>
+        </template>
+      </content-with-footer>
     </div>
   </v-ons-page>
 </template>
 
 <script>
 // components
-import FixedFooter from '@/components/organisms/fixed-footer';
+import ContentWithFooter from '@/components/organisms/content-with-footer';
 
 // pages
 import PushNotification from '@/views/first-guidance/push-notification';
@@ -25,7 +28,7 @@ import PushNotification from '@/views/first-guidance/push-notification';
 export default {
   name: 'FirstGuidanceLocationServices',
   components: {
-    FixedFooter,
+    ContentWithFooter,
   },
   methods: {
     callToLocationServicesDialog() {

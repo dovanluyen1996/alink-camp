@@ -1,34 +1,37 @@
 <template>
   <v-ons-page>
     <custom-toolbar title="コース検索" />
+
     <div class="content">
-      <search-field
-        v-model="searchText"
-        @searched="goToSearchResult"
-      />
+      <content-with-footer>
+        <search-field
+          v-model="searchText"
+          @searched="goToSearchResult"
+        />
 
-      <course-list
-        v-if="viewedCourses.length > 0"
-        :courses="viewedCourses"
-        :has-chevron="false"
-        title="閲覧履歴"
-        @click="goToCourseShow"
-      />
+        <course-list
+          v-if="viewedCourses.length > 0"
+          :courses="viewedCourses"
+          :has-chevron="false"
+          title="閲覧履歴"
+          @click="goToCourseShow"
+        />
 
-      <fixed-footer>
-        <v-ons-button
-          modifier="cta rounded"
-          @click="goToPrefecturesSearch"
-        >
-          地域より選択
-        </v-ons-button>
-        <v-ons-button
-          modifier="cta rounded"
-          @click="goToConditionsSearch"
-        >
-          絞り込み選択
-        </v-ons-button>
-      </fixed-footer>
+        <template #footer>
+          <v-ons-button
+            modifier="cta rounded"
+            @click="goToPrefecturesSearch"
+          >
+            地域より選択
+          </v-ons-button>
+          <v-ons-button
+            modifier="cta rounded"
+            @click="goToConditionsSearch"
+          >
+            絞り込み選択
+          </v-ons-button>
+        </template>
+      </content-with-footer>
     </div>
   </v-ons-page>
 </template>
@@ -37,7 +40,7 @@
 // components
 import SearchField from '@/components/organisms/form/search-field.vue';
 import CourseList from '@/components/organisms/course-list.vue';
-import FixedFooter from '@/components/organisms/fixed-footer';
+import ContentWithFooter from '@/components/organisms/content-with-footer';
 
 // pages
 import SearchResult from '@/views/course-search/search-result';
@@ -50,7 +53,7 @@ export default {
   components: {
     SearchField,
     CourseList,
-    FixedFooter,
+    ContentWithFooter,
   },
   data() {
     return {
@@ -90,7 +93,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.fixed-footer {
+.content-with-footer {
   display: flex;
   justify-content: space-evenly;
 

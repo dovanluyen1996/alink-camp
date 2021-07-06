@@ -12,33 +12,37 @@
       </template>
     </custom-toolbar>
 
-    <course-name :course-name="course.name" />
+    <div class="content">
+      <content-with-footer>
+        <course-name :course-name="course.name" />
 
-    <v-ons-card class="course-weather-and-image">
-      <v-ons-row class="course-weather-and-image-row">
-        <user-course-result-weather />
-        <user-course-result-image v-model="image" />
-      </v-ons-row>
-    </v-ons-card>
+        <v-ons-card class="course-weather-and-image">
+          <v-ons-row class="course-weather-and-image-row">
+            <user-course-result-weather />
+            <user-course-result-image v-model="image" />
+          </v-ons-row>
+        </v-ons-card>
 
-    <user-course-result-target-date-field
-      v-model="target_date"
-      title="プレイ日"
-    />
-    <user-course-result-scores-field
-      :total-score.sync="total_score"
-      :patting-score.sync="patting_score"
-    />
-    <user-course-result-note-field v-model="note" />
+        <user-course-result-target-date-field
+          v-model="target_date"
+          title="プレイ日"
+        />
+        <user-course-result-scores-field
+          :total-score.sync="total_score"
+          :patting-score.sync="patting_score"
+        />
+        <user-course-result-note-field v-model="note" />
 
-    <fixed-footer>
-      <v-ons-button
-        modifier="large--cta add rounded"
-        @click="submitScore"
-      >
-        保存
-      </v-ons-button>
-    </fixed-footer>
+        <template #footer>
+          <v-ons-button
+            modifier="large--cta add rounded"
+            @click="submitScore"
+          >
+            保存
+          </v-ons-button>
+        </template>
+      </content-with-footer>
+    </div>
   </v-ons-page>
 </template>
 
@@ -51,7 +55,7 @@ import UserCourseResultScoresField from '@/components/organisms/user-course-resu
 import UserCourseResultWeather from '@/components/organisms/user-course-results/weather';
 import UserCourseResultImage from '@/components/organisms/user-course-results/image';
 import UserCourseResultNoteField from '@/components/organisms/user-course-results/note-field';
-import FixedFooter from '@/components/organisms/fixed-footer';
+import ContentWithFooter from '@/components/organisms/content-with-footer';
 
 export default {
   name: 'UserCourseResultsEdit',
@@ -63,7 +67,7 @@ export default {
     UserCourseResultWeather,
     UserCourseResultImage,
     UserCourseResultNoteField,
-    FixedFooter,
+    ContentWithFooter,
   },
   props: {
     course: {

@@ -1,31 +1,34 @@
 <template>
   <v-ons-page>
     <custom-toolbar title="サマリー情報" />
-    <course-name :course-name="course.name" />
-    <v-ons-card>
-      <div class="content">
-        <user-course-results-summary-chart />
 
-        <user-course-results-course-weather />
+    <div class="content">
+      <content-with-footer>
+        <course-name :course-name="course.name" />
+        <v-ons-card>
+          <div class="content">
+            <user-course-results-summary-chart />
 
-        <user-course-results-list
-          :user-course-results="userCourseResults"
-          @clickUserCourseResult="showEditConfirmDialog"
-        />
-      </div>
-    </v-ons-card>
-    <fixed-footer>
-      <v-ons-button
-        modifier="large--cta add rounded"
-        @click="goToUserCourseResultsNew"
-      >
-        スコア追加
-      </v-ons-button>
-    </fixed-footer>
+            <user-course-results-course-weather />
 
-    <v-ons-alert-dialog
-      :visible.sync="isVisibleEditConfirmDialog"
-    >
+            <user-course-results-list
+              :user-course-results="userCourseResults"
+              @clickUserCourseResult="showEditConfirmDialog"
+            />
+          </div>
+        </v-ons-card>
+        <template #footer>
+          <v-ons-button
+            modifier="large--cta add rounded"
+            @click="goToUserCourseResultsNew"
+          >
+            スコア追加
+          </v-ons-button>
+        </template>
+      </content-with-footer>
+    </div>
+
+    <v-ons-alert-dialog :visible.sync="isVisibleEditConfirmDialog">
       <template #title>
         編集確認
       </template>
@@ -56,7 +59,7 @@ import CourseName from '@/components/organisms/course-name';
 import UserCourseResultsSummaryChart from '@/components/organisms/user-course-results/summary-chart';
 import UserCourseResultsCourseWeather from '@/components/organisms/user-course-results/course-weather';
 import UserCourseResultsList from '@/components/organisms/user-course-results/result-list';
-import FixedFooter from '@/components/organisms/fixed-footer';
+import ContentWithFooter from '@/components/organisms/content-with-footer';
 
 // pages
 import UserCourseResultsNew from '@/views/user-course-results/new';
@@ -69,7 +72,7 @@ export default {
     UserCourseResultsSummaryChart,
     UserCourseResultsCourseWeather,
     UserCourseResultsList,
-    FixedFooter,
+    ContentWithFooter,
   },
   props: {
     course: {

@@ -2,22 +2,24 @@
   <v-ons-page>
     <custom-toolbar title="初回案内" />
     <div class="content">
-      <v-ons-card>
-        push通知の説明文
-      </v-ons-card>
+      <content-with-footer>
+        <v-ons-card>
+          push通知の説明文
+        </v-ons-card>
 
-      <fixed-footer>
-        <v-ons-button @click="callToPushNotificationDialog">
-          次へ
-        </v-ons-button>
-      </fixed-footer>
+        <template #footer>
+          <v-ons-button @click="callToPushNotificationDialog">
+            次へ
+          </v-ons-button>
+        </template>
+      </content-with-footer>
     </div>
   </v-ons-page>
 </template>
 
 <script>
 // components
-import FixedFooter from '@/components/organisms/fixed-footer';
+import ContentWithFooter from '@/components/organisms/content-with-footer';
 
 // pages
 import IdfaGuidance from '@/views/first-guidance/idfa-guidance';
@@ -25,7 +27,7 @@ import IdfaGuidance from '@/views/first-guidance/idfa-guidance';
 export default {
   name: 'FirstGuidancePushNotification',
   components: {
-    FixedFooter,
+    ContentWithFooter,
   },
   methods: {
     callToPushNotificationDialog() {
