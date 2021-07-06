@@ -8,8 +8,8 @@
       v-model="inputedValue"
       :title="title"
       placeholder="ラウンド日"
+      :errors="errors"
     />
-    <span>{{ errors[0] }}</span>
   </validation-provider>
 </template>
 

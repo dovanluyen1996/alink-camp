@@ -15,6 +15,9 @@
     >
       {{ help }}
     </annotations-block>
+    <div v-if="errors.length">
+      {{ errors[0] }}
+    </div>
   </base-field>
 </template>
 
