@@ -17,21 +17,21 @@
         </template>
       </no-data>
 
-      <div v-else>
+      <content-with-footer v-else>
         <course-list
           :courses="courses"
           @click="goToUserCourseResults"
         />
 
-        <fixed-footer>
+        <template #footer>
           <v-ons-button
             modifier="large--cta add rounded"
             @click="goToCourseSearch"
           >
             別コースでスコア追加
           </v-ons-button>
-        </fixed-footer>
-      </div>
+        </template>
+      </content-with-footer>
     </div>
   </v-ons-page>
 </template>
@@ -40,7 +40,7 @@
 // components
 import NoData from '@/components/organisms/no-data';
 import CourseList from '@/components/organisms/course-list.vue';
-import FixedFooter from '@/components/organisms/fixed-footer';
+import ContentWithFooter from '@/components/organisms/content-with-footer';
 
 // pages
 import UserCourseResultsIndex from '@/views/user-course-results/Index';
@@ -50,7 +50,7 @@ export default {
   components: {
     NoData,
     CourseList,
-    FixedFooter,
+    ContentWithFooter,
   },
   computed: {
     courses() {
