@@ -62,6 +62,8 @@ export default {
         const course = await ApiClient.getCourse(courseId);
 
         context.commit('setChoosenCourse', course);
+      } catch (error) {
+        context.commit('api/setError', error, { root: true });
       } finally {
         context.commit('setIsLoading', false);
       }

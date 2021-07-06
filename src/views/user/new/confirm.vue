@@ -77,15 +77,17 @@ export default {
       );
       return prefecture ? prefecture.text : '';
     },
+    apiSuccess() {
+      return this.$store.state.api.isSuccess;
+    },
   },
   methods: {
     clickBack() {
       this.$store.dispatch('appNavigator/pop');
     },
-    submitUserData() {
-      this.$store.dispatch('models/currentUser/updateUser', this.user).then(() => {
-        this.$store.dispatch('appNavigator/push', UserStampsCampaign);
-      });
+    async submitUserData() {
+      await this.$store.dispatch('models/currentUser/updateUser', this.user);
+      if (this.apiSuccess) this.$store.dispatch('appNavigator/push', UserStampsCampaign);
     },
   },
 };

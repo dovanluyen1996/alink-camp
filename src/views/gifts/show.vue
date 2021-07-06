@@ -110,12 +110,14 @@ export default {
       email: this.$store.state.models.currentUser.user.email,
       confirmVisible: false,
       completedVisible: false,
-      error: null,
     };
   },
   computed: {
     gift() {
       return this.$store.getters['models/gift/findById'](this.giftId);
+    },
+    apiSuccess() {
+      return this.$store.state.api.isSuccess;
     },
   },
   methods: {
@@ -139,8 +141,8 @@ export default {
       };
 
       this.closeConfirm();
-      const success = await this.$store.dispatch('models/userGift/createUserGift', params);
-      if (success) this.showCompleted();
+      await this.$store.dispatch('models/userGift/createUserGift', params);
+      if (this.apiSuccess) this.showCompleted();
     },
   },
 };
