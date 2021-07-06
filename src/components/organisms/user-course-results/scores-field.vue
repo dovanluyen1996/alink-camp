@@ -17,18 +17,18 @@
             <v-ons-col class="total-score-label">
               合計打数
             </v-ons-col>
-              <v-ons-col>
-                <v-ons-input
-                  v-model="inputedTotalScoreValue"
-                  type="text"
-                  maxlength="3"
-                  oninput="value = value.replace(/[^0-9]+/i,'');"
-                  class="total-score-input"
-                />
-              </v-ons-col>
-              <v-ons-col class="score-unit">
-                打
-              </v-ons-col>
+            <v-ons-col>
+              <v-ons-input
+                v-model="inputedTotalScoreValue"
+                type="text"
+                maxlength="3"
+                oninput="value = value.replace(/[^0-9]+/i,'');"
+                class="total-score-input"
+              />
+            </v-ons-col>
+            <v-ons-col class="score-unit">
+              打
+            </v-ons-col>
           </v-ons-row>
           <span>{{ errors[0] }}</span>
         </validation-provider>
