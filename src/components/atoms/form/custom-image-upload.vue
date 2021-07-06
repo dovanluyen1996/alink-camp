@@ -38,7 +38,10 @@
         >
       </label>
     </div>
-    <div v-if="errors.length">
+    <div
+      v-if="errors.length"
+      class="input-error-msg"
+    >
       {{ errors[0] }}
     </div>
   </div>

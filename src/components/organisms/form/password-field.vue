@@ -7,8 +7,10 @@
       v-model="inputedValue"
       :type="type"
     />
-    <!-- TODO: エラーメッセージの表示を修正する必要があります。 -->
-    <div v-if="errors.length">
+    <div
+      v-if="errors.length"
+      class="input-error-msg"
+    >
       {{ errors[0] }}
     </div>
     <template v-if="canShowPassword">

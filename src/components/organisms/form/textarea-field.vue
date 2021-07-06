@@ -9,7 +9,10 @@
       :rows="rows"
       :placeholder="placeholder"
     />
-    <div v-if="errors.length">
+    <div
+      v-if="errors.length"
+      class="input-error-msg"
+    >
       {{ errors[0] }}
     </div>
   </base-field>

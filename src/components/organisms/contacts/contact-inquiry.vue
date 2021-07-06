@@ -9,7 +9,10 @@
         :options="options.map(option => ({ value: option, text: option }))"
         placeholder="選択してください"
       />
-      <div v-if="errors.length">
+      <div
+        v-if="errors.length"
+        class="input-error-msg"
+      >
         {{ errors[0] }}
       </div>
     </div>
