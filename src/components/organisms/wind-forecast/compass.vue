@@ -15,7 +15,7 @@
 <script>
 import settings from '@/config/settings';
 
-const { directions } = settings.views;
+const { windDirections } = settings.views;
 
 export default {
   name: 'Compass',
@@ -42,7 +42,7 @@ export default {
     windDirectionDeg() {
       // the rule is: North direction is corresponding to 0deg
       // so, difference between compass's rules and css's root rule is 90deg
-      const deg = Math.floor(directions[this.windDirection] - 90);
+      const deg = Math.floor(windDirections[this.windDirection] - 90);
 
       return `wind-direction--${deg}-deg`;
     },
