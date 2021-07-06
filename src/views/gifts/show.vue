@@ -121,10 +121,7 @@ export default {
   },
   data() {
     return {
-      // https://github.com/rights-s/alink-golf_tenki-client/issues/266
-      // TODO: currentUser.user.emailをデフォルトでセットする
-      // email: this.$store.state.model.currentUser.user.email,
-      email: '',
+      email: this.$store.state.models.currentUser.user.email,
       confirmVisible: false,
       completedVisible: false,
       errorVisible: false,
