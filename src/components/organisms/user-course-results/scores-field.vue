@@ -14,13 +14,15 @@
           </v-ons-col>
           <validation-provider
             v-slot="{ errors }"
-            rules="required|numeric"
+            rules="required"
             name="合計打数"
           >
             <v-ons-col>
               <v-ons-input
                 v-model="inputedTotalScoreValue"
-                type="number"
+                type="text"
+                maxlength="3"
+                oninput="value = value.replace(/[^0-9]+/i,'');"
                 class="total-score-input"
               />
             </v-ons-col>
@@ -45,7 +47,9 @@
           <v-ons-col>
             <v-ons-input
               v-model="inputedPattingScoreValue"
-              type="number"
+              type="text"
+              maxlength="3"
+              oninput="value = value.replace(/[^0-9]+/i,'');"
               class="patting-score-input"
             />
           </v-ons-col>

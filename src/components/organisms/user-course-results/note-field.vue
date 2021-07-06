@@ -1,9 +1,16 @@
 <template>
   <!-- TODO: #344がマージされたらtextareaにする -->
-  <text-field
-    v-model="inputedValue"
-    title="メモ"
-  />
+  <validation-provider
+    v-slot="{ errors }"
+    rules="max:500"
+    name="メモ"
+  >
+    <text-field
+      v-model="inputedValue"
+      title="メモ"
+    />
+    <span>{{ errors[0] }}</span>
+  </validation-provider>
 </template>
 
 <script>

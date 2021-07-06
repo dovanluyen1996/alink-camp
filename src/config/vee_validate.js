@@ -1,6 +1,6 @@
 import { extend } from 'vee-validate';
 import {
-  required, email, ext, numeric,
+  required, email, ext, max,
 } from 'vee-validate/dist/rules';
 import settings from '@/config/settings';
 
@@ -35,7 +35,7 @@ extend('ext', {
   message: 'そのファイルはご利用いただけません',
 });
 
-extend('numeric', {
-  ...numeric,
-  message: '数値を入力してください',
+extend('max', {
+  ...max,
+  message: '{_field_}は{length}文字以内で入力してください'
 });
