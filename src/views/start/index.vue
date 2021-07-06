@@ -34,16 +34,33 @@
 import SignIn from '@/views/auth/sign-in';
 import TermsOfService from '@/views/terms-of-service/unsigned';
 import FirstGuidance from '@/views/first-guidance';
+import AppTabbar from '@/views/app-tabbar';
+import PurchaseInformation from '@/views/purchase-information';
 
 export default {
   name: 'StartIndex',
+  async created() {
+    // NOTE: Firebase Analytics Sample
+    // if (window.device.platform != 'browser') {
+    //   FirebasePlugin.setScreenName('PurchaseInformation');
+    //   FirebasePlugin.logEvent('screen_view', { content_type: 'page_view', item_id: 'home' });
+    // }
+
+    const isAuthenticated = await this.isAuthenticated();
+    // 1. ログイン済みかつ契約済みの場合、アプリトップに遷移
+    // 2. 未ログインかつ未契約の場合、サブスクリプションのページ
+    // // TODO 7/5現在 サブスクの契約状態の判別が出来ないため、一旦ログインしているかでページ遷移先を実装
+    const component = isAuthenticated ? AppTabbar : PurchaseInformation;
+
+    this.$store.dispatch('appNavigator/push', component);
+  },
   methods: {
-    created() {
-      // NOTE: Firebase Analytics Sample
-      // if (window.device.platform != 'browser') {
-      //   FirebasePlugin.setScreenName('PurchaseInformation');
-      //   FirebasePlugin.logEvent('screen_view', { content_type: 'page_view', item_id: 'home' });
-      // }
+    async isAuthenticated() {
+      try {
+        return await this.$cognito.isAuthenticated();
+      } catch (err) {
+        console.error(err);
+      }
     },
     start() {
       this.goToTermsOfService();

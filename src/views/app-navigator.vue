@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import Transition from '@/views/transition';
+import StartIndex from '@/views/start';
 
 export default {
   computed: {
@@ -15,7 +15,7 @@ export default {
     },
   },
   created() {
-    this.$store.dispatch('appNavigator/push', Transition);
+    this.$store.dispatch('appNavigator/push', StartIndex);
   },
   methods: {
     popPage() {
