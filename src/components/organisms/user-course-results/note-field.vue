@@ -1,5 +1,4 @@
 <template>
-  <!-- TODO: #344がマージされたらtextareaにする -->
   <validation-provider
     v-slot="{ errors }"
     rules="max:500"
