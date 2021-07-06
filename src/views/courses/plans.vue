@@ -78,24 +78,6 @@
         </v-ons-button>
       </template>
     </v-ons-alert-dialog>
-
-    <v-ons-alert-dialog
-      :visible.sync="errorVisible"
-    >
-      <template #title>
-        削除失敗
-      </template>
-
-      削除に失敗しました。
-
-      <template #footer>
-        <v-ons-button
-          @click="closeError()"
-        >
-          OK
-        </v-ons-button>
-      </template>
-    </v-ons-alert-dialog>
   </v-ons-page>
 </template>
 
@@ -134,8 +116,6 @@ export default {
       dateValue: '',
       timeValue: '',
       deleteConfirmDialogVisible: false,
-      errorVisible: false,
-      error: null,
     };
   },
   computed: {
@@ -143,11 +123,10 @@ export default {
       return this.course.name;
     },
     isPersisted() {
-      return Object.keys(this.userCoursePlan).length === 0 ? false : true;
+      return Object.keys(this.userCoursePlan).length !== 0
     },
-    errorMessage() {
-      if (!this.error || !this.error.response) return null;
-      return this.error.response.data.error;
+    targetAt() {
+      return `${this.dateValue} ${this.timeValue}`;
     },
   },
   created() {
@@ -166,25 +145,14 @@ export default {
     closeDeleteConfirmDialog() {
       this.deleteConfirmDialogVisible = false;
     },
-    showError() {
-      this.errorVisible = true;
-    },
-    closeError() {
-      this.errorVisible = false;
-    },
     async deleteUserCoursePlan() {
-      try {
-        await this.destroyUserCoursePlan();
-        this.closeDeleteConfirmDialog();
-        // 現状、UserCourseのStoreを使っています。
-        // そのため、UserCoursePlanを変更する時に、UserCourseのStoreを変更しないといけないです。
-        await this.$store.dispatch('models/userCourse/getUserCourses');
-        await this.$store.dispatch('courseSearchNavigator/pop');
-      } catch (e) {
-        console.log(e);
-        this.closeDeleteConfirmDialog();
-        this.showError();
-      }
+      this.closeDeleteConfirmDialog();
+
+      await this.destroyUserCoursePlan();
+      // 現状、UserCourseのStoreを使っています。
+      // そのため、UserCoursePlanを変更する時に、UserCourseのStoreを変更しないといけないです。
+      await this.$store.dispatch('models/userCourse/getUserCourses');
+      await this.$store.dispatch('courseSearchNavigator/pop');
     },
     async settingUserCoursePlan() {
       if (this.isPersisted) {
@@ -199,7 +167,7 @@ export default {
     },
     async updateUserCoursePlan() {
       const params = {
-        targetAt: this.targetAt(),
+        targetAt: this.targetAt,
       };
       await this.$store.dispatch('models/userCoursePlan/updateUserCoursePlan', {
         userCourseId: this.userCourse.id,
@@ -222,7 +190,7 @@ export default {
       // Create UserCoursePlan
       const params = {
         courseId: this.course.id,
-        targetAt: this.targetAt(),
+        targetAt: this.targetAt,
       };
       await this.$store.dispatch('models/userCoursePlan/createUserCoursePlan', {
         userCourseId,
@@ -240,9 +208,6 @@ export default {
         courseId: this.course.id,
       };
       await this.$store.dispatch('models/userCourse/createUserCourse', params);
-    },
-    targetAt() {
-      return `${this.dateValue} ${this.timeValue}`;
     },
   },
 };
