@@ -84,15 +84,15 @@ $degrees: 0, 22.5, 45, 67.5, 90, 112.5, 135, 157.5, 180, 202.5, 225, 247.5, 270,
   background-size: cover;
 
   &--normal {
-    background-image: url('~@/assets/images/weathers/wind-speed-normal.png');
+    background-image: url('~@/assets/images/weathers/wind-speed/normal.png');
   }
 
   &--strong {
-    background-image: url('~@/assets/images/weathers/wind-speed-strong.png');
+    background-image: url('~@/assets/images/weathers/wind-speed/strong.png');
   }
 
   &--danger {
-    background-image: url('~@/assets/images/weathers/wind-speed-danger.png');
+    background-image: url('~@/assets/images/weathers/wind-speed/danger.png');
   }
 }
 
