@@ -44,11 +44,13 @@ export default {
 .content-with-footer {
   position: relative;
   height: 100%;
+
   &__content {
     box-sizing: border-box;
-    overflow: auto;
     height: 100%;
+    overflow: auto;
   }
+
   &__footer {
     position: absolute;
     bottom: 0;
@@ -57,6 +59,7 @@ export default {
     width: 100%;
     padding: 16px 0;
     text-align: center;
+
     /deep/ {
       .button[class*="button--large"] {
         width: 75%;

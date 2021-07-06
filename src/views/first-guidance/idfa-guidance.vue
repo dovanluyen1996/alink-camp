@@ -29,7 +29,7 @@
           次へ
         </v-ons-button>
       </template>
-      </v-ons-alert-dialog>
+    </v-ons-alert-dialog>
   </v-ons-page>
 </template>
 
