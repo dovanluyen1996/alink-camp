@@ -40,9 +40,7 @@ export default {
       }
     },
     windDirectionDeg() {
-      // the rule is: North direction is corresponding to 0deg
-      // so, difference between compass's rules and css's root rule is 90deg
-      const deg = Math.floor(windDirections[this.windDirection] - 90);
+      const deg = Math.floor(windDirections[this.windDirection]);
 
       return `wind-direction--${deg}-deg`;
     },
@@ -67,14 +65,14 @@ $degrees: 0, 22.5, 45, 67.5, 90, 112.5, 135, 157.5, 180, 202.5, 225, 247.5, 270,
 }
 
 .wind-direction {
-  width: 155px;
-  height: 95px;
+  width: 95px;
+  height: 155px;
   transition: transform 0.5s ease-out, background-image 0.5s ease-out;
 
   @each $degree in $degrees {
     // generate class has partern: wind-direction--xx-deg
-    &--#{floor($degree - 90)}-deg {
-      transform: rotate(#{$degree - 90}deg);
+    &--#{floor($degree)}-deg {
+      transform: rotate(#{$degree}deg);
     }
   }
 }
