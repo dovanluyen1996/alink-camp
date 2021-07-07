@@ -5,48 +5,11 @@ export default {
   strict: true,
   namespaced: true,
   state: {
-    forecastScheduledDate: {},
-    forecast10Days: {},
-    forecastHourly: {},
-    forecastMonthlyTemp: {},
-    forecastMonthlyPrecip: {},
-    forecastWind: {},
-    past: {},
     isLoading: false,
-  },
-  getters: {
-    forecastScheduledDate: state => state.forecastScheduledDate,
-    forecast10Days: state => state.forecast10Days,
-    forecastHourly: state => state.forecastHourly,
-    forecastMonthlyTemp: state => state.forecastMonthlyTemp,
-    forecastMonthlyPrecip: state => state.forecastMonthlyPrecip,
-    forecastWind: state => state.forecastWind,
-    past: state => state.past,
   },
   mutations: {
     setIsLoading(state, isLoading) {
       state.isLoading = isLoading;
-    },
-    setForcastScheduledDate(state, forecastScheduledDate) {
-      Vue.set(state, 'forecastScheduledDate', forecastScheduledDate);
-    },
-    setForecast10Days(state, forecast10Days) {
-      Vue.set(state, 'forecast10Days', forecast10Days);
-    },
-    setForecastHourly(state, forecastHourly) {
-      Vue.set(state, 'forecastHourly', forecastHourly);
-    },
-    setForecastMonthlyTemp(state, forecastMonthlyTemp) {
-      Vue.set(state, 'forecastMonthlyTemp', forecastMonthlyTemp);
-    },
-    setForecastMonthlyPrecip(state, forecastMonthlyPrecip) {
-      Vue.set(state, 'forecastMonthlyPrecip', forecastMonthlyPrecip);
-    },
-    setForecastWind(state, forecastWind) {
-      Vue.set(state, 'forecastWind', forecastWind);
-    },
-    setPast(state, past) {
-      Vue.set(state, 'past', past);
     },
   },
   actions: {
@@ -54,9 +17,7 @@ export default {
       context.commit('setIsLoading', true);
 
       try {
-        const forecastScheduledDate = await ApiClient.getForecastScheduledDate(params);
-
-        context.commit('setForcastScheduledDate', forecastScheduledDate);
+        return await ApiClient.getForecastScheduledDate(params);
       } finally {
         context.commit('setIsLoading', false);
       }
@@ -65,9 +26,7 @@ export default {
       context.commit('setIsLoading', true);
 
       try {
-        const forecast10Days = await ApiClient.getForecast10Days(params);
-
-        context.commit('setForecast10Days', forecast10Days);
+        return await ApiClient.getForecast10Days(params);
       } finally {
         context.commit('setIsLoading', false);
       }
@@ -76,9 +35,7 @@ export default {
       context.commit('setIsLoading', true);
 
       try {
-        const forecastHourly = await ApiClient.getForecastHourly(params);
-
-        context.commit('setForecastHourly', forecastHourly);
+        return await ApiClient.getForecastHourly(params);
       } finally {
         context.commit('setIsLoading', false);
       }
@@ -87,9 +44,7 @@ export default {
       context.commit('setIsLoading', true);
 
       try {
-        const forecastMonthlyTemp = await ApiClient.getForecastMonthlyTemp(params);
-
-        context.commit('setForecastMonthlyTemp', forecastMonthlyTemp);
+        return await ApiClient.getForecastMonthlyTemp(params);
       } finally {
         context.commit('setIsLoading', false);
       }
@@ -98,9 +53,7 @@ export default {
       context.commit('setIsLoading', true);
 
       try {
-        const forecastMonthlyPrecip = await ApiClient.getForecastMonthlyPrecip(params);
-
-        context.commit('setForecastMonthlyPrecip', forecastMonthlyPrecip);
+        return await ApiClient.getForecastMonthlyPrecip(params);
       } finally {
         context.commit('setIsLoading', false);
       }
@@ -109,9 +62,7 @@ export default {
       context.commit('setIsLoading', true);
 
       try {
-        const forecastWind = await ApiClient.getForecastWind(params);
-
-        context.commit('setForecastWind', forecastWind);
+        return await ApiClient.getForecastWind(params);
       } finally {
         context.commit('setIsLoading', false);
       }
@@ -120,9 +71,7 @@ export default {
       context.commit('setIsLoading', true);
 
       try {
-        const past = await ApiClient.getPast(params);
-
-        context.commit('setPast', past);
+        return await ApiClient.getPast(params);
       } finally {
         context.commit('setIsLoading', false);
       }
