@@ -13,6 +13,7 @@ export default {
       uv: false,
       distance: -1,
     },
+    searched: null,
   },
   mutations: {
     push(state, page) {
@@ -47,6 +48,12 @@ export default {
         uv: false,
         distance: -1,
       };
+    },
+    resetSearchFlag(state) {
+      state.searched = null;
+    },
+    setSearched(state, searched) {
+      state.searched = searched;
     },
   },
   actions: {

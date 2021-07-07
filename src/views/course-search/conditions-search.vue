@@ -11,7 +11,7 @@
         <template #footer>
           <v-ons-button
             modifier="large--cta rounded"
-            @click="goToSearchResult"
+            @click="searched()"
           >
             絞り込み選択
           </v-ons-button>
@@ -50,11 +50,20 @@ export default {
           component: CourseSearchLocationTab,
         },
       ],
-      searchResultEmptyVisible: false,
     };
   },
   created() {
     this.$store.commit('courseSearchNavigator/resetSearchConditions');
+    this.$store.commit('courseSearchNavigator/resetSearchFlag');
+  },
+  methods: {
+    searched() {
+      const activeTabIndex = this.$refs.tabContents.activeIndex;
+      const activeTab = this.tabs.find((_tab, index) => index === activeTabIndex).name;
+
+      // activeTab: location/area
+      this.$store.commit('courseSearchNavigator/setSearched', activeTab);
+    },
   },
 };
 </script>
