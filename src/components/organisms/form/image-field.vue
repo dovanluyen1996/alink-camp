@@ -22,7 +22,7 @@ export default {
   },
   props: {
     value: {
-      type: [String, Object],
+      type: [String, File],
       default: () => '',
       required: true,
     },

@@ -53,7 +53,7 @@ export default {
   name: 'CustomImageUpload',
   props: {
     value: {
-      type: [String, Object],
+      type: [String, File],
       default: () => '',
       required: true,
     },
@@ -98,12 +98,12 @@ export default {
       const reader = new FileReader();
       reader.readAsDataURL(image);
       reader.onload = () => {
-        this.updateSelectedFile(reader.result);
+        this.updateSelectedFile(reader.result, image);
       };
     },
-    updateSelectedFile(image) {
-      this.$set(this.selectedFile, 'image', image);
-      this.$emit('input', this.selectedFile);
+    updateSelectedFile(url, image) {
+      this.$set(this.selectedFile, 'image', url);
+      this.$emit('input', image);
     },
     deleteImage() {
       const result = this.clickDelete();

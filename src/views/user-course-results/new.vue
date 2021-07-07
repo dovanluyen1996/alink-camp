@@ -3,33 +3,32 @@
     <custom-toolbar title="スコアの新規登録" />
 
     <div class="content">
-      <content-with-footer>
-        <!-- TODO: templateの中にtemplateがあるとvalidation-observerがうまく機能しない -->
-        <!-- <validation-observer v-slot="{ handleSubmit }"> -->
-        <course-name :course-name="course.name" />
-        <user-course-results-target-date-field
-          v-model="userCourseResult.targetDate"
-          title="プレイ日（必須）"
-        />
-        <user-course-results-scores-field
-          :total-score.sync="userCourseResult.totalScore"
-          :patting-score.sync="userCourseResult.pattingScore"
-        />
-        <user-course-results-image-field
-          v-model="userCourseResult.image"
-          title="写真"
-        />
-        <user-course-results-note-field v-model="userCourseResult.note" />
-        <template #footer>
-          <v-ons-button
-            modifier="large--cta add rounded"
-            @click="createUserCourseResult"
-          >
-            保存
-          </v-ons-button>
-        </template>
-        <!-- </validation-observer> -->
-      </content-with-footer>
+      <validation-observer v-slot="{ handleSubmit }">
+        <content-with-footer>
+          <course-name :course-name="course.name" />
+          <user-course-results-target-date-field
+            v-model="userCourseResult.targetDate"
+            title="プレイ日（必須）"
+          />
+          <user-course-results-scores-field
+            :total-score.sync="userCourseResult.totalScore"
+            :patting-score.sync="userCourseResult.pattingScore"
+          />
+          <user-course-results-image-field
+            v-model="userCourseResult.image"
+            title="写真"
+          />
+          <user-course-results-note-field v-model="userCourseResult.note" />
+          <template #footer>
+            <v-ons-button
+              modifier="large--cta add rounded"
+              @click="handleSubmit(createUserCourseResult)"
+            >
+              保存
+            </v-ons-button>
+          </template>
+        </content-with-footer>
+      </validation-observer>
     </div>
   </v-ons-page>
 </template>
