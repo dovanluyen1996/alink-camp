@@ -20,7 +20,12 @@
                   v-model="email"
                   placeholder="連絡先メールアドレス"
                 />
-                <span>{{ errors[0] }}</span>
+                <div
+                  v-if="errors.length"
+                  class="input-error-msg"
+                >
+                  {{ errors[0] }}
+                </div>
               </validation-provider>
             </template>
           </card-gift>

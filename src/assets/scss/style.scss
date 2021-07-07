@@ -25,3 +25,14 @@ table {
   text-align: center;
   background: $color-th;
 }
+
+/* ----------
+ form
+---------- */
+.input-error-msg {
+  padding-top: 12px;
+  font-weight: 300;
+  line-height: 1;
+  color: $color-error-msg;
+  text-align: center;
+}

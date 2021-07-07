@@ -16,8 +16,10 @@
         {{ option.text }}
       </option>
     </v-ons-select>
-    <!-- TODO: エラーメッセージの表示を修正する必要があります。 -->
-    <div v-if="errors.length">
+    <div
+      v-if="errors.length"
+      class="input-error-msg"
+    >
       {{ errors[0] }}
     </div>
   </div>
