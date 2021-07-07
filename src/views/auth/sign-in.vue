@@ -47,6 +47,7 @@ import ErrorDialog from '@/components/organisms/error-dialog';
 // pages
 import PasswordReminder from '@/views/auth/password-reminder';
 import AppTabbar from '@/views/app-tabbar';
+import ResendConfirmCode from '@/views/user/new/resend-confirm-code';
 
 export default {
   name: 'SignIn',
@@ -77,9 +78,14 @@ export default {
         return 'メールアドレスまたはパスワードが違います。';
       case 'InvalidParameterException':
         return 'メールアドレスが不正です。';
+      case 'UserNotConfirmedException':
+        return 'ユーザーが認証されていません。';
       default:
         return 'ログインに失敗しました';
       }
+    },
+    isNotConfirmed() {
+      return this.error.code === 'UserNotConfirmedException';
     },
   },
   methods: {
@@ -102,6 +108,15 @@ export default {
     },
     closeSignInError() {
       this.signInErrorVisible = false;
+
+      if (this.isNotConfirmed) {
+        this.$store.dispatch('appNavigator/push', {
+          extends: ResendConfirmCode,
+          onsNavigatorProps: {
+            email: this.user.email,
+          },
+        });
+      }
     },
   },
 };

@@ -44,6 +44,7 @@ import ErrorDialog from '@/components/organisms/error-dialog';
 
 // pages
 import UserData from '@/views/user/new/user-data';
+import SignIn from '@/views/auth/sign-in';
 
 export default {
   name: 'UserNewConfirmCode',
@@ -89,7 +90,11 @@ export default {
     autoLogin() {
       const authenticationData = JSON.parse(localStorage.getItem('authenticationData'));
 
-      this.$cognito.login(authenticationData.username, authenticationData.password)
+      if (!authenticationData || authenticationData.username !== this.email) {
+        return this.$store.dispatch('appNavigator/reset', SignIn);
+      }
+
+      return this.$cognito.login(authenticationData.username, authenticationData.password)
         .then(async(result) => {
           console.log(result);
           localStorage.removeItem('authenticationData');

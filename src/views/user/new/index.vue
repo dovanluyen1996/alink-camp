@@ -29,6 +29,12 @@
             <custom-submit @click="handleSubmit(getConfirmCode)">
               認証コードを送信
             </custom-submit>
+            <v-ons-button
+              modifier="quiet"
+              @click="goToResendConfirmCode"
+            >
+              認証コードを再送する
+            </v-ons-button>
           </template>
         </base-form>
       </validation-observer>
@@ -56,6 +62,7 @@ import ErrorDialog from '@/components/organisms/error-dialog';
 
 // pages
 import UerNewConfirmCode from '@/views/user/new/confirm-code';
+import ResendConfirmCode from '@/views/user/new/resend-confirm-code';
 
 export default {
   name: 'UserNew',
@@ -108,6 +115,14 @@ export default {
     goToConfirmCode() {
       this.$store.dispatch('appNavigator/push', {
         extends: UerNewConfirmCode,
+        onsNavigatorProps: {
+          email: this.user.email,
+        },
+      });
+    },
+    goToResendConfirmCode() {
+      this.$store.dispatch('appNavigator/push', {
+        extends: ResendConfirmCode,
         onsNavigatorProps: {
           email: this.user.email,
         },

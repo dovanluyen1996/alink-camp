@@ -81,6 +81,24 @@ export default class Cognito {
   }
 
   /**
+   * resendConfirmationCode
+   */
+  resendConfirmationCode(username) {
+    const userData = { Username: username, Pool: this.userPool };
+    const cognitoUser = new CognitoUser(userData);
+
+    return new Promise((resolve, reject) => {
+      cognitoUser.resendConfirmationCode((err, result) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(result);
+        }
+      });
+    });
+  }
+
+  /**
    * username, passwordでログイン
    */
   login(username, password) {
