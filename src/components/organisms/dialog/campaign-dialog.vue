@@ -1,5 +1,4 @@
 <template>
-  <!-- TODO: 部品化してどこでも呼び出せるようにする -->
   <v-ons-alert-dialog
     :visible.sync="isVisible"
   >
