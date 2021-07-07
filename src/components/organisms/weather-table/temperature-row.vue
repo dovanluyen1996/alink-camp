@@ -10,7 +10,6 @@
       <td :key="index">
         <temperature-component
           :value="temperature"
-          :is-integer="false"
           font-size="12px"
         />
       </td>

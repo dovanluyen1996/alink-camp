@@ -6,7 +6,6 @@
       </span>
       <temperature-component
         :value="forecast.max_temp"
-        :is-integer="false"
         :font-size="fontSize"
       />
     </div>
@@ -16,7 +15,6 @@
       </span>
       <temperature-component
         :value="forecast.min_temp"
-        :is-integer="false"
         :font-size="fontSize"
       />
     </div>

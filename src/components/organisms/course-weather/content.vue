@@ -97,10 +97,10 @@ export default {
         course_id: 2,
         items: [
           {
-            date: '2021-06-29', forecast_telop: '晴れのち曇り', weather_image_name: '1.png', wind_speed: '3.2', wind_direction: '北北西', wind_image_name: '3.png', precip: '30', humidity: '10', max_temp: '4.7', min_temp: '-2.1',
+            date: '2021-06-29', forecast_telop: '晴れのち曇り', weather_image_name: '1.png', wind_speed: '3.2', wind_direction: '北北西', wind_image_name: '3.png', precip: '30', humidity: '10', max_temp: '4.7', min_temp: '0',
           },
           {
-            date: '2021-06-30', forecast_telop: '晴れのち曇り', weather_image_name: '1.png', wind_speed: '3.2', wind_direction: '北北西', wind_image_name: '3.png', precip: '30', humidity: '10', max_temp: '4.7', min_temp: '-2.1',
+            date: '2021-06-30', forecast_telop: '晴れのち曇り', weather_image_name: '1.png', wind_speed: '3.2', wind_direction: '北北西', wind_image_name: '3.png', precip: '30', humidity: '10', max_temp: '4.7', min_temp: '0.0',
           },
           {
             date: '2021-07-01', forecast_telop: '晴れのち曇り', weather_image_name: '1.png', wind_speed: '3.2', wind_direction: '北北西', wind_image_name: '3.png', precip: '30', humidity: '10', max_temp: '4.7', min_temp: '-2.1',

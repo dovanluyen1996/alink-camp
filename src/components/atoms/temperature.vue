@@ -17,11 +17,6 @@ export default {
       type: String,
       default: null,
     },
-    isInteger: {
-      type: Boolean,
-      default: false,
-      required: true,
-    },
     fontSize: {
       type: String,
       default: '14px',
@@ -30,9 +25,8 @@ export default {
   computed: {
     displayValue() {
       const value = Math.round(this.value);
-      if (!value) return '--';
 
-      return this.isInteger ? value : this.value;
+      return value !== 0 && !value ? '--' : value;
     },
   },
 };
