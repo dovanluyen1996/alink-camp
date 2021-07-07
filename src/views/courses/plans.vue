@@ -20,10 +20,10 @@
     </custom-toolbar>
 
     <div class="content">
-      <content-with-footer>
-        <validation-observer
-          v-slot="{ handleSubmit }"
-        >
+      <validation-observer
+        v-slot="{ handleSubmit }"
+      >
+        <content-with-footer>
           <validation-provider
             v-slot="{ errors }"
             rules="required"
@@ -37,7 +37,6 @@
               :errors="errors"
             />
           </validation-provider>
-
           <time-field
             v-model="timeValue"
             title="プレイ開始時刻"
@@ -47,13 +46,13 @@
           <template #footer>
             <v-ons-button
               modifier="large--cta rounded"
-              @click="handleSubmit(settingPlan)"
+              @click="handleSubmit(settingUserCoursePlan)"
             >
               設定完了
             </v-ons-button>
           </template>
-        </validation-observer>
-      </content-with-footer>
+        </content-with-footer>
+      </validation-observer>
     </div>
 
     <v-ons-alert-dialog
