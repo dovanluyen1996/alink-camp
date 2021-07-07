@@ -136,8 +136,8 @@ export default {
     getPlanInfo() {
       if (!this.userCoursePlan.targetAt) return;
       // yyyy-mm-ddのフォーマットを使わないといけないです。
-      this.dateValue = this.$datetimeHelper.localDateWithHyphenFrom(this.userCoursePlan.targetAt);
-      this.timeValue = this.$datetimeHelper.localTimeFrom(this.userCoursePlan.targetAt);
+      this.dateValue = this.$helpers.localDateWithHyphenFrom(this.userCoursePlan.targetAt);
+      this.timeValue = this.$helpers.localTimeFrom(this.userCoursePlan.targetAt);
     },
     openDeleteConfirmDialog() {
       this.deleteConfirmDialogVisible = true;

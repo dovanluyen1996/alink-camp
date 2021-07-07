@@ -1,5 +1,4 @@
 import moment from 'moment';
-
 moment.locale('ja');
 
 export default {
@@ -21,4 +20,22 @@ export default {
       return null;
     }
   },
-};
+
+  momentWithTimezoneOf(time) {
+    return moment(time);
+  },
+
+  // 画面で表示するため
+  localDateFrom(time) {
+    return moment(time).format('YYYY/MM/DD');
+  },
+
+  localTimeFrom(time) {
+    return moment(time).format('HH:mm');
+  },
+
+  // 日付を取得するため。javascriptにはyyyy-mm-ddのフォーマットを使わないといけないです。
+  localDateWithHyphenFrom(time) {
+    return moment(time).format('YYYY-MM-DD');
+  }
+}
