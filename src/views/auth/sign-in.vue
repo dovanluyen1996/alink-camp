@@ -46,7 +46,7 @@ import ErrorDialog from '@/components/organisms/error-dialog';
 
 // pages
 import PasswordReminder from '@/views/auth/password-reminder';
-import UserStampsCampaign from '@/views/user/user-stamps/campaign';
+import AppTabbar from '@/views/app-tabbar';
 
 export default {
   name: 'SignIn',
@@ -90,7 +90,7 @@ export default {
       this.$cognito.login(this.user.email, this.user.password)
         .then(async(result) => {
           console.log(result);
-          this.$store.dispatch('appNavigator/push', UserStampsCampaign);
+          this.$store.dispatch('appNavigator/push', AppTabbar);
         })
         .catch((err) => {
           this.error = err;

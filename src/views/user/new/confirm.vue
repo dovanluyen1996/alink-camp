@@ -47,7 +47,7 @@ import ConfirmField from '@/components/organisms/form/confirm-field';
 import CustomSubmit from '@/components/organisms/form/custom-submit';
 
 // pages
-import UserStampsCampaign from '@/views/user/user-stamps/campaign';
+import AppTabbar from '@/views/app-tabbar';
 
 export default {
   name: 'UserNewConfirm',
@@ -84,7 +84,7 @@ export default {
     },
     submitUserData() {
       this.$store.dispatch('models/currentUser/updateUser', this.user).then(() => {
-        this.$store.dispatch('appNavigator/push', UserStampsCampaign);
+        this.$store.dispatch('appNavigator/push', AppTabbar);
       });
     },
   },
