@@ -36,22 +36,13 @@ export default {
   },
   computed: {
     image() {
-      return this.getImage();
+      return this.$helpers.getImage(`weathers/uv/uv_large_${this.getImageFileName()}.png`);
     },
     label() {
       return this.forecast.uv_index ? this.uv_text[this.forecast.uv_index] : '';
     },
   },
   methods: {
-    getImage() {
-      try {
-        // eslint-disable-next-line global-require, import/no-dynamic-require
-        return require(`@/assets/images/weathers/uv/uv_large_${this.getImageFileName()}.png`);
-      } catch (e) {
-        console.error(`紫外線画像ファイル（@/assets/images/weathers/uv/uv_large_${this.getImageFileName()}.png）の読み込みに失敗しました`);
-        return null;
-      }
-    },
     getImageFileName() {
       return this.forecast.uv_index || 'none';
     },

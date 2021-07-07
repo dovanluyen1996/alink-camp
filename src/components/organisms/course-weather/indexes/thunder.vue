@@ -35,22 +35,13 @@ export default {
   },
   computed: {
     image() {
-      return this.getImage();
+      return this.$helpers.getImage(`weathers/thunder/thunder_large_${this.getImageFileName()}.png`);
     },
     label() {
       return this.forecast.thunder_index ? this.thunder_text[this.forecast.thunder_index] : '';
     },
   },
   methods: {
-    getImage() {
-      try {
-        // eslint-disable-next-line global-require, import/no-dynamic-require
-        return require(`@/assets/images/weathers/thunder/thunder_large_${this.getImageFileName()}.png`);
-      } catch (e) {
-        console.error(`落雷画像ファイル（@/assets/images/weathers/thunder/thunder_large_${this.getImageFileName()}.png）の読み込みに失敗しました`);
-        return null;
-      }
-    },
     getImageFileName() {
       return this.forecast.thunder_index || 'none';
     },

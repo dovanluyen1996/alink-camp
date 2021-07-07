@@ -34,24 +34,11 @@ export default {
   },
   computed: {
     image() {
-      return this.getImage();
+      return this.$helpers.getImage(`weathers/weather/${this.weather.weather_image_name}`);
     },
     alt() {
       if (this.isShownName) return null;
       return this.weather.forecast_telop;
-    },
-  },
-  methods: {
-    getImage() {
-      try {
-        // NOTE: 画像のため依存関係が明らかなのでrequireのルールを除外
-        //       枚数も多いので従うと却って見づらくなる
-        // eslint-disable-next-line global-require, import/no-dynamic-require
-        return require(`@/assets/images/weathers/weather/${this.weather.weather_image_name}`);
-      } catch (e) {
-        console.error(`天気画像ファイル（@/assets/images/weathers/weather/${this.weather.weather_image_name}）の読み込みに失敗しました`);
-        return null;
-      }
     },
   },
 };

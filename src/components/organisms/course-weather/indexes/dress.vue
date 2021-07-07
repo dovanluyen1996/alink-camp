@@ -41,22 +41,13 @@ export default {
   },
   computed: {
     image() {
-      return this.getImage();
+      return this.$helpers.getImage(`weathers/dress/dress_large_${this.getImageFileName()}.png`);
     },
     label() {
       return this.dress_text[`${this.forecast.dress_index_weather}_${this.forecast.dress_index}`];
     },
   },
   methods: {
-    getImage() {
-      try {
-        // eslint-disable-next-line global-require, import/no-dynamic-require
-        return require(`@/assets/images/weathers/dress/dress_large_${this.getImageFileName()}.png`);
-      } catch (e) {
-        console.error(`服装画像ファイル（@/assets/images/weathers/dress/dress_large_${this.getImageFileName()}.png）の読み込みに失敗しました`);
-        return null;
-      }
-    },
     getImageFileName() {
       const isNone = !this.forecast.dress_index || !this.forecast.dress_index_weather;
       const imageName = `${this.forecast.dress_index_weather}_${this.forecast.dress_index}`;
