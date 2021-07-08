@@ -24,9 +24,10 @@ export default {
   },
   computed: {
     displayValue() {
+      if (this.value === null || this.value === '') return '--';
       const value = Math.round(this.value);
 
-      return value !== 0 && !value ? '--' : value;
+      return Number.isNaN(value) ? '--' : value;
     },
   },
 };
