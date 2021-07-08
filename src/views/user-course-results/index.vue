@@ -84,7 +84,7 @@ export default {
   data() {
     return {
       isVisibleEditConfirmDialog: false,
-      selectedUserCourseResults: null,
+      selectedUserCourseResult: null,
     };
   },
   computed: {
@@ -101,18 +101,18 @@ export default {
     },
     showEditConfirmDialog(userCourseResult) {
       this.isVisibleEditConfirmDialog = true;
-      this.selectedUserCourseResults = userCourseResult;
+      this.selectedUserCourseResult = userCourseResult;
     },
     hideEditConfirmDialog() {
       this.isVisibleEditConfirmDialog = false;
-      this.selectedUserCourseResults = null;
+      this.selectedUserCourseResult = null;
     },
     goToUserCourseResultsEdit() {
       this.$store.dispatch('scoresNavigator/push', {
         extends: UserCourseResultsEdit,
         onsNavigatorProps: {
-          course: this.course,
-          userCourseResult: this.selectedUserCourseResults,
+          userCourse: this.userCourse,
+          userCourseResult: this.selectedUserCourseResult,
         },
       });
       this.hideEditConfirmDialog();

@@ -1,6 +1,6 @@
 <template>
   <v-ons-page>
-    <custom-toolbar :title="title | moment('YYYY/MM/DD')">
+    <custom-toolbar :title="userCourseResult.targetDate | moment('YYYY/MM/DD')">
       <template #right>
         <delete-dialog-with-icon
           :is-shown.sync="isShownDeleteDialog"
@@ -15,7 +15,7 @@
     <div class="content">
       <validation-observer v-slot="{ handleSubmit }">
         <content-with-footer>
-          <course-name :course-name="course.name" />
+          <course-name :course-name="userCourse.course.name" />
 
           <v-ons-card class="course-weather-and-image">
             <v-ons-row class="course-weather-and-image-row">
@@ -74,7 +74,7 @@ export default {
     ContentWithFooter,
   },
   props: {
-    course: {
+    userCourse: {
       type: Object,
       default: () => {},
       required: true,
@@ -87,30 +87,16 @@ export default {
   },
   data() {
     return {
-      tempUserCourseResult: {
-        targetDate: this.userCourseResult.targetDate,
-        totalScore: this.userCourseResult.totalScore,
-        pattingScore: this.userCourseResult.pattingScore,
-        image: this.userCourseResult.image,
-        note: this.userCourseResult.note,
-      },
+      tempUserCourseResult: { ...this.userCourseResult },
       isShownDeleteDialog: false,
     };
   },
-  computed: {
-    title() {
-      return this.userCourseResult.targetDate;
-    },
-  },
   methods: {
-    getUserCourse() {
-      return this.$store.getters['models/userCourse/findByCourseId'](this.course.id);
-    },
     async deleteUserCourseResult() {
       this.isShownDeleteDialog = false;
 
       await this.$store.dispatch('models/userCourseResult/destroyUserCourseResult', {
-        userCourseId: this.getUserCourse().id,
+        userCourseId: this.userCourse.id,
         userCourseResultId: this.userCourseResult.id,
       })
         .then(() => {
@@ -128,7 +114,7 @@ export default {
       }
 
       await this.$store.dispatch('models/userCourseResult/updateUserCourseResult', {
-        userCourseId: this.getUserCourse().id,
+        userCourseId: this.userCourse.id,
         userCourseResultId: this.userCourseResult.id,
         params: this.tempUserCourseResult,
       })
