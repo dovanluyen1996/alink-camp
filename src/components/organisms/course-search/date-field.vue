@@ -36,9 +36,8 @@ export default {
       // 0: area, 1: location
       if (this.activeIndex === 0) {
         return this.$store.state.courseSearchNavigator.areaSearchConditions;
-      } else {
-        return this.$store.state.courseSearchNavigator.locationSearchConditions;
       }
+      return this.$store.state.courseSearchNavigator.locationSearchConditions;
     },
     dateValue: {
       get() {
