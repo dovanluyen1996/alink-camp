@@ -9,7 +9,6 @@
       @prechange="prechange"
       @reactive="reactive"
     />
-    <campaign-dialog />
   </v-ons-page>
 </template>
 
@@ -22,14 +21,10 @@ import CourseSearchNavigator from '@/views/course-search/course-search-navigator
 import ScoresNavigator from '@/views/scores/scores-navigator';
 import WindForecastNavigator from '@/views/wind-forecast/wind-forecast-navigator';
 import MenuNavigator from '@/views/menu/menu-navigator';
-import CampaignDialog from '@/components/organisms/dialog/campaign-dialog';
 
 const menuTabIndex = settings.views.appTabbar.tabIndexes.menu;
 
 export default {
-  components: {
-    CampaignDialog,
-  },
   data() {
     return {
       isShownMenu: false,

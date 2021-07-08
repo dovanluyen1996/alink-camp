@@ -47,7 +47,7 @@
 
 <script>
 export default {
-  name: 'CampaignDialog',
+  name: 'UserStampsCampaign',
   data() {
     return {
       stampAreaLimit: 10,
