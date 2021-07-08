@@ -22,6 +22,7 @@
           <template #footer>
             <v-ons-button
               modifier="large--cta add rounded"
+              :disabled="buttonIsDisable"
               @click="handleSubmit(createUserCourseResult)"
             >
               保存
@@ -70,10 +71,18 @@ export default {
         image: '',
         note: '',
       },
+      isDisable: false,
     };
+  },
+  computed: {
+    buttonIsDisable() {
+      return this.isDisable;
+    },
   },
   methods: {
     async createUserCourseResult() {
+      this.isDisable = true;
+
       await this.$store.dispatch('models/userCourseResult/createUserCourseResult', {
         userCourseId: this.userCourse.id,
         params: this.userCourseResult,
@@ -85,6 +94,7 @@ export default {
           console.log(err);
         });
 
+      this.isDisable = false;
       this.$store.dispatch('scoresNavigator/pop');
     },
   },
