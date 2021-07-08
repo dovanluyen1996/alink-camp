@@ -40,7 +40,7 @@ class ApiClient extends HttpClient {
       let errorObject = {};
 
       if (!error.response || !error.response.data) {
-        errorObject = { status: 500, message: '何かがうまくいかなかった' };
+        errorObject = { status: 500, message: 'サーバーエラーが発生しました' };
       } else {
         const errorResponse = error.response;
         errorObject = {
