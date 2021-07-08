@@ -55,7 +55,7 @@ export default {
       return userCoursePlans.sort((a, b) => {
         let sort = 0;
 
-        sort = a.targetDate.isSameOrAfter(b.targetDate) ? 1 : -1;
+        sort = a.targetDate.isAfter(b.targetDate) ? 1 : -1;
         if (a.targetDate.isSame(b.targetDate)) sort = a.isFavorited ? -1 : 1;
 
         return sort;
