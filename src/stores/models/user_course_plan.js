@@ -11,7 +11,7 @@ export default {
   },
   getters: {
     all: (state, getters, rootState, rootGetters) => {
-      const userCourses = rootGetters['models/userCourse/favoritedOrHasPlans'];
+      const userCourses = rootGetters['models/userCourse/all'];
 
       return userCourses.map(userCourse => userCourse.userCoursePlans.map(userCoursePlan => ({
         ...userCoursePlan,
