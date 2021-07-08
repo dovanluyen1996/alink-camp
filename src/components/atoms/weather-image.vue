@@ -37,8 +37,7 @@ export default {
       return this.$helpers.getImage(`weathers/weather/${this.weather.weather_image_name}`);
     },
     alt() {
-      if (this.isShownName) return null;
-      return this.weather.forecast_telop;
+      return (this.isShownName) ? null : this.weather.forecast_telop;
     },
   },
 };
