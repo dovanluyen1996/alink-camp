@@ -4,7 +4,7 @@
 
     <div class="content">
       <content-with-footer>
-        <course-name :course-name="course.name" />
+        <course-name :course-name="userCourse.course.name" />
         <v-ons-card>
           <div class="content">
             <user-course-results-summary-chart />
@@ -75,14 +75,9 @@ export default {
     ContentWithFooter,
   },
   props: {
-    course: {
+    userCourse: {
       type: Object,
       default: () => {},
-      required: true,
-    },
-    userCourseId: {
-      type: Number,
-      default: 0,
       required: true,
     },
   },
@@ -102,7 +97,7 @@ export default {
   },
   methods: {
     async getUserCourseResults() {
-      await this.$store.dispatch('models/userCourseResult/getUserCourseResults', this.userCourseId);
+      await this.$store.dispatch('models/userCourseResult/getUserCourseResults', this.userCourse.id);
     },
     showEditConfirmDialog(userCourseResult) {
       this.isVisibleEditConfirmDialog = true;
@@ -126,11 +121,9 @@ export default {
       this.$store.dispatch('scoresNavigator/push', {
         extends: UserCourseResultsNew,
         onsNavigatorProps: {
-          userCourseId: this.userCourseId,
-          course: this.course,
+          userCourse: this.userCourse,
         },
       });
-      // TODO: issue#134 スコア新規登録画面に遷移
     },
   },
 };

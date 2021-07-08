@@ -5,7 +5,7 @@
     <div class="content">
       <validation-observer v-slot="{ handleSubmit }">
         <content-with-footer>
-          <course-name :course-name="course.name" />
+          <course-name :course-name="userCourse.course.name" />
           <user-course-results-target-date-field
             v-model="userCourseResult.targetDate"
             title="プレイ日（必須）"
@@ -55,12 +55,7 @@ export default {
     ContentWithFooter,
   },
   props: {
-    userCourseId: {
-      type: Number,
-      default: null,
-      require: true,
-    },
-    course: {
+    userCourse: {
       type: Object,
       default: () => {},
       required: true,
@@ -80,7 +75,7 @@ export default {
   methods: {
     async createUserCourseResult() {
       await this.$store.dispatch('models/userCourseResult/createUserCourseResult', {
-        userCourseId: this.userCourseId,
+        userCourseId: this.userCourse.id,
         params: this.userCourseResult,
       })
         .then(() => {
