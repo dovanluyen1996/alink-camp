@@ -37,9 +37,7 @@ export default {
   },
   methods: {
     displayDate(date) {
-      // TODO: dateを元に成形してください
-      console.log(date);
-      return '7日<br>（木）';
+      return this.$helpers.toWeekDay(date);
     },
   },
 };

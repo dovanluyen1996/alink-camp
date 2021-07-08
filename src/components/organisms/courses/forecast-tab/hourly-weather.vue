@@ -29,10 +29,10 @@
       </tr>
       <time-row :forecast-data="margedForecastsAndSuns" />
       <weather-row :forecast-data="margedForecastsAndSuns" />
-      <precipitation-row :forecast-data="forecasts" />
-      <temperature-row :forecast-data="forecasts" />
-      <wind-direction-row :forecast-data="forecasts" />
-      <wind-speed-row :forecast-data="forecasts" />
+      <precipitation-row :forecast-data="forecastHourly.items" />
+      <temperature-row :forecast-data="forecastHourly.items" />
+      <wind-direction-row :forecast-data="forecastHourly.items" />
+      <wind-speed-row :forecast-data="forecastHourly.items" />
     </sticky-table>
   </div>
 </template>
@@ -60,259 +60,54 @@ export default {
   },
   data() {
     return {
-      // TODO: デミーデータです
-      //       データと合わないようだったらconvertMinutesも修正してください
-      date: '2021-6-22',
-      sunrise: '6:30',
-      sunset: '19:30',
-      forecasts: [
-        {
-          time: '1:00',
-          weather: 1,
-          prob_precip: 10,
-          precipitation: 0,
-          temperature: 20,
-          wind_direction: '南',
-          wind_speed: 3,
-        },
-        {
-          time: '2:00',
-          weather: 1,
-          prob_precip: 10,
-          precipitation: 0,
-          temperature: 20,
-          wind_direction: '南',
-          wind_speed: 3,
-        },
-        {
-          time: '3:00',
-          weather: 1,
-          prob_precip: 10,
-          precipitation: 0,
-          temperature: 20,
-          wind_direction: '南',
-          wind_speed: 3,
-        },
-        {
-          time: '4:00',
-          weather: 1,
-          prob_precip: 10,
-          precipitation: 0,
-          temperature: 20,
-          wind_direction: '南',
-          wind_speed: 3,
-        },
-        {
-          time: '5:00',
-          weather: 1,
-          prob_precip: 10,
-          precipitation: 0,
-          temperature: 20,
-          wind_direction: '南',
-          wind_speed: 3,
-        },
-        {
-          time: '6:00',
-          weather: 1,
-          prob_precip: 10,
-          precipitation: 0,
-          temperature: 20,
-          wind_direction: '南',
-          wind_speed: 3,
-        },
-        {
-          time: '7:00',
-          weather: 1,
-          prob_precip: 10,
-          precipitation: 0,
-          temperature: 20,
-          wind_direction: '南',
-          wind_speed: 3,
-        },
-        {
-          time: '8:00',
-          weather: 1,
-          prob_precip: 10,
-          precipitation: 0,
-          temperature: 20,
-          wind_direction: '南',
-          wind_speed: 3,
-        },
-        {
-          time: '9:00',
-          weather: 1,
-          prob_precip: 10,
-          precipitation: 0,
-          temperature: 20,
-          wind_direction: '南',
-          wind_speed: 3,
-        },
-        {
-          time: '10:00',
-          weather: 1,
-          prob_precip: 10,
-          precipitation: 0,
-          temperature: 20,
-          wind_direction: '南',
-          wind_speed: 3,
-        },
-        {
-          time: '11:00',
-          weather: 1,
-          prob_precip: 10,
-          precipitation: 0,
-          temperature: 20,
-          wind_direction: '南',
-          wind_speed: 3,
-        },
-        {
-          time: '12:00',
-          weather: 1,
-          prob_precip: 10,
-          precipitation: 0,
-          temperature: 20,
-          wind_direction: '南',
-          wind_speed: 3,
-        },
-        {
-          time: '13:00',
-          weather: 1,
-          prob_precip: 10,
-          precipitation: 0,
-          temperature: 20,
-          wind_direction: '南',
-          wind_speed: 3,
-        },
-        {
-          time: '14:00',
-          weather: 1,
-          prob_precip: 10,
-          precipitation: 0,
-          temperature: 20,
-          wind_direction: '南',
-          wind_speed: 3,
-        },
-        {
-          time: '15:00',
-          weather: 1,
-          prob_precip: 10,
-          precipitation: 0,
-          temperature: 20,
-          wind_direction: '南',
-          wind_speed: 3,
-        },
-        {
-          time: '16:00',
-          weather: 1,
-          prob_precip: 10,
-          precipitation: 0,
-          temperature: 20,
-          wind_direction: '南',
-          wind_speed: 3,
-        },
-        {
-          time: '17:00',
-          weather: 1,
-          prob_precip: 10,
-          precipitation: 0,
-          temperature: 20,
-          wind_direction: '南',
-          wind_speed: 3,
-        },
-        {
-          time: '18:00',
-          weather: 1,
-          prob_precip: 10,
-          precipitation: 0,
-          temperature: 20,
-          wind_direction: '南',
-          wind_speed: 3,
-        },
-        {
-          time: '19:00',
-          weather: 1,
-          prob_precip: 10,
-          precipitation: 0,
-          temperature: 20,
-          wind_direction: '南',
-          wind_speed: 3,
-        },
-        {
-          time: '20:00',
-          weather: 1,
-          prob_precip: 10,
-          precipitation: 0,
-          temperature: 20,
-          wind_direction: '南',
-          wind_speed: 3,
-        },
-        {
-          time: '21:00',
-          weather: 1,
-          prob_precip: 10,
-          precipitation: 0,
-          temperature: 20,
-          wind_direction: '南',
-          wind_speed: 3,
-        },
-        {
-          time: '22:00',
-          weather: 1,
-          prob_precip: 10,
-          precipitation: 0,
-          temperature: 20,
-          wind_direction: '南',
-          wind_speed: 3,
-        },
-        {
-          time: '23:00',
-          weather: 1,
-          prob_precip: 10,
-          precipitation: 0,
-          temperature: 20,
-          wind_direction: '南',
-          wind_speed: 3,
-        },
-        {
-          time: '24:00',
-          weather: 1,
-          prob_precip: 10,
-          precipitation: 0,
-          temperature: 20,
-          wind_direction: '南',
-          wind_speed: 3,
-        },
-      ],
+      forecastHourly: {},
     };
   },
   computed: {
+    course() {
+      return this.$store.getters['course/choosenCourse'];
+    },
+    userCourse() {
+      return this.$store.getters['models/userCourse/findByCourseId'](this.course.id);
+    },
+    userCoursePlan() {
+      return (this.userCourse && this.userCourse.userCoursePlans[0]) || {};
+    },
     displayDate() {
-      // TODO: this.dateを元に成形してください
-      return '7日（木）';
+      return this.$helpers.toWeekDay(this.forecastHourly.date);
     },
     isToday() {
-      // TODO: 当日チェックしてください
-      return true;
+      const today = this.$moment().format('YYYY-MM-DD');
+      return this.$moment(today).isSame(this.forecastHourly.date);
     },
     margedForecastsAndSuns() {
       const suns = [
         {
           isSunrise: true,
-          time: this.sunrise,
+          hour: this.forecastHourly.sunrize,
         },
         {
           isSunset: true,
-          time: this.sunset,
+          hour: this.forecastHourly.sunset,
         },
       ];
-      const margeData = this.forecasts.concat(suns);
+      const margeData = (this.forecastHourly.items || []).concat(suns);
 
-      return margeData.sort((a, b) => this.convertMinutes(a.time) - this.convertMinutes(b.time));
+      return margeData.sort((a, b) => this.convertMinutes(a.hour) - this.convertMinutes(b.hour));
     },
   },
-  mounted() {
-    // TODO: 予定が入っているときに実行するようにしてください
-    this.tableScrollNow();
+  watch: {
+    async course() {
+      this.forecastHourly = await this.getForecastHourly();
+    },
+  },
+  async created() {
+    this.forecastHourly = await this.getForecastHourly();
+  },
+  updated() {
+    this.$nextTick(() => {
+      this.tableScrollNow();
+    });
   },
   methods: {
     tableScrollNow() {
@@ -320,9 +115,9 @@ export default {
       const table = this.$el.querySelector('.hourly-weather-table');
       const timeRow = table.querySelector('.time-row');
       const th = timeRow.querySelector('th');
-      // TODO: targetAtのフォーマットをAPIのデータに合わせてください
-      const targetAt = '6:00';
+      const targetAt = this.$moment().format('HH');
       const nowCol = timeRow.querySelector(`[date-time="${targetAt}"]`);
+      if (!nowCol) return;
       const x = nowCol.offsetLeft - th.offsetWidth;
 
       table.scrollTo(x, 0);
@@ -330,8 +125,20 @@ export default {
     convertMinutes(time) {
       // NOTE: 日の出日の入りを天気予報にマージするため
       //       時間を比較できるように分にする
+      if (!time) return 0;
+
       const newTime = time.split(':');
-      return (Number(newTime[0]) * 60) + Number(newTime[1]);
+      return (Number(newTime[0]) * 60) + Number(newTime[1] || 0);
+    },
+    getForecastHourly() {
+      if (!this.course.id) return {};
+
+      const params = {
+        course_id: this.course.id,
+        target_date: this.userCoursePlan.targetDate || this.$moment().format('YYYY-MM-DD'),
+      };
+
+      return this.$store.dispatch('models/weather/getForecastHourly', params);
     },
   },
 };

@@ -30,14 +30,12 @@ export default {
   },
   computed: {
     times() {
-      return this.forecastData.map(data => data.time);
+      return this.forecastData.map(data => data.hour);
     },
   },
   methods: {
     displayTime(time) {
-      console.log(time);
-      // TODO: timeを元に整形してください
-      return '01';
+      return time;
     },
   },
 };

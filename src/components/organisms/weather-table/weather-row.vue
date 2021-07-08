@@ -71,6 +71,15 @@ export default {
       default: 5,
     },
   },
+  computed: {
+    weathers() {
+      return this.forecastData.map(data => ({
+        weatherId: data.weatherImageName ? parseInt(data.weatherImageName.split('.jpg')[0], 10) : null,
+        isSunrise: data.isSunrise,
+        isSunset: data.isSunset,
+      }));
+    },
+  },
 };
 </script>
 

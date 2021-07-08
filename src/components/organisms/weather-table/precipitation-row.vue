@@ -27,7 +27,7 @@ export default {
   },
   computed: {
     precipitations() {
-      return this.forecastData.map(data => data.precipitation);
+      return this.forecastData.map(data => data.precip);
     },
   },
 };

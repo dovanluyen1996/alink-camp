@@ -47,229 +47,34 @@ export default {
   },
   data() {
     return {
-      // TODO: デミーデータです
-      forecasts: [
-        {
-          date: '2021-6-23',
-          weather: 1,
-          prob_precip: 10,
-          precipitation: 0,
-          temperature: 20,
-          wind_direction: '南',
-          wind_speed: 3,
-        },
-        {
-          date: '2021-6-23',
-          weather: 1,
-          prob_precip: 10,
-          precipitation: 0,
-          temperature: 20,
-          wind_direction: '南',
-          wind_speed: 3,
-        },
-        {
-          date: '2021-6-23',
-          weather: 1,
-          prob_precip: 10,
-          precipitation: 0,
-          temperature: 20,
-          wind_direction: '南',
-          wind_speed: 3,
-        },
-        {
-          date: '2021-6-23',
-          weather: 1,
-          prob_precip: 10,
-          precipitation: 0,
-          temperature: 20,
-          wind_direction: '南',
-          wind_speed: 3,
-        },
-        {
-          date: '2021-6-23',
-          weather: 1,
-          prob_precip: 10,
-          precipitation: 0,
-          temperature: 20,
-          wind_direction: '南',
-          wind_speed: 3,
-        },
-        {
-          date: '2021-6-23',
-          weather: 1,
-          prob_precip: 10,
-          precipitation: 0,
-          temperature: 20,
-          wind_direction: '南',
-          wind_speed: 3,
-        },
-        {
-          date: '2021-6-23',
-          weather: 1,
-          prob_precip: 10,
-          precipitation: 0,
-          temperature: 20,
-          wind_direction: '南',
-          wind_speed: 3,
-        },
-        {
-          date: '2021-6-23',
-          weather: 1,
-          prob_precip: 10,
-          precipitation: 0,
-          temperature: 20,
-          wind_direction: '南',
-          wind_speed: 3,
-        },
-        {
-          date: '2021-6-23',
-          weather: 1,
-          prob_precip: 10,
-          precipitation: 0,
-          temperature: 20,
-          wind_direction: '南',
-          wind_speed: 3,
-        },
-        {
-          date: '2021-6-23',
-          weather: 1,
-          prob_precip: 10,
-          precipitation: 0,
-          temperature: 20,
-          wind_direction: '南',
-          wind_speed: 3,
-        },
-        {
-          date: '2021-6-23',
-          weather: 1,
-          prob_precip: 10,
-          precipitation: 0,
-          temperature: 20,
-          wind_direction: '南',
-          wind_speed: 3,
-        },
-        {
-          date: '2021-6-23',
-          weather: 1,
-          prob_precip: 10,
-          precipitation: 0,
-          temperature: 20,
-          wind_direction: '南',
-          wind_speed: 3,
-        },
-        {
-          date: '2021-6-23',
-          weather: 1,
-          prob_precip: 10,
-          precipitation: 0,
-          temperature: 20,
-          wind_direction: '南',
-          wind_speed: 3,
-        },
-        {
-          date: '2021-6-23',
-          weather: 1,
-          prob_precip: 10,
-          precipitation: 0,
-          temperature: 20,
-          wind_direction: '南',
-          wind_speed: 3,
-        },
-        {
-          date: '2021-6-23',
-          weather: 1,
-          prob_precip: 10,
-          precipitation: 0,
-          temperature: 20,
-          wind_direction: '南',
-          wind_speed: 3,
-        },
-        {
-          date: '2021-6-23',
-          weather: 1,
-          prob_precip: 10,
-          precipitation: 0,
-          temperature: 20,
-          wind_direction: '南',
-          wind_speed: 3,
-        },
-        {
-          date: '2021-6-23',
-          weather: 1,
-          prob_precip: 10,
-          precipitation: 0,
-          temperature: 20,
-          wind_direction: '南',
-          wind_speed: 3,
-        },
-        {
-          date: '2021-6-23',
-          weather: 1,
-          prob_precip: 10,
-          precipitation: 0,
-          temperature: 20,
-          wind_direction: '南',
-          wind_speed: 3,
-        },
-        {
-          date: '2021-6-23',
-          weather: 1,
-          prob_precip: 10,
-          precipitation: 0,
-          temperature: 20,
-          wind_direction: '南',
-          wind_speed: 3,
-        },
-        {
-          date: '2021-6-23',
-          weather: 1,
-          prob_precip: 10,
-          precipitation: 0,
-          temperature: 20,
-          wind_direction: '南',
-          wind_speed: 3,
-        },
-        {
-          date: '2021-6-23',
-          weather: 1,
-          prob_precip: 10,
-          precipitation: 0,
-          temperature: 20,
-          wind_direction: '南',
-          wind_speed: 3,
-        },
-        {
-          date: '2021-6-23',
-          weather: 1,
-          prob_precip: 10,
-          precipitation: 0,
-          temperature: 20,
-          wind_direction: '南',
-          wind_speed: 3,
-        },
-        {
-          date: '2021-6-23',
-          weather: 1,
-          prob_precip: 10,
-          precipitation: 0,
-          temperature: 20,
-          wind_direction: '南',
-          wind_speed: 3,
-        },
-        {
-          date: '2021-6-23',
-          weather: 1,
-          prob_precip: 10,
-          precipitation: 0,
-          temperature: 20,
-          wind_direction: '南',
-          wind_speed: 3,
-        },
-      ],
+      forecasts: [],
     };
   },
-  mounted() {
-    this.tableScrollPlans();
+  computed: {
+    course() {
+      return this.$store.getters['course/choosenCourse'];
+    },
+    userCourse() {
+      return this.$store.getters['models/userCourse/findByCourseId'](this.course.id);
+    },
+    userCoursePlan() {
+      return (this.userCourse && this.userCourse.userCoursePlans[0]) || {};
+    },
+  },
+  watch: {
+    async course() {
+      const forecast10Days = await this.getForecast10Days();
+      this.forecasts = forecast10Days.items;
+    },
+  },
+  async created() {
+    const forecast10Days = await this.getForecast10Days();
+    this.forecasts = forecast10Days.items;
+  },
+  updated() {
+    this.$nextTick(() => {
+      this.tableScrollPlans();
+    });
   },
   methods: {
     tableScrollPlans() {
@@ -277,12 +82,16 @@ export default {
       const table = this.$el.querySelector('.ten-days-weather-table');
       const dateRow = table.querySelector('.date-row');
       const th = dateRow.querySelector('th');
-      // TODO: plansのフォーマットをAPIのデータに合わせてください
-      const plans = '2021-6-23';
+      const plans = this.userCoursePlan.targetDate || this.$moment().format('YYYY-MM-DD');
       const plansCol = dateRow.querySelector(`[date-day="${plans}"]`);
       const x = plansCol.offsetLeft - th.offsetWidth;
 
       table.scrollTo(x, 0);
+    },
+    getForecast10Days() {
+      if (!this.course.id) return {};
+
+      return this.$store.dispatch('models/weather/getForecast10Days', { course_id: this.course.id });
     },
   },
 };
