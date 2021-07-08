@@ -37,6 +37,7 @@
           <template #footer>
             <v-ons-button
               modifier="large--cta add rounded"
+              :disabled="buttonIsDisable"
               @click="handleSubmit(updateUserCourseResult)"
             >
               保存
@@ -89,7 +90,13 @@ export default {
     return {
       tempUserCourseResult: { ...this.userCourseResult },
       isShownDeleteDialog: false,
+      isDisable: false,
     };
+  },
+  computed: {
+    buttonIsDisable() {
+      return this.isDisable;
+    },
   },
   methods: {
     async deleteUserCourseResult() {
@@ -109,6 +116,8 @@ export default {
         });
     },
     async updateUserCourseResult() {
+      this.isDisable = true;
+
       if (this.userCourseResult.image === this.tempUserCourseResult.image) {
         delete this.tempUserCourseResult.image;
       }
@@ -126,6 +135,8 @@ export default {
           this.$ons.notification.toast('更新に失敗しました', settings.toastSetting);
           console.log(err);
         });
+
+      this.isDisable = false;
     },
   },
 };
