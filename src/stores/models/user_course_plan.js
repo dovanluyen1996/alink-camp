@@ -13,21 +13,15 @@ export default {
     all: (state, getters, rootState, rootGetters) => {
       const userCourses = rootGetters['models/userCourse/favoritedOrHasPlans'];
 
-      return userCourses.map(userCourse => {
-        return userCourse.userCoursePlans.map(userCoursePlan => {
-          return {
-            ...userCoursePlan,
-            isFavorited: userCourse.isFavorited,
-            targetDate: moment(userCoursePlan.targetAt).startOf('days')
-          }
-        })
-      }).flat();
+      return userCourses.map(userCourse => userCourse.userCoursePlans.map(userCoursePlan => ({
+        ...userCoursePlan,
+        isFavorited: userCourse.isFavorited,
+        targetDate: moment(userCoursePlan.targetAt).startOf('days'),
+      }))).flat();
     },
-    inFuture: (state, getters) => {
-      return getters.all.filter(
-        userCoursePlan => userCoursePlan.targetDate.isSameOrAfter(moment().startOf('days'))
-      );
-    },
+    inFuture: (state, getters) => getters.all.filter(
+      userCoursePlan => userCoursePlan.targetDate.isSameOrAfter(moment().startOf('days')),
+    ),
   },
   mutations: {
     addUserCoursePlan(state, userCoursePlan) {
