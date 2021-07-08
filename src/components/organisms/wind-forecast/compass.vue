@@ -43,6 +43,7 @@ export default {
       const deg = Math.floor(windDirections[this.windDirection]);
 
       return `wind-direction--${deg}-deg`;
+      // TODO 角度によって動きが不自然になります。Refactorしてください。(issue #404)
     },
   },
 };
