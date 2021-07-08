@@ -37,5 +37,5 @@ export default {
   // 日付を取得するため。javascriptにはyyyy-mm-ddのフォーマットを使わないといけないです。
   localDateWithHyphenFrom(time) {
     return moment(time).format('YYYY-MM-DD');
-  }
-}
+  },
+};

@@ -122,7 +122,7 @@ export default {
       return this.course.name;
     },
     isPersisted() {
-      return Object.keys(this.userCoursePlan).length !== 0
+      return Object.keys(this.userCoursePlan).length !== 0;
     },
     targetAt() {
       return `${this.dateValue} ${this.timeValue}`;

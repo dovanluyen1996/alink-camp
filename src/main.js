@@ -12,8 +12,14 @@ import store from '@/stores';
 import App from '@/app';
 import cognito from '@/cognito';
 import helpers from '@/helpers/helper';
+import VueMoment from 'vue-moment';
+import moment from 'moment-timezone';
 
-Vue.use(require('vue-moment'));
+moment.tz.setDefault('Asia/Tokyo');
+
+Vue.use(VueMoment, {
+  moment,
+});
 
 Vue.config.productionTip = false;
 
