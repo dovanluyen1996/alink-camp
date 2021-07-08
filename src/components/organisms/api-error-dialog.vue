@@ -18,15 +18,14 @@
       <v-ons-button
         @click="close()"
       >
-        {{ buttonText }}
+        OK
       </v-ons-button>
     </template>
   </v-ons-alert-dialog>
 </template>
 
 <script>
-import SignIn from '@/views/auth/sign-in';
-import PurchaseInformation from '@/views/purchase-information';
+import StartIndex from '@/views/start';
 
 export default {
   name: 'ApiErrorDialog',
@@ -48,8 +47,11 @@ export default {
     errorTitle() {
       return this.isMaintainanceError ? 'メンテナンス中' : 'エラー';
     },
-    buttonText() {
-      return this.isMaintainanceError ? 'アプリを終了する' : 'OK';
+    isMaintainanceError() {
+      return this.errorStatus === 503;
+    },
+    isUnauthorizedError() {
+      return this.errorStatus === 401;
     },
   },
   watch: {
@@ -61,23 +63,12 @@ export default {
     close() {
       this.isVisible = false;
 
-      switch (this.errorStatus) {
-      case 401:
+      if (this.isMaintainanceError || this.isUnauthorizedError) {
         // TODO: fix Navigator error
-        this.$store.dispatch('appNavigator/reset', SignIn);
-        break;
-      case 503:
-        // TODO: fix Navigator error
-        this.$store.dispatch('appNavigator/reset', PurchaseInformation);
-        break;
-      default:
-        break;
+        this.$store.dispatch('appNavigator/reset', StartIndex);
       }
 
       this.$store.dispatch('api/resetError');
-    },
-    isMaintainanceError() {
-      return this.errorStatus === 503;
     },
   },
 };

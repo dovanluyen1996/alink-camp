@@ -26,6 +26,7 @@ export default {
         context.commit('setUserStamp', userStamp);
       } catch (error) {
         context.commit('api/setError', error, { root: true });
+        throw error;
       } finally {
         context.commit('setIsLoading', false);
       }

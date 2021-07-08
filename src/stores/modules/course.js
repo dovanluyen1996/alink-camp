@@ -64,6 +64,7 @@ export default {
         context.commit('setChoosenCourse', course);
       } catch (error) {
         context.commit('api/setError', error, { root: true });
+        throw error;
       } finally {
         context.commit('setIsLoading', false);
       }

@@ -34,6 +34,7 @@ export default {
         context.commit('addUserCoursePlan', userCoursePlan);
       } catch (error) {
         context.commit('api/setError', error, { root: true });
+        throw error;
       } finally {
         context.commit('setIsLoading', false);
       }
@@ -49,6 +50,7 @@ export default {
         context.commit('updateUserCoursePlan', userCoursePlan);
       } catch (error) {
         context.commit('api/setError', error, { root: true });
+        throw error;
       } finally {
         context.commit('setIsLoading', false);
       }

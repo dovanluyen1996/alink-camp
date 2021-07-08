@@ -116,9 +116,6 @@ export default {
     gift() {
       return this.$store.getters['models/gift/findById'](this.giftId);
     },
-    apiSuccess() {
-      return this.$store.state.api.isSuccess;
-    },
   },
   methods: {
     showConfirm() {
@@ -140,9 +137,13 @@ export default {
         email: this.email,
       };
 
-      this.closeConfirm();
-      await this.$store.dispatch('models/userGift/createUserGift', params);
-      if (this.apiSuccess) this.showCompleted();
+      try {
+        await this.$store.dispatch('models/userGift/createUserGift', params);
+        this.closeConfirm();
+        this.showCompleted();
+      } catch (e) {
+        this.closeConfirm();
+      }
     },
   },
 };

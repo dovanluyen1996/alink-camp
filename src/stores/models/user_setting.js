@@ -29,6 +29,7 @@ export default {
         context.commit('setUserSetting', userSetting);
       } catch (error) {
         context.commit('api/setError', error, { root: true });
+        throw error;
       } finally {
         context.commit('setIsLoading', false);
       }
@@ -42,6 +43,7 @@ export default {
         context.commit('setUserSetting', userSetting);
       } catch (error) {
         context.commit('api/setError', error, { root: true });
+        throw error;
       } finally {
         context.commit('setIsLoading', false);
       }

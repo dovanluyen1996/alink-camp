@@ -26,6 +26,7 @@ export default {
         context.dispatch('models/currentUser/getUser', null, { root: true });
       } catch (error) {
         context.commit('api/setError', error, { root: true });
+        throw error;
       } finally {
         context.commit('setIsLoading', false);
       }
