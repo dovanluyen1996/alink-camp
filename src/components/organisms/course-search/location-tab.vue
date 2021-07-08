@@ -56,14 +56,14 @@ export default {
   },
   computed: {
     searchConditions() {
-      return this.$store.state.courseSearchNavigator.searchConditions;
+      return this.$store.state.courseSearchNavigator.locationSearchConditions;
     },
     distanceValue: {
       get() {
         return this.searchConditions.distance;
       },
       set(distance) {
-        this.$store.commit('courseSearchNavigator/setSearchConditions', { distance });
+        this.$store.commit('courseSearchNavigator/setLocationSearchConditions', { distance });
       },
     },
   },

@@ -7,6 +7,7 @@
         <card-with-tab
           ref="tabContents"
           :tabs="tabs"
+          @switchTab="switchTab"
         />
         <template #footer>
           <v-ons-button
@@ -53,16 +54,16 @@ export default {
     };
   },
   created() {
-    this.$store.commit('courseSearchNavigator/resetSearchConditions');
-    this.$store.commit('courseSearchNavigator/resetSearchFlag');
+    this.$store.commit('courseSearchNavigator/resetAreaSearchConditions');
+    this.$store.commit('courseSearchNavigator/resetLocationSearchConditions');
+    this.$store.commit('courseSearchNavigator/resetSearched');
   },
   methods: {
     searched() {
-      const activeTabIndex = this.$refs.tabContents.activeIndex;
-      const activeTab = this.tabs.find((_tab, index) => index === activeTabIndex).name;
-
-      // activeTab: location/area
-      this.$store.commit('courseSearchNavigator/setSearched', activeTab);
+      this.$store.commit('courseSearchNavigator/setSearched', true);
+    },
+    switchTab(index) {
+      this.$store.commit('courseSearchNavigator/setActiveIndex', index);
     },
   },
 };

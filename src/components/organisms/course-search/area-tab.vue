@@ -74,17 +74,20 @@ export default {
   },
   computed: {
     searchConditions() {
-      return this.$store.state.courseSearchNavigator.searchConditions;
+      return this.$store.state.courseSearchNavigator.areaSearchConditions;
     },
     searched() {
       return this.$store.state.courseSearchNavigator.searched;
+    },
+    activeIndex() {
+      return this.$store.state.courseSearchNavigator.activeIndex;
     },
     selectedPrefecture: {
       get() {
         return this.searchConditions.prefecture;
       },
       set(prefecture) {
-        this.$store.commit('courseSearchNavigator/setSearchConditions', { prefecture });
+        this.$store.commit('courseSearchNavigator/setAreaSearchConditions', { prefecture });
       },
     },
     sunny() {
@@ -103,7 +106,9 @@ export default {
   watch: {
     searched() {
       // Watch click search button event.
-      if (this.searched !== 'area') return;
+      if (!this.searched) return;
+      // If current tab is not area, don't search area
+      if (this.activeIndex !== 0) return;
 
       this.searchByArea();
     },
@@ -112,9 +117,11 @@ export default {
     searchByArea() {
       this.$refs.searchArea.validate()
         .then(async(valid) => {
-          if (valid) {
-            this.$store.dispatch('models/course/resetCourses');
+          // Reset searched flag
+          this.$store.commit('courseSearchNavigator/resetSearched');
+          this.$store.dispatch('models/course/resetCourses');
 
+          if (valid) {
             const params = {
               prefecture_id: this.searchConditions.prefecture,
               target_date: this.searchConditions.date,
@@ -132,9 +139,6 @@ export default {
               this.showSearchResultEmptyDialog();
             }
           }
-
-          // Reset searched flag
-          this.$store.commit('courseSearchNavigator/resetSearchFlag');
         });
     },
     closeSearchResultEmptyDialog() {

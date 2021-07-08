@@ -4,7 +4,7 @@ export default {
   state: {
     stack: [],
     // TODO: 天気APIの仕様がわからないためダミーデータなので変更してください
-    searchConditions: {
+    areaSearchConditions: {
       prefecture: -1,
       date: '',
       sunny: false,
@@ -13,7 +13,21 @@ export default {
       uv: false,
       distance: -1,
     },
-    searched: null,
+    locationSearchConditions: {
+      prefecture: -1,
+      date: '',
+      sunny: false,
+      temperature: 0,
+      wind: false,
+      uv: false,
+      distance: -1,
+      lat: null,
+      lon: null,
+      lower_rad: null,
+      upper_rad: null,
+    },
+    searched: false,
+    activeIndex: 0,
   },
   mutations: {
     push(state, page) {
@@ -31,15 +45,22 @@ export default {
     reset(state, page) {
       state.stack = [page || state.stack[0]];
     },
-    setSearchConditions(state, conditions) {
+    setAreaSearchConditions(state, conditions) {
       const newConditions = {};
-      Object.assign(newConditions, state.searchConditions);
+      Object.assign(newConditions, state.areaSearchConditions);
       Object.assign(newConditions, conditions);
 
-      state.searchConditions = newConditions;
+      state.areaSearchConditions = newConditions;
     },
-    resetSearchConditions(state) {
-      state.searchConditions = {
+    setLocationSearchConditions(state, conditions) {
+      const newConditions = {};
+      Object.assign(newConditions, state.locationSearchConditions);
+      Object.assign(newConditions, conditions);
+
+      state.locationSearchConditions = newConditions;
+    },
+    resetAreaSearchConditions(state) {
+      state.areaSearchConditions = {
         prefecture: -1,
         date: '',
         sunny: false,
@@ -49,11 +70,32 @@ export default {
         distance: -1,
       };
     },
-    resetSearchFlag(state) {
-      state.searched = null;
+    resetLocationSearchConditions(state) {
+      state.locationSearchConditions = {
+        prefecture: -1,
+        date: '',
+        sunny: false,
+        temperature: 0,
+        wind: false,
+        uv: false,
+        distance: -1,
+        lat: null,
+        lon: null,
+        lower_rad: null,
+        upper_rad: null,
+      };
     },
     setSearched(state, searched) {
       state.searched = searched;
+    },
+    resetSearched(state) {
+      state.searched = false;
+    },
+    setActiveIndex(state, activeIndex) {
+      state.activeIndex = activeIndex;
+    },
+    resetActiveIndex(state) {
+      state.activeIndex = 0;
     },
   },
   actions: {

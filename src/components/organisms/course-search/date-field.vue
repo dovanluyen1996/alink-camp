@@ -29,15 +29,27 @@ export default {
     CustomDatetimeInput,
   },
   computed: {
+    activeIndex() {
+      return this.$store.state.courseSearchNavigator.activeIndex;
+    },
     searchConditions() {
-      return this.$store.state.courseSearchNavigator.searchConditions;
+      // 0: area, 1: location
+      if (this.activeIndex === 0) {
+        return this.$store.state.courseSearchNavigator.areaSearchConditions;
+      } else {
+        return this.$store.state.courseSearchNavigator.locationSearchConditions;
+      }
     },
     dateValue: {
       get() {
         return this.searchConditions.date;
       },
       set(date) {
-        this.$store.commit('courseSearchNavigator/setSearchConditions', { date });
+        if (this.activeIndex === 0) {
+          this.$store.commit('courseSearchNavigator/setAreaSearchConditions', { date });
+        } else {
+          this.$store.commit('courseSearchNavigator/setLocationSearchConditions', { date });
+        }
       },
     },
   },

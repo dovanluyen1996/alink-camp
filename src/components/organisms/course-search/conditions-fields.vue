@@ -61,9 +61,16 @@ export default {
     };
   },
   computed: {
+    activeIndex() {
+      return this.$store.state.courseSearchNavigator.activeIndex;
+    },
     searchConditions: {
       get() {
-        return this.$store.state.courseSearchNavigator.searchConditions;
+        // 0: area, 1: location
+        if (this.activeIndex === 0) {
+          return this.$store.state.courseSearchNavigator.areaSearchConditions;
+        }
+        return this.$store.state.courseSearchNavigator.locationSearchConditions;
       },
       set(newValue, oldValue) {
         // NOTE: eslintのルールに従うとjsエラーがでるので除外
@@ -71,7 +78,12 @@ export default {
         const newConditions = Object.assign({}, oldValue);
         Object.assign(newConditions, newValue);
 
-        this.$store.commit('courseSearchNavigator/setSearchConditions', newConditions);
+        // 0: area, 1: location
+        if (this.activeIndex === 0) {
+          this.$store.commit('courseSearchNavigator/setAreaSearchConditions', newConditions);
+        } else {
+          this.$store.commit('courseSearchNavigator/setLocationSearchConditions', newConditions);
+        }
       },
     },
     isWindValueDisable() {

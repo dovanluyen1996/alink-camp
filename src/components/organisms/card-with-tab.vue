@@ -46,6 +46,7 @@ export default {
   methods: {
     switchTab(index) {
       this.activeIndex = index;
+      this.$emit('switchTab', index);
     },
     isActive(index) {
       return index === this.activeIndex;
