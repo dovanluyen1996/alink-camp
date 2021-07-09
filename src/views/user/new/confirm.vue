@@ -2,7 +2,6 @@
   <v-ons-page>
     <custom-toolbar
       title="ユーザー情報の登録"
-      :disabled-back-button="true"
     />
     <div class="content">
       <base-form>

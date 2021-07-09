@@ -84,9 +84,6 @@ export default {
         return 'ログインに失敗しました';
       }
     },
-    isNotConfirmed() {
-      return this.error.code === 'UserNotConfirmedException';
-    },
   },
   methods: {
     goToPasswordReminder() {
@@ -109,7 +106,7 @@ export default {
     closeSignInError() {
       this.signInErrorVisible = false;
 
-      if (this.isNotConfirmed) {
+      if (this.isNotConfirmed()) {
         this.$store.dispatch('appNavigator/push', {
           extends: ResendConfirmCode,
           onsNavigatorProps: {
@@ -117,6 +114,9 @@ export default {
           },
         });
       }
+    },
+    isNotConfirmed() {
+      return this.error.code === 'UserNotConfirmedException';
     },
   },
 };
