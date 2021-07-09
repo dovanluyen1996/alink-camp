@@ -53,8 +53,15 @@ export default {
       return '気温';
     },
     temperatures() {
-      // TODO: 最高・最低の判別をしてください
-      return this.forecastData.map(data => data.temperature);
+      let temperatures;
+
+      if (this.isHighest) {
+        temperatures = this.forecastData.map(data => data.max_temp);
+      } else {
+        temperatures = this.forecastData.map(data => data.min_temp);
+      }
+
+      return temperatures;
     },
   },
 };

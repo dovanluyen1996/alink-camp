@@ -8,11 +8,11 @@
     </th>
     <template v-for="(weather, index) in weathers">
       <td
-        v-if="weather.weatherId"
+        v-if="weather"
         :key="index"
       >
         <weather-image
-          :weather-id="weather.weatherId"
+          :weather="weather"
           image-width="40px"
         />
       </td>
@@ -55,7 +55,7 @@ export default {
     WeatherImage,
   },
   props: {
-    forecastData: {
+    weathers: {
       type: Array,
       default: () => [],
       required: true,
@@ -63,15 +63,6 @@ export default {
     sunsRowspan: {
       type: Number,
       default: 5,
-    },
-  },
-  computed: {
-    weathers() {
-      return this.forecastData.map(data => ({
-        weatherId: data.weather,
-        isSunrise: data.isSunrise,
-        isSunset: data.isSunset,
-      }));
     },
   },
 };

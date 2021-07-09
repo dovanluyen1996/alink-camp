@@ -10,7 +10,9 @@
           <div class="content">
             <user-course-results-summary-chart />
 
-            <user-course-results-course-weather />
+            <user-course-results-course-weather
+              :weathers="weathers"
+            />
 
             <user-course-results-list
               :user-course-results="userCourseResults"
@@ -93,6 +95,9 @@ export default {
     },
     isLoading() {
       return this.$store.getters['models/userCourseResult/isLoading'];
+    },
+    weathers() {
+      return this.userCourseResults.map(userCourseResult => JSON.parse(userCourseResult.weather));
     },
   },
   async created() {

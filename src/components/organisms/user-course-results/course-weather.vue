@@ -9,11 +9,11 @@
           scope="col"
           class="th"
         >
-          {{ weather.date }}
+          {{ weather.date | moment('M/D') }}
         </th>
       </tr>
     </template>
-    <weather-row :forecast-data="weathers" />
+    <weather-row :weathers="weathers" />
     <temperature-row
       :forecast-data="weathers"
       :is-highest="true"
@@ -38,46 +38,12 @@ export default {
     WeatherRow,
     TemperatureRow,
   },
-  data() {
-    return {
-      weathers: [
-        {
-          date: '6/30',
-          weather: 1,
-          temperature: 20,
-        },
-        {
-          date: '6/30',
-          weather: 1,
-          temperature: 20,
-        },
-        {
-          date: '6/30',
-          weather: 1,
-          temperature: 20,
-        },
-        {
-          date: '6/30',
-          weather: 1,
-          temperature: 20,
-        },
-        {
-          date: '6/30',
-          weather: 1,
-          temperature: 20,
-        },
-        {
-          date: '6/30',
-          weather: 1,
-          temperature: 20,
-        },
-        {
-          date: '6/30',
-          weather: 1,
-          temperature: 20,
-        },
-      ],
-    };
+  props: {
+    weathers: {
+      type: Array,
+      default: () => [],
+      required: true,
+    },
   },
 };
 </script>
