@@ -19,7 +19,9 @@
 
           <v-ons-card class="course-weather-and-image">
             <v-ons-row class="course-weather-and-image-row">
-              <user-course-result-weather />
+              <user-course-result-weather
+                :weather="weather"
+              />
               <user-course-result-image v-model="tempUserCourseResult.image" />
             </v-ons-row>
           </v-ons-card>
@@ -88,6 +90,11 @@ export default {
       isShownDeleteDialog: false,
       isButtonDisable: false,
     };
+  },
+  computed: {
+    weather() {
+      return JSON.parse(this.userCourseResult.weather);
+    },
   },
   methods: {
     async deleteUserCourseResult() {

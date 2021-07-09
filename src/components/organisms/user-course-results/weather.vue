@@ -1,18 +1,18 @@
 <template>
   <v-ons-col class="course-weather-col">
     <div class="course-weather-date">
-      {{ displayDate }}
+      {{ weather.date | moment('M/D') }}
       お天気
     </div>
     <weather-image
-      :weather-id="weather.weatherId"
+      :weather="weather"
       :is-shown-name="true"
       image-width="95px"
     />
     <div class="course-weather-temperature course-weather-temperature--high">
       最高
       <temperature-component
-        :value="weather.high"
+        :value="weather.max_temp"
         font-size="16px"
       />
     </div>
@@ -20,7 +20,7 @@
     <div class="course-weather-temperature course-weather-temperature--low">
       最低
       <temperature-component
-        :value="weather.low"
+        :value="weather.min_temp"
         font-size="16px"
       />
     </div>
@@ -38,20 +38,11 @@ export default {
     WeatherImage,
     TemperatureComponent,
   },
-  data() {
-    return {
-      // TODO: ダミーなので天気APIに合わせてください
-      weather: {
-        weatherId: 1,
-        high: 20,
-        low: 10,
-      },
-    };
-  },
-  computed: {
-    displayDate() {
-      // TODO: 日付を取得してください
-      return '6/28';
+  props: {
+    weather: {
+      type: Object,
+      default: () => {},
+      required: true,
     },
   },
 };
