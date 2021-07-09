@@ -11,13 +11,10 @@ import store from '@/stores';
 import App from '@/app';
 import cognito from '@/cognito';
 import helpers from '@/helpers/helper';
-import interceptorsSetup from '@/helpers/interceptors';
 
 Vue.use(require('vue-moment'));
 
 Vue.config.productionTip = false;
-
-interceptorsSetup();
 
 Vue.component('ValidationProvider', ValidationProvider);
 Vue.component('ValidationObserver', ValidationObserver);

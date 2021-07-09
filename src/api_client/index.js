@@ -28,7 +28,12 @@ class ApiClient extends HttpClient {
       return config;
     });
 
-    this.axios.interceptors.response.use((response) => {
+    this.axios.interceptors.response.use(async(response) => {
+      const appVersion = await cordova.getAppVersion.getVersionNumber();
+      if (response.headers['x-client-app-version'] && response.headers['x-client-app-version'] !== appVersion) {
+        const error = { status: 600, message: '新しいバージョンがリリースされています。アップデートしてください' };
+        throw (error);
+      }
       this._log([`[${response.config.method.toUpperCase()}] ${response.config.url} Response: ${response.status}`, response.data]);
 
       if (response && response.data) {

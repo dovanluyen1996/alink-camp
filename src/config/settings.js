@@ -20,4 +20,9 @@ export default {
   regex: {
     password: /^(?=.*?[a-z])(?=.*?\d).{6,}$/,
   },
+  app_store: {
+    // TODO: Change real link
+    ios: 'http://sample-ios.com',
+    android: 'http://sample-android.com',
+  },
 };

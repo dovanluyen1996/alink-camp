@@ -14,6 +14,7 @@ import userCoursePlan from './user_course_plan';
 import contact from './contact';
 import userCourseResult from './user_course_result';
 import weather from './weather';
+import appStart from './app_start';
 
 export default {
   strict: true,
@@ -35,5 +36,6 @@ export default {
     contact,
     userCourseResult,
     weather,
+    appStart,
   },
 };

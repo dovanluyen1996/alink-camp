@@ -26,6 +26,7 @@
 
 <script>
 import StartIndex from '@/views/start';
+import settings from '@/config/settings';
 
 export default {
   name: 'ApiErrorDialog',
@@ -53,6 +54,9 @@ export default {
     isUnauthorizedError() {
       return this.errorStatus === 401;
     },
+    isVersionInvalidError() {
+      return this.errorStatus === 600;
+    },
   },
   watch: {
     error(newValue) {
@@ -66,6 +70,11 @@ export default {
       if (this.isMaintainanceError || this.isUnauthorizedError) {
         // TODO: fix Navigator error
         this.$store.dispatch('appNavigator/reset', StartIndex);
+      }
+      if (this.isVersionInvalidError) {
+        const { platform } = window.device || {};
+        if (platform === 'iOS') window.location.href = settings.app_store.ios;
+        window.location.href = settings.app_store.android;
       }
 
       this.$store.dispatch('api/resetError');
