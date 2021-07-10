@@ -24,7 +24,9 @@
     "amazon-cognito-identity-js": "^5.0.3",
     "aws-sdk": "^2.932.0",
     "axios": "^0.21.1",
+    "cordova-annotated-plugin-android": "1.0.4",
     "cordova-plugin-firebasex": "13.0.0-cli",
+    "cordova-plugin-purchases": "2.1.1",
     "geodesy": "^2.2.1",
     "moment": "^2.19.2",
     "node-sass": "4.14.1",
@@ -122,7 +124,8 @@
       "cordova-plugin-geolocation": {
         "GPS_REQUIRED": "true"
       },
-      "cordova-plugin-buildinfo": {}
+      "cordova-plugin-buildinfo": {},
+      "cordova-plugin-purchases": {}
     },
     "platforms": [
       "ios",

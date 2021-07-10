@@ -15,6 +15,7 @@ module.exports = {
     FirebasePlugin: true,
     Adjust: true,
     AdjustConfig: true,
+    Purchases: true,
   },
   plugins: [
     'vue',

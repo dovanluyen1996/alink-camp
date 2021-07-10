@@ -7,6 +7,7 @@ import VueOnsen from '@/plugins/vue_onsenui_plugin';
 import '@/plugins/global_component_plugin';
 import '@/config/vee_validate';
 import AdjustPlugin from '@/config/adjust';
+import RevenueCat from '@/config/revenue_cat';
 import store from '@/stores';
 import App from '@/app';
 import cognito from '@/cognito';
@@ -32,6 +33,8 @@ const initializeVue = () => {
   if (window.device.platform === 'iOS') {
     VueOnsen.enableAutoStatusBarFill();
   }
+
+  RevenueCat.init();
 
   if (window.device.platform !== 'browser') {
     const shouldSetEnabled = true;
