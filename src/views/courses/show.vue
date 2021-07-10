@@ -77,18 +77,20 @@ export default {
       return this.is_favorited ? 'お気に入り追加済' : 'お気に入り追加';
     },
     plansButtonText() {
-      return this.userCoursePlan ? `予定日：${this.$helpers.localDateFrom(this.userCoursePlan.targetAt)}` : '予定日設定';
+      return this.$helpers.isEmptyObject(this.userCoursePlan) ? '予定日設定' : `予定日：${this.$helpers.localDateFrom(this.userCoursePlan.targetAt)}`;
     },
     userCourse() {
       return this.$store.getters['models/userCourse/findByCourseId'](this.course.id);
     },
     userCoursePlan() {
-      return this.userCourse && this.userCourse.userCoursePlans[0];
+      if (!this.userCourse || this.userCourse.userCoursePlans.length === 0) return {};
+
+      const lastUserCoursePlanIndex = this.userCourse.userCoursePlans.length - 1;
+      return this.userCourse.userCoursePlans[lastUserCoursePlanIndex];
     },
   },
   async created() {
     await this.getCourse();
-    // TODO: コース天気TOP画面を実装したら、削除します。
     await this.getUserCourses();
   },
   methods: {
@@ -100,22 +102,17 @@ export default {
         extends: CoursePlans,
         onsNavigatorProps: {
           course: this.course,
-          userCourse: this.userCourse || {},
-          userCoursePlan: this.userCoursePlan || {},
+          userCoursePlan: this.userCoursePlan,
         },
       });
     },
     goToScore() {
+      // TODO: スコア状況画面へ遷移する
       console.log('goToScore');
     },
     async getCourse() {
       await this.$store.dispatch('course/getChoosenCourse', this.course.id);
     },
-    // TODO: user_course_plan情報を取得するために、UserCourse一覧は必要です。
-    // UserCourse一覧はコース天気画面でUserCourseを取得して、Storeに保存します。
-    // この画面でUserCourseのStoreを使って、user_course_plan情報を取得します。
-    //
-    // => コース天気TOP画面を実装したら、削除します。
     async getUserCourses() {
       await this.$store.dispatch('models/userCourse/getUserCourses');
     },

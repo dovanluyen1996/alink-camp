@@ -99,11 +99,6 @@ export default {
       required: true,
       default: () => {},
     },
-    userCourse: {
-      type: Object,
-      required: true,
-      default: () => {},
-    },
     userCoursePlan: {
       type: Object,
       required: true,
@@ -115,6 +110,7 @@ export default {
       dateValue: '',
       timeValue: '',
       deleteConfirmDialogVisible: false,
+      userCourse: {},
     };
   },
   computed: {
@@ -122,18 +118,23 @@ export default {
       return this.course.name;
     },
     isPersisted() {
-      return Object.keys(this.userCoursePlan).length !== 0;
+      return !this.$helpers.isEmptyObject(this.userCoursePlan);
     },
     targetAt() {
       return `${this.dateValue} ${this.timeValue}`;
     },
   },
   created() {
+    this.getUserCourse();
     this.getPlanInfo();
   },
   methods: {
+    getUserCourse() {
+      this.userCourse = this.$store.getters['models/userCourse/findByCourseId'](this.course.id) || {};
+    },
     getPlanInfo() {
-      if (!this.userCoursePlan.targetAt) return;
+      if (!this.isPersisted) return;
+
       // yyyy-mm-ddのフォーマットを使わないといけないです。
       this.dateValue = this.$helpers.localDateWithHyphenFrom(this.userCoursePlan.targetAt);
       this.timeValue = this.$helpers.localTimeFrom(this.userCoursePlan.targetAt);
@@ -175,9 +176,10 @@ export default {
       });
     },
     async createUserCoursePlan() {
-      let userCourseId = this.userCourse.id;
+      let userCourseId = null;
+
       // If UserCourse is not exsited, create UserCourse
-      const isUserCourseNotExisted = Object.keys(this.userCourse).length === 0;
+      const isUserCourseNotExisted = this.$helpers.isEmptyObject(this.userCourse);
       if (isUserCourseNotExisted) {
         await this.createUserCourse();
         const createdUserCourse = this.$store.getters['models/userCourse/findByCourseId'](this.course.id);
@@ -185,7 +187,10 @@ export default {
         if (!createdUserCourse) return;
         // Get created UserCourse.id
         userCourseId = createdUserCourse.id;
+      } else {
+        userCourseId = this.userCourse.id;
       }
+
       // Create UserCoursePlan
       const params = {
         courseId: this.course.id,

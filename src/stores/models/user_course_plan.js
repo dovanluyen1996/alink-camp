@@ -72,7 +72,7 @@ export default {
           userCourseId, userCoursePlanId,
         );
 
-        context.commit('updateUserCoursePlan', userCoursePlan);
+        context.commit('deleteUserCoursePlan', userCoursePlan);
       } finally {
         context.commit('setIsLoading', false);
       }
