@@ -101,10 +101,6 @@ export default {
     },
   },
   async created() {
-    // TODO: コース天気TOP画面を実装したら、削除します。
-    await this.getUserCourses();
-  },
-  async created() {
     await this.getCourse();
     await this.getUserCourses();
   },
