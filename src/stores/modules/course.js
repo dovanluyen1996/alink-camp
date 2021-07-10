@@ -8,6 +8,14 @@ export default {
     viewedCourses: [],
     choosenCourse: {},
     isLoading: false,
+    areaSearchConditions: {
+      prefecture: -1,
+    },
+    locationSearchConditions: {
+      distance: -1,
+    },
+    searched: false,
+    activeIndex: 0,
   },
   getters: {
     viewedCourses: state => state.viewedCourses,
@@ -42,6 +50,42 @@ export default {
     },
     setChoosenCourse(state, course) {
       Vue.set(state, 'choosenCourse', course);
+    },
+    setAreaSearchConditions(state, conditions) {
+      const newConditions = {};
+      Object.assign(newConditions, state.areaSearchConditions);
+      Object.assign(newConditions, conditions);
+
+      Vue.set(state, 'areaSearchConditions', newConditions);
+    },
+    setLocationSearchConditions(state, conditions) {
+      const newConditions = {};
+      Object.assign(newConditions, state.locationSearchConditions);
+      Object.assign(newConditions, conditions);
+
+      Vue.set(state, 'locationSearchConditions', newConditions);
+    },
+    resetAreaSearchConditions(state) {
+      Vue.set(state, 'areaSearchConditions', {
+        prefecture: -1,
+      });
+    },
+    resetLocationSearchConditions(state) {
+      Vue.set(state, 'locationSearchConditions', {
+        distance: -1,
+      });
+    },
+    setSearched(state, searched) {
+      state.searched = searched;
+    },
+    resetSearched(state) {
+      state.searched = false;
+    },
+    setActiveIndex(state, activeIndex) {
+      state.activeIndex = activeIndex;
+    },
+    resetActiveIndex(state) {
+      state.activeIndex = 0;
     },
   },
   actions: {

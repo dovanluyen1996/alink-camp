@@ -15,7 +15,7 @@ extend('email', {
 });
 
 extend('required-select', (value) => {
-  if (value && (typeof value === 'string' || value >= 0)) {
+  if ((typeof value === 'string' && value.length) || value >= 0) {
     return true;
   }
 

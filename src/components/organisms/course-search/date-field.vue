@@ -30,14 +30,14 @@ export default {
   },
   computed: {
     activeIndex() {
-      return this.$store.state.courseSearchNavigator.activeIndex;
+      return this.$store.state.course.activeIndex;
     },
     searchConditions() {
       // 0: area, 1: location
       if (this.activeIndex === 0) {
-        return this.$store.state.courseSearchNavigator.areaSearchConditions;
+        return this.$store.state.course.areaSearchConditions;
       }
-      return this.$store.state.courseSearchNavigator.locationSearchConditions;
+      return this.$store.state.course.locationSearchConditions;
     },
     dateValue: {
       get() {
@@ -45,9 +45,9 @@ export default {
       },
       set(date) {
         if (this.activeIndex === 0) {
-          this.$store.commit('courseSearchNavigator/setAreaSearchConditions', { date });
+          this.$store.commit('course/setAreaSearchConditions', { date });
         } else {
-          this.$store.commit('courseSearchNavigator/setLocationSearchConditions', { date });
+          this.$store.commit('course/setLocationSearchConditions', { date });
         }
       },
     },

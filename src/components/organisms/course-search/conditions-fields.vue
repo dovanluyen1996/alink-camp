@@ -62,15 +62,15 @@ export default {
   },
   computed: {
     activeIndex() {
-      return this.$store.state.courseSearchNavigator.activeIndex;
+      return this.$store.state.course.activeIndex;
     },
     searchConditions: {
       get() {
         // 0: area, 1: location
         if (this.activeIndex === 0) {
-          return this.$store.state.courseSearchNavigator.areaSearchConditions;
+          return this.$store.state.course.areaSearchConditions;
         }
-        return this.$store.state.courseSearchNavigator.locationSearchConditions;
+        return this.$store.state.course.locationSearchConditions;
       },
       set(newValue, oldValue) {
         // NOTE: eslintのルールに従うとjsエラーがでるので除外
@@ -80,9 +80,9 @@ export default {
 
         // 0: area, 1: location
         if (this.activeIndex === 0) {
-          this.$store.commit('courseSearchNavigator/setAreaSearchConditions', newConditions);
+          this.$store.commit('course/setAreaSearchConditions', newConditions);
         } else {
-          this.$store.commit('courseSearchNavigator/setLocationSearchConditions', newConditions);
+          this.$store.commit('course/setLocationSearchConditions', newConditions);
         }
       },
     },

@@ -74,20 +74,20 @@ export default {
   },
   computed: {
     searchConditions() {
-      return this.$store.state.courseSearchNavigator.areaSearchConditions;
+      return this.$store.state.course.areaSearchConditions;
     },
     searched() {
-      return this.$store.state.courseSearchNavigator.searched;
+      return this.$store.state.course.searched;
     },
     activeIndex() {
-      return this.$store.state.courseSearchNavigator.activeIndex;
+      return this.$store.state.course.activeIndex;
     },
     selectedPrefecture: {
       get() {
         return this.searchConditions.prefecture;
       },
       set(prefecture) {
-        this.$store.commit('courseSearchNavigator/setAreaSearchConditions', { prefecture });
+        this.$store.commit('course/setAreaSearchConditions', { prefecture });
       },
     },
     sunny() {
@@ -118,26 +118,26 @@ export default {
       this.$refs.searchArea.validate()
         .then(async(valid) => {
           // Reset searched flag
-          this.$store.commit('courseSearchNavigator/resetSearched');
+          this.$store.commit('course/resetSearched');
           this.$store.dispatch('models/course/resetCourses');
 
-          if (valid) {
-            const params = {
-              prefecture_id: this.searchConditions.prefecture,
-              target_date: this.searchConditions.date,
-              temperature: this.searchConditions.temperature,
-              sunny: this.sunny,
-              wind: this.wind,
-              uv: this.uv,
-            };
+          if (!valid) return;
 
-            await this.$store.dispatch('models/course/getCourses', params);
+          const params = {
+            prefecture_id: this.searchConditions.prefecture,
+            target_date: this.searchConditions.date,
+            temperature: this.searchConditions.temperature,
+            sunny: this.sunny,
+            wind: this.wind,
+            uv: this.uv,
+          };
 
-            if (this.recordCount) {
-              this.goToSearchResult();
-            } else {
-              this.showSearchResultEmptyDialog();
-            }
+          await this.$store.dispatch('models/course/getCourses', params);
+
+          if (this.recordCount) {
+            this.goToSearchResult();
+          } else {
+            this.showSearchResultEmptyDialog();
           }
         });
     },

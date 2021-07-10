@@ -12,7 +12,7 @@
         <template #footer>
           <v-ons-button
             modifier="large--cta rounded"
-            @click="searched()"
+            @click="search()"
           >
             絞り込み選択
           </v-ons-button>
@@ -54,16 +54,16 @@ export default {
     };
   },
   created() {
-    this.$store.commit('courseSearchNavigator/resetAreaSearchConditions');
-    this.$store.commit('courseSearchNavigator/resetLocationSearchConditions');
-    this.$store.commit('courseSearchNavigator/resetSearched');
+    this.$store.commit('course/resetAreaSearchConditions');
+    this.$store.commit('course/resetLocationSearchConditions');
+    this.$store.commit('course/resetSearched');
   },
   methods: {
-    searched() {
-      this.$store.commit('courseSearchNavigator/setSearched', true);
+    search() {
+      this.$store.commit('course/setSearched', true);
     },
     switchTab(index) {
-      this.$store.commit('courseSearchNavigator/setActiveIndex', index);
+      this.$store.commit('course/setActiveIndex', index);
     },
   },
 };
