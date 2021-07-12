@@ -25,6 +25,7 @@
     "aws-sdk": "^2.932.0",
     "axios": "^0.21.1",
     "cordova-annotated-plugin-android": "1.0.4",
+    "chart.js": "2.9.4",
     "cordova-plugin-firebasex": "13.0.0-cli",
     "cordova-plugin-purchases": "2.1.1",
     "geodesy": "^2.2.1",
@@ -39,6 +40,7 @@
     "stylelint-config-standard": "^22.0.0",
     "vee-validate": "^3.4.9",
     "vue": "^2.5.2",
+    "vue-chartjs": "^3.5.1",
     "vue-moment": "^4.1.0",
     "vue-onsenui": "~2.6.2",
     "vuex": "^3.0.0"
