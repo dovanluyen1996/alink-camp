@@ -7,7 +7,6 @@
         <card-with-tab
           ref="tabContents"
           :tabs="tabs"
-          @switchTab="switchTab"
         />
         <template #footer>
           <v-ons-button
@@ -53,6 +52,16 @@ export default {
       ],
     };
   },
+  computed: {
+    activeIndex() {
+      return this.$store.getters['components/cardWithTab/activeIndex'];
+    },
+  },
+  watch: {
+    activeIndex() {
+      this.$store.commit('course/setActiveIndex', this.activeIndex);
+    },
+  },
   created() {
     this.$store.commit('course/resetAreaSearchConditions');
     this.$store.commit('course/resetLocationSearchConditions');
@@ -61,9 +70,6 @@ export default {
   methods: {
     search() {
       this.$store.commit('course/setSearched', true);
-    },
-    switchTab(index) {
-      this.$store.commit('course/setActiveIndex', index);
     },
   },
 };

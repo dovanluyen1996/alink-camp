@@ -38,15 +38,22 @@ export default {
       default: () => [],
     },
   },
-  data() {
-    return {
-      activeIndex: 0,
-    };
+  computed: {
+    activeIndex: {
+      get() {
+        return this.$store.getters['components/cardWithTab/activeIndex'];
+      },
+      set(index) {
+        this.$store.commit('components/cardWithTab/setActiveIndex', index);
+      },
+    },
+  },
+  created() {
+    this.$store.commit('components/cardWithTab/resetActiveIndex');
   },
   methods: {
     switchTab(index) {
       this.activeIndex = index;
-      this.$emit('switchTab', index);
     },
     isActive(index) {
       return index === this.activeIndex;
