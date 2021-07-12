@@ -51,7 +51,8 @@ export default {
         if (offerings.current !== null && offerings.current.availablePackages.length !== 0) {
           const availablePackage = offerings.current.monthly;
 
-          Purchases.purchasePackage(availablePackage, ({productIdentifier, purchaserInfo}) => {
+          // eslint-disable-next-line no-unused-vars
+          Purchases.purchasePackage(availablePackage, ({ productIdentifier, purchaserInfo }) => {
             if (Object.entries(purchaserInfo.entitlements.active).length > 0) {
               this.$store.dispatch('appNavigator/replace', StartIndex);
             }
