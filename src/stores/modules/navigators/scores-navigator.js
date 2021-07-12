@@ -20,6 +20,9 @@ export default {
     reset(state, page) {
       state.stack = [page || state.stack[0]];
     },
+    clear(state) {
+      state.stack = [];
+    },
   },
   actions: {
     push({ commit }, page) {
@@ -33,6 +36,9 @@ export default {
     },
     reset({ commit }, page) {
       commit('reset', page);
+    },
+    clear({ commit }) {
+      commit('clear');
     },
   },
 };

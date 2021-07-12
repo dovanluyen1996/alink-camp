@@ -69,10 +69,10 @@ export default {
 
       if (this.isMaintainanceError || this.isUnauthorizedError) {
         // TODO: fix Navigator error
-        this.$store.dispatch('appNavigator/reset', StartIndex);
+        this.resetNavigators();
       }
       if (this.isVersionInvalidError) {
-        this.$store.dispatch('appNavigator/reset', StartIndex);
+        this.resetNavigators();
 
         const { platform } = window.device || {};
 
@@ -83,6 +83,17 @@ export default {
       }
 
       this.$store.dispatch('api/resetError');
+    },
+    resetNavigators() {
+      this.$store.dispatch('appNavigator/clear');
+      this.$store.dispatch('courseWeatherNavigator/clear');
+      this.$store.dispatch('courseSearchNavigator/clear');
+      this.$store.dispatch('menuNavigator/clear');
+      this.$store.dispatch('scoresNavigator/clear');
+      this.$store.dispatch('windForecastNavigator/clear');
+      this.$store.commit('appTabbar/setActiveIndex', 0);
+
+      this.$store.dispatch('appNavigator/reset', StartIndex);
     },
   },
 };
