@@ -47,9 +47,23 @@ export default {
   },
   methods: {
     callToPurchase() {
-      // TODO: 仮でスタートページに飛ばしているので
-      // サブスクリプションを呼んでください
-      this.$store.dispatch('appNavigator/replace', StartIndex);
+      Purchases.getOfferings((offerings) => {
+        if (offerings.current !== null && offerings.current.availablePackages.length !== 0) {
+          const availablePackage = offerings.current.monthly;
+
+          Purchases.purchasePackage(availablePackage, ({productIdentifier, purchaserInfo}) => {
+            if (Object.entries(purchaserInfo.entitlements.active).length > 0) {
+              this.$store.dispatch('appNavigator/replace', StartIndex);
+            }
+          },
+          ({error}) => {
+            throw error;
+          });
+        }
+      }, (error) => {
+        // TODO: エラー時の処理実装 Issue#148
+        console.error(error);
+      });
     },
   },
 };

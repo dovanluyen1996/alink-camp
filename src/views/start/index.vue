@@ -47,15 +47,24 @@ export default {
     // }
     await this.$store.dispatch('models/appStart/getAppStart');
 
-    if (!this.isCharged()) {
-      this.$store.dispatch('appNavigator/push', PurchaseInformation);
-      return;
-    }
-
-    const isAuthenticated = await this.isAuthenticated();
-    if (isAuthenticated) {
-      this.$store.dispatch('appNavigator/push', AppTabbar);
-    }
+    // 課金チェック
+    Purchases.getPurchaserInfo(
+      async(purchaserInfo) => {
+        if (Object.entries(purchaserInfo.entitlements.active).length === 0) {
+          this.$store.dispatch('appNavigator/push', PurchaseInformation);
+        } else {
+          // 認証チェック
+          const isAuthenticated = await this.isAuthenticated();
+          if (isAuthenticated) {
+            this.$store.dispatch('appNavigator/push', AppTabbar);
+          }
+        }
+      },
+      (error) => {
+        // TODO: エラー時の処理実装 Issue#375
+        console.error(error);
+      },
+    );
   },
   methods: {
     async isAuthenticated() {
@@ -66,10 +75,6 @@ export default {
         console.error(err);
       }
       return authResult;
-    },
-    isCharged() {
-      // TODO: 課金状態の確認
-      return true;
     },
     start() {
       this.goToTermsOfService();
