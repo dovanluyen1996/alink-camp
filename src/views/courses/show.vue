@@ -1,28 +1,28 @@
 <template>
   <v-ons-page>
-    <custom-toolbar :title="title" />
+    <custom-toolbar :title="course.name" />
     <div class="content">
       <div class="course-show-header">
-        <ons-button
+        <v-ons-button
           :configured="is_favorited"
           modifier="large rounded"
           @click="toggleFavorite"
         >
           {{ favoriteButtonText }}
-        </ons-button>
-        <ons-button
-          :configured="userCoursePlan"
+        </v-ons-button>
+        <v-ons-button
+          :configured="!isEmptyPlan"
           modifier="large rounded"
           @click="goToCoursePlans"
         >
           {{ plansButtonText }}
-        </ons-button>
-        <ons-button
+        </v-ons-button>
+        <v-ons-button
           modifier="large rounded"
           @click="goToScore"
         >
           スコア状況
-        </ons-button>
+        </v-ons-button>
       </div>
 
       <div class="course-show">
@@ -58,7 +58,6 @@ export default {
   },
   data() {
     return {
-      title: '〇〇ゴルフ場',
       is_favorited: true,
       tabs: [
         {
@@ -77,7 +76,7 @@ export default {
       return this.is_favorited ? 'お気に入り追加済' : 'お気に入り追加';
     },
     plansButtonText() {
-      return this.$helpers.isEmptyObject(this.userCoursePlan) ? '予定日設定' : `予定日：${this.$helpers.localDateFrom(this.userCoursePlan.targetAt)}`;
+      return this.isEmptyPlan ? '予定日設定' : `予定日：${this.$helpers.localDateFrom(this.userCoursePlan.targetAt)}`;
     },
     userCourse() {
       return this.$store.getters['models/userCourse/findByCourseId'](this.course.id);
@@ -87,6 +86,9 @@ export default {
 
       const lastUserCoursePlanIndex = this.userCourse.userCoursePlans.length - 1;
       return this.userCourse.userCoursePlans[lastUserCoursePlanIndex];
+    },
+    isEmptyPlan() {
+      return this.$helpers.isEmptyObject(this.userCoursePlan);
     },
   },
   async created() {
