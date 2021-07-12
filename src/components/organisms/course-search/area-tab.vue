@@ -99,26 +99,23 @@ export default {
     uv() {
       return (this.searchConditions.uv) ? 1 : 0;
     },
-    recordCount() {
-      return this.$store.getters['models/course/size'];
-    },
   },
   watch: {
     searched() {
-      // Watch click search button event.
-      if (!this.searched) return;
       // If current tab is not area, don't search area
       if (this.activeIndex !== 0) return;
+      // Watch click search button event.
+      if (!this.searched) return;
+      // Reset search flag to false
+      this.$store.commit('course/setSearched', false);
 
-      this.searchByArea();
+      this.search();
     },
   },
   methods: {
-    searchByArea() {
+    search() {
       this.$refs.searchArea.validate()
         .then(async(valid) => {
-          // Reset searched flag
-          this.$store.commit('course/resetSearched');
           this.$store.dispatch('models/course/resetCourses');
 
           if (!valid) return;
@@ -134,7 +131,7 @@ export default {
 
           await this.$store.dispatch('models/course/getCourses', params);
 
-          if (this.recordCount) {
+          if (this.$store.getters['models/course/size']) {
             this.goToSearchResult();
           } else {
             this.showSearchResultEmptyDialog();

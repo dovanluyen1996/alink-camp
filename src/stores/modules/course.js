@@ -78,9 +78,6 @@ export default {
     setSearched(state, searched) {
       state.searched = searched;
     },
-    resetSearched(state) {
-      state.searched = false;
-    },
     setActiveIndex(state, activeIndex) {
       state.activeIndex = activeIndex;
     },
