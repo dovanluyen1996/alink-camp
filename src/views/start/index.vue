@@ -45,7 +45,7 @@ export default {
     //   FirebasePlugin.setScreenName('PurchaseInformation');
     //   FirebasePlugin.logEvent('screen_view', { content_type: 'page_view', item_id: 'home' });
     // }
-    await this.$store.dispatch('models/app_start/getAppStart');
+    await this.$store.dispatch('models/appStart/getAppStart');
 
     if (!this.isCharged()) {
       this.$store.dispatch('appNavigator/push', PurchaseInformation);

@@ -72,9 +72,14 @@ export default {
         this.$store.dispatch('appNavigator/reset', StartIndex);
       }
       if (this.isVersionInvalidError) {
+        this.$store.dispatch('appNavigator/reset', StartIndex);
+
         const { platform } = window.device || {};
-        if (platform === 'iOS') window.location.href = settings.app_store.ios;
-        window.location.href = settings.app_store.android;
+
+        const url = platform === 'iOS' ? settings.app_store.ios : settings.app_store.android;
+        setTimeout(() => {
+          window.open(url, '_system');
+        }, 1000);
       }
 
       this.$store.dispatch('api/resetError');
