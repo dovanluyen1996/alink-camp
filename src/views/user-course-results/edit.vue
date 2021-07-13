@@ -47,8 +47,6 @@
 </template>
 
 <script>
-import settings from '@/config/settings';
-
 // components
 import DeleteDialogWithIcon from '@/components/organisms/dialog/delete-dialog-with-icon';
 import CourseName from '@/components/organisms/course-name';
@@ -101,9 +99,6 @@ export default {
     },
   },
   methods: {
-    getUserCourse() {
-      return this.$store.getters['models/userCourse/findByCourseId'](this.course.id);
-    },
     deleteScore() {
       this.isShownDeleteDialog = false;
       // TODO: delete

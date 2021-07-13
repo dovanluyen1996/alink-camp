@@ -53,7 +53,7 @@ export default {
   name: 'CustomImageUpload',
   props: {
     value: {
-      type: [String, File],
+      type: [String, Object, File],
       default: () => '',
       required: true,
     },
