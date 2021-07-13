@@ -10,7 +10,7 @@ export default {
     isLoading: false,
   },
   getters: {
-    all: (state, getters, rootState, rootGetters) => {
+    allByUserCourses: (state, getters, rootState, rootGetters) => {
       const userCourses = rootGetters['models/userCourse/all'];
 
       return userCourses.map(userCourse => userCourse.userCoursePlans.map(userCoursePlan => ({
@@ -19,7 +19,7 @@ export default {
         targetDate: moment(userCoursePlan.targetAt).startOf('days'),
       }))).flat();
     },
-    inFuture: (state, getters) => getters.all.filter(
+    inFuture: (state, getters) => getters.allByUserCourses.filter(
       userCoursePlan => userCoursePlan.targetDate.isSameOrAfter(moment().startOf('days')),
     ),
     sortedUserCoursePlansInFuture: (state, getters) => getters.inFuture.sort(
@@ -30,7 +30,7 @@ export default {
         if (a.targetDate.isSame(b.targetDate)) sort = a.isFavorited ? -1 : 1;
 
         return sort;
-      }
+      },
     ),
   },
   mutations: {

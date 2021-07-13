@@ -50,9 +50,7 @@ export default {
       return this.$store.getters['models/userCourse/onlyFavoritedWithoutPlans'];
     },
     userCoursePlans() {
-      const userCoursePlans = this.$store.getters['models/userCoursePlan/inFuture'];
-
-      return this.$store.getters['models/userCoursePlan/sortedUserCoursePlansInFuture']
+      return this.$store.getters['models/userCoursePlan/sortedUserCoursePlansInFuture'];
     },
   },
   methods: {
