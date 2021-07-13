@@ -78,6 +78,8 @@ export default {
     },
     isToday() {
       const today = this.$moment().format('YYYY-MM-DD');
+      if (!this.userCoursePlan.targetDate) return false;
+
       return this.$moment(today).isSame(this.forecastHourly.date);
     },
     margedForecastsAndSuns() {

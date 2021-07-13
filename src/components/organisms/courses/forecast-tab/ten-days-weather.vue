@@ -84,6 +84,7 @@ export default {
       const th = dateRow.querySelector('th');
       const plans = this.userCoursePlan.targetDate || this.$moment().format('YYYY-MM-DD');
       const plansCol = dateRow.querySelector(`[date-day="${plans}"]`);
+      if (!plansCol) return;
       const x = plansCol.offsetLeft - th.offsetWidth;
 
       table.scrollTo(x, 0);
