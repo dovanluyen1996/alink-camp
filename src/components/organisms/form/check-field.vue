@@ -1,10 +1,13 @@
 <template>
   <label class="check-field">
-    <custom-checkbox v-model="checkedValue" />
+    <custom-checkbox
+      v-model="checkedValue"
+      :disable="disable"
+    />
     <span
       v-if="label"
       class="check-field__label-text"
-      :class="{disabled : disable}"
+      :class="{ disabled: disable }"
     >
       {{ label }}
     </span>
@@ -31,7 +34,7 @@ export default {
     },
     disable: {
       type: Boolean,
-      default: true,
+      default: false,
     },
   },
   computed: {
