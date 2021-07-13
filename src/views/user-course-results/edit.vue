@@ -47,6 +47,8 @@
 </template>
 
 <script>
+import settings from '@/config/settings';
+
 // components
 import DeleteDialogWithIcon from '@/components/organisms/dialog/delete-dialog-with-icon';
 import CourseName from '@/components/organisms/course-name';
@@ -90,7 +92,6 @@ export default {
       image: require('@/assets/images/course-sample.jpg'),
       note: '',
       isShownDeleteDialog: false,
-      isButtonDisable: false,
     };
   },
   computed: {
