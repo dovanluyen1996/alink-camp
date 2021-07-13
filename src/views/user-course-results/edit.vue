@@ -19,19 +19,19 @@
         <v-ons-card class="course-weather-and-image">
           <v-ons-row class="course-weather-and-image-row">
             <user-course-result-weather />
-            <user-course-result-image v-model="tempUserCourseResult.image" />
+            <user-course-result-image v-model="image" />
           </v-ons-row>
         </v-ons-card>
 
         <user-course-result-target-date-field
-          v-model="tempUserCourseResult.targetDate"
+          v-model="target_date"
           title="プレイ日"
         />
         <user-course-result-scores-field
-          :total-score.sync="tempUserCourseResult.totalScore"
-          :patting-score.sync="tempUserCourseResult.pattingScore"
+          :total-score.sync="total_score"
+          :patting-score.sync="patting_score"
         />
-        <user-course-result-note-field v-model="tempUserCourseResult.note" />
+        <user-course-result-note-field v-model="note" />
 
         <template #footer>
           <v-ons-button
@@ -104,20 +104,9 @@ export default {
     getUserCourse() {
       return this.$store.getters['models/userCourse/findByCourseId'](this.course.id);
     },
-    async deleteScore() {
+    deleteScore() {
       this.isShownDeleteDialog = false;
-
-      await this.$store.dispatch('models/userCourseResult/destroyUserCourseResult', {
-        userCourseId: this.getUserCourse().id,
-        userCourseResultId: this.userCourseResult.id,
-      })
-        .then(() => {
-          this.$ons.notification.toast('削除しました', settings.toastSetting);
-          this.$store.dispatch('scoresNavigator/pop');
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      // TODO: delete
     },
     submitScore() {
       // TODO: スコアを保存
