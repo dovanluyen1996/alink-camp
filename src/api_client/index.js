@@ -71,7 +71,21 @@ class ApiClient extends HttpClient {
   }
 
   compareVersion(appVersion, newestVersion) {
-    return parseInt(appVersion.split('.').join(''), 10) < parseInt(newestVersion.split('.').join(''), 10);
+    try {
+      const appVersions = appVersion.split('.');
+      if (appVersions.length !== 3) return true;
+
+      const newestVersions = newestVersion.split('.');
+      if (newestVersions.length !== 3) return true;
+
+      const appVersionNumber = parseInt(appVersions.map(version => (`00${version}`).slice(-2)).join(''), 10);
+      const newestVersionNumber = parseInt(newestVersions.map(version => (`00${version}`).slice(-2)).join(''), 10);
+
+      return appVersionNumber < newestVersionNumber;
+    } catch (e) {
+      console.log(e);
+      return true;
+    }
   }
 }
 
