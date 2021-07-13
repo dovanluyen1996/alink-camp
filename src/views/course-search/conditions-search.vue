@@ -88,3 +88,11 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+/deep/ {
+  ons-select {
+    width: 100%;
+  }
+}
+</style>
