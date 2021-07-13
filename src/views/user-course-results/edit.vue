@@ -37,7 +37,7 @@
           <template #footer>
             <v-ons-button
               modifier="large--cta add rounded"
-              :disabled="buttonIsDisable"
+              :disabled="isButtonDisable"
               @click="handleSubmit(updateUserCourseResult)"
             >
               保存
@@ -50,8 +50,6 @@
 </template>
 
 <script>
-import settings from '@/config/settings';
-
 // components
 import DeleteDialogWithIcon from '@/components/organisms/dialog/delete-dialog-with-icon';
 import CourseName from '@/components/organisms/course-name';
@@ -90,13 +88,8 @@ export default {
     return {
       tempUserCourseResult: { ...this.userCourseResult },
       isShownDeleteDialog: false,
-      isDisable: false,
+      isButtonDisable: false,
     };
-  },
-  computed: {
-    buttonIsDisable() {
-      return this.isDisable;
-    },
   },
   methods: {
     async deleteUserCourseResult() {
@@ -107,16 +100,16 @@ export default {
         userCourseResultId: this.userCourseResult.id,
       })
         .then(() => {
-          this.$ons.notification.toast('削除しました', settings.toastSetting);
+          // TODO: 削除後のダイアログやトーストなどの表示
           this.$store.dispatch('scoresNavigator/pop');
         })
         .catch((err) => {
-          this.$ons.notification.toast('削除に失敗しました', settings.toastSetting);
+          // TODO: 削除失敗のダイアログやトーストなどの表示
           console.log(err);
         });
     },
     async updateUserCourseResult() {
-      this.isDisable = true;
+      this.isButtonDisable = true;
 
       if (this.userCourseResult.image === this.tempUserCourseResult.image) {
         delete this.tempUserCourseResult.image;
@@ -128,15 +121,15 @@ export default {
         params: this.tempUserCourseResult,
       })
         .then(() => {
-          this.$ons.notification.toast('更新しました', settings.toastSetting);
+          // TODO: 更新後のダイアログやトーストなどの表示
           this.$store.dispatch('scoresNavigator/pop');
         })
         .catch((err) => {
-          this.$ons.notification.toast('更新に失敗しました', settings.toastSetting);
+          // TODO: 更新失敗のダイアログやトーストなどの表示
           console.log(err);
         });
 
-      this.isDisable = false;
+      this.isButtonDisable = false;
     },
   },
 };
