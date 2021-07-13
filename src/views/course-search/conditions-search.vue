@@ -63,8 +63,6 @@ export default {
     },
   },
   created() {
-    this.$store.commit('course/resetAreaSearchConditions');
-    this.$store.commit('course/resetLocationSearchConditions');
     this.$store.commit('course/setSearched', false);
   },
   methods: {

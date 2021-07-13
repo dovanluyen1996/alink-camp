@@ -10,7 +10,7 @@
       name="日にち"
     >
       <custom-datetime-input
-        v-model="dateValue"
+        v-model="inputedValue"
         type="date"
         placeholder="日にち"
         :errors="errors"
@@ -28,27 +28,19 @@ export default {
   components: {
     CustomDatetimeInput,
   },
+  props: {
+    value: {
+      type: String,
+      default: '',
+    },
+  },
   computed: {
-    activeIndex() {
-      return this.$store.state.course.activeIndex;
-    },
-    searchConditions() {
-      // 0: area, 1: location
-      if (this.activeIndex === 0) {
-        return this.$store.state.course.areaSearchConditions;
-      }
-      return this.$store.state.course.locationSearchConditions;
-    },
-    dateValue: {
+    inputedValue: {
       get() {
-        return this.searchConditions.date;
+        return this.value;
       },
-      set(date) {
-        if (this.activeIndex === 0) {
-          this.$store.commit('course/setAreaSearchConditions', { date });
-        } else {
-          this.$store.commit('course/setLocationSearchConditions', { date });
-        }
+      set(newValue) {
+        this.$emit('input', newValue);
       },
     },
   },

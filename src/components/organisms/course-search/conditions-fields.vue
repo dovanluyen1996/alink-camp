@@ -4,7 +4,7 @@
       お天気詳細情報
     </div>
     <check-field
-      v-model="sunnyValue"
+      v-model="inputedSunnyValue"
       label="雨の確率が低いゴルフコース"
     />
 
@@ -12,7 +12,7 @@
       気温
     </div>
     <custom-radio
-      v-model="temperatureValue"
+      v-model="inputedTemperatureValue"
       :labels="temperatureLabels"
     />
 
@@ -20,12 +20,12 @@
       その他
     </div>
     <check-field
-      v-model="windValue"
+      v-model="inputedWindValue"
       label="風が穏やかな予報のコース"
       :disable="isWindValueDisable"
     />
     <check-field
-      v-model="uvValue"
+      v-model="inputedUvValue"
       label="紫外線が弱い予報のコース"
       :disable="isUvValueDisable"
     />
@@ -41,6 +41,28 @@ export default {
   components: {
     CheckField,
     CustomRadio,
+  },
+  props: {
+    sunny: {
+      type: Boolean,
+      default: false,
+    },
+    temperature: {
+      type: String,
+      default: '',
+    },
+    wind: {
+      type: Boolean,
+      default: false,
+    },
+    uv: {
+      type: Boolean,
+      default: false,
+    },
+    date: {
+      type: String,
+      default: '',
+    },
   },
   data() {
     return {
@@ -64,76 +86,51 @@ export default {
     activeIndex() {
       return this.$store.state.course.activeIndex;
     },
-    searchConditions: {
+    inputedSunnyValue: {
       get() {
-        // 0: area, 1: location
-        if (this.activeIndex === 0) {
-          return this.$store.state.course.areaSearchConditions;
-        }
-        return this.$store.state.course.locationSearchConditions;
+        return this.sunny;
       },
-      set(newValue, oldValue) {
-        // NOTE: eslintのルールに従うとjsエラーがでるので除外
-        /* eslint-disable-next-line prefer-object-spread */
-        const newConditions = Object.assign({}, oldValue);
-        Object.assign(newConditions, newValue);
-
-        // 0: area, 1: location
-        if (this.activeIndex === 0) {
-          this.$store.commit('course/setAreaSearchConditions', newConditions);
-        } else {
-          this.$store.commit('course/setLocationSearchConditions', newConditions);
-        }
+      set(newValue) {
+        this.$emit('update:sunny', newValue);
+      },
+    },
+    inputedTemperatureValue: {
+      get() {
+        return this.temperature;
+      },
+      set(newValue) {
+        this.$emit('update:temperature', newValue);
+      },
+    },
+    inputedWindValue: {
+      get() {
+        return this.wind;
+      },
+      set(newValue) {
+        this.$emit('update:wind', newValue);
+      },
+    },
+    inputedUvValue: {
+      get() {
+        return this.uv;
+      },
+      set(newValue) {
+        this.$emit('update:uv', newValue);
       },
     },
     isWindValueDisable() {
-      return !this.isValidDateRange(this.dateValue);
+      return !this.isValidDateRange(this.date);
     },
     isUvValueDisable() {
-      return !this.isValidDateRange(this.dateValue);
-    },
-    sunnyValue: {
-      get() {
-        return this.searchConditions.sunny;
-      },
-      set(sunny) {
-        this.searchConditions = { sunny };
-      },
-    },
-    temperatureValue: {
-      get() {
-        return this.searchConditions.temperature;
-      },
-      set(temperature) {
-        this.searchConditions = { temperature };
-      },
-    },
-    windValue: {
-      get() {
-        return this.searchConditions.wind;
-      },
-      set(wind) {
-        this.searchConditions = { wind };
-      },
-    },
-    uvValue: {
-      get() {
-        return this.searchConditions.uv;
-      },
-      set(uv) {
-        this.searchConditions = { uv };
-      },
-    },
-    dateValue() {
-      return this.searchConditions.date;
+      return !this.isValidDateRange(this.date);
     },
   },
   watch: {
-    dateValue(value) {
+    date(value) {
       if (this.isValidDateRange(value)) return;
 
-      this.uvValue = false;
-      this.windValue = false;
+      this.inputedUvValue = false;
+      this.inputedWindValue = false;
     },
   },
   methods: {

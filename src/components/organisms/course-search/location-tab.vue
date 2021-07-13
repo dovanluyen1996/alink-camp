@@ -4,7 +4,7 @@
       検索範囲選択（必須）
     </div>
     <custom-select
-      v-model="distanceValue"
+      v-model="distance"
       :options="distanceOptions"
       placeholder="検索範囲を選択してください"
     />
@@ -52,20 +52,8 @@ export default {
           text: '〜500m',
         },
       ],
+      distance: -1,
     };
-  },
-  computed: {
-    searchConditions() {
-      return this.$store.state.course.locationSearchConditions;
-    },
-    distanceValue: {
-      get() {
-        return this.searchConditions.distance;
-      },
-      set(distance) {
-        this.$store.commit('course/setLocationSearchConditions', { distance });
-      },
-    },
   },
 };
 </script>

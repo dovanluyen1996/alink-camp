@@ -12,21 +12,29 @@
         name="都道府県"
       >
         <custom-select
-          v-model="selectedPrefecture"
+          v-model="prefecture"
           :options="prefectures"
           placeholder="都道府県を選択してください"
           :errors="errors"
         />
       </validation-provider>
 
-      <course-search-date-field />
+      <course-search-date-field
+        v-model="targetDate"
+      />
 
       <annotations-block>
         ※予報は本日から10日目までとなります。それ以上は過去のお天気をもとに予測したデータとなります。<br>
         ※紫外線、風の強さに関しては10日目までの予報となります。
       </annotations-block>
 
-      <course-search-conditions-fields />
+      <course-search-conditions-fields
+        :sunny.sync="sunny"
+        :temperature.sync="temperature"
+        :wind.sync="wind"
+        :uv.sync="uv"
+        :date.sync="targetDate"
+      />
     </validation-observer>
 
     <v-ons-alert-dialog :visible.sync="searchResultEmptyVisible">
@@ -70,34 +78,20 @@ export default {
     return {
       prefectures: settings.views.prefectures,
       searchResultEmptyVisible: false,
+      prefecture: -1,
+      targetDate: '',
+      temperature: '',
+      sunny: false,
+      wind: false,
+      uv: false,
     };
   },
   computed: {
-    searchConditions() {
-      return this.$store.state.course.areaSearchConditions;
-    },
     searched() {
       return this.$store.state.course.searched;
     },
     activeIndex() {
       return this.$store.state.course.activeIndex;
-    },
-    selectedPrefecture: {
-      get() {
-        return this.searchConditions.prefecture;
-      },
-      set(prefecture) {
-        this.$store.commit('course/setAreaSearchConditions', { prefecture });
-      },
-    },
-    sunny() {
-      return (this.searchConditions.sunny) ? 1 : 0;
-    },
-    wind() {
-      return (this.searchConditions.wind) ? 1 : 0;
-    },
-    uv() {
-      return (this.searchConditions.uv) ? 1 : 0;
     },
   },
   watch: {
@@ -121,12 +115,12 @@ export default {
           if (!valid) return;
 
           const params = {
-            prefecture_id: this.searchConditions.prefecture,
-            target_date: this.searchConditions.date,
-            temperature: this.searchConditions.temperature,
-            sunny: this.sunny,
-            wind: this.wind,
-            uv: this.uv,
+            prefecture_id: this.prefecture,
+            target_date: this.targetDate,
+            temperature: this.temperature,
+            sunny: (this.sunny) ? 1 : 0,
+            wind: (this.wind) ? 1 : 0,
+            uv: (this.uv) ? 1 : 0,
           };
 
           await this.$store.dispatch('models/course/getCourses', params);
