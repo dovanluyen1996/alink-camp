@@ -4,6 +4,7 @@
       v-model="checkedValue"
       type="checkbox"
       class="custom-input__field"
+      :disabled="disable"
     >
     <span class="custom-input__visual" />
   </div>
@@ -14,6 +15,10 @@ export default {
   name: 'CustomCheckbox',
   props: {
     value: {
+      type: Boolean,
+      default: false,
+    },
+    disable: {
       type: Boolean,
       default: false,
     },

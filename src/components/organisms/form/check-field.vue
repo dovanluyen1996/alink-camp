@@ -4,6 +4,7 @@
     <span
       v-if="label"
       class="check-field__label-text"
+      :class="{disabled : disable}"
     >
       {{ label }}
     </span>
@@ -27,6 +28,10 @@ export default {
     label: {
       type: String,
       default: null,
+    },
+    disable: {
+      type: Boolean,
+      default: true,
     },
   },
   computed: {
@@ -52,5 +57,8 @@ export default {
   &__label-text {
     margin-left: 8px;
   }
+}
+.disabled {
+  color: #ccc;
 }
 </style>
