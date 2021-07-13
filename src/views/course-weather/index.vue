@@ -52,14 +52,7 @@ export default {
     userCoursePlans() {
       const userCoursePlans = this.$store.getters['models/userCoursePlan/inFuture'];
 
-      return userCoursePlans.sort((a, b) => {
-        let sort = 0;
-
-        sort = a.targetDate.isAfter(b.targetDate) ? 1 : -1;
-        if (a.targetDate.isSame(b.targetDate)) sort = a.isFavorited ? -1 : 1;
-
-        return sort;
-      });
+      return this.$store.getters['models/userCoursePlan/sortedUserCoursePlansInFuture']
     },
   },
   methods: {
