@@ -58,6 +58,7 @@ export default {
     margin-left: 8px;
   }
 }
+
 .disabled {
   color: #ccc;
 }
