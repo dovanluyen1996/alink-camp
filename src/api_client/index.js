@@ -30,7 +30,7 @@ class ApiClient extends HttpClient {
 
     this.axios.interceptors.response.use(async(response) => {
       const appVersion = await cordova.getAppVersion.getVersionNumber();
-      if (response.headers['x-client-app-version'] && this.compareVersion(appVersion, response.headers['x-client-app-version'])) {
+      if (response.headers['x-client-app-version'] && !this.isNewestAppVersion(appVersion, response.headers['x-client-app-version'])) {
         const error = { status: 600, message: '新しいバージョンがリリースされています。アップデートしてください' };
         throw (error);
       }
@@ -70,7 +70,7 @@ class ApiClient extends HttpClient {
     }
   }
 
-  compareVersion(appVersion, newestVersion) {
+  isNewestAppVersion(appVersion, newestVersion) {
     try {
       const appVersions = appVersion.split('.');
       if (appVersions.length !== 3) return true;
@@ -81,7 +81,7 @@ class ApiClient extends HttpClient {
       const appVersionNumber = parseInt(appVersions.map(version => (`00${version}`).slice(-2)).join(''), 10);
       const newestVersionNumber = parseInt(newestVersions.map(version => (`00${version}`).slice(-2)).join(''), 10);
 
-      return appVersionNumber < newestVersionNumber;
+      return appVersionNumber >= newestVersionNumber;
     } catch (e) {
       console.log(e);
       return true;
