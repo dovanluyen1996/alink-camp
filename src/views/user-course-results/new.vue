@@ -22,7 +22,7 @@
           <template #footer>
             <v-ons-button
               modifier="large--cta add rounded"
-              :disabled="buttonIsDisable"
+              :disabled="isButtonDisable"
               @click="handleSubmit(createUserCourseResult)"
             >
               保存
@@ -35,8 +35,6 @@
 </template>
 
 <script>
-import settings from '@/config/settings';
-
 // components
 import CourseName from '@/components/organisms/course-name';
 import UserCourseResultsTargetDateField from '@/components/organisms/user-course-results/target-date-field';
@@ -71,30 +69,25 @@ export default {
         image: '',
         note: '',
       },
-      isDisable: false,
+      isButtonDisable: false,
     };
-  },
-  computed: {
-    buttonIsDisable() {
-      return this.isDisable;
-    },
   },
   methods: {
     async createUserCourseResult() {
-      this.isDisable = true;
+      this.isButtonDisable = true;
 
       await this.$store.dispatch('models/userCourseResult/createUserCourseResult', {
         userCourseId: this.userCourse.id,
         params: this.userCourseResult,
       })
         .then(() => {
-          this.$ons.notification.toast('登録しました', settings.toastSetting);
+          // TODO: 登録後のダイアログやトーストなどの表示
         })
         .catch((err) => {
           console.log(err);
         });
 
-      this.isDisable = false;
+      this.isButtonDisable = false;
       this.$store.dispatch('scoresNavigator/pop');
     },
   },
