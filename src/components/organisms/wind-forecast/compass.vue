@@ -19,8 +19,16 @@ const { windDirections } = settings.views;
 
 export default {
   name: 'Compass',
+  props: {
+    course: {
+      type: Object,
+      default: () => {},
+      required: true,
+    },
+  },
   data() {
     return {
+      forecastWind: {},
       windSpeed: 0,
       windDirection: '東',
     };
@@ -44,6 +52,24 @@ export default {
 
       return `wind-direction--${deg}-deg`;
       // TODO 角度によって動きが不自然になります。Refactorしてください。(issue #404)
+    },
+  },
+  watch: {
+    forecastWind() {
+      this.windSpeed = this.forecastWind.windSpeed;
+      this.windDirection = this.forecastWind.windDirection;
+    },
+  },
+  async created() {
+    this.forecastWind = await this.getForecastWind();
+  },
+  methods: {
+    getForecastWind() {
+      const params = {
+        course_id: this.course.id,
+        target_date: this.$moment().format('YYYY-MM-DD'),
+      };
+      return this.$store.dispatch('models/weather/getForecastWind', params);
     },
   },
 };

@@ -4,7 +4,7 @@
 
     <div class="content">
       <div class="wind-forecast-content">
-        <compass />
+        <compass :course="course" />
         <div class="course-info">
           {{ course.name }}<br>
           {{ course.address }}
