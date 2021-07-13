@@ -70,7 +70,7 @@ export default {
     ContentWithFooter,
   },
   props: {
-    userCourse: {
+    course: {
       type: Object,
       default: () => {},
       required: true,
