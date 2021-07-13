@@ -2,7 +2,7 @@
   <div class="compass">
     <div
       class="compass-frame"
-      :class="compassHeadingDeg"
+      :style="compassHeadingStyle"
     >
       <div
         class="wind-direction wind-speed"
@@ -37,6 +37,7 @@ export default {
       windSpeed: 0,
       windDirection: '東',
       compassHeading: 0,
+      compassHeadingDeg: 0,
       watchId: null,
     };
   },
@@ -58,18 +59,26 @@ export default {
       const deg = Math.floor(windDirections[this.windDirection]);
 
       return `wind-direction--${deg}-deg`;
-      // TODO 角度によって動きが不自然になります。Refactorしてください。(issue #404)
     },
-    compassHeadingDeg() {
-      const deg = 360 - Math.round(this.compassHeading);
-
-      return `compass-heading--${deg}-deg`;
+    compassHeadingStyle() {
+      return {
+        transform: `rotate(${this.compassHeadingDeg}deg)`,
+      };
     },
   },
   watch: {
     forecastWind() {
       this.windSpeed = this.forecastWind.windSpeed;
       this.windDirection = this.forecastWind.windDirection;
+    },
+    compassHeading(newValue, oldValue) {
+      let delta = newValue - oldValue;
+      if (delta > 180) {
+        delta -= 360;
+      } else if (delta < -180) {
+        delta += 360;
+      }
+      this.compassHeadingDeg += delta;
     },
   },
   methods: {
@@ -87,12 +96,13 @@ export default {
       navigator.compass.clearWatch(this.watchId);
     },
     getCompassHeading(heading) {
-      this.compassHeading = heading.magneticHeading;
+      this.compassHeading = 360 - heading.magneticHeading;
     },
     compassError() {
       this.$emit('update:compassErrorVisible', true);
     },
   },
+
 };
 </script>
 
@@ -101,7 +111,6 @@ export default {
 
 $speed-degrees: 0, 22.5, 45, 67.5, 90, 112.5, 135, 157.5, 180,
   202.5, 225, 247.5, 270, 292.5, 315, 337.5;
-$compass-degrees: 360;
 
 .compass-frame {
   display: flex;
@@ -113,15 +122,6 @@ $compass-degrees: 360;
   background-position: center;
   background-size: cover;
   transition: transform 0.5s ease-out;
-}
-
-.compass-heading {
-  @for $i from 0 through $compass-degrees {
-    // generate class has partern: compass-heading--xx-deg
-    &--#{$i}-deg {
-      transform: rotate(#{$i}deg);
-    }
-  }
 }
 
 .wind-direction {
