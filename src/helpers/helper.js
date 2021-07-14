@@ -35,6 +35,10 @@ export default {
     return moment(time).format('YYYY-MM-DD');
   },
 
+  isFutureTime(time) {
+    return moment(time).isAfter(moment());
+  },
+
   isEmptyObject(object) {
     return Object.keys(object).length === 0;
   },
