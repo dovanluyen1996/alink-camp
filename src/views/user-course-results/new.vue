@@ -56,7 +56,6 @@ export default {
   props: {
     userCourse: {
       type: Object,
-      default: () => {},
       required: true,
     },
   },

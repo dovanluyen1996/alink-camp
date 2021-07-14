@@ -79,7 +79,6 @@ export default {
   props: {
     totalScore: {
       type: [Number, String],
-      default: '',
       required: true,
     },
     pattingScore: {

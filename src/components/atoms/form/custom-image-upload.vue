@@ -54,7 +54,6 @@ export default {
   props: {
     value: {
       type: [String, Object, File],
-      default: () => '',
       required: true,
     },
     errors: {

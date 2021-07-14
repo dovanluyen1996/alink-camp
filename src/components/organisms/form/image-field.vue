@@ -23,7 +23,6 @@ export default {
   props: {
     value: {
       type: [String, File],
-      default: () => '',
       required: true,
     },
     title: {
