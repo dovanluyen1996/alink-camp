@@ -58,7 +58,7 @@ export default {
   props: {
     forecast: {
       type: Object,
-      default: () => {},
+      require: true,
     },
   },
 };

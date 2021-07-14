@@ -32,7 +32,6 @@ export default {
   props: {
     forecast: {
       type: Object,
-      default: null,
       require: true,
     },
     fontSize: {

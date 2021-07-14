@@ -15,7 +15,6 @@ export default {
   props: {
     userCoursePlan: {
       type: Object,
-      default: null,
       require: true,
     },
   },

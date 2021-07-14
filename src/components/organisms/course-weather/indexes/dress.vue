@@ -19,7 +19,6 @@ export default {
   props: {
     forecast: {
       type: Object,
-      default: null,
       required: true,
     },
   },

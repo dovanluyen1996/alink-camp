@@ -45,7 +45,6 @@ export default {
   props: {
     forecasts: {
       type: Array,
-      default: () => [],
       required: true,
     },
   },

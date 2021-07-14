@@ -24,11 +24,11 @@ export default {
   props: {
     sunrise: {
       type: String,
-      default: null,
+      require: true,
     },
     sunset: {
       type: String,
-      default: null,
+      require: true,
     },
   },
 };
