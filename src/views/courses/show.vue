@@ -11,7 +11,7 @@
           {{ favoriteButtonText }}
         </v-ons-button>
         <v-ons-button
-          :configured="!isEmptyPlan"
+          :configured="planned"
           modifier="large rounded"
           @click="goToCoursePlans"
         >
@@ -76,7 +76,7 @@ export default {
       return this.is_favorited ? 'お気に入り追加済' : 'お気に入り追加';
     },
     plansButtonText() {
-      return this.isEmptyPlan ? '予定日設定' : `予定日：${this.$helpers.localDateFrom(this.userCoursePlan.targetAt)}`;
+      return this.planned ? `予定日：${this.$helpers.localDateFrom(this.userCoursePlan.targetAt)}` : '予定日設定';
     },
     userCourse() {
       return this.$store.getters['models/userCourse/findByCourseId'](this.course.id);
@@ -90,8 +90,8 @@ export default {
 
       return futureUserCoursePlan || {};
     },
-    isEmptyPlan() {
-      return this.$helpers.isEmptyObject(this.userCoursePlan);
+    planned() {
+      return !this.$helpers.isEmptyObject(this.userCoursePlan);
     },
   },
   async created() {
