@@ -23,7 +23,10 @@
               v-if="weather"
               :weather="weather"
             />
-            <v-ons-col v-else class="no-data">
+            <v-ons-col
+              v-else
+              class="no-data"
+            >
               <label width="150px">No Data</label>
             </v-ons-col>
             <user-course-result-image v-model="tempUserCourseResult.image" />

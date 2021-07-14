@@ -97,8 +97,8 @@ export default {
       return this.$store.getters['models/userCourseResult/isLoading'];
     },
     weathers() {
-      return this.userCourseResults.map(userCourseResult =>
-        (userCourseResult.weather ? JSON.parse(userCourseResult.weather) : null)
+      return this.userCourseResults.map(
+        courseResult => (courseResult.weather ? JSON.parse(courseResult.weather) : null),
       );
     },
   },
