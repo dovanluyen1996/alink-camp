@@ -1,10 +1,10 @@
 <template>
   <v-ons-page>
-    <custom-toolbar :title="title">
+    <custom-toolbar :title="userCourseResult.targetDate | moment('YYYY/MM/DD')">
       <template #right>
         <delete-dialog-with-icon
           :is-shown.sync="isShownDeleteDialog"
-          @clickDelete="deleteScore"
+          @clickDelete="deleteUserCourseResult"
         >
           このスコアデータを削除します。<br>
           よろしいですか？
@@ -13,35 +13,38 @@
     </custom-toolbar>
 
     <div class="content">
-      <content-with-footer>
-        <course-name :course-name="course.name" />
+      <validation-observer v-slot="{ handleSubmit }">
+        <content-with-footer>
+          <course-name :course-name="userCourse.course.name" />
 
-        <v-ons-card class="course-weather-and-image">
-          <v-ons-row class="course-weather-and-image-row">
-            <user-course-result-weather />
-            <user-course-result-image v-model="image" />
-          </v-ons-row>
-        </v-ons-card>
+          <v-ons-card class="course-weather-and-image">
+            <v-ons-row class="course-weather-and-image-row">
+              <user-course-result-weather />
+              <user-course-result-image v-model="tempUserCourseResult.image" />
+            </v-ons-row>
+          </v-ons-card>
 
-        <user-course-result-target-date-field
-          v-model="target_date"
-          title="プレイ日"
-        />
-        <user-course-result-scores-field
-          :total-score.sync="total_score"
-          :patting-score.sync="patting_score"
-        />
-        <user-course-result-note-field v-model="note" />
+          <user-course-result-target-date-field
+            v-model="tempUserCourseResult.targetDate"
+            title="プレイ日"
+          />
+          <user-course-result-scores-field
+            :total-score.sync="tempUserCourseResult.totalScore"
+            :patting-score.sync="tempUserCourseResult.pattingScore"
+          />
+          <user-course-result-note-field v-model="tempUserCourseResult.note" />
 
-        <template #footer>
-          <v-ons-button
-            modifier="large--cta add rounded"
-            @click="submitScore"
-          >
-            保存
-          </v-ons-button>
-        </template>
-      </content-with-footer>
+          <template #footer>
+            <v-ons-button
+              modifier="large--cta add rounded"
+              :disabled="isButtonDisable"
+              @click="handleSubmit(updateUserCourseResult)"
+            >
+              保存
+            </v-ons-button>
+          </template>
+        </content-with-footer>
+      </validation-observer>
     </div>
   </v-ons-page>
 </template>
@@ -70,41 +73,58 @@ export default {
     ContentWithFooter,
   },
   props: {
-    course: {
+    userCourse: {
       type: Object,
-      default: () => {},
       required: true,
     },
     userCourseResult: {
       type: Object,
-      default: () => {},
       required: true,
     },
   },
   data() {
     return {
-      target_date: '',
-      total_score: '',
-      patting_score: '',
-      /* eslint-disable-next-line global-require */
-      image: require('@/assets/images/course-sample.jpg'),
-      note: '',
+      tempUserCourseResult: { ...this.userCourseResult },
       isShownDeleteDialog: false,
+      isButtonDisable: false,
     };
   },
-  computed: {
-    title() {
-      // TODO: フォーマットしてください
-      return this.userCourseResult.targetDate;
-    },
-  },
   methods: {
-    deleteScore() {
+    async deleteUserCourseResult() {
       this.isShownDeleteDialog = false;
-      // TODO: delete
+
+      await this.$store.dispatch('models/userCourseResult/destroyUserCourseResult', {
+        userCourseId: this.userCourse.id,
+        userCourseResultId: this.userCourseResult.id,
+      })
+        .then(() => {
+          // TODO: 削除後のダイアログやトーストなどの表示
+          this.$store.dispatch('scoresNavigator/pop');
+        })
+        .catch((err) => {
+          // TODO: 削除失敗のダイアログやトーストなどの表示
+          console.log(err);
+        });
     },
-    submitScore() {
-      // TODO: スコアを保存
+    async updateUserCourseResult() {
+      this.isButtonDisable = true;
+      if (this.userCourseResult.image === this.tempUserCourseResult.image) {
+        delete this.tempUserCourseResult.image;
+      }
+      await this.$store.dispatch('models/userCourseResult/updateUserCourseResult', {
+        userCourseId: this.userCourse.id,
+        userCourseResultId: this.userCourseResult.id,
+        params: this.tempUserCourseResult,
+      })
+        .then(() => {
+          // TODO: 更新後のダイアログやトーストなどの表示
+          this.$store.dispatch('scoresNavigator/pop');
+        })
+        .catch((err) => {
+          // TODO: 更新失敗のダイアログやトーストなどの表示
+          console.log(err);
+        });
+      this.isButtonDisable = false;
     },
   },
 };
