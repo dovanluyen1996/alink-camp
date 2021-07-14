@@ -35,6 +35,8 @@
 </template>
 
 <script>
+import moment from 'moment';
+
 // components
 import CardWithTab from '@/components/organisms/card-with-tab';
 
@@ -84,8 +86,11 @@ export default {
     userCoursePlan() {
       if (!this.userCourse || this.userCourse.userCoursePlans.length === 0) return {};
 
-      const lastUserCoursePlanIndex = this.userCourse.userCoursePlans.length - 1;
-      return this.userCourse.userCoursePlans[lastUserCoursePlanIndex];
+      const futureUserCoursePlan = this.userCourse.userCoursePlans.find(
+        userCoursePlan => moment(userCoursePlan.targetAt).isAfter(moment()),
+      );
+
+      return futureUserCoursePlan || {};
     },
     isEmptyPlan() {
       return this.$helpers.isEmptyObject(this.userCoursePlan);
