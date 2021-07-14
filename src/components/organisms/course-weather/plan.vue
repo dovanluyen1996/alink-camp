@@ -15,7 +15,7 @@ export default {
   props: {
     userCoursePlan: {
       type: Object,
-      require: true,
+      required: true,
     },
   },
   computed: {
