@@ -5,24 +5,38 @@
   >
     <v-ons-row vertical-align="bottom">
       <v-ons-col width="55%">
-        <v-ons-row
-          vertical-align="bottom"
-          class="total-score-field"
+        <validation-provider
+          v-slot="{ errors }"
+          rules="required"
+          name="合計打数"
         >
-          <v-ons-col class="total-score-label">
-            合計打数
-          </v-ons-col>
-          <v-ons-col>
-            <v-ons-input
-              v-model="inputedTotalScoreValue"
-              type="text"
-              class="total-score-input"
-            />
-          </v-ons-col>
-          <v-ons-col class="score-unit">
-            打
-          </v-ons-col>
-        </v-ons-row>
+          <v-ons-row
+            vertical-align="bottom"
+            class="total-score-field"
+          >
+            <v-ons-col class="total-score-label">
+              合計打数
+            </v-ons-col>
+            <v-ons-col>
+              <v-ons-input
+                v-model="inputedTotalScoreValue"
+                type="text"
+                maxlength="3"
+                oninput="value = value.replace(/[^0-9]+/i,'');"
+                class="total-score-input"
+              />
+            </v-ons-col>
+            <v-ons-col class="score-unit">
+              打
+            </v-ons-col>
+          </v-ons-row>
+          <div
+            v-if="errors.length"
+            class="input-error-msg"
+          >
+            {{ errors[0] }}
+          </div>
+        </validation-provider>
       </v-ons-col>
       <v-ons-col>
         <v-ons-row
@@ -39,6 +53,8 @@
             <v-ons-input
               v-model="inputedPattingScoreValue"
               type="text"
+              maxlength="3"
+              oninput="value = value.replace(/[^0-9]+/i,'');"
               class="patting-score-input"
             />
           </v-ons-col>
@@ -63,7 +79,6 @@ export default {
   props: {
     totalScore: {
       type: [Number, String],
-      default: '',
       required: true,
     },
     pattingScore: {

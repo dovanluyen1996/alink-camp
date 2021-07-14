@@ -70,13 +70,12 @@ export default {
       return this.$store.getters['models/userCourse/findByCourseId'](courseId);
     },
     goToUserCourseResults(course) {
-      const userCourseId = this.getUserCourse(course.id).id;
+      const userCourse = this.getUserCourse(course.id);
 
       this.$store.dispatch('scoresNavigator/push', {
         extends: UserCourseResultsIndex,
         onsNavigatorProps: {
-          course,
-          userCourseId,
+          userCourse,
         },
       });
     },

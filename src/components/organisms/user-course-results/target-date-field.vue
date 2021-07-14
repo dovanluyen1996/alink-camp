@@ -1,9 +1,16 @@
 <template>
-  <date-field
-    v-model="inputedValue"
-    :title="title"
-    placeholder="ラウンド日"
-  />
+  <validation-provider
+    v-slot="{ errors }"
+    rules="required"
+    name="プレイ日"
+  >
+    <date-field
+      v-model="inputedValue"
+      :title="title"
+      placeholder="ラウンド日"
+      :errors="errors"
+    />
+  </validation-provider>
 </template>
 
 <script>
@@ -18,7 +25,6 @@ export default {
   props: {
     value: {
       type: String,
-      default: '',
       required: true,
     },
     title: {

@@ -1,5 +1,7 @@
 import { extend } from 'vee-validate';
-import { required, email } from 'vee-validate/dist/rules';
+import {
+  required, email, max,
+} from 'vee-validate/dist/rules';
 import settings from '@/config/settings';
 
 extend('required', {
@@ -26,4 +28,9 @@ extend('password', (value) => {
   }
 
   return 'パスワードの条件を満たしていません';
+});
+
+extend('max', {
+  ...max,
+  message: '{_field_}は{length}文字以内で入力してください',
 });

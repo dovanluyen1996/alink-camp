@@ -22,8 +22,7 @@ export default {
   },
   props: {
     value: {
-      type: [String, Object],
-      default: () => '',
+      type: [String, File],
       required: true,
     },
     title: {

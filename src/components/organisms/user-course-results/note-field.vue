@@ -1,24 +1,29 @@
 <template>
-  <!-- TODO: #344がマージされたらtextareaにする -->
-  <text-field
-    v-model="inputedValue"
-    title="メモ"
-  />
+  <validation-provider
+    v-slot="{ errors }"
+    rules="max:500"
+    name="メモ"
+  >
+    <text-area-field
+      v-model="inputedValue"
+      title="メモ"
+      :errors="errors"
+    />
+  </validation-provider>
 </template>
 
 <script>
 // components
-import TextField from '@/components/organisms/form/text-field';
+import TextAreaField from '@/components/organisms/form/textarea-field';
 
 export default {
   name: 'UserCourseResultsNoteField',
   components: {
-    TextField,
+    TextAreaField,
   },
   props: {
     value: {
       type: String,
-      default: '',
       required: true,
     },
     title: {
