@@ -1,15 +1,15 @@
 <template>
   <v-ons-card class="course-weather-show">
     <course-weather-header
-      :user-course="userCourse"
+      :user-course="useUserCourse"
     />
     <div class="course-weather-detail">
       <course-weather-plan
-        v-if="userCoursePlan.targetAt"
+        v-if="userCoursePlan"
         :user-course-plan="userCoursePlan"
       />
 
-      <template v-if="userCoursePlan.targetAt && ForecastScheduledDate">
+      <template v-if="userCoursePlan && ForecastScheduledDate">
         <course-weather-of-the-day :forecast="ForecastScheduledDate" />
         <course-weather-the-day-before :forecast="ForecastScheduledDate.day_before" />
         <course-weather-hourly-weather :forecast="ForecastScheduledDate.scheduled_date" />
@@ -46,12 +46,10 @@ export default {
     userCourse: {
       type: Object,
       default: () => {},
-      required: true,
     },
     userCoursePlan: {
       type: Object,
       default: () => {},
-      required: true,
     },
   },
   data() {
@@ -129,6 +127,12 @@ export default {
         ],
       },
     };
+  },
+  computed: {
+    useUserCourse() {
+      if (!this.userCoursePlan) return this.userCourse;
+      return this.$store.getters['models/userCourse/findByCourseId'](this.userCoursePlan.courseId);
+    },
   },
 };
 </script>

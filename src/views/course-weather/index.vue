@@ -20,14 +20,12 @@
         <course-weather-content
           v-for="userCoursePlan in userCoursePlans"
           :key="userCoursePlan.index"
-          :user-course="userCourseByPlan(userCoursePlan)"
           :user-course-plan="userCoursePlan"
         />
         <course-weather-content
           v-for="userCourse in userCourses"
           :key="userCourse.index"
           :user-course="userCourse"
-          :user-course-plan="{}"
         />
       </template>
     </div>
@@ -50,7 +48,7 @@ export default {
       return this.$store.getters['models/userCourse/onlyFavoritedWithoutPlans'];
     },
     userCoursePlans() {
-      return this.$store.getters['models/userCoursePlan/sortedUserCoursePlansInFuture'];
+      return this.$store.getters['models/userCoursePlan/sortedInFuture'];
     },
   },
   methods: {
@@ -59,9 +57,6 @@ export default {
     },
     async getUserCourses() {
       await this.$store.dispatch('models/userCourse/getUserCourses');
-    },
-    userCourseByPlan(userCoursePlan) {
-      return this.$store.getters['models/userCourse/findByCourseId'](userCoursePlan.courseId);
     },
     goToCourseSearch() {
       this.$store.commit('appTabbar/setActiveIndexFromTabName', 'courseSearch');

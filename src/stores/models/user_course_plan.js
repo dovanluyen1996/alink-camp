@@ -15,19 +15,20 @@ export default {
 
       return userCourses.map(userCourse => userCourse.userCoursePlans.map(userCoursePlan => ({
         ...userCoursePlan,
-        isFavorited: userCourse.isFavorited,
-        targetDate: moment(userCoursePlan.targetAt).startOf('days'),
       }))).flat();
     },
     inFuture: (state, getters) => getters.allByUserCourses.filter(
-      userCoursePlan => userCoursePlan.targetDate.isSameOrAfter(moment().startOf('days')),
+      userCoursePlan => moment(userCoursePlan.targetAt).startOf('days').isSameOrAfter(moment().startOf('days')),
     ),
-    sortedUserCoursePlansInFuture: (state, getters) => getters.inFuture.sort(
+    sortedInFuture: (state, getters, rootState, rootGetters) => getters.inFuture.sort(
       (a, b) => {
+        const userCourse = rootGetters['models/userCourse/findByCourseId'](a.courseId);
+        const aTargetDate = moment(a.targetAt).startOf('days');
+        const bTargetDate = moment(b.targetAt).startOf('days');
         let sort = 0;
 
-        sort = a.targetDate.isAfter(b.targetDate) ? 1 : -1;
-        if (a.targetDate.isSame(b.targetDate)) sort = a.isFavorited ? -1 : 1;
+        sort = aTargetDate.isAfter(bTargetDate) ? 1 : -1;
+        if (aTargetDate.isSame(bTargetDate)) sort = userCourse.isFavorited ? -1 : 1;
 
         return sort;
       },
