@@ -108,9 +108,11 @@ export default {
     },
     async updateUserCourseResult() {
       this.isButtonDisable = true;
+
       if (this.userCourseResult.image === this.tempUserCourseResult.image) {
         delete this.tempUserCourseResult.image;
       }
+
       await this.$store.dispatch('models/userCourseResult/updateUserCourseResult', {
         userCourseId: this.userCourse.id,
         userCourseResultId: this.userCourseResult.id,
@@ -124,6 +126,7 @@ export default {
           // TODO: 更新失敗のダイアログやトーストなどの表示
           console.log(err);
         });
+
       this.isButtonDisable = false;
     },
   },
