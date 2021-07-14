@@ -1,5 +1,5 @@
 <template>
-  <v-ons-page>
+  <v-ons-page @show="show">
     <custom-toolbar
       title="風予測"
       :subtitle="courses.length ? '確認をしたいコース選択' : ''"
@@ -45,6 +45,7 @@ import CourseList from '@/components/organisms/course-list.vue';
 
 // views
 import ShowWindForecastView from '@/views/wind-forecast/show';
+import moment from 'moment';
 
 export default {
   name: 'WindForecastIndex',
@@ -103,6 +104,10 @@ export default {
           course,
         },
       });
+    },
+    show() {
+      const today = new Date();
+      this.$store.dispatch('appTabbar/setLastVisitedAt', moment(today).format('YYYY-MM-DD'));
     },
   },
 };

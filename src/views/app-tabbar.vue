@@ -1,16 +1,15 @@
 <template>
   <v-ons-page>
-    <div>
-      <v-ons-tabbar
-        :tabs="tabs"
-        :visible="true"
-        :index.sync="activeIndex"
-        animation="none"
-        position="bottom"
-        @prechange="prechange"
-        @reactive="reactive"
-      />
-    </div>
+    <v-ons-tabbar
+      :tabs="tabs"
+      :visible="true"
+      :index.sync="activeIndex"
+      animation="none"
+      position="bottom"
+      @prechange="prechange"
+      @reactive="reactive"
+    />
+    <user-stamps-campaign />
   </v-ons-page>
 </template>
 
@@ -23,10 +22,14 @@ import CourseSearchNavigator from '@/views/course-search/course-search-navigator
 import ScoresNavigator from '@/views/scores/scores-navigator';
 import WindForecastNavigator from '@/views/wind-forecast/wind-forecast-navigator';
 import MenuNavigator from '@/views/menu/menu-navigator';
+import UserStampsCampaign from '@/views/user/user-stamps/campaign';
 
 const menuTabIndex = settings.views.appTabbar.tabIndexes.menu;
 
 export default {
+  components: {
+    UserStampsCampaign,
+  },
   data() {
     return {
       isShownMenu: false,

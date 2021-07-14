@@ -5,6 +5,7 @@ export default {
   namespaced: true,
   state: {
     activeIndex: settings.views.appTabbar.tabIndexes.courseWeather,
+    lastVisitedAt: null,
   },
   mutations: {
     setActiveIndex(state, index) {
@@ -12,6 +13,14 @@ export default {
     },
     setActiveIndexFromTabName(state, tabName) {
       state.activeIndex = settings.views.appTabbar.tabIndexes[tabName];
+    },
+    setLastVisitedAt(state, lastVisitedAt) {
+      state.lastVisitedAt = lastVisitedAt;
+    },
+  },
+  actions: {
+    setLastVisitedAt(context, lastVisitedAt) {
+      context.commit('setLastVisitedAt', lastVisitedAt);
     },
   },
 };

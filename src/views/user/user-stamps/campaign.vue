@@ -46,12 +46,14 @@
 </template>
 
 <script>
+import moment from 'moment';
+
 export default {
   name: 'UserStampsCampaign',
   data() {
     return {
       stampAreaLimit: 10,
-      isVisible: true,
+      isVisible: false,
     };
   },
   computed: {
@@ -67,11 +69,21 @@ export default {
     sponsor() {
       return this.sponsors[Math.floor(Math.random() * this.sponsors.length)];
     },
+    lastVisitedAt() {
+      return this.$store.state.appTabbar.lastVisitedAt;
+    },
   },
-  async created() {
-    await this.$store.dispatch('models/userStamp/getUserStamp');
-    await this.$store.dispatch('models/currentUser/getUser');
-    await this.$store.dispatch('models/sponsor/getSponsors');
+  watch: {
+    async isVisible(value) {
+      if (value) await this.getUserStamp();
+    },
+    lastVisitedAt(value) {
+      const lastGettedAt = localStorage.getItem('userStampLastGettedAt');
+      if (!lastGettedAt || moment(value).isAfter(lastGettedAt)) {
+        this.isVisible = true;
+        localStorage.setItem('userStampLastGettedAt', value);
+      }
+    },
   },
   methods: {
     hasStamp(stampArea) {
@@ -79,6 +91,11 @@ export default {
     },
     closeCampaign() {
       this.isVisible = false;
+    },
+    async getUserStamp() {
+      await this.$store.dispatch('models/userStamp/getUserStamp');
+      await this.$store.dispatch('models/currentUser/getUser');
+      await this.$store.dispatch('models/sponsor/getSponsors');
     },
   },
 };

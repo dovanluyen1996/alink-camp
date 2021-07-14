@@ -37,6 +37,7 @@
 // components
 import NoData from '@/components/organisms/no-data';
 import CourseWeatherContent from '@/components/organisms/course-weather/content';
+import moment from 'moment';
 
 export default {
   name: 'CourseWeather',
@@ -64,6 +65,10 @@ export default {
     },
     goToCourseSearch() {
       this.$store.commit('appTabbar/setActiveIndexFromTabName', 'courseSearch');
+    },
+    show() {
+      const today = new Date();
+      this.$store.dispatch('appTabbar/setLastVisitedAt', moment(today).format('YYYY-MM-DD'));
     },
   },
 };
