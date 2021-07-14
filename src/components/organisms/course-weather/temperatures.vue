@@ -5,7 +5,7 @@
         最高
       </span>
       <temperature-component
-        :value="forecast.max_temp"
+        :value="forecast.maxTemp"
         :font-size="fontSize"
       />
     </div>
@@ -14,7 +14,7 @@
         最低
       </span>
       <temperature-component
-        :value="forecast.min_temp"
+        :value="forecast.minTemp"
         :font-size="fontSize"
       />
     </div>

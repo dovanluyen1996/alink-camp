@@ -37,12 +37,12 @@ export default {
       return this.$helpers.getImage(`weathers/thunder/thunder_large_${this.getImageFileName()}.png`);
     },
     label() {
-      return this.forecast.thunder_index ? this.thunder_text[this.forecast.thunder_index] : '';
+      return this.forecast.thunderIndex ? this.thunder_text[this.forecast.thunderIndex] : '';
     },
   },
   methods: {
     getImageFileName() {
-      return this.forecast.thunder_index || 'none';
+      return this.forecast.thunderIndex || 'none';
     },
   },
 };

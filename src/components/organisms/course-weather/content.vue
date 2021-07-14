@@ -11,8 +11,8 @@
 
       <template v-if="userCoursePlan && ForecastScheduledDate">
         <course-weather-of-the-day :forecast="ForecastScheduledDate" />
-        <course-weather-the-day-before :forecast="ForecastScheduledDate.day_before" />
-        <course-weather-hourly-weather :forecast="ForecastScheduledDate.scheduled_date" />
+        <course-weather-the-day-before :forecast="ForecastScheduledDate.dayBefore" />
+        <course-weather-hourly-weather :forecast="ForecastScheduledDate.scheduledDate" />
       </template>
       <template v-else-if="Forecast10Days">
         <course-weather-calendar
@@ -54,84 +54,36 @@ export default {
   },
   data() {
     return {
-      // TODO: ForecastScheduledDate, Forecast10Days のデータは実際の戻り値を参考にしています。
-      //       天気が取得できたらStoreを実装します。
-      ForecastScheduledDate: {
-        course_id: 2,
-        scheduled_date: {
-          date: '2021-06-29',
-          forecast_telop: '晴れのち曇り',
-          weather_image_name: '1.png',
-          wind_speed_0: '1',
-          wind_direction_0: '北北西',
-          precip_0: '10',
-          wind_speed_6: '2',
-          wind_direction_6: '北',
-          precip_6: '20',
-          wind_speed_12: '3',
-          wind_direction_12: '北西',
-          precip_12: '30',
-          wind_speed_18: '4',
-          wind_direction_18: '北',
-          precip_18: '40',
-          max_temp: '4.7',
-          min_temp: '-2.1',
-          thunder_index: 4,
-          dress_index: 1,
-          dress_index_weather: 'fine',
-          uv_index: 3,
-        },
-        sunrise: '6:58',
-        sunset: '16:50',
-        day_before: {
-          date: '2021-06-28',
-          forecast_telop: '晴れのち曇り',
-          weather_image_name: '1.png',
-          max_temp: '4.7',
-          min_temp: '-2.1',
-        },
-      },
-      Forecast10Days: {
-        course_id: 2,
-        items: [
-          {
-            date: '2021-06-29', forecast_telop: '晴れのち曇り', weather_image_name: '1.png', wind_speed: '3.2', wind_direction: '北北西', wind_image_name: '3.png', precip: '30', humidity: '10', max_temp: '4.7', min_temp: '0',
-          },
-          {
-            date: '2021-06-30', forecast_telop: '晴れのち曇り', weather_image_name: '1.png', wind_speed: '3.2', wind_direction: '北北西', wind_image_name: '3.png', precip: '30', humidity: '10', max_temp: '4.7', min_temp: '0.0',
-          },
-          {
-            date: '2021-07-01', forecast_telop: '晴れのち曇り', weather_image_name: '1.png', wind_speed: '3.2', wind_direction: '北北西', wind_image_name: '3.png', precip: '30', humidity: '10', max_temp: '4.7', min_temp: '-2.1',
-          },
-          {
-            date: '2021-07-02', forecast_telop: '晴れのち曇り', weather_image_name: '1.png', wind_speed: '3.2', wind_direction: '北北西', wind_image_name: '3.png', precip: '30', humidity: '10', max_temp: '4.7', min_temp: '-2.1',
-          },
-          {
-            date: '2021-07-03', forecast_telop: '晴れのち曇り', weather_image_name: '1.png', wind_speed: '3.2', wind_direction: '北北西', wind_image_name: '3.png', precip: '30', humidity: '10', max_temp: '4.7', min_temp: '-2.1',
-          },
-          {
-            date: '2021-07-04', forecast_telop: '晴れのち曇り', weather_image_name: '1.png', wind_speed: '3.2', wind_direction: '北北西', wind_image_name: '3.png', precip: '30', humidity: '10', max_temp: '4.7', min_temp: '-2.1',
-          },
-          {
-            date: '2021-07-05', forecast_telop: '晴れのち曇り', weather_image_name: '1.png', wind_speed: '3.2', wind_direction: '北北西', wind_image_name: '3.png', precip: '30', humidity: '10', max_temp: '4.7', min_temp: '-2.1',
-          },
-          {
-            date: '2021-07-06', forecast_telop: '晴れのち曇り', weather_image_name: '1.png', wind_speed: '3.2', wind_direction: '北北西', wind_image_name: '3.png', precip: '30', humidity: '10', max_temp: '4.7', min_temp: '-2.1',
-          },
-          {
-            date: '2021-07-07', forecast_telop: '晴れのち曇り', weather_image_name: '1.png', wind_speed: '3.2', wind_direction: '北北西', wind_image_name: '3.png', precip: '30', humidity: '10', max_temp: '4.7', min_temp: '-2.1',
-          },
-          {
-            date: '2021-07-08', forecast_telop: '晴れのち曇り', weather_image_name: '1.png', wind_speed: '3.2', wind_direction: '北北西', wind_image_name: '3.png', precip: '30', humidity: '10', max_temp: '4.7', min_temp: '-2.1',
-          },
-        ],
-      },
+      ForecastScheduledDate: null,
+      Forecast10Days: null,
     };
   },
   computed: {
     useUserCourse() {
       if (!this.userCoursePlan) return this.userCourse;
       return this.$store.getters['models/userCourse/findByCourseId'](this.userCoursePlan.courseId);
+    },
+  },
+  async created() {
+    this.ForecastScheduledDate = await this.getForecastScheduledDate();
+    this.Forecast10Days = await this.getForecast10Days();
+  },
+  methods: {
+    getForecastScheduledDate() {
+      if (!this.userCoursePlan) return null;
+      const params = {
+        course_id: this.useUserCourse.id,
+        target_date: this.userCoursePlan.targetAt,
+      };
+
+      return this.$store.dispatch('models/weather/getForecastScheduledDate', params);
+    },
+    getForecast10Days() {
+      const params = {
+        course_id: this.useUserCourse.id,
+      };
+
+      return this.$store.dispatch('models/weather/getForecast10Days', params);
     },
   },
 };

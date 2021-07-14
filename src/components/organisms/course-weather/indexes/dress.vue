@@ -43,13 +43,13 @@ export default {
       return this.$helpers.getImage(`weathers/dress/dress_large_${this.getImageFileName()}.png`);
     },
     label() {
-      return this.dress_text[`${this.forecast.dress_index_weather}_${this.forecast.dress_index}`];
+      return this.dress_text[`${this.forecast.dressIndexWeather}_${this.forecast.dressIndex}`];
     },
   },
   methods: {
     getImageFileName() {
-      const isNone = !this.forecast.dress_index || !this.forecast.dress_index_weather;
-      const imageName = `${this.forecast.dress_index_weather}_${this.forecast.dress_index}`;
+      const isNone = !this.forecast.dressIndex || !this.forecast.dressIndexWeather;
+      const imageName = `${this.forecast.dressIndexWeather}_${this.forecast.dressIndex}`;
 
       return isNone ? 'none' : imageName;
     },

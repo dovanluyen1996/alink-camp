@@ -38,12 +38,12 @@ export default {
       return this.$helpers.getImage(`weathers/uv/uv_large_${this.getImageFileName()}.png`);
     },
     label() {
-      return this.forecast.uv_index ? this.uv_text[this.forecast.uv_index] : '';
+      return this.forecast.uvIndex ? this.uv_text[this.forecast.uvIndex] : '';
     },
   },
   methods: {
     getImageFileName() {
-      return this.forecast.uv_index || 'none';
+      return this.forecast.uvIndex || 'none';
     },
   },
 };

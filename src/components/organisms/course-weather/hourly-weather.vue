@@ -84,20 +84,20 @@ export default {
     windDirections() {
       const drectoins = [];
 
-      drectoins.push(this.forecast.wind_direction_0);
-      drectoins.push(this.forecast.wind_direction_6);
-      drectoins.push(this.forecast.wind_direction_12);
-      drectoins.push(this.forecast.wind_direction_18);
+      drectoins.push(this.forecast.windDirection_0);
+      drectoins.push(this.forecast.windDirection_6);
+      drectoins.push(this.forecast.windDirection_12);
+      drectoins.push(this.forecast.windDirection_18);
 
       return drectoins;
     },
     windSpeeds() {
       const speeds = [];
 
-      speeds.push(this.forecast.wind_speed_0);
-      speeds.push(this.forecast.wind_speed_6);
-      speeds.push(this.forecast.wind_speed_12);
-      speeds.push(this.forecast.wind_speed_18);
+      speeds.push(this.forecast.windSpeed_0);
+      speeds.push(this.forecast.windSpeed_6);
+      speeds.push(this.forecast.windSpeed_12);
+      speeds.push(this.forecast.windSpeed_18);
 
       return speeds;
     },

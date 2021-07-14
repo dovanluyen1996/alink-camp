@@ -17,12 +17,12 @@
       </div>
       <div class="course-weather-day-temperature">
         <temperature-component
-          :value="forecast.max_temp"
+          :value="forecast.maxTemp"
           font-size="12px"
           class="temperature-high"
         />&nbsp;/&nbsp;
         <temperature-component
-          :value="forecast.min_temp"
+          :value="forecast.minTemp"
           font-size="12px"
           class="temperature-low"
         />

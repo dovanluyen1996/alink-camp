@@ -6,14 +6,14 @@
     <v-ons-row>
       <v-ons-col>
         <weather-image
-          :weather="forecast.scheduled_date"
+          :weather="forecast.scheduledDate"
           :is-shown-name="true"
           image-width="66px"
         />
       </v-ons-col>
       <v-ons-col>
         <course-weather-temperatures
-          :forecast="forecast.scheduled_date"
+          :forecast="forecast.scheduledDate"
           font-size="18px"
         />
         <course-weather-sun
@@ -24,13 +24,13 @@
     </v-ons-row>
     <v-ons-row class="weather-indexes">
       <v-ons-col>
-        <course-weather-thunder-index :forecast="forecast.scheduled_date" />
+        <course-weather-thunder-index :forecast="forecast.scheduledDate" />
       </v-ons-col>
       <v-ons-col>
-        <course-weather-dress-index :forecast="forecast.scheduled_date" />
+        <course-weather-dress-index :forecast="forecast.scheduledDate" />
       </v-ons-col>
       <v-ons-col>
-        <course-weather-uv-index :forecast="forecast.scheduled_date" />
+        <course-weather-uv-index :forecast="forecast.scheduledDate" />
       </v-ons-col>
     </v-ons-row>
   </div>
