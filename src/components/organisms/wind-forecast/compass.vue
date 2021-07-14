@@ -1,6 +1,9 @@
 <template>
   <div class="compass">
-    <div class="compass-frame">
+    <div
+      class="compass-frame"
+      :class="compassHeadingDeg"
+    >
       <div
         class="wind-direction wind-speed"
         :class="[windSpeedRate, windDirectionDeg]"
@@ -20,17 +23,22 @@ const { windDirections } = settings.views;
 export default {
   name: 'Compass',
   props: {
-    course: {
+    forecastWind: {
       type: Object,
       default: () => {},
       required: true,
     },
+    compassErrorVisible: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
-      forecastWind: {},
       windSpeed: 0,
       windDirection: '東',
+      compassHeading: 0,
+      watchId: null,
     };
   },
   computed: {
@@ -53,6 +61,11 @@ export default {
       return `wind-direction--${deg}-deg`;
       // TODO 角度によって動きが不自然になります。Refactorしてください。(issue #404)
     },
+    compassHeadingDeg() {
+      const deg = 360 - Math.round(this.compassHeading);
+
+      return `compass-heading--${deg}-deg`;
+    },
   },
   watch: {
     forecastWind() {
@@ -60,16 +73,25 @@ export default {
       this.windDirection = this.forecastWind.windDirection;
     },
   },
-  async created() {
-    this.forecastWind = await this.getForecastWind();
-  },
   methods: {
-    getForecastWind() {
-      const params = {
-        course_id: this.course.id,
-        target_date: this.$moment().format('YYYY-MM-DD'),
-      };
-      return this.$store.dispatch('models/weather/getForecastWind', params);
+    startWatch() {
+      const options = { frequency: 500 };
+
+      if (!navigator.compass) this.compassError();
+      this.watchId = navigator.compass.watchHeading(
+        this.getCompassHeading,
+        this.compassError,
+        options,
+      );
+    },
+    stopWatch() {
+      navigator.compass.clearWatch(this.watchId);
+    },
+    getCompassHeading(heading) {
+      this.compassHeading = heading.magneticHeading;
+    },
+    compassError() {
+      this.$emit('update:compassErrorVisible', true);
     },
   },
 };
@@ -78,7 +100,9 @@ export default {
 <style scoped lang="scss">
 @import '@/assets/scss/_mixins.scss';
 
-$degrees: 0, 22.5, 45, 67.5, 90, 112.5, 135, 157.5, 180, 202.5, 225, 247.5, 270, 292.5, 315, 337.5;
+$speed-degrees: 0, 22.5, 45, 67.5, 90, 112.5, 135, 157.5, 180,
+  202.5, 225, 247.5, 270, 292.5, 315, 337.5;
+$compass-degrees: 360;
 
 .compass-frame {
   display: flex;
@@ -89,6 +113,16 @@ $degrees: 0, 22.5, 45, 67.5, 90, 112.5, 135, 157.5, 180, 202.5, 225, 247.5, 270,
   background-image: url('~@/assets/images/weathers/background-compass.png');
   background-position: center;
   background-size: cover;
+  transition: transform 0.5s ease-out;
+}
+
+.compass-heading {
+  @for $i from 0 through $compass-degrees {
+    // generate class has partern: compass-heading--xx-deg
+    &--#{$i}-deg {
+      transform: rotate(#{$i}deg);
+    }
+  }
 }
 
 .wind-direction {
@@ -96,7 +130,7 @@ $degrees: 0, 22.5, 45, 67.5, 90, 112.5, 135, 157.5, 180, 202.5, 225, 247.5, 270,
   height: 155px;
   transition: transform 0.5s ease-out, background-image 0.5s ease-out;
 
-  @each $degree in $degrees {
+  @each $degree in $speed-degrees {
     // generate class has partern: wind-direction--xx-deg
     &--#{floor($degree)}-deg {
       transform: rotate(#{$degree}deg);

@@ -1,10 +1,17 @@
 <template>
-  <v-ons-page>
+  <v-ons-page
+    @show="show"
+    @hide="hide"
+  >
     <custom-toolbar title="風予測" />
 
     <div class="content">
       <div class="wind-forecast-content">
-        <compass :course="course" />
+        <compass
+          ref="compass"
+          :forecast-wind="forecastWind"
+          :compass-error-visible.sync="compassErrorVisible"
+        />
         <div class="course-info">
           {{ course.name }}<br>
           {{ course.address }}
@@ -17,16 +24,25 @@
         </v-ons-button>
       </div>
     </div>
+
+    <error-dialog
+      title="エラー"
+      :is-visible="compassErrorVisible"
+      error-message="エラー"
+      @close="closeCompassErrorDialog"
+    />
   </v-ons-page>
 </template>
 
 <script>
 import Compass from '@/components/organisms/wind-forecast/compass';
+import ErrorDialog from '@/components/organisms/error-dialog';
 
 export default {
   name: 'WindForecastShow',
   components: {
     Compass,
+    ErrorDialog,
   },
   props: {
     course: {
@@ -35,9 +51,35 @@ export default {
       required: true,
     },
   },
+  data() {
+    return {
+      forecastWind: {},
+      compassErrorVisible: false,
+    };
+  },
+  beforeDestroy() {
+    this.$refs.compass.stopWatch();
+  },
   methods: {
+    getForecastWind() {
+      const params = {
+        course_id: this.course.id,
+        target_date: this.$moment().format('YYYY-MM-DD'),
+      };
+      return this.$store.dispatch('models/weather/getForecastWind', params);
+    },
     goBackToCourseList() {
       this.$store.commit('windForecastNavigator/pop');
+    },
+    async show() {
+      this.forecastWind = await this.getForecastWind();
+      this.$refs.compass.startWatch();
+    },
+    hide() {
+      this.$refs.compass.stopWatch();
+    },
+    closeCompassErrorDialog() {
+      this.compassErrorVisible = false;
     },
   },
 };

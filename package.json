@@ -65,6 +65,7 @@
     "cordova-ios": "^6.2.0",
     "cordova-plugin-buildinfo": "^4.0.0",
     "cordova-plugin-device": "^2.0.3",
+    "cordova-plugin-device-orientation": "^2.0.1",
     "cordova-plugin-geolocation": "^4.1.0",
     "cordova-plugin-whitelist": "1",
     "cross-env": "^5.0.1",
@@ -132,7 +133,8 @@
       "cordova-plugin-x-socialsharing": {
         "PHOTO_LIBRARY_ADD_USAGE_DESCRIPTION": "This app requires photo library access to function properly.",
         "PHOTO_LIBRARY_USAGE_DESCRIPTION": "This app requires photo library access to function properly."
-      }
+      },
+      "cordova-plugin-device-orientation": {}
     },
     "platforms": [
       "ios",
