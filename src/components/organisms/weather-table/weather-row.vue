@@ -18,6 +18,13 @@
       </td>
 
       <td
+        v-else-if="!weather"
+        :key="index"
+      >
+        <label>No Data</label>
+      </td>
+
+      <td
         v-else-if="weather.isSunrise"
         :key="index"
         :rowspan="sunsRowspan"
@@ -57,7 +64,6 @@ export default {
   props: {
     weathers: {
       type: Array,
-      default: () => [],
       required: true,
     },
     sunsRowspan: {

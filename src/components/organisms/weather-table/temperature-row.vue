@@ -29,7 +29,6 @@ export default {
   props: {
     forecastData: {
       type: Array,
-      default: () => [],
       required: true,
     },
     isHighest: {
@@ -56,9 +55,9 @@ export default {
       let temperatures;
 
       if (this.isHighest) {
-        temperatures = this.forecastData.map(data => data.max_temp);
+        temperatures = this.forecastData.map(data => data ? data.max_temp : null);
       } else {
-        temperatures = this.forecastData.map(data => data.min_temp);
+        temperatures = this.forecastData.map(data => data ? data.min_temp : null);
       }
 
       return temperatures;

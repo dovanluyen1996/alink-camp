@@ -21,7 +21,6 @@ export default {
   props: {
     weather: {
       type: Object,
-      default: () => {},
       required: true,
     },
     isShownName: {
@@ -35,7 +34,7 @@ export default {
   },
   computed: {
     image() {
-      return this.$helpers.getImage(`weathers/weather/${this.weather.weatherImageName}`);
+      return this.$helpers.getImage(`weathers/weather/${this.weather.weather_image_name}`);
     },
     alt() {
       return (this.isShownName) ? null : this.weather.forecastTelop;

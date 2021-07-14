@@ -9,7 +9,7 @@
           scope="col"
           class="th"
         >
-          {{ weather.date | moment('M/D') }}
+          <span v-if="weather">{{ weather.date | moment('M/D') }}</span>
         </th>
       </tr>
     </template>
@@ -41,7 +41,6 @@ export default {
   props: {
     weathers: {
       type: Array,
-      default: () => [],
       required: true,
     },
   },
