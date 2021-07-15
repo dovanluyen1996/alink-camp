@@ -14,12 +14,13 @@
       </ten-days-weather>
     </transition>
 
-    <v-ons-button
-      modifier="large--cta rounded"
-      class="reservation-button"
+    <a
+      href="https://golf-jalan.net/"
+      class="reservation-button button button--large--cta button--rounded"
+      :target="target()"
     >
       ゴルフコースの予約をする
-    </v-ons-button>
+    </a>
 
     <monthly-weather />
   </div>
@@ -56,6 +57,11 @@ export default {
     },
     isShownTenDays() {
       return this.segmentIndex === segmentIndexes.tenDays;
+    },
+  },
+  methods: {
+    target() {
+      return (cordova.platformId === 'browser') ? '_self' : '_blank';
     },
   },
 };
