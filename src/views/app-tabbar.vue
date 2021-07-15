@@ -1,15 +1,17 @@
 <template>
   <v-ons-page>
-    <v-ons-tabbar
-      :tabs="tabs"
-      :visible="true"
-      :index.sync="activeIndex"
-      animation="none"
-      position="bottom"
-      @prechange="prechange"
-      @reactive="reactive"
-    />
-    <user-stamps-campaign />
+    <div>
+      <v-ons-tabbar
+        :tabs="tabs"
+        :visible="true"
+        :index.sync="activeIndex"
+        animation="none"
+        position="bottom"
+        @prechange="prechange"
+        @reactive="reactive"
+      />
+      <user-stamps-campaign />
+    </div>
   </v-ons-page>
 </template>
 

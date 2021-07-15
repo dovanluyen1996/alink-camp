@@ -65,8 +65,7 @@ export default {
   },
   methods: {
     async show() {
-      const today = new Date();
-      this.$store.dispatch('appTabbar/setLastVisitedAt', this.$helpers.localDateWithHyphenFrom(today));
+      this.$store.dispatch('appTabbar/setLastVisitedAt', this.$helpers.localDateWithHyphenFrom(new Date()));
       await this.getUserCourses();
     },
     async getUserCourses() {

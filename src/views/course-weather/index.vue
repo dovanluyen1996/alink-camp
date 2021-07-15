@@ -57,6 +57,7 @@ export default {
   },
   methods: {
     async show() {
+      this.$store.dispatch('appTabbar/setLastVisitedAt', this.$helpers.localDateWithHyphenFrom(new Date()));
       await this.getUserCourses();
     },
     async getUserCourses() {
@@ -64,10 +65,6 @@ export default {
     },
     goToCourseSearch() {
       this.$store.commit('appTabbar/setActiveIndexFromTabName', 'courseSearch');
-    },
-    show() {
-      const today = new Date();
-      this.$store.dispatch('appTabbar/setLastVisitedAt', this.$helpers.localDateWithHyphenFrom(today));
     },
   },
 };
