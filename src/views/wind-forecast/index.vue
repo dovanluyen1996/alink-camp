@@ -45,7 +45,6 @@ import CourseList from '@/components/organisms/course-list.vue';
 
 // views
 import ShowWindForecastView from '@/views/wind-forecast/show';
-import moment from 'moment';
 
 export default {
   name: 'WindForecastIndex',
@@ -107,7 +106,7 @@ export default {
     },
     show() {
       const today = new Date();
-      this.$store.dispatch('appTabbar/setLastVisitedAt', moment(today).format('YYYY-MM-DD'));
+      this.$store.dispatch('appTabbar/setLastVisitedAt', this.$helpers.localDateWithHyphenFrom(today));
     },
   },
 };

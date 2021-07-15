@@ -46,8 +46,6 @@
 </template>
 
 <script>
-import moment from 'moment';
-
 export default {
   name: 'UserStampsCampaign',
   data() {
@@ -79,7 +77,7 @@ export default {
     },
     lastVisitedAt(value) {
       const lastGettedAt = localStorage.getItem('userStampLastGettedAt');
-      if (!lastGettedAt || moment(value).isAfter(lastGettedAt)) {
+      if (!lastGettedAt || this.$helpers.isAfterTime(value, lastGettedAt)) {
         this.isVisible = true;
         localStorage.setItem('userStampLastGettedAt', value);
       }

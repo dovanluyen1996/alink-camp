@@ -47,4 +47,8 @@ export default {
   isPresentObject(object) {
     return Object.keys(object).length > 0;
   },
+
+  isAfterTime(compareTime, time) {
+    return moment(compareTime).isAfter(time);
+  },
 };

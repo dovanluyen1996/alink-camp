@@ -45,7 +45,6 @@ import ContentWithFooter from '@/components/organisms/content-with-footer';
 
 // pages
 import UserCourseResultsIndex from '@/views/user-course-results/Index';
-import moment from 'moment';
 
 export default {
   name: 'ScoresIndex',
@@ -67,7 +66,7 @@ export default {
   methods: {
     async show() {
       const today = new Date();
-      this.$store.dispatch('appTabbar/setLastVisitedAt', moment(today).format('YYYY-MM-DD'));
+      this.$store.dispatch('appTabbar/setLastVisitedAt', this.$helpers.localDateWithHyphenFrom(today));
       await this.getUserCourses();
     },
     async getUserCourses() {

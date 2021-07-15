@@ -45,7 +45,6 @@ import ContentWithFooter from '@/components/organisms/content-with-footer';
 // pages
 import SearchResult from '@/views/course-search/search-result';
 import CourseShow from '@/views/courses/show';
-import moment from 'moment';
 import PrefecturesSearch from '@//views/course-search/prefectures-search';
 import ConditionsSearch from '@//views/course-search/conditions-search';
 
@@ -91,7 +90,7 @@ export default {
     },
     show() {
       const today = new Date();
-      this.$store.dispatch('appTabbar/setLastVisitedAt', moment(today).format('YYYY-MM-DD'));
+      this.$store.dispatch('appTabbar/setLastVisitedAt', this.$helpers.localDateWithHyphenFrom(today));
     },
   },
 };
