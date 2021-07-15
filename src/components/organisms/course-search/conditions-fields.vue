@@ -139,7 +139,7 @@ export default {
 
       const selectedDate = this.$moment(date);
       const fromDate = this.$moment().startOf('day');
-      const toDate = this.$moment().add(11, 'days').endOf('day');
+      const toDate = this.$moment().add(9, 'days').endOf('day');
 
       return selectedDate.isAfter(fromDate) && selectedDate.isBefore(toDate);
     },

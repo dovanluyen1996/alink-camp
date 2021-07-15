@@ -118,9 +118,9 @@ export default {
             prefecture_id: this.prefecture,
             target_date: this.targetDate,
             temperature: this.temperature,
-            sunny: (this.sunny) ? 1 : 0,
-            wind: (this.wind) ? 1 : 0,
-            uv: (this.uv) ? 1 : 0,
+            sunny: this.sunny ? 1 : 0,
+            wind: this.wind ? 1 : 0,
+            uv: this.uv ? 1 : 0,
           };
 
           await this.$store.dispatch('models/course/getCourses', params);
