@@ -171,28 +171,27 @@ export default {
           // Reset before search result
           this.$store.dispatch('models/course/resetCourses');
 
-          if (valid) {
-            if (!this.lat || !this.lon) return;
+          if (!valid) return;
+          if (!this.lat || !this.lon) return;
 
-            const params = {
-              lower_rad: this.lower_rad,
-              upper_rad: this.upper_rad,
-              target_date: this.targetDate,
-              temperature: this.temperature,
-              sunny: this.sunny ? 1 : 0,
-              wind: this.wind ? 1 : 0,
-              uv: this.uv ? 1 : 0,
-              lat: this.lat,
-              lon: this.lon,
-            };
+          const params = {
+            lower_rad: this.lower_rad,
+            upper_rad: this.upper_rad,
+            target_date: this.targetDate,
+            temperature: this.temperature,
+            sunny: this.sunny ? 1 : 0,
+            wind: this.wind ? 1 : 0,
+            uv: this.uv ? 1 : 0,
+            lat: this.lat,
+            lon: this.lon,
+          };
 
-            await this.$store.dispatch('models/course/getCourses', params);
+          await this.$store.dispatch('models/course/getCourses', params);
 
-            if (this.$store.getters['models/course/size']) {
-              this.goToSearchResult();
-            } else {
-              this.showSearchResultEmptyDialog();
-            }
+          if (this.$store.getters['models/course/size']) {
+            this.goToSearchResult();
+          } else {
+            this.showSearchResultEmptyDialog();
           }
         });
     },
