@@ -48,23 +48,33 @@ export default {
     await this.$store.dispatch('models/appStart/getAppStart');
 
     // 課金チェック
-    Purchases.getPurchaserInfo(
-      async(purchaserInfo) => {
-        if (Object.entries(purchaserInfo.entitlements.active).length === 0) {
-          this.$store.dispatch('appNavigator/push', PurchaseInformation);
-        } else {
-          // 認証チェック
-          const isAuthenticated = await this.isAuthenticated();
-          if (isAuthenticated) {
-            this.$store.dispatch('appNavigator/push', AppTabbar);
+    if (BuildInfo.debug) {
+      console.log(' --------------- debug -------------------');
+      const isCharged = JSON.parse(localStorage.getItem('isCharged'));
+      console.log(isCharged);
+      if (!isCharged) {
+        console.log(' --------------- 課金前 -------------------');
+        this.$store.dispatch('appNavigator/push', PurchaseInformation);
+      } else {
+        console.log(' --------------- 課金済み -------------------');
+        await this.goToAppTabbarIfAuthenticated();
+      }
+    } else {
+      console.log(' --------------- release -------------------');
+      Purchases.getPurchaserInfo(
+        async(purchaserInfo) => {
+          if (Object.entries(purchaserInfo.entitlements.active).length === 0) {
+            this.$store.dispatch('appNavigator/push', PurchaseInformation);
+          } else {
+            await this.goToAppTabbarIfAuthenticated();
           }
-        }
-      },
-      (error) => {
-        // TODO: エラー時の処理実装 Issue#375
-        console.error(error);
-      },
-    );
+        },
+        (error) => {
+          // TODO: エラー時の処理実装 Issue#375
+          console.error(error);
+        },
+      );
+    }
   },
   methods: {
     async isAuthenticated() {
@@ -90,6 +100,12 @@ export default {
     },
     goToSignIn() {
       this.$store.dispatch('appNavigator/push', SignIn);
+    },
+    async goToAppTabbarIfAuthenticated() {
+      const isAuthenticated = await this.isAuthenticated();
+      if (isAuthenticated) {
+        this.$store.dispatch('appNavigator/push', AppTabbar);
+      }
     },
   },
 };

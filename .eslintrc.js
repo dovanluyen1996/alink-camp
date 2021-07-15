@@ -16,6 +16,7 @@ module.exports = {
     Adjust: true,
     AdjustConfig: true,
     Purchases: true,
+    BuildInfo: true,
   },
   plugins: [
     'vue',

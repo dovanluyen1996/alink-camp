@@ -47,6 +47,16 @@ export default {
   },
   methods: {
     callToPurchase() {
+      if (BuildInfo.debug) {
+        console.log(' --------------- debug -------------------');
+        localStorage.setItem('isCharged', true);
+        this.$store.dispatch('appNavigator/replace', StartIndex);
+      } else {
+        console.log(' --------------- release -------------------');
+        this.purchaseByRevenueCat();
+      }
+    },
+    purchaseByRevenueCat() {
       Purchases.getOfferings((offerings) => {
         if (offerings.current !== null && offerings.current.availablePackages.length !== 0) {
           const availablePackage = offerings.current.monthly;
@@ -57,7 +67,7 @@ export default {
               this.$store.dispatch('appNavigator/replace', StartIndex);
             }
           },
-          ({error}) => {
+          ({ error }) => {
             throw error;
           });
         }
