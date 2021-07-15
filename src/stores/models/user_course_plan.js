@@ -9,31 +9,6 @@ export default {
     userCoursePlans: [],
     isLoading: false,
   },
-  getters: {
-    allByUserCourses: (state, getters, rootState, rootGetters) => {
-      const userCourses = rootGetters['models/userCourse/all'];
-
-      return userCourses.map(userCourse => userCourse.userCoursePlans.map(userCoursePlan => ({
-        ...userCoursePlan,
-      }))).flat();
-    },
-    inFuture: (state, getters) => getters.allByUserCourses.filter(
-      userCoursePlan => moment(userCoursePlan.targetAt).startOf('days').isSameOrAfter(moment().startOf('days')),
-    ),
-    sortedInFuture: (state, getters, rootState, rootGetters) => getters.inFuture.sort(
-      (a, b) => {
-        const userCourse = rootGetters['models/userCourse/findByCourseId'](a.courseId);
-        const aTargetDate = moment(a.targetAt).startOf('days');
-        const bTargetDate = moment(b.targetAt).startOf('days');
-        let sort = 0;
-
-        sort = aTargetDate.isAfter(bTargetDate) ? 1 : -1;
-        if (aTargetDate.isSame(bTargetDate)) sort = userCourse.isFavorited ? -1 : 1;
-
-        return sort;
-      },
-    ),
-  },
   mutations: {
     addUserCoursePlan(state, userCoursePlan) {
       state.userCoursePlans.push(userCoursePlan);

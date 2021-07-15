@@ -48,7 +48,7 @@ export default {
       return this.$store.getters['models/userCourse/onlyFavoritedWithoutPlans'];
     },
     userCoursePlans() {
-      return this.$store.getters['models/userCoursePlan/sortedInFuture'];
+      return this.$store.getters['models/userCourse/sortedInFuture'];
     },
   },
   methods: {

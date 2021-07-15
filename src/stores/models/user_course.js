@@ -28,6 +28,29 @@ export default {
         },
       ).length,
     ),
+    allUserCoursePlans: (state, getters) => {
+      const userCourses = getters.all;
+
+      return userCourses.map(userCourse => userCourse.userCoursePlans.map(userCoursePlan => ({
+        ...userCoursePlan,
+      }))).flat();
+    },
+    inFuture: (state, getters) => getters.allUserCoursePlans.filter(
+      userCoursePlan => moment(userCoursePlan.targetAt).startOf('days').isSameOrAfter(moment().startOf('days')),
+    ),
+    sortedInFuture: (state, getters) => getters.inFuture.sort(
+      (a, b) => {
+        const userCourse = getters.findByCourseId(a.courseId);
+        const aTargetDate = moment(a.targetAt).startOf('days');
+        const bTargetDate = moment(b.targetAt).startOf('days');
+        let sort = 0;
+
+        sort = aTargetDate.isAfter(bTargetDate) ? 1 : -1;
+        if (aTargetDate.isSame(bTargetDate)) sort = userCourse.isFavorited ? -1 : 1;
+
+        return sort;
+      },
+    ),
   },
   mutations: {
     setIsLoading(state, isLoading) {
