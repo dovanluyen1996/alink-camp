@@ -16,6 +16,13 @@ export default {
   components: {
     LineChart,
   },
+  props: {
+    chartDataUpdatedAt: {
+      type: String,
+      default: '',
+      required: true,
+    },
+  },
   data() {
     return {
       chartData: {},
@@ -65,6 +72,7 @@ export default {
     async course() {
       const forecastMonthlyTemp = await this.getForecastMonthlyTemp();
       if (forecastMonthlyTemp) {
+        this.$emit('update:chartDataUpdatedAt', forecastMonthlyTemp.updatedAt);
         this.fillData(forecastMonthlyTemp.items);
       }
     },

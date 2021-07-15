@@ -16,6 +16,13 @@ export default {
   components: {
     BarChart,
   },
+  props: {
+    chartDataUpdatedAt: {
+      type: String,
+      default: '',
+      required: true,
+    },
+  },
   data() {
     return {
       chartData: {},
@@ -65,6 +72,7 @@ export default {
     async course() {
       const forecastMonthlyPrecip = await this.getForecastMonthlyPrecip();
       if (forecastMonthlyPrecip) {
+        this.$emit('update:chartDataUpdatedAt', forecastMonthlyPrecip.updatedAt);
         this.fillData(forecastMonthlyPrecip.items);
       }
     },

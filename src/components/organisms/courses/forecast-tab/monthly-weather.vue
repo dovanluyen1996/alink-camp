@@ -9,20 +9,20 @@
         気温（℃）
       </v-ons-col>
       <v-ons-col class="chart-update">
-        12月27日23:59発表
+        {{ $helpers.toShortStringWithTime(temperatureForecastUpdatedAt) }}発表
       </v-ons-col>
     </v-ons-row>
-    <temperature-chart />
+    <temperature-chart :chart-data-updated-at.sync="temperatureForecastUpdatedAt" />
 
     <v-ons-row class="chart-header">
       <v-ons-col class="chart-title">
         降水量（mm）
       </v-ons-col>
       <v-ons-col class="chart-update">
-        12月27日23:59発表
+        {{ $helpers.toShortStringWithTime(precipForecastUpdatedAt) }}発表
       </v-ons-col>
     </v-ons-row>
-    <prob-precip-chart />
+    <prob-precip-chart :chart-data-updated-at.sync="precipForecastUpdatedAt" />
   </div>
 </template>
 
@@ -36,6 +36,12 @@ export default {
   components: {
     TemperatureChart,
     ProbPrecipChart,
+  },
+  data() {
+    return {
+      temperatureForecastUpdatedAt: '',
+      precipForecastUpdatedAt: '',
+    };
   },
 };
 </script>

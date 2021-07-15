@@ -51,4 +51,14 @@ export default {
   isAfterDate(compareDate, targetDate) {
     return moment(compareDate).isAfter(targetDate);
   },
+  toShortStringWithTime(targetDate) {
+    if (!targetDate) return '';
+
+    const date = new Date(targetDate);
+    const month = (`00${(date.getMonth() + 1)}`).slice(-2);
+    const day = (`00${date.getDate()}`).slice(-2);
+    const hour = (`00${date.getHours()}`).slice(-2);
+    const minute = (`00${date.getMinutes()}`).slice(-2);
+    return `${month}月${day}日${hour}:${minute}`;
+  },
 };
