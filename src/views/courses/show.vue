@@ -99,9 +99,7 @@ export default {
       return this.$helpers.isPresentObject(this.userCoursePlan);
     },
     favorited() {
-      if (!this.userCourse) return false;
-
-      return this.userCourse.isFavorited;
+      return this.userCourse ? this.userCourse.isFavorited : false;
     },
   },
   async created() {
@@ -130,12 +128,12 @@ export default {
     },
     async settingFavorited() {
       if (this.userCourse) {
-        await this.updateUserCourse();
+        await this.updateUserCourseFavorited();
       } else {
-        await this.createUserCourse();
+        await this.createUserCourseFavorited();
       }
     },
-    async createUserCourse() {
+    async createUserCourseFavorited() {
       const params = {
         courseId: this.course.id,
         isFavorited: true,
@@ -143,7 +141,7 @@ export default {
 
       await this.$store.dispatch('models/userCourse/createUserCourse', params);
     },
-    async updateUserCourse() {
+    async updateUserCourseFavorited() {
       const params = {
         isFavorited: !this.favorited,
       };
