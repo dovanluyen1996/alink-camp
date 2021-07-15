@@ -48,11 +48,9 @@ export default {
   methods: {
     callToPurchase() {
       if (BuildInfo.debug) {
-        console.log(' --------------- debug -------------------');
         localStorage.setItem('isCharged', true);
         this.$store.dispatch('appNavigator/replace', StartIndex);
       } else {
-        console.log(' --------------- release -------------------');
         this.purchaseByRevenueCat();
       }
     },

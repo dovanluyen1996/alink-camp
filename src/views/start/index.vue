@@ -49,18 +49,13 @@ export default {
 
     // 課金チェック
     if (BuildInfo.debug) {
-      console.log(' --------------- debug -------------------');
       const isCharged = JSON.parse(localStorage.getItem('isCharged'));
-      console.log(isCharged);
       if (!isCharged) {
-        console.log(' --------------- 課金前 -------------------');
         this.$store.dispatch('appNavigator/push', PurchaseInformation);
       } else {
-        console.log(' --------------- 課金済み -------------------');
         await this.goToAppTabbarIfAuthenticated();
       }
     } else {
-      console.log(' --------------- release -------------------');
       Purchases.getPurchaserInfo(
         async(purchaserInfo) => {
           if (Object.entries(purchaserInfo.entitlements.active).length === 0) {
