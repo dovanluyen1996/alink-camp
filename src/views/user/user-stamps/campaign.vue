@@ -72,13 +72,11 @@ export default {
     },
   },
   watch: {
-    async isVisible(value) {
-      if (value) await this.getUserStamp();
-    },
-    lastVisitedAt(value) {
+    async lastVisitedAt(value) {
       const lastGettedAt = localStorage.getItem('userStampLastGettedAt');
       if (!lastGettedAt || this.$helpers.isAfterTime(value, lastGettedAt)) {
         this.isVisible = true;
+        await this.getUserStamp();
         localStorage.setItem('userStampLastGettedAt', value);
       }
     },
