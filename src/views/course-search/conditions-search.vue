@@ -1,5 +1,5 @@
 <template>
-  <v-ons-page>
+  <v-ons-page @show="show()">
     <custom-toolbar title="コース検索" />
 
     <div class="content">
@@ -57,10 +57,10 @@ export default {
       return this.$store.state.components.cardWithTab.activeIndex;
     },
   },
-  created() {
-    this.$store.commit('course/setSearched', false);
-  },
   methods: {
+    show() {
+      this.$store.commit('course/setSearched', false);
+    },
     search() {
       this.$store.commit('course/setSearched', true);
     },
