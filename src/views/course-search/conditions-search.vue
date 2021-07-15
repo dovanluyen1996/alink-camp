@@ -54,12 +54,7 @@ export default {
   },
   computed: {
     activeIndex() {
-      return this.$store.getters['components/cardWithTab/activeIndex'];
-    },
-  },
-  watch: {
-    activeIndex() {
-      this.$store.commit('course/setActiveIndex', this.activeIndex);
+      return this.$store.state.components.cardWithTab.activeIndex;
     },
   },
   created() {

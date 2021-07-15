@@ -9,7 +9,6 @@ export default {
     choosenCourse: {},
     isLoading: false,
     searched: false,
-    activeIndex: 0,
   },
   getters: {
     viewedCourses: state => state.viewedCourses,
@@ -47,12 +46,6 @@ export default {
     },
     setSearched(state, searched) {
       state.searched = searched;
-    },
-    setActiveIndex(state, activeIndex) {
-      state.activeIndex = activeIndex;
-    },
-    resetActiveIndex(state) {
-      state.activeIndex = 0;
     },
   },
   actions: {
