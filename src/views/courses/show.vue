@@ -82,7 +82,9 @@ export default {
       return this.$store.getters['models/userCourse/findByCourseId'](this.course.id);
     },
     userCoursePlan() {
-      if (!this.userCourse || this.userCourse.userCoursePlans.length === 0) return {};
+      if (!this.userCourse || this.$helpers.isEmptyObject(this.userCourse.userCoursePlans)) {
+        return {};
+      }
 
       const futureUserCoursePlan = this.userCourse.userCoursePlans.find(
         userCoursePlan => this.$helpers.isFutureTime(userCoursePlan.targetAt),

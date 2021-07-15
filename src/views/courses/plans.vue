@@ -97,11 +97,9 @@ export default {
     course: {
       type: Object,
       required: true,
-      default: () => {},
     },
     userCoursePlan: {
       type: Object,
-      required: true,
       default: () => {},
     },
   },
@@ -118,7 +116,7 @@ export default {
       return this.course.name;
     },
     isPersisted() {
-      return !this.$helpers.isEmptyObject(this.userCoursePlan);
+      return this.$helpers.isPresentObject(this.userCoursePlan);
     },
     targetAt() {
       return `${this.dateValue} ${this.timeValue}`;
@@ -149,9 +147,6 @@ export default {
       this.closeDeleteConfirmDialog();
 
       await this.destroyUserCoursePlan();
-      // 現状、UserCourseのStoreを使っています。
-      // そのため、UserCoursePlanを変更する時に、UserCourseのStoreを変更しないといけないです。
-      await this.$store.dispatch('models/userCourse/getUserCourses');
       await this.$store.dispatch('courseSearchNavigator/pop');
     },
     async settingUserCoursePlan() {
@@ -160,9 +155,7 @@ export default {
       } else {
         await this.createUserCoursePlan();
       }
-      // 現状、UserCourseのStoreを使っています。
-      // そのため、UserCoursePlanを変更する時に、UserCourseのStoreを変更しないといけないです。
-      await this.$store.dispatch('models/userCourse/getUserCourses');
+
       await this.$store.dispatch('courseSearchNavigator/pop');
     },
     async updateUserCoursePlan() {

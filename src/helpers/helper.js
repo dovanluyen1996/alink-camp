@@ -42,4 +42,8 @@ export default {
   isEmptyObject(object) {
     return Object.keys(object).length === 0;
   },
+
+  isPresentObject(object) {
+    return Object.keys(object).length > 0;
+  },
 };

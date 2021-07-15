@@ -68,6 +68,57 @@ export default {
 
       Vue.set(state.userCourses, index, userCourse);
     },
+    addUserCoursePlan(state, userCoursePlan) {
+      const userCourseIndex = state.userCourses.findIndex(
+        _userCourse => _userCourse.id === userCoursePlan.userCourseId,
+      );
+      if (userCourseIndex < 0) return;
+
+      const newUserCourses = state.userCourses.slice();
+      const newUserCourse = newUserCourses[userCourseIndex];
+      newUserCourse.userCoursePlans.push(userCoursePlan);
+      newUserCourses[userCourseIndex] = newUserCourse;
+
+      Vue.set(state, 'userCourses', newUserCourses);
+    },
+    updateUserCoursePlan(state, userCoursePlan) {
+      const userCourseIndex = state.userCourses.findIndex(
+        _userCourse => _userCourse.id === userCoursePlan.userCourseId,
+      );
+      if (userCourseIndex < 0) return;
+
+      const userCourse = state.userCourses[userCourseIndex];
+      const userCoursePlanIndex = userCourse.userCoursePlans.findIndex(
+        _userCoursePlan => _userCoursePlan.id === userCoursePlan.id,
+      );
+      if (userCoursePlanIndex < 0) return;
+
+      const newUserCourses = state.userCourses.slice();
+      const newUserCourse = newUserCourses[userCourseIndex];
+      newUserCourse.userCoursePlans[userCoursePlanIndex] = userCoursePlan;
+      newUserCourses[userCourseIndex] = newUserCourse;
+
+      Vue.set(state, 'userCourses', newUserCourses);
+    },
+    deleteUserCoursePlan(state, userCoursePlan) {
+      const userCourseIndex = state.userCourses.findIndex(
+        _userCourse => _userCourse.id === userCoursePlan.userCourseId,
+      );
+      if (userCourseIndex < 0) return;
+
+      const userCourse = state.userCourses[userCourseIndex];
+      const userCoursePlanIndex = userCourse.userCoursePlans.findIndex(
+        _userCoursePlan => _userCoursePlan.id === userCoursePlan.id,
+      );
+      if (userCoursePlanIndex < 0) return;
+
+      const newUserCourses = state.userCourses.slice();
+      const newUserCourse = newUserCourses[userCourseIndex];
+      newUserCourse.userCoursePlans.splice(userCoursePlanIndex, 1);
+      newUserCourses[userCourseIndex] = newUserCourse;
+
+      Vue.set(state, 'userCourses', newUserCourses);
+    },
   },
   actions: {
     async getUserCourses(context) {

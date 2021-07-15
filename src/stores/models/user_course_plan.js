@@ -41,6 +41,7 @@ export default {
         const userCoursePlan = await ApiClient.createUserCoursePlan(userCourseId, params);
 
         context.commit('addUserCoursePlan', userCoursePlan);
+        context.commit('models/userCourse/addUserCoursePlan', userCoursePlan, { root: true });
       } catch (error) {
         context.commit('api/setError', error, { root: true });
         throw error;
@@ -57,6 +58,7 @@ export default {
         );
 
         context.commit('updateUserCoursePlan', userCoursePlan);
+        context.commit('models/userCourse/updateUserCoursePlan', userCoursePlan, { root: true });
       } catch (error) {
         context.commit('api/setError', error, { root: true });
         throw error;
@@ -73,6 +75,10 @@ export default {
         );
 
         context.commit('deleteUserCoursePlan', userCoursePlan);
+        context.commit('models/userCourse/deleteUserCoursePlan', userCoursePlan, { root: true });
+      } catch (error) {
+        context.commit('api/setError', error, { root: true });
+        throw error;
       } finally {
         context.commit('setIsLoading', false);
       }
