@@ -49,10 +49,9 @@ export default {
     callToPurchase() {
       if (BuildInfo.debug) {
         localStorage.setItem('isCharged', true);
-        this.$store.dispatch('appNavigator/replace', StartIndex);
-      } else {
-        this.purchaseByRevenueCat();
+        return this.purchaseComplete();
       }
+      this.purchaseByRevenueCat();
     },
     purchaseByRevenueCat() {
       Purchases.getOfferings((offerings) => {
@@ -62,7 +61,7 @@ export default {
           // eslint-disable-next-line no-unused-vars
           Purchases.purchasePackage(availablePackage, ({ productIdentifier, purchaserInfo }) => {
             if (Object.entries(purchaserInfo.entitlements.active).length > 0) {
-              this.$store.dispatch('appNavigator/replace', StartIndex);
+              this.purchaseComplete();
             }
           },
           ({ error }) => {
@@ -73,6 +72,10 @@ export default {
         // TODO: エラー時の処理実装 Issue#148
         console.error(error);
       });
+    },
+
+    purchaseComplete() {
+      this.$store.dispatch('appNavigator/replace', StartIndex);
     },
   },
 };

@@ -47,29 +47,11 @@ export default {
     // }
     await this.$store.dispatch('models/appStart/getAppStart');
 
-    // 課金チェック
     if (BuildInfo.debug) {
-      const isCharged = JSON.parse(localStorage.getItem('isCharged'));
-      if (!isCharged) {
-        this.$store.dispatch('appNavigator/push', PurchaseInformation);
-      } else {
-        await this.goToAppTabbarIfAuthenticated();
-      }
-    } else {
-      Purchases.getPurchaserInfo(
-        async(purchaserInfo) => {
-          if (Object.entries(purchaserInfo.entitlements.active).length === 0) {
-            this.$store.dispatch('appNavigator/push', PurchaseInformation);
-          } else {
-            await this.goToAppTabbarIfAuthenticated();
-          }
-        },
-        (error) => {
-          // TODO: エラー時の処理実装 Issue#375
-          console.error(error);
-        },
-      );
+      return this.checkChargedStatusOnlyDebug();
     }
+
+    this.checkChargedStatus();
   },
   methods: {
     async isAuthenticated() {
@@ -96,10 +78,30 @@ export default {
     goToSignIn() {
       this.$store.dispatch('appNavigator/push', SignIn);
     },
-    async goToAppTabbarIfAuthenticated() {
-      const isAuthenticated = await this.isAuthenticated();
-      if (isAuthenticated) {
-        this.$store.dispatch('appNavigator/push', AppTabbar);
+    checkChargedStatus() {
+      Purchases.getPurchaserInfo(
+        async(purchaserInfo) => {
+          const isCharged = Object.entries(purchaserInfo.entitlements.active).length === 0;
+          this.checkChargedStatusComplete(isCharged);
+        },
+        (error) => {
+          // TODO: エラー時の処理実装 Issue#375
+          console.error(error);
+        },
+      );
+    },
+    async checkChargedStatusOnlyDebug() {
+      const isCharged = JSON.parse(localStorage.getItem('isCharged'));
+      await this.checkChargedStatusComplete(isCharged);
+    },
+    async checkChargedStatusComplete(isCharged) {
+      if (isCharged) {
+        const isAuthenticated = await this.isAuthenticated();
+        if (isAuthenticated) {
+          this.$store.dispatch('appNavigator/push', AppTabbar);
+        }
+      } else {
+        this.$store.dispatch('appNavigator/push', PurchaseInformation);
       }
     },
   },
