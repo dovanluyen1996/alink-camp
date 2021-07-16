@@ -93,7 +93,7 @@ export default {
       return futureUserCoursePlan || {};
     },
     planned() {
-      return !this.$helpers.isEmptyObject(this.userCoursePlan);
+      return this.$helpers.isPresentObject(this.userCoursePlan);
     },
   },
   async created() {

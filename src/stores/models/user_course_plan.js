@@ -1,34 +1,12 @@
-import Vue from 'vue';
 import ApiClient from '@/api_client';
 
 export default {
   strict: true,
   namespaced: true,
   state: {
-    userCoursePlans: [],
     isLoading: false,
   },
   mutations: {
-    addUserCoursePlan(state, userCoursePlan) {
-      state.userCoursePlans.push(userCoursePlan);
-    },
-    updateUserCoursePlan(state, userCoursePlan) {
-      const index = state.userCoursePlans.findIndex(
-        _userCoursePlan => _userCoursePlan.id === userCoursePlan.id,
-      );
-      if (index < 0) return;
-
-      Vue.set(state.userCoursePlans, index, userCoursePlan);
-    },
-    deleteUserCoursePlan(state, userCoursePlan) {
-      const index = state.userCoursePlans.findIndex(
-        _userCoursePlan => _userCoursePlan.id === userCoursePlan.id,
-      );
-
-      if (index < 0) return;
-
-      Vue.delete(state.userCoursePlans, index);
-    },
     setIsLoading(state, isLoading) {
       state.isLoading = isLoading;
     },
@@ -40,7 +18,6 @@ export default {
       try {
         const userCoursePlan = await ApiClient.createUserCoursePlan(userCourseId, params);
 
-        context.commit('addUserCoursePlan', userCoursePlan);
         context.commit('models/userCourse/addUserCoursePlan', userCoursePlan, { root: true });
       } catch (error) {
         context.commit('api/setError', error, { root: true });
@@ -57,7 +34,6 @@ export default {
           userCourseId, userCoursePlanId, params,
         );
 
-        context.commit('updateUserCoursePlan', userCoursePlan);
         context.commit('models/userCourse/updateUserCoursePlan', userCoursePlan, { root: true });
       } catch (error) {
         context.commit('api/setError', error, { root: true });
@@ -74,7 +50,6 @@ export default {
           userCourseId, userCoursePlanId,
         );
 
-        context.commit('deleteUserCoursePlan', userCoursePlan);
         context.commit('models/userCourse/deleteUserCoursePlan', userCoursePlan, { root: true });
       } catch (error) {
         context.commit('api/setError', error, { root: true });
