@@ -93,12 +93,6 @@ export default {
             fill: false,
             data: this.getAveragePrecip(data),
           },
-          {
-            label: 'last year',
-            backgroundColor: '#2693CC',
-            fill: false,
-            data: this.getLastYearPrecip(data),
-          },
         ],
       };
     },
@@ -115,9 +109,6 @@ export default {
     },
     getThisYearPrecip(data) {
       return data.map(item => item.thisYear);
-    },
-    getLastYearPrecip(data) {
-      return data.map(item => item.lastYear);
     },
     getAveragePrecip(data) {
       return data.map(item => item.average);
