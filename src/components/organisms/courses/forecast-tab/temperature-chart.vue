@@ -88,12 +88,6 @@ export default {
             data: this.getThisYearTemp(data),
           },
           {
-            label: 'last year',
-            borderColor: '#2693CC',
-            fill: false,
-            data: this.getLastYearTemp(data),
-          },
-          {
             label: '平年値',
             borderColor: '#BCCFDF',
             fill: false,
@@ -110,9 +104,6 @@ export default {
     },
     getThisYearTemp(data) {
       return data.map(item => item.thisYear);
-    },
-    getLastYearTemp(data) {
-      return data.map(item => item.lastYear);
     },
     getAverageTemp(data) {
       return data.map(item => item.average);

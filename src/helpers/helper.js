@@ -9,6 +9,18 @@ export default {
   toShortString(targetDate) {
     return moment(targetDate).format('M/D (dd)');
   },
+  toDayString(targetDate) {
+    if (!targetDate) return '';
+    return moment(targetDate).format('DD日 (dd)');
+  },
+  toWeekDayString(targetDate) {
+    if (!targetDate) return '';
+    return moment(targetDate).format('DD（dd）');
+  },
+  toShortWithTimeString(targetDate) {
+    if (!targetDate) return '';
+    return moment(targetDate).format('MM月DD日hh:mm');
+  },
   getImage(filePath) {
     try {
       // NOTE: 画像のため依存関係が明らかなのでrequireのルールを除外

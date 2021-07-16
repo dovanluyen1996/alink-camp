@@ -112,7 +112,6 @@ export default {
   },
   async created() {
     await this.getCourse();
-    await this.getUserCourses();
   },
   methods: {
     goToCoursePlans() {

@@ -9,7 +9,7 @@
     <sticky-table class="ten-days-weather-table">
       <date-row :forecast-data="forecasts" />
       <weather-row :forecast-data="forecasts" />
-      <prob-precip-row :forecast-data="forecasts" />
+      <prob-precip-row :prob-precips="precips" />
       <temperature-row
         :forecast-data="forecasts"
         :is-highest="true"
@@ -18,8 +18,8 @@
         :forecast-data="forecasts"
         :is-lowest="true"
       />
-      <wind-direction-row :forecast-data="forecasts" />
-      <wind-speed-row :forecast-data="forecasts" />
+      <wind-direction-row :wind-directions="windDirections" />
+      <wind-speed-row :wind-speeds="windSpeeds" />
     </sticky-table>
   </div>
 </template>
@@ -59,6 +59,15 @@ export default {
     },
     userCoursePlan() {
       return (this.userCourse && this.userCourse.userCoursePlans[0]) || {};
+    },
+    windDirections() {
+      return this.forecasts ? this.forecasts.map(item => item.windDirection) : [];
+    },
+    windSpeeds() {
+      return this.forecasts ? this.forecasts.map(item => item.windSpeed) : [];
+    },
+    precips() {
+      return this.forecasts ? this.forecasts.map(item => item.precip) : [];
     },
   },
   watch: {

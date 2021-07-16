@@ -12,7 +12,7 @@
         :key="index"
       >
         <weather-image
-          :weather="weather"
+          :weather="weather.weatherData"
           image-width="40px"
         />
       </td>
@@ -75,6 +75,7 @@ export default {
     weathers() {
       return this.forecastData.map(data => ({
         weatherId: data.weatherImageName ? parseInt(data.weatherImageName.split('.jpg')[0], 10) : null,
+        weatherData: data,
         isSunrise: data.isSunrise,
         isSunset: data.isSunset,
       }));

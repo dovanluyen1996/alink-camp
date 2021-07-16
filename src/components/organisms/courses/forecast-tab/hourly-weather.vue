@@ -29,10 +29,10 @@
       </tr>
       <time-row :forecast-data="margedForecastsAndSuns" />
       <weather-row :forecast-data="margedForecastsAndSuns" />
-      <precipitation-row :forecast-data="forecastHourly.items" />
-      <temperature-row :forecast-data="forecastHourly.items" />
-      <wind-direction-row :forecast-data="forecastHourly.items" />
-      <wind-speed-row :forecast-data="forecastHourly.items" />
+      <precipitation-row :forecast-data="forecastData" />
+      <temperature-row :forecast-data="forecastData" />
+      <wind-direction-row :wind-directions="windDirections" />
+      <wind-speed-row :wind-speeds="windSpeeds" />
     </sticky-table>
   </div>
 </template>
@@ -74,7 +74,7 @@ export default {
       return (this.userCourse && this.userCourse.userCoursePlans[0]) || {};
     },
     displayDate() {
-      return this.$helpers.toWeekDay(this.forecastHourly.date);
+      return this.$helpers.toDayString(this.forecastHourly.date);
     },
     isToday() {
       const today = this.$moment().format('YYYY-MM-DD');
@@ -96,6 +96,15 @@ export default {
       const margeData = (this.forecastHourly.items || []).concat(suns);
 
       return margeData.sort((a, b) => this.convertMinutes(a.hour) - this.convertMinutes(b.hour));
+    },
+    forecastData() {
+      return this.forecastHourly.items;
+    },
+    windDirections() {
+      return this.forecastData ? this.forecastData.map(item => item.windDirection) : [];
+    },
+    windSpeeds() {
+      return this.forecastData ? this.forecastData.map(item => item.windSpeed) : [];
     },
   },
   watch: {

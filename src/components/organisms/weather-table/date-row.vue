@@ -37,7 +37,7 @@ export default {
   },
   methods: {
     displayDate(date) {
-      return this.$helpers.toWeekDay(date);
+      return this.$helpers.toWeekDayString(date);
     },
   },
 };

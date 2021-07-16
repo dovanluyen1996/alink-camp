@@ -9,7 +9,7 @@
         気温（℃）
       </v-ons-col>
       <v-ons-col class="chart-update">
-        {{ $helpers.toShortStringWithTime(temperatureForecastUpdatedAt) }}発表
+        {{ $helpers.toShortWithTimeString(temperatureForecastUpdatedAt) }}発表
       </v-ons-col>
     </v-ons-row>
     <temperature-chart :chart-data-updated-at.sync="temperatureForecastUpdatedAt" />
@@ -19,7 +19,7 @@
         降水量（mm）
       </v-ons-col>
       <v-ons-col class="chart-update">
-        {{ $helpers.toShortStringWithTime(precipForecastUpdatedAt) }}発表
+        {{ $helpers.toShortWithTimeString(precipForecastUpdatedAt) }}発表
       </v-ons-col>
     </v-ons-row>
     <prob-precip-chart :chart-data-updated-at.sync="precipForecastUpdatedAt" />

@@ -65,8 +65,7 @@ export default {
       return course.jalaUrl;
     },
     target() {
-      return '_self';
-      // return (cordova.platformId === 'browser') ? '_self' : '_blank';
+      return (cordova.platformId === 'browser') ? '_self' : '_blank';
     },
   },
 };
