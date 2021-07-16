@@ -69,21 +69,21 @@ export default {
     this.Forecast10Days = await this.getForecast10Days();
   },
   methods: {
-    getForecastScheduledDate() {
+    async getForecastScheduledDate() {
       if (!this.userCoursePlan) return null;
       const params = {
         course_id: this.useUserCourse.id,
         target_date: this.userCoursePlan.targetAt,
       };
 
-      return this.$store.dispatch('models/weather/getForecastScheduledDate', params);
+      return await this.$store.dispatch('models/weather/getForecastScheduledDate', params);
     },
-    getForecast10Days() {
+    async getForecast10Days() {
       const params = {
         course_id: this.useUserCourse.id,
       };
 
-      return this.$store.dispatch('models/weather/getForecast10Days', params);
+      return await this.$store.dispatch('models/weather/getForecast10Days', params);
     },
   },
 };
