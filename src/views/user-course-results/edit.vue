@@ -17,21 +17,21 @@
         <content-with-footer>
           <course-name :course-name="userCourse.course.name" />
 
-        <v-ons-card class="course-weather-and-image">
-          <v-ons-row class="course-weather-and-image-row">
-            <user-course-result-weather
-              v-if="weather"
-              :weather="weather"
-            />
-            <v-ons-col
-              v-else
-              class="no-data"
-            >
-              <label width="150px">No Data</label>
-            </v-ons-col>
-            <user-course-result-image v-model="tempUserCourseResult.image" />
-          </v-ons-row>
-        </v-ons-card>
+          <v-ons-card class="course-weather-and-image">
+            <v-ons-row class="course-weather-and-image-row">
+              <user-course-result-weather
+                v-if="weather"
+                :weather="weather"
+              />
+              <v-ons-col
+                v-else
+                class="no-data"
+              >
+                <label width="150px">No Data</label>
+              </v-ons-col>
+              <user-course-result-image v-model="tempUserCourseResult.image" />
+            </v-ons-row>
+          </v-ons-card>
 
           <user-course-result-target-date-field
             v-model="tempUserCourseResult.targetDate"
