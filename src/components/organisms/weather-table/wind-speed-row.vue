@@ -21,7 +21,6 @@ export default {
   props: {
     windSpeeds: {
       type: Array,
-      default: () => [],
       required: true,
     },
     colorTh: {

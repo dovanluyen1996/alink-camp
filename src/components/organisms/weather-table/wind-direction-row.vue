@@ -21,7 +21,6 @@ export default {
   props: {
     windDirections: {
       type: Array,
-      default: () => [],
       required: true,
     },
     colorTh: {
