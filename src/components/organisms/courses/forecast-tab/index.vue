@@ -1,15 +1,24 @@
 <template>
   <div class="courses-forecast-tab">
     <transition name="fade">
-      <hourly-weather v-if="isShownHourly">
+      <hourly-weather
+        v-if="isShownHourly"
+        :has-forecast-data.sync="hasForecastData"
+      >
         <template #switcher>
-          <forecast-switcher :segment-index.sync="segmentIndex" />
+          <forecast-switcher
+            :segment-index.sync="segmentIndex"
+            :segment-disabled="segmentDisabled"
+          />
         </template>
       </hourly-weather>
 
       <ten-days-weather v-if="isShownTenDays">
         <template #switcher>
-          <forecast-switcher :segment-index.sync="segmentIndex" />
+          <forecast-switcher
+            :segment-index.sync="segmentIndex"
+            :segment-disabled="segmentDisabled"
+          />
         </template>
       </ten-days-weather>
     </transition>
@@ -49,6 +58,8 @@ export default {
   data() {
     return {
       segmentIndex: segmentIndexes.hourly,
+      hasForecastData: true,
+      segmentDisabled: false,
     };
   },
   computed: {
@@ -57,6 +68,12 @@ export default {
     },
     isShownTenDays() {
       return this.segmentIndex === segmentIndexes.tenDays;
+    },
+  },
+  watch: {
+    hasForecastData() {
+      this.segmentIndex = this.hasForecastData ? segmentIndexes.hourly : segmentIndexes.tenDays;
+      this.segmentDisabled = !this.hasForecastData;
     },
   },
   methods: {
@@ -98,5 +115,9 @@ export default {
   top: 0;
   width: 100%;
   opacity: 0;
+}
+
+/deep/ ons-segment[disabled] {
+  opacity: 1;
 }
 </style>
