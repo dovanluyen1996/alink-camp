@@ -77,7 +77,15 @@ export default {
       return this.$store.getters['models/userCourse/findByCourseId'](this.course.id);
     },
     userCoursePlan() {
-      return (this.userCourse && this.userCourse.userCoursePlans[0]) || {};
+      if (!this.userCourse || this.$helpers.isEmptyObject(this.userCourse.userCoursePlans)) {
+        return {};
+      }
+
+      const futureUserCoursePlan = this.userCourse.userCoursePlans.find(
+        userCoursePlan => this.$helpers.isFutureTime(userCoursePlan.targetAt),
+      );
+
+      return futureUserCoursePlan || {};
     },
     displayDate() {
       return this.$helpers.toDayString(this.forecastHourly.date);
