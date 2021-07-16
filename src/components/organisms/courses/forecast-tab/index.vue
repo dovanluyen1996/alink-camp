@@ -15,7 +15,7 @@
     </transition>
 
     <a
-      href="https://golf-jalan.net/"
+      :href="reservationUrl()"
       class="reservation-button button button--large--cta button--rounded"
       :target="target()"
     >
@@ -60,8 +60,13 @@ export default {
     },
   },
   methods: {
+    reservationUrl() {
+      const course = this.$store.getters['course/choosenCourse'];
+      return course.jalaUrl;
+    },
     target() {
-      return (cordova.platformId === 'browser') ? '_self' : '_blank';
+      return '_self';
+      // return (cordova.platformId === 'browser') ? '_self' : '_blank';
     },
   },
 };

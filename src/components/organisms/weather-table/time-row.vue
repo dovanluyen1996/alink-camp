@@ -11,7 +11,7 @@
         :key="index"
         :date-time="time"
       >
-        {{ displayTime(time) }}
+        {{ time }}
       </td>
     </template>
   </tr>
@@ -31,11 +31,6 @@ export default {
   computed: {
     times() {
       return this.forecastData.map(data => data.hour);
-    },
-  },
-  methods: {
-    displayTime(time) {
-      return time;
     },
   },
 };
