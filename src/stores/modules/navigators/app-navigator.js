@@ -34,11 +34,18 @@ export default {
     replace({ commit }, page) {
       commit('replace', page);
     },
-    reset({ commit }, page) {
-      commit('reset', page);
+    reset(context, page) {
+      context.dispatch('clear');
+      context.commit('reset', page);
     },
-    clear({ commit }) {
-      commit('clear');
+    clear(context) {
+      context.commit('clear');
+      context.commit('appTabbar/setActiveIndex', 0, { root: true });
+      context.dispatch('courseWeatherNavigator/clear', null, { root: true });
+      context.dispatch('courseSearchNavigator/clear', null, { root: true });
+      context.dispatch('menuNavigator/clear', null, { root: true });
+      context.dispatch('scoresNavigator/clear', null, { root: true });
+      context.dispatch('windForecastNavigator/clear', null, { root: true });
     },
   },
 };

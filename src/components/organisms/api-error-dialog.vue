@@ -66,7 +66,7 @@ export default {
   methods: {
     close() {
       this.isVisible = false;
-
+      this.resetNavigators();
       if (this.isMaintainanceError || this.isUnauthorizedError) {
         // TODO: fix Navigator error
         this.resetNavigators();
@@ -85,14 +85,6 @@ export default {
       this.$store.dispatch('api/resetError');
     },
     resetNavigators() {
-      this.$store.dispatch('appNavigator/clear');
-      this.$store.dispatch('courseWeatherNavigator/clear');
-      this.$store.dispatch('courseSearchNavigator/clear');
-      this.$store.dispatch('menuNavigator/clear');
-      this.$store.dispatch('scoresNavigator/clear');
-      this.$store.dispatch('windForecastNavigator/clear');
-      this.$store.commit('appTabbar/setActiveIndex', 0);
-
       this.$store.dispatch('appNavigator/reset', StartIndex);
     },
   },
