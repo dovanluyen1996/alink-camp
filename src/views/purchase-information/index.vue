@@ -51,7 +51,7 @@ export default {
         localStorage.setItem('isCharged', true);
         return this.purchaseComplete();
       }
-      this.purchaseByRevenueCat();
+      return this.purchaseByRevenueCat();
     },
     purchaseByRevenueCat() {
       Purchases.getOfferings((offerings) => {

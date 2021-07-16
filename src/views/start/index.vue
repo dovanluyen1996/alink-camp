@@ -51,7 +51,7 @@ export default {
       return this.checkChargedStatusOnlyDebug();
     }
 
-    this.checkChargedStatus();
+    return this.checkChargedStatus();
   },
   methods: {
     async isAuthenticated() {
