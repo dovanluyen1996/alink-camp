@@ -81,7 +81,7 @@ export default {
     checkChargedStatus() {
       Purchases.getPurchaserInfo(
         async(purchaserInfo) => {
-          const isCharged = Object.entries(purchaserInfo.entitlements.active).length === 0;
+          const isCharged = Object.entries(purchaserInfo.entitlements.active).length > 0;
           this.checkChargedStatusComplete(isCharged);
         },
         (error) => {
