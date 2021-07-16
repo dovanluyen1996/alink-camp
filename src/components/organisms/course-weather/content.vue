@@ -76,14 +76,16 @@ export default {
         target_date: this.userCoursePlan.targetAt,
       };
 
-      return await this.$store.dispatch('models/weather/getForecastScheduledDate', params);
+      const forecasts = await this.$store.dispatch('models/weather/getForecastScheduledDate', params);
+      return forecasts;
     },
     async getForecast10Days() {
       const params = {
         course_id: this.useUserCourse.id,
       };
 
-      return await this.$store.dispatch('models/weather/getForecast10Days', params);
+      const forecasts = await this.$store.dispatch('models/weather/getForecast10Days', params);
+      return forecasts;
     },
   },
 };

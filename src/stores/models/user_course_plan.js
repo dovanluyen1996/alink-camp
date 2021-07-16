@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import ApiClient from '@/api_client';
-import moment from 'moment';
 
 export default {
   strict: true,
