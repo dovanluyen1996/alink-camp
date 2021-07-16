@@ -89,10 +89,11 @@ export default {
 
       table.scrollTo(x, 0);
     },
-    getForecast10Days() {
+    async getForecast10Days() {
       if (!this.course.id) return {};
 
-      return this.$store.dispatch('models/weather/getForecast10Days', { course_id: this.course.id });
+      const forecast10Days = await this.$store.dispatch('models/weather/getForecast10Days', { course_id: this.course.id });
+      return forecast10Days;
     },
   },
 };

@@ -19,7 +19,6 @@ export default {
   props: {
     chartDataUpdatedAt: {
       type: String,
-      default: '',
       required: true,
     },
   },
@@ -118,10 +117,11 @@ export default {
     getAverageTemp(data) {
       return data.map(item => item.average);
     },
-    getForecastMonthlyTemp() {
+    async getForecastMonthlyTemp() {
       if (!this.course.id) return null;
 
-      return this.$store.dispatch('models/weather/getForecastMonthlyTemp', { course_id: this.course.id });
+      const forecastMonthlyTemp = await this.$store.dispatch('models/weather/getForecastMonthlyTemp', { course_id: this.course.id });
+      return forecastMonthlyTemp;
     },
   },
 };

@@ -132,15 +132,15 @@ export default {
       const newTime = time.split(':');
       return (Number(newTime[0]) * 60) + Number(newTime[1] || 0);
     },
-    getForecastHourly() {
+    async getForecastHourly() {
       if (!this.course.id) return {};
 
       const params = {
         course_id: this.course.id,
         target_date: this.userCoursePlan.targetDate || this.$moment().format('YYYY-MM-DD'),
       };
-
-      return this.$store.dispatch('models/weather/getForecastHourly', params);
+      const forecastHourly = await this.$store.dispatch('models/weather/getForecastHourly', params);
+      return forecastHourly;
     },
   },
 };
