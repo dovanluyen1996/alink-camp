@@ -26,6 +26,9 @@ import WindForecastNavigator from '@/views/wind-forecast/wind-forecast-navigator
 import MenuNavigator from '@/views/menu/menu-navigator';
 import UserStampsCampaign from '@/views/user/user-stamps/campaign';
 
+// pages
+import CourseSearchIndexPage from '@/views/course-search/index';
+
 const menuTabIndex = settings.views.appTabbar.tabIndexes.menu;
 
 export default {
@@ -81,6 +84,10 @@ export default {
     },
     reactive(event) {
       if (event.activeIndex === menuTabIndex) this.closeMenu();
+
+      if (event.activeIndex === settings.views.appTabbar.tabIndexes.courseSearch) {
+        this.$store.dispatch('courseSearchNavigator/reset', CourseSearchIndexPage);
+      }
     },
     openMenu(lastActiveIndex) {
       // NOTE: @reactiveでは前のタブがとれないので
