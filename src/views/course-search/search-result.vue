@@ -76,22 +76,7 @@ export default {
         return;
       }
 
-      let params = null;
-      switch (this.searchType()) {
-      case 'area':
-        params = this.searchByAreaParams();
-        break;
-      case 'prefecture':
-        params = this.searchByPrefectureParams();
-        break;
-      case 'location':
-        params = this.searchByLocationParams();
-        break;
-      default:
-        params = this.searchByNameParams();
-      }
-
-      await this.$store.dispatch('models/course/getCourses', params)
+      await this.$store.dispatch('models/course/getCourses', this.searchParams())
         .then(() => {
           this.page += 1;
         })
@@ -124,6 +109,18 @@ export default {
         prefecture_id: this.searchConditions.prefecture,
         page: this.page,
       };
+    },
+    searchParams() {
+      switch (this.searchType()) {
+      case 'area':
+        return this.searchByAreaParams();
+      case 'prefecture':
+        return this.searchByPrefectureParams();
+      case 'location':
+        return this.searchByLocationParams();
+      default:
+        return this.searchByNameParams();
+      }
     },
   },
 };

@@ -139,7 +139,7 @@ export default {
       this.searchResultEmptyVisible = true;
     },
     goToSearchResult(params) {
-      const searchConditions = { ...params, ...{ type: 'area' } };
+      const searchConditions = { ...params, type: 'area' };
       this.$store.dispatch('courseSearchNavigator/push', {
         extends: SearchResult,
         onsNavigatorProps: {

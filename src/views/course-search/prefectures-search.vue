@@ -35,10 +35,7 @@ export default {
       this.goToSearchResult(prefecture);
     },
     goToSearchResult(prefecture) {
-      const searchConditions = {
-        prefecture,
-        type: 'prefecture',
-      };
+      const searchConditions = { prefecture, type: 'prefecture' };
 
       this.$store.dispatch('courseSearchNavigator/push', {
         extends: SearchResult,

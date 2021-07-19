@@ -73,10 +73,7 @@ export default {
 
       if (this.recordCount) {
         // Send search condition params to paging in search result
-        const searchConditions = {
-          type: 'name',
-          name: this.inputedValue,
-        };
+        const searchConditions = { ...params, name: this.inputedValue };
 
         this.$emit('searched', searchConditions);
       } else {
