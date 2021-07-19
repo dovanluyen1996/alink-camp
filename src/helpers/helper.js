@@ -47,8 +47,4 @@ export default {
   isPresentObject(object) {
     return Object.keys(object).length > 0;
   },
-
-  momentWithTimezoneOf(time) {
-    return moment(time);
-  },
 };
