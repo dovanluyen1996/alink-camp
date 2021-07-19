@@ -38,7 +38,7 @@ export default {
       this.$store.dispatch('courseSearchNavigator/push', {
         extends: SearchResult,
         onsNavigatorProps: {
-          title: `コース検索結果（${prefecture.text}）`,
+          title: prefecture.text,
         },
       });
     },
