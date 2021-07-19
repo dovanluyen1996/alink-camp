@@ -161,18 +161,22 @@ export default {
       this.searchByLocation();
     },
   },
-  async created() {
-    await this.getGeoLocation();
-  },
   methods: {
     searchByLocation() {
+      Promise.resolve()
+        .then(() => this.getGeoLocation())
+        .then(() => this.search())
+        .catch((e) => {
+          console.error(e);
+        });
+    },
+    search() {
       this.$refs.searchLocation.validate()
         .then(async(valid) => {
           // Reset before search result
           this.$store.dispatch('models/course/resetCourses');
 
           if (!valid) return;
-          if (!this.lat || !this.lon) return;
 
           const params = {
             lower_rad: this.lower_rad,
@@ -203,21 +207,26 @@ export default {
         },
       });
     },
-    async getGeoLocation() {
-      await navigator.geolocation.getCurrentPosition(
-        (position) => {
-          this.lat = position.coords.latitude;
-          this.lon = position.coords.longitude;
-        }, (e) => {
-          console.error(e);
-          this.showGeoLocationErrorDialog();
-        },
-        {
-          enableHighAccuracy: true,
-          timeout: 10000,
-          maximumAge: 0,
-        },
-      );
+    getGeoLocation() {
+      return new Promise((resolve, reject) => {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            this.lat = position.coords.latitude;
+            this.long = position.coords.longitude;
+
+            resolve();
+          }, (e) => {
+            this.lat = null;
+            this.lon = null;
+            this.showGeoLocationErrorDialog();
+
+            reject(e);
+          }, {
+            timeout: 30000,
+            enableHighAccuracy: true,
+          },
+        );
+      });
     },
     closeSearchResultEmptyDialog() {
       this.searchResultEmptyVisible = false;
