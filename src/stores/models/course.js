@@ -5,18 +5,34 @@ export default {
   strict: true,
   namespaced: true,
   state: {
-    courses: [],
+    courses: {
+      courses: [],
+      totalCount: 0,
+    },
     isLoading: false,
   },
   getters: {
-    all: state => state.courses,
-    size: state => state.courses.length,
+    all: state => state.courses.courses,
+    size: state => state.courses.courses.length,
+    totalCount: state => state.courses.totalCount,
   },
   mutations: {
     setIsLoading(state, isLoading) {
       state.isLoading = isLoading;
     },
     setCourses(state, courses) {
+      const newCourses = state.courses;
+      newCourses.courses = [...newCourses.courses, ...courses.courses];
+      newCourses.totalCount = courses.totalCount;
+
+      Vue.set(state, 'courses', newCourses);
+    },
+    resetCourses(state) {
+      const courses = {
+        courses: [],
+        totalCount: 0,
+      };
+
       Vue.set(state, 'courses', courses);
     },
   },
@@ -36,7 +52,7 @@ export default {
       }
     },
     resetCourses(context) {
-      context.commit('setCourses', []);
+      context.commit('resetCourses');
     },
   },
 };

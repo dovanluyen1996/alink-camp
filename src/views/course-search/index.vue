@@ -72,11 +72,12 @@ export default {
     goToConditionsSearch() {
       this.$store.dispatch('courseSearchNavigator/push', ConditionsSearch);
     },
-    goToSearchResult() {
+    goToSearchResult(searchConditions) {
       this.$store.dispatch('courseSearchNavigator/push', {
         extends: SearchResult,
         onsNavigatorProps: {
           title: 'コース検索結果',
+          searchConditions,
         },
       });
     },

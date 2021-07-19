@@ -72,7 +72,13 @@ export default {
       await this.$store.dispatch('models/course/getCourses', params);
 
       if (this.recordCount) {
-        this.$emit('searched');
+        // Send search condition params to paging in search result
+        const searchConditions = {
+          type: 'name',
+          name: this.inputedValue,
+        };
+
+        this.$emit('searched', searchConditions);
       } else {
         this.showSearchResultEmptyDialog();
       }
