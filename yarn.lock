@@ -3289,6 +3289,11 @@ cordova-plugin-whitelist@1:
   resolved "https://registry.yarnpkg.com/cordova-plugin-whitelist/-/cordova-plugin-whitelist-1.3.4.tgz#31938545c7c3e7de35c20ab08c2c3afa06e8a3f9"
   integrity sha512-EYC5eQFVkoYXq39l7tYKE6lEjHJ04mvTmKXxGL7quHLdFPfJMNzru/UYpn92AOfpl3PQaZmou78C7EgmFOwFQQ==
 
+cordova-plugin-x-socialsharing@^6.0.3:
+  version "6.0.3"
+  resolved "https://registry.yarnpkg.com/cordova-plugin-x-socialsharing/-/cordova-plugin-x-socialsharing-6.0.3.tgz#5ae9276a73f4201b7af8727219a6372ccc8ba2cd"
+  integrity sha512-pnrE2CXsz4G0n0WoFDAasLS1VT3nIsNpddvXgfpiqX3wyOlSjO2NdF+sjYaTvs1B+f7z8EWbYCHpCrgBQiMLIg==
+
 cordova-serve@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/cordova-serve/-/cordova-serve-3.0.0.tgz#974d695f75a9f2b3e487604be6f539a39dba8390"

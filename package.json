@@ -28,6 +28,7 @@
     "chart.js": "2.9.4",
     "cordova-plugin-firebasex": "13.0.0-cli",
     "cordova-plugin-purchases": "2.1.1",
+    "cordova-plugin-x-socialsharing": "^6.0.3",
     "geodesy": "^2.2.1",
     "moment-timezone": "^0.5.33",
     "moment": "^2.19.2",
@@ -127,7 +128,8 @@
         "GPS_REQUIRED": "true"
       },
       "cordova-plugin-buildinfo": {},
-      "cordova-plugin-purchases": {}
+      "cordova-plugin-purchases": {},
+      "cordova-plugin-x-socialsharing": {}
     },
     "platforms": [
       "ios",
