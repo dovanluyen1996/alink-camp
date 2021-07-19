@@ -25,6 +25,12 @@
           アプリデータを引き継ぐ
         </v-ons-button>
       </div>
+
+      <error-dialog
+        title="課金エラーが発生しました"
+        :is-visible="checkChargedStatusErrorVisible"
+        @close="closeCheckChargedStatusError"
+      />
     </div>
   </v-ons-page>
 </template>
@@ -36,9 +42,19 @@ import TermsOfService from '@/views/terms-of-service/unsigned';
 import FirstGuidance from '@/views/first-guidance';
 import AppTabbar from '@/views/app-tabbar';
 import PurchaseInformation from '@/views/purchase-information';
+import ErrorDialog from '@/components/organisms/error-dialog';
 
 export default {
   name: 'StartIndex',
+  components: {
+    ErrorDialog,
+  },
+  data() {
+    return {
+      error: null,
+      checkChargedStatusErrorVisible: false,
+    };
+  },
   async created() {
     // NOTE: Firebase Analytics Sample
     // if (window.device.platform != 'browser') {
@@ -84,9 +100,9 @@ export default {
           const isCharged = Object.entries(purchaserInfo.entitlements.active).length > 0;
           this.checkChargedStatusComplete(isCharged);
         },
-        (error) => {
-          // TODO: エラー時の処理実装 Issue#375
-          console.error(error);
+        () => {
+          this.checkChargedStatusErrorVisible = true;
+          this.checkChargedStatusComplete(false);
         },
       );
     },
@@ -103,6 +119,9 @@ export default {
       } else {
         this.$store.dispatch('appNavigator/push', PurchaseInformation);
       }
+    },
+    closeCheckChargedStatusError() {
+      this.checkChargedStatusErrorVisible = false;
     },
   },
 };

@@ -29,6 +29,12 @@
           </v-ons-button>
         </template>
       </content-with-footer>
+
+      <error-dialog
+        title="課金エラーが発生しました"
+        :is-visible="checkPurchaseErrorVisible"
+        @close="closePurchaseError"
+      />
     </div>
   </v-ons-page>
 </template>
@@ -36,6 +42,7 @@
 <script>
 // components
 import ContentWithFooter from '@/components/organisms/content-with-footer';
+import ErrorDialog from '@/components/organisms/error-dialog';
 
 // pages
 import StartIndex from '@/views/start';
@@ -44,6 +51,13 @@ export default {
   name: 'PurchaseInformation',
   components: {
     ContentWithFooter,
+    ErrorDialog,
+  },
+  data() {
+    return {
+      error: null,
+      checkPurchaseErrorVisible: false,
+    };
   },
   methods: {
     callToPurchase() {
@@ -64,18 +78,24 @@ export default {
               this.purchaseComplete();
             }
           },
-          ({ error }) => {
-            throw error;
+          // eslint-disable-next-line no-unused-vars
+          ({ error, userCancelled }) => {
+            if (!userCancelled) {
+              this.checkPurchaseErrorVisible = true;
+            }
           });
         }
-      }, (error) => {
-        // TODO: エラー時の処理実装 Issue#148
-        console.error(error);
+      }, () => {
+        this.checkPurchaseErrorVisible = true;
       });
     },
 
     purchaseComplete() {
       this.$store.dispatch('appNavigator/replace', StartIndex);
+    },
+
+    closePurchaseError() {
+      this.checkPurchaseErrorVisible = false;
     },
   },
 };
