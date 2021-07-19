@@ -21,6 +21,9 @@ export default {
     if (!targetDate) return '';
     return moment(targetDate).format('MM月DD日hh:mm');
   },
+  isFutureTime(time) {
+    return moment(time).isAfter(moment());
+  },
   getImage(filePath) {
     try {
       // NOTE: 画像のため依存関係が明らかなのでrequireのルールを除外

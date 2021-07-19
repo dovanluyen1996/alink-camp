@@ -1,5 +1,9 @@
 <template>
   <div class="temperature-chart-container">
+    <chart-header
+      title="気温（℃）"
+      :updated-at="chartUpdatedAt"
+    />
     <line-chart
       :chart-data="chartData"
       :options="options"
@@ -10,21 +14,18 @@
 
 <script>
 import LineChart from '@/components/atoms/chart/line-chart';
+import ChartHeader from '@/components/organisms/courses/forecast-tab/forecast-chart-header';
 
 export default {
   name: 'CoursesForecastTabTemperatureChart',
   components: {
     LineChart,
-  },
-  props: {
-    chartDataUpdatedAt: {
-      type: String,
-      required: true,
-    },
+    ChartHeader,
   },
   data() {
     return {
       chartData: {},
+      chartUpdatedAt: '',
       options: {
         legend: {
           position: 'bottom',
@@ -71,7 +72,7 @@ export default {
     async course() {
       const forecastMonthlyTemp = await this.getForecastMonthlyTemp();
       if (forecastMonthlyTemp) {
-        this.$emit('update:chartDataUpdatedAt', forecastMonthlyTemp.updatedAt);
+        this.chartUpdatedAt = forecastMonthlyTemp.updatedAt;
         this.fillData(forecastMonthlyTemp.items);
       }
     },

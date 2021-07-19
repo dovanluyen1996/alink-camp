@@ -8,7 +8,7 @@
     </th>
     <template v-for="(weather, index) in weathers">
       <td
-        v-if="weather"
+        v-if="weather.weatherData.weatherImageName"
         :key="index"
       >
         <weather-image
@@ -74,7 +74,6 @@ export default {
   computed: {
     weathers() {
       return this.forecastData.map(data => ({
-        weatherId: data.weatherImageName ? parseInt(data.weatherImageName.split('.jpg')[0], 10) : null,
         weatherData: data,
         isSunrise: data.isSunrise,
         isSunset: data.isSunset,

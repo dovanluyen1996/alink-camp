@@ -124,8 +124,6 @@ export default {
   watch: {
     async course() {
       this.forecastHourly = await this.getForecastHourly();
-    },
-    forecastHourly() {
       this.$emit('update:hasForecastData', Object.keys(this.forecastHourly).length !== 0);
     },
   },

@@ -116,8 +116,4 @@ export default {
   width: 100%;
   opacity: 0;
 }
-
-/deep/ ons-segment[disabled] {
-  opacity: 1;
-}
 </style>

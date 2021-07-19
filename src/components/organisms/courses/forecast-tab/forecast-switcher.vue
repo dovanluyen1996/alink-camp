@@ -2,6 +2,7 @@
   <v-ons-segment
     :index.sync="activeIndex"
     class="forecast-switcher"
+    :class="{ 'segment--disabled': segmentDisabled }"
     :disabled="segmentDisabled"
   >
     <button
@@ -52,7 +53,11 @@ export default {
   margin: 15px auto;
 }
 
-.segment__item:not(.segment__item--active) {
-  opacity: 0.5;
+.segment--disabled {
+  opacity: 1;
+
+  .segment__item:not(.segment__item--active) {
+    opacity: 0.5;
+  }
 }
 </style>

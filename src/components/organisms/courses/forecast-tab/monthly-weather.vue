@@ -4,25 +4,9 @@
       向こう一か月のお天気予測
     </div>
 
-    <v-ons-row class="chart-header">
-      <v-ons-col class="chart-title">
-        気温（℃）
-      </v-ons-col>
-      <v-ons-col class="chart-update">
-        {{ $helpers.toShortWithTimeString(temperatureForecastUpdatedAt) }}発表
-      </v-ons-col>
-    </v-ons-row>
-    <temperature-chart :chart-data-updated-at.sync="temperatureForecastUpdatedAt" />
+    <temperature-chart />
 
-    <v-ons-row class="chart-header">
-      <v-ons-col class="chart-title">
-        降水量（mm）
-      </v-ons-col>
-      <v-ons-col class="chart-update">
-        {{ $helpers.toShortWithTimeString(precipForecastUpdatedAt) }}発表
-      </v-ons-col>
-    </v-ons-row>
-    <prob-precip-chart :chart-data-updated-at.sync="precipForecastUpdatedAt" />
+    <prob-precip-chart />
   </div>
 </template>
 
@@ -36,12 +20,6 @@ export default {
   components: {
     TemperatureChart,
     ProbPrecipChart,
-  },
-  data() {
-    return {
-      temperatureForecastUpdatedAt: '',
-      precipForecastUpdatedAt: '',
-    };
   },
 };
 </script>

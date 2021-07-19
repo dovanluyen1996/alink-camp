@@ -1,5 +1,9 @@
 <template>
   <div class="prob-precip-chart-container">
+    <chart-header
+      title="降水量（mm）"
+      :updated-at="chartUpdatedAt"
+    />
     <bar-chart
       :chart-data="chartData"
       :options="options"
@@ -10,21 +14,18 @@
 
 <script>
 import BarChart from '@/components/atoms/chart/bar-chart';
+import ChartHeader from '@/components/organisms/courses/forecast-tab/forecast-chart-header';
 
 export default {
   name: 'CoursesForecastTabProbPrecipChart',
   components: {
     BarChart,
-  },
-  props: {
-    chartDataUpdatedAt: {
-      type: String,
-      required: true,
-    },
+    ChartHeader,
   },
   data() {
     return {
       chartData: {},
+      chartUpdatedAt: '',
       options: {
         maintainAspectRatio: false,
         legend: {
@@ -71,7 +72,7 @@ export default {
     async course() {
       const forecastMonthlyPrecip = await this.getForecastMonthlyPrecip();
       if (forecastMonthlyPrecip) {
-        this.$emit('update:chartDataUpdatedAt', forecastMonthlyPrecip.updatedAt);
+        this.chartUpdatedAt = forecastMonthlyPrecip.updatedAt;
         this.fillData(forecastMonthlyPrecip.items);
       }
     },
