@@ -1,20 +1,23 @@
 <template>
-  <v-ons-card v-if="helps.length > 0">
-    <div class="content">
-      <v-ons-list modifier="noborder">
-        <v-ons-list-item
-          v-for="help in helps"
-          :key="help.id"
-          modifier="longdivider"
-          @click="clickHelp(help)"
-        >
-          <div class="center">
-            <span class="list-item__title">{{ help.title }}</span>
-          </div>
-        </v-ons-list-item>
-      </v-ons-list>
-    </div>
-  </v-ons-card>
+  <div>
+    <loading :visible="isLoading" />
+    <v-ons-card v-if="helps.length > 0">
+      <div class="content">
+        <v-ons-list modifier="noborder">
+          <v-ons-list-item
+            v-for="help in helps"
+            :key="help.id"
+            modifier="longdivider"
+            @click="clickHelp(help)"
+          >
+            <div class="center">
+              <span class="list-item__title">{{ help.title }}</span>
+            </div>
+          </v-ons-list-item>
+        </v-ons-list>
+      </div>
+    </v-ons-card>
+  </div>
 </template>
 
 <script>
@@ -23,6 +26,9 @@ export default {
   computed: {
     helps() {
       return this.$store.getters['models/help/all'];
+    },
+    isLoading() {
+      return this.$store.getters['models/help/isLoading'];
     },
   },
   async created() {

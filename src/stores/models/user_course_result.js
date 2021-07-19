@@ -13,6 +13,7 @@ export default {
     findById: state => userCourseResultId => state.userCourseResults.find(
       userCourseResult => userCourseResult.id === userCourseResultId,
     ),
+    isLoading: state => state.isLoading,
   },
   mutations: {
     setUserCourseResults(state, userCourseResults) {

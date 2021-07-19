@@ -2,6 +2,7 @@
   <v-ons-page @show="show">
     <custom-toolbar title="スコア" />
     <div class="content">
+      <loading :visible="isLoading" />
       <no-data v-if="courses.length === 0">
         <p>
           まだスコア登録がありません。<br>
@@ -57,6 +58,9 @@ export default {
       const userCourses = this.$store.getters['models/userCourse/all'];
 
       return userCourses.map(userCourse => userCourse.course);
+    },
+    isLoading() {
+      return this.$store.getters['models/userCourse/isLoading'];
     },
   },
   methods: {

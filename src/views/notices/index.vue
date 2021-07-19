@@ -2,6 +2,7 @@
   <v-ons-page>
     <custom-toolbar title="お知らせ" />
     <div class="content">
+      <loading :visible="isLoading" />
       <notice-list
         v-if="notices.length > 0"
         :notices="notices"
@@ -26,6 +27,9 @@ export default {
   computed: {
     notices() {
       return this.$store.getters['models/notice/all'];
+    },
+    isLoading() {
+      return this.$store.getters['models/notice/isLoading'];
     },
   },
   async created() {

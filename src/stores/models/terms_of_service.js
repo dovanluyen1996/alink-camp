@@ -10,6 +10,7 @@ export default {
   },
   getters: {
     current: state => state.termsOfService,
+    isLoading: state => state.isLoading,
   },
   mutations: {
     setTermsOfService(state, termsOfService) {

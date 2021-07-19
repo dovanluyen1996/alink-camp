@@ -51,6 +51,7 @@ export default {
         return sort;
       },
     ),
+    isLoading: state => state.isLoading,
   },
   mutations: {
     setIsLoading(state, isLoading) {

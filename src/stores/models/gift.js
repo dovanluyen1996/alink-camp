@@ -11,6 +11,7 @@ export default {
   getters: {
     all: state => state.gifts,
     findById: state => giftId => state.gifts.find(gift => gift.id === giftId),
+    isLoading: state => state.isLoading,
   },
   mutations: {
     setGifts(state, gifts) {

@@ -2,6 +2,7 @@
   <v-ons-page @show="show">
     <custom-toolbar title="コースお天気" />
     <div class="content">
+      <loading :visible="isLoading" />
       <no-data v-if="userCourses.length === 0 && userCoursePlans.length === 0">
         <p>
           まだお気に入りや予定日設定しているコースがありません。<br>
@@ -49,6 +50,9 @@ export default {
     },
     userCoursePlans() {
       return this.$store.getters['models/userCourse/sortedInFuture'];
+    },
+    isLoading() {
+      return this.$store.getters['models/userCourse/isLoading'];
     },
   },
   methods: {

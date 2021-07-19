@@ -11,6 +11,7 @@ export default {
   getters: {
     all: state => state.notices,
     findById: state => noticeId => state.notices.find(notice => notice.id === noticeId),
+    isLoading: state => state.isLoading,
   },
   mutations: {
     setNotices(state, notices) {

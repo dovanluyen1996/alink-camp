@@ -3,6 +3,7 @@
     <custom-toolbar title="お問い合わせ" />
 
     <div class="content">
+      <loading :visible="isLoading" />
       <validation-observer
         ref="guidanceForm"
         v-slot="{ handleSubmit }"
@@ -136,6 +137,11 @@ export default {
       confirmDialogVisible: false,
       completeDialogVisible: false,
     };
+  },
+  computed: {
+    isLoading() {
+      return this.$store.getters['models/contact/isLoading'];
+    },
   },
   methods: {
     showConfirmDialog() {

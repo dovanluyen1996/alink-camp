@@ -3,8 +3,10 @@ import Vue from 'vue';
 
 // components
 import CustomToolbar from '@/components/organisms/custom-toolbar.vue';
+import Loading from '@/components/organisms/loading.vue';
 
 // style
 import '@/assets/scss/style.scss';
 
 Vue.component('CustomToolbar', CustomToolbar);
+Vue.component('Loading', Loading);

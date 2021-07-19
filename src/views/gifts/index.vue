@@ -2,6 +2,7 @@
   <v-ons-page>
     <custom-toolbar title="特典交換" />
     <div class="content">
+      <loading :visible="isLoading" />
       <ticket-info
         :ticket-count="currentUser.ticketCount"
         :user-stamp-number="userStamp.number"
@@ -38,6 +39,13 @@ export default {
     },
     userStamp() {
       return this.$store.state.models.userStamp.userStamp;
+    },
+    isLoading() {
+      const isLoadingGift = this.$store.getters['models/gift/isLoading'];
+      const isGettingUser = this.$store.getters['models/currentUser/isLoading'];
+      const isGettingUserStamp = this.$store.getters['models/userStamp/isLoading'];
+
+      return isLoadingGift || isGettingUser || isGettingUserStamp;
     },
   },
   async created() {

@@ -1,5 +1,6 @@
 <template>
   <div class="terms-of-service-description">
+    <loading :visible="isLoading" />
     <!-- eslint-disable-next-line vue/no-v-html -->
     <div v-html="description" />
   </div>
@@ -9,6 +10,9 @@
 export default {
   name: 'TermsOfServiceDescription',
   computed: {
+    isLoading() {
+      return this.$store.getters['models/termsOfService/isLoading'];
+    },
     termsOfService() {
       return this.$store.getters['models/termsOfService/current'];
     },

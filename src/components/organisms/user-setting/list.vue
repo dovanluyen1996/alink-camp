@@ -4,6 +4,7 @@
       PUSH設定
     </template>
 
+    <loading :visible="isLoading" />
     <v-ons-list modifier="noborder">
       <v-ons-list-item modifier="nodivider">
         <div class="center">
@@ -54,6 +55,9 @@ export default {
   computed: {
     userSetting() {
       return this.$store.getters['models/userSetting/userSetting'];
+    },
+    isLoading() {
+      return this.$store.getters['models/userSetting/isLoading'];
     },
     isReceivableWeatherForecast: {
       get() {

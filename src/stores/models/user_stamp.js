@@ -8,6 +8,9 @@ export default {
     userStamp: {},
     isLoading: false,
   },
+  getters: {
+    isLoading: state => state.isLoading,
+  },
   mutations: {
     setUserStamp(state, userStamp) {
       Vue.set(state, 'userStamp', userStamp);

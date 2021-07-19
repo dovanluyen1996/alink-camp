@@ -11,6 +11,7 @@ export default {
   getters: {
     all: state => state.helps,
     findById: state => helpId => state.helps.find(help => help.id === helpId),
+    isLoading: state => state.isLoading,
   },
   mutations: {
     setHelps(state, helps) {

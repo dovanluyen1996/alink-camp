@@ -10,6 +10,7 @@ export default {
   },
   getters: {
     current: state => state.privacyPolicy,
+    isLoading: state => state.isLoading,
   },
   mutations: {
     setPrivacyPolicy(state, privacyPolicy) {

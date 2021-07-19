@@ -10,6 +10,7 @@ export default {
   },
   getters: {
     userSetting: state => state.userSetting,
+    isLoading: state => state.isLoading,
   },
   mutations: {
     setUserSetting(state, userSetting) {

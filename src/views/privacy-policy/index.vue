@@ -3,6 +3,7 @@
     <custom-toolbar title="プライバシーポリシー" />
 
     <v-ons-card fullscreen>
+      <loading :visible="isLoading" />
       <!-- eslint-disable-next-line vue/no-v-html -->
       <div v-html="description" />
     </v-ons-card>
@@ -12,6 +13,9 @@
 <script>
 export default {
   computed: {
+    isLoading() {
+      return this.$store.getters['models/privacyPolicy/isLoading'];
+    },
     privacyPolicy() {
       return this.$store.getters['models/privacyPolicy/current'];
     },

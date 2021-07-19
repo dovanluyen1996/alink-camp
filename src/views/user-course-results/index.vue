@@ -3,6 +3,7 @@
     <custom-toolbar title="サマリー情報" />
 
     <div class="content">
+      <loading :visible="isLoading" />
       <content-with-footer>
         <course-name :course-name="userCourse.course.name" />
         <v-ons-card>
@@ -89,6 +90,9 @@ export default {
   computed: {
     userCourseResults() {
       return this.$store.getters['models/userCourseResult/all'];
+    },
+    isLoading() {
+      return this.$store.getters['models/userCourseResult/isLoading'];
     },
   },
   async created() {
