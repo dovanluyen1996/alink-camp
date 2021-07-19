@@ -206,9 +206,6 @@ export default {
     async getGeoLocation() {
       await navigator.geolocation.getCurrentPosition(
         (position) => {
-          console.log(`lat: ${position.coords.latitude}`);
-          console.log(`lon: ${position.coords.longitude}`);
-
           this.lat = position.coords.latitude;
           this.lon = position.coords.longitude;
         }, (e) => {
