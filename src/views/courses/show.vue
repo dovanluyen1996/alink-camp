@@ -86,7 +86,11 @@ export default {
         return {};
       }
 
-      const futureUserCoursePlan = this.userCourse.userCoursePlans.find(
+      const { userCoursePlans } = this.userCourse;
+      const sortedUserCoursePlans = userCoursePlans.sort(
+        (a, b) => this.$moment(a.targetAt).valueOf() - this.$moment(b.targetAt).valueOf(),
+      );
+      const futureUserCoursePlan = sortedUserCoursePlans.find(
         userCoursePlan => this.$helpers.isFutureTime(userCoursePlan.targetAt),
       );
 
