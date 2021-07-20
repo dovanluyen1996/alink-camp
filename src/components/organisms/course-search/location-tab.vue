@@ -159,8 +159,6 @@ export default {
       if (this.activeIndex !== 1) return;
       // Watch click search button event.
       if (!this.searched) return;
-      // Reset search flag to false
-      this.$store.commit('course/setSearched', false);
 
       this.searchByLocation();
     },
@@ -168,14 +166,14 @@ export default {
   methods: {
     searchByLocation() {
       Promise.resolve()
-        .then(() => this.$store.commit('course/setSearching', true))
         .then(() => this.getGeoLocation())
         .then(() => this.search())
         .catch((e) => {
           console.error(e);
         })
         .finally(() => {
-          this.$store.commit('course/setSearching', false);
+          // Reset search flag to false
+          this.$store.commit('course/setSearched', false);
         });
     },
     search() {
