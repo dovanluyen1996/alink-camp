@@ -178,6 +178,11 @@ export default {
 
           if (!valid) return;
 
+          console.log("===== search");
+          console.log(this.lat);
+          console.log(this.lon);
+          console.log("===== /search");
+
           const params = {
             lower_rad: this.lower_rad,
             upper_rad: this.upper_rad,
@@ -212,7 +217,12 @@ export default {
         navigator.geolocation.getCurrentPosition(
           (position) => {
             this.lat = position.coords.latitude;
-            this.long = position.coords.longitude;
+            this.lon = position.coords.longitude;
+
+            console.log("===== getGeoLocation");
+            console.log(this.lat);
+            console.log(this.lon);
+            console.log("===== /getGeoLocation");
 
             resolve();
           }, (e) => {
