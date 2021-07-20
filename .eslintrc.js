@@ -15,6 +15,7 @@ module.exports = {
     FirebasePlugin: true,
     Adjust: true,
     AdjustConfig: true,
+    AdjustEvent: true,
     Purchases: true,
     BuildInfo: true,
   },

@@ -61,6 +61,8 @@ export default {
       this.goToUserNew();
     },
     goToUserNew() {
+      const adjustEvent = new AdjustEvent(process.env.ADJUST_TUTORIAL_COMPLETED_EVENT_ID);
+      Adjust.trackEvent(adjustEvent);
       this.$store.dispatch('appNavigator/push', UserNew);
     },
   },

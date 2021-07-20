@@ -83,6 +83,8 @@ export default {
     },
     submitUserData() {
       this.$store.dispatch('models/currentUser/updateUser', this.user).then(() => {
+        const adjustEvent = new AdjustEvent(process.env.ADJUST_REGISTRATION_COMPLETED_EVENT_ID);
+        Adjust.trackEvent(adjustEvent);
         this.$store.dispatch('appNavigator/push', AppTabbar);
       });
     },
