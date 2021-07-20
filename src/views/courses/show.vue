@@ -4,9 +4,9 @@
     <div class="content">
       <div class="course-show-header">
         <v-ons-button
-          :configured="is_favorited"
+          :configured="favorited"
           modifier="large rounded"
-          @click="toggleFavorite"
+          @click="settingFavorited"
         >
           {{ favoriteButtonText }}
         </v-ons-button>
@@ -58,7 +58,6 @@ export default {
   },
   data() {
     return {
-      is_favorited: true,
       tabs: [
         {
           label: '天気予報詳細',
@@ -73,7 +72,7 @@ export default {
   },
   computed: {
     favoriteButtonText() {
-      return this.is_favorited ? 'お気に入り追加済' : 'お気に入り追加';
+      return this.favorited ? 'お気に入り追加済' : 'お気に入り追加';
     },
     plansButtonText() {
       return this.planned ? `予定日：${this.$helpers.localDateFrom(this.userCoursePlan.targetAt)}` : '予定日設定';
@@ -99,15 +98,15 @@ export default {
     planned() {
       return this.$helpers.isPresentObject(this.userCoursePlan);
     },
+    favorited() {
+      return this.userCourse ? this.userCourse.isFavorited : false;
+    },
   },
   async created() {
     await this.getCourse();
     await this.getUserCourses();
   },
   methods: {
-    toggleFavorite() {
-      this.is_favorited = !this.is_favorited;
-    },
     goToCoursePlans() {
       this.$store.dispatch('courseSearchNavigator/push', {
         extends: CoursePlans,
@@ -126,6 +125,31 @@ export default {
     },
     async getUserCourses() {
       await this.$store.dispatch('models/userCourse/getUserCourses');
+    },
+    async settingFavorited() {
+      if (this.userCourse) {
+        await this.updateUserCourseFavorited();
+      } else {
+        await this.createUserCourseFavorited();
+      }
+    },
+    async createUserCourseFavorited() {
+      const params = {
+        courseId: this.course.id,
+        isFavorited: true,
+      };
+
+      await this.$store.dispatch('models/userCourse/createUserCourse', params);
+    },
+    async updateUserCourseFavorited() {
+      const params = {
+        isFavorited: !this.favorited,
+      };
+
+      await this.$store.dispatch('models/userCourse/updateUserCourse', {
+        userCourseId: this.userCourse.id,
+        params,
+      });
     },
   },
 };
