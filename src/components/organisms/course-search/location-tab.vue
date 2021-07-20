@@ -229,7 +229,6 @@ export default {
             reject(e);
           }, {
             timeout: 30000,
-            enableHighAccuracy: true,
           },
         );
       });
