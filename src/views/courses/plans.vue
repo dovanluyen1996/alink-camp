@@ -1,8 +1,7 @@
 <template>
   <v-ons-page>
     <custom-toolbar
-      :title="title"
-      subtitle="（予定日設定）"
+      title="予定日設定"
     >
       <template #right>
         <div
@@ -112,9 +111,6 @@ export default {
     };
   },
   computed: {
-    title() {
-      return this.course.name;
-    },
     isPersisted() {
       return this.$helpers.isPresentObject(this.userCoursePlan);
     },
