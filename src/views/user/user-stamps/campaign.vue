@@ -74,7 +74,7 @@ export default {
   watch: {
     async lastVisitedAt(value) {
       const lastGettedAt = localStorage.getItem('userStampLastGettedAt');
-      if (!lastGettedAt || this.$helpers.isAfterTime(value, lastGettedAt)) {
+      if (!lastGettedAt || this.$helpers.isAfterDate(value, lastGettedAt)) {
         this.isVisible = true;
         await this.getUserStamp();
         localStorage.setItem('userStampLastGettedAt', value);

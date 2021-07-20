@@ -32,8 +32,8 @@ export default {
   },
 
   // 日付を取得するため。javascriptにはyyyy-mm-ddのフォーマットを使わないといけないです。
-  localDateWithHyphenFrom(time) {
-    return moment(time).format('YYYY-MM-DD');
+  localDateWithHyphenFrom(targetDate) {
+    return moment(targetDate).format('YYYY-MM-DD');
   },
 
   isFutureTime(time) {
@@ -48,7 +48,7 @@ export default {
     return Object.keys(object).length > 0;
   },
 
-  isAfterTime(compareTime, time) {
-    return moment(compareTime).isAfter(time);
+  isAfterDate(compareDate, targetDate) {
+    return moment(compareDate).isAfter(targetDate);
   },
 };
