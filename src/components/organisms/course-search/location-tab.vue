@@ -145,8 +145,12 @@ export default {
         this.lower_rad = 100;
         this.upper_rad = 200;
         break;
-      default:
+      case 2:
         this.lower_rad = 201;
+        this.upper_rad = null;
+        break;
+      default:
+        this.lower_rad = null;
         this.upper_rad = null;
       }
     },
@@ -177,11 +181,6 @@ export default {
           this.$store.dispatch('models/course/resetCourses');
 
           if (!valid) return;
-
-          console.log("===== search");
-          console.log(this.lat);
-          console.log(this.lon);
-          console.log("===== /search");
 
           const params = {
             lower_rad: this.lower_rad,
@@ -218,11 +217,6 @@ export default {
           (position) => {
             this.lat = position.coords.latitude;
             this.lon = position.coords.longitude;
-
-            console.log("===== getGeoLocation");
-            console.log(this.lat);
-            console.log(this.lon);
-            console.log("===== /getGeoLocation");
 
             resolve();
           }, (e) => {
