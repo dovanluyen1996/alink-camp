@@ -62,11 +62,7 @@ export default {
         return {};
       }
 
-      const futureUserCoursePlan = this.userCourse.userCoursePlans.find(
-        userCoursePlan => this.$helpers.isFutureTime(userCoursePlan.targetAt),
-      );
-
-      return futureUserCoursePlan || {};
+      return this.$store.getters['models/userCourse/sortedInFuture'][0] || {};
     },
     windDirections() {
       return this.forecasts ? this.forecasts.map(item => item.windDirection) : [];
@@ -99,7 +95,7 @@ export default {
       const table = this.$el.querySelector('.ten-days-weather-table');
       const dateRow = table.querySelector('.date-row');
       const th = dateRow.querySelector('th');
-      const plans = this.userCoursePlan.targetDate || this.$moment().format('YYYY-MM-DD');
+      const plans = this.userCoursePlan.targetAt || this.$moment().format('YYYY-MM-DD');
       const plansCol = dateRow.querySelector(`[date-day="${plans}"]`);
       if (!plansCol) return;
       const x = plansCol.offsetLeft - th.offsetWidth;

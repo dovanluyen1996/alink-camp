@@ -21,8 +21,8 @@ export default {
     if (!targetDate) return '';
     return moment(targetDate).format('MM月DD日hh:mm');
   },
-  isFutureTime(time) {
-    return moment(time).isAfter(moment());
+  localDateFrom(time) {
+    return moment(time).format('YYYY/MM/DD');
   },
   getImage(filePath) {
     try {

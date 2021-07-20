@@ -79,7 +79,7 @@ export default {
   methods: {
     reservationUrl() {
       const course = this.$store.getters['course/choosenCourse'];
-      return course.jalaUrl;
+      return course.jalanUrl;
     },
     target() {
       return (cordova.platformId === 'browser') ? '_self' : '_blank';

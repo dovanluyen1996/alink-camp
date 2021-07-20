@@ -81,18 +81,14 @@ export default {
         return {};
       }
 
-      const futureUserCoursePlan = this.userCourse.userCoursePlans.find(
-        userCoursePlan => this.$helpers.isFutureTime(userCoursePlan.targetAt),
-      );
-
-      return futureUserCoursePlan || {};
+      return this.$store.getters['models/userCourse/sortedInFuture'][0] || {};
     },
     displayDate() {
       return this.$helpers.toDayString(this.forecastHourly.date);
     },
     isToday() {
       const today = this.$moment().format('YYYY-MM-DD');
-      if (!this.userCoursePlan.targetDate) return false;
+      if (!this.userCoursePlan.targetAt) return false;
 
       return this.$moment(today).isSame(this.forecastHourly.date);
     },
@@ -157,11 +153,11 @@ export default {
       return (Number(newTime[0]) * 60) + Number(newTime[1] || 0);
     },
     async getForecastHourly() {
-      if (!this.course.id || !this.userCoursePlan.targetDate) return {};
+      if (!this.course.id || !this.userCoursePlan.targetAt) return {};
 
       const params = {
         course_id: this.course.id,
-        target_date: this.userCoursePlan.targetDate,
+        target_date: this.userCoursePlan.targetAt,
       };
       const forecastHourly = await this.$store.dispatch('models/weather/getForecastHourly', params);
       return forecastHourly;
