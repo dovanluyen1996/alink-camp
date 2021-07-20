@@ -66,9 +66,8 @@ export default {
   methods: {
     close() {
       this.isVisible = false;
-      this.resetNavigators();
+
       if (this.isMaintainanceError || this.isUnauthorizedError) {
-        // TODO: fix Navigator error
         this.resetNavigators();
       }
       if (this.isVersionInvalidError) {
