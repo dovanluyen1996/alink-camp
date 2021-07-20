@@ -34,7 +34,7 @@ export default {
   },
   computed: {
     image() {
-      return this.$helpers.getImage(`weathers/weather/${this.weather.weather_image_name}`);
+      return this.$helpers.getImage(`weathers/weather/${this.weather.weatherImageName}`);
     },
     alt() {
       return (this.isShownName) ? null : this.weather.forecastTelop;

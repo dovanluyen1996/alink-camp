@@ -100,7 +100,7 @@ export default {
   },
   computed: {
     weather() {
-      return JSON.parse(this.userCourseResult.weather);
+      return this.userCourseResult.weather;
     },
   },
   methods: {

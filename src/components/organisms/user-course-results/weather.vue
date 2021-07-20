@@ -12,7 +12,7 @@
     <div class="course-weather-temperature course-weather-temperature--high">
       最高
       <temperature-component
-        :value="weather.max_temp"
+        :value="weather.maxTemp"
         font-size="16px"
       />
     </div>
@@ -20,7 +20,7 @@
     <div class="course-weather-temperature course-weather-temperature--low">
       最低
       <temperature-component
-        :value="weather.min_temp"
+        :value="weather.minTemp"
         font-size="16px"
       />
     </div>

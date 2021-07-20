@@ -55,9 +55,9 @@ export default {
       let temperatures;
 
       if (this.isHighest) {
-        temperatures = this.forecastData.map(data => (data ? data.max_temp : null));
+        temperatures = this.forecastData.map(data => (data ? data.maxTemp : null));
       } else {
-        temperatures = this.forecastData.map(data => (data ? data.min_temp : null));
+        temperatures = this.forecastData.map(data => (data ? data.minTemp : null));
       }
 
       return temperatures;
