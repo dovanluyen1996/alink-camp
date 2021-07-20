@@ -9,6 +9,7 @@ export default {
     choosenCourse: {},
     isLoading: false,
     searched: false,
+    searching: false,
   },
   getters: {
     viewedCourses: state => state.viewedCourses,
@@ -46,6 +47,9 @@ export default {
     },
     setSearched(state, searched) {
       state.searched = searched;
+    },
+    setSearching(state, searching) {
+      state.searching = searching;
     },
   },
   actions: {

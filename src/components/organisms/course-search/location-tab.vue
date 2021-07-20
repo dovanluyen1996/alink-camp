@@ -168,10 +168,14 @@ export default {
   methods: {
     searchByLocation() {
       Promise.resolve()
+        .then(() => this.$store.commit('course/setSearching', true))
         .then(() => this.getGeoLocation())
         .then(() => this.search())
         .catch((e) => {
           console.error(e);
+        })
+        .finally(() => {
+          this.$store.commit('course/setSearching', false);
         });
     },
     search() {

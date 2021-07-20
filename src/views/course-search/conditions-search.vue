@@ -11,6 +11,7 @@
         <template #footer>
           <v-ons-button
             modifier="large--cta rounded"
+            :disabled="searching"
             @click="search()"
           >
             絞り込み選択
@@ -55,6 +56,9 @@ export default {
   computed: {
     activeIndex() {
       return this.$store.state.components.cardWithTab.activeIndex;
+    },
+    searching() {
+      return this.$store.state.course.searching;
     },
   },
   methods: {
