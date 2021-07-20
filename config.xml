@@ -25,15 +25,15 @@
         <allow-intent href="itms-apps:*" />
 
         <config-file target="*-Info.plist" parent="NSLocationAlwaysAndWhenInUseUsageDescription">
-          <string>need location access to find things nearby</string>
+          <string>位置情報をコース検索に利用します</string>
         </config-file>
 
         <config-file target="*-Info.plist" parent="NSLocationAlwaysUsageDescription">
-            <string>need location access to find things nearby</string>
+            <string>位置情報をコース検索に利用します</string>
         </config-file>
 
         <config-file target="*-Info.plist" parent="NSLocationWhenInUseUsageDescription">
-            <string>need location access to find things nearby</string>
+            <string>位置情報をコース検索に利用します</string>
         </config-file>
     </platform>
 </widget>
