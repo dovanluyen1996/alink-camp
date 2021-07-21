@@ -37,6 +37,7 @@ export default {
           console.log(position);
           this.goToPushNotification();
         }, (e) => {
+          console.log(e);
           this.goToPushNotification();
         }, {
           timeout: 30000,
