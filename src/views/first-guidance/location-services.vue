@@ -14,6 +14,25 @@
           </v-ons-button>
         </template>
       </content-with-footer>
+
+      <v-ons-alert-dialog
+        :visible.sync="geoLocationErrorVisible"
+      >
+        <template #title>
+          位置情報が取得できませんでした
+        </template>
+
+        位置情報が取得できませんでした。<br>
+        お手数ですが、通信状況の良いところで再度お試しください。
+
+        <template #footer>
+          <v-ons-button
+            @click="closeGeoLocationErrorDialog()"
+          >
+            OK
+          </v-ons-button>
+        </template>
+      </v-ons-alert-dialog>
     </div>
   </v-ons-page>
 </template>
@@ -30,6 +49,11 @@ export default {
   components: {
     ContentWithFooter,
   },
+  data() {
+    return {
+      geoLocationErrorVisible: false,
+    };
+  },
   methods: {
     callToLocationServicesDialog() {
       navigator.geolocation.getCurrentPosition(
@@ -38,7 +62,7 @@ export default {
           this.goToPushNotification();
         }, (e) => {
           console.log(e);
-          this.goToPushNotification();
+          this.showGeoLocationErrorDialog();
         }, {
           timeout: 30000,
         },
@@ -46,6 +70,13 @@ export default {
     },
     goToPushNotification() {
       this.$store.dispatch('appNavigator/push', PushNotification);
+    },
+    closeGeoLocationErrorDialog() {
+      this.geoLocationErrorVisible = false;
+      this.goToPushNotification();
+    },
+    showGeoLocationErrorDialog() {
+      this.geoLocationErrorVisible = true;
     },
   },
 };
