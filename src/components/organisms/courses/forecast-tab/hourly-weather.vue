@@ -77,11 +77,7 @@ export default {
       return this.$store.getters['models/userCourse/findByCourseId'](this.course.id);
     },
     userCoursePlan() {
-      if (!this.userCourse || this.$helpers.isEmptyObject(this.userCourse.userCoursePlans)) {
-        return {};
-      }
-
-      return this.$store.getters['models/userCourse/sortedInFuture'][0] || {};
+      return this.$store.getters['models/userCourse/nearestPlan'](this.course.id);
     },
     displayDate() {
       return this.$helpers.toDayString(this.forecastHourly.date);

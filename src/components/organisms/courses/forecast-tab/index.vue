@@ -80,6 +80,7 @@ export default {
     },
     course() {
       this.segmentIndex = segmentIndexes.hourly;
+      this.segmentDisabled = false;
     },
   },
   methods: {

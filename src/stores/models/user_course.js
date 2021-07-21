@@ -51,6 +51,22 @@ export default {
         return sort;
       },
     ),
+    nearestPlan: (state, getters) => (courseId) => {
+      const userCourse = getters.findByCourseId(courseId);
+      if (!userCourse) return {};
+
+      const userCoursePlans = userCourse.userCoursePlans.slice();
+      if (!userCoursePlans) return {};
+
+      const sortedUserCoursePlans = userCoursePlans.sort(
+        (a, b) => moment(a.targetAt).valueOf() - moment(b.targetAt).valueOf(),
+      );
+      const futureUserCoursePlan = sortedUserCoursePlans.find(
+        userCoursePlan => moment(userCoursePlan.targetAt).isAfter(moment()),
+      );
+
+      return futureUserCoursePlan || {};
+    },
     isLoading: state => state.isLoading,
   },
   mutations: {

@@ -89,19 +89,7 @@ export default {
       return this.$store.getters['models/userCourse/findByCourseId'](this.course.id);
     },
     userCoursePlan() {
-      if (!this.userCourse || this.$helpers.isEmptyObject(this.userCourse.userCoursePlans)) {
-        return {};
-      }
-
-      const { userCoursePlans } = this.userCourse;
-      const sortedUserCoursePlans = userCoursePlans.sort(
-        (a, b) => this.$moment(a.targetAt).valueOf() - this.$moment(b.targetAt).valueOf(),
-      );
-      const futureUserCoursePlan = sortedUserCoursePlans.find(
-        userCoursePlan => this.$helpers.isFutureTime(userCoursePlan.targetAt),
-      );
-
-      return futureUserCoursePlan || {};
+      return this.$store.getters['models/userCourse/nearestPlan'](this.course.id);
     },
     planned() {
       return this.$helpers.isPresentObject(this.userCoursePlan);
