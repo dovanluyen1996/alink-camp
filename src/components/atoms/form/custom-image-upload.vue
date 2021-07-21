@@ -24,6 +24,11 @@
       width="150px"
       class="image"
     >
+    <div v-show="imagePath">
+      <button class="upload-button" @click="socialSharing">
+        写真をシェア
+      </button>
+    </div>
     <div v-show="!imagePath">
       <label class="upload-button">
         写真をアップロード
@@ -88,6 +93,9 @@ export default {
     },
   },
   methods: {
+    socialSharing() {
+      window.plugins.socialsharing.share(null, null, this.imagePath, null);
+    },
     selectImage(e) {
       const image = e.target.files[0];
       this.createImage(image);
