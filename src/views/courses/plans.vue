@@ -19,6 +19,7 @@
     </custom-toolbar>
 
     <div class="content">
+      <course-name :course-name="course.name" />
       <validation-observer
         v-slot="{ handleSubmit }"
       >
@@ -84,6 +85,7 @@
 import DateField from '@/components/organisms/form/date-field';
 import TimeField from '@/components/organisms/form/time-field';
 import ContentWithFooter from '@/components/organisms/content-with-footer';
+import CourseName from '@/components/organisms/course-name';
 
 export default {
   name: 'CoursePlans',
@@ -91,6 +93,7 @@ export default {
     DateField,
     TimeField,
     ContentWithFooter,
+    CourseName,
   },
   props: {
     course: {

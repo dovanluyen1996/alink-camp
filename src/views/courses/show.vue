@@ -1,24 +1,25 @@
 <template>
   <v-ons-page>
-    <custom-toolbar :title="course.name" />
+    <custom-toolbar title="ゴルフ場情報" />
     <div class="content">
+      <course-name :course-name="course.name" />
       <div class="course-show-header">
         <v-ons-button
           :configured="favorited"
-          modifier="large rounded"
+          modifier="large rounded favorite"
           @click="settingFavorited"
         >
           {{ favoriteButtonText }}
         </v-ons-button>
         <v-ons-button
           :configured="planned"
-          modifier="large rounded"
+          modifier="large rounded plan"
           @click="goToCoursePlans"
         >
           {{ plansButtonText }}
         </v-ons-button>
         <v-ons-button
-          modifier="large rounded"
+          modifier="large rounded score"
           @click="goToScore"
         >
           スコア状況
@@ -37,6 +38,7 @@
 <script>
 // components
 import CardWithTab from '@/components/organisms/card-with-tab';
+import CourseName from '@/components/organisms/course-name';
 
 // tab contents
 import CoursesForecastTab from '@/components/organisms/courses/forecast-tab';
@@ -49,6 +51,7 @@ export default {
   name: 'CourseShow',
   components: {
     CardWithTab,
+    CourseName,
   },
   props: {
     course: {
@@ -165,9 +168,46 @@ export default {
     margin-bottom: 16px;
     margin-left: auto;
 
+    &--favorite,
+    &--plan,
+    &--score {
+      &::before {
+        float: left;
+        width: 20px;
+        height: 28px;
+        margin-left: 5px;
+        content: '';
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 100%;
+      }
+    }
+
+    &--favorite {
+      &::before {
+        background-image: url('~@/assets/images/favorite.png');
+      }
+    }
+
+    &--plan {
+      &::before {
+        background-image: url('~@/assets/images/calendar.png');
+      }
+    }
+
+    &--score {
+      &::before {
+        background-image: url('~@/assets/images/note.png');
+      }
+    }
+
     &[configured] {
       color: inherit;
       background: #d9d9d9;
+
+      &::before {
+        background-image: url('~@/assets/images/check.png');
+      }
     }
   }
 }
