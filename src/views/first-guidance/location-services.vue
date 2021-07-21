@@ -1,15 +1,23 @@
 <template>
   <v-ons-page>
-    <custom-toolbar title="初回案内" />
+    <custom-toolbar
+      modifier="green"
+      title="位置情報取得"
+    />
 
     <div class="content">
-      <content-with-footer>
-        <v-ons-card>
-          位置情報取得の説明文
-        </v-ons-card>
+      <content-with-footer class="guidance-content">
+        <img
+          src="@/assets/images/guidances/location-service.png"
+          width="114px"
+        >
+        <p>位置情報をONにすることで、風予測や最適なゴルフコースの検索に活用いただけます。</p>
 
         <template #footer>
-          <v-ons-button @click="callToLocationServicesDialog()">
+          <v-ons-button
+            modifier="large"
+            @click="callToLocationServicesDialog()"
+          >
             次へ
           </v-ons-button>
         </template>

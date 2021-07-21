@@ -52,6 +52,12 @@ export default {
   }
 }
 
+.toolbar {
+  &--green {
+    background: #80b700;
+  }
+}
+
 .center {
   display: flex;
   flex-direction: column;

@@ -1,14 +1,23 @@
 <template>
   <v-ons-page>
-    <custom-toolbar title="初回案内" />
+    <custom-toolbar
+      modifier="green"
+      title="PUSH通知許可"
+    />
+
     <div class="content">
-      <content-with-footer>
-        <v-ons-card>
-          push通知の説明文
-        </v-ons-card>
+      <content-with-footer class="guidance-content">
+        <img
+          src="@/assets/images/guidances/push-noti.png"
+          width="118px"
+        >
+        <p>PUSH通知をONにすることで、急な雨へのPUSH通知や、最適なゴルフコースの検索に活用いただけます。</p>
 
         <template #footer>
-          <v-ons-button @click="callToPushNotificationDialog">
+          <v-ons-button
+            modifier="large"
+            @click="callToPushNotificationDialog"
+          >
             次へ
           </v-ons-button>
         </template>

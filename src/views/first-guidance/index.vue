@@ -1,15 +1,23 @@
 <template>
   <v-ons-page>
-    <custom-toolbar title="初回案内" />
+    <custom-toolbar
+      modifier="green"
+      title="情報登録・設定"
+    />
 
     <div class="content">
-      <content-with-footer>
-        <v-ons-card>
-          説明文
-        </v-ons-card>
+      <content-with-footer class="guidance-content">
+        <img
+          src="@/assets/images/guidances/info-setting.png"
+          width="200px"
+        >
+        <p>コース検索をして予定日を登録することで、詳細なお天気情報が届きます。</p>
 
         <template #footer>
-          <v-ons-button @click="goToLocationServices">
+          <v-ons-button
+            modifier="large"
+            @click="goToLocationServices"
+          >
             次へ
           </v-ons-button>
         </template>

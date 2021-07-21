@@ -62,11 +62,33 @@ export default {
 
     /deep/ {
       .button[class*="button--large"] {
-        width: 75%;
-        max-width: 280px;
-        margin-right: auto;
-        margin-left: auto;
+        width: auto;
+        margin: 0 30px;
+        font-size: 20px;
+        font-weight: 600;
+        color: #fff;
+        background-color: #ffc134;
       }
+    }
+  }
+}
+
+.content-with-footer[class*="guidance-content"] {
+  padding: 0 16px;
+  color: #fff;
+  background-color: #256c14;
+
+  .content-with-footer__content {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+
+    p {
+      margin-top: 28px;
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 1.5;
     }
   }
 }

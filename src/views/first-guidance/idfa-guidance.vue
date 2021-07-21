@@ -1,15 +1,26 @@
 <template>
   <v-ons-page>
-    <custom-toolbar title="初回案内" />
+    <custom-toolbar
+      modifier="green"
+      title="スコアデータ保存"
+    />
 
     <div class="content">
-      <content-with-footer>
-        <v-ons-card>
-          idfaの説明文
-        </v-ons-card>
+      <content-with-footer class="cguidance-content">
+        <img
+          src="@/assets/images/guidances/score-data.png"
+          width="165px"
+        >
+        <p>
+          簡単なスコア登録もできるのでご活用ください。<br>
+          アカウント設定で、データが保存されます。
+        </p>
 
         <template #footer>
-          <v-ons-button @click="showIdfaAlert()">
+          <v-ons-button
+            modifier="large"
+            @click="showIdfaAlert()"
+          >
             次へ
           </v-ons-button>
         </template>
