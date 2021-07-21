@@ -1,5 +1,5 @@
 <template>
-  <v-ons-page>
+  <v-ons-page @show="show">
     <custom-toolbar title="ゴルフ場情報" />
     <div class="content">
       <course-name :course-name="course.name" />
@@ -110,9 +110,6 @@ export default {
       return this.userCourse ? this.userCourse.isFavorited : false;
     },
   },
-  async created() {
-    await this.getCourse();
-  },
   methods: {
     goToCoursePlans() {
       this.$store.dispatch('courseSearchNavigator/push', {
@@ -148,6 +145,10 @@ export default {
           userCourse: this.userCourse,
         },
       });
+    },
+    async show() {
+      await this.getCourse();
+      await this.getUserCourses();
     },
     async getCourse() {
       await this.$store.dispatch('course/getChoosenCourse', this.course.id);

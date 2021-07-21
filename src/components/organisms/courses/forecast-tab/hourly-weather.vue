@@ -96,7 +96,7 @@ export default {
       const suns = [
         {
           isSunrise: true,
-          hour: this.forecastHourly.sunrize,
+          hour: this.forecastHourly.sunrise,
         },
         {
           isSunset: true,

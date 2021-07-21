@@ -69,11 +69,17 @@ export default {
     isShownTenDays() {
       return this.segmentIndex === segmentIndexes.tenDays;
     },
+    course() {
+      return this.$store.getters['course/choosenCourse'];
+    },
   },
   watch: {
     hasForecastData() {
       this.segmentIndex = this.hasForecastData ? segmentIndexes.hourly : segmentIndexes.tenDays;
       this.segmentDisabled = !this.hasForecastData;
+    },
+    course() {
+      this.segmentIndex = segmentIndexes.hourly;
     },
   },
   methods: {
