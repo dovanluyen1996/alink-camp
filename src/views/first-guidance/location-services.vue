@@ -30,32 +30,18 @@ export default {
   components: {
     ContentWithFooter,
   },
-  data() {
-    return {
-      lat: null,
-      long: null,
-    };
-  },
   methods: {
     callToLocationServicesDialog() {
-      return new Promise((resolve, reject) => {
-        navigator.geolocation.getCurrentPosition(
-          (position) => {
-            this.lat = position.coords.latitude;
-            this.long = position.coords.longitude;
-            resolve();
-            this.goToPushNotification();
-          }, (e) => {
-            this.lat = null;
-            this.lon = null;
-            reject(e);
-            this.goToPushNotification();
-          }, {
-            timeout: 30000,
-            enableHighAccuracy: true,
-          },
-        );
-      });
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          console.log(position);
+          this.goToPushNotification();
+        }, (e) => {
+          this.goToPushNotification();
+        }, {
+          timeout: 30000,
+        },
+      );
     },
     goToPushNotification() {
       this.$store.dispatch('appNavigator/push', PushNotification);
