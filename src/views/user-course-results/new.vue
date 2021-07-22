@@ -43,6 +43,9 @@ import UserCourseResultsImageField from '@/components/organisms/form/image-field
 import UserCourseResultsNoteField from '@/components/organisms/user-course-results/note-field';
 import ContentWithFooter from '@/components/organisms/content-with-footer';
 
+// pages
+import UserCourseResultsIndex from '@/views/user-course-results/index';
+
 export default {
   name: 'ScoresResultNew',
   components: {
@@ -84,8 +87,14 @@ export default {
     async createUserCourseResult() {
       this.isButtonDisable = true;
 
+      let createdUserCourse = {};
+      if (!this.userCourse) {
+        await this.createUserCourse();
+        createdUserCourse = this.$store.getters['models/userCourse/findByCourseId'](this.course.id);
+      }
+      const userCourseId = (this.userCourse && this.userCourse.id) || createdUserCourse.id;
       await this.$store.dispatch('models/userCourseResult/createUserCourseResult', {
-        userCourseId: this.userCourse.id,
+        userCourseId,
         params: this.userCourseResult,
       })
         .then(() => {
@@ -96,7 +105,22 @@ export default {
         });
 
       this.isButtonDisable = false;
+
       this.$store.dispatch('scoresNavigator/pop');
+      if (!this.userCourse) {
+        this.$store.dispatch('scoresNavigator/push', {
+          extends: UserCourseResultsIndex,
+          onsNavigatorProps: {
+            userCourse: createdUserCourse,
+          },
+        });
+      }
+    },
+    async createUserCourse() {
+      const params = {
+        courseId: this.course.id,
+      };
+      await this.$store.dispatch('models/userCourse/createUserCourse', params);
     },
   },
 };
