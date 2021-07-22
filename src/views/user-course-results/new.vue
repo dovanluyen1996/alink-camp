@@ -5,7 +5,7 @@
     <div class="content">
       <validation-observer v-slot="{ handleSubmit }">
         <content-with-footer>
-          <course-name :course-name="userCourse.course.name" />
+          <course-name :course-name="courseName" />
           <user-course-results-target-date-field
             v-model="userCourseResult.targetDate"
             title="プレイ日（必須）"
@@ -54,9 +54,13 @@ export default {
     ContentWithFooter,
   },
   props: {
+    course: {
+      type: Object,
+      default: () => {},
+    },
     userCourse: {
       type: Object,
-      required: true,
+      default: () => {},
     },
   },
   data() {
@@ -70,6 +74,11 @@ export default {
       },
       isButtonDisable: false,
     };
+  },
+  computed: {
+    courseName() {
+      return this.userCourse ? this.userCourse.course.name : this.course.name;
+    },
   },
   methods: {
     async createUserCourseResult() {

@@ -36,6 +36,8 @@
 </template>
 
 <script>
+import settings from '@/config/settings';
+
 // components
 import CardWithTab from '@/components/organisms/card-with-tab';
 import CourseName from '@/components/organisms/course-name';
@@ -46,6 +48,8 @@ import CoursesInformationTab from '@/components/organisms/courses/information-ta
 
 // pages
 import CoursePlans from '@/views/courses/plans/';
+import UserCourseResultsIndex from '@/views/user-course-results/index';
+import UserCourseResultsNew from '@/views/user-course-results/new';
 
 export default {
   name: 'CourseShow',
@@ -120,8 +124,29 @@ export default {
       });
     },
     goToScore() {
-      // TODO: スコア状況画面へ遷移する
-      console.log('goToScore');
+      this.$store.commit('appTabbar/setActiveIndex', settings.views.appTabbar.tabIndexes.scores);
+
+      if (this.userCourse) {
+        this.goToScoreSummary();
+      } else {
+        this.goToCreateScore();
+      }
+    },
+    goToCreateScore() {
+      this.$store.dispatch('scoresNavigator/push', {
+        extends: UserCourseResultsNew,
+        onsNavigatorProps: {
+          course: this.course,
+        },
+      });
+    },
+    goToScoreSummary() {
+      this.$store.dispatch('scoresNavigator/push', {
+        extends: UserCourseResultsIndex,
+        onsNavigatorProps: {
+          userCourse: this.userCourse,
+        },
+      });
     },
     async getCourse() {
       await this.$store.dispatch('course/getChoosenCourse', this.course.id);
