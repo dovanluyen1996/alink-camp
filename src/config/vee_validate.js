@@ -3,6 +3,7 @@ import {
   required, email, max,
 } from 'vee-validate/dist/rules';
 import settings from '@/config/settings';
+import moment from 'moment';
 
 extend('required', {
   ...required,
@@ -28,6 +29,14 @@ extend('password', (value) => {
   }
 
   return 'パスワードの条件を満たしていません';
+});
+
+extend('required-future-day', (value) => {
+  if (value && moment(value).isSameOrAfter(moment(), 'day')) {
+    return true;
+  }
+
+  return moment().format('YYYY/MM/DD') + '以上を指定してください';
 });
 
 extend('max', {

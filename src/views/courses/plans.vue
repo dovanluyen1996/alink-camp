@@ -25,7 +25,7 @@
         <content-with-footer>
           <validation-provider
             v-slot="{ errors }"
-            rules="required"
+            rules="required|required-future-day"
             name="プレイ予定日"
           >
             <date-field
