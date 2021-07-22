@@ -81,7 +81,9 @@ export default {
 
   /deep/ {
     input {
+      padding: 8px 5px;
       border: none;
+      -webkit-appearance: none;
 
       &::-webkit-calendar-picker-indicator {
         background: none;

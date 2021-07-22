@@ -52,5 +52,16 @@ export default {
   margin-top: 30px;
   margin-bottom: 10px;
   text-align: center;
+
+  /deep/ {
+    .custom-input-date {
+      width: 160px;
+      margin: 0 auto;
+
+      &.is-shown-placeholder::before {
+        justify-content: center;
+      }
+    }
+  }
 }
 </style>
