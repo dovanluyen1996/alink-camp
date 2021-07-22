@@ -1,20 +1,17 @@
 <template>
   <v-ons-page>
-    <custom-toolbar
-      title="予定日設定"
-    >
-      <template #right>
-        <div
-          v-if="isPersisted"
-          class="delete-plan"
-          @click="openDeleteConfirmDialog"
+    <custom-toolbar title="予定日設定">
+      <template
+        v-if="isPersisted"
+        #right
+      >
+        <delete-dialog-with-icon
+          :is-shown.sync="deleteConfirmDialogVisible"
+          @clickDelete="deleteUserCoursePlan"
         >
-          <img
-            src="@/assets/images/trash.png"
-            width="24px"
-            alt="予定を削除"
-          >
-        </div>
+          この予定日設定を削除します。<br>
+          よろしいですか？
+        </delete-dialog-with-icon>
       </template>
     </custom-toolbar>
 
@@ -54,29 +51,6 @@
         </content-with-footer>
       </validation-observer>
     </div>
-
-    <v-ons-alert-dialog
-      :visible="deleteConfirmDialogVisible"
-    >
-      <template #title>
-        削除確認
-      </template>
-
-      この予定日設定を削除します。<br>
-      よろしいですか？
-
-      <template #footer>
-        <v-ons-button
-          modifier="quiet quiet-dark"
-          @click="closeDeleteConfirmDialog"
-        >
-          キャンセル
-        </v-ons-button>
-        <v-ons-button @click="deleteUserCoursePlan">
-          削除する
-        </v-ons-button>
-      </template>
-    </v-ons-alert-dialog>
   </v-ons-page>
 </template>
 
@@ -86,6 +60,7 @@ import DateField from '@/components/organisms/form/date-field';
 import TimeField from '@/components/organisms/form/time-field';
 import ContentWithFooter from '@/components/organisms/content-with-footer';
 import CourseName from '@/components/organisms/course-name';
+import DeleteDialogWithIcon from '@/components/organisms/dialog/delete-dialog-with-icon';
 
 export default {
   name: 'CoursePlans',
@@ -94,6 +69,7 @@ export default {
     TimeField,
     ContentWithFooter,
     CourseName,
+    DeleteDialogWithIcon,
   },
   props: {
     course: {
@@ -135,9 +111,6 @@ export default {
       // yyyy-mm-ddのフォーマットを使わないといけないです。
       this.dateValue = this.$helpers.localDateWithHyphenFrom(this.userCoursePlan.targetAt);
       this.timeValue = this.$helpers.localTimeFrom(this.userCoursePlan.targetAt);
-    },
-    openDeleteConfirmDialog() {
-      this.deleteConfirmDialogVisible = true;
     },
     closeDeleteConfirmDialog() {
       this.deleteConfirmDialogVisible = false;
