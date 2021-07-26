@@ -199,17 +199,19 @@ export default {
           await this.$store.dispatch('models/course/getCourses', params);
 
           if (this.$store.getters['models/course/size']) {
-            this.goToSearchResult();
+            this.goToSearchResult(params);
           } else {
             this.showSearchResultEmptyDialog();
           }
         });
     },
-    goToSearchResult() {
+    goToSearchResult(params) {
+      const searchConditions = { ...params, type: 'location' };
       this.$store.dispatch('courseSearchNavigator/push', {
         extends: SearchResult,
         onsNavigatorProps: {
           title: 'コース検索結果',
+          searchConditions,
         },
       });
     },

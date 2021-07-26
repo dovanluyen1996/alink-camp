@@ -102,7 +102,18 @@ export default {
       };
     },
     searchByLocationParams() {
-      // TODO: after search by location is merged, implement paging for search location
+      return {
+        lower_rad: this.searchConditions.lower_rad,
+        upper_rad: this.searchConditions.upper_rad,
+        target_date: this.searchConditions.targetDate,
+        temperature: this.searchConditions.temperature,
+        sunny: this.searchConditions.sunny,
+        wind: this.searchConditions.wind,
+        uv: this.searchConditions.uv,
+        lat: this.searchConditions.lat,
+        lon: this.searchConditions.lon,
+        page: this.page,
+      };
     },
     searchByPrefectureParams() {
       return {
