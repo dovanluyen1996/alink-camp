@@ -28,8 +28,9 @@ import UserStampsCampaign from '@/views/user/user-stamps/campaign';
 
 // pages
 import CourseSearchIndexPage from '@/views/course-search/index';
-
-const menuTabIndex = settings.views.appTabbar.tabIndexes.menu;
+import ScoresIndexPage from '@/views/scores/index';
+import WindForecastIndexPage from '@/views/wind-forecast/index';
+import CourseWeatherIndexPage from '@/views/course-weather/index';
 
 export default {
   components: {
@@ -80,14 +81,10 @@ export default {
   },
   methods: {
     prechange(event) {
-      if (event.activeIndex === menuTabIndex) this.openMenu(event.lastActiveIndex);
+      this.resetToTopPageOfTab(event, true);
     },
     reactive(event) {
-      if (event.activeIndex === menuTabIndex) this.closeMenu();
-
-      if (event.activeIndex === settings.views.appTabbar.tabIndexes.courseSearch) {
-        this.$store.dispatch('courseSearchNavigator/reset', CourseSearchIndexPage);
-      }
+      this.resetToTopPageOfTab(event, false);
     },
     openMenu(lastActiveIndex) {
       // NOTE: @reactiveでは前のタブがとれないので
@@ -99,6 +96,28 @@ export default {
       this.activeIndex = this.lastActiveIndex;
       this.lastActiveIndex = null;
       this.isShownMenu = false;
+    },
+    resetToTopPageOfTab(event, isPrechange) {
+      switch (event.activeIndex) {
+      case settings.views.appTabbar.tabIndexes.courseWeather:
+        this.$store.dispatch('courseWeatherNavigator/reset', CourseWeatherIndexPage);
+        break;
+      case settings.views.appTabbar.tabIndexes.courseSearch:
+        this.$store.dispatch('courseSearchNavigator/reset', CourseSearchIndexPage);
+        break;
+      case settings.views.appTabbar.tabIndexes.scores:
+        this.$store.dispatch('scoresNavigator/reset', ScoresIndexPage);
+        break;
+      case settings.views.appTabbar.tabIndexes.windForecast:
+        this.$store.dispatch('windForecastNavigator/reset', WindForecastIndexPage);
+        break;
+      default:
+        if (isPrechange) {
+          this.openMenu(event.lastActiveIndex);
+        } else {
+          this.closeMenu();
+        }
+      }
     },
   },
 };
