@@ -61,9 +61,6 @@ export default {
     },
   },
   methods: {
-    async show() {
-      await this.getUserCourses();
-    },
     async getUserCourses() {
       await this.$store.dispatch('models/userCourse/getUserCourses');
     },
@@ -78,8 +75,9 @@ export default {
         },
       });
     },
-    show() {
+    async show() {
       this.$store.dispatch('appTabbar/setLastVisitedAt', this.$helpers.localDateWithHyphenFrom(new Date()));
+      await this.getUserCourses();
     },
   },
 };
