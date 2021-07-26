@@ -52,15 +52,9 @@ export default {
       return '気温';
     },
     temperatures() {
-      let temperatures;
-
-      if (this.isHighest) {
-        temperatures = this.forecastData.map(data => (data ? data.maxTemp : null));
-      } else {
-        temperatures = this.forecastData.map(data => (data ? data.minTemp : null));
-      }
-
-      return temperatures;
+      if (this.isHighest) return this.forecastData.map(data => (data ? data.maxTemp : null));
+      if (this.isLowest) return this.forecastData.map(data => (data ? data.minTemp : null));
+      return this.forecastData.map(data => data.temperature);
     },
   },
 };
