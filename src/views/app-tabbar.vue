@@ -68,7 +68,6 @@ export default {
           page: MenuNavigator,
         },
       ],
-      isCloseMenu: true,
     };
   },
   computed: {
