@@ -24,10 +24,12 @@
       width="150px"
       class="image"
     >
-    <div v-show="imagePath">
-      <button class="upload-button" @click="socialSharing">
+    <div v-show="isButtonVisible">
+      <v-ons-button
+        @click="socialSharing()"
+      >
         写真をシェア
-      </button>
+      </v-ons-button>
     </div>
     <div v-show="!imagePath">
       <label class="upload-button">
@@ -90,6 +92,9 @@ export default {
         imagePath = this.value.url || this.selectedFile.image;
       }
       return imagePath;
+    },
+    isButtonVisible() {
+      return this.value.url ? true : false;
     },
   },
   methods: {
