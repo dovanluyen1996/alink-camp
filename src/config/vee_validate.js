@@ -36,7 +36,7 @@ extend('required-future-day', (value) => {
     return true;
   }
 
-  return moment().format('YYYY/MM/DD') + '以上を指定してください';
+  return `${moment().format('YYYY/MM/DD')}より後を指定してください`;
 });
 
 extend('max', {
