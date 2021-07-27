@@ -67,6 +67,7 @@ export default {
           page: MenuNavigator,
         },
       ],
+      isCloseMenu: true,
     };
   },
   computed: {
@@ -81,23 +82,11 @@ export default {
   },
   methods: {
     prechange(event) {
-      this.resetToTopPageOfTab(event, true);
+      if (event.activeIndex === settings.views.appTabbar.tabIndexes.menu) {
+        this.openMenu(event.lastActiveIndex);
+      }
     },
     reactive(event) {
-      this.resetToTopPageOfTab(event, false);
-    },
-    openMenu(lastActiveIndex) {
-      // NOTE: @reactiveでは前のタブがとれないので
-      // メニューを表示するときは一つ前のタブを保存しておく
-      this.lastActiveIndex = lastActiveIndex;
-      this.isShownMenu = true;
-    },
-    closeMenu() {
-      this.activeIndex = this.lastActiveIndex;
-      this.lastActiveIndex = null;
-      this.isShownMenu = false;
-    },
-    resetToTopPageOfTab(event, isPrechange) {
       switch (event.activeIndex) {
       case settings.views.appTabbar.tabIndexes.courseWeather:
         this.$store.dispatch('courseWeatherNavigator/reset', CourseWeatherIndexPage);
@@ -112,12 +101,19 @@ export default {
         this.$store.dispatch('windForecastNavigator/reset', WindForecastIndexPage);
         break;
       default:
-        if (isPrechange) {
-          this.openMenu(event.lastActiveIndex);
-        } else {
-          this.closeMenu();
-        }
+        this.closeMenu();
       }
+    },
+    openMenu(lastActiveIndex) {
+      // NOTE: @reactiveでは前のタブがとれないので
+      // メニューを表示するときは一つ前のタブを保存しておく
+      this.lastActiveIndex = lastActiveIndex;
+      this.isShownMenu = true;
+    },
+    closeMenu() {
+      this.activeIndex = this.lastActiveIndex;
+      this.lastActiveIndex = null;
+      this.isShownMenu = false;
     },
   },
 };
