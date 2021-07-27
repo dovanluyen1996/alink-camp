@@ -48,6 +48,7 @@ import CoursesInformationTab from '@/components/organisms/courses/information-ta
 
 // pages
 import CoursePlans from '@/views/courses/plans/';
+import ScoresIndexPage from '@/views/scores/index';
 import UserCourseResultsIndex from '@/views/user-course-results/index';
 import UserCourseResultsNew from '@/views/user-course-results/new';
 
@@ -125,6 +126,7 @@ export default {
     },
     goToScore() {
       this.$store.commit('appTabbar/setActiveIndex', settings.views.appTabbar.tabIndexes.scores);
+      this.$store.dispatch('scoresNavigator/reset', ScoresIndexPage);
 
       if (this.userCourse) {
         this.goToScoreSummary();
