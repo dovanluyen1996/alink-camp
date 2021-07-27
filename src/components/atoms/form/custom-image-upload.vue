@@ -184,10 +184,10 @@ export default {
 }
 
 .share-button {
-  height: 24px;
-  font-size: 12px;
   min-width: 140px;
-  line-height: 16px;
+  height: 24px;
   margin-top: 10px;
+  font-size: 12px;
+  line-height: 16px;
 }
 </style>
