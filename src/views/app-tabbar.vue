@@ -100,9 +100,12 @@ export default {
       case settings.views.appTabbar.tabIndexes.windForecast:
         this.$store.dispatch('windForecastNavigator/reset', WindForecastIndexPage);
         break;
-      default:
+      case settings.views.appTabbar.tabIndexes.menu:
         this.$store.dispatch('menuNavigator/reset', MenuIndexPage);
         this.closeMenu();
+        break;
+      default:
+        break;
       }
     },
     openMenu(lastActiveIndex) {
