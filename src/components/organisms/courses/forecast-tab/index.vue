@@ -1,24 +1,15 @@
 <template>
   <div class="courses-forecast-tab">
     <transition name="fade">
-      <hourly-weather
-        v-if="isShownHourly"
-        :has-forecast-data.sync="hasForecastData"
-      >
+      <hourly-weather v-if="isShownHourly">
         <template #switcher>
-          <forecast-switcher
-            :segment-index.sync="segmentIndex"
-            :segment-disabled="segmentDisabled"
-          />
+          <forecast-switcher :segment-index.sync="segmentIndex" />
         </template>
       </hourly-weather>
 
       <ten-days-weather v-if="isShownTenDays">
         <template #switcher>
-          <forecast-switcher
-            :segment-index.sync="segmentIndex"
-            :segment-disabled="segmentDisabled"
-          />
+          <forecast-switcher :segment-index.sync="segmentIndex" />
         </template>
       </ten-days-weather>
     </transition>
@@ -58,8 +49,6 @@ export default {
   data() {
     return {
       segmentIndex: segmentIndexes.hourly,
-      hasForecastData: true,
-      segmentDisabled: false,
     };
   },
   computed: {
@@ -73,20 +62,9 @@ export default {
       return this.$store.getters['course/choosenCourse'];
     },
   },
-  watch: {
-    hasForecastData() {
-      this.segmentIndex = this.hasForecastData ? segmentIndexes.hourly : segmentIndexes.tenDays;
-      this.segmentDisabled = !this.hasForecastData;
-    },
-    course() {
-      this.segmentIndex = segmentIndexes.hourly;
-      this.segmentDisabled = false;
-    },
-  },
   methods: {
     reservationUrl() {
-      const course = this.$store.getters['course/choosenCourse'];
-      return course.jalanUrl;
+      return this.course.jalanUrl;
     },
     target() {
       return (cordova.platformId === 'browser') ? '_self' : '_blank';

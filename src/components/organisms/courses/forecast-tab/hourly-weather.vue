@@ -58,12 +58,6 @@ export default {
     WindDirectionRow,
     WindSpeedRow,
   },
-  props: {
-    hasForecastData: {
-      type: Boolean,
-      required: true,
-    },
-  },
   data() {
     return {
       forecastHourly: {},
@@ -83,7 +77,7 @@ export default {
       return this.$helpers.toDayString(this.forecastHourly.date);
     },
     isToday() {
-      const today = this.$moment().format('YYYY-MM-DD');
+      const today = this.$helpers.localDateWithHyphenFrom(new Date());
       if (!this.userCoursePlan.targetAt) return false;
 
       return this.$moment(today).isSame(this.forecastHourly.date);
@@ -116,7 +110,6 @@ export default {
   watch: {
     async course() {
       this.forecastHourly = await this.getForecastHourly();
-      this.$emit('update:hasForecastData', Object.keys(this.forecastHourly).length !== 0);
     },
   },
   async created() {
@@ -149,11 +142,11 @@ export default {
       return (Number(newTime[0]) * 60) + Number(newTime[1] || 0);
     },
     async getForecastHourly() {
-      if (!this.course.id || !this.userCoursePlan.targetAt) return {};
+      if (!this.course.id) return {};
 
       const params = {
         course_id: this.course.id,
-        target_date: this.userCoursePlan.targetAt,
+        target_date: this.$helpers.localDateWithHyphenFrom(this.userCoursePlan.targetAt),
       };
       const forecastHourly = await this.$store.dispatch('models/weather/getForecastHourly', params);
       return forecastHourly;

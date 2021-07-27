@@ -91,7 +91,7 @@ export default {
       const table = this.$el.querySelector('.ten-days-weather-table');
       const dateRow = table.querySelector('.date-row');
       const th = dateRow.querySelector('th');
-      const plans = this.userCoursePlan.targetAt || this.$moment().format('YYYY-MM-DD');
+      const plans = this.$helpers.localDateWithHyphenFrom(this.userCoursePlan.targetAt);
       const plansCol = dateRow.querySelector(`[date-day="${plans}"]`);
       if (!plansCol) return;
       const x = plansCol.offsetLeft - th.offsetWidth;
