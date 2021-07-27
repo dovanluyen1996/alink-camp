@@ -79,8 +79,6 @@ export default {
       await this.$store.dispatch('models/course/getCourses', this.searchParams())
         .then(() => {
           this.page += 1;
-        })
-        .then(() => {
           if (done) done();
         });
     },
