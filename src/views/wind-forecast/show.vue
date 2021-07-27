@@ -47,7 +47,6 @@ export default {
   props: {
     course: {
       type: Object,
-      default: () => {},
       required: true,
     },
   },

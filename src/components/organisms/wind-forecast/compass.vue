@@ -25,7 +25,6 @@ export default {
   props: {
     forecastWind: {
       type: Object,
-      default: () => {},
       required: true,
     },
     compassErrorVisible: {

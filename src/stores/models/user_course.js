@@ -17,6 +17,12 @@ export default {
     findByCourseId: state => courseId => state.userCourses.find(
       userCourse => userCourse.courseId === courseId,
     ),
+    favorited: state => state.userCourses.filter(userCourse => userCourse.isFavorited),
+    hasPlanInFuture: (state, getter) => {
+      const inFutureUserCourseId = getter.inFuture.map(plan => plan.courseId);
+
+      return state.userCourses.filter(userCourse => inFutureUserCourseId.includes(userCourse.id));
+    },
     onlyFavoritedWithoutPlans: state => state.userCourses.filter(
       // お気に入り登録されている、かつ今日以降の予定日がないuserCourse
       userCourse => userCourse.isFavorited && !userCourse.userCoursePlans.filter(
