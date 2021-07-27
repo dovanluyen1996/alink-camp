@@ -63,7 +63,7 @@ export default {
           this.goToPushNotification();
         }, (e) => {
           console.log(e);
-          this.showGeoLocationErrorDialog();
+          this.geoLocationErrorVisible = true;
         }, {
           timeout: settings.locationServices.timeout,
         },
@@ -75,9 +75,6 @@ export default {
     closeGeoLocationErrorDialog() {
       this.geoLocationErrorVisible = false;
       this.goToPushNotification();
-    },
-    showGeoLocationErrorDialog() {
-      this.geoLocationErrorVisible = true;
     },
   },
 };
