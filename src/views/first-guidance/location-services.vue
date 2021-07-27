@@ -43,6 +43,7 @@ import ContentWithFooter from '@/components/organisms/content-with-footer';
 
 // pages
 import PushNotification from '@/views/first-guidance/push-notification';
+import settings from '@/config/settings';
 
 export default {
   name: 'FirstGuidanceLocationServices',
@@ -57,14 +58,13 @@ export default {
   methods: {
     callToLocationServicesDialog() {
       navigator.geolocation.getCurrentPosition(
-        (position) => {
-          console.log(position);
+        () => {
           this.goToPushNotification();
         }, (e) => {
           console.log(e);
           this.showGeoLocationErrorDialog();
         }, {
-          timeout: 30000,
+          timeout: settings.locationServices.timeout,
         },
       );
     },

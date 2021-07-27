@@ -25,4 +25,7 @@ export default {
     ios: 'http://sample-ios.com',
     android: 'http://sample-android.com',
   },
+  locationServices: {
+    timeout: 30000,
+  },
 };
