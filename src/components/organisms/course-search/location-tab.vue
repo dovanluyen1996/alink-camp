@@ -230,7 +230,7 @@ export default {
 
             reject(e);
           }, {
-            timeout: 30000,
+            timeout: settings.locationServices.timeout,
           },
         );
       });
