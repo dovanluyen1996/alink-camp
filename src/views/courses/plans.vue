@@ -19,11 +19,11 @@
     </custom-toolbar>
 
     <div class="content">
-      <course-name :course-name="course.name" />
       <validation-observer
         v-slot="{ handleSubmit }"
       >
         <content-with-footer>
+          <course-name :course-name="course.name" />
           <validation-provider
             v-slot="{ errors }"
             rules="required|required-future-day"
