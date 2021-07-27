@@ -26,6 +26,7 @@
     >
     <div v-show="isButtonVisible">
       <v-ons-button
+        class="share-button"
         @click="socialSharing()"
       >
         写真をシェア
@@ -180,5 +181,13 @@ export default {
   width: 100%;
   height: 100%;
   opacity: 0;
+}
+
+.share-button {
+  margin-top: 10px;
+  min-width: 140px;
+  height: 24px;
+  font-size: 12px;
+  line-height: 16px;
 }
 </style>
