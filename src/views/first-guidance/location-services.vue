@@ -43,6 +43,7 @@ import ContentWithFooter from '@/components/organisms/content-with-footer';
 
 // pages
 import PushNotification from '@/views/first-guidance/push-notification';
+
 import settings from '@/config/settings';
 
 export default {

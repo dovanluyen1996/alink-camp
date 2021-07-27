@@ -84,6 +84,7 @@ import CustomSelect from '@/components/atoms/form/custom-select';
 import CourseSearchDateField from '@/components/organisms/course-search/date-field';
 import AnnotationsBlock from '@/components/atoms/form/annotations-block';
 import CourseSearchConditionsFields from '@/components/organisms/course-search/conditions-fields.vue';
+
 import settings from '@/config/settings';
 
 export default {
