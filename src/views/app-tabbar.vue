@@ -31,6 +31,7 @@ import CourseSearchIndexPage from '@/views/course-search/index';
 import ScoresIndexPage from '@/views/scores/index';
 import WindForecastIndexPage from '@/views/wind-forecast/index';
 import CourseWeatherIndexPage from '@/views/course-weather/index';
+import MenuIndexPage from '@/views/menu/index';
 
 export default {
   components: {
@@ -101,6 +102,7 @@ export default {
         this.$store.dispatch('windForecastNavigator/reset', WindForecastIndexPage);
         break;
       default:
+        this.$store.dispatch('menuNavigator/reset', MenuIndexPage);
         this.closeMenu();
       }
     },
