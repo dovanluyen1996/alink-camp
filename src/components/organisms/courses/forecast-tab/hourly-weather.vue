@@ -28,7 +28,7 @@
         </td>
       </tr>
       <time-row :forecast-data="margedForecastsAndSuns" />
-      <weather-row :forecast-data="margedForecastsAndSuns" />
+      <weather-row :weathers="margedForecastsAndSuns" />
       <precipitation-row :forecast-data="forecastData" />
       <temperature-row :forecast-data="forecastData" />
       <wind-direction-row :wind-directions="windDirections" />
@@ -98,7 +98,7 @@ export default {
       return margeData.sort((a, b) => this.convertMinutes(a.hour) - this.convertMinutes(b.hour));
     },
     forecastData() {
-      return this.forecastHourly.items;
+      return this.forecastHourly.items || [];
     },
     windDirections() {
       return this.forecastData ? this.forecastData.map(item => item.windDirection) : [];

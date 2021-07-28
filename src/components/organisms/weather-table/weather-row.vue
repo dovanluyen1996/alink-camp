@@ -8,20 +8,20 @@
     </th>
     <template v-for="(weather, index) in weathers">
       <td
-        v-if="weather.weatherData.weatherImageName"
-        :key="index"
-      >
-        <weather-image
-          :weather="weather.weatherData"
-          image-width="40px"
-        />
-      </td>
-
-      <td
-        v-else-if="!weather"
+        v-if="!weather"
         :key="index"
       >
         <label>No Data</label>
+      </td>
+
+      <td
+        v-else-if="weather.weatherImageName"
+        :key="index"
+      >
+        <weather-image
+          :weather="weather"
+          image-width="40px"
+        />
       </td>
 
       <td
@@ -69,15 +69,6 @@ export default {
     sunsRowspan: {
       type: Number,
       default: 5,
-    },
-  },
-  computed: {
-    weathers() {
-      return this.forecastData.map(data => ({
-        weatherData: data,
-        isSunrise: data.isSunrise,
-        isSunset: data.isSunset,
-      }));
     },
   },
 };

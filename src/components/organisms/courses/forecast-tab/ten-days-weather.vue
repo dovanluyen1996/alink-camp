@@ -8,7 +8,7 @@
 
     <sticky-table class="ten-days-weather-table">
       <date-row :forecast-data="forecasts" />
-      <weather-row :forecast-data="forecasts" />
+      <weather-row :weathers="forecasts" />
       <prob-precip-row :prob-precips="precips" />
       <temperature-row
         :forecast-data="forecasts"
