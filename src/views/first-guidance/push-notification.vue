@@ -40,9 +40,15 @@ export default {
   },
   methods: {
     callToPushNotificationDialog() {
-      // TODO: Push notificationsのダイアログを出してください
-      console.log('callToLocationServicesDialog');
-      this.goToIdfaGuidance();
+      if (window.device.platform !== 'browser') {
+        window.FirebasePlugin.grantPermission(() => {
+          this.goToIdfaGuidance();
+        }, (error) => {
+          console.log(error);
+        });
+      } else {
+        this.goToIdfaGuidance();
+      }
     },
     goToIdfaGuidance() {
       this.$store.dispatch('appNavigator/push', IdfaGuidance);
