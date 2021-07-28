@@ -60,6 +60,8 @@ export default {
 
       &.is-shown-placeholder::before {
         justify-content: center;
+        padding-right: 28px;
+        padding-left: 0;
       }
     }
   }
