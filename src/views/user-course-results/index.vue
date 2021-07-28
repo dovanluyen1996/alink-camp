@@ -8,7 +8,7 @@
         <course-name :course-name="userCourse.course.name" />
         <v-ons-card>
           <div class="content">
-            <user-course-results-summary-chart />
+            <user-course-results-summary-chart :user-course-results="userCourseResults" />
 
             <user-course-results-course-weather
               :weathers="weathers"
