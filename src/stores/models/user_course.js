@@ -19,7 +19,7 @@ export default {
     ),
     favorited: state => state.userCourses.filter(userCourse => userCourse.isFavorited),
     hasPlanInFuture: (state, getter) => {
-      const inFutureUserCourseId = getter.inFuture.map(plan => plan.courseId);
+      const inFutureUserCourseId = getter.inFuture.map(plan => plan.userCourseId);
 
       return state.userCourses.filter(userCourse => inFutureUserCourseId.includes(userCourse.id));
     },
