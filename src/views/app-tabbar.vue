@@ -39,8 +39,6 @@ export default {
   },
   data() {
     return {
-      isShownMenu: false,
-      lastActiveIndex: null,
       tabs: [
         {
           label: 'コース天気',
@@ -84,7 +82,6 @@ export default {
     prechange(event) {
       if (event.activeIndex === settings.views.appTabbar.tabIndexes.menu) {
         this.$store.dispatch('menuNavigator/reset', MenuIndexPage);
-        this.openMenu(event.lastActiveIndex);
       }
     },
     reactive(event) {
@@ -103,22 +100,10 @@ export default {
         break;
       case settings.views.appTabbar.tabIndexes.menu:
         this.$store.dispatch('menuNavigator/reset', MenuIndexPage);
-        this.closeMenu();
         break;
       default:
         break;
       }
-    },
-    openMenu(lastActiveIndex) {
-      // NOTE: @reactiveでは前のタブがとれないので
-      // メニューを表示するときは一つ前のタブを保存しておく
-      this.lastActiveIndex = lastActiveIndex;
-      this.isShownMenu = true;
-    },
-    closeMenu() {
-      this.activeIndex = this.lastActiveIndex;
-      this.lastActiveIndex = null;
-      this.isShownMenu = false;
     },
   },
 };
@@ -143,10 +128,6 @@ $tabs: weather, search, score, wind, menu;
     .tabbar__item[icon="#{$tab}"] .tabbar__icon {
       background-image: url('~@/assets/images/tabbar/#{$tab}.png');
     }
-  }
-
-  .tabbar__item[icon="menu"].active .tabbar__icon {
-    background-image: url('~@/assets/images/tabbar/close-menu.png');
   }
 }
 </style>
