@@ -95,12 +95,12 @@ export default {
       return imagePath;
     },
     isButtonVisible() {
-      return this.value.thumb ? true : false;
+      return this.value.url ? true : false;
     },
   },
   methods: {
     socialSharing() {
-      window.plugins.socialsharing.share(null, null, this.value.thumb.url, null);
+      window.plugins.socialsharing.share(null, null, this.value.url, null);
     },
     selectImage(e) {
       const image = e.target.files[0];
