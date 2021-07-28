@@ -1,25 +1,56 @@
 <template>
   <v-ons-page>
-    <custom-toolbar title="データ引き継ぎ設定" />
+    <custom-toolbar title="データ引継ぎ設定" />
     <div class="content">
-      <base-form>
-        <has-editable-button-field
-          :value="user.email"
-          @clickEdit="goToEditEmail"
-        />
-        <has-editable-button-field
-          value="**************"
-          @clickEdit="goToEditPassword"
-        />
-        <user-gender v-model="user.gender" />
-        <user-birthdate v-model="user.birthdate" />
-        <user-prefecture v-model="user.prefecture" />
-        <template #buttons>
-          <custom-submit @click="showConfirmDialog">
-            保存
-          </custom-submit>
-        </template>
-      </base-form>
+      <loading :visible="isLoading" />
+      <validation-observer v-slot="{ handleSubmit }">
+        <base-form>
+          <!-- TODO: change email -->
+          <has-editable-button-field
+            :value="user.email"
+            @clickEdit="goToEditEmail"
+          />
+          <has-editable-button-field
+            value="**************"
+            @clickEdit="goToEditPassword"
+          />
+          <validation-provider
+            v-slot="{ errors }"
+            rules="required-select"
+            name="性別"
+          >
+            <user-gender
+              v-model="user.gender"
+              :errors="errors"
+            />
+          </validation-provider>
+          <validation-provider
+            v-slot="{ errors }"
+            rules="required"
+            name="生年月日"
+          >
+            <user-birthdate
+              v-model="user.birthdate"
+              :errors="errors"
+            />
+          </validation-provider>
+          <validation-provider
+            v-slot="{ errors }"
+            rules="required-select"
+            name="お住まい"
+          >
+            <user-prefecture
+              v-model="user.prefecture"
+              :errors="errors"
+            />
+          </validation-provider>
+          <template #buttons>
+            <custom-submit @click="handleSubmit(showConfirmDialog)">
+              保存
+            </custom-submit>
+          </template>
+        </base-form>
+      </validation-observer>
     </div>
 
     <v-ons-alert-dialog :visible="isShownComfirmDialog">
@@ -54,6 +85,7 @@ import UserGender from '@/components/organisms/user/user-gender';
 import UserBirthdate from '@/components/organisms/user/user-birthdate';
 import UserPrefecture from '@/components/organisms/user/user-prefecture';
 import CustomSubmit from '@/components/organisms/form/custom-submit';
+import ChangePasswordView from '@/views/user/edit/change-password';
 
 export default {
   name: 'UserNewUserData',
@@ -68,21 +100,28 @@ export default {
   data() {
     return {
       isShownComfirmDialog: false,
-      user: {
-        email: 'test@example.com',
-        password: '*******',
-        gender: 0,
-        birthdate: '1980-01-01',
-        prefecture: 1,
-      },
     };
+  },
+  computed: {
+    currentUser() {
+      return this.$store.state.models.currentUser.user;
+    },
+    user() {
+      return { ...this.currentUser };
+    },
+    isLoading() {
+      return this.$store.getters['models/currentUser/isLoading'];
+    },
+  },
+  async created() {
+    await this.getCurrentUser();
   },
   methods: {
     goToEditEmail() {
       console.log('goToEditEmail');
     },
     goToEditPassword() {
-      console.log('goToEditPassword');
+      this.$store.dispatch('menuNavigator/push', ChangePasswordView);
     },
     showConfirmDialog() {
       this.isShownComfirmDialog = true;
@@ -93,8 +132,12 @@ export default {
     cancel() {
       this.closeConfirmDialog();
     },
-    update() {
+    async update() {
       this.closeConfirmDialog();
+      await this.$store.dispatch('models/currentUser/updateUser', this.user);
+    },
+    async getCurrentUser() {
+      await this.$store.dispatch('models/currentUser/getUser');
     },
   },
 };

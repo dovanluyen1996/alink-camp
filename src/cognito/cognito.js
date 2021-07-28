@@ -181,5 +181,27 @@ export default class Cognito {
       });
     });
   }
+
+  /**
+   * changePassword
+   */
+  changePassword(oldPassword, newPassword) {
+    return new Promise((resolve, reject) => {
+      const cognitoUser = this.userPool.getCurrentUser();
+      if (!cognitoUser) return reject(new Error('User is not authenticated'));
+
+      cognitoUser.getSession((sessionErr, _session) => {
+        if (sessionErr) return reject(sessionErr);
+
+        cognitoUser.changePassword(oldPassword, newPassword, (err, result) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(result);
+          }
+        });
+      });
+    });
+  }
 }
 /* eslint-enable no-underscore-dangle, no-unused-vars, consistent-return */

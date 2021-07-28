@@ -5,6 +5,7 @@
     help="※6文字以上の半角英数字で登録して下さい"
     title="新しいパスワード"
     class="password-new"
+    :errors="errors"
   />
 </template>
 
@@ -29,6 +30,10 @@ export default {
     hasHelp: {
       type: Boolean,
       default: true,
+    },
+    errors: {
+      type: Array,
+      default: () => [],
     },
   },
   computed: {
