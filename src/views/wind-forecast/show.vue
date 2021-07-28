@@ -25,6 +25,7 @@
       </div>
     </div>
 
+    <!-- TODO: change error message - issue#513  -->
     <error-dialog
       title="エラー"
       :is-visible="compassErrorVisible"
