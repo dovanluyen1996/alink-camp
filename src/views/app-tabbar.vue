@@ -83,6 +83,7 @@ export default {
   methods: {
     prechange(event) {
       if (event.activeIndex === settings.views.appTabbar.tabIndexes.menu) {
+        this.$store.dispatch('menuNavigator/reset', MenuIndexPage);
         this.openMenu(event.lastActiveIndex);
       }
     },
