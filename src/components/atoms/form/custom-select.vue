@@ -73,7 +73,7 @@ export default {
   padding-right: 30px;
   font-size: 16px;
   font-weight: 600;
-  line-height: 30px;
+  line-height: 28px;
   background-image: url('~@/assets/images/form/select-arrow.png');
   background-size: 30px;
 }
