@@ -82,11 +82,15 @@ export default {
     courseName() {
       return this.userCourse ? this.userCourse.course.name : this.course.name;
     },
+    userCourseResultSize() {
+      return this.$store.getters['models/userCourseResult/size'];
+    },
   },
   methods: {
     async createUserCourseResult() {
       this.isButtonDisable = true;
       let userCourse = this.userCourse || {};
+      const beforeUserCourseResultSize = this.userCourseResultSize;
 
       if (this.$helpers.isEmptyObject(userCourse)) userCourse = await this.createdUserCourse();
       await this.$store.dispatch('models/userCourseResult/createUserCourseResult', {
@@ -103,7 +107,7 @@ export default {
       this.isButtonDisable = false;
 
       this.$store.dispatch('scoresNavigator/pop');
-      if (!this.userCourse) {
+      if (!beforeUserCourseResultSize) {
         this.$store.dispatch('scoresNavigator/push', {
           extends: UserCourseResultsIndex,
           onsNavigatorProps: {
