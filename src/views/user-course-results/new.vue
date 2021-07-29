@@ -87,7 +87,7 @@ export default {
     async createUserCourseResult() {
       this.isButtonDisable = true;
 
-      const userCourse = this.userCourse || await this.createUserCourse();
+      const userCourse = this.userCourse || await this.createdUserCourse();
       await this.$store.dispatch('models/userCourseResult/createUserCourseResult', {
         userCourseId: userCourse.id,
         params: this.userCourseResult,
@@ -116,9 +116,11 @@ export default {
         courseId: this.course.id,
       };
       await this.$store.dispatch('models/userCourse/createUserCourse', params);
-
-      return this.$store.getters['models/userCourse/findByCourseId'](this.course.id);
     },
+    async createdUserCourse() {
+      await this.createUserCourse();
+      return this.$store.getters['models/userCourse/findByCourseId'](this.course.id);
+    }
   },
 };
 </script>
