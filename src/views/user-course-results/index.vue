@@ -8,7 +8,9 @@
         <course-name :course-name="userCourse.course.name" />
         <v-ons-card>
           <div class="content">
-            <user-course-results-summary-chart :user-course-results="userCourseResults" />
+            <user-course-results-summary-chart
+              :user-course-results="topTwentyUserCourseResults"
+            />
 
             <user-course-results-course-weather
               :weathers="weathers"
@@ -91,13 +93,16 @@ export default {
   },
   computed: {
     userCourseResults() {
-      return this.$store.getters['models/userCourseResult/all'];
+      return this.$store.getters['models/userCourseResult/sortByTargetDate'];
+    },
+    topTwentyUserCourseResults() {
+      return this.userCourseResults.slice(0, 20);
     },
     isLoading() {
       return this.$store.getters['models/userCourseResult/isLoading'];
     },
     weathers() {
-      return this.userCourseResults.map(courseResult => courseResult.weather);
+      return this.topTwentyUserCourseResults.map(courseResult => courseResult.weather);
     },
   },
   async created() {

@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import ApiClient from '@/api_client';
+import moment from 'moment';
 
 export default {
   strict: true,
@@ -12,6 +13,9 @@ export default {
     all: state => state.userCourseResults,
     findById: state => userCourseResultId => state.userCourseResults.find(
       userCourseResult => userCourseResult.id === userCourseResultId,
+    ),
+    sortByTargetDate: state => state.userCourseResults.sort(
+      (a, b) => (moment(a.targetDate).isAfter(b.targetDate) ? -1 : 1),
     ),
     isLoading: state => state.isLoading,
   },

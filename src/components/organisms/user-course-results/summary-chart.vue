@@ -1,9 +1,31 @@
 <template>
-  <div class="user-course-result-chart-container">
-    <bar-chart
-      :chart-data="chartData"
-      :options="options"
-      :height="270"
+  <div class="user-course-result-chart-container chart-scrollable">
+    <div class="chart-legend">
+      <ul class="legend">
+        <li>
+          総打数
+          <span class="legend__total-score"></span>
+        </li>
+        <li>
+          内パター数
+          <span class="legend__patting-score"></span>
+        </li>
+      </ul>
+    </div>
+    <div class="chart-wrapper">
+      <bar-chart
+        v-if="chartData"
+        :chart-data="chartData"
+        :scrollable="true"
+        :options="options"
+        :height="270"
+        class="chart-content"
+      />
+    </div>
+    <canvas
+      id="fixed-axis"
+      height="270"
+      width="0"
     />
   </div>
 </template>
@@ -13,25 +35,21 @@ import BarChart from '@/components/atoms/chart/bar-chart';
 
 export default {
   name: 'UserCourseResultsSummaryChart',
+  components: {
+    BarChart,
+  },
   props: {
     userCourseResults: {
       type: Array,
       required: true,
     },
   },
-  components: {
-    BarChart,
-  },
   data() {
     return {
-      chartData: {},
+      chartData: null,
       options: {
         legend: {
-          align: 'end',
-          labels: {
-            boxWidth: 16,
-            fontSize: 10,
-          },
+          display: false,
         },
         scales: {
           xAxes: [{
@@ -76,14 +94,71 @@ export default {
       };
     },
     getYAxis(data) {
-      return data.map(item => this.$moment(item.targetDate).format('MM/DD'));
+      const yAxis = data.map(item => this.$moment(item.targetDate).format('MM/DD'));
+      for (let i = yAxis.length; i < 8; i += 1) {
+        yAxis.push('');
+      }
+      return yAxis;
     },
     getTotalScores(data) {
       return data.map(item => item.totalScore);
     },
     getPattingScores(data) {
       return data.map(item => item.pattingScore);
-    }
-  }
+    },
+  },
 };
 </script>
+
+<style lang="scss" scoped>
+.user-course-result-chart-container {
+  position: relative;
+
+  canvas {
+    position: absolute;
+    top: 20px;
+    left: 0;
+    pointer-events: none;
+  }
+
+  .chart-wrapper {
+    position: relative;
+    overflow-x: scroll;
+  }
+
+  .chart-content {
+    float: left;
+  }
+
+  .chart-legend {
+    height: 20px;
+
+    .legend {
+      display: flex;
+      justify-content: flex-end;
+      font-size: 10px;
+      list-style: none;
+
+      li {
+        display: flex;
+        align-items: center;
+        padding-left: 10px;
+      }
+
+      &__total-score {
+        width: 16px;
+        height: 10px;
+        margin-left: 5px;
+        background-color: rgb(126, 201, 103);
+      }
+
+      &__patting-score {
+        width: 16px;
+        height: 10px;
+        margin-left: 5px;
+        background-color: rgb(67, 149, 237);
+      }
+    }
+  }
+}
+</style>
