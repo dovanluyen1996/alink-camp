@@ -69,6 +69,9 @@ import UserCourseResultImage from '@/components/organisms/user-course-results/im
 import UserCourseResultNoteField from '@/components/organisms/user-course-results/note-field';
 import ContentWithFooter from '@/components/organisms/content-with-footer';
 
+// pages
+import ScoresIndexPage from '@/views/scores/index';
+
 export default {
   name: 'UserCourseResultsEdit',
   components: {
@@ -99,6 +102,9 @@ export default {
     };
   },
   computed: {
+    userCourseResultSize() {
+      return this.$store.getters['models/userCourseResult/size'];
+    },
     weather() {
       return this.userCourseResult.weather;
     },
@@ -113,7 +119,11 @@ export default {
       })
         .then(() => {
           // TODO: 削除後のダイアログやトーストなどの表示
-          this.$store.dispatch('scoresNavigator/pop');
+          if (this.userCourseResultSize) {
+            this.$store.dispatch('scoresNavigator/pop');
+          } else {
+            this.$store.dispatch('scoresNavigator/reset', ScoresIndexPage);
+          }
         })
         .catch((err) => {
           // TODO: 削除失敗のダイアログやトーストなどの表示
