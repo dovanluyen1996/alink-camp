@@ -56,7 +56,7 @@ export default {
       window.FirebasePlugin.grantPermission(() => {
         this.goToIdfaGuidance();
       }, (error) => {
-        console.log(error);
+        console.error(error);
       });
     },
     goToIdfaGuidance() {
