@@ -11,6 +11,7 @@ export default {
   },
   getters: {
     all: state => state.userCourseResults,
+    size: state => state.userCourseResults.length,
     findById: state => userCourseResultId => state.userCourseResults.find(
       userCourseResult => userCourseResult.id === userCourseResultId,
     ),
