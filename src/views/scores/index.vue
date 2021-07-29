@@ -45,6 +45,7 @@ import ContentWithFooter from '@/components/organisms/content-with-footer';
 
 // pages
 import UserCourseResultsIndex from '@/views/user-course-results/Index';
+import UserCourseResultsNew from '@/views/user-course-results/new';
 
 export default {
   name: 'ScoresIndex',
@@ -55,9 +56,16 @@ export default {
   },
   computed: {
     courses() {
-      const userCourses = this.$store.getters['models/userCourse/all'];
+      let userCourses = this.$store.getters['models/userCourse/all'];
+
+      userCourses = userCourses.filter(
+        userCourse => (userCourse.isFavorited || userCourse.userCoursePlans.length),
+      );
 
       return userCourses.map(userCourse => userCourse.course);
+    },
+    userCourseResultSize() {
+      return this.$store.getters['models/userCourseResult/size'];
     },
     isLoading() {
       return this.$store.getters['models/userCourse/isLoading'];
@@ -74,11 +82,30 @@ export default {
     getUserCourse(courseId) {
       return this.$store.getters['models/userCourse/findByCourseId'](courseId);
     },
-    goToUserCourseResults(course) {
+    async getUserCourseResults(userCourseId) {
+      await this.$store.dispatch('models/userCourseResult/getUserCourseResults', userCourseId);
+    },
+    async goToUserCourseResults(course) {
       const userCourse = this.getUserCourse(course.id);
+      await this.getUserCourseResults(userCourse.id);
 
+      if (this.userCourseResultSize) {
+        this.goToUserCourseResultsIndex(userCourse);
+      } else {
+        this.goToUserCourseResultsNew(userCourse);
+      }
+    },
+    goToUserCourseResultsIndex(userCourse) {
       this.$store.dispatch('scoresNavigator/push', {
         extends: UserCourseResultsIndex,
+        onsNavigatorProps: {
+          userCourse,
+        },
+      });
+    },
+    goToUserCourseResultsNew(userCourse) {
+      this.$store.dispatch('scoresNavigator/push', {
+        extends: UserCourseResultsNew,
         onsNavigatorProps: {
           userCourse,
         },
