@@ -87,14 +87,9 @@ export default {
     async createUserCourseResult() {
       this.isButtonDisable = true;
 
-      let createdUserCourse = {};
-      if (!this.userCourse) {
-        await this.createUserCourse();
-        createdUserCourse = this.$store.getters['models/userCourse/findByCourseId'](this.course.id);
-      }
-      const userCourseId = (this.userCourse && this.userCourse.id) || createdUserCourse.id;
+      const userCourse = this.userCourse || await this.createUserCourse();
       await this.$store.dispatch('models/userCourseResult/createUserCourseResult', {
-        userCourseId,
+        userCourseId: userCourse.id,
         params: this.userCourseResult,
       })
         .then(() => {
@@ -111,7 +106,7 @@ export default {
         this.$store.dispatch('scoresNavigator/push', {
           extends: UserCourseResultsIndex,
           onsNavigatorProps: {
-            userCourse: createdUserCourse,
+            userCourse,
           },
         });
       }
@@ -121,6 +116,8 @@ export default {
         courseId: this.course.id,
       };
       await this.$store.dispatch('models/userCourse/createUserCourse', params);
+
+      return this.$store.getters['models/userCourse/findByCourseId'](this.course.id);
     },
   },
 };
