@@ -41,14 +41,23 @@ export default {
   methods: {
     callToPushNotificationDialog() {
       if (window.device.platform !== 'browser') {
-        window.FirebasePlugin.grantPermission(() => {
-          this.goToIdfaGuidance();
-        }, (error) => {
-          console.log(error);
+        window.FirebasePlugin.hasPermission((hasPermission) => {
+          if (hasPermission) {
+            this.goToIdfaGuidance();
+          } else {
+            this.grantPermission();
+          }
         });
       } else {
         this.goToIdfaGuidance();
       }
+    },
+    grantPermission() {
+      window.FirebasePlugin.grantPermission(() => {
+        this.goToIdfaGuidance();
+      }, (error) => {
+        console.log(error);
+      });
     },
     goToIdfaGuidance() {
       this.$store.dispatch('appNavigator/push', IdfaGuidance);
