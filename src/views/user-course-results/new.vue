@@ -86,8 +86,9 @@ export default {
   methods: {
     async createUserCourseResult() {
       this.isButtonDisable = true;
+      let userCourse = this.userCourse || {};
 
-      const userCourse = this.userCourse || await this.createdUserCourse();
+      if (this.$helpers.isEmptyObject(userCourse)) userCourse = await this.createdUserCourse();
       await this.$store.dispatch('models/userCourseResult/createUserCourseResult', {
         userCourseId: userCourse.id,
         params: this.userCourseResult,
@@ -118,9 +119,14 @@ export default {
       await this.$store.dispatch('models/userCourse/createUserCourse', params);
     },
     async createdUserCourse() {
-      await this.createUserCourse();
+      try {
+        await this.createUserCourse();
+      } catch (error) {
+        return {};
+      }
+
       return this.$store.getters['models/userCourse/findByCourseId'](this.course.id);
-    }
+    },
   },
 };
 </script>
