@@ -83,7 +83,7 @@ export default {
       // When click to other tab,
       // if menu is open other page, reset menu
       // If menu is open menu items only, no reset
-      if (this.$store.state.menuNavigator.stack.length > 0) {
+      if (this.$store.state.menuNavigator.stack.length > 1) {
         this.$store.dispatch('menuNavigator/reset', MenuIndexPage);
       }
     },
