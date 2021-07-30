@@ -16,8 +16,8 @@ export default {
   },
   props: {
     value: {
-      type: [String, null],
-      required: true,
+      type: String,
+      default: '',
     },
     errors: {
       type: Array,

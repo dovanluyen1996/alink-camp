@@ -7,10 +7,12 @@
         <base-form>
           <!-- TODO: change email -->
           <has-editable-button-field
+            title="メールアドレス"
             :value="user.email"
             @clickEdit="goToEditEmail"
           />
           <has-editable-button-field
+            title="パスワード"
             value="**************"
             @clickEdit="goToEditPassword"
           />
@@ -57,9 +59,15 @@
       <template #title>
         設定変更確認
       </template>
+
       データ引継ぎ設定の内容を変更します。<br>
+<<<<<<< HEAD
       よろしいですか？<br>
       （※機種変更時などに必要となると大切な情報です。お間違いないようご注意ください）
+=======
+      よろしいですか？
+
+>>>>>>> 7fe6630 (Add confirm popup)
       <template #footer>
         <v-ons-button
           modifier="quiet quiet-dark"
@@ -86,7 +94,7 @@
 
       <template #footer>
         <v-ons-button
-          @click="closeCompletedVisible()"
+          @click="closeCompletedDialog()"
         >
           OK
         </v-ons-button>
@@ -154,15 +162,15 @@ export default {
     async update() {
       this.closeConfirmDialog();
       await this.$store.dispatch('models/currentUser/updateUser', this.user);
-      this.showCompletedVisible();
+      this.showCompletedDialog();
     },
     async getCurrentUser() {
       await this.$store.dispatch('models/currentUser/getUser');
     },
-    showCompletedVisible() {
+    showCompletedDialog() {
       this.completedVisible = true;
     },
-    closeCompletedVisible() {
+    closeCompletedDialog() {
       this.completedVisible = false;
     },
   },

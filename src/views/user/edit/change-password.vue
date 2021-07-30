@@ -26,7 +26,7 @@
             />
           </validation-provider>
           <template #buttons>
-            <custom-submit @click="handleSubmit(submitPassword)">
+            <custom-submit @click="handleSubmit(showConfirmDialog)">
               変更
             </custom-submit>
           </template>
@@ -41,6 +41,30 @@
       @close="closeChangePasswordError"
     />
 
+    <v-ons-alert-dialog :visible="comfirmDialogVisible">
+      <template #title>
+        設定変更確認
+      </template>
+
+      データ引継ぎ設定の内容を変更します。<br>
+      よろしいですか？<br>
+      （※機種変更時などに必要となると大切な情報です。お間違えないようご注意ください）
+
+      <template #footer>
+        <v-ons-button
+          modifier="quiet quiet-dark"
+          @click="closeConfirmDialog"
+        >
+          キャンセル
+        </v-ons-button>
+        <v-ons-button
+          @click="submitPassword"
+        >
+          変更する
+        </v-ons-button>
+      </template>
+    </v-ons-alert-dialog>
+
     <v-ons-alert-dialog
       :visible.sync="completedVisible"
     >
@@ -52,7 +76,7 @@
 
       <template #footer>
         <v-ons-button
-          @click="closeCompletedVisible()"
+          @click="closeCompletedDialog()"
         >
           OK
         </v-ons-button>
@@ -85,6 +109,7 @@ export default {
       error: '',
       changePasswordErrorVisible: false,
       completedVisible: false,
+      comfirmDialogVisible: false,
     };
   },
   computed: {
@@ -103,9 +128,10 @@ export default {
   },
   methods: {
     submitPassword() {
+      this.closeConfirmDialog();
       this.$cognito.changePassword(this.oldPassword, this.newPassword)
         .then(() => {
-          this.showCompletedVisible();
+          this.showCompletedDialog();
         })
         .catch((err) => {
           this.error = err;
@@ -118,10 +144,16 @@ export default {
     closeChangePasswordError() {
       this.changePasswordErrorVisible = false;
     },
-    showCompletedVisible() {
+    showConfirmDialog() {
+      this.comfirmDialogVisible = true;
+    },
+    closeConfirmDialog() {
+      this.comfirmDialogVisible = false;
+    },
+    showCompletedDialog() {
       this.completedVisible = true;
     },
-    closeCompletedVisible() {
+    closeCompletedDialog() {
       this.completedVisible = false;
       this.$store.dispatch('menuNavigator/pop');
     },
