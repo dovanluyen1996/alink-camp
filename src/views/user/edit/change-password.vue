@@ -6,7 +6,7 @@
         <base-form>
           <validation-provider
             v-slot="{ errors }"
-            rules="required|password"
+            rules="required"
             name="今のパスワード"
           >
             <password-field
@@ -35,11 +35,29 @@
     </div>
 
     <error-dialog
-      title="パスワードの変更に失敗しました"
+      title="パスワードの更新に失敗しました"
       :is-visible="changePasswordErrorVisible"
       :error-message="errorMessage"
       @close="closeChangePasswordError"
     />
+
+    <v-ons-alert-dialog
+      :visible.sync="completedVisible"
+    >
+      <template #title>
+        パスワードを更新しました
+      </template>
+
+      パスワードを更新しました
+
+      <template #footer>
+        <v-ons-button
+          @click="closeCompletedVisible()"
+        >
+          OK
+        </v-ons-button>
+      </template>
+    </v-ons-alert-dialog>
   </v-ons-page>
 </template>
 
@@ -50,9 +68,6 @@ import UserPasswordNew from '@/components/organisms/user/user-password-new';
 import CustomSubmit from '@/components/organisms/form/custom-submit';
 import ErrorDialog from '@/components/organisms/error-dialog';
 import PasswordField from '@/components/organisms/form/password-field';
-
-// pages
-import SignIn from '@/views/auth/sign-in';
 
 export default {
   name: 'ChangePasswordView',
@@ -69,6 +84,7 @@ export default {
       newPassword: '',
       error: '',
       changePasswordErrorVisible: false,
+      completedVisible: false,
     };
   },
   computed: {
@@ -77,9 +93,9 @@ export default {
 
       switch (this.error.code) {
       case 'NotAuthorizedException':
-        return '今のパスワードが間違っています';
+        return '今のパスワードと一致しません';
       case 'LimitExceededException':
-        return 'Attempt limit exceeded, please try after some time';
+        return '試行回数の制限を超えました。しばらくしてから試してください';
       default:
         return 'パスワードの変更に失敗しました';
       }
@@ -89,7 +105,7 @@ export default {
     submitPassword() {
       this.$cognito.changePassword(this.oldPassword, this.newPassword)
         .then(() => {
-          this.$store.dispatch('appNavigator/reset', SignIn);
+          this.showCompletedVisible();
         })
         .catch((err) => {
           this.error = err;
@@ -101,6 +117,13 @@ export default {
     },
     closeChangePasswordError() {
       this.changePasswordErrorVisible = false;
+    },
+    showCompletedVisible() {
+      this.completedVisible = true;
+    },
+    closeCompletedVisible() {
+      this.completedVisible = false;
+      this.$store.dispatch('menuNavigator/pop');
     },
   },
 };

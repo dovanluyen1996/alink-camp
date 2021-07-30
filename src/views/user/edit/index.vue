@@ -74,6 +74,24 @@
         </v-ons-button>
       </template>
     </v-ons-alert-dialog>
+
+    <v-ons-alert-dialog
+      :visible.sync="completedVisible"
+    >
+      <template #title>
+        設定を更新しました
+      </template>
+
+      設定を更新しました
+
+      <template #footer>
+        <v-ons-button
+          @click="closeCompletedVisible()"
+        >
+          OK
+        </v-ons-button>
+      </template>
+    </v-ons-alert-dialog>
   </v-ons-page>
 </template>
 
@@ -100,6 +118,7 @@ export default {
   data() {
     return {
       isShownComfirmDialog: false,
+      completedVisible: false,
     };
   },
   computed: {
@@ -135,9 +154,16 @@ export default {
     async update() {
       this.closeConfirmDialog();
       await this.$store.dispatch('models/currentUser/updateUser', this.user);
+      this.showCompletedVisible();
     },
     async getCurrentUser() {
       await this.$store.dispatch('models/currentUser/getUser');
+    },
+    showCompletedVisible() {
+      this.completedVisible = true;
+    },
+    closeCompletedVisible() {
+      this.completedVisible = false;
     },
   },
 };
