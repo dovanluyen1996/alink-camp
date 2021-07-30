@@ -79,8 +79,11 @@ export default {
     },
   },
   methods: {
-    prechange(event) {
-      if (event.activeIndex === settings.views.appTabbar.tabIndexes.menu) {
+    prechange() {
+      // When click to other tab,
+      // if menu is open other page, reset menu
+      // If menu is open menu items only, no reset
+      if (this.$store.state.menuNavigator.stack.length > 0) {
         this.$store.dispatch('menuNavigator/reset', MenuIndexPage);
       }
     },
