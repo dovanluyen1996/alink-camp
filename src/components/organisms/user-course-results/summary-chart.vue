@@ -57,6 +57,9 @@ export default {
             gridLines: {
               color: 'transparent',
             },
+            ticks: {
+              maxRotation: 90,
+            },
           }],
           yAxes: [{
             stacked: true,
@@ -118,7 +121,9 @@ export default {
     position: absolute;
     top: 20px;
     left: 0;
+    padding-bottom: 32px;
     pointer-events: none;
+    background-color: #fff;
   }
 
   .chart-wrapper {

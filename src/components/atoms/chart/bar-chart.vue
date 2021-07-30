@@ -1,4 +1,5 @@
 <script>
+/* eslint-disable no-underscore-dangle */
 import { Bar, mixins } from 'vue-chartjs';
 
 const { reactiveProp } = mixins;
@@ -24,6 +25,7 @@ export default {
   watch: {
     chartData() {
       this.rectangleSet = false;
+      this.adjustAxisRotationDeg(this.$data._chart);
     },
   },
   mounted() {
@@ -36,6 +38,7 @@ export default {
       };
     }
     this.renderChart(this.chartData, options);
+    this.adjustAxisRotationDeg(this.$data._chart);
   },
   methods: {
     onComplete(event) {
@@ -43,7 +46,7 @@ export default {
         const scale = window.devicePixelRatio;
 
         const sourceCanvas = event.chart.canvas;
-        const copyWidth = event.chart.scales['y-axis-0'].width + 4;
+        const copyWidth = event.chart.scales['y-axis-0'].width + 2;
         const copyHeight = event.chart.scales['y-axis-0'].height + event.chart.scales['y-axis-0'].top + 10;
 
         const targetCtx = document.getElementById('fixed-axis').getContext('2d');
@@ -61,7 +64,7 @@ export default {
         );
 
         const sourceCtx = sourceCanvas.getContext('2d');
-        sourceCtx.clearRect(0, 0, copyWidth, copyHeight);
+        sourceCtx.clearRect(0, 0, copyWidth - 2, copyHeight);
 
         this.rectangleSet = true;
       }
@@ -75,6 +78,14 @@ export default {
         sourceCtx.clearRect(0, 0, copyWidth, copyHeight);
       }
     },
+    adjustAxisRotationDeg(chart) {
+      if (!this.scrollable) return;
+
+      const rotateDeg = this.chartData.labels.length >= 10 ? 90 : 0;
+      chart.options.scales.xAxes[0].ticks.minRotation = rotateDeg;
+      chart.update();
+    },
   },
 };
+/* eslint-enable no-underscore-dangle */
 </script>
