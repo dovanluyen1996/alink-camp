@@ -18,6 +18,7 @@ export default {
     value: {
       type: String,
       default: '',
+      requier: true,
     },
     errors: {
       type: Array,
@@ -27,7 +28,7 @@ export default {
   computed: {
     inputedValue: {
       get() {
-        return this.value || '';
+        return this.value;
       },
       set(newValue) {
         this.$emit('input', newValue);

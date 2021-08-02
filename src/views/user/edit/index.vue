@@ -134,7 +134,10 @@ export default {
       return this.$store.state.models.currentUser.user;
     },
     user() {
-      return { ...this.currentUser };
+      const user = { ...this.currentUser };
+      if (!user.birthdate) user.birthdate = '';
+
+      return user;
     },
     isLoading() {
       return this.$store.getters['models/currentUser/isLoading'];

@@ -69,10 +69,10 @@
       :visible.sync="completedVisible"
     >
       <template #title>
-        パスワードを更新しました
+        変更完了
       </template>
 
-      パスワードを更新しました
+      情報を変更しました。
 
       <template #footer>
         <v-ons-button
