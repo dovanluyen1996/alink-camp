@@ -6,7 +6,8 @@
     >
       <div
         class="wind-direction wind-speed"
-        :class="[windSpeedRate, windDirectionDeg]"
+        :class="[windSpeedRate]"
+        :style="windDirectionStyle"
       />
     </div>
     <div class="wind-info">
@@ -35,7 +36,8 @@ export default {
   data() {
     return {
       windSpeed: 0,
-      windDirection: '東',
+      windDirection: '北',
+      windDirectionDeg: 0,
       compassHeading: 0,
       compassHeadingDeg: 0,
       watchId: null,
@@ -55,14 +57,17 @@ export default {
         return 'wind-speed--danger';
       }
     },
-    windDirectionDeg() {
-      const deg = Math.floor(windDirections[this.windDirection]);
-
-      return `wind-direction--${deg}-deg`;
+    windDirectionHeading() {
+      return windDirections[this.windDirection];
     },
     compassHeadingStyle() {
       return {
         transform: `rotate(${this.compassHeadingDeg}deg)`,
+      };
+    },
+    windDirectionStyle() {
+      return {
+        transform: `rotate(${this.windDirectionDeg}deg)`,
       };
     },
   },
@@ -72,13 +77,10 @@ export default {
       this.windDirection = this.forecastWind.windDirection;
     },
     compassHeading(newValue, oldValue) {
-      let delta = newValue - oldValue;
-      if (delta > 180) {
-        delta -= 360;
-      } else if (delta < -180) {
-        delta += 360;
-      }
-      this.compassHeadingDeg += delta;
+      this.compassHeadingDeg += this.calDelta(newValue, oldValue);
+    },
+    windDirectionHeading(newValue, oldValue) {
+      this.windDirectionDeg += this.calDelta(newValue, oldValue);
     },
   },
   methods: {
@@ -102,6 +104,16 @@ export default {
       this.$emit('update:compassErrorVisible', true);
       // TODO: change error message - issue#513
     },
+    calDelta(newValue, oldValue) {
+      let delta = newValue - oldValue;
+      if (delta > 180) {
+        delta -= 360;
+      } else if (delta < -180) {
+        delta += 360;
+      }
+
+      return delta;
+    }
   },
 
 };
