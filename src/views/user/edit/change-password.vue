@@ -72,7 +72,7 @@
         変更完了
       </template>
 
-      情報を変更しました。
+      パスワードを変更しました。
 
       <template #footer>
         <v-ons-button

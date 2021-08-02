@@ -87,10 +87,10 @@
       :visible.sync="completedVisible"
     >
       <template #title>
-        設定を更新しました
+        変更完了
       </template>
 
-      設定を更新しました
+      情報を変更しました。
 
       <template #footer>
         <v-ons-button
