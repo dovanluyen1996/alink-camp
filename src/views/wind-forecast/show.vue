@@ -59,6 +59,10 @@ export default {
   },
   beforeDestroy() {
     this.$refs.compass.stopWatch();
+    document.removeEventListener('resume', this.onResume, false);
+  },
+  mounted() {
+    document.addEventListener('resume', this.onResume, false);
   },
   methods: {
     getForecastWind() {
@@ -80,6 +84,9 @@ export default {
     },
     closeCompassErrorDialog() {
       this.compassErrorVisible = false;
+    },
+    async onResume() {
+      this.forecastWind = await this.getForecastWind();
     },
   },
 };
