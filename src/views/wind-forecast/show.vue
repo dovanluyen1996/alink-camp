@@ -25,25 +25,32 @@
       </div>
     </div>
 
-    <!-- TODO: change error message - issue#513  -->
-    <error-dialog
-      title="エラー"
-      :is-visible="compassErrorVisible"
-      error-message="エラー"
-      @close="closeCompassErrorDialog"
-    />
+    <v-ons-alert-dialog :visible.sync="compassErrorVisible">
+      <template #title>
+        エラー
+      </template>
+
+      {{ compassErrorMsg }}
+
+      <template #footer>
+        <v-ons-button @click="goBackToCourseList()">
+          コース選択に戻る
+        </v-ons-button>
+        <v-ons-button @click="show()">
+          再度APIを実行する
+        </v-ons-button>
+      </template>
+    </v-ons-alert-dialog>
   </v-ons-page>
 </template>
 
 <script>
 import Compass from '@/components/organisms/wind-forecast/compass';
-import ErrorDialog from '@/components/organisms/error-dialog';
 
 export default {
   name: 'WindForecastShow',
   components: {
     Compass,
-    ErrorDialog,
   },
   props: {
     course: {
@@ -55,6 +62,7 @@ export default {
     return {
       forecastWind: {},
       compassErrorVisible: false,
+      compassErrorMsg: '',
     };
   },
   beforeDestroy() {
@@ -65,14 +73,25 @@ export default {
     document.addEventListener('resume', this.onResume, false);
   },
   methods: {
-    getForecastWind() {
+    async getForecastWind() {
       const params = {
         course_id: this.course.id,
         target_date: this.$moment().format('YYYY-MM-DD'),
       };
-      return this.$store.dispatch('models/weather/getForecastWind', params);
+      let forecastWind = {};
+
+      this.compassErrorVisible = false;
+      try {
+        forecastWind = await this.$store.dispatch('models/weather/getForecastWind', params);
+      } catch (error) {
+        this.compassErrorMsg = error.message;
+        this.compassErrorVisible = true;
+      }
+
+      return forecastWind;
     },
     goBackToCourseList() {
+      this.compassErrorVisible = false;
       this.$store.commit('windForecastNavigator/pop');
     },
     async show() {

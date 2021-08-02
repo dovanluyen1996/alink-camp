@@ -100,6 +100,7 @@ export default {
     },
     compassError() {
       this.$emit('update:compassErrorVisible', true);
+      // TODO: change error message - issue#513
     },
   },
 
