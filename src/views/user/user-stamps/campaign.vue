@@ -21,17 +21,21 @@
       所持応募券：<span>{{ currentUser.ticketCount }}</span>枚
     </div>
     <div class="campaign-stamps">
-      <!-- TODO: アニメーションを付けたい -->
       <div
         v-for="stampArea in stampAreaLimit"
         :key="stampArea"
-        :class="['campaign-stamps__count', {'has-stamp' : hasStamp(stampArea)}]"
+        :class="[
+          'campaign-stamps__count',
+          {'campaign-stamps--increase' : hasStamp(stampArea) && increaseStampArea(stampArea)
+          }]"
       >
-        <img
-          v-if="hasStamp(stampArea)"
-          src="@/assets/images/user/stamps/campaign/flag.png"
-          width="40"
-        >
+        <div :class="[{'has-stamp' : hasStamp(stampArea)}]">
+          <img
+            v-if="hasStamp(stampArea)"
+            src="@/assets/images/user/stamps/campaign/flag.png"
+            width="75%"
+          >
+        </div>
       </div>
     </div>
     <template #footer>
@@ -75,15 +79,25 @@ export default {
     async lastVisitedAt(value) {
       const lastGettedAt = localStorage.getItem('userStampLastGettedAt');
       if (!lastGettedAt || this.$helpers.isAfterDate(value, lastGettedAt)) {
-        this.isVisible = true;
         await this.getUserStamp();
         localStorage.setItem('userStampLastGettedAt', value);
+        this.isVisible = true;
       }
     },
   },
   methods: {
     hasStamp(stampArea) {
       return stampArea <= this.userStamp.number;
+    },
+    increaseStampArea(stampArea) {
+      let isIncreaseStamp = false;
+
+      for (let i = this.userStamp.increase; i > 0; i -= 1) {
+        isIncreaseStamp = stampArea === (this.userStamp.number - i + 1);
+        if (isIncreaseStamp) { break; }
+      }
+
+      return isIncreaseStamp;
     },
     closeCampaign() {
       this.isVisible = false;
@@ -140,6 +154,7 @@ export default {
   justify-content: center;
 
   &__count {
+    position: relative;
     box-sizing: border-box;
     display: flex;
     align-items: center;
@@ -160,20 +175,56 @@ export default {
       }
     }
 
-    &.has-stamp {
-      background-color: #fff2ac;
-      border-color: #dedede;
-
-      @for $number from 1 through 10 {
-        &:nth-child(#{$number}) {
-          background-image: url('~@/assets/images/user/stamps/campaign/#{$number}-on.png');
-        }
+    @for $number from 1 through 10 {
+      .has-stamp {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #fff2ac;
+        background-image: url('~@/assets/images/user/stamps/campaign/#{$number}-on.png');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 40px;
+        border-color: #dedede;
+        opacity: 1;
       }
+    }
+  }
+
+  &--increase {
+    .has-stamp {
+      z-index: 9999;
+      opacity: 0;
+      animation: mark-stemp 0.5s ease-in 0.2s;
+      animation-fill-mode: forwards;
     }
   }
 }
 
 .close-button {
   width: 180px;
+}
+
+@keyframes mark-stemp {
+  0% {
+    top: -12px;
+    left: -12px;
+    width: 80px;
+    height: 80px;
+    opacity: 0;
+  }
+
+  100% {
+    top: 0;
+    left: 0;
+    width: 53px;
+    height: 53px;
+    opacity: 1;
+  }
 }
 </style>
