@@ -56,11 +56,7 @@ export default {
   },
   computed: {
     courses() {
-      let userCourses = this.$store.getters['models/userCourse/all'];
-
-      userCourses = userCourses.filter(
-        userCourse => (userCourse.isFavorited || userCourse.userCoursePlans.length),
-      );
+      const userCourses = this.$store.getters['models/userCourse/hasFavoritedOrPlans'];
 
       return userCourses.map(userCourse => userCourse.course);
     },

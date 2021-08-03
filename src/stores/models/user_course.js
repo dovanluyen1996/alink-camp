@@ -23,6 +23,9 @@ export default {
 
       return state.userCourses.filter(userCourse => inFutureUserCourseId.includes(userCourse.id));
     },
+    hasFavoritedOrPlans: state => state.userCourses.filter(
+      userCourse => (userCourse.isFavorited || userCourse.userCoursePlans.length),
+    ),
     onlyFavoritedWithoutPlans: state => state.userCourses.filter(
       // お気に入り登録されている、かつ今日以降の予定日がないuserCourse
       userCourse => userCourse.isFavorited && !userCourse.userCoursePlans.filter(
