@@ -35,21 +35,21 @@ export default {
     title() {
       switch (this.action) {
       case 'update':
-        return '削除完了';
+        return '編集完了';
       case 'create':
         return '登録完了';
       default:
-        return '編集完了';
+        return '削除完了';
       }
     },
     message() {
       switch (this.action) {
       case 'update':
-        return '削除しました。';
+        return '編集しました。';
       case 'create':
         return '登録しました。';
       default:
-        return '編集しました。';
+        return '削除しました。';
       }
     },
   },
