@@ -52,6 +52,12 @@
         @close="closeSignUpError"
       />
     </div>
+
+    <completed-dialog
+      action="create"
+      :is-visible="completedDialogVisible"
+      @close="closeCompletedDialog"
+    />
   </v-ons-page>
 </template>
 
@@ -63,6 +69,7 @@ import UserPassword from '@/components/organisms/user/user-password';
 import CustomSubmit from '@/components/organisms/form/custom-submit';
 import SocialLogin from '@/components/organisms/social-login';
 import ErrorDialog from '@/components/organisms/error-dialog';
+import CompletedDialog from '@/components/organisms/completed-dialog';
 
 // pages
 import UerNewConfirmCode from '@/views/user/new/confirm-code';
@@ -77,6 +84,7 @@ export default {
     CustomSubmit,
     SocialLogin,
     ErrorDialog,
+    CompletedDialog,
   },
   data() {
     return {
@@ -86,6 +94,7 @@ export default {
       },
       error: null,
       signUpErrorVisible: false,
+      completedDialogVisible: false,
     };
   },
   computed: {
@@ -109,7 +118,7 @@ export default {
       this.$cognito.signUp(this.user.email, this.user.password)
         .then(async(result) => {
           console.log(result);
-          this.goToConfirmCode();
+          this.showCompletedDialog();
         })
         .catch((err) => {
           this.error = err;
@@ -137,6 +146,13 @@ export default {
     },
     closeSignUpError() {
       this.signUpErrorVisible = false;
+    },
+    showCompletedDialog() {
+      this.completedDialogVisible = true;
+    },
+    closeCompletedDialog() {
+      this.completedDialogVisible = false;
+      this.goToConfirmCode();
     },
   },
 };

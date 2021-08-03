@@ -31,6 +31,12 @@
         </content-with-footer>
       </validation-observer>
     </div>
+
+    <completed-dialog
+      action="create"
+      :is-visible="completedDialogVisible"
+      @close="closeCompletedDialog"
+    />
   </v-ons-page>
 </template>
 
@@ -42,6 +48,7 @@ import UserCourseResultsScoresField from '@/components/organisms/user-course-res
 import UserCourseResultsImageField from '@/components/organisms/form/image-field';
 import UserCourseResultsNoteField from '@/components/organisms/user-course-results/note-field';
 import ContentWithFooter from '@/components/organisms/content-with-footer';
+import CompletedDialog from '@/components/organisms/completed-dialog';
 
 // pages
 import UserCourseResultsIndex from '@/views/user-course-results/index';
@@ -55,6 +62,7 @@ export default {
     UserCourseResultsImageField,
     UserCourseResultsNoteField,
     ContentWithFooter,
+    CompletedDialog,
   },
   props: {
     course: {
@@ -76,6 +84,7 @@ export default {
         note: '',
       },
       isButtonDisable: false,
+      completedDialogVisible: false,
     };
   },
   computed: {
@@ -87,6 +96,28 @@ export default {
     },
   },
   methods: {
+    showCompletedDialog() {
+      this.completedDialogVisible = true;
+    },
+    async closeCompletedDialog() {
+      let userCourse = this.userCourse || {};
+
+      if (this.$helpers.isEmptyObject(userCourse)) userCourse = await this.createdUserCourse();
+
+      this.completedDialogVisible = false;
+
+      this.isButtonDisable = false;
+
+      this.$store.dispatch('scoresNavigator/pop');
+      if (!this.userCourse) {
+        this.$store.dispatch('scoresNavigator/push', {
+          extends: UserCourseResultsIndex,
+          onsNavigatorProps: {
+            userCourse,
+          },
+        });
+      }
+    },
     async createUserCourseResult() {
       this.isButtonDisable = true;
       let userCourse = this.userCourse || {};
@@ -115,6 +146,7 @@ export default {
           },
         });
       }
+      this.showCompletedDialog();
     },
     async createUserCourse() {
       const params = {

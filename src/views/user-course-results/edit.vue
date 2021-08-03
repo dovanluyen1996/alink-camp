@@ -55,6 +55,12 @@
         </content-with-footer>
       </validation-observer>
     </div>
+
+    <completed-dialog
+      :action="action"
+      :is-visible="completedDialogVisible"
+      @close="closeCompletedDialog"
+    />
   </v-ons-page>
 </template>
 
@@ -68,6 +74,7 @@ import UserCourseResultWeather from '@/components/organisms/user-course-results/
 import UserCourseResultImage from '@/components/organisms/user-course-results/image';
 import UserCourseResultNoteField from '@/components/organisms/user-course-results/note-field';
 import ContentWithFooter from '@/components/organisms/content-with-footer';
+import CompletedDialog from '@/components/organisms/completed-dialog';
 
 // pages
 import ScoresIndexPage from '@/views/scores/index';
@@ -83,6 +90,7 @@ export default {
     UserCourseResultImage,
     UserCourseResultNoteField,
     ContentWithFooter,
+    CompletedDialog,
   },
   props: {
     userCourse: {
@@ -99,6 +107,8 @@ export default {
       tempUserCourseResult: { ...this.userCourseResult },
       isShownDeleteDialog: false,
       isButtonDisable: false,
+      completedDialogVisible: false,
+      action: '',
     };
   },
   computed: {
@@ -110,6 +120,15 @@ export default {
     },
   },
   methods: {
+    showCompletedDialog(action) {
+      this.action = action;
+      this.completedDialogVisible = true;
+    },
+    closeCompletedDialog() {
+      this.completedDialogVisible = false;
+
+      this.$store.dispatch('scoresNavigator/pop');
+    },
     async deleteUserCourseResult() {
       this.isShownDeleteDialog = false;
 
@@ -124,6 +143,8 @@ export default {
           } else {
             this.$store.dispatch('scoresNavigator/reset', ScoresIndexPage);
           }
+
+          this.showCompletedDialog('delete');
         })
         .catch((err) => {
           // TODO: 削除失敗のダイアログやトーストなどの表示
@@ -144,7 +165,7 @@ export default {
       })
         .then(() => {
           // TODO: 更新後のダイアログやトーストなどの表示
-          this.$store.dispatch('scoresNavigator/pop');
+          this.showCompletedDialog('update');
         })
         .catch((err) => {
           // TODO: 更新失敗のダイアログやトーストなどの表示

@@ -32,6 +32,12 @@
         />
       </div>
     </div>
+
+    <completed-dialog
+      :action="action"
+      :is-visible="completedDialogVisible"
+      @close="closeCompletedDialog"
+    />
   </v-ons-page>
 </template>
 
@@ -41,6 +47,7 @@ import settings from '@/config/settings';
 // components
 import CardWithTab from '@/components/organisms/card-with-tab';
 import CourseName from '@/components/organisms/course-name';
+import CompletedDialog from '@/components/organisms/completed-dialog';
 
 // tab contents
 import CoursesForecastTab from '@/components/organisms/courses/forecast-tab';
@@ -57,6 +64,7 @@ export default {
   components: {
     CardWithTab,
     CourseName,
+    CompletedDialog,
   },
   props: {
     course: {
@@ -76,6 +84,8 @@ export default {
           component: CoursesInformationTab,
         },
       ],
+      completedDialogVisible: false,
+      action: '',
     };
   },
   computed: {
@@ -134,6 +144,13 @@ export default {
         },
       });
     },
+    showCompletedDialog(action) {
+      this.action = action;
+      this.completedDialogVisible = true;
+    },
+    closeCompletedDialog() {
+      this.completedDialogVisible = false;
+    },
     async show() {
       await this.getCourse();
       await this.getUserCourses();
@@ -147,8 +164,10 @@ export default {
     async settingFavorited() {
       if (this.userCourse) {
         await this.updateUserCourseFavorited();
+        this.showCompletedDialog('update');
       } else {
         await this.createUserCourseFavorited();
+        this.showCompletedDialog('create');
       }
     },
     async createUserCourseFavorited() {
@@ -163,7 +182,6 @@ export default {
       const params = {
         isFavorited: !this.favorited,
       };
-
       await this.$store.dispatch('models/userCourse/updateUserCourse', {
         userCourseId: this.userCourse.id,
         params,

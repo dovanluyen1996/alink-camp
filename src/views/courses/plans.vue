@@ -51,6 +51,12 @@
         </content-with-footer>
       </validation-observer>
     </div>
+
+    <completed-dialog
+      :action="action"
+      :is-visible="completedDialogVisible"
+      @close="closeCompletedDialog"
+    />
   </v-ons-page>
 </template>
 
@@ -61,6 +67,7 @@ import TimeField from '@/components/organisms/form/time-field';
 import ContentWithFooter from '@/components/organisms/content-with-footer';
 import CourseName from '@/components/organisms/course-name';
 import DeleteDialogWithIcon from '@/components/organisms/dialog/delete-dialog-with-icon';
+import CompletedDialog from '@/components/organisms/completed-dialog';
 
 export default {
   name: 'CoursePlans',
@@ -70,6 +77,7 @@ export default {
     ContentWithFooter,
     CourseName,
     DeleteDialogWithIcon,
+    CompletedDialog,
   },
   props: {
     course: {
@@ -87,6 +95,8 @@ export default {
       timeValue: '',
       deleteConfirmDialogVisible: false,
       userCourse: {},
+      completedDialogVisible: false,
+      action: '',
     };
   },
   computed: {
@@ -119,16 +129,16 @@ export default {
       this.closeDeleteConfirmDialog();
 
       await this.destroyUserCoursePlan();
-      await this.$store.dispatch('courseSearchNavigator/pop');
+      this.showCompletedDialog('delete');
     },
     async settingUserCoursePlan() {
       if (this.isPersisted) {
         await this.updateUserCoursePlan();
+        this.showCompletedDialog('update');
       } else {
         await this.createUserCoursePlan();
+        this.showCompletedDialog('create');
       }
-
-      await this.$store.dispatch('courseSearchNavigator/pop');
     },
     async updateUserCoursePlan() {
       const params = {
@@ -177,6 +187,14 @@ export default {
         courseId: this.course.id,
       };
       await this.$store.dispatch('models/userCourse/createUserCourse', params);
+    },
+    showCompletedDialog(action) {
+      this.action = action;
+      this.completedDialogVisible = true;
+    },
+    async closeCompletedDialog() {
+      this.completedDialogVisible = false;
+      await this.$store.dispatch('courseSearchNavigator/pop');
     },
   },
 };
