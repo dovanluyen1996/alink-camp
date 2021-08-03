@@ -21,6 +21,7 @@
               <v-ons-input
                 v-model="inputedTotalScoreValue"
                 type="text"
+                inputmode="numeric"
                 maxlength="3"
                 oninput="value = value.replace(/[^0-9]+/i,'');"
                 class="total-score-input"
@@ -53,6 +54,7 @@
             <v-ons-input
               v-model="inputedPattingScoreValue"
               type="text"
+              inputmode="numeric"
               maxlength="3"
               oninput="value = value.replace(/[^0-9]+/i,'');"
               class="patting-score-input"
