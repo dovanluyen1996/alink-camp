@@ -83,13 +83,13 @@ export default {
         datasets: [
           {
             label: '内パター数',
-            backgroundColor: '#7EC967',
+            backgroundColor: '#7ec967',
             maxBarThickness: 14,
             data: this.getPattingScores(data),
           },
           {
             label: '総打数',
-            backgroundColor: '#4395ED',
+            backgroundColor: '#4395ed',
             maxBarThickness: 14,
             data: this.getTotalScores(data),
           },
@@ -150,18 +150,19 @@ export default {
         padding-left: 10px;
       }
 
-      &__total-score {
-        width: 16px;
-        height: 10px;
-        margin-left: 5px;
-        background-color: rgb(126, 201, 103);
-      }
-
+      &__total-score,
       &__patting-score {
         width: 16px;
         height: 10px;
         margin-left: 5px;
-        background-color: rgb(67, 149, 237);
+      }
+
+      &__total-score {
+        background-color: #4395ed;
+      }
+
+      &__patting-score {
+        background-color: #7ec967;
       }
     }
   }
