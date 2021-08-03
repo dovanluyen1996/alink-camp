@@ -1,5 +1,4 @@
 <script>
-/* eslint-disable no-underscore-dangle */
 import { Bar, mixins } from 'vue-chartjs';
 
 const { reactiveProp } = mixins;
@@ -22,23 +21,15 @@ export default {
       rectangleSet: false,
     };
   },
-  watch: {
-    chartData() {
-      this.rectangleSet = false;
-      this.adjustAxisRotationDeg(this.$data._chart);
-    },
-  },
   mounted() {
     const options = { ...this.options };
 
     if (this.scrollable) {
       options.animation = {
         onComplete: this.onComplete,
-        onProgress: this.onProgress,
       };
     }
     this.renderChart(this.chartData, options);
-    this.adjustAxisRotationDeg(this.$data._chart);
   },
   methods: {
     onComplete(event) {
@@ -69,23 +60,6 @@ export default {
         this.rectangleSet = true;
       }
     },
-    onProgress(event) {
-      if (this.rectangleSet) {
-        const copyWidth = event.chart.scales['y-axis-0'].width + 5;
-        const copyHeight = event.chart.scales['y-axis-0'].height + event.chart.scales['y-axis-0'].top + 10;
-
-        const sourceCtx = event.chart.canvas.getContext('2d');
-        sourceCtx.clearRect(0, 0, copyWidth, copyHeight);
-      }
-    },
-    adjustAxisRotationDeg(chart) {
-      if (!this.scrollable) return;
-
-      const rotateDeg = this.chartData.labels.length >= 10 ? 90 : 0;
-      chart.options.scales.xAxes[0].ticks.minRotation = rotateDeg;
-      chart.update();
-    },
   },
 };
-/* eslint-enable no-underscore-dangle */
 </script>

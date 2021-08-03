@@ -12,13 +12,18 @@
         </li>
       </ul>
     </div>
-    <div class="chart-wrapper">
+    <div
+      id="score-summary-chart"
+      class="chart-wrapper"
+    >
       <bar-chart
         v-if="chartData"
+        :key="chartKey"
         :chart-data="chartData"
         :scrollable="true"
         :options="options"
         :height="270"
+        :width="chartWidth"
         class="chart-content"
       />
     </div>
@@ -47,7 +52,12 @@ export default {
   data() {
     return {
       chartData: null,
+      xAxisStepSize: 45,
+      chartWidth: 800,
+      blankLabel: 0,
+      chartKey: 0,
       options: {
+        responsive: false,
         legend: {
           display: false,
         },
@@ -56,9 +66,6 @@ export default {
             stacked: true,
             gridLines: {
               color: 'transparent',
-            },
-            ticks: {
-              maxRotation: 90,
             },
           }],
           yAxes: [{
@@ -73,6 +80,8 @@ export default {
   },
   watch: {
     userCourseResults() {
+      this.chartKey += 1;
+      this.calChartWidth();
       this.fillData(this.userCourseResults);
     },
   },
@@ -98,7 +107,7 @@ export default {
     },
     getYAxis(data) {
       const yAxis = data.map(item => this.$moment(item.targetDate).format('MM/DD'));
-      for (let i = yAxis.length; i < 8; i += 1) {
+      for (let i = yAxis.length; i <= this.blankLabel; i += 1) {
         yAxis.push('');
       }
       return yAxis;
@@ -108,6 +117,21 @@ export default {
     },
     getPattingScores(data) {
       return data.map(item => item.pattingScore);
+    },
+    calChartWidth() {
+      const chartElement = document.getElementById('score-summary-chart');
+      const chartWrapWidth = chartElement.offsetWidth || parseInt(chartElement.dataset.width, 10);
+      let chartWidth = this.userCourseResults.length * this.xAxisStepSize;
+
+      if (chartElement.offsetWidth > 0) {
+        chartElement.dataset.width = chartElement.offsetWidth;
+      }
+      if (chartWidth < chartWrapWidth) {
+        // 32 is width of yAxis
+        this.blankLabel = Math.floor((chartWrapWidth - 32) / this.xAxisStepSize);
+        chartWidth += (chartWrapWidth - chartWidth);
+      }
+      this.chartWidth = chartWidth;
     },
   },
 };
