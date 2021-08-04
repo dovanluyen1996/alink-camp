@@ -41,28 +41,16 @@
         </div>
       </v-ons-list-item>
     </v-ons-list>
-    <completed-dialog
-      action="update"
-      :is-visible="completedDialogVisible"
-      @close="closeCompletedDialog"
-    />
   </card-with-title>
 </template>
 
 <script>
 import CardWithTitle from '@/components/organisms/card-with-title';
-import CompletedDialog from '@/components/organisms/completed-dialog';
 
 export default {
   name: 'UserSettingList',
   components: {
     CardWithTitle,
-    CompletedDialog,
-  },
-  data() {
-    return {
-      completedDialogVisible: false,
-    };
   },
   computed: {
     userSetting() {
@@ -109,16 +97,9 @@ export default {
     async updateUserSetting() {
       try {
         await this.$store.dispatch('models/userSetting/updateUserSetting', this.userSetting);
-        this.showCompletedDialog();
       } catch (e) {
         this.getUserSetting();
       }
-    },
-    showCompletedDialog() {
-      this.completedDialogVisible = true;
-    },
-    closeCompletedDialog() {
-      this.completedDialogVisible = false;
     },
   },
 };
