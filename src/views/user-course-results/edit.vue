@@ -137,7 +137,6 @@ export default {
         userCourseResultId: this.userCourseResult.id,
       })
         .then(() => {
-          // TODO: 削除後のダイアログやトーストなどの表示
           if (this.userCourseResultSize) {
             this.$store.dispatch('scoresNavigator/pop');
           } else {
@@ -164,7 +163,6 @@ export default {
         params: this.tempUserCourseResult,
       })
         .then(() => {
-          // TODO: 更新後のダイアログやトーストなどの表示
           this.showCompletedDialog('update');
         })
         .catch((err) => {
