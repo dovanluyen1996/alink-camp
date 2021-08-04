@@ -99,14 +99,14 @@ export default {
     showCompletedDialog() {
       this.completedDialogVisible = true;
     },
-    async closeCompletedDialog() {
-      let userCourse = this.userCourse || {};
-
-      if (this.$helpers.isEmptyObject(userCourse)) userCourse = await this.createdUserCourse();
-
+    closeCompletedDialog() {
       this.completedDialogVisible = false;
 
-      this.isButtonDisable = false;
+      this.gotoUserCourseResultsIndex();
+    },
+    async gotoUserCourseResultsIndex() {
+      let userCourse = this.userCourse || {};
+      if (this.$helpers.isEmptyObject(userCourse)) userCourse = await this.createdUserCourse();
 
       this.$store.dispatch('scoresNavigator/pop');
       if (!this.userCourse) {
@@ -124,6 +124,7 @@ export default {
       const beforeUserCourseResultSize = this.userCourseResultSize;
 
       if (this.$helpers.isEmptyObject(userCourse)) userCourse = await this.createdUserCourse();
+
       await this.$store.dispatch('models/userCourseResult/createUserCourseResult', {
         userCourseId: userCourse.id,
         params: this.userCourseResult,
@@ -146,6 +147,7 @@ export default {
           },
         });
       }
+      
       this.showCompletedDialog();
     },
     async createUserCourse() {
