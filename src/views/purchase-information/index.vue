@@ -1,34 +1,62 @@
 <template>
   <v-ons-page>
     <div class="content">
-      <content-with-footer>
-        <v-ons-card>
-          月額案内1
-        </v-ons-card>
+      <greeting @click="callToPurchase" />
 
-        <v-ons-card>
-          月額案内2
-        </v-ons-card>
-
-        <v-ons-card>
-          月額案内3
-        </v-ons-card>
-
-        <v-ons-card>
-          月額案内4
-        </v-ons-card>
-
-        <template #footer>
-          <v-ons-button
-            modifier="cta"
-            class="call-to-purchase"
-            @click="callToPurchase"
-          >
-            利用開始する<br>
-            <small>（初月無料月額￥〇〇〇）</small>
-          </v-ons-button>
+      <purchase-point>
+        <template #title>
+          いつでもゴルフ場の天気傾向を確認
         </template>
-      </content-with-footer>
+        <template #thumbnail>
+          <img
+            :src="require('@/assets/images/purchase-information/point-1.png')"
+            alt="purchase-point-1"
+          >
+        </template>
+        過去のお天気データを活用して最適なコースを検索できます。
+      </purchase-point>
+
+      <purchase-point :content-full-width="true">
+        <template #title>
+          ゴルフ場のピンポイント天気予報を提供
+        </template>
+        <template #thumbnail>
+          <img
+            :src="require('@/assets/images/purchase-information/point-2.png')"
+            alt="purchase-point-1"
+          >
+        </template>
+        晴れや雨などの天気予報に加えて、落雷の危険性や、服装提案、紫外線の予測などの詳細情報も提供しています。
+      </purchase-point>
+
+      <purchase-point>
+        <template #title>
+          位置情報を活用した風予測を提供
+        </template>
+        <template #thumbnail>
+          <img
+            :src="require('@/assets/images/purchase-information/point-3.png')"
+            alt="purchase-point-1"
+          >
+        </template>
+        実際にゴルフボールを打つ際に、進行方向に対してどの向きに風が吹いているか予測ができます。
+      </purchase-point>
+
+      <purchase-point>
+        <template #title>
+          急な天気の変化でも安心
+        </template>
+        <template #thumbnail>
+          <img
+            :src="require('@/assets/images/purchase-information/point-4.png')"
+            alt="purchase-point-1"
+          >
+        </template>
+        雨雲の接近や落雷の危険性が高まった場合もPUSH通知でご案内します。
+      </purchase-point>
+
+      <using-note />
+      <purchase />
 
       <error-dialog
         title="課金エラーが発生しました"
@@ -41,8 +69,11 @@
 
 <script>
 // components
-import ContentWithFooter from '@/components/organisms/content-with-footer';
 import ErrorDialog from '@/components/organisms/error-dialog';
+import Greeting from '@/components/organisms/purchase-information/greeting';
+import PurchasePoint from '@/components/organisms/purchase-information/point';
+import UsingNote from '@/components/organisms/purchase-information/using-note';
+import Purchase from '@/components/organisms/purchase-information/purchase';
 
 // pages
 import StartIndex from '@/views/start';
@@ -50,8 +81,11 @@ import StartIndex from '@/views/start';
 export default {
   name: 'PurchaseInformation',
   components: {
-    ContentWithFooter,
     ErrorDialog,
+    Greeting,
+    PurchasePoint,
+    UsingNote,
+    Purchase,
   },
   data() {
     return {
@@ -104,7 +138,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.call-to-purchase {
-  height: auto;
+@import '@/assets/scss/_variables.scss';
+
+/deep/ .page__background {
+  background: linear-gradient(180deg, $color-green 0%, $color-green 50%, #fff 50%, #fff 100%);
 }
 </style>
