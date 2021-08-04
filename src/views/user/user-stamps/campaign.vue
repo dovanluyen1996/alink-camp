@@ -90,14 +90,7 @@ export default {
       return stampArea <= this.userStamp.number;
     },
     increaseStampArea(stampArea) {
-      let isIncreaseStamp = false;
-
-      for (let i = this.userStamp.increase; i > 0; i -= 1) {
-        isIncreaseStamp = stampArea === (this.userStamp.number - i + 1);
-        if (isIncreaseStamp) { break; }
-      }
-
-      return isIncreaseStamp;
+      return stampArea > this.userStamp.number - this.userStamp.increase;
     },
     closeCampaign() {
       this.isVisible = false;
