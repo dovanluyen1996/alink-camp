@@ -22,12 +22,10 @@ export default {
   props: {
     isVisible: {
       type: Boolean,
-      default: false,
       required: true,
     },
     action: {
       type: String,
-      default: '',
       required: true,
     },
   },

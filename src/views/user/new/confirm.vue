@@ -34,11 +34,6 @@
         </template>
       </base-form>
     </div>
-    <completed-dialog
-      action="update"
-      :is-visible="completedDialogVisible"
-      @close="closeCompletedDialog"
-    />
   </v-ons-page>
 </template>
 
@@ -49,7 +44,6 @@ import settings from '@/config/settings';
 import BaseForm from '@/components/organisms/form/base-form';
 import ConfirmField from '@/components/organisms/form/confirm-field';
 import CustomSubmit from '@/components/organisms/form/custom-submit';
-import CompletedDialog from '@/components/organisms/completed-dialog';
 
 // pages
 import AppTabbar from '@/views/app-tabbar';
@@ -60,7 +54,6 @@ export default {
     BaseForm,
     ConfirmField,
     CustomSubmit,
-    CompletedDialog,
   },
   props: {
     user: {
@@ -68,11 +61,6 @@ export default {
       default: () => {},
       required: true,
     },
-  },
-  data() {
-    return {
-      completedDialogVisible: false,
-    };
   },
   computed: {
     genderText() {
@@ -99,14 +87,6 @@ export default {
         Adjust.trackEvent(adjustEvent);
         this.$store.dispatch('appNavigator/push', AppTabbar);
       });
-
-      this.showCompletedDialog();
-    },
-    showCompletedDialog() {
-      this.completedDialogVisible = true;
-    },
-    closeCompletedDialog() {
-      this.completedDialogVisible = false;
     },
   },
 };
