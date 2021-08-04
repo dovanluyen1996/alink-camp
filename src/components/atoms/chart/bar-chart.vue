@@ -55,7 +55,7 @@ export default {
         );
 
         const sourceCtx = sourceCanvas.getContext('2d');
-        sourceCtx.clearRect(0, 0, copyWidth - 2, copyHeight);
+        sourceCtx.clearRect(0, 0, copyWidth - 2, copyHeight - 10);
 
         this.rectangleSet = true;
       }
