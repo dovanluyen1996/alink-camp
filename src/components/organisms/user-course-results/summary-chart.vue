@@ -88,7 +88,7 @@ export default {
   methods: {
     fillData(data) {
       this.chartData = {
-        labels: this.getYAxis(data),
+        labels: this.getXAxis(data),
         datasets: [
           {
             label: '内パター数',
@@ -105,12 +105,12 @@ export default {
         ],
       };
     },
-    getYAxis(data) {
-      const yAxis = data.map(item => this.$moment(item.targetDate).format('MM/DD'));
-      for (let i = yAxis.length; i <= this.blankLabel; i += 1) {
-        yAxis.push('');
+    getXAxis(data) {
+      const xAxis = data.map(item => this.$moment(item.targetDate).format('MM/DD'));
+      for (let i = xAxis.length; i <= this.blankLabel; i += 1) {
+        xAxis.push('');
       }
-      return yAxis;
+      return xAxis;
     },
     getTotalScores(data) {
       return data.map(item => item.totalScore);
