@@ -1,7 +1,6 @@
 <template>
   <v-ons-page>
     <custom-toolbar title="スコアの新規登録" />
-
     <div class="content">
       <validation-observer v-slot="{ handleSubmit }">
         <content-with-footer>
@@ -31,7 +30,6 @@
         </content-with-footer>
       </validation-observer>
     </div>
-
     <completed-dialog
       action="create"
       :is-visible="completedDialogVisible"
@@ -39,7 +37,6 @@
     />
   </v-ons-page>
 </template>
-
 <script>
 // components
 import CourseName from '@/components/organisms/course-name';
@@ -49,10 +46,8 @@ import UserCourseResultsImageField from '@/components/organisms/form/image-field
 import UserCourseResultsNoteField from '@/components/organisms/user-course-results/note-field';
 import ContentWithFooter from '@/components/organisms/content-with-footer';
 import CompletedDialog from '@/components/organisms/completed-dialog';
-
 // pages
 import UserCourseResultsIndex from '@/views/user-course-results/index';
-
 export default {
   name: 'ScoresResultNew',
   components: {
@@ -99,21 +94,26 @@ export default {
     showCompletedDialog() {
       this.completedDialogVisible = true;
     },
+    findCreatedUserCourse() {
+      let userCourse = this.userCourse || {}
+      if (this.$helpers.isEmptyObject(userCourse)) {
+        userCourse = this.$store.getters['models/userCourse/findByCourseId'](this.course.id);
+      }
+      return userCourse;
+    },
     closeCompletedDialog() {
       this.completedDialogVisible = false;
-
       this.gotoUserCourseResultsIndex();
     },
-    async gotoUserCourseResultsIndex() {
-      let userCourse = this.userCourse || {};
-      if (this.$helpers.isEmptyObject(userCourse)) userCourse = await this.createdUserCourse();
-
+    gotoUserCourseResultsIndex() {
       this.$store.dispatch('scoresNavigator/pop');
-      if (!this.userCourse) {
+      const beforeUserCourseResultSize = this.userCourseResultSize;
+
+      if (!beforeUserCourseResultSize) {
         this.$store.dispatch('scoresNavigator/push', {
           extends: UserCourseResultsIndex,
           onsNavigatorProps: {
-            userCourse,
+            userCourse: this.findCreatedUserCourse(),
           },
         });
       }
@@ -121,34 +121,19 @@ export default {
     async createUserCourseResult() {
       this.isButtonDisable = true;
       let userCourse = this.userCourse || {};
-      const beforeUserCourseResultSize = this.userCourseResultSize;
 
       if (this.$helpers.isEmptyObject(userCourse)) userCourse = await this.createdUserCourse();
-
       await this.$store.dispatch('models/userCourseResult/createUserCourseResult', {
         userCourseId: userCourse.id,
         params: this.userCourseResult,
       })
         .then(() => {
-          // TODO: 登録後のダイアログやトーストなどの表示
+          this.showCompletedDialog();
         })
         .catch((err) => {
           console.log(err);
         });
-
       this.isButtonDisable = false;
-
-      this.$store.dispatch('scoresNavigator/pop');
-      if (!beforeUserCourseResultSize) {
-        this.$store.dispatch('scoresNavigator/push', {
-          extends: UserCourseResultsIndex,
-          onsNavigatorProps: {
-            userCourse,
-          },
-        });
-      }
-      
-      this.showCompletedDialog();
     },
     async createUserCourse() {
       const params = {
@@ -162,7 +147,6 @@ export default {
       } catch (error) {
         return {};
       }
-
       return this.$store.getters['models/userCourse/findByCourseId'](this.course.id);
     },
   },
