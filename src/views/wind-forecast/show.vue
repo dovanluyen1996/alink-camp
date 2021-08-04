@@ -30,7 +30,7 @@
         エラー
       </template>
 
-      {{ compassErrorMsg }}
+      コンパスの実行に失敗しました
 
       <template #footer>
         <v-ons-button @click="goBackToCourseList()">
@@ -62,7 +62,6 @@ export default {
     return {
       forecastWind: {},
       compassErrorVisible: false,
-      compassErrorMsg: '',
     };
   },
   beforeDestroy() {
@@ -83,7 +82,6 @@ export default {
       try {
         forecastWind = await this.$store.dispatch('models/weather/getForecastWind', params);
       } catch (error) {
-        this.compassErrorMsg = error.message;
         this.compassErrorVisible = true;
       }
 
