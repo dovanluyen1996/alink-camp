@@ -27,6 +27,7 @@ export default {
     if (this.scrollable) {
       options.animation = {
         onComplete: this.onComplete,
+        onProgress: this.onProgress,
       };
     }
     this.renderChart(this.chartData, options);
@@ -55,9 +56,17 @@ export default {
         );
 
         const sourceCtx = sourceCanvas.getContext('2d');
-        sourceCtx.clearRect(0, 0, copyWidth - 2, copyHeight - 10);
+        sourceCtx.clearRect(0, 0, copyWidth, copyHeight);
 
         this.rectangleSet = true;
+      }
+    },
+    onProgress(event) {
+      if (this.rectangleSet) {
+        const copyWidth = event.chart.scales['y-axis-0'].width + 2;
+        const copyHeight = event.chart.scales['y-axis-0'].height + event.chart.scales['y-axis-0'].top + 10;
+        const sourceCtx = event.chart.canvas.getContext('2d');
+        sourceCtx.clearRect(0, 0, copyWidth, copyHeight);
       }
     },
   },

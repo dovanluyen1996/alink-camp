@@ -61,6 +61,14 @@ export default {
         legend: {
           display: false,
         },
+        tooltips: {
+          xAlign: 'left',
+        },
+        layout: {
+          padding: {
+            right: 0,
+          }
+        },
         scales: {
           xAxes: [{
             stacked: true,
@@ -123,15 +131,28 @@ export default {
       const chartWrapWidth = chartElement.offsetWidth || parseInt(chartElement.dataset.width, 10);
       let chartWidth = this.userCourseResults.length * this.xAxisStepSize;
 
+      // assign data-width for chart's element
       if (chartElement.offsetWidth > 0) {
         chartElement.dataset.width = chartElement.offsetWidth;
       }
+
+      // in case chart's items not enought to fill whole horizontal width,
+      //   add blank items to make sure chart's items always align left
+      const yAxisWidth = 32;
       if (chartWidth < chartWrapWidth) {
-        // 32 is width of yAxis
-        this.blankLabel = Math.floor((chartWrapWidth - 32) / this.xAxisStepSize);
+        this.blankLabel = Math.floor((chartWrapWidth - yAxisWidth) / this.xAxisStepSize);
         chartWidth += (chartWrapWidth - chartWidth);
       }
-      this.chartWidth = chartWidth;
+
+      // add more space at the right of chart for tooltip displaying
+      const extendSpace = 110;
+      if (chartWrapWidth - (this.userCourseResults.length * this.xAxisStepSize) <= extendSpace) {
+        this.chartWidth = chartWidth + extendSpace;
+        this.options.layout.padding.right = extendSpace;
+      } else {
+        this.options.layout.padding.right = 0;
+        this.chartWidth = chartWidth;
+      }
     },
   },
 };
