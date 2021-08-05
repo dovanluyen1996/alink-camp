@@ -25,6 +25,23 @@
       </div>
     </div>
 
+    <v-ons-alert-dialog :visible.sync="forecastWindErrorVisible">
+      <template #title>
+        エラー
+      </template>
+
+      {{ forecastWindErrorErrorMsg }}
+
+      <template #footer>
+        <v-ons-button @click="goBackToCourseList()">
+          コース選択に戻る
+        </v-ons-button>
+        <v-ons-button @click="show()">
+          再度APIを実行する
+        </v-ons-button>
+      </template>
+    </v-ons-alert-dialog>
+
     <v-ons-alert-dialog :visible.sync="compassErrorVisible">
       <template #title>
         エラー
@@ -33,11 +50,8 @@
       コンパスの実行に失敗しました
 
       <template #footer>
-        <v-ons-button @click="goBackToCourseList()">
-          コース選択に戻る
-        </v-ons-button>
-        <v-ons-button @click="show()">
-          再度APIを実行する
+        <v-ons-button @click="closeCompassErrorDialog()">
+          OK
         </v-ons-button>
       </template>
     </v-ons-alert-dialog>
@@ -61,7 +75,9 @@ export default {
   data() {
     return {
       forecastWind: {},
+      forecastWindErrorVisible: false,
       compassErrorVisible: false,
+      forecastWindErrorErrorMsg: '',
     };
   },
   beforeDestroy() {
@@ -78,17 +94,18 @@ export default {
       };
       let forecastWind = {};
 
-      this.compassErrorVisible = false;
+      this.forecastWindErrorVisible = false;
       try {
         forecastWind = await this.$store.dispatch('models/weather/getForecastWind', params);
       } catch (error) {
-        this.compassErrorVisible = true;
+        this.forecastWindErrorErrorMsg = error.message;
+        this.forecastWindErrorVisible = true;
       }
 
       return forecastWind;
     },
     goBackToCourseList() {
-      this.compassErrorVisible = false;
+      this.forecastWindErrorVisible = false;
       this.$store.commit('windForecastNavigator/pop');
     },
     async show() {
@@ -100,6 +117,7 @@ export default {
     },
     closeCompassErrorDialog() {
       this.compassErrorVisible = false;
+      this.$store.commit('windForecastNavigator/pop');
     },
     async onResume() {
       this.forecastWind = await this.getForecastWind();
