@@ -74,7 +74,7 @@ import UserCourseResultWeather from '@/components/organisms/user-course-results/
 import UserCourseResultImage from '@/components/organisms/user-course-results/image';
 import UserCourseResultNoteField from '@/components/organisms/user-course-results/note-field';
 import ContentWithFooter from '@/components/organisms/content-with-footer';
-import CompletedDialog from '@/components/organisms/completed-dialog';
+import CompletedDialog from '@/components/organisms/dialog/completed-dialog';
 
 // pages
 import ScoresIndexPage from '@/views/scores/index';

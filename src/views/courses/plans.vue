@@ -67,7 +67,7 @@ import TimeField from '@/components/organisms/form/time-field';
 import ContentWithFooter from '@/components/organisms/content-with-footer';
 import CourseName from '@/components/organisms/course-name';
 import DeleteDialogWithIcon from '@/components/organisms/dialog/delete-dialog-with-icon';
-import CompletedDialog from '@/components/organisms/completed-dialog';
+import CompletedDialog from '@/components/organisms/dialog/completed-dialog';
 
 export default {
   name: 'CoursePlans',
