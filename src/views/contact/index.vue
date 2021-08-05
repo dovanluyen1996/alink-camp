@@ -77,7 +77,7 @@
         <v-ons-button
           @click="submit()"
         >
-          応募する
+          送信する
         </v-ons-button>
       </template>
     </v-ons-alert-dialog>
