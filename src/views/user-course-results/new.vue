@@ -48,6 +48,7 @@ import ContentWithFooter from '@/components/organisms/content-with-footer';
 import CompletedDialog from '@/components/organisms/completed-dialog';
 // pages
 import UserCourseResultsIndex from '@/views/user-course-results/index';
+
 export default {
   name: 'ScoresResultNew',
   components: {
@@ -95,7 +96,7 @@ export default {
       this.completedDialogVisible = true;
     },
     findCreatedUserCourse() {
-      let userCourse = this.userCourse || {}
+      let userCourse = this.userCourse || {};
       if (this.$helpers.isEmptyObject(userCourse)) {
         userCourse = this.$store.getters['models/userCourse/findByCourseId'](this.course.id);
       }

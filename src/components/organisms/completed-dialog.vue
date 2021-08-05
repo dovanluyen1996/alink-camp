@@ -36,8 +36,10 @@ export default {
         return '編集完了';
       case 'create':
         return '登録完了';
-      default:
+      case 'delete':
         return '削除完了';
+      default:
+        return null;
       }
     },
     message() {
@@ -46,8 +48,10 @@ export default {
         return '編集しました。';
       case 'create':
         return '登録しました。';
-      default:
+      case 'delete':
         return '削除しました。';
+      default:
+        return null;
       }
     },
   },
