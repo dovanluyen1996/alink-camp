@@ -1,62 +1,78 @@
 <template>
   <v-ons-page>
     <div class="content">
-      <greeting @click="callToPurchase" />
+      <content-with-footer>
+        <greeting />
 
-      <purchase-point>
-        <template #title>
-          いつでもゴルフ場の天気傾向を確認
-        </template>
-        <template #thumbnail>
-          <img
-            :src="require('@/assets/images/purchase-information/point-1.png')"
-            alt="purchase-point-1"
-          >
-        </template>
-        過去のお天気データを活用して最適なコースを検索できます。
-      </purchase-point>
+        <purchase-point>
+          <template #title>
+            いつでもゴルフ場の天気傾向を確認
+          </template>
+          <template #thumbnail>
+            <img
+              :src="require('@/assets/images/purchase-information/point-1.png')"
+              alt="purchase-point-1"
+            >
+          </template>
+          過去のお天気データを活用して最適なコースを検索できます。
+        </purchase-point>
 
-      <purchase-point :content-full-width="true">
-        <template #title>
-          ゴルフ場のピンポイント天気予報を提供
-        </template>
-        <template #thumbnail>
-          <img
-            :src="require('@/assets/images/purchase-information/point-2.png')"
-            alt="purchase-point-1"
-          >
-        </template>
-        晴れや雨などの天気予報に加えて、落雷の危険性や、服装提案、紫外線の予測などの詳細情報も提供しています。
-      </purchase-point>
+        <purchase-point :content-full-width="true">
+          <template #title>
+            ゴルフ場のピンポイント天気予報を提供
+          </template>
+          <template #thumbnail>
+            <img
+              :src="require('@/assets/images/purchase-information/point-2.png')"
+              alt="purchase-point-1"
+            >
+          </template>
+          晴れや雨などの天気予報に加えて、落雷の危険性や、服装提案、紫外線の予測などの詳細情報も提供しています。
+        </purchase-point>
 
-      <purchase-point>
-        <template #title>
-          位置情報を活用した風予測を提供
-        </template>
-        <template #thumbnail>
-          <img
-            :src="require('@/assets/images/purchase-information/point-3.png')"
-            alt="purchase-point-1"
-          >
-        </template>
-        実際にゴルフボールを打つ際に、進行方向に対してどの向きに風が吹いているか予測ができます。
-      </purchase-point>
+        <purchase-point>
+          <template #title>
+            位置情報を活用した風予測を提供
+          </template>
+          <template #thumbnail>
+            <img
+              :src="require('@/assets/images/purchase-information/point-3.png')"
+              alt="purchase-point-1"
+            >
+          </template>
+          実際にゴルフボールを打つ際に、進行方向に対してどの向きに風が吹いているか予測ができます。
+        </purchase-point>
 
-      <purchase-point>
-        <template #title>
-          急な天気の変化でも安心
-        </template>
-        <template #thumbnail>
-          <img
-            :src="require('@/assets/images/purchase-information/point-4.png')"
-            alt="purchase-point-1"
-          >
-        </template>
-        雨雲の接近や落雷の危険性が高まった場合もPUSH通知でご案内します。
-      </purchase-point>
+        <purchase-point>
+          <template #title>
+            急な天気の変化でも安心
+          </template>
+          <template #thumbnail>
+            <img
+              :src="require('@/assets/images/purchase-information/point-4.png')"
+              alt="purchase-point-1"
+            >
+          </template>
+          雨雲の接近や落雷の危険性が高まった場合もPUSH通知でご案内します。
+        </purchase-point>
 
-      <using-note />
-      <purchase />
+        <using-note />
+
+        <template #footer>
+          <div class="purchase">
+            <div class="purchase__content" @click.self="callToPurchase()">
+              利用を開始する<br>
+              <span>（初月無料月額￥360）</span>
+              <v-ons-button
+                modifier="rounded"
+                @click="renew()"
+              >
+                以前購入した方はこちらから復元
+              </v-ons-button>
+            </div>
+          </div>
+        </template>
+      </content-with-footer>
 
       <error-dialog
         title="課金エラーが発生しました"
@@ -69,11 +85,11 @@
 
 <script>
 // components
+import ContentWithFooter from '@/components/organisms/content-with-footer';
 import ErrorDialog from '@/components/organisms/error-dialog';
 import Greeting from '@/components/organisms/purchase-information/greeting';
 import PurchasePoint from '@/components/organisms/purchase-information/point';
 import UsingNote from '@/components/organisms/purchase-information/using-note';
-import Purchase from '@/components/organisms/purchase-information/purchase';
 
 // pages
 import StartIndex from '@/views/start';
@@ -81,11 +97,11 @@ import StartIndex from '@/views/start';
 export default {
   name: 'PurchaseInformation',
   components: {
+    ContentWithFooter,
     ErrorDialog,
     Greeting,
     PurchasePoint,
     UsingNote,
-    Purchase,
   },
   data() {
     return {
@@ -133,6 +149,10 @@ export default {
     closePurchaseError() {
       this.checkPurchaseErrorVisible = false;
     },
+    renew() {
+      console.log('renew clicked');
+      // TODO: Add event for「以前購入した方はこちらから復元」button
+    },
   },
 };
 </script>
@@ -140,7 +160,42 @@ export default {
 <style lang="scss" scoped>
 @import '@/assets/scss/_variables.scss';
 
-/deep/ .page__background {
-  background: linear-gradient(180deg, $color-green 0%, $color-green 50%, #fff 50%, #fff 100%);
+.purchase {
+  padding: 4px 0;
+  background-color: #fff;
+
+  &__content {
+    padding: 20px 25px;
+    font-size: 30px;
+    font-weight: 600;
+    color: #fff;
+    text-align: center;
+    background-color: $color-orange;
+
+    span {
+      font-size: 20px;
+    }
+  }
+}
+
+/deep/ {
+  .page__background {
+    background: linear-gradient(180deg, $color-green 0%, $color-green 50%, #fff 50%, #fff 100%);
+  }
+
+  .content-with-footer__footer {
+    padding: 0 !important;
+  }
+
+  .purchase .button[class*="button--rounded"] {
+    width: 100%;
+    height: 44px;
+    margin: 22px 0 0 0;
+    font-size: 14px;
+    line-height: 36px;
+    color: #fff;
+    background-color: #9f9a97;
+    border-radius: 30px;
+  }
 }
 </style>

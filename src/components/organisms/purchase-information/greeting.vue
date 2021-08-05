@@ -12,12 +12,6 @@
         :src="require('@/assets/images/purchase-information/medal.png')"
         width="41%"
       >
-      <v-ons-button
-        modifier="rounded"
-        @click="clickQuickStart()"
-      >
-        さっそくはじめる
-      </v-ons-button>
     </div>
   </div>
 </template>
@@ -25,11 +19,6 @@
 <script>
 export default {
   name: 'PurchaseGreeting',
-  methods: {
-    clickQuickStart() {
-      this.$emit('click');
-    },
-  },
 };
 </script>
 
@@ -66,7 +55,7 @@ export default {
     background-size: 100% 100%;
 
     img {
-      padding: 32px 0;
+      padding: 70px 0;
     }
 
     /deep/ {
