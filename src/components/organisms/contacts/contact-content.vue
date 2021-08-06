@@ -5,7 +5,8 @@
     </div>
     <div class="input-field-body">
       <span class="input-field-note">
-        ※特殊文字、機種依存文字をご使用いただきますと、送信時に文字化けする可能性がございますのでご留意ください。
+        ※特殊文字、機種依存文字をご使用いただきますと、送信時に文字化けする可能性がございますのでご留意ください。<br>
+        ※1,000文字まで
       </span>
       <textarea
         v-model="inputedValue"
