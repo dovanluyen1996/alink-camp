@@ -19,7 +19,6 @@ export default {
   props: {
     value: {
       type: String,
-      default: '',
       required: true,
     },
     errors: {
