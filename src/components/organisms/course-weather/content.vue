@@ -72,7 +72,7 @@ export default {
     async getForecastScheduledDate() {
       if (!this.userCoursePlan) return null;
       const params = {
-        course_id: this.useUserCourse.id,
+        course_id: this.useUserCourse.courseId,
         target_date: this.userCoursePlan.targetAt,
       };
 
@@ -81,7 +81,7 @@ export default {
     },
     async getForecast10Days() {
       const params = {
-        course_id: this.useUserCourse.id,
+        course_id: this.useUserCourse.courseId,
       };
 
       const forecasts = await this.$store.dispatch('models/weather/getForecast10Days', params);
