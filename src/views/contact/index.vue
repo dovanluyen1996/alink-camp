@@ -120,7 +120,6 @@ import ContactInquiry from '@/components/organisms/contacts/contact-inquiry';
 import ContactContent from '@/components/organisms/contacts/contact-content';
 import CardWithTitle from '@/components/organisms/card-with-title';
 import ContentWithFooter from '@/components/organisms/content-with-footer';
-import HelpsView from '@/views/helps/index';
 
 export default {
   components: {
@@ -157,7 +156,7 @@ export default {
     closeCompleteDialog() {
       this.completeDialogVisible = false;
 
-      this.$store.dispatch('menuNavigator/push', HelpsView);
+      this.$store.dispatch('menuNavigator/pop');
     },
     async submit() {
       const appVersion = await cordova.getAppVersion.getVersionNumber();
