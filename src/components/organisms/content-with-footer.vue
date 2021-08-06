@@ -33,7 +33,7 @@ export default {
 
       // NOTE: コンテンツにフッターが被らないようにpaddingを取る
       this.contentStyle = {
-        paddingBottom: `${footerHeight}px`,
+        paddingBottom: `${footerHeight - 1}px`,
       };
     },
   },

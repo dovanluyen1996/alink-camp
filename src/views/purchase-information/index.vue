@@ -60,7 +60,10 @@
 
         <template #footer>
           <div class="purchase">
-            <div class="purchase__content" @click.self="callToPurchase()">
+            <div
+              class="purchase__content"
+              @click.self="callToPurchase()"
+            >
               利用を開始する<br>
               <span>（初月無料月額￥360）</span>
               <v-ons-button
@@ -161,8 +164,7 @@ export default {
 @import '@/assets/scss/_variables.scss';
 
 .purchase {
-  padding: 4px 0;
-  background-color: #fff;
+  border-top: 4px solid #fff;
 
   &__content {
     padding: 20px 25px;
@@ -180,11 +182,25 @@ export default {
 
 /deep/ {
   .page__background {
-    background: linear-gradient(180deg, $color-green 0%, $color-green 50%, #fff 50%, #fff 100%);
+    background:
+      linear-gradient(
+        180deg,
+        $color-green 0%,
+        $color-green 50%,
+        $color-orange 50%,
+        $color-orange 100%
+      );
   }
 
-  .content-with-footer__footer {
-    padding: 0 !important;
+  .page__content {
+    font-size: 0;
+  }
+
+  .content-with-footer {
+    &__footer {
+      bottom: -1px !important;
+      padding: 0 !important;
+    }
   }
 
   .purchase .button[class*="button--rounded"] {

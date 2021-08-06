@@ -74,7 +74,7 @@ export default {
     /deep/ {
       .button[class*="button--quiet"] {
         height: auto;
-        padding: 0 5px 0 0;
+        padding: 0 8px 0 0;
         font-size: 14px;
         font-weight: 600;
         line-height: 1.7;
