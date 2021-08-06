@@ -1,6 +1,7 @@
 <template>
   <v-ons-page>
     <custom-toolbar title="スコアの新規登録" />
+
     <div class="content">
       <validation-observer v-slot="{ handleSubmit }">
         <content-with-footer>
@@ -37,6 +38,7 @@
     />
   </v-ons-page>
 </template>
+
 <script>
 // components
 import CourseName from '@/components/organisms/course-name';
@@ -46,6 +48,7 @@ import UserCourseResultsImageField from '@/components/organisms/form/image-field
 import UserCourseResultsNoteField from '@/components/organisms/user-course-results/note-field';
 import ContentWithFooter from '@/components/organisms/content-with-footer';
 import CompletedDialog from '@/components/organisms/dialog/completed-dialog';
+
 // pages
 import UserCourseResultsIndex from '@/views/user-course-results/index';
 
@@ -87,9 +90,6 @@ export default {
     courseName() {
       return this.userCourse ? this.userCourse.course.name : this.course.name;
     },
-    userCourseResultSize() {
-      return this.$store.getters['models/userCourseResult/size'];
-    },
   },
   methods: {
     showCompletedDialog() {
@@ -108,9 +108,8 @@ export default {
     },
     gotoUserCourseResultsIndex() {
       this.$store.dispatch('scoresNavigator/pop');
-      const beforeUserCourseResultSize = this.userCourseResultSize;
 
-      if (!beforeUserCourseResultSize) {
+      if (!this.userCourse) {
         this.$store.dispatch('scoresNavigator/push', {
           extends: UserCourseResultsIndex,
           onsNavigatorProps: {
@@ -134,6 +133,7 @@ export default {
         .catch((err) => {
           console.log(err);
         });
+
       this.isButtonDisable = false;
     },
     async createUserCourse() {
@@ -148,6 +148,7 @@ export default {
       } catch (error) {
         return {};
       }
+
       return this.$store.getters['models/userCourse/findByCourseId'](this.course.id);
     },
   },

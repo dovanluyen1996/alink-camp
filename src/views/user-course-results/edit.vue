@@ -126,8 +126,13 @@ export default {
     },
     closeCompletedDialog() {
       this.completedDialogVisible = false;
+      const userCourseResultSize = this.$store.getters['models/userCourseResult/size'];
 
-      this.$store.dispatch('scoresNavigator/pop');
+      if (userCourseResultSize) {
+        this.$store.dispatch('scoresNavigator/pop');
+      } else {
+        this.$store.dispatch('scoresNavigator/reset', ScoresIndexPage);
+      }
     },
     async deleteUserCourseResult() {
       this.isShownDeleteDialog = false;
@@ -137,12 +142,6 @@ export default {
         userCourseResultId: this.userCourseResult.id,
       })
         .then(() => {
-          if (this.userCourseResultSize) {
-            this.$store.dispatch('scoresNavigator/pop');
-          } else {
-            this.$store.dispatch('scoresNavigator/reset', ScoresIndexPage);
-          }
-
           this.showCompletedDialog('delete');
         })
         .catch((err) => {

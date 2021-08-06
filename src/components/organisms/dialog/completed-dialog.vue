@@ -45,11 +45,11 @@ export default {
     message() {
       switch (this.action) {
       case 'update':
-        return '編集しました。';
+        return '編集しました';
       case 'create':
-        return '登録しました。';
+        return '登録しました';
       case 'delete':
-        return '削除しました。';
+        return '削除しました';
       default:
         return null;
       }
