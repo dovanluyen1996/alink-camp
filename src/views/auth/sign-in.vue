@@ -10,16 +10,20 @@
           :has-help="false"
         />
         <template #buttons>
-          <custom-submit @click="signIn">
-            ログイン
-          </custom-submit>
-          <v-ons-button
-            modifier="quiet"
-            class="go-to-password-reminder"
-            @click="goToPasswordReminder"
-          >
-            パスワードを忘れた方はこちら
-          </v-ons-button>
+          <div>
+            <custom-submit @click="signIn">
+              ログイン
+            </custom-submit>
+          </div>
+          <div>
+            <v-ons-button
+              modifier="white"
+              class="go-to-password-reminder"
+              @click="goToPasswordReminder"
+            >
+              パスワードを忘れた方はこちら
+            </v-ons-button>
+          </div>
         </template>
       </base-form>
 
@@ -132,10 +136,10 @@ export default {
 }
 
 .go-to-password-reminder {
-  margin-top: 10px;
+  margin-top: 23px;
 }
 
 .form {
-  margin-bottom: 40px;
+  margin-bottom: 55px;
 }
 </style>

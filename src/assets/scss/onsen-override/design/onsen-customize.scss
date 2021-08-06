@@ -141,6 +141,16 @@ $button-height--rounded: 36px;
     }
   }
 
+  &--white {
+    height: 26px;
+    padding: 6px 30px;
+    font-weight: 300;
+    line-height: 1;
+    color: #000;
+    background-color: #fff;
+    border-radius: 10px;
+  }
+
   .alert-dialog-footer & {
     min-width: 140px;
   }
