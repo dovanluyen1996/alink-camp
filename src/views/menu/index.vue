@@ -36,7 +36,7 @@
           modifier="nodivider chevron"
           @click="goToUserEdit"
         >
-          データ引き継ぎ設定
+          データ引継ぎ設定
         </v-ons-list-item>
 
         <v-ons-list-item
