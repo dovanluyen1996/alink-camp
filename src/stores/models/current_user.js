@@ -47,5 +47,19 @@ export default {
         context.commit('setIsLoading', false);
       }
     },
+    async changeEmail(context, params) {
+      context.commit('setIsLoading', true);
+
+      try {
+        const user = await ApiClient.changeCurrentUserEmail(params);
+
+        context.commit('setUser', user);
+      } catch (error) {
+        context.commit('api/setError', error, { root: true });
+        throw error;
+      } finally {
+        context.commit('setIsLoading', false);
+      }
+    },
   },
 };

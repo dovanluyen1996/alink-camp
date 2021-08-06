@@ -107,6 +107,7 @@ import UserBirthdate from '@/components/organisms/user/user-birthdate';
 import UserPrefecture from '@/components/organisms/user/user-prefecture';
 import CustomSubmit from '@/components/organisms/form/custom-submit';
 import ChangePasswordView from '@/views/user/edit/change-password';
+import ChangeEmailView from '@/views/user/edit/change-email';
 
 export default {
   name: 'UserNewUserData',
@@ -143,7 +144,7 @@ export default {
   },
   methods: {
     goToEditEmail() {
-      console.log('goToEditEmail');
+      this.$store.dispatch('menuNavigator/push', ChangeEmailView);
     },
     goToEditPassword() {
       this.$store.dispatch('menuNavigator/push', ChangePasswordView);
