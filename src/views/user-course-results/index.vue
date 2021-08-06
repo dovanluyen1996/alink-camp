@@ -39,7 +39,7 @@
       </template>
 
       編集により、登録したスコアデータ、写真が削除される可能性があります。<br>
-      よろしいすか？
+      よろしいですか？
 
       <template #footer>
         <v-ons-button
