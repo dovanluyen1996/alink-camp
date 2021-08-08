@@ -68,7 +68,7 @@
               <span>（初月無料月額￥360）</span>
               <v-ons-button
                 modifier="rounded"
-                @click="renew()"
+                @click="restorePurchase()"
               >
                 以前購入した方はこちらから復元
               </v-ons-button>
@@ -79,6 +79,7 @@
 
       <error-dialog
         title="課金エラーが発生しました"
+        :error-message="errorMessage"
         :is-visible="checkPurchaseErrorVisible"
         @close="closePurchaseError"
       />
@@ -109,6 +110,7 @@ export default {
   data() {
     return {
       error: null,
+      errorMessage: '',
       checkPurchaseErrorVisible: false,
     };
   },
@@ -137,6 +139,8 @@ export default {
           ({ error, userCancelled }) => {
             if (!userCancelled) {
               this.checkPurchaseErrorVisible = true;
+              const RestorableErrorCode = 6;
+              this.errorMessage = error.code === RestorableErrorCode ? 'すでに購入済みのアプリです。課金情報を復元してください。' : '';
             }
           });
         }
@@ -145,16 +149,31 @@ export default {
       });
     },
 
+    restorePurchase() {
+      Purchases.restoreTransactions(
+        (restoredInfo) => {
+          const entitlements = restoredInfo.entitlements.all;
+          const targetEntitlement = entitlements[process.env.REVENUE_CAT_ENTITLEMENT_USE_APP];
+          if (targetEntitlement.isActive) {
+            this.purchaseComplete();
+          } else {
+            this.checkPurchaseErrorVisible = true;
+            this.errorMessage = '課金状態を復元できません。';
+          }
+        },
+        () => {
+          this.checkPurchaseErrorVisible = true;
+          this.errorMessage = '課金状態を復元できません。';
+        },
+      );
+    },
+
     purchaseComplete() {
       this.$store.dispatch('appNavigator/replace', StartIndex);
     },
 
     closePurchaseError() {
       this.checkPurchaseErrorVisible = false;
-    },
-    renew() {
-      console.log('renew clicked');
-      // TODO: Add event for「以前購入した方はこちらから復元」button
     },
   },
 };
