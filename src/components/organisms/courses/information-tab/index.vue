@@ -29,7 +29,9 @@
           電話番号&#9312;
         </th>
         <td>
-          {{ course.phone }}
+          <a :href="`tel:${course.phone}`">
+            {{ course.phone }}
+          </a>
         </td>
       </tr>
       <tr>
@@ -40,7 +42,9 @@
           電話番号&#9313;
         </th>
         <td>
-          {{ course.phone2 }}
+          <a :href="`tel:${course.phone2}`">
+            {{ course.phone2 }}
+          </a>
         </td>
       </tr>
       <tr>
@@ -51,7 +55,12 @@
           ホームページ
         </th>
         <td>
-          {{ course.url }}
+          <a
+            :href="course.url"
+            :target="target()"
+          >
+            {{ course.url }}
+          </a>
         </td>
       </tr>
       <tr>
@@ -62,7 +71,12 @@
           予約
         </th>
         <td>
-          {{ course.jalanUrl }}
+          <a
+            :href="course.jalanUrl"
+            :target="target()"
+          >
+            {{ course.jalanUrl }}
+          </a>
         </td>
       </tr>
       <tr>
@@ -116,7 +130,15 @@ export default {
 
 <style lang="scss" scoped>
 .courses-information {
+  width: 100%;
   word-break: break-all;
+
+  td {
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+  }
 }
 
 .th {
@@ -144,7 +166,8 @@ export default {
   text-align: center;
 
   img {
-    max-width: 100%;
+    width: 100%;
+    height: auto;
   }
 }
 </style>
