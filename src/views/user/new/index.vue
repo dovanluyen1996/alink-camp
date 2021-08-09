@@ -26,15 +26,19 @@
             />
           </validation-provider>
           <template #buttons>
-            <custom-submit @click="handleSubmit(getConfirmCode)">
-              認証コードを送信
-            </custom-submit>
-            <v-ons-button
-              modifier="quiet"
-              @click="goToResendConfirmCode"
-            >
-              認証コードを再送する
-            </v-ons-button>
+            <div>
+              <custom-submit @click="handleSubmit(getConfirmCode)">
+                認証コードを送信
+              </custom-submit>
+            </div>
+            <div>
+              <v-ons-button
+                modifier="quiet"
+                @click="goToResendConfirmCode"
+              >
+                認証コードを再送する
+              </v-ons-button>
+            </div>
           </template>
         </base-form>
       </validation-observer>
@@ -140,6 +144,13 @@ export default {
 
 <style lang="scss" scoped>
 .form {
-  margin-bottom: 60px;
+  margin-bottom: 30px;
+}
+
+/deep/ .button--quiet {
+  height: auto;
+  margin-top: 25px;
+  font-size: 18px;
+  line-height: 18px;
 }
 </style>
