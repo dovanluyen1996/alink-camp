@@ -10,7 +10,9 @@ export default {
   name: 'AboutSubscriptionAppStoreTab',
   computed: {
     descriptions() {
-      return this.$store.state.models.subscription.subsAppStore;
+      if (!this.$store.state.models.subscription.subscription) return null;
+
+      return this.$store.state.models.subscription.subscription.appStore;
     },
   },
   async created() {

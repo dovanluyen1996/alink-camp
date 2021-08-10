@@ -5,16 +5,12 @@ export default {
   strict: true,
   namespaced: true,
   state: {
-    subsAppStore: '',
-    subsGooglePlay: '',
+    subscription: {},
     isLoading: false,
   },
   mutations: {
-    setSubsAppStore(state, subsAppStore) {
-      Vue.set(state, 'subsAppStore', subsAppStore);
-    },
-    setSubsGooglePlay(state, subsGooglePlay) {
-      Vue.set(state, 'subsGooglePlay', subsGooglePlay);
+    setSubscription(state, subscription) {
+      Vue.set(state, 'subscription', subscription);
     },
     setIsLoading(state, isLoading) {
       state.isLoading = isLoading;
@@ -27,8 +23,7 @@ export default {
       try {
         const subscription = await ApiClient.getSubscription();
 
-        context.commit('setSubsAppStore', subscription.appStore);
-        context.commit('setSubsGooglePlay', subscription.googlePlay);
+        context.commit('setSubscription', subscription);
       } catch (error) {
         context.commit('api/setError', error, { root: true });
         throw error;

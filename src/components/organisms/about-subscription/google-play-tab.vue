@@ -10,7 +10,9 @@ export default {
   name: 'AboutSubscriptionGooglePlayTab',
   computed: {
     descriptions() {
-      return this.$store.state.models.subscription.subsGooglePlay;
+      if (!this.$store.state.models.subscription.subscription) return null;
+
+      return this.$store.state.models.subscription.subscription.googlePlay;
     },
   },
 };
