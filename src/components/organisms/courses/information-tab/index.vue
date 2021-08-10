@@ -135,7 +135,7 @@ export default {
 
   td {
     a {
-      color: inherit;
+      color: #0061ca;
       text-decoration: none;
     }
   }
