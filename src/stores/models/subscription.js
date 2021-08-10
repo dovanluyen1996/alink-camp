@@ -8,6 +8,10 @@ export default {
     subscription: {},
     isLoading: false,
   },
+  getters: {
+    current: state => state.subscription,
+    isLoading: state => state.isLoading,
+  },
   mutations: {
     setSubscription(state, subscription) {
       Vue.set(state, 'subscription', subscription);

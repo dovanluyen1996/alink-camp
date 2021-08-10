@@ -1,5 +1,6 @@
 <template>
   <div class="app-store-tab">
+    <loading :visible="isLoading" />
     <!-- eslint-disable-next-line vue/no-v-html -->
     <div v-html="descriptions" />
   </div>
@@ -9,17 +10,22 @@
 export default {
   name: 'AboutSubscriptionAppStoreTab',
   computed: {
+    isLoading() {
+      return this.$store.getters['models/subscription/isLoading'];
+    },
+    subscription() {
+      return this.$store.getters['models/subscription/current'];
+    },
     descriptions() {
-      if (!this.$store.state.models.subscription.subscription) return null;
-
-      return this.$store.state.models.subscription.subscription.appStore;
+      if (!this.subscription) return '';
+      return this.subscription.appStore;
     },
   },
   async created() {
-    await this.getDescription();
+    await this.getSubscription();
   },
   methods: {
-    async getDescription() {
+    async getSubscription() {
       await this.$store.dispatch('models/subscription/getSubscription');
     },
   },
