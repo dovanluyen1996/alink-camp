@@ -15,6 +15,7 @@ import ContactApi from './contact_api';
 import UserCourseResultsApi from './user_course_results_api';
 import WeatherApi from './weather_api';
 import AppStartApi from './app_start_api';
+import UserDevisesApi from './user_devises_api';
 
 export default {
   NoticesApi,
@@ -34,4 +35,5 @@ export default {
   UserCourseResultsApi,
   WeatherApi,
   AppStartApi,
+  UserDevisesApi,
 };
