@@ -120,6 +120,7 @@ export default {
   justify-content: center;
   min-height: 100%;
   padding: 5px 0;
+  overflow: hidden;
 }
 
 .course-info {

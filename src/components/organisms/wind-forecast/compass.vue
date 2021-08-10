@@ -125,16 +125,29 @@ export default {
 $speed-degrees: 0, 22.5, 45, 67.5, 90, 112.5, 135, 157.5, 180,
   202.5, 225, 247.5, 270, 292.5, 315, 337.5;
 
+.compass {
+  width: 100%;
+}
+
 .compass-frame {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 320px;
-  height: 320px;
+  width: 85%;
+  max-width: 320px;
+  height: auto;
+  max-height: 320px;
+  margin: 0 auto;
   background-image: url('~@/assets/images/weathers/background-compass.png');
   background-position: center;
   background-size: cover;
   transition: transform 0.5s ease-out;
+
+  &::after {
+    display: block;
+    padding-bottom: 100%;
+    content: "";
+  }
 }
 
 .wind-direction {
