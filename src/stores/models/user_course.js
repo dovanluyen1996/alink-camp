@@ -71,7 +71,7 @@ export default {
         (a, b) => moment(a.targetAt).valueOf() - moment(b.targetAt).valueOf(),
       );
       const futureUserCoursePlan = sortedUserCoursePlans.find(
-        userCoursePlan => moment(userCoursePlan.targetAt).isAfter(moment()),
+        userCoursePlan => moment(userCoursePlan.targetAt).isSameOrAfter(moment(), 'day'),
       );
 
       return futureUserCoursePlan || {};
