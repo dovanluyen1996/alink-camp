@@ -139,9 +139,9 @@
       "cordova-plugin-add-swift-support": {}
     },
     "platforms": [
-      "ios",
       "android",
-      "browser"
+      "browser",
+      "ios"
     ]
   }
 }
