@@ -45,5 +45,9 @@
         <config-file target="*-Info.plist" parent="NSLocationWhenInUseUsageDescription">
             <string>位置情報をコース検索に利用します</string>
         </config-file>
+
+        <edit-config target="NSUserTrackingUsageDescription" file="*-Info.plist" mode="merge">
+          <string>My tracking usage description</string>
+        </edit-config>
     </platform>
 </widget>

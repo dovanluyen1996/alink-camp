@@ -8,6 +8,7 @@ import '@/plugins/global_component_plugin';
 import '@/config/vee_validate';
 import AdjustPlugin from '@/config/adjust';
 import RevenueCat from '@/config/revenue_cat';
+import IdfaAaidPlugin from '@/config/idfa';
 import store from '@/stores';
 import App from '@/app';
 import cognito from '@/cognito';
@@ -40,6 +41,7 @@ const initializeVue = () => {
     VueOnsen.enableAutoStatusBarFill();
   }
 
+  IdfaAaidPlugin.init();
   RevenueCat.init();
 
   if (window.device.platform !== 'browser') {
