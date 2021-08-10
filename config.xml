@@ -23,6 +23,7 @@
     <platform name="ios">
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
+        <preference name="UseSwiftLanguageVersion" value="5" />
 
         <config-file target="*-Info.plist" parent="NSLocationAlwaysAndWhenInUseUsageDescription">
           <string>位置情報をコース検索に利用します</string>
