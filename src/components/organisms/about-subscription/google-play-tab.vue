@@ -13,12 +13,10 @@ export default {
     isLoading() {
       return this.$store.getters['models/subscription/isLoading'];
     },
-    subscription() {
-      return this.$store.getters['models/subscription/current'];
-    },
     descriptions() {
-      if (!this.subscription) return '';
-      return this.subscription.googlePlay;
+      const subscription = this.$store.getters['models/subscription/current'];
+
+      return subscription ? subscription.googlePlay : '';
     },
   },
 };
