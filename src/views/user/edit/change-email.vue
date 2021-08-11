@@ -30,7 +30,8 @@
       </template>
 
       データ引継ぎ設定の内容を変更します。<br>
-      よろしいですか？
+      よろしいですか？<br>
+      （※機種変更時などに必要となると大切な情報です。お間違えないようご注意ください）
 
       <template #footer>
         <v-ons-button
@@ -95,7 +96,7 @@ export default {
   methods: {
     async submitChangeEmail() {
       this.closeConfirmDialog();
-      await this.$store.dispatch('models/currentUser/changeEmail', { newEmail: this.newEmail });
+      await this.$store.dispatch('models/currentUser/changeEmail', { email: this.newEmail });
       this.showCompletedDialog();
     },
     showConfirmDialog() {
