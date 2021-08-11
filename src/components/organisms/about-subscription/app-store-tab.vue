@@ -1,8 +1,12 @@
 <template>
   <div class="app-store-tab">
     <loading :visible="isLoading" />
-    <!-- eslint-disable-next-line vue/no-v-html -->
-    <div v-html="descriptions" />
+    <!-- eslint-disable vue/no-v-html -->
+    <div
+      class="app-store-tab__description"
+      v-html="descriptions"
+    />
+    <!-- eslint-enable -->
   </div>
 </template>
 
@@ -21,3 +25,9 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.app-store-tab__description {
+  white-space: pre-wrap;
+}
+</style>

@@ -15,11 +15,8 @@ import ContactApi from './contact_api';
 import UserCourseResultsApi from './user_course_results_api';
 import WeatherApi from './weather_api';
 import AppStartApi from './app_start_api';
-<<<<<<< HEAD
 import UserDevisesApi from './user_devises_api';
-=======
 import SubscriptionsApi from './subscriptions_api';
->>>>>>> f50e777 (問い合わせ_ボタンの文言がおかしい)
 
 export default {
   NoticesApi,
@@ -39,9 +36,6 @@ export default {
   UserCourseResultsApi,
   WeatherApi,
   AppStartApi,
-<<<<<<< HEAD
   UserDevisesApi,
-=======
   SubscriptionsApi,
->>>>>>> f50e777 (問い合わせ_ボタンの文言がおかしい)
 };
