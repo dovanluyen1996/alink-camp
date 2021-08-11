@@ -40,5 +40,13 @@ export default {
       ],
     };
   },
+  created() {
+    this.getSubscription();
+  },
+  methods: {
+    async getSubscription() {
+      await this.$store.dispatch('models/subscription/getSubscription');
+    },
+  },
 };
 </script>

@@ -19,13 +19,5 @@ export default {
       return subscription ? subscription.appStore : '';
     },
   },
-  async created() {
-    await this.getSubscription();
-  },
-  methods: {
-    async getSubscription() {
-      await this.$store.dispatch('models/subscription/getSubscription');
-    },
-  },
 };
 </script>
