@@ -25,6 +25,15 @@
         <allow-intent href="itms-apps:*" />
         <preference name="UseSwiftLanguageVersion" value="5" />
 
+        <config-file target="*-Info.plist" parent="CFBundleDevelopmentRegion">
+            <string>Japanese</string>
+        </config-file>
+        <config-file target="*-Info.plist" parent="CFBundleLocalizations">
+          <array>
+            <string>ja</string>
+          </array>
+        </config-file>
+
         <config-file target="*-Info.plist" parent="NSLocationAlwaysAndWhenInUseUsageDescription">
           <string>位置情報をコース検索に利用します</string>
         </config-file>
