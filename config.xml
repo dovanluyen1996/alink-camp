@@ -49,5 +49,17 @@
         <edit-config target="NSUserTrackingUsageDescription" file="*-Info.plist" mode="merge">
           <string>表示する広告を適切に選択するために使用します。</string>
         </edit-config>
+
+        <config-file target="*-Info.plist" parent="NSCameraUsageDescription">
+          <string>カメラを許可してください</string>
+        </config-file>
+
+        <config-file target="*-Info.plist" parent="NSPhotoLibraryUsageDescription">
+          <string>写真へのアクセスを許可してください</string>
+        </config-file>
+
+        <config-file target="*-Info.plist" parent="NSPhotoLibraryAddUsageDescription">
+          <string>写真へのアクセスを許可してください</string>
+        </config-file>
     </platform>
 </widget>

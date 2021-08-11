@@ -32,21 +32,31 @@
         写真をシェア
       </v-ons-button>
     </div>
+
     <div v-show="!imagePath">
-      <label class="upload-button">
+      <label
+        class="upload-button"
+        @click="showActionSheet"
+      >
         写真をアップロード
-        <!-- NOTE: v-modelがtype="file"に非対応のため changeイベントで処理する
-        - <input v-model="image" type="file">:
-        File inputs are read only. Use a v-on:change listener instead.
-        -->
-        <input
-          class="file-input"
-          type="file"
-          accept=".jpg, .jpeg, .gif, .png"
-          @change="selectImage"
-        >
       </label>
     </div>
+
+    <v-ons-action-sheet
+      :visible.sync="actionSheetVisible"
+      cancelable
+    >
+      <v-ons-action-sheet-button @click="getPictureFromCamera">
+        Camera
+      </v-ons-action-sheet-button>
+      <v-ons-action-sheet-button @click="getPictureFromPhotoLibrary">
+        Photo Library
+      </v-ons-action-sheet-button>
+      <v-ons-action-sheet-button @click="closeActionSheet">
+        キャンセル
+      </v-ons-action-sheet-button>
+    </v-ons-action-sheet>
+
     <div
       v-if="errors.length"
       class="input-error-msg"
@@ -82,6 +92,7 @@ export default {
         description: '',
         image: null,
       },
+      actionSheetVisible: false,
     };
   },
   computed: {
@@ -102,19 +113,35 @@ export default {
     socialSharing() {
       window.plugins.socialsharing.share(null, null, this.value.url, null);
     },
-    selectImage(e) {
-      const image = e.target.files[0];
-      this.createImage(image);
+    getPictureFromCamera() {
+      this.closeActionSheet();
+
+      // onFailメソッドはカメラを起動して、キャンセルするときに、実行します。
+      // これはエラーではないので、エラーを表示しない。ログのみをしています。
+      window.navigator.camera.getPicture(this.createBase64DataUrl, this.onFail, {
+        saveToPhotoAlbum: true,
+        destinationType: window.navigator.camera.DestinationType.DATA_URL,
+      });
     },
-    createImage(image) {
-      const reader = new FileReader();
-      reader.readAsDataURL(image);
-      reader.onload = () => {
-        this.updateSelectedFile(reader.result, image);
-      };
+    getPictureFromPhotoLibrary() {
+      this.closeActionSheet();
+
+      // onFailメソッドはカメラを起動して、キャンセルするときに、実行します。
+      // これはエラーではないので、エラーを表示しない。ログのみをしています。
+      window.navigator.camera.getPicture(this.createBase64DataUrl, this.onFail, {
+        sourceType: window.navigator.camera.PictureSourceType.PHOTOLIBRARY,
+        destinationType: window.navigator.camera.DestinationType.DATA_URL,
+      });
     },
-    updateSelectedFile(url, image) {
-      this.$set(this.selectedFile, 'image', url);
+    onFail(message) {
+      console.log(message);
+    },
+    async createBase64DataUrl(dataUrl) {
+      const base64DataURL = `data:image/gif;base64,${dataUrl}`;
+      this.updateSelectedFile(base64DataURL);
+    },
+    updateSelectedFile(image) {
+      this.$set(this.selectedFile, 'image', image);
       this.$emit('input', image);
     },
     deleteImage() {
@@ -126,6 +153,15 @@ export default {
       // NOTE: v-bindでvalueをバインドさせても書き換わらないためDOM操作する
       //       原因はおそらくtype="file"が読み取り専用のため
       this.$el.querySelector('.file-input').value = '';
+    },
+    closeActionSheet() {
+      this.actionSheetVisible = false;
+    },
+    showActionSheet() {
+      this.actionSheetVisible = true;
+    },
+    closeCameraError() {
+      this.cameraErrorVisible = false;
     },
   },
 };
