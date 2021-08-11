@@ -32,11 +32,14 @@ export default {
   computed: {
     title() {
       switch (this.action) {
-      case 'update':
+      case 'updateResult':
+      case 'updatePlan':
         return '編集完了';
-      case 'create':
+      case 'createResult':
+      case 'createPlan':
         return '登録完了';
-      case 'delete':
+      case 'deleteResult':
+      case 'deletePlan':
         return '削除完了';
       default:
         return null;
@@ -44,12 +47,18 @@ export default {
     },
     message() {
       switch (this.action) {
-      case 'update':
-        return '編集しました';
-      case 'create':
-        return '登録しました';
-      case 'delete':
-        return '削除しました';
+      case 'updateResult':
+        return 'スコアを編集しました。';
+      case 'createResult':
+        return 'スコアを登録しました。';
+      case 'deleteResult':
+        return 'スコアを削除しました。';
+      case 'updatePlan':
+        return '予定日を編集しました。';
+      case 'createPlan':
+        return '予定日を登録しました。';
+      case 'deletePlan':
+        return '予定日を削除しました。';
       default:
         return null;
       }

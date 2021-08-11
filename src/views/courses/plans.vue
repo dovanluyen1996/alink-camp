@@ -129,15 +129,15 @@ export default {
       this.closeDeleteConfirmDialog();
 
       await this.destroyUserCoursePlan();
-      this.showCompletedDialog('delete');
+      this.showCompletedDialog('deletePlan');
     },
     async settingUserCoursePlan() {
       if (this.isPersisted) {
         await this.updateUserCoursePlan();
-        this.showCompletedDialog('update');
+        this.showCompletedDialog('updatePlan');
       } else {
         await this.createUserCoursePlan();
-        this.showCompletedDialog('create');
+        this.showCompletedDialog('createPlan');
       }
     },
     async updateUserCoursePlan() {

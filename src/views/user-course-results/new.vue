@@ -32,7 +32,7 @@
       </validation-observer>
     </div>
     <completed-dialog
-      action="create"
+      action="createResult"
       :is-visible="completedDialogVisible"
       @close="closeCompletedDialog"
     />
@@ -84,6 +84,7 @@ export default {
       },
       isButtonDisable: false,
       completedDialogVisible: false,
+      userCourseResultSize: 0,
     };
   },
   computed: {
@@ -109,7 +110,7 @@ export default {
     gotoUserCourseResultsIndex() {
       this.$store.dispatch('scoresNavigator/pop');
 
-      if (!this.userCourse) {
+      if (!this.userCourseResultSize) {
         this.$store.dispatch('scoresNavigator/push', {
           extends: UserCourseResultsIndex,
           onsNavigatorProps: {
@@ -121,6 +122,7 @@ export default {
     async createUserCourseResult() {
       this.isButtonDisable = true;
       let userCourse = this.userCourse || {};
+      this.userCourseResultSize = this.$store.getters['models/userCourseResult/size'];
 
       if (this.$helpers.isEmptyObject(userCourse)) userCourse = await this.createdUserCourse();
       await this.$store.dispatch('models/userCourseResult/createUserCourseResult', {

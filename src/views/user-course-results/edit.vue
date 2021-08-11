@@ -142,7 +142,7 @@ export default {
         userCourseResultId: this.userCourseResult.id,
       })
         .then(() => {
-          this.showCompletedDialog('delete');
+          this.showCompletedDialog('deleteResult');
         })
         .catch((err) => {
           // TODO: 削除失敗のダイアログやトーストなどの表示
@@ -162,7 +162,7 @@ export default {
         params: this.tempUserCourseResult,
       })
         .then(() => {
-          this.showCompletedDialog('update');
+          this.showCompletedDialog('updateResult');
         })
         .catch((err) => {
           // TODO: 更新失敗のダイアログやトーストなどの表示
