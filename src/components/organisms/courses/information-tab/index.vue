@@ -29,7 +29,10 @@
           電話番号&#9312;
         </th>
         <td>
-          <a :href="`tel:${course.phone}`">
+          <a
+            v-if="course.phone"
+            :href="`tel:${course.phone}`"
+          >
             {{ course.phone }}
           </a>
         </td>
@@ -42,7 +45,10 @@
           電話番号&#9313;
         </th>
         <td>
-          <a :href="`tel:${course.phone2}`">
+          <a
+            v-if="course.phone2"
+            :href="`tel:${course.phone2}`"
+          >
             {{ course.phone2 }}
           </a>
         </td>
@@ -56,6 +62,7 @@
         </th>
         <td>
           <a
+            v-if="course.url"
             :href="course.url"
             :target="target()"
           >
@@ -72,6 +79,7 @@
         </th>
         <td>
           <a
+            v-if="course.jalanUrl"
             :href="course.jalanUrl"
             :target="target()"
           >
