@@ -47,7 +47,7 @@
         </config-file>
 
         <edit-config target="NSUserTrackingUsageDescription" file="*-Info.plist" mode="merge">
-          <string>My tracking usage description</string>
+          <string>表示する広告を適切に選択するために使用します。</string>
         </edit-config>
     </platform>
 </widget>
