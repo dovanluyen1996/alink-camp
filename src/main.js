@@ -67,6 +67,9 @@ const initializeVue = () => {
       if (this.$ons.platform.isIPhoneX()) {
         document.documentElement.setAttribute('onsflag-iphonex-portrait', '');
       }
+      if (this.$ons.platform.isIOS()) {
+        document.documentElement.setAttribute('onsflag-iOS-device', '');
+      }
     },
     template: '<App/>',
   });

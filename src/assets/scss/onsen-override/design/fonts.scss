@@ -1,0 +1,119 @@
+@font-face {
+  font-family: 'San Francisco';
+  src: url('~@/assets/fonts/SF-Pro.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'DroidSans';
+  src: url('~@/assets/fonts/DroidSans.ttf') format('truetype');
+}
+
+.page,
+.page__content h1,
+.page__content h2,
+.page__content h3,
+.page__content h4,
+.page__content h5,
+.notification,
+.toolbar,
+.bottom-bar,
+.button,
+.button--quiet,
+.button--cta,
+.button--large--quiet, /* stylelint-disable-line */
+.button--large--cta, /* stylelint-disable-line */
+.button-bar,
+.button-bar__item,
+.button-bar__button,
+.segment,
+.segment__item,
+.segment__button,
+.tabbar,
+.tabbar__item,
+.tabbar__button,
+.tabbar__label,
+.toolbar-button,
+.checkbox,
+.checkbox__checkmark,
+.checkbox--noborder,
+.radio-button__checkmark,
+.list,
+.list-title,
+.search-input,
+.text-input,
+.text-input--underbar,
+.textarea,
+.textarea--transparent,
+.dialog,
+.alert-dialog,
+.alert-dialog-title,
+.alert-dialog-button,
+.popover__content,
+ons-fab.fab,
+ons-speed-dial-item.fab,
+button.fab,
+.modal,
+.modal__content,
+.select-input,
+.action-sheet,
+.card,
+.card__title,
+.toast {
+  font-family: 'DroidSans', sans-serif;
+}
+
+html[onsflag-iOS-device] {
+  .page,
+  .page__content h1,
+  .page__content h2,
+  .page__content h3,
+  .page__content h4,
+  .page__content h5,
+  .notification,
+  .toolbar,
+  .bottom-bar,
+  .button,
+  .button--quiet,
+  .button--cta,
+  .button--large--quiet, /* stylelint-disable-line */
+  .button--large--cta, /* stylelint-disable-line */
+  .button-bar,
+  .button-bar__item,
+  .button-bar__button,
+  .segment,
+  .segment__item,
+  .segment__button,
+  .tabbar,
+  .tabbar__item,
+  .tabbar__button,
+  .tabbar__label,
+  .toolbar-button,
+  .checkbox,
+  .checkbox__checkmark,
+  .checkbox--noborder,
+  .radio-button__checkmark,
+  .list,
+  .list-title,
+  .search-input,
+  .text-input,
+  .text-input--underbar,
+  .textarea,
+  .textarea--transparent,
+  .dialog,
+  .alert-dialog,
+  .alert-dialog-title,
+  .alert-dialog-button,
+  .popover__content,
+  ons-fab.fab,
+  ons-speed-dial-item.fab,
+  button.fab,
+  .modal,
+  .modal__content,
+  .select-input,
+  .action-sheet,
+  .card,
+  .card__title,
+  .toast {
+    font-family: 'San Francisco', sans-serif;
+  }
+}
