@@ -98,9 +98,6 @@ export default {
 
 <style lang="scss" scoped>
 .content-with-footer {
-  display: flex;
-  justify-content: space-evenly;
-
   .button {
     width: 150px;
   }

@@ -5,12 +5,14 @@
       placeholder="コース名などを入力"
       class="search-form"
     />
-    <v-ons-button
-      modifier="large rounded"
-      @click="searchByName"
-    >
-      検索する
-    </v-ons-button>
+    <div class="search-button">
+      <v-ons-button
+        modifier="large rounded"
+        @click="searchByName"
+      >
+        検索する
+      </v-ons-button>
+    </div>
 
     <v-ons-alert-dialog
       :visible.sync="searchResultEmptyVisible"
@@ -93,6 +95,10 @@ export default {
 <style lang="scss" scoped>
 .search-field {
   margin: 20px 20px 45px;
+}
+
+.search-button {
+  margin: 0 10px;
 }
 
 .search-form {
