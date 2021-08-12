@@ -14,12 +14,17 @@
         >
           日
         </th>
-        <!-- NOTE: stick表示にしたいのであえてcolspanはつけない -->
-        <td class="date-col">
+        <!-- NOTE: colspan = number of hourly-data plus sunset and sunrise cols -->
+        <td
+          v-for="forecast in forecastHourly.items"
+          :key="forecast.date"
+          :colspan="forecast.hourlyData.length + 2"
+          class="date-col"
+        >
           <div class="date-col__display-date">
-            {{ displayDate }}
+            {{ displayDate(forecast.date) }}
             <span
-              v-if="isToday"
+              v-if="isScheduledDate(forecast.date)"
               class="is-today"
             >
               ゴルフ予定日
@@ -73,32 +78,38 @@ export default {
     userCoursePlan() {
       return this.$store.getters['models/userCourse/nearestPlan'](this.course.id);
     },
-    displayDate() {
-      return this.$helpers.toDayString(this.forecastHourly.date);
-    },
-    isToday() {
-      const today = this.$helpers.localDateWithHyphenFrom(new Date());
-      if (!this.userCoursePlan.targetAt) return false;
-
-      return this.$moment(today).isSame(this.forecastHourly.date);
-    },
     margedForecastsAndSuns() {
-      const suns = [
-        {
-          isSunrise: true,
-          hour: this.forecastHourly.sunrise,
-        },
-        {
-          isSunset: true,
-          hour: this.forecastHourly.sunset,
-        },
-      ];
-      const margeData = (this.forecastHourly.items || []).concat(suns);
+      if (!this.forecastHourly.items) return [];
 
-      return margeData.sort((a, b) => this.convertMinutes(a.hour) - this.convertMinutes(b.hour));
+      let forecastsAndSuns = [];
+      this.forecastHourly.items.forEach((forecastHourly) => {
+        const suns = [
+          {
+            isSunrise: true,
+            hour: forecastHourly.sunrise,
+          },
+          {
+            isSunset: true,
+            hour: forecastHourly.sunset,
+          },
+        ];
+        const margeData = (forecastHourly.hourlyData || []).concat(suns);
+        margeData.sort((a, b) => this.convertMinutes(a.hour) - this.convertMinutes(b.hour));
+
+        forecastsAndSuns = forecastsAndSuns.concat(margeData);
+      });
+
+      return forecastsAndSuns;
     },
     forecastData() {
-      return this.forecastHourly.items || [];
+      if (!this.forecastHourly.items) return [];
+
+      let forecastData = [];
+      this.forecastHourly.items.forEach((forecastHourly) => {
+        forecastData = forecastData.concat(forecastHourly.hourlyData);
+      });
+
+      return forecastData;
     },
     windDirections() {
       return this.forecastData ? this.forecastData.map(item => item.windDirection) : [];
@@ -133,6 +144,15 @@ export default {
 
       table.scrollTo(x, 0);
     },
+    displayDate(date) {
+      return this.$helpers.toDayString(date);
+    },
+    isScheduledDate(date) {
+      if (!this.userCoursePlan.targetAt) return false;
+
+      const scheduledDate = this.$helpers.localDateWithHyphenFrom(this.userCoursePlan.targetAt);
+      return this.$moment(date).isSame(scheduledDate);
+    },
     convertMinutes(time) {
       // NOTE: 日の出日の入りを天気予報にマージするため
       //       時間を比較できるように分にする
@@ -146,7 +166,7 @@ export default {
 
       const params = {
         course_id: this.course.id,
-        target_date: this.$helpers.localDateWithHyphenFrom(this.userCoursePlan.targetAt),
+        target_date: this.$moment().format('YYYY-MM-DD'),
       };
       const forecastHourly = await this.$store.dispatch('models/weather/getForecastHourly', params);
       return forecastHourly;
@@ -170,20 +190,6 @@ export default {
 
 .date-row {
   text-align: left;
-}
-
-.date-col {
-  position: sticky;
-  left: 63px;
-
-  &__display-date {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    display: flex;
-    align-items: center;
-    white-space: nowrap;
-  }
 }
 
 .is-today {
