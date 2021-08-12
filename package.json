@@ -27,6 +27,7 @@
     "chart.js": "2.9.4",
     "cordova-annotated-plugin-android": "1.0.4",
     "cordova-plugin-add-swift-support": "2.0.2",
+    "cordova-plugin-customurlscheme": "^5.0.2",
     "cordova-plugin-firebasex": "13.0.0-cli",
     "cordova-plugin-ionic-keyboard": "2.2.0",
     "cordova-plugin-purchases": "2.1.1",
@@ -151,7 +152,10 @@
       "cordova-plugin-androidx-adapter": {},
       "cordova-plugin-splashscreen": {},
       "cordova-plugin-background-mode": {},
-      "cordova-plugin-ionic-keyboard": {}
+      "cordova-plugin-ionic-keyboard": {},
+      "cordova-plugin-customurlscheme": {
+        "URL_SCHEME": "jp.rights.alink.golftenki.dev"
+      }
     },
     "platforms": [
       "android",

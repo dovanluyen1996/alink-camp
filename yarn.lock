@@ -3209,6 +3209,11 @@ cordova-plugin-device-orientation@^2.0.1:
   resolved "https://registry.yarnpkg.com/cordova-plugin-device-orientation/-/cordova-plugin-device-orientation-2.0.1.tgz#149d51250defc309f0d03d306fe28e89881ba84d"
   integrity sha1-FJ1RJQ3vwwnw0D0wb+KOiYgbqE0=
 
+cordova-plugin-customurlscheme@^5.0.2:
+  version "5.0.2"
+  resolved "https://registry.yarnpkg.com/cordova-plugin-customurlscheme/-/cordova-plugin-customurlscheme-5.0.2.tgz#c6246e469a2c23772ebfb545138354cb0dc1a683"
+  integrity sha512-g139Av7iYD3xcSsCd5S6a7B7dp4GTqGYtvdhh44g4OS38+aX6XkC1lsCRmROuhLIs4fkwJqkrvxacH9H4U9Gsg==
+
 cordova-plugin-device@^2.0.3:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/cordova-plugin-device/-/cordova-plugin-device-2.0.3.tgz#c2b41b7efd0455dd097f89356d85bfdd5dadeb0f"

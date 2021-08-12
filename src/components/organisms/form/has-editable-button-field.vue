@@ -6,6 +6,7 @@
     {{ value }}
     <!-- NOTE: 見た目が小さいボタンのため当たり判定を広げている -->
     <div
+      v-if="editable"
       class="button-edit"
       @click="clickEdit"
     >
@@ -32,6 +33,10 @@ export default {
     title: {
       type: String,
       default: null,
+    },
+    editable: {
+      type: Boolean,
+      default: true,
     },
   },
   methods: {

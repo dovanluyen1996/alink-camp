@@ -6,6 +6,7 @@ import {
   CognitoUserAttribute,
 } from 'amazon-cognito-identity-js';
 import { Config, CognitoIdentityCredentials } from 'aws-sdk';
+import HttpClient from '@/lib/http_client';
 
 export default class Cognito {
   configure(config) {
@@ -22,6 +23,9 @@ export default class Cognito {
     //   IdentityPoolId: config.IdentityPoolId
     // })
     this.options = config;
+    this.cognitoHttpClient = new HttpClient({
+      baseURL: config.UserPoolDomain,
+    });
   }
 
   static install = (Vue, options) => {
@@ -109,6 +113,7 @@ export default class Cognito {
     return new Promise((resolve, reject) => {
       cognitoUser.authenticateUser(authenticationDetails, {
         onSuccess: (result) => {
+          localStorage.setItem('externalProviderSignIn', false);
           resolve(result);
         },
         onFailure: (err) => {
@@ -202,6 +207,36 @@ export default class Cognito {
         });
       });
     });
+  }
+
+  /**
+   * get oauth token form code
+   */
+  async getOauthToken(code) {
+    const headers = {
+      'Content-Type': 'application/x-www-form-urlencoded',
+    };
+    const params = new URLSearchParams({
+      grant_type: this.options.OauthFlow,
+      client_id: this.options.ClientId,
+      redirect_uri: this.options.CallbackUrl,
+      code,
+    });
+    const response = await this.cognitoHttpClient.post('/oauth2/token', params, headers);
+
+    return response.data;
+  }
+
+  /**
+   * get user's info
+   */
+  async getOauthUserInfo(accessToken) {
+    const headers = {
+      Authorization: `Bearer ${accessToken}`,
+    };
+    const response = await this.cognitoHttpClient.get('/oauth2/userInfo', {}, headers);
+
+    return response.data;
   }
 }
 /* eslint-enable no-underscore-dangle, no-unused-vars, consistent-return */

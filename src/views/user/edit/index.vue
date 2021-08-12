@@ -9,11 +9,12 @@
           <has-editable-button-field
             title="メールアドレス"
             :value="user.email"
-            @clickEdit="goToEditEmail"
+            :editable="false"
           />
           <has-editable-button-field
             title="パスワード"
             value="**************"
+            :editable="isPasswordEditable()"
             @clickEdit="goToEditPassword"
           />
           <validation-provider
@@ -107,7 +108,6 @@ import UserBirthdate from '@/components/organisms/user/user-birthdate';
 import UserPrefecture from '@/components/organisms/user/user-prefecture';
 import CustomSubmit from '@/components/organisms/form/custom-submit';
 import ChangePasswordView from '@/views/user/edit/change-password';
-import ChangeEmailView from '@/views/user/edit/change-email';
 
 export default {
   name: 'UserNewUserData',
@@ -149,9 +149,6 @@ export default {
     window.removeEventListener('keyboardDidShow', this.onKeyBoardShow);
   },
   methods: {
-    goToEditEmail() {
-      this.$store.dispatch('menuNavigator/push', ChangeEmailView);
-    },
     goToEditPassword() {
       this.$store.dispatch('menuNavigator/push', ChangePasswordView);
     },
@@ -184,6 +181,9 @@ export default {
       if (activeField) {
         activeField.scrollIntoView(true);
       }
+    },
+    isPasswordEditable() {
+      return !JSON.parse(localStorage.getItem('externalProviderSignIn'));
     },
   },
 };
