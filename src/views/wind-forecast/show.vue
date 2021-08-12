@@ -76,7 +76,6 @@ export default {
     async getForecastWind() {
       const params = {
         course_id: this.course.id,
-        target_date: this.$moment().format('YYYY-MM-DD'),
       };
       let forecastWind = {};
 
