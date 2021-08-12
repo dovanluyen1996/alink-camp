@@ -97,6 +97,7 @@ export default {
       this.$cognito.login(this.user.email, this.user.password)
         .then(async(result) => {
           console.log(result);
+          this.createUserDevise();
           this.$store.dispatch('appNavigator/push', AppTabbar);
         })
         .catch((err) => {
@@ -121,6 +122,23 @@ export default {
     },
     isNotConfirmed() {
       return this.error.code === 'UserNotConfirmedException';
+    },
+    createUserDevise() {
+      if (window.device.platform === 'iOS') {
+        FirebasePlugin.getAPNSToken(async(token) => {
+          const params = { os: 'ios', token };
+          await this.$store.dispatch('models/userDevise/createUserDevise', params);
+        }, (error) => {
+          console.error(error);
+        });
+      } else if (window.device.platform === 'Android') {
+        FirebasePlugin.getToken(async(token) => {
+          const params = { os: 'android', token };
+          await this.$store.dispatch('models/userDevise/createUserDevise', params);
+        }, (error) => {
+          console.error(error);
+        });
+      }
     },
   },
 };

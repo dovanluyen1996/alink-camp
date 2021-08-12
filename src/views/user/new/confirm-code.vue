@@ -105,6 +105,7 @@ export default {
         });
     },
     goToUserData() {
+      this.createUserDevise();
       this.$store.dispatch('appNavigator/push', UserData);
     },
     showConfirmError() {
@@ -112,6 +113,23 @@ export default {
     },
     closeConfirmError() {
       this.confirmErrorVisible = false;
+    },
+    createUserDevise() {
+      if (window.device.platform === 'iOS') {
+        FirebasePlugin.getAPNSToken(async(token) => {
+          const params = { os: 'ios', token };
+          await this.$store.dispatch('models/userDevise/createUserDevise', params);
+        }, (error) => {
+          console.error(error);
+        });
+      } else if (window.device.platform === 'Android') {
+        FirebasePlugin.getToken(async(token) => {
+          const params = { os: 'android', token };
+          await this.$store.dispatch('models/userDevise/createUserDevise', params);
+        }, (error) => {
+          console.error(error);
+        });
+      }
     },
   },
 };
