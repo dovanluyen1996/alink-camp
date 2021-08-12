@@ -57,14 +57,7 @@ export default {
       return this.userCourses.map(userCourse => userCourse.course);
     },
     userCourses() {
-      const favoritedUserCourses = this.$store.getters['models/userCourse/favorited'];
-      const planedUserCourses = this.$store.getters['models/userCourse/hasPlanInFuture'];
-      const planedUserCourseIds = new Set(planedUserCourses.map(userCourse => userCourse.id));
-
-      // 予定日がある または お気に入りのuserCourse
-      return [...planedUserCourses, ...favoritedUserCourses.filter(
-        userCourse => !planedUserCourseIds.has(userCourse.id),
-      )];
+      return this.$store.getters['models/userCourse/todayPlan'];
     },
   },
   methods: {

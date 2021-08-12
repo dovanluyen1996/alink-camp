@@ -76,6 +76,11 @@ export default {
 
       return futureUserCoursePlan || {};
     },
+    todayPlan: state => state.userCourses.filter(
+      userCourse => userCourse.userCoursePlans.filter(
+        userCoursePlan => moment(userCoursePlan.targetAt).isSame(moment(), 'day'),
+      ).length,
+    ),
     isLoading: state => state.isLoading,
   },
   mutations: {
