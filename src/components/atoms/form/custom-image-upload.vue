@@ -162,9 +162,6 @@ export default {
     showActionSheet() {
       this.actionSheetVisible = true;
     },
-    closeCameraError() {
-      this.cameraErrorVisible = false;
-    },
   },
 };
 </script>
