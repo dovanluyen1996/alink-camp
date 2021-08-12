@@ -57,9 +57,5 @@
         <config-file target="*-Info.plist" parent="NSPhotoLibraryUsageDescription">
           <string>写真へのアクセスを許可してください</string>
         </config-file>
-
-        <config-file target="*-Info.plist" parent="NSPhotoLibraryAddUsageDescription">
-          <string>写真へのアクセスを許可してください</string>
-        </config-file>
     </platform>
 </widget>
