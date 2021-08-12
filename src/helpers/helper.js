@@ -1,4 +1,5 @@
 import moment from 'moment';
+import store from '@/stores';
 
 moment.locale('ja');
 
@@ -63,5 +64,24 @@ export default {
 
   isAfterDate(compareDate, targetDate) {
     return moment(compareDate).isAfter(targetDate);
+  },
+
+  // デバイストークンを送信する
+  async createUserDevise() {
+    if (window.device.platform === 'iOS') {
+      FirebasePlugin.getAPNSToken(async(token) => {
+        const params = { os: 'ios', token };
+        await store.dispatch('models/userDevise/createUserDevise', params);
+      }, (error) => {
+        console.error(error);
+      });
+    } else if (window.device.platform === 'Android') {
+      FirebasePlugin.getToken(async(token) => {
+        const params = { os: 'android', token };
+        await store.dispatch('models/userDevise/createUserDevise', params);
+      }, (error) => {
+        console.error(error);
+      });
+    }
   },
 };

@@ -114,7 +114,7 @@ export default {
       if (isCharged) {
         const isAuthenticated = await this.isAuthenticated();
         if (isAuthenticated) {
-          this.createUserDevise();
+          this.$helpers.createUserDevise();
           this.$store.dispatch('appNavigator/push', AppTabbar);
         }
       } else {
@@ -123,23 +123,6 @@ export default {
     },
     closeCheckChargedStatusError() {
       this.checkChargedStatusErrorVisible = false;
-    },
-    createUserDevise() {
-      if (window.device.platform === 'iOS') {
-        FirebasePlugin.getAPNSToken(async(token) => {
-          const params = { os: 'ios', token };
-          await this.$store.dispatch('models/userDevise/createUserDevise', params);
-        }, (error) => {
-          console.error(error);
-        });
-      } else if (window.device.platform === 'Android') {
-        FirebasePlugin.getToken(async(token) => {
-          const params = { os: 'android', token };
-          await this.$store.dispatch('models/userDevise/createUserDevise', params);
-        }, (error) => {
-          console.error(error);
-        });
-      }
     },
   },
 };
