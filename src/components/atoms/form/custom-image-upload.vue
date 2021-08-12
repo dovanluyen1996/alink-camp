@@ -121,6 +121,7 @@ export default {
       window.navigator.camera.getPicture(this.createBase64DataUrl, this.onFail, {
         saveToPhotoAlbum: true,
         destinationType: window.navigator.camera.DestinationType.DATA_URL,
+        correctOrientation: true,
       });
     },
     getPictureFromPhotoLibrary() {
@@ -131,6 +132,7 @@ export default {
       window.navigator.camera.getPicture(this.createBase64DataUrl, this.onFail, {
         sourceType: window.navigator.camera.PictureSourceType.PHOTOLIBRARY,
         destinationType: window.navigator.camera.DestinationType.DATA_URL,
+        correctOrientation: true,
       });
     },
     onFail(message) {
