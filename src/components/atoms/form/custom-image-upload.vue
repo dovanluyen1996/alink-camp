@@ -47,10 +47,10 @@
       cancelable
     >
       <v-ons-action-sheet-button @click="getPictureFromCamera">
-        Camera
+        カメラ
       </v-ons-action-sheet-button>
       <v-ons-action-sheet-button @click="getPictureFromPhotoLibrary">
-        Photo Library
+        写真
       </v-ons-action-sheet-button>
       <v-ons-action-sheet-button @click="closeActionSheet">
         キャンセル
