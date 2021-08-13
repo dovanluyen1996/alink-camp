@@ -55,12 +55,6 @@ export default {
 
       context.commit('setUserSetting', userSetting);
     },
-    setIsReceivableDailyWhetherForecast(context, value) {
-      const userSetting = { ...context.state.userSetting };
-      userSetting.isReceivableDailyWhetherForecast = value;
-
-      context.commit('setUserSetting', userSetting);
-    },
     setIsReceivableWarning(context, value) {
       const userSetting = { ...context.state.userSetting };
       userSetting.isReceivableWarning = value;

@@ -20,18 +20,6 @@
       <v-ons-list-item modifier="nodivider">
         <div class="center">
           <span class="list-item__title">
-            予定日の天気を毎日ご連絡
-            <v-ons-switch v-model="isReceivableDailyWhetherForecast" />
-          </span>
-          <span class="list-item__subtitle">
-            ※予定日10日前より定期的に該当コースの天気をご連絡します<br>
-            ※急な変化の際のキャンセルの判断にご利用ください
-          </span>
-        </div>
-      </v-ons-list-item>
-      <v-ons-list-item modifier="nodivider">
-        <div class="center">
-          <span class="list-item__title">
             落雷、雨雲警報
             <v-ons-switch v-model="isReceivableWarning" />
           </span>
@@ -65,15 +53,6 @@ export default {
       },
       async set(newValue) {
         this.$store.dispatch('models/userSetting/setIsReceivableWeatherForecast', newValue);
-        await this.updateUserSetting();
-      },
-    },
-    isReceivableDailyWhetherForecast: {
-      get() {
-        return this.userSetting && this.userSetting.isReceivableDailyWhetherForecast;
-      },
-      async set(newValue) {
-        this.$store.dispatch('models/userSetting/setIsReceivableDailyWhetherForecast', newValue);
         await this.updateUserSetting();
       },
     },
