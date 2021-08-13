@@ -70,6 +70,7 @@ export default {
   async createUserDevise() {
     if (window.device.platform === 'iOS') {
       FirebasePlugin.getAPNSToken(async(token) => {
+        if (!token) return;
         const params = { os: 'ios', token };
         await ApiClient.createUserDevise(params);
       }, (error) => {
@@ -77,6 +78,7 @@ export default {
       });
     } else if (window.device.platform === 'Android') {
       FirebasePlugin.getToken(async(token) => {
+        if (!token) return;
         const params = { os: 'android', token };
         await ApiClient.createUserDevise(params);
       }, (error) => {
