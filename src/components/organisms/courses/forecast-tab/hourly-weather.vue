@@ -178,7 +178,6 @@ export default {
 
       const params = {
         course_id: this.course.id,
-        target_date: this.$moment().format('YYYY-MM-DD'),
       };
       const forecastHourly = await this.$store.dispatch('models/weather/getForecastHourly', params);
       return forecastHourly;
