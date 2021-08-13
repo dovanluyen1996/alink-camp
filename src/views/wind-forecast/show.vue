@@ -47,7 +47,7 @@
         エラー
       </template>
 
-      コンパスの実行に失敗しました
+      コンパスの利用ができません。端末の設定を確認してください
 
       <template #footer>
         <v-ons-button @click="closeCompassErrorDialog()">
