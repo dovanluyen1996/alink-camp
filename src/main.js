@@ -77,7 +77,17 @@ const initializeVue = () => {
   });
 };
 
+const onBackButton = (event) => {
+  cordova.plugins.backgroundMode.moveToBackground();
+  // To prevent back button exit application event.
+  event.preventDefault();
+  event.stop();
+
+  return false;
+};
+
 document.addEventListener('deviceready', initializeVue, false);
+document.addEventListener('backbutton', onBackButton, false);
 
 const plugin = {
   install() {

@@ -3189,6 +3189,11 @@ cordova-plugin-app-version@^0.1.12:
   resolved "https://registry.yarnpkg.com/cordova-plugin-app-version/-/cordova-plugin-app-version-0.1.12.tgz#08798f6edf870e42dc655a8f1028894428eb72a6"
   integrity sha512-P+0d9+h9HasanKuMd8tcEpuJJlsVmClie3Mbq16v3TV/VroDrgYB6Ea8Imkc/WjjMVSBCjWB+pji1LoupWlddA==
 
+cordova-plugin-background-mode@^0.7.3:
+  version "0.7.3"
+  resolved "https://registry.yarnpkg.com/cordova-plugin-background-mode/-/cordova-plugin-background-mode-0.7.3.tgz#066f92c99f403b3ed3d6fb91f281a0a7ccbc84ba"
+  integrity sha512-LsU1v7EgTUROaks+tcQ8TnMzVUcU/TwjDVwj2O/4e4aI2q2ldLGsiZorqKqfqvwh2HoIssmY73OwJk91hQi62w==
+
 cordova-plugin-buildinfo@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/cordova-plugin-buildinfo/-/cordova-plugin-buildinfo-4.0.0.tgz#1a913b45a9233e359092fac67a91b6ad0d73ad44"
