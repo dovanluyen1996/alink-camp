@@ -61,13 +61,8 @@
       </template>
 
       データ引継ぎ設定の内容を変更します。<br>
-<<<<<<< HEAD
-      よろしいですか？<br>
-      （※機種変更時などに必要となると大切な情報です。お間違いないようご注意ください）
-=======
       よろしいですか？
 
->>>>>>> 7fe6630 (Add confirm popup)
       <template #footer>
         <v-ons-button
           modifier="quiet quiet-dark"
