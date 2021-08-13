@@ -112,7 +112,7 @@ export default {
       }
 
       return delta;
-    }
+    },
   },
 
 };

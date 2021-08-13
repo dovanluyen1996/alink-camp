@@ -13,9 +13,7 @@ const IdfaAaidPlugin = {
         return idfaPlugin.requestPermission().then((result) => {
           if (result === idfaPlugin.TRACKING_PERMISSION_AUTHORIZED) {
             // eslint-disable-next-line no-shadow
-            return idfaPlugin.getInfo().then((info) => {
-              return info.idfa || info.aaid;
-            });
+            return idfaPlugin.getInfo().then(info => info.idfa || info.aaid);
           }
         });
       }

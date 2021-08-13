@@ -67,7 +67,7 @@ export default {
         layout: {
           padding: {
             right: 0,
-          }
+          },
         },
         scales: {
           xAxes: [{
