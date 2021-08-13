@@ -96,7 +96,7 @@ export default {
   methods: {
     async submitChangeEmail() {
       this.closeConfirmDialog();
-      await this.$store.dispatch('models/currentUser/changeEmail', { email: this.newEmail });
+      await this.$store.dispatch('models/currentUser/updateUser', { email: this.newEmail });
       this.showCompletedDialog();
     },
     showConfirmDialog() {
