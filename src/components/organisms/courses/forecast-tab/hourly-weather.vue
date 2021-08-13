@@ -19,6 +19,7 @@
           v-for="forecast in forecastHourly.items"
           :key="forecast.date"
           :colspan="forecast.hourlyData.length + 2"
+          :date-time="forecast.date"
           class="date-col"
         >
           <div class="date-col__display-date">
@@ -135,10 +136,21 @@ export default {
     tableScrollNow() {
       // NOTE: セルのdate-time属性に時刻を入れてスクロール位置を取得している
       const table = this.$el.querySelector('.hourly-weather-table');
+      const dateRow = table.querySelector('.date-row');
       const timeRow = table.querySelector('.time-row');
       const th = timeRow.querySelector('th');
-      const targetAt = this.$moment().format('HH');
-      const nowCol = timeRow.querySelector(`[date-time="${targetAt}"]`);
+      const today = this.$moment();
+      let nowCol = null;
+
+      // if plan-date exists and not today, set the scroll's target to that plan-date
+      if (!this.$helpers.isEmptyObject(this.userCoursePlan) && !this.isScheduledDate(today.format('YYYY-MM-DD'))) {
+        const targetDate = this.$helpers.localDateWithHyphenFrom(this.userCoursePlan.targetAt);
+        nowCol = dateRow.querySelector(`[date-time="${targetDate}"]`);
+      }
+      const targetAt = today.format('HH');
+      // otherwise, set the scroll's to current time
+      nowCol = nowCol || timeRow.querySelector(`[date-time="${targetAt}"]`);
+
       if (!nowCol) return;
       const x = nowCol.offsetLeft - th.offsetWidth;
 
