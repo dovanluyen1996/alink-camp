@@ -1,5 +1,5 @@
 import moment from 'moment';
-import store from '@/stores';
+import ApiClient from '@/api_client';
 
 moment.locale('ja');
 
@@ -71,14 +71,14 @@ export default {
     if (window.device.platform === 'iOS') {
       FirebasePlugin.getAPNSToken(async(token) => {
         const params = { os: 'ios', token };
-        await store.dispatch('models/userDevise/createUserDevise', params);
+        await ApiClient.createUserDevise(params);
       }, (error) => {
         console.error(error);
       });
     } else if (window.device.platform === 'Android') {
       FirebasePlugin.getToken(async(token) => {
         const params = { os: 'android', token };
-        await store.dispatch('models/userDevise/createUserDevise', params);
+        await ApiClient.createUserDevise(params);
       }, (error) => {
         console.error(error);
       });
