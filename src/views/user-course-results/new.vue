@@ -22,6 +22,7 @@
           <template #footer>
             <v-ons-button
               modifier="large--cta add rounded"
+              v-show="isButtonShown"
               :disabled="isButtonDisable"
               @click="handleSubmit(createUserCourseResult)"
             >
@@ -82,10 +83,19 @@ export default {
         image: '',
         note: '',
       },
+      isButtonShown: true,
       isButtonDisable: false,
       completedDialogVisible: false,
       userCourseResultSize: 0,
     };
+  },
+  mounted() {
+    document.addEventListener('deviceready', this.onDeviceReady, false);
+  },
+  beforeDestroy() {
+    document.removeEventListener('deviceready', this.onDeviceReady, false);
+    window.removeEventListener('native.keyboardshow', this.onKeyBoardShow);
+    window.removeEventListener('native.keyboardhide', this.onKeyBoardHide);
   },
   computed: {
     courseName() {
@@ -152,6 +162,16 @@ export default {
       }
 
       return this.$store.getters['models/userCourse/findByCourseId'](this.course.id);
+    },
+    onDeviceReady() {
+      window.addEventListener('native.keyboardshow', this.onKeyBoardShow);
+      window.addEventListener('native.keyboardhide', this.onKeyBoardHide);
+    },
+    onKeyBoardShow() {
+      this.isButtonShown = false;
+    },
+    onKeyBoardHide() {
+      this.isButtonShown = true;
     },
   },
 };
