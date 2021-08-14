@@ -91,6 +91,9 @@ export default {
       }
     },
   },
+  async created() {
+    await this.$store.dispatch('models/appStart/getAppStart');
+  },
   methods: {
     goToPasswordReminder() {
       this.$store.dispatch('appNavigator/push', PasswordReminder);
