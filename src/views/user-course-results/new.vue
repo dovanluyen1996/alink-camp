@@ -90,10 +90,12 @@ export default {
     };
   },
   mounted() {
+    document.addEventListener('click', this.onTapOutsideInput, false);
     document.addEventListener('deviceready', this.onDeviceReady, false);
   },
   beforeDestroy() {
     document.removeEventListener('deviceready', this.onDeviceReady, false);
+    document.removeEventListener('click', this.onTapOutsideInput, false);
     window.removeEventListener('native.keyboardshow', this.onKeyBoardShow);
     window.removeEventListener('native.keyboardhide', this.onKeyBoardHide);
   },
@@ -175,6 +177,11 @@ export default {
     onKeyBoardHide() {
       this.isButtonShown = true;
     },
+    onTapOutsideInput() {
+      if (document.activeElement.tagName == 'BODY') {
+        document.activeElement.blur();
+      }
+    }
   },
 };
 </script>
