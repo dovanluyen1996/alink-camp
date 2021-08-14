@@ -4,19 +4,29 @@
       予定日当日のお天気
     </div>
     <v-ons-row>
-      <v-ons-col>
+      <v-ons-col width="50%">
         <weather-image
           :weather="forecast.scheduledDate"
           :is-shown-name="true"
           image-width="66px"
         />
       </v-ons-col>
-      <v-ons-col>
+      <v-ons-col width="50%">
         <course-weather-temperatures
           :forecast="forecast.scheduledDate"
           font-size="18px"
         />
         <course-weather-sun
+          class="course-weather-sun--top"
+          :sunrise="forecast.sunrise"
+          :sunset="forecast.sunset"
+        />
+      </v-ons-col>
+    </v-ons-row>
+    <v-ons-row>
+      <v-ons-col>
+        <course-weather-sun
+          class="course-weather-sun--bottom"
           :sunrise="forecast.sunrise"
           :sunset="forecast.sunset"
         />
@@ -88,6 +98,24 @@ export default {
 
   ons-col {
     padding: 0 2px;
+  }
+}
+
+.course-weather-sun--top {
+  display: none;
+}
+
+.course-weather-sun--bottom {
+  display: flex;
+}
+
+@media screen and (min-width: 375px) {
+  .course-weather-sun--top {
+    display: flex;
+  }
+
+  .course-weather-sun--bottom {
+    display: none;
   }
 }
 </style>

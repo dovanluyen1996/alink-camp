@@ -115,18 +115,21 @@ export default {
   width: 100%;
 }
 
-@media screen and (min-width: 375px) {
+@media screen and (min-width: 320px) {
   .course-weather-of-the-day {
     width: 61%;
   }
 
   .course-weather-the-day-before {
+    width: 36%;
+    margin-left: 3%;
+  }
+}
+
+@media screen and (min-width: 375px) {
+  .course-weather-the-day-before {
     width: 32%;
     margin-left: 7%;
-  }
-
-  .course-weather-time-table {
-    width: 100%;
   }
 }
 

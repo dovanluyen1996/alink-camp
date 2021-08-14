@@ -180,25 +180,49 @@ export default {
   text-align: center;
 }
 
-@media screen and (max-width: 374px) {
-  .course-weather-and-image-row {
-    flex-direction: column;
-  }
-
-  .course-weather-col {
-    margin-right: 0;
-    margin-bottom: 15px;
-  }
+.course-weather-and-image-row {
+  flex-direction: column;
 }
 
-@media screen and (min-width: 375px) {
+.course-weather-col {
+  margin-right: 0;
+  margin-bottom: 15px;
+}
+
+@media screen and (min-width: 320px) {
+  .course-weather-and-image-row {
+    flex-direction: row;
+  }
+
   .course-weather-col {
-    margin-right: 15px;
+    flex: 0 0 50%;
+    max-width: 50%;
+    padding-right: 0;
+    margin-bottom: 0;
   }
 
   .course-image-col {
     flex: 0 0 50%;
     max-width: 50%;
+    padding-left: 5px;
+
+    .share-button {
+      min-width: 90%;
+    }
+  }
+}
+
+@media screen and (min-width: 375px) {
+  .course-weather-col {
+    padding-right: 15px;
+  }
+
+  .course-image-col {
+    padding-left: 0;
+
+    .share-button {
+      min-width: 140px;
+    }
   }
 }
 
@@ -206,5 +230,23 @@ export default {
   margin: auto;
   font-size: 16px;
   font-weight: bold;
+}
+
+/deep/ {
+  @media screen and (min-width: 320px) {
+    .course-image-col {
+      .share-button {
+        min-width: 95%;
+      }
+    }
+  }
+
+  @media screen and (min-width: 375px) {
+    .course-image-col {
+      .share-button {
+        min-width: 140px;
+      }
+    }
+  }
 }
 </style>

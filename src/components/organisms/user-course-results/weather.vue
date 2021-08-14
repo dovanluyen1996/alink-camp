@@ -61,8 +61,8 @@ export default {
   border-radius: 12px;
 }
 
-.course-weather-col {
-  text-align: center;
+.course-weather-and-image {
+  flex-direction: column;
 }
 
 .weather {
@@ -85,17 +85,6 @@ export default {
 /deep/ {
   .temperature__unit {
     margin-left: 0;
-  }
-}
-
-@media screen and (max-width: 374px) {
-  .course-weather-and-image {
-    flex-direction: column;
-  }
-
-  .course-weather-col {
-    margin-right: 0;
-    margin-bottom: 15px;
   }
 }
 </style>
