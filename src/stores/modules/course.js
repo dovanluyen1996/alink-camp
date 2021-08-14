@@ -25,7 +25,7 @@ export default {
       );
 
       // If exsited in Viewed Courses
-      if (exsitedViewedCourseIndex > 0) {
+      if (exsitedViewedCourseIndex >= 0) {
         Vue.delete(state.viewedCourses, exsitedViewedCourseIndex);
       }
 
