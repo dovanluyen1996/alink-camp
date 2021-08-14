@@ -178,7 +178,7 @@ export default {
       this.isButtonShown = true;
     },
     onTapOutsideInput() {
-      if (document.activeElement.tagName == 'BODY') {
+      if (document.activeElement.tagName === 'BODY') {
         document.activeElement.blur();
       }
     }
