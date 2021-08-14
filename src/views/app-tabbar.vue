@@ -32,6 +32,7 @@ import ScoresIndexPage from '@/views/scores/index';
 import WindForecastIndexPage from '@/views/wind-forecast/index';
 import CourseWeatherIndexPage from '@/views/course-weather/index';
 import MenuIndexPage from '@/views/menu/index';
+import EditUserDataPage from '@/views/user/edit/user-data';
 
 export default {
   components: {
@@ -77,6 +78,13 @@ export default {
         this.$store.commit('appTabbar/setActiveIndex', index);
       },
     },
+    currentUser() {
+      return this.$store.state.models.currentUser.user;
+    },
+  },
+  async created() {
+    await this.getCurrentUser();
+    if (this.currentUser && !this.currentUser.birthdate) this.$store.dispatch('appNavigator/push', EditUserDataPage);
   },
   methods: {
     prechange() {
@@ -107,6 +115,9 @@ export default {
       default:
         break;
       }
+    },
+    async getCurrentUser() {
+      await this.$store.dispatch('models/currentUser/getUser');
     },
   },
 };
