@@ -16,17 +16,11 @@
           :forecast="forecast.scheduledDate"
           font-size="18px"
         />
-        <course-weather-sun
-          class="course-weather-sun--top"
-          :sunrise="forecast.sunrise"
-          :sunset="forecast.sunset"
-        />
       </v-ons-col>
     </v-ons-row>
     <v-ons-row>
       <v-ons-col>
         <course-weather-sun
-          class="course-weather-sun--bottom"
           :sunrise="forecast.sunrise"
           :sunset="forecast.sunset"
         />
@@ -98,24 +92,6 @@ export default {
 
   ons-col {
     padding: 0 2px;
-  }
-}
-
-.course-weather-sun--top {
-  display: none;
-}
-
-.course-weather-sun--bottom {
-  display: flex;
-}
-
-@media screen and (min-width: 375px) {
-  .course-weather-sun--top {
-    display: flex;
-  }
-
-  .course-weather-sun--bottom {
-    display: none;
   }
 }
 </style>
