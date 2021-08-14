@@ -171,7 +171,7 @@ export default {
     },
     onKeyBoardShow() {
       this.isButtonShown = false;
-      let activeField = document.activeElement;
+      const activeField = document.activeElement;
       activeField.scrollIntoView(true);
     },
     onKeyBoardHide() {
