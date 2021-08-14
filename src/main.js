@@ -131,8 +131,6 @@ const onBackButton = (event) => {
 
   // To prevent back button exit application event.
   event.preventDefault();
-  event.stopPropagation();
-  event.stopImmediatePropagation();
   event.stop();
 
   return false;
