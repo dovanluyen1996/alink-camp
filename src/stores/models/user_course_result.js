@@ -15,6 +15,9 @@ export default {
     findById: state => userCourseResultId => state.userCourseResults.find(
       userCourseResult => userCourseResult.id === userCourseResultId,
     ),
+    findByUserCourseId: state => userCourseId => state.userCourseResults.find(
+      userCourseResult => userCourseResult.userCourseId === userCourseId,
+    ),
     sortByTargetDate: state => state.userCourseResults.sort(
       (a, b) => (moment(a.targetDate).isAfter(b.targetDate) ? -1 : 1),
     ),
