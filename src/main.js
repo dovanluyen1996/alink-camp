@@ -88,28 +88,28 @@ const resetTabPage = (tabbarActiveIndex) => {
   switch (tabbarActiveIndex) {
   case settings.views.appTabbar.tabIndexes.courseSearch:
     if (store.state.courseSearchNavigator.stack.length > 1) {
-      store.dispatch('courseSearchNavigator/reset', CourseSearchIndexPage);
+      store.dispatch('courseSearchNavigator/pop');
     } else {
       store.commit('appTabbar/setActiveIndex', settings.views.appTabbar.tabIndexes.courseWeather);
     }
     break;
   case settings.views.appTabbar.tabIndexes.scores:
     if (store.state.scoresNavigator.stack.length > 1) {
-      store.dispatch('scoresNavigator/reset', ScoresIndexPage);
+      store.dispatch('scoresNavigator/pop');
     } else {
       store.commit('appTabbar/setActiveIndex', settings.views.appTabbar.tabIndexes.courseWeather);
     }
     break;
   case settings.views.appTabbar.tabIndexes.windForecast:
     if (store.state.windForecastNavigator.stack.length > 1) {
-      store.dispatch('windForecastNavigator/reset', WindForecastIndexPage);
+      store.dispatch('windForecastNavigator/pop');
     } else {
       store.commit('appTabbar/setActiveIndex', settings.views.appTabbar.tabIndexes.courseWeather);
     }
     break;
   case settings.views.appTabbar.tabIndexes.menu:
     if (store.state.menuNavigator.stack.length > 1) {
-      store.dispatch('menuNavigator/reset', MenuIndexPage);
+      store.dispatch('menuNavigator/pop');
     } else {
       store.commit('appTabbar/setActiveIndex', settings.views.appTabbar.tabIndexes.courseWeather);
     }
@@ -127,7 +127,7 @@ const onBackButton = (event) => {
   //
   // If active index isn't App Top
   // -> check is open other page in each tab
-  //    -> If open other page -> reset to Top Page of Tab
+  //    -> If open other page -> back to previous screen like button 「<」
   //    -> If is openning Top Page of Tab -> set Active Tab to App Top
   if (tabbarActiveIndex === settings.views.appTabbar.tabIndexes.courseWeather) {
     cordova.plugins.backgroundMode.moveToBackground();
