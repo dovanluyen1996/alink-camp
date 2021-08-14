@@ -2,7 +2,7 @@
   <div>
     <v-ons-select v-model="selectedValue">
       <option
-        value="-1"
+        :value="-1"
         selected
         class="placeholder"
       >
