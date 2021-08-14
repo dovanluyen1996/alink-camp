@@ -125,7 +125,7 @@ export default {
       return this.$store.getters['course/choosenCourse'];
     },
     mapUrl() {
-      return `https://maps.google.com/?q=${this.course.latitude},${this.course.longitude}`;
+      return `https://maps.google.com/?q=${this.course.address}`;
     },
   },
   methods: {
