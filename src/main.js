@@ -17,12 +17,6 @@ import VueMoment from 'vue-moment';
 import moment from 'moment-timezone';
 import settings from '@/config/settings';
 
-// pages
-import CourseSearchIndexPage from '@/views/course-search/index';
-import ScoresIndexPage from '@/views/scores/index';
-import WindForecastIndexPage from '@/views/wind-forecast/index';
-import MenuIndexPage from '@/views/menu/index';
-
 moment.tz.setDefault('Asia/Tokyo');
 
 Vue.use(VueMoment, {
