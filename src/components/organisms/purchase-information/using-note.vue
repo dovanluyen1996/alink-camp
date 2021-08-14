@@ -43,7 +43,12 @@ export default {
   name: 'UsingNote',
   methods: {
     goToTermOfService() {
-      this.$store.dispatch('appNavigator/push', TermsOfServiceView);
+      this.$store.dispatch('appNavigator/push', {
+        extends: TermsOfServiceView,
+        onsNavigatorProps: {
+          isFromPurchaseInformation: true,
+        },
+      });
     },
     goToPolicy() {
       this.$store.dispatch('appNavigator/push', PrivacyPolicyView);
