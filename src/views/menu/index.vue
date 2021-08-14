@@ -72,7 +72,7 @@ import UserSettingView from '@/views/user-setting/index';
 import HelpsView from '@/views/helps/index';
 import UserEdit from '@/views/user/edit';
 import PrivacyPolicyView from '@/views/privacy-policy/index.vue';
-import TermsOfServiceView from '@/views/terms-of-service/signed';
+import TermsOfServiceView from '@/views/terms-of-service/index';
 import AboutSubscriptionView from '@/views/about-subscription/index';
 
 export default {

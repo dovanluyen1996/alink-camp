@@ -12,10 +12,7 @@
       >
         同意しない
       </v-ons-button>
-      <v-ons-button
-        v-if="!isFromPurchaseInformation"
-        @click="agree"
-      >
+      <v-ons-button @click="agree">
         同意する
       </v-ons-button>
     </ons-bottom-toolbar>
@@ -33,12 +30,6 @@ export default {
   name: 'TermsOfServiceUnsigned',
   components: {
     TermsOfServiceDescription,
-  },
-  props: {
-    isFromPurchaseInformation: {
-      type: Boolean,
-      default: false,
-    },
   },
   methods: {
     disagree() {

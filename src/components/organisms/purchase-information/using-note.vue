@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import TermsOfServiceView from '@/views/terms-of-service/unsigned';
+import TermsOfServiceView from '@/views/terms-of-service/index';
 import PrivacyPolicyView from '@/views/privacy-policy/index';
 import AboutSubscriptionView from '@/views/about-subscription/index';
 
@@ -43,12 +43,7 @@ export default {
   name: 'UsingNote',
   methods: {
     goToTermOfService() {
-      this.$store.dispatch('appNavigator/push', {
-        extends: TermsOfServiceView,
-        onsNavigatorProps: {
-          isFromPurchaseInformation: true,
-        },
-      });
+      this.$store.dispatch('appNavigator/push', TermsOfServiceView);
     },
     goToPolicy() {
       this.$store.dispatch('appNavigator/push', PrivacyPolicyView);

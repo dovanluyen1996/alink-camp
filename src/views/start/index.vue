@@ -38,7 +38,7 @@
 <script>
 // pages
 import SignIn from '@/views/auth/sign-in';
-import TermsOfService from '@/views/terms-of-service/unsigned';
+import TermsOfService from '@/views/terms-of-service/confirm';
 import FirstGuidance from '@/views/first-guidance';
 import AppTabbar from '@/views/app-tabbar';
 import PurchaseInformation from '@/views/purchase-information';
