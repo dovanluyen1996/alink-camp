@@ -44,7 +44,7 @@ import CourseList from '@/components/organisms/course-list.vue';
 import ContentWithFooter from '@/components/organisms/content-with-footer';
 
 // pages
-import UserCourseResultsIndex from '@/views/user-course-results/Index';
+import UserCourseResultsIndex from '@/views/user-course-results/index';
 import UserCourseResultsNew from '@/views/user-course-results/new';
 
 export default {
