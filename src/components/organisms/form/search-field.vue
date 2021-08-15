@@ -4,7 +4,7 @@
       v-model="inputedValue"
       placeholder="コース名などを入力"
       class="search-form"
-      @keyup.enter="searchByName()"
+      @keyup.enter="searchByEnter"
     />
     <div class="search-button">
       <v-ons-button
@@ -82,6 +82,10 @@ export default {
       } else {
         this.showSearchResultEmptyDialog();
       }
+    },
+    async searchByEnter() {
+      Keyboard.hide();
+      await this.searchByName();
     },
     closeSearchResultEmptyDialog() {
       this.searchResultEmptyVisible = false;
