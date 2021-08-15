@@ -4,6 +4,7 @@
       title="ユーザー情報の登録"
     />
     <div class="content">
+      <loading :visible="isLoading" />
       <validation-observer v-slot="{ handleSubmit }">
         <base-form>
           <validation-provider
@@ -65,6 +66,7 @@ export default {
       confirmCode: '',
       error: null,
       confirmErrorVisible: false,
+      isLoading: false,
     };
   },
   computed: {
@@ -75,15 +77,20 @@ export default {
     },
   },
   methods: {
-    submitConfirmCode() {
+    async submitConfirmCode() {
+      this.isLoading = true;
       this.$cognito.confirmation(this.email, this.confirmCode)
         .then(async(result) => {
           console.log(result);
-          this.autoLogin();
+          await this.autoLogin();
         })
         .catch((err) => {
+          console.log(err);
           this.error = err;
           this.showConfirmError();
+        })
+        .finally(() => {
+          this.isLoading = false;
         });
     },
     autoLogin() {
