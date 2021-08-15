@@ -32,7 +32,7 @@ import ScoresIndexPage from '@/views/scores/index';
 import WindForecastIndexPage from '@/views/wind-forecast/index';
 import CourseWeatherIndexPage from '@/views/course-weather/index';
 import MenuIndexPage from '@/views/menu/index';
-import EditUserDataPage from '@/views/user/edit/user-data';
+import UserDataPage from '@/views/user/new/user-data';
 
 export default {
   components: {
@@ -84,7 +84,7 @@ export default {
   },
   async created() {
     await this.getCurrentUser();
-    if (this.currentUser && !this.currentUser.birthdate) this.$store.dispatch('appNavigator/push', EditUserDataPage);
+    if (this.currentUser && !this.currentUser.birthdate) this.$store.dispatch('appNavigator/reset', UserDataPage);
   },
   methods: {
     prechange() {

@@ -41,8 +41,6 @@ export default {
       case 'deleteResult':
       case 'deletePlan':
         return '削除完了';
-      case 'updateUserData':
-        return '変更完了';
       default:
         return null;
       }
@@ -61,8 +59,6 @@ export default {
         return '予定日を登録しました。';
       case 'deletePlan':
         return '予定日を削除しました。';
-      case 'updateUserData':
-        return '情報を変更しました。';
       default:
         return null;
       }
