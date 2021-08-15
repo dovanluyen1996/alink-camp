@@ -84,7 +84,7 @@ export default {
       }
     },
     async searchByEnter() {
-      Keyboard.hide();
+      window.Keyboard.hide();
       await this.searchByName();
     },
     closeSearchResultEmptyDialog() {
