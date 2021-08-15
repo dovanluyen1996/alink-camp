@@ -36,11 +36,12 @@
 </template>
 
 <script>
+import CheckCompleteRegistration from '@/mixins/checkCompleteRegistration';
+
 // pages
 import SignIn from '@/views/auth/sign-in';
 import TermsOfService from '@/views/terms-of-service/confirm';
 import FirstGuidance from '@/views/first-guidance';
-import AppTabbar from '@/views/app-tabbar';
 import PurchaseInformation from '@/views/purchase-information';
 import ErrorDialog from '@/components/organisms/error-dialog';
 
@@ -49,6 +50,7 @@ export default {
   components: {
     ErrorDialog,
   },
+  mixins: [CheckCompleteRegistration],
   data() {
     return {
       error: null,
@@ -115,7 +117,7 @@ export default {
         const isAuthenticated = await this.isAuthenticated();
         if (isAuthenticated) {
           this.$helpers.createUserDevise();
-          this.$store.dispatch('appNavigator/push', AppTabbar);
+          this.checkBeforeGoToAppTabbar();
         }
       } else {
         this.$store.dispatch('appNavigator/push', PurchaseInformation);

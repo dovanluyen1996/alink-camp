@@ -40,6 +40,8 @@
 </template>
 
 <script>
+import CheckCompleteRegistration from '@/mixins/checkCompleteRegistration';
+
 // components
 import BaseForm from '@/components/organisms/form/base-form';
 import UserEmail from '@/components/organisms/user/user-email';
@@ -50,7 +52,6 @@ import ErrorDialog from '@/components/organisms/error-dialog';
 
 // pages
 import PasswordReminder from '@/views/auth/password-reminder';
-import AppTabbar from '@/views/app-tabbar';
 import ResendConfirmCode from '@/views/user/new/resend-confirm-code';
 
 export default {
@@ -63,6 +64,7 @@ export default {
     SocialLogin,
     ErrorDialog,
   },
+  mixins: [CheckCompleteRegistration],
   data() {
     return {
       user: {
@@ -98,7 +100,7 @@ export default {
         .then(async(result) => {
           console.log(result);
           this.$helpers.createUserDevise();
-          this.$store.dispatch('appNavigator/push', AppTabbar);
+          this.checkBeforeGoToAppTabbar();
         })
         .catch((err) => {
           this.error = err;
