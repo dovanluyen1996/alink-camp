@@ -85,7 +85,6 @@ export default {
           await this.autoLogin();
         })
         .catch((err) => {
-          console.log(err);
           this.error = err;
           this.showConfirmError();
         })
