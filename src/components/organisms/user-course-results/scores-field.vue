@@ -39,7 +39,7 @@
           </div>
         </validation-provider>
       </v-ons-col>
-      <v-ons-col>
+      <v-ons-col width="45%">
         <v-ons-row
           vertical-align="bottom"
           class="patting-score-field"
@@ -141,13 +141,19 @@ export default {
 }
 
 .patting-score-field {
-  padding-left: 25%;
+  padding-left: 5%;
 }
 
 .patting-score-input {
   /deep/ input {
     font-size: $font-size-large;
     text-align: center;
+  }
+}
+
+@media screen and (min-width: 320px) {
+  .patting-score-field {
+    padding-left: 25%;
   }
 }
 
