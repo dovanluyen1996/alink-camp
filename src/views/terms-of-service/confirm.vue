@@ -31,9 +31,6 @@ export default {
   components: {
     TermsOfServiceDescription,
   },
-  async created() {
-    await this.$store.dispatch('models/appStart/getAppStart');
-  },
   methods: {
     disagree() {
       this.$store.dispatch('appNavigator/pop');

@@ -64,10 +64,14 @@ export default {
     },
   },
   methods: {
-    close() {
+    async close() {
       this.isVisible = false;
 
-      if (this.isMaintainanceError || this.isUnauthorizedError) {
+      if (this.isMaintainanceError) {
+        await this.$store.dispatch('models/appStart/getAppStart');
+      }
+
+      if (this.isUnauthorizedError) {
         this.resetNavigators();
       }
       if (this.isVersionInvalidError) {

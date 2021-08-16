@@ -63,7 +63,7 @@ export default {
     //   FirebasePlugin.setScreenName('PurchaseInformation');
     //   FirebasePlugin.logEvent('screen_view', { content_type: 'page_view', item_id: 'home' });
     // }
-    await this.$store.dispatch('models/appStart/getAppStart');
+    this.getAppStart();
 
     if (BuildInfo.debug) {
       return this.checkChargedStatusOnlyDebug();
@@ -72,6 +72,13 @@ export default {
     return this.checkChargedStatus();
   },
   methods: {
+    async getAppStart() {
+      try {
+        await this.$store.dispatch('models/appStart/getAppStart');
+      } catch (e) {
+        console.error(e);
+      }
+    },
     async isAuthenticated() {
       let authResult = null;
       try {
