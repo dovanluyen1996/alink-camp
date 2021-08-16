@@ -83,8 +83,8 @@ export default {
         this.showSearchResultEmptyDialog();
       }
     },
-    async searchByEnter() {
-      document.activeElement.blur();
+    async searchByEnter(event) {
+      event.target.blur();
       await this.searchByName();
     },
     closeSearchResultEmptyDialog() {
