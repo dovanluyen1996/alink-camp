@@ -1,6 +1,10 @@
 // 独自スタイルを作成するためのファイル
 @import '@/assets/scss/_variables.scss';
 
+html {
+  touch-action: manipulation;
+}
+
 body {
   // iPhoneX対応
   height: 100vh;
