@@ -38,6 +38,9 @@ export default {
   components: {
     ContentWithFooter,
   },
+  async created() {
+    await this.$store.dispatch('models/appStart/getAppStart');
+  },
   methods: {
     goToLocationServices() {
       this.$store.dispatch('appNavigator/push', LocationServices);
