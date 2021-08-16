@@ -12,7 +12,7 @@
       <template v-if="userCoursePlan && ForecastScheduledDate">
         <course-weather-of-the-day :forecast="ForecastScheduledDate" />
         <course-weather-the-day-before :forecast="ForecastScheduledDate.dayBefore" />
-        <course-weather-hourly-weather :forecast="ForecastScheduledDate.scheduledDate" />
+        <course-weather-hourly-weather :forecast="ForecastScheduledDate.targetDate" />
       </template>
       <template v-else-if="Forecast10Days">
         <course-weather-calendar
