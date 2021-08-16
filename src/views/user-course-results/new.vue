@@ -21,8 +21,8 @@
           <user-course-results-note-field v-model="userCourseResult.note" />
           <template #footer>
             <v-ons-button
-              modifier="large--cta add rounded"
               v-show="isButtonShown"
+              modifier="large--cta add rounded"
               :disabled="isButtonDisable"
               @click="handleSubmit(createUserCourseResult)"
             >
@@ -89,20 +89,21 @@ export default {
       userCourseResultSize: 0,
     };
   },
-  mounted() {
-    document.addEventListener('click', this.onTapOutsideInput, false);
-    document.addEventListener('deviceready', this.onDeviceReady, false);
-  },
-  beforeDestroy() {
-    document.removeEventListener('deviceready', this.onDeviceReady, false);
-    document.removeEventListener('click', this.onTapOutsideInput, false);
-    window.removeEventListener('native.keyboardshow', this.onKeyBoardShow);
-    window.removeEventListener('native.keyboardhide', this.onKeyBoardHide);
-  },
   computed: {
     courseName() {
       return this.userCourse ? this.userCourse.course.name : this.course.name;
     },
+  },
+  mounted() {
+    window.addEventListener('keyboardWillShow', this.onKeyBoardShow);
+    window.addEventListener('keyboardWillHide', this.onKeyBoardHide);
+    // blur to hide keyboard and show 保存 button when tap outside the input
+    document.addEventListener('click', this.onTapOutsideInput, false);
+  },
+  beforeDestroy() {
+    window.removeEventListener('keyboardWillShow', this.onKeyBoardShow);
+    window.removeEventListener('keyboardWillHide', this.onKeyBoardHide);
+    document.removeEventListener('click', this.onTapOutsideInput, false);
   },
   methods: {
     showCompletedDialog() {
@@ -165,23 +166,31 @@ export default {
 
       return this.$store.getters['models/userCourse/findByCourseId'](this.course.id);
     },
-    onDeviceReady() {
-      window.addEventListener('native.keyboardshow', this.onKeyBoardShow);
-      window.addEventListener('native.keyboardhide', this.onKeyBoardHide);
-    },
     onKeyBoardShow() {
       this.isButtonShown = false;
+
+      // Scroll to selected input
       const activeField = document.activeElement;
-      activeField.scrollIntoView(true);
+      if (activeField) {
+        activeField.scrollIntoView(true);
+      }
     },
     onKeyBoardHide() {
       this.isButtonShown = true;
     },
     onTapOutsideInput() {
+      // blur to hide keyboard and show 保存 button when tap outside the input
+      // if don't do this action, never see 保存 button after inputed all information
+      // 1. プライ日
+      // 2. スコア
+      // 3. 写真
+      // 4. メモ
+      // -> Can not show 保存 button
+      // -> tab outside input -> show 保存 button
       if (document.activeElement.tagName === 'BODY') {
         document.activeElement.blur();
       }
-    }
+    },
   },
 };
 </script>
