@@ -149,8 +149,7 @@
       "cordova-plugin-camera": {},
       "cordova-plugin-androidx-adapter": {},
       "cordova-plugin-splashscreen": {},
-      "cordova-plugin-background-mode": {},
-      "cordova-plugin-ionic-keyboard": {}
+      "cordova-plugin-background-mode": {}
     },
     "platforms": [
       "android",
