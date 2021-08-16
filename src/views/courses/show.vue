@@ -97,8 +97,8 @@ export default {
     favorited() {
       return this.userCourse ? this.userCourse.isFavorited : false;
     },
-    userCourseResult() {
-      return this.userCourse ? this.$store.getters['models/userCourseResult/findByUserCourseId'](this.userCourse.id) : null;
+    userCourseResultSize() {
+      return this.$store.getters['models/userCourseResult/size'];
     },
   },
   methods: {
@@ -116,7 +116,7 @@ export default {
       this.$store.dispatch('scoresNavigator/reset', ScoresIndexPage);
       await this.getUserCourseResults();
 
-      if (this.userCourseResult) {
+      if (this.userCourseResultSize) {
         this.goToScoreSummary();
       } else {
         this.goToCreateScore();
@@ -127,6 +127,7 @@ export default {
         extends: UserCourseResultsNew,
         onsNavigatorProps: {
           course: this.course,
+          userCourse: this.userCourse,
         },
       });
     },
@@ -174,6 +175,7 @@ export default {
       });
     },
     async getUserCourseResults() {
+      await this.getUserCourses();
       if (this.userCourse) await this.$store.dispatch('models/userCourseResult/getUserCourseResults', this.userCourse.id);
     },
   },
