@@ -88,7 +88,8 @@ export default {
       }
       return authResult;
     },
-    start() {
+    async start() {
+      await this.$store.dispatch('models/appStart/getAppStart');
       this.goToTermsOfService();
     },
     goToTermsOfService() {
@@ -100,7 +101,8 @@ export default {
         this.$store.dispatch('appNavigator/push', TermsOfService);
       }
     },
-    goToSignIn() {
+    async goToSignIn() {
+      await this.$store.dispatch('models/appStart/getAppStart');
       this.$store.dispatch('appNavigator/push', SignIn);
     },
     checkChargedStatus() {
