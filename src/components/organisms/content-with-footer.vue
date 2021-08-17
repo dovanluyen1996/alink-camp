@@ -59,6 +59,7 @@ export default {
     width: 100%;
     padding: 16px 0;
     text-align: center;
+    -webkit-transform: translate3d(0, 0, 0);
 
     /deep/ {
       .button[class*="button--large"] {
