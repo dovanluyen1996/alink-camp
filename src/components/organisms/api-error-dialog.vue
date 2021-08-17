@@ -65,14 +65,11 @@ export default {
   },
   methods: {
     async close() {
-      this.isVisible = false;
-
       if (this.isMaintainanceError) {
-        // setTimeoutをしない場合、OKボタンを高速でタップするとダイアログが出てこなくなります。
-        setTimeout(async() => {
-          await this.$store.dispatch('models/appStart/getAppStart');
-        }, 500);
+        await this.$store.dispatch('models/appStart/getAppStart');
       }
+
+      this.isVisible = false;
 
       if (this.isUnauthorizedError) {
         this.resetNavigators();
