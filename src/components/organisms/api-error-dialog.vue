@@ -68,7 +68,10 @@ export default {
       this.isVisible = false;
 
       if (this.isMaintainanceError) {
-        await this.$store.dispatch('models/appStart/getAppStart');
+        // setTimeoutをしない場合、OKボタンを高速でタップするとダイアログが出てこなくなります。
+        setTimeout(async() => {
+          await this.$store.dispatch('models/appStart/getAppStart');
+        }, 500);
       }
 
       if (this.isUnauthorizedError) {
