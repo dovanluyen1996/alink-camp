@@ -45,6 +45,9 @@ import CourseList from '@/components/organisms/course-list.vue';
 // views
 import ShowWindForecastView from '@/views/wind-forecast/show';
 
+// pages
+import CourseSearchIndex from '@/views/course-search/index';
+
 export default {
   name: 'WindForecastIndex',
   components: {
@@ -64,6 +67,7 @@ export default {
       await this.$store.dispatch('models/userCourse/getUserCourses');
     },
     goToCourseSearch() {
+      this.$store.dispatch('courseSearchNavigator/reset', CourseSearchIndex);
       this.$store.commit('appTabbar/setActiveIndexFromTabName', 'courseSearch');
     },
     goToShowWindForecast(course) {

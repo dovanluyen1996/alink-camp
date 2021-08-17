@@ -46,6 +46,7 @@ import ContentWithFooter from '@/components/organisms/content-with-footer';
 // pages
 import UserCourseResultsIndex from '@/views/user-course-results/index';
 import UserCourseResultsNew from '@/views/user-course-results/new';
+import CourseSearchIndex from '@/views/course-search/index';
 
 export default {
   name: 'ScoresIndex',
@@ -108,6 +109,7 @@ export default {
       });
     },
     goToCourseSearch() {
+      this.$store.dispatch('courseSearchNavigator/reset', CourseSearchIndex);
       this.$store.commit('appTabbar/setActiveIndexFromTabName', 'courseSearch');
     },
   },

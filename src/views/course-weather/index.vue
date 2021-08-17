@@ -34,6 +34,9 @@
 </template>
 
 <script>
+// pages
+import CourseSearchIndex from '@/views/course-search/index';
+
 // components
 import NoData from '@/components/organisms/no-data';
 import CourseWeatherContent from '@/components/organisms/course-weather/content';
@@ -64,6 +67,7 @@ export default {
       await this.$store.dispatch('models/userCourse/getUserCourses');
     },
     goToCourseSearch() {
+      this.$store.dispatch('courseSearchNavigator/reset', CourseSearchIndex);
       this.$store.commit('appTabbar/setActiveIndexFromTabName', 'courseSearch');
     },
   },
