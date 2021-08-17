@@ -123,12 +123,12 @@ export default {
     window.addEventListener('keyboardDidShow', this.onKeyBoardShow);
     window.addEventListener('keyboardWillHide', this.onKeyBoardHide);
     // blur to hide keyboard and show 抽選応募する button when tap outside the input
-    document.addEventListener('click', this.onTapOutsideInput, false);
+    document.addEventListener('touchend', this.onTapOutsideInput, false);
   },
   beforeDestroy() {
     window.removeEventListener('keyboardDidShow', this.onKeyBoardShow);
     window.removeEventListener('keyboardWillHide', this.onKeyBoardHide);
-    document.removeEventListener('click', this.onTapOutsideInput, false);
+    document.removeEventListener('touchend', this.onTapOutsideInput, false);
   },
   methods: {
     showConfirm() {
@@ -170,8 +170,8 @@ export default {
     onKeyBoardHide() {
       this.isButtonShown = true;
     },
-    onTapOutsideInput() {
-      if (document.activeElement.tagName === 'BODY') {
+    onTapOutsideInput(event) {
+      if (event.target.tagName !== 'INPUT' && event.target.tagName !== 'TEXTAREA') {
         document.activeElement.blur();
       }
     },
