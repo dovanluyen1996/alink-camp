@@ -53,6 +53,7 @@ export default {
   padding-bottom: 13px;
   font-size: $font-size-large;
   font-weight: 600;
+  word-break: break-all;
 }
 
 .button-edit {
