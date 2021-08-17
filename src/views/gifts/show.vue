@@ -32,6 +32,7 @@
 
           <template #footer>
             <v-ons-button
+              v-show="isButtonShown"
               modifier="large--cta rounded"
               @click="handleSubmit(showConfirm)"
             >
@@ -110,12 +111,24 @@ export default {
       email: this.$store.state.models.currentUser.user.email,
       confirmVisible: false,
       completedVisible: false,
+      isButtonShown: true,
     };
   },
   computed: {
     gift() {
       return this.$store.getters['models/gift/findById'](this.giftId);
     },
+  },
+  mounted() {
+    window.addEventListener('keyboardDidShow', this.onKeyBoardShow);
+    window.addEventListener('keyboardWillHide', this.onKeyBoardHide);
+    // blur to hide keyboard and show 抽選応募する button when tap outside the input
+    document.addEventListener('click', this.onTapOutsideInput, false);
+  },
+  beforeDestroy() {
+    window.removeEventListener('keyboardDidShow', this.onKeyBoardShow);
+    window.removeEventListener('keyboardWillHide', this.onKeyBoardHide);
+    document.removeEventListener('click', this.onTapOutsideInput, false);
   },
   methods: {
     showConfirm() {
@@ -143,6 +156,23 @@ export default {
         this.showCompleted();
       } catch (e) {
         this.closeConfirm();
+      }
+    },
+    onKeyBoardShow() {
+      this.isButtonShown = false;
+
+      // Scroll to selected input
+      const activeField = document.activeElement;
+      if (activeField) {
+        activeField.scrollIntoView(true);
+      }
+    },
+    onKeyBoardHide() {
+      this.isButtonShown = true;
+    },
+    onTapOutsideInput() {
+      if (document.activeElement.tagName === 'BODY') {
+        document.activeElement.blur();
       }
     },
   },

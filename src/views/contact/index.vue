@@ -46,6 +46,7 @@
 
           <template #footer>
             <v-ons-button
+              v-show="isButtonShown"
               modifier="large--cta rounded"
               @click="handleSubmit(showConfirmDialog)"
             >
@@ -136,12 +137,24 @@ export default {
       },
       confirmDialogVisible: false,
       completeDialogVisible: false,
+      isButtonShown: true,
     };
   },
   computed: {
     isLoading() {
       return this.$store.getters['models/contact/isLoading'];
     },
+  },
+  mounted() {
+    window.addEventListener('keyboardDidShow', this.onKeyBoardShow);
+    window.addEventListener('keyboardWillHide', this.onKeyBoardHide);
+    // blur to hide keyboard and show 送信確認 button when tap outside the input
+    document.addEventListener('click', this.onTapOutsideInput, false);
+  },
+  beforeDestroy() {
+    window.removeEventListener('keyboardDidShow', this.onKeyBoardShow);
+    window.removeEventListener('keyboardWillHide', this.onKeyBoardHide);
+    document.removeEventListener('click', this.onTapOutsideInput, false);
   },
   methods: {
     showConfirmDialog() {
@@ -172,6 +185,23 @@ export default {
       await this.$store.dispatch('models/contact/sendContact', params);
 
       this.showCompleteDialog();
+    },
+    onKeyBoardShow() {
+      this.isButtonShown = false;
+
+      // Scroll to selected input
+      const activeField = document.activeElement;
+      if (activeField) {
+        activeField.scrollIntoView(true);
+      }
+    },
+    onKeyBoardHide() {
+      this.isButtonShown = true;
+    },
+    onTapOutsideInput() {
+      if (document.activeElement.tagName === 'BODY') {
+        document.activeElement.blur();
+      }
     },
   },
 };
