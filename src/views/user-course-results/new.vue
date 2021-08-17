@@ -95,13 +95,13 @@ export default {
     },
   },
   mounted() {
-    window.addEventListener('keyboardWillShow', this.onKeyBoardShow);
+    window.addEventListener('keyboardDidShow', this.onKeyBoardShow);
     window.addEventListener('keyboardWillHide', this.onKeyBoardHide);
     // blur to hide keyboard and show 保存 button when tap outside the input
     document.addEventListener('click', this.onTapOutsideInput, false);
   },
   beforeDestroy() {
-    window.removeEventListener('keyboardWillShow', this.onKeyBoardShow);
+    window.removeEventListener('keyboardDidShow', this.onKeyBoardShow);
     window.removeEventListener('keyboardWillHide', this.onKeyBoardHide);
     document.removeEventListener('click', this.onTapOutsideInput, false);
   },
