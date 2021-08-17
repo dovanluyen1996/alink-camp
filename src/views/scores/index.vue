@@ -6,7 +6,7 @@
       <no-data v-if="courses.length === 0">
         <p>
           まだスコア登録がありません。<br>
-          コース検索より、追加したいコースを選択してください
+          コース検索より、追加したいコースを選択してください。
         </p>
         <template #actions>
           <v-ons-button

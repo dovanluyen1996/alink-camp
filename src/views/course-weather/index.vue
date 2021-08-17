@@ -6,7 +6,7 @@
       <no-data v-if="userCourses.length === 0 && userCoursePlans.length === 0">
         <p>
           まだお気に入りや予定日設定しているコースがありません。<br>
-          コース検索より、設定してください
+          コース検索より、設定してください。
         </p>
         <template #actions>
           <v-ons-button

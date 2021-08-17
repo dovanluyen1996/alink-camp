@@ -29,19 +29,12 @@ export default {
   padding: 0 30px;
   font-size: 18px;
   font-weight: 600;
+  text-align: center;
 }
 
 .no-data-contents {
   position: relative;
   width: 100%;
-
-  &__actions {
-    text-align: center;
-  }
-
-  &__message {
-    text-align: left;
-  }
 
   &__actions + &__message {
     position: absolute;
