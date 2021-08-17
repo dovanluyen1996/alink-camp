@@ -64,6 +64,12 @@ export default {
       return this.$store.getters['models/userCourse/findByCourseId'](this.userCoursePlan.courseId);
     },
   },
+  watch: {
+    async useUserCourse() {
+      this.ForecastScheduledDate = await this.getForecastScheduledDate();
+      this.Forecast10Days = await this.getForecast10Days();
+    },
+  },
   async created() {
     this.ForecastScheduledDate = await this.getForecastScheduledDate();
     this.Forecast10Days = await this.getForecast10Days();
