@@ -3,7 +3,7 @@
     @show="show"
     @hide="hide"
   >
-    <custom-toolbar title="風予測" />
+    <custom-toolbar title="風予報" />
 
     <div class="content">
       <div class="wind-forecast-content">

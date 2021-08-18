@@ -32,7 +32,7 @@
 
         <purchase-point>
           <template #title>
-            位置情報を活用した風予測を提供
+            位置情報を活用した風予報を提供
           </template>
           <template #thumbnail>
             <img

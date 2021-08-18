@@ -11,7 +11,7 @@
           src="@/assets/images/guidances/location-service.png"
           width="114px"
         >
-        <p>位置情報をONにすることで、風予測や最適なゴルフコースの検索に活用いただけます。</p>
+        <p>位置情報をONにすることで、風予報や最適なゴルフコースの検索に活用いただけます。</p>
 
         <template #footer>
           <v-ons-button
