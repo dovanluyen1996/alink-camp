@@ -55,12 +55,8 @@ export default {
     return {
       error: null,
       checkChargedStatusErrorVisible: false,
+      appVersion: '',
     };
-  },
-  computed: {
-    appVersion() {
-      return this.$store.getters['models/appStart/current'];
-    },
   },
   async created() {
     // NOTE: Firebase Analytics Sample
@@ -69,6 +65,7 @@ export default {
     //   FirebasePlugin.logEvent('screen_view', { content_type: 'page_view', item_id: 'home' });
     // }
     this.getAppStart();
+    this.getAppVersion();
 
     if (BuildInfo.debug) {
       return this.checkChargedStatusOnlyDebug();
@@ -139,6 +136,9 @@ export default {
     },
     closeCheckChargedStatusError() {
       this.checkChargedStatusErrorVisible = false;
+    },
+    async getAppVersion() {
+      this.appVersion = await cordova.getAppVersion.getVersionNumber();
     },
   },
 };
