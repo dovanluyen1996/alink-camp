@@ -13,6 +13,7 @@
     </custom-toolbar>
 
     <div class="content">
+      <loading :visible="isLoading" />
       <validation-observer v-slot="{ handleSubmit }">
         <content-with-footer>
           <course-name :course-name="userCourse.course.name" />
@@ -119,6 +120,9 @@ export default {
     },
     weather() {
       return this.userCourseResult.weather;
+    },
+    isLoading() {
+      return this.$store.getters['models/userCourseResult/isLoading'];
     },
   },
   mounted() {

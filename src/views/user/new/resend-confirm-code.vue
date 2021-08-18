@@ -2,6 +2,7 @@
   <v-ons-page>
     <custom-toolbar title="認証コードを再送する" />
     <div class="content">
+      <loading :visible="isLoading" />
       <validation-observer
         v-slot="{ handleSubmit }"
       >
@@ -65,6 +66,7 @@ export default {
       },
       error: null,
       resendConfirmCodeErrorVisible: false,
+      isLoading: false,
     };
   },
   computed: {
@@ -76,6 +78,7 @@ export default {
   },
   methods: {
     resendConfirmationCode() {
+      this.isLoading = true;
       this.$cognito.resendConfirmationCode(this.user.email)
         .then((result) => {
           console.log(result);
@@ -90,6 +93,9 @@ export default {
         .catch((err) => {
           this.error = err;
           this.showResendConfirmCodeError();
+        })
+        .finally(() => {
+          this.isLoading = false;
         });
     },
     showResendConfirmCodeError() {

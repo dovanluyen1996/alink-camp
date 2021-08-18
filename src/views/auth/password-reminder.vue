@@ -2,6 +2,7 @@
   <v-ons-page>
     <custom-toolbar title="パスワードを忘れた方" />
     <div class="content">
+      <loading :visible="isLoading" />
       <validation-observer
         v-slot="{ handleSubmit }"
       >
@@ -59,6 +60,7 @@ export default {
       },
       error: null,
       remindPasswordErrorVisible: false,
+      isLoading: false,
     };
   },
   computed: {
@@ -75,6 +77,7 @@ export default {
   },
   methods: {
     sendComfirmCode() {
+      this.isLoading = true;
       this.$cognito.forgotPassword(this.user.email)
         .then((result) => {
           console.log(result);
@@ -89,6 +92,9 @@ export default {
         .catch((err) => {
           this.error = err;
           this.showRemindPasswordError();
+        })
+        .finally(() => {
+          this.isLoading = false;
         });
     },
     showRemindPasswordError() {

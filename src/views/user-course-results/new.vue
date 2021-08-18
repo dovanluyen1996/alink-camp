@@ -3,6 +3,7 @@
     <custom-toolbar title="スコアの新規登録" />
 
     <div class="content">
+      <loading :visible="isLoading" />
       <validation-observer v-slot="{ handleSubmit }">
         <content-with-footer>
           <course-name :course-name="courseName" />
@@ -92,6 +93,9 @@ export default {
   computed: {
     courseName() {
       return this.userCourse ? this.userCourse.course.name : this.course.name;
+    },
+    isLoading() {
+      return this.$store.getters['models/userCourseResult/isLoading'] || this.$store.getters['models/userCourse/isLoading'];
     },
   },
   mounted() {

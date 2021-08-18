@@ -1,6 +1,7 @@
 <template>
   <v-ons-page>
     <div class="content">
+      <loading :visible="isLoading" />
       <content-with-footer>
         <greeting />
 
@@ -112,6 +113,7 @@ export default {
       error: null,
       errorMessage: '',
       checkPurchaseErrorVisible: false,
+      isLoading: false,
     };
   },
   methods: {
@@ -123,6 +125,7 @@ export default {
       return this.purchaseByRevenueCat();
     },
     purchaseByRevenueCat() {
+      this.isLoading = true;
       Purchases.getOfferings((offerings) => {
         if (offerings.current !== null && offerings.current.availablePackages.length !== 0) {
           const availablePackage = offerings.current.monthly;
@@ -135,6 +138,7 @@ export default {
               Adjust.trackEvent(adjustEvent);
               this.purchaseComplete();
             }
+            this.isLoading = false;
           },
           // eslint-disable-next-line no-unused-vars
           ({ error, userCancelled }) => {
@@ -143,14 +147,19 @@ export default {
               const RestorableErrorCode = 6;
               this.errorMessage = error.code === RestorableErrorCode ? 'すでに購入済みのアプリです。課金情報を復元してください。' : '';
             }
+            this.isLoading = false;
           });
+        } else {
+          this.isLoading = false;
         }
       }, () => {
         this.checkPurchaseErrorVisible = true;
+        this.isLoading = false;
       });
     },
 
     restorePurchase() {
+      this.isLoading = true;
       Purchases.restoreTransactions(
         (restoredInfo) => {
           const entitlements = restoredInfo.entitlements.all;
@@ -161,10 +170,12 @@ export default {
             this.checkPurchaseErrorVisible = true;
             this.errorMessage = '課金状態を復元できません。';
           }
+          this.isLoading = false;
         },
         () => {
           this.checkPurchaseErrorVisible = true;
           this.errorMessage = '課金状態を復元できません。';
+          this.isLoading = false;
         },
       );
     },

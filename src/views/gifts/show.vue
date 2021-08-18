@@ -3,6 +3,7 @@
     <custom-toolbar title="特典交換" />
 
     <div class="content">
+      <loading :visible="isLoading" />
       <validation-observer
         ref="guidanceForm"
         v-slot="{ handleSubmit }"
@@ -118,6 +119,9 @@ export default {
     gift() {
       return this.$store.getters['models/gift/findById'](this.giftId);
     },
+    isLoading() {
+      return this.$store.getters['models/userGift/isLoading'];
+    },
   },
   mounted() {
     window.addEventListener('keyboardDidShow', this.onKeyBoardShow);
@@ -146,13 +150,12 @@ export default {
         giftId: this.giftId,
         email: this.email,
       };
-
+      this.closeConfirm();
       try {
         await this.$store.dispatch('models/userGift/createUserGift', params);
-        this.closeConfirm();
         this.showCompleted();
       } catch (e) {
-        this.closeConfirm();
+        console.error(e);
       }
     },
     onKeyBoardShow() {

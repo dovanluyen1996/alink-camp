@@ -2,6 +2,7 @@
   <v-ons-page>
     <custom-toolbar title="データを引き継ぐ" />
     <div class="content">
+      <loading :visible="isLoading" />
       <base-form>
         <user-email v-model="user.email" />
         <user-password
@@ -73,6 +74,7 @@ export default {
       },
       error: null,
       signInErrorVisible: false,
+      isLoading: false,
     };
   },
   computed: {
@@ -96,6 +98,7 @@ export default {
       this.$store.dispatch('appNavigator/push', PasswordReminder);
     },
     async signIn() {
+      this.isLoading = true;
       this.$cognito.login(this.user.email, this.user.password)
         .then(async(result) => {
           console.log(result);
@@ -107,6 +110,9 @@ export default {
         .catch((err) => {
           this.error = err;
           this.showSignInError();
+        })
+        .finally(() => {
+          this.isLoading = false;
         });
     },
     showSignInError() {

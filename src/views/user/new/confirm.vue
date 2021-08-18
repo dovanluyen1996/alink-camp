@@ -4,6 +4,7 @@
       title="ユーザー情報の登録"
     />
     <div class="content">
+      <loading :visible="isLoading" />
       <base-form>
         <confirm-field
           :value="genderText"
@@ -75,6 +76,9 @@ export default {
         _prefecture => _prefecture.value === this.user.prefecture,
       );
       return prefecture ? prefecture.text : '';
+    },
+    isLoading() {
+      return this.$store.getters['models/currentUser/isLoading'];
     },
   },
   methods: {

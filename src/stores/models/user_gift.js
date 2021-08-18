@@ -7,6 +7,9 @@ export default {
     userGifts: [],
     isLoading: false,
   },
+  getters: {
+    isLoading: state => state.isLoading,
+  },
   mutations: {
     addUserGift(state, userGift) {
       state.userGifts.push(userGift);

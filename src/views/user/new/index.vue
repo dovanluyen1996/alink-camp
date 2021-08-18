@@ -2,6 +2,7 @@
   <v-ons-page>
     <custom-toolbar title="ユーザー情報の登録" />
     <div class="content">
+      <loading :visible="isLoading" />
       <validation-observer v-slot="{ handleSubmit }">
         <base-form>
           <validation-provider
@@ -86,6 +87,7 @@ export default {
       },
       error: null,
       signUpErrorVisible: false,
+      isLoading: false,
     };
   },
   computed: {
@@ -105,7 +107,7 @@ export default {
   methods: {
     getConfirmCode() {
       localStorage.removeItem('authenticationData');
-
+      this.isLoading = true;
       this.$cognito.signUp(this.user.email, this.user.password)
         .then(async(result) => {
           console.log(result);
@@ -114,6 +116,9 @@ export default {
         .catch((err) => {
           this.error = err;
           this.showSignUpError();
+        })
+        .finally(() => {
+          this.isLoading = false;
         });
     },
     goToConfirmCode() {

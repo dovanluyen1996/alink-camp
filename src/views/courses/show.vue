@@ -2,6 +2,7 @@
   <v-ons-page @show="show">
     <custom-toolbar title="ゴルフ場情報" />
     <div class="content">
+      <loading :visible="isLoading" />
       <course-name :course-name="course.name" />
       <div class="course-show-header">
         <v-ons-button
@@ -99,6 +100,9 @@ export default {
     },
     userCourseResultSize() {
       return this.$store.getters['models/userCourseResult/size'];
+    },
+    isLoading() {
+      return this.$store.getters['models/userCourse/isLoading'] || this.$store.getters['models/userCourseResult/isLoading'];
     },
   },
   methods: {

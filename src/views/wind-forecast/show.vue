@@ -6,6 +6,7 @@
     <custom-toolbar title="風予報" />
 
     <div class="content">
+      <loading :visible="isLoading" />
       <div class="wind-forecast-content">
         <compass
           ref="compass"
@@ -79,6 +80,11 @@ export default {
       compassErrorVisible: false,
       forecastWindErrorErrorMsg: '',
     };
+  },
+  computed: {
+    isLoading() {
+      return this.$store.getters['models/weather/isLoading'];
+    },
   },
   beforeDestroy() {
     this.$refs.compass.stopWatch();

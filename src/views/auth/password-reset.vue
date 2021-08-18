@@ -2,6 +2,7 @@
   <v-ons-page>
     <custom-toolbar title="パスワードを忘れた方" />
     <div class="content">
+      <loading :visible="isLoading" />
       <base-form>
         <auth-comfirm-code v-model="confirmCode" />
         <user-password-new v-model="newPassword" />
@@ -55,6 +56,7 @@ export default {
       newPassword: '',
       error: '',
       resetPasswordErrorVisible: false,
+      isLoading: false,
     };
   },
   computed: {
@@ -73,6 +75,7 @@ export default {
   },
   methods: {
     submitPassword() {
+      this.isLoading = true;
       this.$cognito.confirmPassword(this.email, this.confirmCode, this.newPassword)
         .then((result) => {
           console.log(result);
@@ -81,6 +84,9 @@ export default {
         .catch((err) => {
           this.error = err;
           this.showResetPasswordError();
+        })
+        .finally(() => {
+          this.isLoading = false;
         });
     },
     showResetPasswordError() {

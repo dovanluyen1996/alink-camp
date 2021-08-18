@@ -16,6 +16,7 @@
     </custom-toolbar>
 
     <div class="content">
+      <loading :visible="isLoading" />
       <validation-observer
         v-slot="{ handleSubmit }"
       >
@@ -105,6 +106,9 @@ export default {
     },
     targetAt() {
       return `${this.dateValue} ${this.timeValue}`;
+    },
+    isLoading() {
+      return this.$store.getters['models/userCoursePlan/isLoading'] || this.$store.getters['models/userCourse/isLoading'];
     },
   },
   created() {

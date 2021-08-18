@@ -2,6 +2,7 @@
   <v-ons-page>
     <custom-toolbar title="データ引継ぎ設定" />
     <div class="content">
+      <loading :visible="isLoading" />
       <validation-observer v-slot="{ handleSubmit }">
         <base-form>
           <validation-provider
@@ -110,6 +111,7 @@ export default {
       changePasswordErrorVisible: false,
       completedVisible: false,
       comfirmDialogVisible: false,
+      isLoading: false,
     };
   },
   computed: {
@@ -129,6 +131,7 @@ export default {
   methods: {
     submitPassword() {
       this.closeConfirmDialog();
+      this.isLoading = true;
       this.$cognito.changePassword(this.oldPassword, this.newPassword)
         .then(() => {
           this.showCompletedDialog();
@@ -136,6 +139,9 @@ export default {
         .catch((err) => {
           this.error = err;
           this.showChangePasswordError();
+        })
+        .finally(() => {
+          this.isLoading = false;
         });
     },
     showChangePasswordError() {
