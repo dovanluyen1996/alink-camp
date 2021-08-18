@@ -95,11 +95,13 @@ export default {
     goToPasswordReminder() {
       this.$store.dispatch('appNavigator/push', PasswordReminder);
     },
-    signIn() {
+    async signIn() {
       this.$cognito.login(this.user.email, this.user.password)
         .then(async(result) => {
           console.log(result);
-          this.$helpers.createUserDevise();
+          await this.$helpers.callPushNotificationPermission();
+          await this.$helpers.callGeolocationPermission();
+          await this.$helpers.createUserDevise();
           this.checkBeforeGoToAppTabbar();
         })
         .catch((err) => {

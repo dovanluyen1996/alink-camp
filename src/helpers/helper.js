@@ -1,5 +1,6 @@
 import moment from 'moment';
 import ApiClient from '@/api_client';
+import settings from '@/config/settings';
 
 moment.locale('ja');
 
@@ -85,5 +86,29 @@ export default {
         console.error(error);
       });
     }
+  },
+
+  // PUSH通知の権限確認
+  callPushNotificationPermission() {
+    if (window.device.platform !== 'browser') {
+      window.FirebasePlugin.hasPermission((hasPermission) => {
+        if (!hasPermission) {
+          window.FirebasePlugin.grantPermission(() => {}, (error) => {
+            console.error(error);
+          });
+        }
+      });
+    }
+  },
+
+  // 位置情報の権限確認
+  callGeolocationPermission() {
+    navigator.geolocation.getCurrentPosition(
+      () => {}, (error) => {
+        console.log(error);
+      }, {
+        timeout: settings.locationServices.timeout,
+      },
+    );
   },
 };
