@@ -7,7 +7,8 @@ export default {
       return this.$store.state.models.currentUser.user;
     },
     isNeedUpdateData() {
-      return !this.currentUser.birthdate;
+      const { birthdate, gender, prefecture } = this.currentUser;
+      return !birthdate || !gender || !prefecture;
     },
   },
   methods: {
