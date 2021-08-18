@@ -1,16 +1,16 @@
 const AdjustPlugin = {
-  init() {
+  init(ajustToken) {
     let adjustConfig;
     if (process.env.NODE_ENV === 'production') {
       // TODO: 開発環境をdevelopmentでビルドできるようになったら、本番用の実装を組み込む
       adjustConfig = new AdjustConfig(
-        process.env.ADJUST_TOKEN,
+        ajustToken.APP_TOKEN,
         AdjustConfig.EnvironmentSandbox,
         //   AdjustConfig.EnvironmentProduction,
       );
     } else if (process.env.NODE_ENV === 'development') {
       adjustConfig = new AdjustConfig(
-        process.env.ADJUST_TOKEN,
+        ajustToken.APP_TOKEN,
         AdjustConfig.EnvironmentSandbox,
       );
     }

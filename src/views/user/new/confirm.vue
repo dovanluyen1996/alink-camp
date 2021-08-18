@@ -83,7 +83,10 @@ export default {
     },
     submitUserData() {
       this.$store.dispatch('models/currentUser/updateUser', this.user).then(() => {
-        const adjustEvent = new AdjustEvent(process.env.ADJUST_REGISTRATION_COMPLETED_EVENT_ID);
+        const ADJUST_TOKEN = (window.device.platform === 'iOS') ? process.env.ADJUST_TOKEN_IOS : process.env.ADJUST_TOKEN_ANDROID;
+        const adjustEvent = new AdjustEvent(ADJUST_TOKEN.REGISTRATION_COMPLETED_EVENT_ID);
+        console.log('----------------*******************************************');
+        console.log(ADJUST_TOKEN.REGISTRATION_COMPLETED_EVENT_ID);
         Adjust.trackEvent(adjustEvent);
         this.$store.dispatch('appNavigator/push', AppTabbar);
       });

@@ -130,7 +130,10 @@ export default {
           // eslint-disable-next-line no-unused-vars
           Purchases.purchasePackage(availablePackage, ({ productIdentifier, purchaserInfo }) => {
             if (Object.entries(purchaserInfo.entitlements.active).length > 0) {
-              const adjustEvent = new AdjustEvent(process.env.ADJUST_TRIAL_STARTED_EVENT_ID);
+              const ADJUST_TOKEN = (window.device.platform === 'iOS') ? process.env.ADJUST_TOKEN_IOS : process.env.ADJUST_TOKEN_ANDROID;
+              const adjustEvent = new AdjustEvent(ADJUST_TOKEN.TRIAL_STARTED_EVENT_ID);
+              console.log('----------------*******************************************');
+              console.log(ADJUST_TOKEN.TRIAL_STARTED_EVENT_ID);
               Adjust.trackEvent(adjustEvent);
               this.purchaseComplete();
             }

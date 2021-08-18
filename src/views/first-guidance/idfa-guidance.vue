@@ -72,7 +72,10 @@ export default {
       this.goToUserNew();
     },
     goToUserNew() {
-      const adjustEvent = new AdjustEvent(process.env.ADJUST_TUTORIAL_COMPLETED_EVENT_ID);
+      const ADJUST_TOKEN = (window.device.platform === 'iOS') ? process.env.ADJUST_TOKEN_IOS : process.env.ADJUST_TOKEN_ANDROID;
+      const adjustEvent = new AdjustEvent(ADJUST_TOKEN.TUTORIAL_COMPLETED_EVENT_ID);
+      console.log('----------------*******************************************');
+      console.log(ADJUST_TOKEN.TUTORIAL_COMPLETED_EVENT_ID);
       Adjust.trackEvent(adjustEvent);
       this.$store.dispatch('appNavigator/push', UserNew);
     },

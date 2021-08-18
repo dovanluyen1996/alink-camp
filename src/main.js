@@ -57,7 +57,8 @@ const initializeVue = () => {
     FirebasePlugin.setAnalyticsCollectionEnabled(true);
   }
 
-  AdjustPlugin.init();
+  const ADJUST_TOKEN = (window.device.platform === 'iOS') ? process.env.ADJUST_TOKEN_IOS : process.env.ADJUST_TOKEN_ANDROID;
+  AdjustPlugin.init(ADJUST_TOKEN);
 
   new Vue({
     el: '#app',
