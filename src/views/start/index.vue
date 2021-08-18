@@ -64,8 +64,8 @@ export default {
     //   FirebasePlugin.setScreenName('PurchaseInformation');
     //   FirebasePlugin.logEvent('screen_view', { content_type: 'page_view', item_id: 'home' });
     // }
-    this.getAppStart();
-    this.getAppVersion();
+    await this.getAppStart();
+    await this.getAppVersion();
 
     if (BuildInfo.debug) {
       return this.checkChargedStatusOnlyDebug();
