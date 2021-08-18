@@ -1,16 +1,18 @@
 const AdjustPlugin = {
-  init(ajustToken) {
+  init() {
+    const ADJUST_TOKEN = (window.device.platform === 'iOS') ? process.env.ADJUST_TOKEN_IOS : process.env.ADJUST_TOKEN_ANDROID;
+
     let adjustConfig;
     if (process.env.NODE_ENV === 'production') {
       // TODO: 開発環境をdevelopmentでビルドできるようになったら、本番用の実装を組み込む
       adjustConfig = new AdjustConfig(
-        ajustToken.APP_TOKEN,
+        ADJUST_TOKEN.APP_TOKEN,
         AdjustConfig.EnvironmentSandbox,
         //   AdjustConfig.EnvironmentProduction,
       );
     } else if (process.env.NODE_ENV === 'development') {
       adjustConfig = new AdjustConfig(
-        ajustToken.APP_TOKEN,
+        ADJUST_TOKEN.APP_TOKEN,
         AdjustConfig.EnvironmentSandbox,
       );
     }
