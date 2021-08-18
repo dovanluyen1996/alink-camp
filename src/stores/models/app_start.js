@@ -5,10 +5,17 @@ export default {
   namespaced: true,
   state: {
     isLoading: false,
+    appVersion: '',
+  },
+  getters: {
+    current: state => state.appVersion,
   },
   mutations: {
     setIsLoading(state, isLoading) {
       state.isLoading = isLoading;
+    },
+    setAppVersion(state, appVersion) {
+      state.appVersion = appVersion;
     },
   },
   actions: {
@@ -16,7 +23,9 @@ export default {
       context.commit('setIsLoading', true);
 
       try {
-        await ApiClient.getAppStart();
+        const appVersion = await ApiClient.getAppStart();
+
+        context.commit('setAppVersion', appVersion);
       } catch (error) {
         context.commit('api/setError', error, { root: true });
         throw error;

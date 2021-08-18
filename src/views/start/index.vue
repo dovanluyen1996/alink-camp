@@ -13,7 +13,7 @@
         </div>
         <div class="app-version">
           <small>
-            ver XXXX
+            ver {{ appVersion }}
           </small>
         </div>
       </div>
@@ -56,6 +56,11 @@ export default {
       error: null,
       checkChargedStatusErrorVisible: false,
     };
+  },
+  computed: {
+    appVersion() {
+      return this.$store.getters['models/appStart/current'];
+    },
   },
   async created() {
     // NOTE: Firebase Analytics Sample
