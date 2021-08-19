@@ -45,6 +45,7 @@
 
           <template #footer>
             <v-ons-button
+              v-show="isButtonShown"
               modifier="large--cta add rounded"
               :disabled="isButtonDisable"
               @click="handleSubmit(updateUserCourseResult)"
@@ -109,6 +110,7 @@ export default {
       isButtonDisable: false,
       completedDialogVisible: false,
       action: '',
+      isButtonShown: true,
     };
   },
   computed: {
@@ -118,6 +120,17 @@ export default {
     weather() {
       return this.userCourseResult.weather;
     },
+  },
+  mounted() {
+    window.addEventListener('keyboardDidShow', this.onKeyBoardShow);
+    window.addEventListener('keyboardWillHide', this.onKeyBoardHide);
+    // blur to hide keyboard and show 保存 button when tap outside the input
+    document.addEventListener('touchend', this.onTapOutsideInput, false);
+  },
+  beforeDestroy() {
+    window.removeEventListener('keyboardDidShow', this.onKeyBoardShow);
+    window.removeEventListener('keyboardWillHide', this.onKeyBoardHide);
+    document.removeEventListener('touchend', this.onTapOutsideInput, false);
   },
   methods: {
     showCompletedDialog(action) {
@@ -170,6 +183,31 @@ export default {
         });
 
       this.isButtonDisable = false;
+    },
+    onKeyBoardShow() {
+      this.isButtonShown = false;
+
+      // Scroll to selected input
+      const activeField = document.activeElement;
+      if (activeField) {
+        activeField.scrollIntoView(true);
+      }
+    },
+    onKeyBoardHide() {
+      this.isButtonShown = true;
+    },
+    onTapOutsideInput(event) {
+      // blur to hide keyboard and show 保存 button when tap outside the input
+      // if don't do this action, never see 保存 button after inputed all information
+      // 1. プライ日
+      // 2. スコア
+      // 3. 写真
+      // 4. メモ
+      // -> Can not show 保存 button
+      // -> tab outside input -> show 保存 button
+      if (event.target.tagName !== 'INPUT' && event.target.tagName !== 'TEXTAREA') {
+        document.activeElement.blur();
+      }
     },
   },
 };
