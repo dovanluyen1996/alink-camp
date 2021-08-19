@@ -7,8 +7,8 @@
     <div class="content">
       <no-data v-if="courses.length === 0">
         <p>
-          予定日設定されているゴルフコースがありません。<br>
-          検索より設定してから、ご利用ください。<br>
+          本日、予定されているゴルフコースがありません。<br>
+          コースの詳細ページより設定してください。<br>
         </p>
         <template #actions>
           <v-ons-button
