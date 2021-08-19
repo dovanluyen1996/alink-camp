@@ -15,6 +15,7 @@
     </transition>
 
     <a
+      v-if="reservationUrl()"
       :href="reservationUrl()"
       class="reservation-button button button--large--cta button--rounded"
       :target="target()"
@@ -86,7 +87,7 @@ export default {
 
 .reservation-button {
   width: 95%;
-  margin: 20px auto 40px;
+  margin: 20px auto 0;
 }
 
 .fade-enter-active,

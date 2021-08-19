@@ -27,6 +27,10 @@ export default {
 <style scoped lang="scss">
 @import '@/assets/scss/_variables.scss';
 
+.hourly-weather {
+  margin-top: 40px;
+}
+
 .chart-header {
   height: 40px;
   margin: 15px 0;
