@@ -124,13 +124,10 @@ export default {
   mounted() {
     window.addEventListener('keyboardDidShow', this.onKeyBoardShow);
     window.addEventListener('keyboardWillHide', this.onKeyBoardHide);
-    // blur to hide keyboard and show 保存 button when tap outside the input
-    document.addEventListener('touchend', this.onTapOutsideInput, false);
   },
   beforeDestroy() {
     window.removeEventListener('keyboardDidShow', this.onKeyBoardShow);
     window.removeEventListener('keyboardWillHide', this.onKeyBoardHide);
-    document.removeEventListener('touchend', this.onTapOutsideInput, false);
   },
   methods: {
     showCompletedDialog(action) {
@@ -195,11 +192,6 @@ export default {
     },
     onKeyBoardHide() {
       this.isButtonShown = true;
-    },
-    onTapOutsideInput(event) {
-      if (event.target.tagName !== 'INPUT' && event.target.tagName !== 'TEXTAREA') {
-        document.activeElement.blur();
-      }
     },
   },
 };

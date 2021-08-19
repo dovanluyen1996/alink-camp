@@ -97,13 +97,10 @@ export default {
   mounted() {
     window.addEventListener('keyboardDidShow', this.onKeyBoardShow);
     window.addEventListener('keyboardWillHide', this.onKeyBoardHide);
-    // blur to hide keyboard and show 保存 button when tap outside the input
-    document.addEventListener('touchend', this.onTapOutsideInput, false);
   },
   beforeDestroy() {
     window.removeEventListener('keyboardDidShow', this.onKeyBoardShow);
     window.removeEventListener('keyboardWillHide', this.onKeyBoardHide);
-    document.removeEventListener('touchend', this.onTapOutsideInput, false);
   },
   methods: {
     showCompletedDialog() {
@@ -177,19 +174,6 @@ export default {
     },
     onKeyBoardHide() {
       this.isButtonShown = true;
-    },
-    onTapOutsideInput(event) {
-      // blur to hide keyboard and show 保存 button when tap outside the input
-      // if don't do this action, never see 保存 button after inputed all information
-      // 1. プライ日
-      // 2. スコア
-      // 3. 写真
-      // 4. メモ
-      // -> Can not show 保存 button
-      // -> tab outside input -> show 保存 button
-      if (event.target.tagName !== 'INPUT' && event.target.tagName !== 'TEXTAREA') {
-        document.activeElement.blur();
-      }
     },
   },
 };
