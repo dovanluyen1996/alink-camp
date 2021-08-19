@@ -5,16 +5,15 @@
       <loading :visible="isLoading" />
       <validation-observer v-slot="{ handleSubmit }">
         <base-form>
-          <!-- TODO: change email -->
           <has-editable-button-field
-            title="メールアドレス"
+            :title="isSocialSignIn() ? 'ソーシャルログイン利用中' : 'メールアドレス'"
             :value="user.email"
             :editable="false"
           />
           <has-editable-button-field
+            v-if="!isSocialSignIn()"
             title="パスワード"
             value="**************"
-            :editable="isPasswordEditable()"
             @clickEdit="goToEditPassword"
           />
           <validation-provider
@@ -182,8 +181,8 @@ export default {
         activeField.scrollIntoView(true);
       }
     },
-    isPasswordEditable() {
-      return !JSON.parse(localStorage.getItem('externalProviderSignIn'));
+    isSocialSignIn() {
+      return JSON.parse(localStorage.getItem('externalProviderSignIn'));
     },
   },
 };
