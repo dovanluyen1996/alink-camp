@@ -12,12 +12,12 @@
         :user-course-plan="userCoursePlan"
       />
 
-      <template v-if="userCoursePlan && ForecastScheduledDate">
+      <template v-if="userCoursePlan && isPresent(ForecastScheduledDate)">
         <course-weather-of-the-day :forecast="ForecastScheduledDate" />
         <course-weather-the-day-before :forecast="ForecastScheduledDate.dayBefore" />
         <course-weather-hourly-weather :forecast="ForecastScheduledDate.targetDate" />
       </template>
-      <template v-else-if="Forecast10Days">
+      <template v-else-if="isPresent(Forecast10Days)">
         <course-weather-calendar
           :forecasts="Forecast10Days.items"
         />
@@ -111,6 +111,9 @@ export default {
           course: this.useUserCourse.course,
         },
       });
+    },
+    isPresent(forecastObject) {
+      return this.$helpers.isPresentObject(forecastObject);
     },
   },
 };
