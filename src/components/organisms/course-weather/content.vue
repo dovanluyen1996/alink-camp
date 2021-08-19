@@ -1,5 +1,8 @@
 <template>
-  <v-ons-card class="course-weather-show">
+  <v-ons-card
+    class="course-weather-show"
+    @click="goToCourseDetail"
+  >
     <course-weather-header
       :user-course="useUserCourse"
     />
@@ -24,6 +27,8 @@
 </template>
 
 <script>
+import settings from '@/config/settings';
+
 // components
 import CourseWeatherHeader from '@/components/organisms/course-weather/header';
 import CourseWeatherPlan from '@/components/organisms/course-weather/plan';
@@ -31,6 +36,10 @@ import CourseWeatherOfTheDay from '@/components/organisms/course-weather/weather
 import CourseWeatherTheDayBefore from '@/components/organisms/course-weather/weather-the-day-before';
 import CourseWeatherHourlyWeather from '@/components/organisms/course-weather/hourly-weather';
 import CourseWeatherCalendar from '@/components/organisms/course-weather/calendar';
+
+// pages
+import CourseSearchIndexPage from '@/views/course-search/index';
+import CourseShowPage from '@/views/courses/show';
 
 export default {
   name: 'CourseWeatherContent',
@@ -92,6 +101,16 @@ export default {
 
       const forecasts = await this.$store.dispatch('models/weather/getForecast10Days', params);
       return forecasts;
+    },
+    goToCourseDetail() {
+      this.$store.commit('appTabbar/setActiveIndex', settings.views.appTabbar.tabIndexes.courseSearch);
+      this.$store.dispatch('courseSearchNavigator/reset', CourseSearchIndexPage);
+      this.$store.dispatch('courseSearchNavigator/push', {
+        extends: CourseShowPage,
+        onsNavigatorProps: {
+          course: this.useUserCourse.course,
+        },
+      });
     },
   },
 };

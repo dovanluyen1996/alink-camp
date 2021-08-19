@@ -1,9 +1,6 @@
 <template>
   <div class="course-weather-header">
-    <div
-      class="course-name"
-      @click="goToCourseDetail"
-    >
+    <div class="course-name">
       {{ course.name }}
       <img
         v-if="userCourse.isFavorited"
@@ -18,12 +15,6 @@
 </template>
 
 <script>
-// pages
-import CourseSearchIndexPage from '@/views/course-search/index';
-import CourseShowPage from '@/views/courses/show';
-
-import settings from '@/config/settings';
-
 export default {
   name: 'CourseWeatherHeader',
   props: {
@@ -35,18 +26,6 @@ export default {
   computed: {
     course() {
       return this.userCourse.course;
-    },
-  },
-  methods: {
-    goToCourseDetail() {
-      this.$store.commit('appTabbar/setActiveIndex', settings.views.appTabbar.tabIndexes.courseSearch);
-      this.$store.dispatch('courseSearchNavigator/reset', CourseSearchIndexPage);
-      this.$store.dispatch('courseSearchNavigator/push', {
-        extends: CourseShowPage,
-        onsNavigatorProps: {
-          course: this.course,
-        },
-      });
     },
   },
 };
