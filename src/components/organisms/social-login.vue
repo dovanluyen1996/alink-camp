@@ -31,9 +31,7 @@
 import ErrorDialog from '@/components/organisms/error-dialog';
 import CheckCompleteRegistration from '@/mixins/checkCompleteRegistration';
 
-const YahooImage = require('@/assets/images/social/yahoo.png');
 const GoogleImage = require('@/assets/images/social/google.png');
-const TwitterImage = require('@/assets/images/social/twitter.png');
 const FacebookImage = require('@/assets/images/social/facebook.png');
 
 export default {
@@ -52,16 +50,8 @@ export default {
     return {
       services: [
         {
-          name: 'Yahoo! JAPAN',
-          image: YahooImage,
-        },
-        {
           name: 'Google',
           image: GoogleImage,
-        },
-        {
-          name: 'Twitter',
-          image: TwitterImage,
         },
         {
           name: 'Facebook',
