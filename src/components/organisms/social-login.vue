@@ -78,9 +78,12 @@ export default {
     },
     addHandleOpenUrlAfterLogin() {
       window.handleOpenURL = async(url) => {
-        const code = this.detectOauthCode(url);
-        if (!code) return;
         this.isLoading = true;
+        const code = this.detectOauthCode(url);
+        if (!code) {
+          this.isLoading = false;
+          return;
+        }
 
         try {
           const oauthInfo = await this.$cognito.getOauthToken(code);
