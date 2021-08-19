@@ -51,7 +51,7 @@
         class="alert-dialog-footer__msg"
       >
         今月のスタンプは全て溜まりました。<br>
-        また来月お楽しみに!
+        また来月お楽しみに！
       </p>
     </template>
   </v-ons-alert-dialog>
