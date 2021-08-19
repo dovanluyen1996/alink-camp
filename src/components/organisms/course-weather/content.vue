@@ -72,13 +72,13 @@ export default {
       if (!this.userCoursePlan) return this.userCourse;
       return this.$store.getters['models/userCourse/findByCourseId'](this.userCoursePlan.courseId);
     },
-    isShow() {
-      return this.$store.getters['courseWeather/isShow'];
+    activeIndex() {
+      return this.$store.state.appTabbar.activeIndex;
     },
   },
   watch: {
-    async isShow() {
-      if (this.isShow === true) {
+    async activeIndex() {
+      if (this.activeIndex === settings.views.appTabbar.tabIndexes.courseWeather) {
         this.ForecastScheduledDate = await this.getForecastScheduledDate();
         this.Forecast10Days = await this.getForecast10Days();
       }

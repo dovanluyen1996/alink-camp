@@ -79,20 +79,12 @@ export default {
     },
   },
   methods: {
-    prechange(event) {
+    prechange() {
       // When click to other tab,
       // if menu is open other page, reset menu
       // If menu is open menu items only, no reset
       if (this.$store.state.menuNavigator.stack.length > 1) {
         this.$store.dispatch('menuNavigator/reset', MenuIndexPage);
-      }
-
-      // When click to Course Weather Tab, set store isShow to true
-      // When click to other Tab, set store isShow to false
-      if (event.activeIndex === settings.views.appTabbar.tabIndexes.courseWeather) {
-        this.$store.dispatch('courseWeather/setIsShow', true);
-      } else {
-        this.$store.dispatch('courseWeather/setIsShow', false);
       }
     },
     reactive(event) {

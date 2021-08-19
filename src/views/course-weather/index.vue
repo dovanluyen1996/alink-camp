@@ -58,9 +58,6 @@ export default {
       return this.$store.getters['models/userCourse/isLoading'];
     },
   },
-  created() {
-    this.$store.dispatch('courseWeather/setIsShow', true);
-  },
   methods: {
     async show() {
       this.$store.dispatch('appTabbar/setLastVisitedAt', this.$helpers.localDateWithHyphenFrom(new Date()));
