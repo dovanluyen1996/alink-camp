@@ -72,11 +72,16 @@ export default {
       if (!this.userCoursePlan) return this.userCourse;
       return this.$store.getters['models/userCourse/findByCourseId'](this.userCoursePlan.courseId);
     },
+    isShow() {
+      return this.$store.getters['courseWeather/isShow'];
+    },
   },
   watch: {
-    async useUserCourse() {
-      this.ForecastScheduledDate = await this.getForecastScheduledDate();
-      this.Forecast10Days = await this.getForecast10Days();
+    async isShow() {
+      if (this.isShow === true) {
+        this.ForecastScheduledDate = await this.getForecastScheduledDate();
+        this.Forecast10Days = await this.getForecast10Days();
+      }
     },
   },
   async created() {
