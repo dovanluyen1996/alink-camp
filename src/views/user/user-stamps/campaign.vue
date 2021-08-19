@@ -45,11 +45,22 @@
       >
         決定
       </v-ons-button>
+
+      <p
+        v-show="isMaximumStampMessageVisible"
+        class="alert-dialog-footer__msg"
+      >
+        今月のスタンプは全て溜まりました。<br>
+        また来月お楽しみに!
+      </p>
     </template>
   </v-ons-alert-dialog>
 </template>
 
 <script>
+// setting
+import settings from '@/config/settings';
+
 export default {
   name: 'UserStampsCampaign',
   data() {
@@ -73,6 +84,14 @@ export default {
     },
     lastVisitedAt() {
       return this.$store.state.appTabbar.lastVisitedAt;
+    },
+    isMaximumStampMessageVisible() {
+      if (this.userStamp.increase === 0
+        && this.userStamp.number === settings.views.loginCampaign.num_change_to_ticket) {
+        return true;
+      }
+
+      return false;
     },
   },
   watch: {
@@ -118,6 +137,12 @@ export default {
 
   .alert-dialog-footer {
     padding-bottom: 40px;
+
+    &__msg {
+      padding-top: 20px;
+      margin: 0;
+      color: #de133c;
+    }
   }
 }
 
