@@ -24,7 +24,7 @@
         <allow-intent href="market:*" />
         <preference name="AndroidXEnabled" value="true"/>
         <edit-config file="AndroidManifest.xml" mode="merge" target="/manifest/application/activity">
-            <activity android:label="tenki.jp ゴルフ天気" />
+            <activity android:label="ゴルフ天気" />
         </edit-config>
 
         <icon src="res/icon/android/ldpi.png" density="ldpi" />
@@ -51,9 +51,6 @@
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
         <preference name="UseSwiftLanguageVersion" value="5" />
-        <edit-config file="*-Info.plist" mode="merge" target="CFBundleDisplayName">
-            <string>tenki.jp ゴルフ天気</string>
-        </edit-config>
 
         <icon src="res/icon/ios/icon-60@3x.png" width="180" height="180" />
         <icon src="res/icon/ios/icon-60.png" width="60" height="60" />
@@ -120,5 +117,9 @@
         <config-file target="*-Info.plist" parent="NSPhotoLibraryUsageDescription">
           <string>写真へのアクセスを許可してください</string>
         </config-file>
+
+        <edit-config file="*-Info.plist" mode="merge" target="CFBundleDisplayName">
+            <string>ゴルフ天気</string>
+        </edit-config>
     </platform>
 </widget>
