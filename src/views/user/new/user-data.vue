@@ -77,6 +77,12 @@ export default {
       },
     };
   },
+  mounted() {
+    window.addEventListener('keyboardDidShow', this.onKeyBoardShow);
+  },
+  beforeDestroy() {
+    window.removeEventListener('keyboardDidShow', this.onKeyBoardShow);
+  },
   methods: {
     goToConfirm() {
       this.$store.dispatch('appNavigator/push', {
@@ -85,6 +91,13 @@ export default {
           user: this.user,
         },
       });
+    },
+    onKeyBoardShow() {
+      // Scroll to selected input
+      const activeField = document.activeElement;
+      if (activeField) {
+        activeField.scrollIntoView(true);
+      }
     },
   },
 };

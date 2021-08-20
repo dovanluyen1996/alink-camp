@@ -142,6 +142,12 @@ export default {
   async created() {
     await this.getCurrentUser();
   },
+  mounted() {
+    window.addEventListener('keyboardDidShow', this.onKeyBoardShow);
+  },
+  beforeDestroy() {
+    window.removeEventListener('keyboardDidShow', this.onKeyBoardShow);
+  },
   methods: {
     goToEditEmail() {
       this.$store.dispatch('menuNavigator/push', ChangeEmailView);
@@ -171,6 +177,13 @@ export default {
     },
     closeCompletedDialog() {
       this.completedVisible = false;
+    },
+    onKeyBoardShow() {
+      // Scroll to selected input
+      const activeField = document.activeElement;
+      if (activeField) {
+        activeField.scrollIntoView(true);
+      }
     },
   },
 };
