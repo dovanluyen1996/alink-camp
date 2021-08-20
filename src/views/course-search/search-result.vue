@@ -115,7 +115,7 @@ export default {
     },
     searchByPrefectureParams() {
       return {
-        prefecture_id: this.searchConditions.prefecture,
+        prefecture_id: this.searchConditions.prefecture.value,
         page: this.page,
       };
     },
