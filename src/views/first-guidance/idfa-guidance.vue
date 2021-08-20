@@ -51,6 +51,9 @@ import ContentWithFooter from '@/components/organisms/content-with-footer';
 // pages
 import UserNew from '@/views/user/new';
 
+// config
+import IdfaAaidPlugin from '@/config/idfa';
+
 export default {
   name: 'FirstGuidanceIDFA',
   components: {
@@ -67,7 +70,10 @@ export default {
     },
     callToIdfaDialog() {
       this.isShownIdfaAlert = false;
-      // TODO: IDFAのダイアログを出してください
+      IdfaAaidPlugin.init();
+      const ADJUST_TOKEN = (window.device.platform === 'iOS') ? process.env.ADJUST_TOKEN_IOS : process.env.ADJUST_TOKEN_ANDROID;
+      const adjustEvent = new AdjustEvent(ADJUST_TOKEN.TRIAL_STARTED_EVENT_ID);
+      Adjust.trackEvent(adjustEvent);
       console.log('callToIdfaDialog');
       this.goToUserNew();
     },
