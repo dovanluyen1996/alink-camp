@@ -25,10 +25,10 @@
             地域より選択
           </v-ons-button>
           <v-ons-button
-            modifier="cta rounded"
+            modifier="cta rounded orange"
             @click="goToConditionsSearch"
           >
-            絞り込み選択
+            気象情報より検索
           </v-ons-button>
         </template>
       </content-with-footer>
