@@ -74,12 +74,13 @@ export default {
       const scope = process.env.COGNITO_OAUTH_SCOPES;
       const providerUrl = `${domain}/authorize?identity_provider=${provider}&response_type=${type}&client_id=${clientId}&redirect_uri=${callback}&scope=${scope}`;
 
+      localStorage.setItem('externalProviderSignIn', true);
       window.open(providerUrl, '_system');
     },
     addHandleOpenUrlAfterLogin() {
       window.handleOpenURL = async(url) => {
         this.isLoading = true;
-        const code = this.detectOauthCode(url);
+        const code = this.oauthCode(url);
         if (!code) {
           this.isLoading = false;
           return;
@@ -91,6 +92,9 @@ export default {
 
           if (userInfo.email) {
             this.storeToken(userInfo, oauthInfo);
+            await this.$helpers.callPushNotificationPermission();
+            await this.$helpers.callGeolocationPermission();
+            await this.$helpers.createUserDevise();
             this.checkBeforeGoToAppTabbar();
           } else {
             this.showSignInError();
@@ -103,7 +107,7 @@ export default {
         }
       };
     },
-    detectOauthCode(url) {
+    oauthCode(url) {
       const codeRegex = /(code=)([^,&,#,/]+)/ig;
       const code = url.match(codeRegex) && url.match(codeRegex)[0].split('=')[1];
 
@@ -117,7 +121,6 @@ export default {
       localStorage.setItem(`${userKey}.idToken`, oauthInfo.id_token);
       localStorage.setItem(`${userKey}.refreshToken`, oauthInfo.refresh_token);
       localStorage.setItem(`${userPoolKey}.LastAuthUser`, userInfo.username);
-      localStorage.setItem('externalProviderSignIn', true);
     },
     showSignInError() {
       this.signInErrorVisible = true;
