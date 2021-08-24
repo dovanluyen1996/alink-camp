@@ -69,11 +69,11 @@ export default {
       temperatureLabels: [
         {
           value: 1,
-          text: '近隣ゴルフ場の中でも暖かい(暑い)コース',
+          text: '近隣の中でも暖かいゴルフ場',
         },
         {
           value: 2,
-          text: '近隣ゴルフ場の中でも涼しい(寒い)コース',
+          text: '近隣の中でも涼しいゴルフ場',
         },
         {
           value: 0,
