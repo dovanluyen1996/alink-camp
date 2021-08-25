@@ -75,7 +75,7 @@ export default {
 
       switch (this.error.code) {
       case 'NotAuthorizedException':
-        return '既に認証済みのユーザです';
+        return '既に登録済みのユーザです';
       default:
         return '認証コードが一致しません';
       }
