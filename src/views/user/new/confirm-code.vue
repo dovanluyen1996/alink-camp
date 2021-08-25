@@ -73,7 +73,12 @@ export default {
     errorMessage() {
       if (!this.error) return '';
 
-      return '認証コードが一致しません';
+      switch (this.error.code) {
+      case 'NotAuthorizedException':
+        return '既に登録済みのユーザです';
+      default:
+        return '認証コードが一致しません';
+      }
     },
   },
   methods: {
