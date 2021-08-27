@@ -92,9 +92,6 @@ export default {
 
           if (userInfo.email) {
             this.storeToken(userInfo, oauthInfo);
-            await this.$helpers.callPushNotificationPermission();
-            await this.$helpers.callGeolocationPermission();
-            await this.$helpers.createUserDevise();
             this.checkBeforeGoToAppTabbar();
           } else {
             this.showSignInError();

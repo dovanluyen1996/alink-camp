@@ -127,9 +127,6 @@ export default {
       if (isCharged) {
         const isAuthenticated = await this.isAuthenticated();
         if (isAuthenticated) {
-          await this.$helpers.callPushNotificationPermission();
-          await this.$helpers.callGeolocationPermission();
-          await this.$helpers.createUserDevise();
           this.checkBeforeGoToAppTabbar();
         }
       } else {

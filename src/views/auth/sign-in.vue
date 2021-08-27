@@ -102,9 +102,6 @@ export default {
       this.$cognito.login(this.user.email, this.user.password)
         .then(async(result) => {
           console.log(result);
-          await this.$helpers.callPushNotificationPermission();
-          await this.$helpers.callGeolocationPermission();
-          await this.$helpers.createUserDevise();
           this.checkBeforeGoToAppTabbar();
         })
         .catch((err) => {
