@@ -67,6 +67,14 @@ export default {
     return moment(compareDate).isAfter(targetDate);
   },
 
+  isSaturday(date) {
+    return moment(date).isoWeekday() === 6;
+  },
+
+  isSunday(date) {
+    return moment(date).isoWeekday() === 7;
+  },
+
   // デバイストークンを送信する
   async createUserDevise() {
     if (window.device.platform === 'iOS') {

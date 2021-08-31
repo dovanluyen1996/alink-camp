@@ -6,7 +6,10 @@
       width="25%"
       class="course-weather-day"
     >
-      <div class="course-weather-day-date">
+      <div
+        class="course-weather-day-date"
+        :class="[saturdayCol(forecast.date), sundayCol(forecast.date)]"
+      >
         {{ shortDate(forecast.date) }}
       </div>
       <div class="course-weather-day-weather">
@@ -52,6 +55,12 @@ export default {
     shortDate(date) {
       return this.$helpers.toShortString(date);
     },
+    saturdayCol(date) {
+      return this.$helpers.isSaturday(date) ? 'course-weather-day-date__sarturday' : '';
+    },
+    sundayCol(date) {
+      return this.$helpers.isSunday(date) ? 'course-weather-day-date__sunday' : '';
+    },
   },
 };
 </script>
@@ -88,6 +97,14 @@ export default {
   height: 24px;
   font-size: $font-size-small;
   background: $color-th;
+
+  &__sarturday {
+    color: #113095;
+  }
+
+  &__sunday {
+    color: #9d1d1d;
+  }
 }
 
 .course-weather-day-weather {
