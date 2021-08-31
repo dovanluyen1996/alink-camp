@@ -4,7 +4,7 @@
       {{ title }}
     </v-ons-col>
     <v-ons-col class="chart-update">
-      <div>（地点： {{ pointName }}）</div>
+      <div>（地点 : {{ pointName }}）</div>
       <div>{{ $helpers.toShortWithTimeString(updatedAt) }}発表</div>
     </v-ons-col>
   </v-ons-row>
