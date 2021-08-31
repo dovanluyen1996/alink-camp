@@ -35,11 +35,3 @@ export default {
   },
 };
 </script>
-
-<style scoped lang="scss">
-.time-row {
-  td {
-    font-weight: 600;
-  }
-}
-</style>

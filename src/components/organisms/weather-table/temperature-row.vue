@@ -63,12 +63,6 @@ export default {
 <style scoped lang="scss">
 @import '@/assets/scss/_variables.scss';
 
-.temperature-row {
-  td {
-    font-weight: 600;
-  }
-}
-
 .is-highest {
   td {
     color: $color-temperature-high;
