@@ -3,6 +3,7 @@
     <chart-header
       title="気温（℃）"
       :updated-at="chartUpdatedAt"
+      :pointName="pointName"
     />
     <line-chart
       :chart-data="chartData"
@@ -26,6 +27,7 @@ export default {
     return {
       chartData: {},
       chartUpdatedAt: '',
+      pointName: '',
       options: {
         legend: {
           position: 'bottom',
@@ -73,6 +75,7 @@ export default {
       const forecastMonthlyTemp = await this.getForecastMonthlyTemp();
       if (forecastMonthlyTemp) {
         this.chartUpdatedAt = forecastMonthlyTemp.updatedAt;
+        this.pointName = forecastMonthlyTemp.pointName;
         this.fillData(forecastMonthlyTemp.items);
       }
     },

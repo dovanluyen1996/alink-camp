@@ -4,7 +4,8 @@
       {{ title }}
     </v-ons-col>
     <v-ons-col class="chart-update">
-      {{ $helpers.toShortWithTimeString(updatedAt) }}発表
+      <div>（地点： {{ pointName }}）</div>
+      <div>{{ $helpers.toShortWithTimeString(updatedAt) }}発表</div>
     </v-ons-col>
   </v-ons-row>
 </template>
@@ -18,6 +19,10 @@ export default {
       default: '',
     },
     updatedAt: {
+      type: String,
+      default: '',
+    },
+    pointName: {
       type: String,
       default: '',
     },
@@ -44,7 +49,7 @@ export default {
 .chart-update {
   align-self: flex-end;
   padding-right: 7px;
-  padding-bottom: 5px;
+  padding-bottom: 3px;
   font-size: $font-size-small;
   text-align: right;
 }

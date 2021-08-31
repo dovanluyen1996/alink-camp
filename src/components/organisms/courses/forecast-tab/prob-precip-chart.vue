@@ -3,6 +3,7 @@
     <chart-header
       title="降水量（mm）"
       :updated-at="chartUpdatedAt"
+      :pointName="pointName"
     />
     <bar-chart
       :chart-data="chartData"
@@ -26,6 +27,7 @@ export default {
     return {
       chartData: {},
       chartUpdatedAt: '',
+      pointName: '',
       options: {
         maintainAspectRatio: false,
         legend: {
@@ -73,6 +75,7 @@ export default {
       const forecastMonthlyPrecip = await this.getForecastMonthlyPrecip();
       if (forecastMonthlyPrecip) {
         this.chartUpdatedAt = forecastMonthlyPrecip.updatedAt;
+        this.pointName = forecastMonthlyPrecip.pointName;
         this.fillData(forecastMonthlyPrecip.items);
       }
     },
