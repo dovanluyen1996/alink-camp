@@ -73,7 +73,7 @@ export default {
           component: CoursesForecastTab,
         },
         {
-          label: '詳細情報',
+          label: '施設詳細',
           component: CoursesInformationTab,
         },
       ],
