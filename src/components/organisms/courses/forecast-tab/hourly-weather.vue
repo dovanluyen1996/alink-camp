@@ -192,17 +192,15 @@ export default {
 /deep/ {
   .table {
     text-align: center;
-  }
 
-  .th {
-    white-space: nowrap;
-  }
-
-  .table {
     th,
     td {
       padding: 4px;
     }
+  }
+
+  .th {
+    white-space: nowrap;
   }
 }
 
