@@ -4,7 +4,7 @@
       scope="row"
       :class="{th : colorTh}"
     >
-      風の向き
+      風向
     </th>
     <template v-for="(windDirection, index) in windDirections">
       <td :key="index">

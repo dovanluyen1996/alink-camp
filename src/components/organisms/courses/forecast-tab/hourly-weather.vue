@@ -197,6 +197,13 @@ export default {
   .th {
     white-space: nowrap;
   }
+
+  .table {
+    th,
+    td {
+      padding: 4px;
+    }
+  }
 }
 
 .date-row {

@@ -4,7 +4,7 @@
       scope="row"
       :class="{th : colorTh}"
     >
-      風速 (km)
+      風速<br>(m/s)
     </th>
     <template v-for="(windSpeed, index) in windSpeeds">
       <td :key="index">
