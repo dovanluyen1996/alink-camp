@@ -186,10 +186,8 @@ export default {
       this.checkPurchaseErrorVisible = false;
     },
     isIos() {
-      const { platform } = window.device || {};
-
-      return platform === 'iOS'
-    }
+      return window.device.platform === 'iOS';
+    },
   },
 };
 </script>
