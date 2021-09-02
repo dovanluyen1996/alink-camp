@@ -4,7 +4,12 @@
       scope="row"
       :class="{th : colorTh}"
     >
-      風速<br>(m/s)
+      <span v-if="displayCourseWeatherTop">
+        風速 (m/s)
+      </span>
+      <span v-else>
+        風速<br>(m/s)
+      </span>
     </th>
     <template v-for="(windSpeed, index) in windSpeeds">
       <td :key="index">
@@ -26,6 +31,10 @@ export default {
     colorTh: {
       type: Boolean,
       default: true,
+    },
+    displayCourseWeatherTop: {
+      type: Boolean,
+      default: false,
     },
   },
 };

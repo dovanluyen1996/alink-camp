@@ -46,6 +46,7 @@
       <wind-speed-row
         :wind-speeds="windSpeeds"
         :color-th="false"
+        :display-course-weather-top="true"
       />
     </tbody>
   </table>
