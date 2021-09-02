@@ -66,7 +66,11 @@ export default {
   },
   methods: {
     showIdfaAlert() {
-      this.isShownIdfaAlert = true;
+      if (window.device.platform === 'iOS') {
+        this.isShownIdfaAlert = true;
+      } else {
+        this.goToUserNew();
+      }
     },
     callToIdfaDialog() {
       this.isShownIdfaAlert = false;
