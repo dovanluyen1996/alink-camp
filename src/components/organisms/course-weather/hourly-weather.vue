@@ -73,6 +73,8 @@ export default {
   },
   computed: {
     probPrecips() {
+      if (!this.forecast) return [null, null, null, null];
+
       const precips = [];
 
       precips.push(this.forecast.precip_0);
@@ -83,6 +85,8 @@ export default {
       return precips;
     },
     windDirections() {
+      if (!this.forecast) return [null, null, null, null];
+
       const drectoins = [];
 
       drectoins.push(this.forecast.windDirection_0);
@@ -93,6 +97,8 @@ export default {
       return drectoins;
     },
     windSpeeds() {
+      if (!this.forecast) return [null, null, null, null];
+
       const speeds = [];
 
       speeds.push(this.forecast.windSpeed_0);

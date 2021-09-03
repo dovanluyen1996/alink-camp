@@ -13,7 +13,7 @@
     </th>
     <template v-for="(windSpeed, index) in windSpeeds">
       <td :key="index">
-        {{ windSpeed }}
+        {{ windSpeed || '--' }}
       </td>
     </template>
   </tr>

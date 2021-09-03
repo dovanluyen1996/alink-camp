@@ -34,15 +34,15 @@ export default {
   },
   computed: {
     image() {
-      return this.$helpers.getImage(`weathers/thunder/thunder_large_${this.getImageFileName()}.png`);
+      if (!this.forecast) return this.$helpers.getImage('weathers/thunder/thunder_large_none.png');
+
+      const image = this.$helpers.getImage(`weathers/thunder/thunder_large_${this.forecast.thunderIndex}.png`);
+      return image || this.$helpers.getImage('weathers/thunder/thunder_large_none.png');
     },
     label() {
+      if (!this.forecast) return '';
+
       return this.forecast.thunderIndex ? this.thunder_text[this.forecast.thunderIndex] : '';
-    },
-  },
-  methods: {
-    getImageFileName() {
-      return this.forecast.thunderIndex || 'none';
     },
   },
 };

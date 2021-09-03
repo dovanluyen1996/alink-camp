@@ -8,7 +8,7 @@
     </th>
     <template v-for="(windDirection, index) in windDirections">
       <td :key="index">
-        {{ windDirection }}
+        {{ windDirection || '--' }}
       </td>
     </template>
   </tr>

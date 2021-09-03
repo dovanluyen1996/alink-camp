@@ -5,7 +5,7 @@
         src="@/assets/images/weathers/sunrise.png"
         width="12px"
       >
-      {{ sunrise }}
+      {{ sunrise || '--:--' }}
     </v-ons-col>
     <v-ons-col>
       &nbsp;
@@ -13,7 +13,7 @@
         src="@/assets/images/weathers/sunset.png"
         width="12px"
       >
-      {{ sunset }}
+      {{ sunset || '--:--' }}
     </v-ons-col>
   </v-ons-row>
 </template>

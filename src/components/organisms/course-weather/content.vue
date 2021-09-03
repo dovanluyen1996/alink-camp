@@ -22,6 +22,9 @@
           :forecasts="Forecast10Days.items"
         />
       </template>
+      <template v-else>
+        天気情報がありません
+      </template>
     </div>
   </v-ons-card>
 </template>

@@ -10,7 +10,7 @@
       v-if="isShownName"
       class="weather-name"
     >
-      {{ weather.forecastTelop }}
+      {{ weather ? weather.forecastTelop : '' }}
     </div>
   </div>
 </template>
@@ -34,7 +34,10 @@ export default {
   },
   computed: {
     image() {
-      return this.$helpers.getImage(`weathers/weather/${this.weather.weatherImageName}`);
+      if (!this.weather) return this.$helpers.getImage('weathers/weather/00.png');
+
+      const image = this.$helpers.getImage(`weathers/weather/${this.weather.weatherImageName}`);
+      return image || this.$helpers.getImage('weathers/weather/00.png');
     },
     alt() {
       return (this.isShownName) ? null : this.weather.forecastTelop;

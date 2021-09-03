@@ -8,7 +8,7 @@
       width="26px"
     >
     <div class="dress-label">
-      {{ label }}
+      {{ forecast ? forecast.dressTelop : '' }}
     </div>
   </div>
 </template>
@@ -22,36 +22,12 @@ export default {
       required: true,
     },
   },
-  data() {
-    return {
-      dress_text: {
-        fine_1: '着脱可能な服',
-        fine_2: '上着が重宝',
-        fine_3: 'しっかり保温',
-        fine_4: '厳重に防寒を',
-        fine_5: '冬山の装備を',
-        rain_1: '急な雨に備えて',
-        rain_2: '急な雨に備えて',
-        rain_3: '急な雨に備えて',
-        rain_4: '雨具の下は暖かく',
-        rain_5: '冬山の装備を',
-      },
-    };
-  },
   computed: {
     image() {
-      return this.$helpers.getImage(`weathers/dress/dress_large_${this.getImageFileName()}.png`);
-    },
-    label() {
-      return this.dress_text[`${this.forecast.dressIndexWeather}_${this.forecast.dressIndex}`];
-    },
-  },
-  methods: {
-    getImageFileName() {
-      const isNone = !this.forecast.dressIndex || !this.forecast.dressIndexWeather;
-      const imageName = `${this.forecast.dressIndexWeather}_${this.forecast.dressIndex}`;
+      if (!this.forecast) return this.$helpers.getImage('weathers/dress/00.png');
 
-      return isNone ? 'none' : imageName;
+      const image = this.$helpers.getImage(`weathers/dress/${this.forecast.dressImageName}`);
+      return image || this.$helpers.getImage('weathers/dress/00.png');
     },
   },
 };
