@@ -50,10 +50,37 @@
 
       <error-dialog
         title="登録に失敗しました"
-        :is-visible="signUpErrorVisible"
+        :is-visible="otherErrorVisible"
         :error-message="errorMessage"
         @close="closeSignUpError"
       />
+
+      <v-ons-alert-dialog
+        :visible.sync="userExistsErrorVisible"
+      >
+        <template #title>
+          登録に失敗しました
+        </template>
+
+        指定されたメールアドレスのアカウントはすでに存在します。 <br>
+        アカウントを既にお持ちの方は引継ぎ画面からデータを引継ぐことができます。
+
+        <template #footer>
+          <v-ons-button
+            modifier="quiet quiet--dark"
+            class="cancel-btn"
+            @click="closeSignUpError"
+          >
+            キャンセル
+          </v-ons-button>
+          <v-ons-button
+            @click="goToSignIn"
+          >
+            移動する
+          </v-ons-button>
+        </template>
+      </v-ons-alert-dialog>
+
     </div>
   </v-ons-page>
 </template>
@@ -70,6 +97,7 @@ import ErrorDialog from '@/components/organisms/error-dialog';
 // pages
 import UerNewConfirmCode from '@/views/user/new/confirm-code';
 import ResendConfirmCode from '@/views/user/new/resend-confirm-code';
+import SignIn from '@/views/auth/sign-in';
 
 export default {
   name: 'UserNew',
@@ -105,6 +133,15 @@ export default {
         return '登録に失敗しました';
       }
     },
+    isUserExistsException() {
+      return this.error && this.error.code === 'UsernameExistsException';
+    },
+    userExistsErrorVisible() {
+      return this.signUpErrorVisible && this.isUserExistsException;
+    },
+    otherErrorVisible() {
+      return this.signUpErrorVisible && !this.isUserExistsException;
+    }
   },
   methods: {
     getConfirmCode() {
@@ -139,6 +176,10 @@ export default {
         },
       });
     },
+    goToSignIn() {
+      this.closeSignUpError();
+      this.$store.dispatch('appNavigator/push', SignIn);
+    },
     showSignUpError() {
       this.signUpErrorVisible = true;
     },
@@ -159,5 +200,11 @@ export default {
   margin-top: 25px;
   font-size: 18px;
   line-height: 18px;
+}
+
+.cancel-btn {
+  margin-top: 0;
+  font-size: 14px;
+  line-height: 36px;
 }
 </style>
