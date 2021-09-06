@@ -68,7 +68,6 @@
               利用を開始する<br>
               <span>（初月無料月額￥360）</span>
               <v-ons-button
-                v-if="isIos()"
                 modifier="rounded"
                 @click="restorePurchase()"
               >
@@ -184,9 +183,6 @@ export default {
 
     closePurchaseError() {
       this.checkPurchaseErrorVisible = false;
-    },
-    isIos() {
-      return window.device.platform === 'iOS';
     },
   },
 };
