@@ -55,7 +55,7 @@ export default {
       return this.$store.getters['models/userCourse/sortedInFuture'];
     },
     isLoading() {
-      return this.$store.getters['models/userCourse/isLoading'];
+      return this.$store.getters['models/userCourse/isLoading'] || this.$store.getters['models/weather/isLoading'];
     },
   },
   methods: {
