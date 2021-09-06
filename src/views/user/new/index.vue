@@ -8,22 +8,24 @@
           <validation-provider
             v-slot="{ errors }"
             rules="required|email"
-            name="メールアドレス"
+            name="登録したいメールアドレス"
           >
             <user-email
               v-model="user.email"
               :errors="errors"
+              title="登録したいメールアドレス"
             />
           </validation-provider>
           <validation-provider
             v-slot="{ errors }"
             rules="required|password"
-            name="パスワード"
+            name="登録したいパスワード"
           >
             <user-password
               v-model="user.password"
               :can-show-password="true"
               :errors="errors"
+              title="登録したいパスワード"
             />
           </validation-provider>
           <template #buttons>
@@ -44,7 +46,7 @@
         </base-form>
       </validation-observer>
 
-      <social-login title="他サービスで設定" />
+      <social-login title="他サービスで登録" />
 
       <error-dialog
         title="登録に失敗しました"

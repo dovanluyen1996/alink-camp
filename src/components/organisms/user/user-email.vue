@@ -2,7 +2,7 @@
   <div>
     <text-field
       v-model="inputedValue"
-      title="メールアドレス"
+      :title="title"
       :errors="errors"
     />
   </div>
@@ -26,6 +26,10 @@ export default {
       type: Array,
       default: () => [],
     },
+    title: {
+      type: String,
+      default: 'メールアドレス'
+    }
   },
   computed: {
     inputedValue: {

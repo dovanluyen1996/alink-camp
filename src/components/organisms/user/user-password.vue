@@ -3,7 +3,7 @@
     v-model="inputedValue"
     :can-show-password="canShowPassword"
     :help="help"
-    title="パスワード"
+    :title="title"
     :errors="errors"
   />
 </template>
@@ -34,6 +34,10 @@ export default {
       type: Array,
       default: () => [],
     },
+    title: {
+      type: String,
+      default: 'パスワード',
+    }
   },
   computed: {
     inputedValue: {
