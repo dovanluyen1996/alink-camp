@@ -81,6 +81,16 @@ export default {
         userCoursePlan => moment(userCoursePlan.targetAt).isSame(moment(), 'day'),
       ).length,
     ),
+    favoritedAndTodayPlan: (state, getters) => getters.todayPlan.filter(
+      userCourse => userCourse.isFavorited,
+    ),
+    favoritedOrTodayPlan: (state, getters) => {
+      let userCourses = getters.favoritedAndTodayPlan;
+      userCourses = userCourses.concat(getters.todayPlan);
+      userCourses = userCourses.concat(getters.favorited);
+
+      return Array.from(new Set(userCourses));
+    },
     isLoading: state => state.isLoading,
   },
   mutations: {

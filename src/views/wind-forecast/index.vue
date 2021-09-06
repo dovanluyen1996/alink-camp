@@ -61,11 +61,7 @@ export default {
       return this.userCourses.map(userCourse => userCourse.course);
     },
     userCourses() {
-      let userCourses = [];
-      userCourses = this.$store.getters['models/userCourse/todayPlan'];
-      userCourses = userCourses.concat(this.$store.getters['models/userCourse/favorited']);
-
-      return Array.from(new Set(userCourses));
+      return this.$store.getters['models/userCourse/favoritedOrTodayPlan'];
     },
   },
   methods: {
