@@ -39,6 +39,14 @@ extend('required-future-day', (value) => {
   return `${moment().format('YYYY/MM/DD')}より後を指定してください`;
 });
 
+extend('required-past-day', (value) => {
+  if (value && moment(value).isSameOrBefore(moment(), 'day')) {
+    return true;
+  }
+
+  return `${moment().format('YYYY/MM/DD')}より前を指定してください`;
+});
+
 extend('max', {
   ...max,
   message: '{_field_}は{length}文字以内で入力してください',
