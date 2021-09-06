@@ -7,8 +7,8 @@
     <div class="content">
       <no-data v-if="courses.length === 0">
         <p>
-          本日、予定されているゴルフコースがありません。<br>
-          コースの詳細ページより設定してください。<br>
+          本日、予定されているまたはお気に入りにしているコースがありません。<br>
+          コース検索より登録して下さい。<br>
         </p>
         <template #actions>
           <v-ons-button
@@ -23,6 +23,8 @@
       <div v-else>
         <course-list
           :courses="courses"
+          :user-courses="userCourses"
+          :set-favorite-marc="true"
           @click="goToShowWindForecast"
         >
           <template #right>
@@ -59,7 +61,11 @@ export default {
       return this.userCourses.map(userCourse => userCourse.course);
     },
     userCourses() {
-      return this.$store.getters['models/userCourse/todayPlan'];
+      let userCourses = [];
+      userCourses = this.$store.getters['models/userCourse/todayPlan'];
+      userCourses = userCourses.concat(this.$store.getters['models/userCourse/favorited']);
+
+      return Array.from(new Set(userCourses));
     },
   },
   methods: {

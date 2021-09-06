@@ -18,7 +18,17 @@
           >
             <div class="center">
               <div class="list-item__title">
-                {{ course.name }}
+                <span v-if="setFavoriteMarc">
+                  {{ course.name }}
+                  <img
+                    v-if="isCourseFavorite(course)"
+                    src="@/assets/images/user/user-course/favorite.png"
+                    width="18px"
+                  >
+                </span>
+                <span v-else>
+                  {{ course.name }}
+                </span>
                 <span
                   v-if="currentLocation"
                   class="course-distance"
@@ -52,6 +62,10 @@ export default {
       type: Array,
       default: () => [],
     },
+    userCourses: {
+      type: Array,
+      default: () => [],
+    },
     hasChevron: {
       type: Boolean,
       default: true,
@@ -59,6 +73,10 @@ export default {
     currentLocation: {
       type: Object,
       default: () => null,
+    },
+    setFavoriteMarc: {
+      type: Boolean,
+      default: false,
     },
   },
   data() {
@@ -107,6 +125,13 @@ export default {
     addViewedCourse(course) {
       // Get 閲覧履歴 from Local Storage and save to Store
       this.$store.dispatch('course/addViewedCourses', course);
+    },
+    isCourseFavorite(course) {
+      const targetUserCourse = this.userCourses.find(
+        userCourse => userCourse.courseId === course.id,
+      );
+
+      return targetUserCourse.isFavorited || false;
     },
   },
 };
