@@ -9,22 +9,25 @@
       <v-ons-list-item modifier="nodivider">
         <div class="center">
           <span class="list-item__title">
-            天気予報
+            天気の通知
             <v-ons-switch v-model="isReceivableWeatherForecast" />
           </span>
           <span class="list-item__subtitle">
-            ※予定日当日の予報が発表された際にご連絡します（最速で10日前となります）
+            ※予定日10日前より定期的に該当コースの天気を通知します
+          </span>
+          <span class="list-item__subtitle">
+            ※急な変化の際のキャンセルの判断にご利用ください
           </span>
         </div>
       </v-ons-list-item>
       <v-ons-list-item modifier="nodivider">
         <div class="center">
           <span class="list-item__title">
-            落雷、雨雲警報
+            雨雲の通知
             <v-ons-switch v-model="isReceivableWarning" />
           </span>
           <span class="list-item__subtitle">
-            ※予定日当日に該当コースで落雷警報が出た場合にご連絡します
+            ※予定日当日に該当コースに雨雲が近づいた場合に通知します
           </span>
         </div>
       </v-ons-list-item>
