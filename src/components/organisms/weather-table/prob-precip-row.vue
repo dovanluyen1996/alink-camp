@@ -4,7 +4,12 @@
       scope="row"
       :class="{th : colorTh}"
     >
-      降水確率
+      <span v-if="displayTenDaysWeather">
+        降水<br>確率
+      </span>
+      <span v-else>
+        降水確率
+      </span>
     </th>
     <template v-for="(probPrecip, index) in probPrecips">
       <td :key="index">
@@ -26,6 +31,10 @@ export default {
     colorTh: {
       type: Boolean,
       default: true,
+    },
+    displayTenDaysWeather: {
+      type: Boolean,
+      default: false,
     },
   },
 };

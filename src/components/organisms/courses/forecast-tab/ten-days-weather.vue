@@ -9,7 +9,10 @@
     <sticky-table class="ten-days-weather-table">
       <date-row :forecast-data="forecasts" />
       <weather-row :weathers="forecasts" />
-      <prob-precip-row :prob-precips="precips" />
+      <prob-precip-row
+        :prob-precips="precips"
+        :display-ten-days-weather="true"
+      />
       <temperature-row
         :forecast-data="forecasts"
         :is-highest="true"
