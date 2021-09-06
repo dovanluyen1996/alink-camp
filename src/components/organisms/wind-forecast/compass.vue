@@ -11,7 +11,8 @@
       />
     </div>
     <div class="wind-info">
-      風速：<span>{{ windSpeed }}</span> m/s <br>
+      風速：<span class="wind-speed">{{ windSpeed }}</span> m/s <br>
+      <span class="wind-speed-location">（高さ10m付近の風）</span>
     </div>
   </div>
 </template>
@@ -185,8 +186,13 @@ $speed-degrees: 0, 22.5, 45, 67.5, 90, 112.5, 135, 157.5, 180,
   margin-top: 30px;
   margin-bottom: 20px;
 
-  span {
+  .wind-speed {
     font-size: 40px;
+  }
+
+  .wind-speed-location {
+    font-size: 14px;
+    font-weight: normal;
   }
 }
 </style>
