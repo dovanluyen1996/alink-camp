@@ -1,6 +1,9 @@
 <template>
   <v-ons-row class="chart-header">
-    <v-ons-col class="chart-title">
+    <v-ons-col
+      class="chart-title"
+      width="110px"
+    >
       {{ title }}
     </v-ons-col>
     <v-ons-col class="chart-update">
