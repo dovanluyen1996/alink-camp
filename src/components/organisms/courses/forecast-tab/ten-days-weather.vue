@@ -11,7 +11,7 @@
       <weather-row :weathers="forecasts" />
       <prob-precip-row
         :prob-precips="precips"
-        :display-ten-days-weather="true"
+        :is-show-ten-days="true"
       />
       <temperature-row
         :forecast-data="forecasts"

@@ -4,7 +4,7 @@
       scope="row"
       :class="{th : colorTh}"
     >
-      <span v-if="displayTenDaysWeather">
+      <span v-if="isShowTenDays">
         降水<br>確率
       </span>
       <span v-else>
@@ -32,7 +32,7 @@ export default {
       type: Boolean,
       default: true,
     },
-    displayTenDaysWeather: {
+    isShowTenDays: {
       type: Boolean,
       default: false,
     },
