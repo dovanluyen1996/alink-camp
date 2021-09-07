@@ -102,7 +102,9 @@ export default {
       return this.$store.getters['models/userCourseResult/size'];
     },
     isLoading() {
-      return this.$store.getters['models/userCourse/isLoading'] || this.$store.getters['models/userCourseResult/isLoading'];
+      return this.$store.getters['models/userCourse/isLoading']
+        || this.$store.getters['models/userCourseResult/isLoading']
+        || this.$store.getters['models/weather/isLoading'];
     },
   },
   methods: {
