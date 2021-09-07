@@ -46,8 +46,13 @@ export default {
       return this.error.message ? this.error.message.split(',') : [];
     },
     errorTitle() {
-      if (this.error.message && this.error.message.includes('チケットが不足しています。')) return 'チケット不足';
-      return this.isMaintainanceError ? 'メンテナンス中' : 'エラー';
+      if (this.isMaintainanceError) {
+        return 'メンテナンス中';
+      } else if (this.isTicketNotEnoughError) {
+        return 'チケット不足';
+      } else {
+        return 'エラー';
+      }
     },
     isMaintainanceError() {
       return this.errorStatus === 503;
@@ -58,6 +63,9 @@ export default {
     isVersionInvalidError() {
       return this.errorStatus === 600;
     },
+    isTicketNotEnoughError() {
+      return this.error.message && this.error.message.includes('チケットが不足しています。');
+    }
   },
   watch: {
     error(newValue) {
