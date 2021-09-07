@@ -24,7 +24,7 @@
         <course-list
           :courses="courses"
           :user-courses="userCourses"
-          :set-favorite-marc="true"
+          :is-show-favorite-mark="true"
           @click="goToShowWindForecast"
         >
           <template #right>

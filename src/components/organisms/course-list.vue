@@ -18,7 +18,7 @@
           >
             <div class="center">
               <div class="list-item__title">
-                <span v-if="setFavoriteMarc">
+                <span v-if="isShowFavoriteMark">
                   {{ course.name }}
                   <img
                     v-if="isCourseFavorite(course)"
@@ -74,7 +74,7 @@ export default {
       type: Object,
       default: () => null,
     },
-    setFavoriteMarc: {
+    isShowFavoriteMark: {
       type: Boolean,
       default: false,
     },
@@ -131,7 +131,7 @@ export default {
         userCourse => userCourse.courseId === course.id,
       );
 
-      return targetUserCourse.isFavorited || false;
+      return targetUserCourse.isFavorited;
     },
   },
 };
