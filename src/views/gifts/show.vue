@@ -88,6 +88,24 @@
         </v-ons-button>
       </template>
     </v-ons-alert-dialog>
+
+    <v-ons-alert-dialog
+      :visible.sync="lackTicketVisible"
+    >
+      <template #title>
+        チケット不足
+      </template>
+
+      チケットが不足しています。アプリ起動でスタンプを集めて、チケットをぜひ手に入れましょう。
+
+      <template #footer>
+        <v-ons-button
+          @click="closeLackTicketMsg()"
+        >
+          OK
+        </v-ons-button>
+      </template>
+    </v-ons-alert-dialog>
   </v-ons-page>
 </template>
 
@@ -113,6 +131,7 @@ export default {
       confirmVisible: false,
       completedVisible: false,
       isButtonShown: true,
+      lackTicketMsgVisible: false,
     };
   },
   computed: {
@@ -145,6 +164,12 @@ export default {
       this.completedVisible = false;
       this.$store.dispatch('menuNavigator/pop');
     },
+    showLackTicketMsg() {
+      this.lackTicketMsgVisible = true;
+    },
+    closeLackTicketMsg() {
+      this.lackTicketMsgVisible = false;
+    },
     async submit() {
       const params = {
         giftId: this.giftId,
@@ -156,6 +181,7 @@ export default {
         this.showCompleted();
       } catch (e) {
         console.error(e);
+        this.showLackTicketMsg();
       }
     },
     onKeyBoardShow() {
