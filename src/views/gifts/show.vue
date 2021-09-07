@@ -145,12 +145,6 @@ export default {
       this.completedVisible = false;
       this.$store.dispatch('menuNavigator/pop');
     },
-    showLackTicketMsg() {
-      this.lackTicketMsgVisible = true;
-    },
-    closeLackTicketMsg() {
-      this.lackTicketMsgVisible = false;
-    },
     async submit() {
       const params = {
         giftId: this.giftId,
