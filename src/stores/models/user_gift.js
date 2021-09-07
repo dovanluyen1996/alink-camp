@@ -28,9 +28,7 @@ export default {
         context.commit('addUserGift', userGift);
         context.dispatch('models/currentUser/getUser', null, { root: true });
       } catch (error) {
-        if (error.message !== 'チケット枚数が足りません') {
-          context.commit('api/setError', error, { root: true });
-        }
+        context.commit('api/setError', error, { root: true });
         throw error;
       } finally {
         context.commit('setIsLoading', false);

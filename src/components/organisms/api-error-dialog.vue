@@ -46,6 +46,7 @@ export default {
       return this.error.message ? this.error.message.split(',') : [];
     },
     errorTitle() {
+      if (this.error.message && this.error.message.includes('チケットが不足しています。')) return 'チケット不足';
       return this.isMaintainanceError ? 'メンテナンス中' : 'エラー';
     },
     isMaintainanceError() {
