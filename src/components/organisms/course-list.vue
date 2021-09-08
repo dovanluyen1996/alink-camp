@@ -18,16 +18,13 @@
           >
             <div class="center">
               <div class="list-item__title">
-                <span v-if="isShowFavoriteMark">
+                <span>
                   {{ course.name }}
                   <img
-                    v-if="isCourseFavorite(course)"
+                    v-if="isShowFavoriteMark && isCourseFavorite(course)"
                     src="@/assets/images/user/user-course/favorite.png"
                     width="18px"
                   >
-                </span>
-                <span v-else>
-                  {{ course.name }}
                 </span>
                 <span
                   v-if="currentLocation"
