@@ -52,7 +52,7 @@ export default {
   data() {
     return {
       chartData: null,
-      xAxisStepSize: 45,
+      xAxisStepSize: 56,
       chartWidth: 800,
       blankLabel: 0,
       chartKey: 0,
@@ -161,11 +161,12 @@ export default {
 <style lang="scss" scoped>
 .user-course-result-chart-container {
   position: relative;
+  padding-left: 40px;
 
   canvas {
     position: absolute;
     top: 20px;
-    left: 0;
+    left: 40px;
     padding-bottom: 32px;
     pointer-events: none;
     background-color: #fff;

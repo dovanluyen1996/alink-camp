@@ -51,14 +51,23 @@ export default {
 @import '@/assets/scss/_variables.scss';
 
 .score-course-weather {
+  width: fit-content;
+  max-width: 100%;
   margin: 15px 0 20px;
   font-size: $font-size-small;
   text-align: center;
 
-  /deep/ tbody th {
-    width: 50px;
-    min-width: 50px;
-    background: #fff;
+  /deep/ {
+    table {
+      width: auto;
+      table-layout: fixed;
+    }
+
+    tbody th {
+      width: 50px;
+      min-width: 50px;
+      background: #fff;
+    }
   }
 }
 </style>
