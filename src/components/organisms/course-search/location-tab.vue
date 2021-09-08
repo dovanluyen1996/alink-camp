@@ -100,19 +100,27 @@ export default {
       distanceOptions: [
         {
           value: 0,
-          text: '〜50km',
+          text: '〜30km',
         },
         {
           value: 1,
-          text: '51km 〜 100km',
+          text: '〜50km',
         },
         {
           value: 2,
-          text: '101km 〜 200km',
+          text: '〜80km',
         },
         {
           value: 3,
-          text: '201km〜',
+          text: '〜100km',
+        },
+        {
+          value: 4,
+          text: '〜150km',
+        },
+        {
+          value: 5,
+          text: '〜200km',
         },
       ],
       distance: -1,
