@@ -166,6 +166,7 @@ export default {
     async updateUserCourseResult() {
       this.isButtonDisable = true;
 
+      if (!this.tempUserCourseResult.image) this.tempUserCourseResult.removeImage = true;
       if (this.userCourseResult.image === this.tempUserCourseResult.image) {
         delete this.tempUserCourseResult.image;
       }
