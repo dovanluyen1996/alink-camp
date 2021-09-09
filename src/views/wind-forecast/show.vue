@@ -12,6 +12,7 @@
           ref="compass"
           :forecast-wind="forecastWind"
           :compass-error-visible.sync="compassErrorVisible"
+          :compass-error-msg.sync="compassErrorMsg"
         />
         <div class="course-info">
           {{ course.name }}<br>
@@ -48,7 +49,7 @@
         エラー
       </template>
 
-      コンパスの利用ができません。端末の設定を確認してください
+      {{ compassErrorMsg }}
 
       <template #footer>
         <v-ons-button @click="closeCompassErrorDialog()">
@@ -79,6 +80,7 @@ export default {
       forecastWindErrorVisible: false,
       compassErrorVisible: false,
       forecastWindErrorErrorMsg: '',
+      compassErrorMsg: '',
     };
   },
   computed: {

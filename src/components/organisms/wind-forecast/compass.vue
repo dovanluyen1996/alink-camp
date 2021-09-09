@@ -33,6 +33,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    compassErrorMsg: {
+      type: String,
+      default: '',
+    }
   },
   data() {
     return {
@@ -101,8 +105,9 @@ export default {
     getCompassHeading(heading) {
       this.compassHeading = 360 - heading.magneticHeading;
     },
-    compassError() {
+    compassError(error) {
       this.$emit('update:compassErrorVisible', true);
+      this.$emit('update:compassErrorMsg', error);
     },
     calDelta(newValue, oldValue) {
       let delta = newValue - oldValue;
