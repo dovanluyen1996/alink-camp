@@ -2,8 +2,8 @@ import { extend } from 'vee-validate';
 import {
   required, email, max,
 } from 'vee-validate/dist/rules';
-import settings from '@/config/settings';
 import moment from 'moment';
+import settings from '@/config/settings';
 
 extend('required', {
   ...required,

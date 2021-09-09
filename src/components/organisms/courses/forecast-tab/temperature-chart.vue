@@ -3,7 +3,7 @@
     <chart-header
       title="気温（℃）"
       :updated-at="chartUpdatedAt"
-      :pointName="pointName"
+      :point-name="pointName"
     />
     <line-chart
       :chart-data="chartData"

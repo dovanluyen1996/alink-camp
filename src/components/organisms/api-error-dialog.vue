@@ -48,11 +48,10 @@ export default {
     errorTitle() {
       if (this.isMaintainanceError) {
         return 'メンテナンス中';
-      } else if (this.isTicketNotEnoughError) {
+      } if (this.isTicketNotEnoughError) {
         return 'チケット不足';
-      } else {
-        return 'エラー';
       }
+      return 'エラー';
     },
     isMaintainanceError() {
       return this.errorStatus === 503;
@@ -65,7 +64,7 @@ export default {
     },
     isTicketNotEnoughError() {
       return this.error.message && this.error.message.includes('チケットが不足しています。');
-    }
+    },
   },
   watch: {
     error(newValue) {

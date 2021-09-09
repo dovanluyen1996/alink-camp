@@ -3,6 +3,8 @@
 
 import Vue from 'vue';
 import { ValidationProvider, ValidationObserver } from 'vee-validate';
+import VueMoment from 'vue-moment';
+import moment from 'moment-timezone';
 import VueOnsen from '@/plugins/vue_onsenui_plugin';
 import '@/plugins/global_component_plugin';
 import '@/config/vee_validate';
@@ -12,8 +14,6 @@ import store from '@/stores';
 import App from '@/app';
 import cognito from '@/cognito';
 import helpers from '@/helpers/helper';
-import VueMoment from 'vue-moment';
-import moment from 'moment-timezone';
 import settings from '@/config/settings';
 
 moment.tz.setDefault('Asia/Tokyo');

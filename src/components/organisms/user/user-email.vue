@@ -28,8 +28,8 @@ export default {
     },
     title: {
       type: String,
-      default: 'メールアドレス'
-    }
+      default: 'メールアドレス',
+    },
   },
   computed: {
     inputedValue: {

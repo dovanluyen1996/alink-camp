@@ -3,7 +3,7 @@
     <chart-header
       title="降水量（mm）"
       :updated-at="chartUpdatedAt"
-      :pointName="pointName"
+      :point-name="pointName"
     />
     <bar-chart
       :chart-data="chartData"
