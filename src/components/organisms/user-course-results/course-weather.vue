@@ -2,7 +2,9 @@
   <sticky-table class="score-course-weather">
     <template #thead>
       <tr>
-        <th class="th" />
+        <th class="th">
+          日
+        </th>
         <th
           v-for="(weather, index) in weathers"
           :key="index"
