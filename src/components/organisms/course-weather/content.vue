@@ -23,7 +23,7 @@
         />
       </template>
       <template v-else>
-        <div class='no-forecast'>
+        <div class="no-forecast">
           表示できる天気情報がありません
         </div>
       </template>
