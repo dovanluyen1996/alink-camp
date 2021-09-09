@@ -131,8 +131,8 @@ export default {
 
 <style scoped lang="scss">
 .no-forecast {
-  text-align: center;
   margin: 2rem auto 1rem auto;
+  text-align: center;
 }
 
 .course-weather-detail {
