@@ -65,6 +65,9 @@ const initializeVue = () => {
     beforeCreate() {
       this.$ons.disableAutoStyling();
 
+      // Portrait without Upside Down setting
+      window.screen.orientation.lock('portrait-primary');
+
       if (this.$ons.platform.isIPhoneX()) {
         document.documentElement.setAttribute('onsflag-iphonex-portrait', '');
       }

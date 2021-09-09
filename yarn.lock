@@ -3204,15 +3204,15 @@ cordova-plugin-camera@^5.0.3:
   resolved "https://registry.yarnpkg.com/cordova-plugin-camera/-/cordova-plugin-camera-5.0.3.tgz#eb045f15ffa7722ffbec35a0cb32c1a0c5f91066"
   integrity sha512-CfoqP8+0XGm8wS0Ri6BCaTTq195Z7ny/tXrD14DsYyR7hHjf1nn+B643tzdYuPNVynxMLRQa1T8n1EkCxFyUog==
 
-cordova-plugin-device-orientation@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/cordova-plugin-device-orientation/-/cordova-plugin-device-orientation-2.0.1.tgz#149d51250defc309f0d03d306fe28e89881ba84d"
-  integrity sha1-FJ1RJQ3vwwnw0D0wb+KOiYgbqE0=
-
 cordova-plugin-customurlscheme@^5.0.2:
   version "5.0.2"
   resolved "https://registry.yarnpkg.com/cordova-plugin-customurlscheme/-/cordova-plugin-customurlscheme-5.0.2.tgz#c6246e469a2c23772ebfb545138354cb0dc1a683"
   integrity sha512-g139Av7iYD3xcSsCd5S6a7B7dp4GTqGYtvdhh44g4OS38+aX6XkC1lsCRmROuhLIs4fkwJqkrvxacH9H4U9Gsg==
+
+cordova-plugin-device-orientation@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/cordova-plugin-device-orientation/-/cordova-plugin-device-orientation-2.0.1.tgz#149d51250defc309f0d03d306fe28e89881ba84d"
+  integrity sha1-FJ1RJQ3vwwnw0D0wb+KOiYgbqE0=
 
 cordova-plugin-device@^2.0.3:
   version "2.0.3"
@@ -3248,6 +3248,11 @@ cordova-plugin-purchases@2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/cordova-plugin-purchases/-/cordova-plugin-purchases-2.1.1.tgz#8b064649d164562f555cea7eb646cb9cc1f46aad"
   integrity sha512-tRWxvTWZoMIRd8VOr0GdhU+GUk98mJgzPIDLpe0JOsFShqsus2dn6bp5LOxbZEghL3OP/jN/bP9L1N6A+1cgvg==
+
+cordova-plugin-screen-orientation@^3.0.2:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/cordova-plugin-screen-orientation/-/cordova-plugin-screen-orientation-3.0.2.tgz#81290a933cfe84d35482cfcb251c931cc7b71931"
+  integrity sha512-2w6CMC+HGvbhogJetalwGurL2Fx8DQCCPy3wlSZHN1/W7WoQ5n9ujVozcoKrY4VaagK6bxrPFih+ElkO8Uqfzg==
 
 cordova-plugin-splashscreen@^6.0.0:
   version "6.0.0"
