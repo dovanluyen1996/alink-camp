@@ -23,7 +23,9 @@
         />
       </template>
       <template v-else>
-        天気情報がありません
+        <div class='no-forecast'>
+          表示できる天気情報がありません
+        </div>
       </template>
     </div>
   </v-ons-card>
@@ -128,6 +130,11 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.no-forecast {
+  text-align: center;
+  margin: 2rem auto 1rem auto;
+}
+
 .course-weather-detail {
   display: flex;
   flex-wrap: wrap;

@@ -10,7 +10,7 @@
         class="course-weather-day-date"
         :class="[saturdayCol(forecast.date), sundayCol(forecast.date)]"
       >
-        {{ shortDate(forecast.date) }}
+        {{ !forecast.date ? '--/--' : shortDate(forecast.date) }}
       </div>
       <div class="course-weather-day-weather">
         <weather-image
