@@ -161,12 +161,12 @@ export default {
 <style lang="scss" scoped>
 .user-course-result-chart-container {
   position: relative;
-  padding-left: 40px;
+  padding-left: 20px;
 
   canvas {
     position: absolute;
     top: 20px;
-    left: 40px;
+    left: 20px;
     padding-bottom: 32px;
     pointer-events: none;
     background-color: #fff;

@@ -63,10 +63,17 @@ export default {
       table-layout: fixed;
     }
 
-    tbody th {
-      width: 50px;
-      min-width: 50px;
-      background: #fff;
+    tbody {
+      th {
+        width: 50px;
+        min-width: 50px;
+        background: #fff;
+      }
+
+      th:nth-child(1) {
+        width: 30px;
+        min-width: 30px;
+      }
     }
   }
 }
