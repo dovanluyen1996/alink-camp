@@ -148,34 +148,34 @@ export default {
   watch: {
     distance(value) {
       // 〜30km：upper_rad=&lower_rad=30
-      // 〜50km：upper_rad=31&lower_rad=50
-      // 〜80km：upper_rad=51&lower_rad=80
-      // 〜100km：upper_rad=81&lower_rad=100
-      // 〜150km：upper_rad=101&lower_rad=150
-      // 〜200km：upper_rad=151&lower_rad=200
+      // 〜50km：upper_rad=&lower_rad=50
+      // 〜80km：upper_rad=&lower_rad=80
+      // 〜100km：upper_rad=&lower_rad=100
+      // 〜150km：upper_rad=&lower_rad=150
+      // 〜200km：upper_rad=&lower_rad=200
       switch (value) {
       case 0:
         this.lower_rad = null;
         this.upper_rad = 30;
         break;
       case 1:
-        this.lower_rad = 31;
+        this.lower_rad = null;
         this.upper_rad = 50;
         break;
       case 2:
-        this.lower_rad = 51;
+        this.lower_rad = null;
         this.upper_rad = 80;
         break;
       case 3:
-        this.lower_rad = 81;
+        this.lower_rad = null;
         this.upper_rad = 100;
         break;
       case 4:
-        this.lower_rad = 101;
+        this.lower_rad = null;
         this.upper_rad = 150;
         break;
       case 5:
-        this.lower_rad = 151;
+        this.lower_rad = null;
         this.upper_rad = 200;
         break;
       default:
