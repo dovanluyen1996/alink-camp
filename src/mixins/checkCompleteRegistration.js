@@ -18,9 +18,8 @@ export default {
     async checkBeforeGoToAppTabbar() {
       await this.getCurrentUser();
 
-      await this.$helpers.callPushNotificationPermission();
       await this.$helpers.callGeolocationPermission();
-      await this.$helpers.createUserDevise();
+      await this.$helpers.callPushNotificationPermission();
       if (this.isNeedUpdateData) {
         this.$store.dispatch('appNavigator/push', UserDataPage);
       } else {
