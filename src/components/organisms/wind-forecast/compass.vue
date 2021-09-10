@@ -33,10 +33,6 @@ export default {
       type: Boolean,
       default: false,
     },
-    compassErrorMsg: {
-      type: String,
-      default: '',
-    }
   },
   data() {
     return {
@@ -89,25 +85,88 @@ export default {
     },
   },
   methods: {
-    startWatch() {
+    getCompassHeadingForAndroid(event) {
+      if (event.webkitCompassHeading) {
+        // some devices don't understand "alpha" (especially IOS devices)
+        this.compassHeading = 360 - event.webkitCompassHeading;
+      } else {
+        this.compassHeading = 360 - this.headingForAndroidBy(event.alpha, event.beta, event.gamma);
+      }
+    },
+    headingForAndroidBy(alpha, beta, gamma) {
+      // Convert degrees to radians
+      const alphaRad = alpha * (Math.PI / 180);
+      const betaRad = beta * (Math.PI / 180);
+      const gammaRad = gamma * (Math.PI / 180);
+
+      // Calculate equation components
+      const cA = Math.cos(alphaRad);
+      const sA = Math.sin(alphaRad);
+      const sB = Math.sin(betaRad);
+      const cG = Math.cos(gammaRad);
+      const sG = Math.sin(gammaRad);
+
+      // Calculate A, B, C rotation components
+      const rA = (-cA * sG) - (sA * sB * cG);
+      const rB = (-sA * sG) + (cA * sB * cG);
+
+      // Calculate compass heading
+      let compassHeading = Math.atan(rA / rB);
+
+      // Convert from half unit circle to whole unit circle
+      if (rB < 0) {
+        compassHeading += Math.PI;
+      } else if (rA < 0) {
+        compassHeading += 2 * Math.PI;
+      }
+
+      // Convert radians to degrees
+      compassHeading *= 180 / Math.PI;
+
+      return compassHeading;
+    },
+    startWatchForIOS() {
       const options = { frequency: 500 };
 
       if (!navigator.compass) this.compassError();
       this.watchId = navigator.compass.watchHeading(
-        this.getCompassHeading,
+        this.getCompassHeadingForIOS,
         this.compassError,
         options,
       );
     },
-    stopWatch() {
-      navigator.compass.clearWatch(this.watchId);
+    startWatchForAndroid() {
+      DeviceOrientationEvent.requestPermission()
+        .then((permissionState) => {
+          if (permissionState === 'granted') {
+            window.addEventListener('deviceorientation', this.getCompassHeadingForAndroid);
+          } else {
+            this.compassError();
+          }
+        })
+        .catch(() => {
+          this.compassError();
+        });
     },
-    getCompassHeading(heading) {
+    startWatch() {
+      if (this.$ons.platform.isIOS()) {
+        this.startWatchForIOS();
+      } else if (this.$ons.platform.isAndroid()) {
+        this.startWatchForAndroid();
+      }
+    },
+    stopWatch() {
+      if (this.$ons.platform.isIOS()) {
+        navigator.compass.clearWatch(this.watchId);
+      } else {
+        window.removeEventListener('deviceorientation', this.getCompassHeadingForAndroid);
+      }
+    },
+    getCompassHeadingForIOS(heading) {
       this.compassHeading = 360 - heading.magneticHeading;
     },
-    compassError(error) {
+    compassError() {
       this.$emit('update:compassErrorVisible', true);
-      this.$emit('update:compassErrorMsg', error);
     },
     calDelta(newValue, oldValue) {
       let delta = newValue - oldValue;
