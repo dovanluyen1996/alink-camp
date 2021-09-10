@@ -13,7 +13,7 @@
     </th>
     <template v-for="(probPrecip, index) in probPrecips">
       <td :key="index">
-        {{ !probPrecip ? '--' : `${probPrecip}%` }}
+        {{ probPrecip ? `${probPrecip}%` : '--' }}
       </td>
     </template>
   </tr>
