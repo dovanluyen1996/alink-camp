@@ -101,8 +101,10 @@ export default {
   // PUSH通知の権限確認
   callPushNotificationPermission() {
     if (window.device.platform !== 'browser') {
-      window.FirebasePlugin.hasPermission((hasPermission) => {
-        if (!hasPermission) {
+      window.FirebasePlugin.hasPermission(async(hasPermission) => {
+        if (hasPermission) {
+          await this.createUserDevise();
+        } else {
           window.FirebasePlugin.grantPermission(async(permissionGranted) => {
             // 選択直後では設定がまだ反映されていないため、3秒遅延させる（ユーザの操作に影響はない）
             if (permissionGranted) {

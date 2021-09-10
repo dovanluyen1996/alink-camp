@@ -20,7 +20,6 @@ export default {
 
       await this.$helpers.callGeolocationPermission();
       await this.$helpers.callPushNotificationPermission();
-      await this.$helpers.createUserDevise();
       if (this.isNeedUpdateData) {
         this.$store.dispatch('appNavigator/push', UserDataPage);
       } else {
