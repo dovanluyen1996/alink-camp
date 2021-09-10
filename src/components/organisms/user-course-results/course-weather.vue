@@ -10,12 +10,12 @@
           :key="index"
           scope="col"
           class="th"
+          :class="[saturdayCol(weather.date), sundayCol(weather.date)]"
         >
           <span
             v-if="weather"
-            :class="[saturdayCol(weather.date), sundayCol(weather.date)]"
           >
-            {{ weather.date | moment('M/D') }}
+            {{ displayDate(weather.date) }}
           </span>
         </th>
       </tr>
@@ -52,11 +52,14 @@ export default {
     },
   },
   methods: {
+    displayDate(date) {
+      return this.$helpers.toWeekDayString(date);
+    },
     saturdayCol(date) {
-      return this.$helpers.isSaturday(date) ? 'score-course-weather__sarturday' : '';
+      return this.$helpers.isSaturday(date) ? 'date-row__sarturday' : '';
     },
     sundayCol(date) {
-      return this.$helpers.isSunday(date) ? 'score-course-weather__sunday' : '';
+      return this.$helpers.isSunday(date) ? 'date-row__sunday' : '';
     },
   },
 };
@@ -72,26 +75,10 @@ export default {
   font-size: $font-size-small;
   text-align: center;
 
-  &__sarturday {
-    color: #113095;
-  }
-  
-  &__sunday {
-    color: #9d1d1d;
-  }
-
   /deep/ {
     table {
       width: auto;
       table-layout: fixed;
-
-      .th {
-        background: #fff;
-      }
-
-      .th:nth-child(1) {
-        background: $color-th;
-      }
     }
 
     tbody {
@@ -109,6 +96,26 @@ export default {
         background: $color-th;
       }
     }
+  }
+}
+
+.th {
+  background: #fff;
+}
+
+.th:nth-child(1) {
+  background: $color-th;
+}
+
+.date-row {
+  &__sarturday {
+    color: #113095;
+    background-color: #e3f6ff;
+  }
+
+  &__sunday {
+    color: #9d1d1d;
+    background-color: #ffeaea;
   }
 }
 </style>
