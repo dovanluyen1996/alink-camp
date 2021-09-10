@@ -103,10 +103,10 @@ export default {
     if (window.device.platform !== 'browser') {
       window.FirebasePlugin.hasPermission((hasPermission) => {
         if (!hasPermission) {
-          window.FirebasePlugin.grantPermission(async (permissionGranted) => {
-            // 許可した
+          window.FirebasePlugin.grantPermission(async(permissionGranted) => {
+            // 選択直後では設定がまだ反映されていないため、3秒遅延させる（ユーザの操作に影響はない）
             if (permissionGranted) {
-              setTimeout(async () => {
+              setTimeout(async() => {
                 await this.createUserDevise();
               }, 3000);
             }
