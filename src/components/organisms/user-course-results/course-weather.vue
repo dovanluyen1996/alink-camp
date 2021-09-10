@@ -11,7 +11,12 @@
           scope="col"
           class="th"
         >
-          <span v-if="weather">{{ weather.date | moment('M/D') }}</span>
+          <span
+            v-if="weather"
+            :class="[saturdayCol(weather.date), sundayCol(weather.date)]"
+          >
+            {{ weather.date | moment('M/D') }}
+          </span>
         </th>
       </tr>
     </template>
@@ -46,6 +51,14 @@ export default {
       required: true,
     },
   },
+  methods: {
+    saturdayCol(date) {
+      return this.$helpers.isSaturday(date) ? 'score-course-weather__sarturday' : '';
+    },
+    sundayCol(date) {
+      return this.$helpers.isSunday(date) ? 'score-course-weather__sunday' : '';
+    },
+  },
 };
 </script>
 
@@ -59,22 +72,41 @@ export default {
   font-size: $font-size-small;
   text-align: center;
 
+  &__sarturday {
+    color: #113095;
+  }
+  
+  &__sunday {
+    color: #9d1d1d;
+  }
+
   /deep/ {
     table {
       width: auto;
       table-layout: fixed;
+
+      .th {
+        background: #fff;
+      }
+
+      .th:nth-child(1) {
+        background: $color-th;
+      }
     }
 
     tbody {
       th {
         width: 50px;
         min-width: 50px;
-        background: #fff;
       }
 
       th:nth-child(1) {
         width: 30px;
         min-width: 30px;
+      }
+
+      td:nth-child(1) {
+        background: $color-th;
       }
     }
   }
