@@ -120,7 +120,7 @@ export default {
 
       switch (this.error.code) {
       case 'NotAuthorizedException':
-        return '今のパスワードと一致しません';
+        return '現在利用しているパスワードと一致しません';
       case 'LimitExceededException':
         return '試行回数の制限を超えました。しばらくしてから試してください';
       default:
