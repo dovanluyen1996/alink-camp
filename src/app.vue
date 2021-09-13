@@ -21,15 +21,11 @@ export default {
   },
   methods: {
     async onResume() {
-      console.log('BuildInfo.debug');
-      console.log(BuildInfo.debug);
       if (!BuildInfo.debug) this.checkChargedStatus();
     },
     async checkChargedStatus() {
       Purchases.getPurchaserInfo(
         async(purchaserInfo) => {
-          console.log('purchaserInfo.entitlements');
-          console.log(purchaserInfo.entitlements);
           const isCharged = Object.entries(purchaserInfo.entitlements.active).length > 0;
 
           if (!isCharged) await this.$store.dispatch('appNavigator/push', PurchaseInformation);
