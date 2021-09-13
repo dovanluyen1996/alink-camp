@@ -21,21 +21,23 @@ export default {
   },
   methods: {
     async onResume() {
-      if (!BuildInfo.debug && !this.checkChargedStatus()) {
-        await this.$store.dispatch('appNavigator/push', PurchaseInformation);
-      }
+      console.log('BuildInfo.debug');
+      console.log(BuildInfo.debug);
+      if (!BuildInfo.debug) this.checkChargedStatus();
     },
     async checkChargedStatus() {
       Purchases.getPurchaserInfo(
         async(purchaserInfo) => {
+          console.log('purchaserInfo.entitlements');
+          console.log(purchaserInfo.entitlements);
           const isCharged = Object.entries(purchaserInfo.entitlements.active).length > 0;
-          this.checkChargedStatusComplete(isCharged);
 
+          if (!isCharged) await this.$store.dispatch('appNavigator/push', PurchaseInformation);
         },
         () => {
           // 全画面共通のエラーメッセージを表示したい
           this.checkChargedStatusErrorVisible = true;
-          this.checkChargedStatusComplete(false);
+          this.$store.dispatch('appNavigator/push', PurchaseInformation);
         },
       );
     },
