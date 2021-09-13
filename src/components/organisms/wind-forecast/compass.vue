@@ -136,17 +136,7 @@ export default {
       );
     },
     startWatchForAndroid() {
-      DeviceOrientationEvent.requestPermission()
-        .then((permissionState) => {
-          if (permissionState === 'granted') {
-            window.addEventListener('deviceorientation', this.getCompassHeadingForAndroid);
-          } else {
-            this.compassError();
-          }
-        })
-        .catch(() => {
-          this.compassError();
-        });
+      window.addEventListener('deviceorientation', this.getCompassHeadingForAndroid);
     },
     startWatch() {
       if (this.$ons.platform.isIOS()) {
