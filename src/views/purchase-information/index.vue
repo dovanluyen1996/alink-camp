@@ -142,7 +142,7 @@ export default {
             if (!userCancelled) {
               this.checkPurchaseErrorVisible = true;
               const RestorableErrorCode = 6;
-              this.errorMessage = error.code === RestorableErrorCode ? 'すでに購入済みのアプリです。課金情報を復元してください。' : '';
+              this.errorMessage = error.code === RestorableErrorCode ? 'すでに購入済みのアプリです。課金情報を復元してください' : '';
             }
             this.isLoading = false;
           });
@@ -165,13 +165,13 @@ export default {
             this.purchaseComplete();
           } else {
             this.checkPurchaseErrorVisible = true;
-            this.errorMessage = '課金状態を復元できません。';
+            this.errorMessage = '課金状態を復元できません';
           }
           this.isLoading = false;
         },
         () => {
           this.checkPurchaseErrorVisible = true;
-          this.errorMessage = '課金状態を復元できません。';
+          this.errorMessage = '課金状態を復元できません';
           this.isLoading = false;
         },
       );
