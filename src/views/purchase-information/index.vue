@@ -204,6 +204,7 @@ export default {
 
     span:first-child {
       text-decoration: underline;
+      text-underline-offset: 4px;
     }
 
     span:last-of-type {
