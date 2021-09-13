@@ -2,6 +2,12 @@
   <div>
     <app-navigator />
     <api-error-dialog />
+
+    <error-dialog
+      title="課金エラーが発生しました"
+      :is-visible="checkChargedStatusErrorVisible"
+      @close="closeCheckChargedStatusError"
+    />
   </div>
 </template>
 
@@ -10,11 +16,19 @@ import AppNavigator from '@/views/app-navigator';
 import ApiErrorDialog from '@/components/organisms/api-error-dialog';
 import PurchaseInformation from '@/views/purchase-information';
 
+import ErrorDialog from '@/components/organisms/error-dialog';
+
 export default {
   name: 'App',
   components: {
     AppNavigator,
     ApiErrorDialog,
+    ErrorDialog,
+  },
+  data() {
+    return {
+      checkChargedStatusErrorVisible: false,
+    };
   },
   mounted() {
     document.addEventListener('resume', this.onResume, false);
@@ -36,6 +50,9 @@ export default {
           this.$store.dispatch('appNavigator/push', PurchaseInformation);
         },
       );
+    },
+    closeCheckChargedStatusError() {
+      this.checkChargedStatusErrorVisible = false;
     },
   },
 };
