@@ -27,9 +27,11 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import '@/assets/scss/onsen-override/base-layout/_variables.scss';
+
 .loading {
-  position: absolute;
-  top: 0;
+  position: fixed;
+  top: $--toolbar-height;
   right: 0;
   bottom: 0;
   left: 0;

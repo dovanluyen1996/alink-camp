@@ -1,0 +1,8 @@
+@import "../_variables.scss";
+@import "./_variables.scss";
+
+@media (orientation: portrait) {
+  html[onsflag-iphonex-portrait] .loading {
+    top: $--iphonex-safe-area-inset-top-portrait + $--toolbar-height;
+  }
+}
