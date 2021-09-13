@@ -65,8 +65,8 @@
               class="purchase__content"
               @click.self="callToPurchase()"
             >
-              利用を開始する<br>
-              <span>（初月無料月額￥360）</span>
+              <span>利用を開始する</span><br>
+              <span>（初回7日間無料月額￥360）</span>
               <v-ons-button
                 modifier="rounded"
                 @click="restorePurchase()"
@@ -202,7 +202,11 @@ export default {
     text-align: center;
     background-color: $color-orange;
 
-    span {
+    span:first-child {
+      text-decoration: underline;
+    }
+
+    span:last-of-type {
       font-size: 20px;
     }
   }
