@@ -32,12 +32,12 @@ export default {
         async(purchaserInfo) => {
           const isCharged = Object.entries(purchaserInfo.entitlements.active).length > 0;
 
-          if (!isCharged) await this.$store.dispatch('appNavigator/push', PurchaseInformation);
+          if (!isCharged) await this.$store.dispatch('appNavigator/reset', PurchaseInformation);
         },
         () => {
           // 全画面共通のエラーメッセージを表示したい
           this.checkChargedStatusErrorVisible = true;
-          this.$store.dispatch('appNavigator/push', PurchaseInformation);
+          this.$store.dispatch('appNavigator/reset', PurchaseInformation);
         },
       );
     },
