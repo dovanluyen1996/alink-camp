@@ -47,6 +47,14 @@ extend('required-past-day', (value) => {
   return `${moment().format('YYYY/MM/DD')}より前を指定してください`;
 });
 
+extend('required-one-year-later', (value) => {
+  if (value && moment(value).isSameOrBefore(moment().add(1, 'year'), 'day')) {
+    return true;
+  }
+
+  return `${moment().add(1, 'year').format('YYYY/MM/DD')}より前を指定してください`;
+});
+
 extend('max', {
   ...max,
   message: '{_field_}は{length}文字以内で入力してください',

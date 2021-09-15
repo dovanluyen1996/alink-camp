@@ -6,7 +6,7 @@
 
     <validation-provider
       v-slot="{ errors }"
-      rules="required|required-future-day"
+      rules="required|required-future-day|required-one-year-later"
       name="日にち"
     >
       <custom-datetime-input
