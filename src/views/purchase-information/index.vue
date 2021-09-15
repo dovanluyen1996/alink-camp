@@ -63,13 +63,13 @@
           <div class="purchase">
             <div
               class="purchase__content"
-              @click.self="callToPurchase()"
+              @click="callToPurchase()"
             >
               <span>利用を開始する</span><br>
               <span>（初回7日間無料月額￥360）</span>
               <v-ons-button
                 modifier="rounded"
-                @click="restorePurchase()"
+                @click.stop="restorePurchase()"
               >
                 以前購入した方はこちらから復元
               </v-ons-button>
