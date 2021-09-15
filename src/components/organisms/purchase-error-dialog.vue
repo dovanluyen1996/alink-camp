@@ -23,8 +23,11 @@ export default {
   mounted() {
     document.addEventListener('resume', this.onResume, false);
   },
+  beforeDestroy() {
+    document.removeEventListener('resume', this.onResume);
+  },
   methods: {
-    async onResume() {
+    onResume() {
       if (!BuildInfo.debug) this.checkChargedStatus();
     },
     async checkChargedStatus() {
