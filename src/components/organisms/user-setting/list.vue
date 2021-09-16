@@ -31,6 +31,14 @@
           </span>
         </div>
       </v-ons-list-item>
+
+      <v-ons-list-item v-show="!hasPermission">
+        <div class="center">
+          <span class="list-item__alert">
+            PUSH通知の許可がされていません。スマートフォンの設定からゴルフ天気を選択し、通知を許可してください
+          </span>
+        </div>
+      </v-ons-list-item>
     </v-ons-list>
   </card-with-title>
 </template>
@@ -42,6 +50,11 @@ export default {
   name: 'UserSettingList',
   components: {
     CardWithTitle,
+  },
+  data() {
+    return {
+      hasPermission: true,
+    };
   },
   computed: {
     userSetting() {
@@ -71,6 +84,7 @@ export default {
   },
   async created() {
     await this.getUserSetting();
+    await this.checkPermission();
   },
   methods: {
     async getUserSetting() {
@@ -81,6 +95,13 @@ export default {
         await this.$store.dispatch('models/userSetting/updateUserSetting', this.userSetting);
       } catch (e) {
         this.getUserSetting();
+      }
+    },
+    async checkPermission() {
+      if (window.device.platform !== 'browser') {
+        window.FirebasePlugin.hasPermission(async(hasPermission) => {
+          this.hasPermission = hasPermission;
+        });
       }
     },
   },
@@ -114,6 +135,11 @@ export default {
   &__subtitle {
     font-size: $font-size-small;
     color: $color-subtext;
+  }
+
+  &__alert {
+    font-size: $font-size-default;
+    color: $color-error-msg;
   }
 }
 
