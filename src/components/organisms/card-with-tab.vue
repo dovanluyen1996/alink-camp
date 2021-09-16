@@ -37,14 +37,26 @@ export default {
       type: Array,
       default: () => [],
     },
+    screen: {
+      type: String,
+      default: '',
+    }
   },
   computed: {
     activeIndex: {
       get() {
-        return this.$store.getters['components/cardWithTab/activeIndex'];
+        if (this.screen === 'SearchCourseCondition') {
+          return this.$store.getters['course/searchConditionActiveIndex'];
+        } else {
+          return this.$store.getters['components/cardWithTab/activeIndex'];
+        }
       },
       set(index) {
-        this.$store.commit('components/cardWithTab/setActiveIndex', index);
+        if (this.screen === 'SearchCourseCondition') {
+          this.$store.commit('course/setSearchConditionActiveIndex', index);
+        } else {
+          this.$store.commit('components/cardWithTab/setActiveIndex', index);
+        }
       },
     },
   },

@@ -9,10 +9,12 @@ export default {
     choosenCourse: {},
     isLoading: false,
     searched: false,
+    searchConditionActiveIndex: 0,
   },
   getters: {
     viewedCourses: state => state.viewedCourses,
     choosenCourse: state => state.choosenCourse,
+    searchConditionActiveIndex: state => state.searchConditionActiveIndex,
   },
   mutations: {
     setViewedCourses(state, courses) {
@@ -46,6 +48,9 @@ export default {
     },
     setSearched(state, searched) {
       state.searched = searched;
+    },
+    setSearchConditionActiveIndex(state, activeIndex) {
+      state.searchConditionActiveIndex = activeIndex;
     },
   },
   actions: {

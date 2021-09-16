@@ -7,6 +7,7 @@
         <card-with-tab
           ref="tabContents"
           :tabs="tabs"
+          :screen="'SearchCourseCondition'"
         />
         <template #footer>
           <v-ons-button
@@ -55,7 +56,7 @@ export default {
   },
   computed: {
     activeIndex() {
-      return this.$store.state.components.cardWithTab.activeIndex;
+      return this.$store.getters['course/searchConditionActiveIndex'];
     },
     searched() {
       return this.$store.state.course.searched;
