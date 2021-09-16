@@ -86,12 +86,7 @@ export default {
       return this.$store.state.appTabbar.lastVisitedAt;
     },
     isMaximumStampMessageVisible() {
-      if (this.userStamp.increase === 0
-        && this.userStamp.number === settings.views.loginCampaign.num_change_to_ticket) {
-        return true;
-      }
-
-      return false;
+      return this.userStamp.number === settings.views.loginCampaign.num_change_to_ticket;
     },
   },
   watch: {
