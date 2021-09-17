@@ -22,8 +22,8 @@ export default {
   },
   app_store: {
     // TODO: Change real link
-    ios: 'http://sample-ios.com',
-    android: 'http://sample-android.com',
+    ios: 'https://itunes.apple.com/jp/app/id1584902038?mt=8',
+    android: 'https://play.google.com/store/apps/details?id=jp.or.jwa.tenkijp.golf',
   },
   locationServices: {
     timeout: 30000,
