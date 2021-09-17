@@ -7,7 +7,7 @@
         <card-with-tab
           ref="tabContents"
           :tabs="tabs"
-          :screen="'SearchCourseCondition'"
+          :isSearchCourseCondition="true"
         />
         <template #footer>
           <v-ons-button

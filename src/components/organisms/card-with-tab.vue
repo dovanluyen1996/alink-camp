@@ -37,22 +37,22 @@ export default {
       type: Array,
       default: () => [],
     },
-    screen: {
-      type: String,
-      default: '',
+    isSearchCourseCondition: {
+      type: Boolean,
+      default: false,
     }
   },
   computed: {
     activeIndex: {
       get() {
-        if (this.screen === 'SearchCourseCondition') {
+        if (this.isSearchCourseCondition) {
           return this.$store.getters['course/searchConditionActiveIndex'];
         } else {
           return this.$store.getters['components/cardWithTab/activeIndex'];
         }
       },
       set(index) {
-        if (this.screen === 'SearchCourseCondition') {
+        if (this.isSearchCourseCondition) {
           this.$store.commit('course/setSearchConditionActiveIndex', index);
         } else {
           this.$store.commit('components/cardWithTab/setActiveIndex', index);
