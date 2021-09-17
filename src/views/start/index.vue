@@ -1,6 +1,7 @@
 <template>
   <v-ons-page>
     <div class="content start-page">
+      <loading :visible="isLoading" />
       <div class="start-page__top">
         <img
           src="@/assets/images/start/logo.png"
@@ -56,6 +57,7 @@ export default {
       error: null,
       checkChargedStatusErrorVisible: false,
       appVersion: '',
+      isLoading: false,
     };
   },
   async created() {
@@ -130,7 +132,12 @@ export default {
           this.checkBeforeGoToAppTabbar();
         }
       } else {
-        this.$store.dispatch('appNavigator/push', PurchaseInformation);
+        this.isLoading = true;
+
+        setTimeout(() => {
+          this.isLoading = false;
+          this.$store.dispatch('appNavigator/replace', PurchaseInformation);
+        }, 1000);
       }
     },
     closeCheckChargedStatusError() {
