@@ -197,7 +197,7 @@ export default {
   border-top: 4px solid #fff;
 
   &__content {
-    padding: 20px 20px 0px;
+    padding: 20px 20px 1px;
     font-size: 30px;
     font-weight: 600;
     color: #fff;
@@ -215,7 +215,7 @@ export default {
   }
 
   &__action {
-    padding: 0px 25px 20px;
+    padding: 1px 25px 20px;
     font-size: 30px;
     font-weight: 600;
     color: #fff;
