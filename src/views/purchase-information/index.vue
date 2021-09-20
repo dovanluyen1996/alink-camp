@@ -67,9 +67,11 @@
             >
               <span>利用を開始する</span><br>
               <span>（初回7日間無料月額￥360）</span>
+            </div>
+            <div class="purchase__action">
               <v-ons-button
                 modifier="rounded"
-                @click.stop="restorePurchase()"
+                @click="restorePurchase()"
               >
                 以前購入した方はこちらから復元
               </v-ons-button>
@@ -195,7 +197,7 @@ export default {
   border-top: 4px solid #fff;
 
   &__content {
-    padding: 20px 25px;
+    padding: 20px 20px 0px;
     font-size: 30px;
     font-weight: 600;
     color: #fff;
@@ -210,6 +212,15 @@ export default {
     span:last-of-type {
       font-size: 20px;
     }
+  }
+
+  &__action {
+    padding: 0px 25px 20px;
+    font-size: 30px;
+    font-weight: 600;
+    color: #fff;
+    text-align: center;
+    background-color: $color-orange;
   }
 }
 
