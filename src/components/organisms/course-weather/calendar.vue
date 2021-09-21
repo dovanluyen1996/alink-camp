@@ -56,10 +56,10 @@ export default {
       return this.$helpers.toShortString(date);
     },
     saturdayCol(date) {
-      return this.$helpers.isSaturday(date) ? 'course-weather-day-date__sarturday' : '';
+      return this.$helpers.isSaturday(date) ? 'date-row__sarturday' : '';
     },
     sundayCol(date) {
-      return this.$helpers.isSunday(date) ? 'course-weather-day-date__sunday' : '';
+      return this.$helpers.isSunday(date) ? 'date-row__sunday' : '';
     },
   },
 };
@@ -91,22 +91,6 @@ export default {
   }
 }
 
-.course-weather-day-date {
-  @include colum-style;
-
-  height: 24px;
-  font-size: $font-size-small;
-  background: $color-th;
-
-  &__sarturday {
-    color: #113095;
-  }
-
-  &__sunday {
-    color: #9d1d1d;
-  }
-}
-
 .course-weather-day-weather {
   @include colum-style;
 
@@ -135,5 +119,17 @@ export default {
 
 .temperature-low {
   color: $color-temperature-low;
+}
+
+.date-row {
+  &__sarturday {
+    color: #113095;
+    background-color: #e3f6ff;
+  }
+
+  &__sunday {
+    color: #9d1d1d;
+    background-color: #ffeaea;
+  }
 }
 </style>
