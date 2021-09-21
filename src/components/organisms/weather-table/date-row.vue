@@ -7,15 +7,22 @@
       日
     </th>
     <template v-for="(date, index) in dates">
-      <!-- eslint-disable vue/no-v-html -->
-      <td
-        :key="index"
-        :date-day="date"
-        :class="[saturdayCol(date), sundayCol(date)]"
-        v-html="displayDate(date)"
-      >
-      <!-- eslint-enable vue/no-v-html -->
-      </td>
+      <template v-if="date">
+        <!-- eslint-disable vue/no-v-html -->
+        <td
+          :key="index"
+          :date-day="date"
+          :class="[saturdayCol(date), sundayCol(date)]"
+          v-html="displayDate(date)"
+        >
+        <!-- eslint-enable vue/no-v-html -->
+        </td>
+      </template>
+      <template v-else>
+        <td>
+          {{ '--' }}
+        </td>
+      </template>
     </template>
   </tr>
 </template>
@@ -33,7 +40,7 @@ export default {
   },
   computed: {
     dates() {
-      return this.forecastData.map(data => data.date);
+      return this.forecastData.map(data => data ? data.date : null);
     },
   },
   methods: {

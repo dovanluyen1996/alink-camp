@@ -8,24 +8,7 @@
     </th>
     <template v-for="(weather, index) in weathers">
       <td
-        v-if="!weather"
-        :key="index"
-      >
-        <label>No Data</label>
-      </td>
-
-      <td
-        v-else-if="weather.weatherImageName"
-        :key="index"
-      >
-        <weather-image
-          :weather="weather"
-          image-width="40px"
-        />
-      </td>
-
-      <td
-        v-else-if="weather.isSunrise"
+        v-if="weather.isSunrise"
         :key="index"
         :rowspan="sunsRowspan"
       >
@@ -48,6 +31,16 @@
           <img src="@/assets/images/weathers/sunset.png">
           <div>日の入</div>
         </div>
+      </td>
+
+      <td
+        v-else
+        :key="index"
+      >
+        <weather-image
+          :weather="weather"
+          image-width="40px"
+        />
       </td>
     </template>
   </tr>

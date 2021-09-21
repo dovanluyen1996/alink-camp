@@ -12,9 +12,17 @@
               :user-course-results="topTwentyUserCourseResults"
             />
 
-            <user-course-results-course-weather
-              :weathers="weathers"
-            />
+            <template v-if="weathers.filter(Boolean).length != 0">
+              <user-course-results-course-weather
+                :weathers="weathers"
+              />
+            </template>
+
+            <template v-else>
+              <div class="no-forecast">
+                表示できる天気情報がありません
+              </div>
+            </template>
 
             <user-course-results-list
               :user-course-results="userCourseResults"
@@ -141,3 +149,10 @@ export default {
   },
 };
 </script>
+
+<style scoped lang="scss">
+.no-forecast {
+  margin: 2rem auto 2rem auto;
+  text-align: center;
+}
+</style>
