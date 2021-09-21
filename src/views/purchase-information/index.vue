@@ -54,7 +54,7 @@
               alt="purchase-point-1"
             >
           </template>
-          雨雲の接近や落雷の危険性が高まった場合もPUSH通知でご案内します。
+          予定日の天気予報やプレイ中に雨雲の接近の危険性が高まった場合もPUSH通知でご案内します。
         </purchase-point>
 
         <using-note />
