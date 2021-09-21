@@ -32,7 +32,7 @@
         </div>
       </v-ons-list-item>
 
-      <v-ons-list-item v-show="!hasPermission">
+      <v-ons-list-item v-show="isErrorPushPermisionVisible">
         <div class="center">
           <span class="list-item__alert">
             PUSH通知の許可がされていません。スマートフォンの設定からゴルフ天気を選択し、通知を許可してください
@@ -53,7 +53,7 @@ export default {
   },
   data() {
     return {
-      hasPermission: true,
+      isErrorPushPermisionVisible: false,
     };
   },
   computed: {
@@ -100,7 +100,11 @@ export default {
     async checkPermission() {
       if (window.device.platform !== 'browser') {
         window.FirebasePlugin.hasPermission(async(hasPermission) => {
-          this.hasPermission = hasPermission;
+          if (hasPermission) {
+            this.isErrorPushPermisionVisible = false;
+          } else {
+            this.isErrorPushPermisionVisible = true;
+          }
         });
       }
     },
