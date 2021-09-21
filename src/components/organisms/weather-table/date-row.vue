@@ -19,8 +19,8 @@
         </td>
       </template>
       <template v-else>
-        <td>
-          {{ '--' }}
+        <td :key="index">
+          --
         </td>
       </template>
     </template>
@@ -40,7 +40,7 @@ export default {
   },
   computed: {
     dates() {
-      return this.forecastData.map(data => data ? data.date : null);
+      return this.forecastData.map(data => (data ? data.date : null));
     },
   },
   methods: {
