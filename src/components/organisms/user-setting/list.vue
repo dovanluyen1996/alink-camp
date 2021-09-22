@@ -13,7 +13,7 @@
             <v-ons-switch v-model="isReceivableWeatherForecast" />
           </span>
           <span class="list-item__subtitle">
-            ※予定日10日前より定期的に該当コースの天気を通知します
+            ※予定日3日前より定期的に該当コースの天気を通知します
           </span>
           <span class="list-item__subtitle">
             ※急な変化の際のキャンセルの判断にご利用ください
