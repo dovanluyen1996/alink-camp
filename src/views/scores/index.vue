@@ -13,7 +13,7 @@
             modifier="cta"
             @click="goToCourseSearch"
           >
-            早速コース検索
+            コース検索
           </v-ons-button>
         </template>
       </no-data>
