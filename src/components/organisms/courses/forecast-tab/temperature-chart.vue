@@ -5,11 +5,20 @@
       :updated-at="chartUpdatedAt"
       :point-name="pointName"
     />
-    <line-chart
-      :chart-data="chartData"
-      :options="options"
-      :height="200"
-    />
+
+    <template v-if="isPresent(chartData)">
+      <line-chart
+        :chart-data="chartData"
+        :options="options"
+        :height="200"
+      />
+    </template>
+
+    <template v-else>
+      <div class="no-forecast">
+        表示できる天気情報がありません
+      </div>
+    </template>
   </div>
 </template>
 
@@ -118,6 +127,17 @@ export default {
       const forecastMonthlyTemp = await this.$store.dispatch('models/weather/getForecastMonthlyTemp', { course_id: this.course.id });
       return forecastMonthlyTemp;
     },
+    isPresent(forecastObject) {
+      console.log(forecastObject);
+      return this.$helpers.isPresentObject(forecastObject);
+    },
   },
 };
 </script>
+
+<style scoped lang="scss">
+.no-forecast {
+  margin: 2rem auto 2rem auto;
+  text-align: center;
+}
+</style>

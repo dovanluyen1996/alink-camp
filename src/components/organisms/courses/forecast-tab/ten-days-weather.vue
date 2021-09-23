@@ -6,24 +6,32 @@
 
     <slot name="switcher" />
 
-    <sticky-table class="ten-days-weather-table">
-      <date-row :forecast-data="forecasts" />
-      <weather-row :weathers="forecasts" />
-      <prob-precip-row
-        :prob-precips="precips"
-        :is-show-ten-days="true"
-      />
-      <temperature-row
-        :forecast-data="forecasts"
-        :is-highest="true"
-      />
-      <temperature-row
-        :forecast-data="forecasts"
-        :is-lowest="true"
-      />
-      <wind-direction-row :wind-directions="windDirections" />
-      <wind-speed-row :wind-speeds="windSpeeds" />
-    </sticky-table>
+    <template v-if="isPresent(forecasts)">
+      <sticky-table class="ten-days-weather-table">
+        <date-row :forecast-data="forecasts" />
+        <weather-row :weathers="forecasts" />
+        <prob-precip-row
+          :prob-precips="precips"
+          :is-show-ten-days="true"
+        />
+        <temperature-row
+          :forecast-data="forecasts"
+          :is-highest="true"
+        />
+        <temperature-row
+          :forecast-data="forecasts"
+          :is-lowest="true"
+        />
+        <wind-direction-row :wind-directions="windDirections" />
+        <wind-speed-row :wind-speeds="windSpeeds" />
+      </sticky-table>
+    </template>
+
+    <template v-else>
+      <div class="no-forecast">
+        表示できる天気情報がありません
+      </div>
+    </template>
   </div>
 </template>
 
@@ -107,6 +115,10 @@ export default {
       const forecast10Days = await this.$store.dispatch('models/weather/getForecast10Days', { course_id: this.course.id });
       return forecast10Days;
     },
+    isPresent(forecastObject) {
+      console.log(forecastObject);
+      return this.$helpers.isPresentObject(forecastObject);
+    },
   },
 };
 </script>
@@ -125,5 +137,10 @@ export default {
   .th {
     white-space: nowrap;
   }
+}
+
+.no-forecast {
+  margin: 2rem auto 2rem auto;
+  text-align: center;
 }
 </style>

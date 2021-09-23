@@ -1,16 +1,26 @@
 <template>
-  <div class="prob-precip-chart-container">
-    <chart-header
-      title="降水量（mm）"
-      :updated-at="chartUpdatedAt"
-      :point-name="pointName"
-    />
-    <bar-chart
-      :chart-data="chartData"
-      :options="options"
-      :height="160"
-    />
-  </div>
+    <div class="prob-precip-chart-container">
+      <chart-header
+        title="降水量（mm）"
+        :updated-at="chartUpdatedAt"
+        :point-name="pointName"
+      />
+
+      <template v-if="isPresent(chartData)">
+        <bar-chart
+          :chart-data="chartData"
+          :options="options"
+          :height="160"
+        />
+      </template>
+
+      <template v-else>
+        <div class="no-forecast">
+          表示できる天気情報がありません
+        </div>
+      </template>
+    </div>
+
 </template>
 
 <script>
@@ -123,6 +133,17 @@ export default {
       const forecastMonthlyPrecip = await this.$store.dispatch('models/weather/getForecastMonthlyPrecip', { course_id: this.course.id });
       return forecastMonthlyPrecip;
     },
+    isPresent(forecastObject) {
+      console.log(forecastObject);
+      return this.$helpers.isPresentObject(forecastObject);
+    },
   },
 };
 </script>
+
+<style scoped lang="scss">
+.no-forecast {
+  margin: 2rem auto 2rem auto;
+  text-align: center;
+}
+</style>
