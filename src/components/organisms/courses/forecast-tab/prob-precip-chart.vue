@@ -1,26 +1,25 @@
 <template>
-    <div class="prob-precip-chart-container">
-      <chart-header
-        title="降水量（mm）"
-        :updated-at="chartUpdatedAt"
-        :point-name="pointName"
+  <div class="prob-precip-chart-container">
+    <chart-header
+      title="降水量（mm）"
+      :updated-at="chartUpdatedAt"
+      :point-name="pointName"
+    />
+
+    <template v-if="isPresent(chartData)">
+      <bar-chart
+        :chart-data="chartData"
+        :options="options"
+        :height="160"
       />
+    </template>
 
-      <template v-if="isPresent(chartData)">
-        <bar-chart
-          :chart-data="chartData"
-          :options="options"
-          :height="160"
-        />
-      </template>
-
-      <template v-else>
-        <div class="no-forecast">
-          表示できる天気情報がありません
-        </div>
-      </template>
-    </div>
-
+    <template v-else>
+      <div class="no-forecast">
+        表示できる天気情報がありません
+      </div>
+    </template>
+  </div>
 </template>
 
 <script>

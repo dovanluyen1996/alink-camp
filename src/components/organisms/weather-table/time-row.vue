@@ -30,20 +30,19 @@ export default {
   },
   computed: {
     times() {
-      return this.forecastData.map(data => data ? data.hour : null);
+      return this.forecastData.map(data => (data ? data.hour : null));
     },
   },
   methods: {
     timeLabel(time, index) {
       if (!time) {
         if (this.forecastData[index].isSunrise || this.forecastData[index].isSunset) {
-          return "--:--";
-        } else {
-          return "--";
+          return '--:--';
         }
+        return '--';
       }
 
-      return time
+      return time;
     },
   },
 };

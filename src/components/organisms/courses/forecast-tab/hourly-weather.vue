@@ -118,7 +118,9 @@ export default {
 
       let forecastData = [];
       this.forecastHourly.items.forEach((forecastHourly) => {
-        forecastData = forecastData.concat(forecastHourly.hourlyData.filter(hourlyData => hourlyData.hour));
+        forecastData = forecastData.concat(forecastHourly
+          .hourlyData
+          .filter(hourlyData => hourlyData.hour));
       });
 
       return forecastData;
@@ -197,7 +199,7 @@ export default {
       return this.$helpers.isPresentObject(forecastObject);
     },
     spanCount(forecast) {
-      let count = forecast.hourlyData.filter(data => data.hour).length
+      let count = forecast.hourlyData.filter(data => data.hour).length;
       if (forecast.sunrise) count += 1;
       if (forecast.sunset) count += 1;
 
