@@ -1,7 +1,7 @@
 <template>
   <div class="hourly-weather">
     <div class="card__title card__title--center">
-      向こう一か月のお天気予測
+      1ヶ月先までの天気傾向
     </div>
 
     <temperature-chart />
