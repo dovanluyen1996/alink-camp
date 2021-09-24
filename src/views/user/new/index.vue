@@ -63,20 +63,13 @@
         </template>
 
         指定されたメールアドレスのアカウントはすでに存在します。 <br>
-        アカウントを既にお持ちの方は引継ぎ画面からデータを引継ぐことができます。
+        既に登録のあるメールアドレスです。認証コードを再送していただくか、アプリデータを引き継ぐよりログインをお試しください
 
         <template #footer>
           <v-ons-button
-            modifier="quiet quiet--dark"
-            class="cancel-btn"
             @click="closeSignUpError"
           >
-            キャンセル
-          </v-ons-button>
-          <v-ons-button
-            @click="goToSignIn"
-          >
-            移動する
+            OK
           </v-ons-button>
         </template>
       </v-ons-alert-dialog>
