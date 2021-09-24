@@ -62,7 +62,19 @@ export default {
           display: false,
         },
         tooltips: {
+          callbacks: {
+            label: ((_tooltipItems, data) => {
+              const pattingScore = data['datasets'][0]['data'][data.index];
+              const totalScore = data['datasets'][1]['data'][data.index] + pattingScore;
+              return '総打数: ' + totalScore;
+            }),
+            afterLabel: ((_tooltipItems, data) => {
+              const pattingScore = data['datasets'][0]['data'][data.index];
+              return '内パター数: ' + pattingScore;
+            }),
+          },
           xAlign: 'left',
+          displayColors: false,
         },
         layout: {
           padding: {
@@ -121,7 +133,7 @@ export default {
       return xAxis;
     },
     getTotalScores(data) {
-      return data.map(item => item.totalScore);
+      return data.map(item => item.totalScore - item.pattingScore);
     },
     getPattingScores(data) {
       return data.map(item => item.pattingScore);
