@@ -85,20 +85,42 @@ export default {
     },
   },
   methods: {
-    startWatch() {
+    getCompassHeadingForAndroid(event) {
+      if (event.webkitCompassHeading) {
+        // some devices don't understand "alpha" (especially IOS devices)
+        this.compassHeading = 360 - event.webkitCompassHeading;
+      } else {
+        this.compassHeading = event.alpha - 240;
+      }
+    },
+    startWatchForIOS() {
       const options = { frequency: 500 };
 
       if (!navigator.compass) this.compassError();
       this.watchId = navigator.compass.watchHeading(
-        this.getCompassHeading,
+        this.getCompassHeadingForIOS,
         this.compassError,
         options,
       );
     },
-    stopWatch() {
-      navigator.compass.clearWatch(this.watchId);
+    startWatchForAndroid() {
+      window.addEventListener('deviceorientation', this.getCompassHeadingForAndroid);
     },
-    getCompassHeading(heading) {
+    startWatch() {
+      if (this.$ons.platform.isIOS()) {
+        this.startWatchForIOS();
+      } else if (this.$ons.platform.isAndroid()) {
+        this.startWatchForAndroid();
+      }
+    },
+    stopWatch() {
+      if (this.$ons.platform.isIOS()) {
+        navigator.compass.clearWatch(this.watchId);
+      } else {
+        window.removeEventListener('deviceorientation', this.getCompassHeadingForAndroid);
+      }
+    },
+    getCompassHeadingForIOS(heading) {
       this.compassHeading = 360 - heading.magneticHeading;
     },
     compassError() {
