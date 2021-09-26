@@ -24,6 +24,9 @@
     <platform name="android">
         <allow-intent href="market:*" />
         <preference name="AndroidXEnabled" value="true"/>
+        <edit-config file="AndroidManifest.xml" mode="merge" target="/manifest/application">
+            <application android:label="ゴルフ天気" />
+        </edit-config>
         <edit-config file="AndroidManifest.xml" mode="merge" target="/manifest/application/activity">
             <activity android:label="ゴルフ天気" />
         </edit-config>
