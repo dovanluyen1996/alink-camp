@@ -12,7 +12,7 @@
               :user-course-results="topTwentyUserCourseResults"
             />
 
-            <template v-if="weathers.filter(Boolean).length != 0">
+            <template v-if="isWeatherPresent()">
               <user-course-results-course-weather
                 :weathers="weathers"
               />
@@ -145,6 +145,9 @@ export default {
           userCourse: this.userCourse,
         },
       });
+    },
+    isWeatherPresent() {
+      return this.weathers.filter(weather => weather.date).length != 0;
     },
   },
 };
