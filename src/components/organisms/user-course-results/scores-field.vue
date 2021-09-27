@@ -25,6 +25,7 @@
                 maxlength="3"
                 oninput="value = value.replace(/[^0-9]+/i,'');"
                 class="total-score-input"
+                @keyup.enter="hideSoftKeyboard"
               />
             </v-ons-col>
             <v-ons-col class="score-unit">
@@ -58,6 +59,7 @@
               maxlength="3"
               oninput="value = value.replace(/[^0-9]+/i,'');"
               class="patting-score-input"
+              @keyup.enter="hideSoftKeyboard"
             />
           </v-ons-col>
           <v-ons-col class="score-unit">
@@ -106,6 +108,11 @@ export default {
       },
     },
   },
+  methods: {
+    hideSoftKeyboard() {
+      window.Keyboard.hide();
+    }
+  }
 };
 </script>
 
