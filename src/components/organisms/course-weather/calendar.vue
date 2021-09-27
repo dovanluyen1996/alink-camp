@@ -91,6 +91,13 @@ export default {
   }
 }
 
+.course-weather-day-date {
+  @include colum-style;
+  height: 24px;
+  font-size: $font-size-small;
+  background: $color-th;
+}
+
 .course-weather-day-weather {
   @include colum-style;
 
