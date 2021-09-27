@@ -11,7 +11,10 @@
           src="@/assets/images/guidances/push-noti.png"
           width="118px"
         >
-        <p>PUSH通知をONにすることで、急な雨へのPUSH通知や、最適なゴルフコースの検索に活用いただけます。</p>
+        <p>
+          PUSH通知をONにすることで、ゴルフプレイ中に雨雲が近づいた場合や、
+          予定日設定したゴルフ場の天気予報を定期的にお知らせいたします。
+        </p>
 
         <template #footer>
           <v-ons-button
