@@ -72,7 +72,7 @@ export default {
     return {
       user: {
         gender: -1,
-        birthdate: '',
+        birthdate: '1980-01-01',
         prefecture: -1,
       },
     };
