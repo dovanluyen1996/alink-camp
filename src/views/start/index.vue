@@ -126,9 +126,6 @@ export default {
       await this.checkChargedStatusComplete(isCharged);
     },
     async checkChargedStatusComplete(isCharged) {
-      console.log('------ 課金結果: ');
-      console.log(isCharged);
-      console.log('------ /課金結果: ');
       this.isLoading = true;
 
       setTimeout(async() => {
