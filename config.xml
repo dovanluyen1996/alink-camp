@@ -40,6 +40,16 @@
           </intent-filter>
         </config-file>
 
+        <resource-file src="res/icon/android/drawable-mdpi/notification_icon.png" target="app/src/main/res/drawable-mdpi/notification_icon.png" />
+        <resource-file src="res/icon/android/drawable-hdpi/notification_icon.png" target="app/src/main/res/drawable-hdpi/notification_icon.png" />
+        <resource-file src="res/icon/android/drawable-xhdpi/notification_icon.png" target="app/src/main/res/drawable-xhdpi/notification_icon.png" />
+        <resource-file src="res/icon/android/drawable-xxhdpi/notification_icon.png" target="app/src/main/res/drawable-xxhdpi/notification_icon.png" />
+        <resource-file src="res/icon/android/drawable-xxxhdpi/notification_icon.png" target="app/src/main/res/drawable-xxxhdpi/notification_icon.png" />
+
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+          <meta-data android:name="com.google.firebase.messaging.default_notification_icon" android:resource="@drawable/notification_icon" />
+        </config-file>
+
         <icon src="res/icon/android/ldpi.png" density="ldpi" />
         <icon src="res/icon/android/mdpi.png" density="mdpi" />
         <icon src="res/icon/android/hdpi.png" density="hdpi" />
