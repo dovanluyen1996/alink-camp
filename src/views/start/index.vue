@@ -126,19 +126,23 @@ export default {
       await this.checkChargedStatusComplete(isCharged);
     },
     async checkChargedStatusComplete(isCharged) {
-      if (isCharged) {
-        const isAuthenticated = await this.isAuthenticated();
-        if (isAuthenticated) {
-          this.checkBeforeGoToAppTabbar();
-        }
-      } else {
-        this.isLoading = true;
+      console.log('------ 課金結果: ');
+      console.log(isCharged);
+      console.log('------ /課金結果: ');
+      this.isLoading = true;
 
-        setTimeout(() => {
-          this.isLoading = false;
+      setTimeout(async() => {
+        this.isLoading = false;
+
+        if (isCharged) {
+          const isAuthenticated = await this.isAuthenticated();
+          if (isAuthenticated) {
+            this.checkBeforeGoToAppTabbar();
+          }
+        } else {
           this.$store.dispatch('appNavigator/replace', PurchaseInformation);
-        }, 1000);
-      }
+        }
+      }, 1000);
     },
     closeCheckChargedStatusError() {
       this.checkChargedStatusErrorVisible = false;
