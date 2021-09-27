@@ -63,13 +63,17 @@ export default {
     },
     compassHeadingStyle() {
       return {
-        transform: `rotate(${this.compassHeadingDeg}deg)`,
+        transform: `rotate(${this.degree}deg)`,
       };
     },
     windDirectionStyle() {
       return {
-        transform: `rotate(${this.windDirectionDeg}deg)`,
+        transform: `rotate(${this.degree}deg)`,
       };
+    },
+    degree() {
+      if (!this.compassHeadingDeg) return 0;
+      return 360 - this.compassHeadingDeg;
     },
   },
   watch: {
@@ -88,8 +92,10 @@ export default {
     getCompassHeadingForAndroid(event) {
       if (event.webkitCompassHeading) {
         // some devices don't understand "alpha" (especially IOS devices)
-        this.compassHeading = 360 - event.webkitCompassHeading;
+        this.compassHeading = event.webkitCompassHeading;
       } else {
+        // TODO: https://qiita.com/umi_kappa/items/38499c03792b2aac49ad
+        // 固定値240はおかしいので修正する
         this.compassHeading = event.alpha - 240;
       }
     },
@@ -121,13 +127,14 @@ export default {
       }
     },
     getCompassHeadingForIOS(heading) {
-      this.compassHeading = 360 - heading.magneticHeading;
+      this.compassHeading = heading.magneticHeading;
     },
     compassError() {
       this.$emit('update:compassErrorVisible', true);
     },
     calDelta(newValue, oldValue) {
       let delta = newValue - oldValue;
+      // ここも変更する
       if (delta > 180) {
         delta -= 360;
       } else if (delta < -180) {
