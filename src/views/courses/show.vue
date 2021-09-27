@@ -30,6 +30,8 @@
       <div class="course-show">
         <card-with-tab
           :tabs="tabs"
+          :active-index="activeIndexTab"
+          @switchTab="switchTab"
         />
       </div>
     </div>
@@ -106,6 +108,12 @@ export default {
         || this.$store.getters['models/userCourseResult/isLoading']
         || this.$store.getters['models/weather/isLoading'];
     },
+    activeIndexTab() {
+      return this.$store.state.components.cardWithTab.showCourseActiveIndex;
+    },
+  },
+  created() {
+    this.resetCardWithTab();
   },
   methods: {
     goToCoursePlans() {
@@ -183,6 +191,12 @@ export default {
     async getUserCourseResults() {
       await this.getUserCourses();
       if (this.userCourse) await this.$store.dispatch('models/userCourseResult/getUserCourseResults', this.userCourse.id);
+    },
+    switchTab(index) {
+      this.$store.commit('components/cardWithTab/setShowCourseActiveIndex', index);
+    },
+    resetCardWithTab() {
+      this.$store.commit('components/cardWithTab/resetShowCourseActiveIndex');
     },
   },
 };

@@ -37,35 +37,14 @@ export default {
       type: Array,
       default: () => [],
     },
-    isSearchCourseCondition: {
-      type: Boolean,
-      default: false,
-    }
-  },
-  computed: {
     activeIndex: {
-      get() {
-        if (this.isSearchCourseCondition) {
-          return this.$store.getters['course/searchConditionActiveIndex'];
-        } else {
-          return this.$store.getters['components/cardWithTab/activeIndex'];
-        }
-      },
-      set(index) {
-        if (this.isSearchCourseCondition) {
-          this.$store.commit('course/setSearchConditionActiveIndex', index);
-        } else {
-          this.$store.commit('components/cardWithTab/setActiveIndex', index);
-        }
-      },
+      type: Number,
+      default: 0,
     },
-  },
-  created() {
-    this.$store.commit('components/cardWithTab/resetActiveIndex');
   },
   methods: {
     switchTab(index) {
-      this.activeIndex = index;
+      this.$emit('switchTab', index);
     },
     isActive(index) {
       return index === this.activeIndex;

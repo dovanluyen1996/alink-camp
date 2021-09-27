@@ -6,6 +6,8 @@
       <card-with-tab
         :tabs="tabs"
         fullscreen
+        :active-index="activeIndexTab"
+        @switchTab="switchTab"
       />
     </div>
   </v-ons-page>
@@ -40,12 +42,24 @@ export default {
       ],
     };
   },
+  computed: {
+    activeIndexTab() {
+      return this.$store.state.components.cardWithTab.aboutSubscriptionActiveIndex;
+    },
+  },
   created() {
+    this.resetCardWithTab();
     this.getSubscription();
   },
   methods: {
     async getSubscription() {
       await this.$store.dispatch('models/subscription/getSubscription');
+    },
+    switchTab(index) {
+      this.$store.commit('components/cardWithTab/setAboutSubscriptionActiveIndex', index);
+    },
+    resetCardWithTab() {
+      this.$store.commit('components/cardWithTab/resetAboutSubscriptionActiveIndex');
     },
   },
 };

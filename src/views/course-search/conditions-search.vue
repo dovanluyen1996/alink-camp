@@ -7,7 +7,8 @@
         <card-with-tab
           ref="tabContents"
           :tabs="tabs"
-          :isSearchCourseCondition="true"
+          :active-index="activeIndexTab"
+          @switchTab="switchTab"
         />
         <template #footer>
           <v-ons-button
@@ -55,12 +56,15 @@ export default {
     };
   },
   computed: {
-    activeIndex() {
-      return this.$store.getters['course/searchConditionActiveIndex'];
-    },
     searched() {
       return this.$store.state.course.searched;
     },
+    activeIndexTab() {
+      return this.$store.state.components.cardWithTab.searchCourseActiveIndex;
+    },
+  },
+  created() {
+    this.resetCardWithTab();
   },
   methods: {
     show() {
@@ -68,6 +72,12 @@ export default {
     },
     search() {
       this.$store.commit('course/setSearched', true);
+    },
+    switchTab(index) {
+      this.$store.commit('components/cardWithTab/setSearchCourseActiveIndex', index);
+    },
+    resetCardWithTab() {
+      this.$store.commit('components/cardWithTab/resetSearchCourseActiveIndex');
     },
   },
 };

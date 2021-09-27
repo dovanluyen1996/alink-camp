@@ -142,7 +142,7 @@ export default {
       return this.$store.state.course.searched;
     },
     activeIndex() {
-      return this.$store.getters['course/searchConditionActiveIndex'];
+      return this.$store.state.components.cardWithTab.searchCourseActiveIndex;
     },
   },
   watch: {
