@@ -59,3 +59,11 @@ extend('max', {
   ...max,
   message: '{_field_}は{length}文字以内で入力してください',
 });
+
+extend('lteq', {
+  params: ['max'],
+  validate(value, { max }) {
+    return value <= max;
+  },
+  message: '内パター数は総打数以下にしてください',
+});

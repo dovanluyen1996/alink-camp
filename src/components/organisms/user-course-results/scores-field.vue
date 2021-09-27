@@ -41,31 +41,42 @@
         </validation-provider>
       </v-ons-col>
       <v-ons-col width="45%">
-        <v-ons-row
-          vertical-align="bottom"
-          class="patting-score-field"
+        <validation-provider
+          v-slot="{ errors }"
+          rules="lteq:@合計打数"
+          name="内パター"
         >
-          <v-ons-col
-            width="100%"
-            class="patting-score-label"
+          <v-ons-row
+            vertical-align="bottom"
+            class="patting-score-field"
           >
-            内パター（任意）
-          </v-ons-col>
-          <v-ons-col>
-            <v-ons-input
-              v-model="inputedPattingScoreValue"
-              type="text"
-              inputmode="numeric"
-              maxlength="3"
-              oninput="value = value.replace(/[^0-9]+/i,'');"
-              class="patting-score-input"
-              @keyup.enter="hideSoftKeyboard"
-            />
-          </v-ons-col>
-          <v-ons-col class="score-unit">
-            打
-          </v-ons-col>
-        </v-ons-row>
+            <v-ons-col
+              width="100%"
+              class="patting-score-label"
+            >
+              内パター（任意）
+            </v-ons-col>
+            <v-ons-col>
+              <v-ons-input
+                v-model="inputedPattingScoreValue"
+                type="text"
+                inputmode="numeric"
+                maxlength="3"
+                oninput="value = value.replace(/[^0-9]+/i,'');"
+                class="patting-score-input"
+              />
+            </v-ons-col>
+            <v-ons-col class="score-unit">
+              打
+            </v-ons-col>
+          </v-ons-row>
+          <div
+            v-if="errors.length"
+            class="input-error-msg"
+          >
+            {{ errors[0] }}
+          </div>
+        </validation-provider>
       </v-ons-col>
     </v-ons-row>
   </base-field>
