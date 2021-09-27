@@ -60,10 +60,10 @@ extend('max', {
   message: '{_field_}は{length}文字以内で入力してください',
 });
 
-extend('lteq', {
+extend('lteq-total-score', {
   params: ['max'],
-  validate(value, { max }) {
-    return value <= max;
+  validate(value, { maxValue }) {
+    return value <= maxValue;
   },
   message: '内パター数は総打数以下にしてください',
 });

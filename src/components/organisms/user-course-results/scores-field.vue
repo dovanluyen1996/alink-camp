@@ -43,7 +43,7 @@
       <v-ons-col width="45%">
         <validation-provider
           v-slot="{ errors }"
-          rules="lteq:@合計打数"
+          rules="lteq-total-score:@合計打数"
           name="内パター"
         >
           <v-ons-row
