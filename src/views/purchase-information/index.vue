@@ -193,6 +193,10 @@ export default {
 <style lang="scss" scoped>
 @import '@/assets/scss/_variables.scss';
 
+/deep/ .loading {
+  top: 0 !important;
+}
+
 .purchase {
   border-top: 4px solid #fff;
 
