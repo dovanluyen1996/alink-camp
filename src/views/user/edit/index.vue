@@ -28,7 +28,7 @@
           </validation-provider>
           <validation-provider
             v-slot="{ errors }"
-            rules="required"
+            rules="required|required-past-day"
             name="生年月日"
           >
             <user-birthdate
