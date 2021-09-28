@@ -12,8 +12,7 @@
     </div>
     <div class="wind-info">
       風速：<span class="wind-speed">{{ windSpeed }}</span> m/s <br>
-      <span class="wind-speed-location">（高さ10m付近の風）</span> <br>
-      compassHeading: {{ Math.round(compassHeading) }}
+      <span class="wind-speed-location">（高さ10m付近の風）</span>
     </div>
   </div>
 </template>
@@ -86,70 +85,82 @@ export default {
     },
   },
   methods: {
-    getCompassHeadingForAndroid(event) {
+    getCompassHeadingByJS(event) {
+      // If can use webkitCompassHeading -> use webkitCompassHeading
+      // If can not use webkitCompassHeading -> calculate Heading by alpha, beta, gamma
       if (event.webkitCompassHeading) {
-        // some devices don't understand "alpha" (especially IOS devices)
         this.compassHeading = 360 - event.webkitCompassHeading;
       } else {
-        this.compassHeading = this.calCompassHeadingForAndroid(event.alpha, event.beta, event.gamma);
+        // Androidのalphaは反時計回り
+        this.compassHeading = 360 - this.calCompassHeadingBy(event.alpha, event.beta, event.gamma);
       }
     },
-    calCompassHeadingForAndroid(alpha, beta, gamma) {
+    calCompassHeadingBy(alpha, beta, gamma) {
       let degtorad = Math.PI / 180; // Degree-to-Radian conversion
+
       let _x = beta ? beta * degtorad : 0; // beta value
       let _y = gamma ? gamma * degtorad : 0; // gamma value
       let _z = alpha ? alpha * degtorad : 0; // alpha value
-      // let cX = Math.cos(_x);
+
       let cY = Math.cos(_y);
       let cZ = Math.cos(_z);
       let sX = Math.sin(_x);
       let sY = Math.sin(_y);
       let sZ = Math.sin(_z);
+
       // Calculate Vx and Vy components
       let Vx = -cZ * sY - sZ * sX * cY;
       let Vy = -sZ * sY + cZ * sX * cY;
+
       // Calculate compass heading
       let compassHeading = Math.atan(Vx / Vy);
+
       // Convert compass heading to use whole unit circle
       if (Vy < 0) {
         compassHeading += Math.PI;
       } else if (Vx < 0) {
         compassHeading += 2 * Math.PI;
       }
+
       return compassHeading * ( 180 / Math.PI );
     },
-    startWatchForIOS() {
+    startWatchForAndroid() {
+      window.addEventListener('deviceorientation', this.getCompassHeadingByJS);
+    },
+    startWatch() {
+      // 優先度で角度を取得する
+      // 1. navigator.compass
+      // 2. webkitCompassHeading
+      // 3. 補正した alpha
       const options = { frequency: 500 };
 
       if (!navigator.compass) this.compassError();
       this.watchId = navigator.compass.watchHeading(
-        this.getCompassHeadingForIOS,
+        this.getCompassHeading,
         this.compassError,
         options,
       );
     },
-    startWatchForAndroid() {
-      window.addEventListener('deviceorientation', this.getCompassHeadingForAndroid);
-    },
-    startWatch() {
-      if (this.$ons.platform.isIOS()) {
-        this.startWatchForIOS();
-      } else if (this.$ons.platform.isAndroid()) {
-        this.startWatchForAndroid();
-      }
-    },
     stopWatch() {
       if (this.$ons.platform.isIOS()) {
         navigator.compass.clearWatch(this.watchId);
-      } else {
-        window.removeEventListener('deviceorientation', this.getCompassHeadingForAndroid);
+      } else if (this.$ons.platform.isAndroid() && this.watchId) {
+        navigator.compass.clearWatch(this.watchId);
+      } else if (this.$ons.platform.isAndroid() && !this.watchId) {
+        window.removeEventListener('deviceorientation', this.getCompassHeadingByJS);
       }
     },
-    getCompassHeadingForIOS(heading) {
+    getCompassHeading(heading) {
       this.compassHeading = 360 - heading.magneticHeading;
     },
     compassError() {
-      this.$emit('update:compassErrorVisible', true);
+      // Android device: If can not use Cordova navigator compass library, use Javascript
+      // iOS: Show error message
+      if (this.$ons.platform.isAndroid()) {
+        window.addEventListener('deviceorientation', this.getCompassHeadingByJS);
+      } else {
+        this.$emit('update:compassErrorVisible', true);
+      }
     },
     calDelta(newValue, oldValue) {
       let delta = newValue - oldValue;
