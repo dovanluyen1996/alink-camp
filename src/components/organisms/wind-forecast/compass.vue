@@ -12,7 +12,8 @@
     </div>
     <div class="wind-info">
       風速：<span class="wind-speed">{{ windSpeed }}</span> m/s <br>
-      <span class="wind-speed-location">（高さ10m付近の風）</span>
+      <span class="wind-speed-location">（高さ10m付近の風）</span> <br>
+      compassHeading: {{ Math.round(compassHeading) }}
     </div>
   </div>
 </template>
@@ -63,18 +64,13 @@ export default {
     },
     compassHeadingStyle() {
       return {
-        transform: `rotate(${this.degree}deg)`,
+        transform: `rotate(${this.compassHeadingDeg}deg)`,
       };
     },
     windDirectionStyle() {
       return {
-        transform: `rotate(${this.degree}deg)`,
+        transform: `rotate(${this.windDirectionDeg}deg)`,
       };
-    },
-    degree() {
-      if (!this.compassHeadingDeg) return 0;
-
-      return 360 - this.compassHeadingDeg;
     },
   },
   watch: {
@@ -82,52 +78,44 @@ export default {
       this.windSpeed = this.forecastWind.windSpeed;
       this.windDirection = this.forecastWind.windDirection;
     },
-    // compassHeading(newValue, oldValue) {
-    //   this.compassHeadingDeg += this.calDelta(newValue, oldValue);
-    // },
-    // windDirectionHeading(newValue, oldValue) {
-    //   this.windDirectionDeg += this.calDelta(newValue, oldValue);
-    // },
+    compassHeading(newValue, oldValue) {
+      this.compassHeadingDeg += this.calDelta(newValue, oldValue);
+    },
+    windDirectionHeading(newValue, oldValue) {
+      this.windDirectionDeg += this.calDelta(newValue, oldValue);
+    },
   },
   methods: {
     getCompassHeadingForAndroid(event) {
-      // if (event.webkitCompassHeading) {
-      //   // some devices don't understand "alpha" (especially IOS devices)
-      //   this.compassHeading = event.webkitCompassHeading;
-      // } else {
-        // TODO: https://qiita.com/umi_kappa/items/38499c03792b2aac49ad
-        // 固定値240はおかしいので修正する
-        this.compassHeading = this.calCompassHeadingForAndroid(event.alpha, event.beta, event.gamma)
-      // }
+      if (event.webkitCompassHeading) {
+        // some devices don't understand "alpha" (especially IOS devices)
+        this.compassHeading = 360 - event.webkitCompassHeading;
+      } else {
+        this.compassHeading = this.calCompassHeadingForAndroid(event.alpha, event.beta, event.gamma);
+      }
     },
     calCompassHeadingForAndroid(alpha, beta, gamma) {
-      var degtorad = Math.PI / 180; // Degree-to-Radian conversion
-
-      var _x = beta ? beta * degtorad : 0; // beta value
-      var _y = gamma ? gamma * degtorad : 0; // gamma value
-      var _z = alpha ? alpha * degtorad : 0; // alpha value
-
-      // var cX = Math.cos(_x);
-      var cY = Math.cos(_y);
-      var cZ = Math.cos(_z);
-      var sX = Math.sin(_x);
-      var sY = Math.sin(_y);
-      var sZ = Math.sin(_z);
-
+      let degtorad = Math.PI / 180; // Degree-to-Radian conversion
+      let _x = beta ? beta * degtorad : 0; // beta value
+      let _y = gamma ? gamma * degtorad : 0; // gamma value
+      let _z = alpha ? alpha * degtorad : 0; // alpha value
+      // let cX = Math.cos(_x);
+      let cY = Math.cos(_y);
+      let cZ = Math.cos(_z);
+      let sX = Math.sin(_x);
+      let sY = Math.sin(_y);
+      let sZ = Math.sin(_z);
       // Calculate Vx and Vy components
-      var Vx = -cZ * sY - sZ * sX * cY;
-      var Vy = -sZ * sY + cZ * sX * cY;
-
+      let Vx = -cZ * sY - sZ * sX * cY;
+      let Vy = -sZ * sY + cZ * sX * cY;
       // Calculate compass heading
-      var compassHeading = Math.atan(Vx / Vy);
-
+      let compassHeading = Math.atan(Vx / Vy);
       // Convert compass heading to use whole unit circle
       if (Vy < 0) {
         compassHeading += Math.PI;
       } else if (Vx < 0) {
         compassHeading += 2 * Math.PI;
       }
-
       return compassHeading * ( 180 / Math.PI );
     },
     startWatchForIOS() {
@@ -158,22 +146,21 @@ export default {
       }
     },
     getCompassHeadingForIOS(heading) {
-      this.compassHeading = heading.magneticHeading;
+      this.compassHeading = 360 - heading.magneticHeading;
     },
     compassError() {
       this.$emit('update:compassErrorVisible', true);
     },
-    // calDelta(newValue, oldValue) {
-    //   let delta = newValue - oldValue;
-    //   // ここも変更する
-    //   if (delta > 180) {
-    //     delta -= 360;
-    //   } else if (delta < -180) {
-    //     delta += 360;
-    //   }
+    calDelta(newValue, oldValue) {
+      let delta = newValue - oldValue;
+      if (delta > 180) {
+        delta -= 360;
+      } else if (delta < -180) {
+        delta += 360;
+      }
 
-    //   return delta;
-    // },
+      return delta;
+    },
   },
 
 };
