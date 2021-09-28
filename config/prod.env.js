@@ -12,13 +12,11 @@ module.exports = {
   COGNITO_RESPONSE_TYPE: '"code"',
   ADJUST_TOKEN_IOS: {
     APP_TOKEN: '"ko4d8l3mary8"',
-    TRIAL_STARTED_EVENT_ID: '"40mx5t"',
     TUTORIAL_COMPLETED_EVENT_ID: '"rgb7xb"',
     REGISTRATION_COMPLETED_EVENT_ID: '"n1mmjs"',
   },
   ADJUST_TOKEN_ANDROID: {
     APP_TOKEN: '"ko4d8l3mary8"',
-    TRIAL_STARTED_EVENT_ID: '"40mx5t"',
     TUTORIAL_COMPLETED_EVENT_ID: '"rgb7xb"',
     REGISTRATION_COMPLETED_EVENT_ID: '"n1mmjs"',
   },

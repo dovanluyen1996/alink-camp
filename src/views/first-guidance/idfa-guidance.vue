@@ -36,7 +36,7 @@
       </template>
       許可の設定により、今後も各種機能改善のご参考にさせていただきます。次へのボタン押下後のポップアップで選択してください
       <template #footer>
-        <v-ons-button @click="callToIdfaDialog()">
+        <v-ons-button @click="closeIdfaAlert()">
           次へ
         </v-ons-button>
       </template>
@@ -72,16 +72,12 @@ export default {
         this.goToUserNew();
       }
     },
-    callToIdfaDialog() {
+    closeIdfaAlert() {
       this.isShownIdfaAlert = false;
-      IdfaAaidPlugin.init();
-      const ADJUST_TOKEN = (window.device.platform === 'iOS') ? process.env.ADJUST_TOKEN_IOS : process.env.ADJUST_TOKEN_ANDROID;
-      const adjustEvent = new AdjustEvent(ADJUST_TOKEN.TRIAL_STARTED_EVENT_ID);
-      Adjust.trackEvent(adjustEvent);
-      console.log('callToIdfaDialog');
       this.goToUserNew();
     },
     goToUserNew() {
+      IdfaAaidPlugin.init();
       const ADJUST_TOKEN = (window.device.platform === 'iOS') ? process.env.ADJUST_TOKEN_IOS : process.env.ADJUST_TOKEN_ANDROID;
       const adjustEvent = new AdjustEvent(ADJUST_TOKEN.TUTORIAL_COMPLETED_EVENT_ID);
       Adjust.trackEvent(adjustEvent);
