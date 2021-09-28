@@ -6,7 +6,7 @@
 
     <slot name="switcher" />
 
-    <template v-if="isPresent(forecasts)">
+    <template v-if="$helpers.isPresentObject(forecasts)">
       <sticky-table class="ten-days-weather-table">
         <date-row :forecast-data="forecasts" />
         <weather-row :weathers="forecasts" />
@@ -114,10 +114,6 @@ export default {
 
       const forecast10Days = await this.$store.dispatch('models/weather/getForecast10Days', { course_id: this.course.id });
       return forecast10Days;
-    },
-    isPresent(forecastObject) {
-      console.log(forecastObject);
-      return this.$helpers.isPresentObject(forecastObject);
     },
   },
 };

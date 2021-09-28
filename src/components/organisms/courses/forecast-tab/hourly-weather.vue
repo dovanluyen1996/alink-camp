@@ -6,7 +6,7 @@
 
     <slot name="switcher" />
 
-    <template v-if="isPresent(forecastData)">
+    <template v-if="$helpers.isPresentObject(forecastData)">
       <sticky-table class="hourly-weather-table">
         <tr class="date-row">
           <th
@@ -194,9 +194,6 @@ export default {
       };
       const forecastHourly = await this.$store.dispatch('models/weather/getForecastHourly', params);
       return forecastHourly;
-    },
-    isPresent(forecastObject) {
-      return this.$helpers.isPresentObject(forecastObject);
     },
     spanCount(forecast) {
       let count = forecast.hourlyData.filter(data => data.hour).length;

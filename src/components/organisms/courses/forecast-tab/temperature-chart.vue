@@ -6,7 +6,7 @@
       :point-name="pointName"
     />
 
-    <template v-if="isPresent(chartData)">
+    <template v-if="$helpers.isPresentObject(chartData)">
       <line-chart
         :chart-data="chartData"
         :options="options"
@@ -126,10 +126,6 @@ export default {
 
       const forecastMonthlyTemp = await this.$store.dispatch('models/weather/getForecastMonthlyTemp', { course_id: this.course.id });
       return forecastMonthlyTemp;
-    },
-    isPresent(forecastObject) {
-      console.log(forecastObject);
-      return this.$helpers.isPresentObject(forecastObject);
     },
   },
 };

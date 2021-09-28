@@ -35,14 +35,11 @@ export default {
   },
   methods: {
     timeLabel(time, index) {
-      if (!time) {
-        if (this.forecastData[index].isSunrise || this.forecastData[index].isSunset) {
-          return '--:--';
-        }
-        return '--';
-      }
+      if (time) return time;
 
-      return time;
+      if (this.forecastData[index].isSunrise || this.forecastData[index].isSunset) return '--:--';
+
+      return '--';
     },
   },
 };
