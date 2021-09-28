@@ -30,7 +30,7 @@ export default {
   },
   computed: {
     times() {
-      return this.forecastData.map(data => (data ? data.hour : null));
+      return this.forecastData.map(data => data.hour);
     },
   },
   methods: {
