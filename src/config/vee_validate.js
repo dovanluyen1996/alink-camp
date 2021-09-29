@@ -65,5 +65,5 @@ extend('lteq-total-score', {
   validate(value, { maxValue }) {
     return value <= maxValue;
   },
-  message: '内パター数は総打数以下にしてください',
+  message: '合計打数を超えています',
 });
