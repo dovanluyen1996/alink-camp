@@ -96,21 +96,21 @@ export default {
       }
     },
     calCompassHeadingBy(alpha, beta, gamma) {
-      let degtorad = Math.PI / 180; // Degree-to-Radian conversion
+      const degtorad = Math.PI / 180; // Degree-to-Radian conversion
 
-      let _x = beta ? beta * degtorad : 0; // beta value
-      let _y = gamma ? gamma * degtorad : 0; // gamma value
-      let _z = alpha ? alpha * degtorad : 0; // alpha value
+      const x = beta ? beta * degtorad : 0; // beta value
+      const y = gamma ? gamma * degtorad : 0; // gamma value
+      const z = alpha ? alpha * degtorad : 0; // alpha value
 
-      let cY = Math.cos(_y);
-      let cZ = Math.cos(_z);
-      let sX = Math.sin(_x);
-      let sY = Math.sin(_y);
-      let sZ = Math.sin(_z);
+      const cY = Math.cos(y);
+      const cZ = Math.cos(z);
+      const sX = Math.sin(x);
+      const sY = Math.sin(y);
+      const sZ = Math.sin(z);
 
       // Calculate Vx and Vy components
-      let Vx = -cZ * sY - sZ * sX * cY;
-      let Vy = -sZ * sY + cZ * sX * cY;
+      const Vx = (-cZ * sY) - (sZ * sX * cY);
+      const Vy = (-sZ * sY) + (cZ * sX * cY);
 
       // Calculate compass heading
       let compassHeading = Math.atan(Vx / Vy);
@@ -122,7 +122,7 @@ export default {
         compassHeading += 2 * Math.PI;
       }
 
-      return compassHeading * ( 180 / Math.PI );
+      return compassHeading * (180 / Math.PI);
     },
     startWatchForAndroid() {
       window.addEventListener('deviceorientation', this.getCompassHeadingByJS);
