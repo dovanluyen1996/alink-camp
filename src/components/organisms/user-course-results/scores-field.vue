@@ -111,9 +111,7 @@ export default {
   methods: {
     hideSoftKeyboard() {
       // Only hide soft keyboard with Android device
-      if (this.$ons.platform.isAndroid()) {
-        window.Keyboard.hide();
-      }
+      if (this.$ons.platform.isAndroid()) window.Keyboard.hide();
     },
   },
 };
