@@ -65,5 +65,5 @@ extend('lteq-total-score', {
   validate(value, { maxValue }) {
     return value <= maxValue;
   },
-  message: '合計打数を超えています',
+  message: '合計打数オーバー',
 });
