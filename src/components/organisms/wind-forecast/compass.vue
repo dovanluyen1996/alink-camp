@@ -124,9 +124,6 @@ export default {
 
       return compassHeading * (180 / Math.PI);
     },
-    startWatchForAndroid() {
-      window.addEventListener('deviceorientation', this.getCompassHeadingByJS);
-    },
     startWatch() {
       // 優先度で角度を取得する
       // 1. navigator.compass
@@ -134,12 +131,15 @@ export default {
       // 3. 補正した alpha
       const options = { frequency: 500 };
 
-      if (!navigator.compass) this.compassError();
-      this.watchId = navigator.compass.watchHeading(
-        this.getCompassHeading,
-        this.compassError,
-        options,
-      );
+      if (navigator.compass) {
+        this.watchId = navigator.compass.watchHeading(
+          this.getCompassHeading,
+          this.compassError,
+          options,
+        );
+      } else {
+        window.addEventListener('deviceorientation', this.getCompassHeadingByJS);
+      }
     },
     stopWatch() {
       if (this.$ons.platform.isIOS()) {
@@ -154,13 +154,7 @@ export default {
       this.compassHeading = 360 - heading.magneticHeading;
     },
     compassError() {
-      // Android device: If can not use Cordova navigator compass library, use Javascript
-      // iOS: Show error message
-      if (this.$ons.platform.isAndroid()) {
-        window.addEventListener('deviceorientation', this.getCompassHeadingByJS);
-      } else {
-        this.$emit('update:compassErrorVisible', true);
-      }
+      this.$emit('update:compassErrorVisible', true);
     },
     calDelta(newValue, oldValue) {
       let delta = newValue - oldValue;
