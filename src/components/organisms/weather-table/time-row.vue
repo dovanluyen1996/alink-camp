@@ -11,7 +11,7 @@
         :key="index"
         :date-time="time"
       >
-        {{ time }}
+        {{ timeLabel(time, index) }}
       </td>
     </template>
   </tr>
@@ -31,6 +31,15 @@ export default {
   computed: {
     times() {
       return this.forecastData.map(data => data.hour);
+    },
+  },
+  methods: {
+    timeLabel(time, index) {
+      if (time) return time;
+
+      if (this.forecastData[index].isSunrise || this.forecastData[index].isSunset) return '--:--';
+
+      return '--';
     },
   },
 };

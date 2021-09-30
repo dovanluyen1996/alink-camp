@@ -5,11 +5,20 @@
       :updated-at="chartUpdatedAt"
       :point-name="pointName"
     />
-    <line-chart
-      :chart-data="chartData"
-      :options="options"
-      :height="200"
-    />
+
+    <template v-if="$helpers.isPresentObject(chartData)">
+      <line-chart
+        :chart-data="chartData"
+        :options="options"
+        :height="200"
+      />
+    </template>
+
+    <template v-else>
+      <div class="no-forecast">
+        表示できる天気情報がありません
+      </div>
+    </template>
   </div>
 </template>
 
@@ -121,3 +130,10 @@ export default {
   },
 };
 </script>
+
+<style scoped lang="scss">
+.no-forecast {
+  margin: 2rem auto 2rem auto;
+  text-align: center;
+}
+</style>

@@ -6,40 +6,51 @@
 
     <slot name="switcher" />
 
-    <sticky-table class="hourly-weather-table">
-      <tr class="date-row">
-        <th
-          scope="row"
-          class="th"
-        >
-          日
-        </th>
-        <!-- NOTE: colspan = number of hourly-data plus sunset and sunrise cols -->
-        <td
-          v-for="forecast in forecastHourly.items"
-          :key="forecast.date"
-          :colspan="forecast.hourlyData.length + 2"
-          :date-time="forecast.date"
-          class="date-col"
-        >
-          <div class="date-col__display-date">
-            {{ displayDate(forecast.date) }}
-            <span
-              v-if="isScheduledDate(forecast.date)"
-              class="is-today"
-            >
-              ゴルフ予定日
-            </span>
-          </div>
-        </td>
-      </tr>
-      <time-row :forecast-data="margedForecastsAndSuns" />
-      <weather-row :weathers="margedForecastsAndSuns" />
-      <precipitation-row :forecast-data="forecastData" />
-      <temperature-row :forecast-data="forecastData" />
-      <wind-direction-row :wind-directions="windDirections" />
-      <wind-speed-row :wind-speeds="windSpeeds" />
-    </sticky-table>
+    <template v-if="$helpers.isPresentObject(forecastData)">
+      <sticky-table class="hourly-weather-table">
+        <tr class="date-row">
+          <th
+            scope="row"
+            class="th"
+          >
+            日
+          </th>
+          <!-- NOTE: colspan = number of hourly-data plus sunset and sunrise cols -->
+          <template v-for="forecast in forecastHourly.items">
+            <template v-if="spanCount(forecast)">
+              <td
+                :key="forecast.date"
+                :colspan="spanCount(forecast)"
+                :date-time="forecast.date"
+                class="date-col"
+              >
+                <div class="date-col__display-date">
+                  {{ displayDate(forecast.date) }}
+                  <span
+                    v-if="isScheduledDate(forecast.date)"
+                    class="is-today"
+                  >
+                    ゴルフ予定日
+                  </span>
+                </div>
+              </td>
+            </template>
+          </template>
+        </tr>
+        <time-row :forecast-data="margedForecastsAndSuns" />
+        <weather-row :weathers="margedForecastsAndSuns" />
+        <precipitation-row :forecast-data="forecastData" />
+        <temperature-row :forecast-data="forecastData" />
+        <wind-direction-row :wind-directions="windDirections" />
+        <wind-speed-row :wind-speeds="windSpeeds" />
+      </sticky-table>
+    </template>
+
+    <template v-else>
+      <div class="no-forecast">
+        表示できる天気情報がありません
+      </div>
+    </template>
   </div>
 </template>
 
@@ -94,7 +105,7 @@ export default {
             hour: forecastHourly.sunset,
           },
         ];
-        const margeData = (forecastHourly.hourlyData || []).concat(suns);
+        const margeData = (forecastHourly.hourlyData || []).concat(suns).filter(data => data.hour);
         margeData.sort((a, b) => this.convertMinutes(a.hour) - this.convertMinutes(b.hour));
 
         forecastsAndSuns = forecastsAndSuns.concat(margeData);
@@ -107,7 +118,9 @@ export default {
 
       let forecastData = [];
       this.forecastHourly.items.forEach((forecastHourly) => {
-        forecastData = forecastData.concat(forecastHourly.hourlyData);
+        forecastData = forecastData.concat(forecastHourly
+          .hourlyData
+          .filter(hourlyData => hourlyData.hour));
       });
 
       return forecastData;
@@ -182,6 +195,13 @@ export default {
       const forecastHourly = await this.$store.dispatch('models/weather/getForecastHourly', params);
       return forecastHourly;
     },
+    spanCount(forecast) {
+      let count = forecast.hourlyData.filter(data => data.hour).length;
+      if (forecast.sunrise) count += 1;
+      if (forecast.sunset) count += 1;
+
+      return count;
+    },
   },
 };
 </script>
@@ -210,5 +230,10 @@ export default {
 
 .is-today {
   color: $color-is-today;
+}
+
+.no-forecast {
+  margin: 2rem auto 2rem auto;
+  text-align: center;
 }
 </style>

@@ -8,7 +8,7 @@
     </th>
     <template v-for="(precipitation, index) in precipitations">
       <td :key="index">
-        {{ precipitation }}
+        {{ precipitation || '--' }}
       </td>
     </template>
   </tr>
