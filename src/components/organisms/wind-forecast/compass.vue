@@ -131,15 +131,11 @@ export default {
       // 3. 補正した alpha
       const options = { frequency: 500 };
 
-      if (navigator.compass) {
-        this.watchId = navigator.compass.watchHeading(
-          this.getCompassHeading,
-          this.compassError,
-          options,
-        );
-      } else {
-        window.addEventListener('deviceorientation', this.getCompassHeadingByJS);
-      }
+      this.watchId = navigator.compass.watchHeading(
+        this.getCompassHeading,
+        this.compassError,
+        options,
+      );
     },
     stopWatch() {
       if (this.$ons.platform.isIOS()) {
@@ -154,7 +150,13 @@ export default {
       this.compassHeading = 360 - heading.magneticHeading;
     },
     compassError() {
-      this.$emit('update:compassErrorVisible', true);
+      // Android device: If can not use Cordova navigator compass library, use Javascript
+      // iOS: Show error message
+      if (this.$ons.platform.isAndroid()) {
+        window.addEventListener('deviceorientation', this.getCompassHeadingByJS);
+      } else {
+        this.$emit('update:compassErrorVisible', true);
+      }
     },
     calDelta(newValue, oldValue) {
       let delta = newValue - oldValue;
