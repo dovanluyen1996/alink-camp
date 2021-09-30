@@ -3,7 +3,7 @@
     title="総合スコア"
     class="scores-field"
   >
-    <v-ons-row vertical-align="bottom">
+    <v-ons-row vertical-align="top">
       <v-ons-col width="55%">
         <validation-provider
           v-slot="{ errors }"
