@@ -161,6 +161,11 @@ export default {
 
 .patting-score-field {
   padding-left: 5%;
+
+  & + .input-error-msg {
+    padding-left: 5%;
+    text-align: left;
+  }
 }
 
 .patting-score-input {
@@ -173,6 +178,10 @@ export default {
 @media screen and (min-width: 320px) {
   .patting-score-field {
     padding-left: 25%;
+
+    & + .input-error-msg {
+      padding-left: 25%;
+    }
   }
 }
 
