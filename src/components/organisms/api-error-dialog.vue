@@ -49,7 +49,7 @@ export default {
       if (this.isMaintainanceError) {
         return 'メンテナンス中';
       } if (this.isTicketNotEnoughError) {
-        return 'チケット不足';
+        return '応募券不足';
       }
       return 'エラー';
     },
@@ -63,7 +63,7 @@ export default {
       return this.errorStatus === 600;
     },
     isTicketNotEnoughError() {
-      return this.error.message && this.error.message.includes('チケットが不足しています。');
+      return this.error.message && this.error.message.includes('応募券が不足しています。');
     },
   },
   watch: {
