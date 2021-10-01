@@ -10,6 +10,12 @@
         :style="windDirectionStyle"
       />
     </div>
+    <p
+      v-if="isUsingJS"
+      class="compass-warning"
+    >
+      コンパスの精度が低い状態です
+    </p>
     <div class="wind-info">
       風速：<span class="wind-speed">{{ windSpeed }}</span> m/s <br>
       <span class="wind-speed-location">（高さ10m付近の風）</span>
@@ -42,6 +48,7 @@ export default {
       compassHeading: 0,
       compassHeadingDeg: 0,
       watchId: null,
+      isUsingJS: false,
     };
   },
   computed: {
@@ -147,12 +154,14 @@ export default {
       }
     },
     getCompassHeading(heading) {
+      this.isUsingJS = false;
       this.compassHeading = 360 - heading.magneticHeading;
     },
     compassError() {
       // Android device: If can not use Cordova navigator compass library, use Javascript
       // iOS: Show error message
       if (this.$ons.platform.isAndroid()) {
+        this.isUsingJS = true;
         window.addEventListener('deviceorientation', this.getCompassHeadingByJS);
       } else {
         this.$emit('update:compassErrorVisible', true);
@@ -175,6 +184,7 @@ export default {
 
 <style scoped lang="scss">
 @import '@/assets/scss/_mixins.scss';
+@import '@/assets/scss/_variables.scss';
 
 $speed-degrees: 0, 22.5, 45, 67.5, 90, 112.5, 135, 157.5, 180,
   202.5, 225, 247.5, 270, 292.5, 315, 337.5;
@@ -249,4 +259,12 @@ $speed-degrees: 0, 22.5, 45, 67.5, 90, 112.5, 135, 157.5, 180,
     font-weight: normal;
   }
 }
+
+.compass-warning {
+  display: block;
+  padding-top: 20px;
+  color: $color-error-msg;
+  text-align: center;
+}
+
 </style>
