@@ -1,5 +1,6 @@
 import AppTabbar from '@/views/app-tabbar';
 import UserDataPage from '@/views/user/new/user-data';
+import IdfaAaidPlugin from '@/config/idfa';
 
 export default {
   computed: {
@@ -18,6 +19,7 @@ export default {
     async checkBeforeGoToAppTabbar() {
       await this.getCurrentUser();
 
+      await IdfaAaidPlugin.init();
       await this.$helpers.callGeolocationPermission();
       await this.$helpers.callPushNotificationPermission();
       if (this.isNeedUpdateData) {
