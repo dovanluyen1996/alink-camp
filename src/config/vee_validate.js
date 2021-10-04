@@ -63,7 +63,7 @@ extend('max', {
 extend('lteq-total-score', {
   params: ['maxValue'],
   validate(value, { maxValue }) {
-    return parseInt(value) <= parseInt(maxValue);
+    return parseInt(value, 10) <= parseInt(maxValue, 10);
   },
   message: '合計打数オーバー',
 });
