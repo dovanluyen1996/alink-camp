@@ -61,7 +61,7 @@ extend('max', {
 });
 
 extend('lteq-total-score', {
-  params: ['max'],
+  params: ['maxValue'],
   validate(value, { maxValue }) {
     return value <= maxValue;
   },
