@@ -75,6 +75,7 @@
         <allow-intent href="itms-apps:*" />
         <preference name="UseSwiftLanguageVersion" value="5" />
         <preference name="HideKeyboardFormAccessoryBar" value="false" />
+        <preference name="deployment-target" value="14.0" />
 
         <icon src="res/icon/ios/icon-60@3x.png" width="180" height="180" />
         <icon src="res/icon/ios/icon-60.png" width="60" height="60" />
