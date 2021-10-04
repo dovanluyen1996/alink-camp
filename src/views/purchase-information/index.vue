@@ -73,7 +73,7 @@
                 modifier="rounded"
                 @click="restorePurchase()"
               >
-                以前購入した方はこちらから復元
+                定期購入中の方はこちらから復元
               </v-ons-button>
             </div>
           </div>
