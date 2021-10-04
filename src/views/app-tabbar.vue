@@ -66,6 +66,7 @@ export default {
           page: MenuNavigator,
         },
       ],
+      reactiveable: true,
     };
   },
   computed: {
@@ -87,7 +88,13 @@ export default {
         this.$store.dispatch('menuNavigator/reset', MenuIndexPage);
       }
     },
-    reactive(event) {
+    async reactive(event) {
+      if (!this.reactiveable) return;
+
+      this.reactiveable = false
+      await new Promise(r => setTimeout(r, 1000));
+      this.reactiveable = true
+
       switch (event.activeIndex) {
       case settings.views.appTabbar.tabIndexes.courseWeather:
         this.$store.dispatch('courseWeatherNavigator/reset', CourseWeatherIndexPage);
