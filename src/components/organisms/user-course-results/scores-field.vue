@@ -8,7 +8,8 @@
         <validation-provider
           v-slot="{ errors }"
           rules="required"
-          name="合計打数"
+          name="total-score"
+          :custom-messages="{ required: '合計打数を入力してください' }"
         >
           <v-ons-row
             vertical-align="bottom"
@@ -43,7 +44,7 @@
       <v-ons-col width="45%">
         <validation-provider
           v-slot="{ errors }"
-          rules="lteq-total-score:@合計打数"
+          rules="lteq-total-score:@total-score"
           name="内パター"
         >
           <v-ons-row
