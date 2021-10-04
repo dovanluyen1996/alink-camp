@@ -147,7 +147,7 @@ export default {
       });
     },
     isWeatherPresent() {
-      return this.weathers.filter(weather => weather.date).length !== 0;
+      return this.weathers.filter(Boolean).filter(weather => weather.date).length !== 0;
     },
   },
 };
