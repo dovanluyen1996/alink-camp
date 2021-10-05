@@ -192,4 +192,8 @@ export default {
 .content {
   padding-bottom: 20px;
 }
+
+/deep/ .form-buttons {
+  padding-bottom: 10px;
+}
 </style>
