@@ -167,13 +167,13 @@ export default {
             this.purchaseComplete();
           } else {
             this.checkPurchaseErrorVisible = true;
-            this.errorMessage = '課金状態を復元できません';
+            this.errorMessage = '購入状態を復元できません。定期購入期間が終了している可能性があります。お手数ですがご確認下さい。';
           }
           this.isLoading = false;
         },
         () => {
           this.checkPurchaseErrorVisible = true;
-          this.errorMessage = '課金状態を復元できません';
+          this.errorMessage = '購入状態を復元できません。定期購入期間が終了している可能性があります。お手数ですがご確認下さい。';
           this.isLoading = false;
         },
       );
