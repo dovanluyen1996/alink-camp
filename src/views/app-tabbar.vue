@@ -66,7 +66,7 @@ export default {
           page: MenuNavigator,
         },
       ],
-      reactiveable: true,
+      timeoutId: null,
     };
   },
   computed: {
@@ -81,39 +81,40 @@ export default {
   },
   methods: {
     prechange() {
-      // When click to other tab,
-      // if menu is open other page, reset menu
-      // If menu is open menu items only, no reset
-      if (this.$store.state.menuNavigator.stack.length > 1) {
-        this.$store.dispatch('menuNavigator/reset', MenuIndexPage);
-      }
+      if (this.timeoutId) clearTimeout(this.timeoutId);
+      this.timeoutId = setTimeout(() => {
+        this.timeoutId = null;
+
+        if (this.$store.state.menuNavigator.stack.length > 1) {
+          this.$store.dispatch('menuNavigator/reset', MenuIndexPage);
+        }
+      }, 500);
     },
     async reactive(event) {
-      if (!this.reactiveable) return;
+      if (this.timeoutId) clearTimeout(this.timeoutId);
+      this.timeoutId = setTimeout(() => {
+        this.timeoutId = null;
 
-      this.reactiveable = false
-      await new Promise(r => setTimeout(r, 1000));
-      this.reactiveable = true
-
-      switch (event.activeIndex) {
-      case settings.views.appTabbar.tabIndexes.courseWeather:
-        this.$store.dispatch('courseWeatherNavigator/reset', CourseWeatherIndexPage);
-        break;
-      case settings.views.appTabbar.tabIndexes.courseSearch:
-        this.$store.dispatch('courseSearchNavigator/reset', CourseSearchIndexPage);
-        break;
-      case settings.views.appTabbar.tabIndexes.scores:
-        this.$store.dispatch('scoresNavigator/reset', ScoresIndexPage);
-        break;
-      case settings.views.appTabbar.tabIndexes.windForecast:
-        this.$store.dispatch('windForecastNavigator/reset', WindForecastIndexPage);
-        break;
-      case settings.views.appTabbar.tabIndexes.menu:
-        this.$store.dispatch('menuNavigator/reset', MenuIndexPage);
-        break;
-      default:
-        break;
-      }
+        switch (event.activeIndex) {
+        case settings.views.appTabbar.tabIndexes.courseWeather:
+          this.$store.dispatch('courseWeatherNavigator/reset', CourseWeatherIndexPage);
+          break;
+        case settings.views.appTabbar.tabIndexes.courseSearch:
+          this.$store.dispatch('courseSearchNavigator/reset', CourseSearchIndexPage);
+          break;
+        case settings.views.appTabbar.tabIndexes.scores:
+          this.$store.dispatch('scoresNavigator/reset', ScoresIndexPage);
+          break;
+        case settings.views.appTabbar.tabIndexes.windForecast:
+          this.$store.dispatch('windForecastNavigator/reset', WindForecastIndexPage);
+          break;
+        case settings.views.appTabbar.tabIndexes.menu:
+          this.$store.dispatch('menuNavigator/reset', MenuIndexPage);
+          break;
+        default:
+          break;
+        }
+      }, 500);
     },
   },
 };
