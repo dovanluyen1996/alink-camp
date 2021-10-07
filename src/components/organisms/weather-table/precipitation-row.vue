@@ -4,7 +4,7 @@
       scope="row"
       class="th"
     >
-      降水量
+      降水量<br>(mm/h)
     </th>
     <template v-for="(precipitation, index) in precipitations">
       <td :key="index">
