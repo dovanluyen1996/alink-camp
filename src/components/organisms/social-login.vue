@@ -5,16 +5,17 @@
       {{ title }}
     </div>
     <v-ons-card
-      v-for="(service, index) in services"
+      v-for="(service, index) in services.filter(sv => sv.isShow)"
       :key="index"
       @click="signIn(service.name)"
+      :class="['social-login-card', service.modifierClass]"
     >
-      <img
-        :src="service.image"
-        class="social-login-image"
-      >
       <div class="social-login-name">
-        {{ service.name }}
+        <img
+          :src="service.image"
+          class="social-login-image"
+        >
+        {{ service.text }}
       </div>
     </v-ons-card>
 
@@ -32,7 +33,7 @@ import ErrorDialog from '@/components/organisms/error-dialog';
 import CheckCompleteRegistration from '@/mixins/checkCompleteRegistration';
 
 const GoogleImage = require('@/assets/images/social/google.png');
-const FacebookImage = require('@/assets/images/social/facebook.png');
+const AppleImage = require('@/assets/images/social/apple.png');
 
 export default {
   name: 'SocialLogin',
@@ -50,12 +51,18 @@ export default {
     return {
       services: [
         {
-          name: 'Google',
-          image: GoogleImage,
+          name: 'SignInWithApple',
+          text: 'Appleでサインイン',
+          image: AppleImage,
+          modifierClass: 'apple',
+          isShow: window.device.platform === 'iOS',
         },
         {
-          name: 'Facebook',
-          image: FacebookImage,
+          name: 'Google',
+          text: 'Googleでサインイン',
+          image: GoogleImage,
+          modifierClass: 'google',
+          isShow: true,
         },
       ],
       signInErrorVisible: false,
@@ -72,7 +79,7 @@ export default {
       const type = process.env.COGNITO_RESPONSE_TYPE;
       const callback = process.env.COGNITO_CALLBACK_URL;
       const scope = process.env.COGNITO_OAUTH_SCOPES;
-      const providerUrl = `${domain}/authorize?identity_provider=${provider}&response_type=${type}&client_id=${clientId}&redirect_uri=${callback}&scope=${scope}`;
+      const providerUrl = `${domain}/authorize?response_mode=form_post&identity_provider=${provider}&response_type=${type}&client_id=${clientId}&redirect_uri=${callback}&scope=${scope}`;
 
       localStorage.setItem('externalProviderSignIn', true);
       window.open(providerUrl, '_system');
@@ -131,12 +138,21 @@ export default {
 
 <style lang="scss" scoped>
 @import '@/assets/scss/_mixins.scss';
+@import '@/assets/scss/_variables.scss';
 
 .social-login {
   display: flex;
   flex-wrap: wrap;
   margin-right: 13px;
   margin-left: 13px;
+
+  .google {
+    background-color: $color-google-blue;
+  }
+
+  .apple {
+    background-color: black;
+  }
 }
 
 .social-login-title {
@@ -146,17 +162,24 @@ export default {
   margin-bottom: 30px;
 }
 
-.social-login-image {
-  width: 32px;
-  margin-bottom: 9px;
-}
-
-.card {
-  width: calc(50% - 15px);
-  padding: 10px 0 15px;
-  margin: 0 7px 15px;
+.social-login-card {
+  width: 310px;
+  padding: 15px 45px;
+  margin: 10px auto;
   font-weight: 600;
   line-height: 1;
-  text-align: center;
+  border-radius: 10px;
+}
+
+.social-login-name {
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  color: white;
+}
+
+.social-login-image {
+  width: 25px;
+  margin-right: 10px;
 }
 </style>
