@@ -3244,10 +3244,10 @@ cordova-plugin-ionic-keyboard@2.2.0:
   resolved "https://registry.yarnpkg.com/cordova-plugin-ionic-keyboard/-/cordova-plugin-ionic-keyboard-2.2.0.tgz#53ba9ccd5e765165446a094cfe042a2ddd87d81d"
   integrity sha512-yDUG+9ieKVRitq5mGlNxjaZh/MgEhFFIgTIPhqSbUaQ8UuZbawy5mhJAVClqY97q8/rcQtL6dCDa7x2sEtCLcA==
 
-cordova-plugin-purchases@2.1.1:
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/cordova-plugin-purchases/-/cordova-plugin-purchases-2.1.1.tgz#8b064649d164562f555cea7eb646cb9cc1f46aad"
-  integrity sha512-tRWxvTWZoMIRd8VOr0GdhU+GUk98mJgzPIDLpe0JOsFShqsus2dn6bp5LOxbZEghL3OP/jN/bP9L1N6A+1cgvg==
+cordova-plugin-purchases@2.3.1:
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/cordova-plugin-purchases/-/cordova-plugin-purchases-2.3.1.tgz#795c44e7c2559d6777fb3ed261205a3c9d8e8c22"
+  integrity sha512-aZRC4PE4lFC58yczXAe5+6RpEW8NGII2YSO+48ySDFD6gesYzjDXH9im2+R5h4v1ErOndSPQ9D10YpliI/UaQw==
 
 cordova-plugin-screen-orientation@^3.0.2:
   version "3.0.2"
