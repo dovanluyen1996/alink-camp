@@ -3,6 +3,7 @@ export default {
   namespaced: true,
   state: {
     stack: [],
+    isBusy: false,
   },
   mutations: {
     push(state, page) {
@@ -22,6 +23,9 @@ export default {
     },
     clear(state) {
       state.stack = [];
+    },
+    setIsBusy(state, isBusy) {
+      state.isBusy = isBusy;
     },
   },
   actions: {

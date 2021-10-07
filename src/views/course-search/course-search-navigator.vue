@@ -2,6 +2,10 @@
   <v-ons-navigator
     :page-stack="pageStack"
     :pop-page="popPage"
+    @prepush="onPrePush"
+    @postpush="onPostPush"
+    @prepop="onPrePop"
+    @postpop="onPostPop"
   />
 </template>
 
@@ -20,8 +24,20 @@ export default {
     this.$store.dispatch('course/setViewedCoursesByCache');
   },
   methods: {
+    onPrePush() {
+      this.$store.commit('courseSearchNavigator/setIsBusy', true);
+    },
+    onPostPush() {
+      this.$store.commit('courseSearchNavigator/setIsBusy', false);
+    },
+    onPrePop() {
+      this.$store.commit('courseSearchNavigator/setIsBusy', true);
+    },
     popPage() {
       this.$store.dispatch('courseSearchNavigator/pop');
+    },
+    onPostPop() {
+      this.$store.commit('courseSearchNavigator/setIsBusy', false);
     },
   },
 };
