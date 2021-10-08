@@ -5,7 +5,7 @@
       {{ title }}
     </div>
     <v-ons-card
-      v-for="(service, index) in services.filter(sv => sv.isShow)"
+      v-for="(service, index) in services.filter(sv => isShowService(sv.name))"
       :key="index"
       @click="signIn(service.name)"
       :class="['social-login-card', service.modifierClass]"
@@ -49,32 +49,26 @@ export default {
   },
   data() {
     return {
-      signInErrorVisible: false,
-      isLoading: false,
-    };
-  },
-  created() {
-    this.addHandleOpenUrlAfterLogin();
-  },
-  computed: {
-    services() {
-      return [
+      services: [
         {
           name: 'SignInWithApple',
           text: 'Appleでサインイン',
           image: AppleImage,
           modifierClass: 'apple',
-          isShow: window.device.platform === 'iOS',
         },
         {
           name: 'Google',
           text: 'Googleでサインイン',
           image: GoogleImage,
           modifierClass: 'google',
-          isShow: true,
         },
-      ]
-    }
+      ],
+      signInErrorVisible: false,
+      isLoading: false,
+    };
+  },
+  created() {
+    this.addHandleOpenUrlAfterLogin();
   },
   methods: {
     signIn(provider) {
@@ -135,6 +129,11 @@ export default {
     },
     closeSignInError() {
       this.signInErrorVisible = false;
+    },
+    isShowService(serviceName) {
+      if (serviceName !== 'SignInWithApple') return true;
+
+      return window.device.platform === 'iOS';
     },
   },
 };
