@@ -133,7 +133,7 @@ export default {
     isShowService(serviceName) {
       if (serviceName !== 'SignInWithApple') return true;
 
-      return window.device.platform === 'iOS';
+      return window.device && window.device.platform === 'iOS';
     },
   },
 };
