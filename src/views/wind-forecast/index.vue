@@ -69,7 +69,16 @@ export default {
       await this.$store.dispatch('models/userCourse/getUserCourses');
     },
     goToCourseSearch() {
-      this.$store.dispatch('courseSearchNavigator/reset', CourseSearchIndex);
+      this.$store.commit('courseSearchNavigator/setEnableBusy', false);
+      this.$store.dispatch('courseSearchNavigator/reset', {
+        extends: CourseSearchIndex,
+        onsNavigatorOptions: {
+          callback: () => {
+            this.$store.commit('courseSearchNavigator/setEnableBusy', true);
+          },
+        },
+      });
+
       this.$store.commit('appTabbar/setActiveIndexFromTabName', 'courseSearch');
     },
     goToShowWindForecast(course) {
