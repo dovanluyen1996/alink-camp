@@ -7,9 +7,10 @@
 </template>
 
 <script>
-  import PurchaseInformation from '@/views/purchase-information';
+import PurchaseInformation from '@/views/purchase-information';
 
-  import ErrorDialog from '@/components/organisms/error-dialog';
+import ErrorDialog from '@/components/organisms/error-dialog';
+
 export default {
   name: 'ApiErrorDialog',
   components: {

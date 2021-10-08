@@ -72,7 +72,6 @@
           </v-ons-button>
         </template>
       </v-ons-alert-dialog>
-
     </div>
   </v-ons-page>
 </template>
@@ -133,7 +132,7 @@ export default {
     },
     otherErrorVisible() {
       return this.signUpErrorVisible && !this.isUserExistsException;
-    }
+    },
   },
   methods: {
     getConfirmCode() {
