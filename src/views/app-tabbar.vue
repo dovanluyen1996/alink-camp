@@ -56,7 +56,7 @@ export default {
           page: ScoresNavigator,
         },
         {
-          label: '風予報',
+          label: '今の風',
           icon: 'wind',
           page: WindForecastNavigator,
         },

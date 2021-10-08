@@ -3,7 +3,7 @@
     @show="show"
     @hide="hide"
   >
-    <custom-toolbar title="風予報" />
+    <custom-toolbar title="今の風" />
 
     <div class="content">
       <loading :visible="isLoading" />

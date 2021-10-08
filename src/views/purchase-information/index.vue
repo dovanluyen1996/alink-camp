@@ -33,7 +33,7 @@
 
         <purchase-point>
           <template #title>
-            位置情報を活用した風予報を提供
+            コンパス×風予報で「今の風」が分かる
           </template>
           <template #thumbnail>
             <img
@@ -41,7 +41,8 @@
               alt="purchase-point-1"
             >
           </template>
-          実際にゴルフボールを打つ際に、進行方向に対してどの向きに風が吹いているか予測ができます。
+          進行方向に対しての風予報を提供。<br>
+          ゴルフボールを打つ際、コース上空の風を確認できます。
         </purchase-point>
 
         <purchase-point>

@@ -1,7 +1,7 @@
 <template>
   <v-ons-page @show="show">
     <custom-toolbar
-      title="風予報"
+      title="今の風"
       :subtitle="courses.length ? '確認をしたいコース選択' : ''"
     />
     <div class="content">
