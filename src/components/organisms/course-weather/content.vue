@@ -114,7 +114,6 @@ export default {
     },
     goToCourseDetail() {
       this.$store.commit('courseSearchNavigator/setEnableBusy', false);
-
       this.$store.commit('appTabbar/setActiveIndex', settings.views.appTabbar.tabIndexes.courseSearch);
       this.$store.dispatch('courseSearchNavigator/reset', CourseSearchIndexPage);
       this.$store.dispatch('courseSearchNavigator/push', {
