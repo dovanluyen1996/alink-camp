@@ -71,14 +71,6 @@
             </div>
             <div class="purchase__action">
               <v-ons-button
-                v-if="isIos"
-                modifier="rounded"
-                @click="callToPurchase()"
-              >
-                以前購入した方はこちらから復元
-              </v-ons-button>
-              <v-ons-button
-                v-else
                 modifier="rounded"
                 @click="restorePurchase()"
               >
@@ -126,11 +118,6 @@ export default {
       checkPurchaseErrorVisible: false,
       isLoading: false,
     };
-  },
-  computed: {
-    isIos() {
-      return window.device.platform === 'iOS';
-    },
   },
   methods: {
     callToPurchase() {
