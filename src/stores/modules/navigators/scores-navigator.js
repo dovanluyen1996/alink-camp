@@ -4,6 +4,7 @@ export default {
   state: {
     stack: [],
     isBusy: false,
+    enableBusy: true,
   },
   mutations: {
     push(state, page) {
@@ -25,7 +26,14 @@ export default {
       state.stack = [];
     },
     setIsBusy(state, isBusy) {
+      if (!state.enableBusy) {
+        isBusy = false;
+      }
+
       state.isBusy = isBusy;
+    },
+    setEnableBusy(state, enableBusy) {
+      state.enableBusy = enableBusy;
     },
   },
   actions: {

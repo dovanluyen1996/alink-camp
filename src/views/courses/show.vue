@@ -126,9 +126,11 @@ export default {
       });
     },
     async goToScore() {
+      await this.getUserCourseResults();
+
+      this.$store.commit('scoresNavigator/setEnableBusy', false);
       this.$store.commit('appTabbar/setActiveIndex', settings.views.appTabbar.tabIndexes.scores);
       this.$store.dispatch('scoresNavigator/reset', ScoresIndexPage);
-      await this.getUserCourseResults();
 
       if (this.userCourseResultSize) {
         this.goToScoreSummary();
@@ -143,6 +145,11 @@ export default {
           course: this.course,
           userCourse: this.userCourse,
         },
+        onsNavigatorOptions: {
+          callback: () => {
+            this.$store.commit('scoresNavigator/setEnableBusy', true);
+          },
+        },
       });
     },
     goToScoreSummary() {
@@ -150,6 +157,11 @@ export default {
         extends: UserCourseResultsIndex,
         onsNavigatorProps: {
           userCourse: this.userCourse,
+        },
+        onsNavigatorOptions: {
+          callback: () => {
+            this.$store.commit('scoresNavigator/setEnableBusy', true);
+          },
         },
       });
     },
