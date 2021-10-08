@@ -113,12 +113,19 @@ export default {
       return forecasts;
     },
     goToCourseDetail() {
+      this.$store.commit('courseSearchNavigator/setEnableBusy', false);
+
       this.$store.commit('appTabbar/setActiveIndex', settings.views.appTabbar.tabIndexes.courseSearch);
       this.$store.dispatch('courseSearchNavigator/reset', CourseSearchIndexPage);
       this.$store.dispatch('courseSearchNavigator/push', {
         extends: CourseShowPage,
         onsNavigatorProps: {
           course: this.useUserCourse.course,
+        },
+        onsNavigatorOptions: {
+          callback: () => {
+            this.$store.commit('courseSearchNavigator/setEnableBusy', true);
+          },
         },
       });
     },
