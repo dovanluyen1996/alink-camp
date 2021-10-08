@@ -149,6 +149,8 @@ export default {
     tableScrollNow() {
       // NOTE: セルのdate-time属性に時刻を入れてスクロール位置を取得している
       const table = this.$el.querySelector('.hourly-weather-table');
+      if (!table) return;
+
       const dateRow = table.querySelector('.date-row');
       const timeRow = table.querySelector('.time-row');
       const th = timeRow.querySelector('th');
