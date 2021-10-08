@@ -49,7 +49,16 @@ export default {
   },
   data() {
     return {
-      services: [
+      signInErrorVisible: false,
+      isLoading: false,
+    };
+  },
+  created() {
+    this.addHandleOpenUrlAfterLogin();
+  },
+  computed: {
+    services() {
+      return [
         {
           name: 'SignInWithApple',
           text: 'Appleでサインイン',
@@ -64,13 +73,8 @@ export default {
           modifierClass: 'google',
           isShow: true,
         },
-      ],
-      signInErrorVisible: false,
-      isLoading: false,
-    };
-  },
-  created() {
-    this.addHandleOpenUrlAfterLogin();
+      ]
+    }
   },
   methods: {
     signIn(provider) {
