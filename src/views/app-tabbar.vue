@@ -86,8 +86,11 @@ export default {
     },
   },
   methods: {
-    prechange() {
-      if (this.isNavigatorBusy) return;
+    prechange(event) {
+      if (this.isNavigatorBusy) {
+        event.cancel();
+        return;
+      }
 
       // When click to other tab,
       // if menu is open other page, reset menu
