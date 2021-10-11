@@ -75,6 +75,7 @@
     "cordova-plugin-device-orientation": "^2.0.1",
     "cordova-plugin-geolocation": "^4.1.0",
     "cordova-plugin-idfa": "^2.0.0",
+    "cordova-plugin-safariviewcontroller": "^2.0.0",
     "cordova-plugin-screen-orientation": "^3.0.2",
     "cordova-plugin-splashscreen": "^6.0.0",
     "cordova-plugin-whitelist": "1",
@@ -157,7 +158,8 @@
       "cordova-plugin-customurlscheme": {
         "URL_SCHEME": "jp.rights.alink.golftenki.dev"
       },
-      "cordova-plugin-screen-orientation": {}
+      "cordova-plugin-screen-orientation": {},
+      "cordova-plugin-safariviewcontroller": {}
     },
     "platforms": [
       "android",

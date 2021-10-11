@@ -11,8 +11,7 @@
     >
       <a
         v-if="sponsor.image && sponsor.image.url"
-        :href="sponsor.url"
-        target="_blank"
+        @click="openPage(sponsor.url)"
       >
         <img :src="sponsor.image.url">
       </a>
@@ -113,6 +112,17 @@ export default {
       await this.$store.dispatch('models/userStamp/getUserStamp');
       await this.$store.dispatch('models/currentUser/getUser');
       await this.$store.dispatch('models/sponsor/getSponsors');
+    },
+    openPage(url) {
+      window.SafariViewController.show({
+        url,
+      },
+      (result) => {
+        console.log(result);
+      },
+      (error) => {
+        console.log(error);
+      });
     },
   },
 };

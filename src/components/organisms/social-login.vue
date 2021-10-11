@@ -75,15 +75,27 @@ export default {
       const domain = process.env.COGNITO_USER_POOL_DOMAIN;
       const clientId = process.env.COGNITO_CLIENT_ID;
       const type = process.env.COGNITO_RESPONSE_TYPE;
-      const callback = process.env.COGNITO_CALLBACK_URL;
-      const scope = process.env.COGNITO_OAUTH_SCOPES;
+      const callback = encodeURI(process.env.COGNITO_CALLBACK_URL);
+      const scope = encodeURI(process.env.COGNITO_OAUTH_SCOPES);
       const providerUrl = `${domain}/authorize?response_mode=form_post&identity_provider=${provider}&response_type=${type}&client_id=${clientId}&redirect_uri=${callback}&scope=${scope}`;
 
       localStorage.setItem('externalProviderSignIn', true);
-      window.open(providerUrl, '_system');
+      window.SafariViewController.show({
+        url: providerUrl,
+      },
+      (result) => {
+        console.log(result);
+      },
+      (error) => {
+        console.log(error);
+        this.showSignInError();
+      });
     },
     addHandleOpenUrlAfterLogin() {
       window.handleOpenURL = async(url) => {
+        // Close SafariViewController after login success
+        window.SafariViewController.hide();
+
         this.isLoading = true;
         const code = this.oauthCode(url);
         if (!code) {

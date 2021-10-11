@@ -14,9 +14,8 @@
           <span class="map-link">
             MAP
             <a
-              :href="mapUrl"
               class="map-link__target"
-              :target="target()"
+              @click="openPage(mapUrl)"
             >
             </a></span>
         </td>
@@ -63,8 +62,7 @@
         <td>
           <a
             v-if="course.url"
-            :href="course.url"
-            :target="target()"
+            @click="openPage(course.url)"
           >
             {{ course.url }}
           </a>
@@ -80,8 +78,7 @@
         <td>
           <a
             v-if="course.jalanUrl"
-            :href="course.jalanUrl"
-            :target="target()"
+            @click="openPage(course.jalanUrl)"
           >
             {{ course.jalanUrl }}
           </a>
@@ -125,12 +122,20 @@ export default {
       return this.$store.getters['course/choosenCourse'];
     },
     mapUrl() {
-      return `https://maps.google.com/?q=${this.course.name}`;
+      return `https://maps.google.com/?q=${encodeURI(this.course.name)}`;
     },
   },
   methods: {
-    target() {
-      return (cordova.platformId === 'browser') ? '_self' : '_blank';
+    openPage(url) {
+      window.SafariViewController.show({
+        url,
+      },
+      (result) => {
+        console.log(result);
+      },
+      (error) => {
+        console.log(error);
+      });
     },
   },
 };

@@ -16,9 +16,8 @@
 
     <a
       v-if="reservationUrl()"
-      :href="reservationUrl()"
       class="reservation-button button button--large--cta button--rounded"
-      :target="target()"
+      @click="openReservationPage()"
     >
       ゴルフコースの予約をする
     </a>
@@ -67,8 +66,16 @@ export default {
     reservationUrl() {
       return this.course.jalanUrl;
     },
-    target() {
-      return (cordova.platformId === 'browser') ? '_self' : '_blank';
+    openReservationPage() {
+      window.SafariViewController.show({
+        url: this.reservationUrl(),
+      },
+      (result) => {
+        console.log(result);
+      },
+      (error) => {
+        console.log(error);
+      });
     },
   },
 };

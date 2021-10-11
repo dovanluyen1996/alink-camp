@@ -3249,6 +3249,11 @@ cordova-plugin-purchases@2.3.1:
   resolved "https://registry.yarnpkg.com/cordova-plugin-purchases/-/cordova-plugin-purchases-2.3.1.tgz#795c44e7c2559d6777fb3ed261205a3c9d8e8c22"
   integrity sha512-aZRC4PE4lFC58yczXAe5+6RpEW8NGII2YSO+48ySDFD6gesYzjDXH9im2+R5h4v1ErOndSPQ9D10YpliI/UaQw==
 
+cordova-plugin-safariviewcontroller@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/cordova-plugin-safariviewcontroller/-/cordova-plugin-safariviewcontroller-2.0.0.tgz#29537f25bb6c65d149a2ddae9ccba9e99b769792"
+  integrity sha512-pYYM4hcS9YsS47N97HA5dIG7JAVrsCLaD/RLG/0rBfFuGVWQmu776TazPjrvZs3chZDYQTLPZGkx4othrig0AQ==
+
 cordova-plugin-screen-orientation@^3.0.2:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/cordova-plugin-screen-orientation/-/cordova-plugin-screen-orientation-3.0.2.tgz#81290a933cfe84d35482cfcb251c931cc7b71931"
