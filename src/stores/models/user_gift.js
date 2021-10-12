@@ -11,6 +11,9 @@ export default {
     isLoading: state => state.isLoading,
   },
   mutations: {
+    setUserGifts(state, userGifts) {
+      state.userGifts = userGifts
+    },
     addUserGift(state, userGift) {
       state.userGifts.push(userGift);
     },
@@ -27,6 +30,20 @@ export default {
 
         context.commit('addUserGift', userGift);
         context.dispatch('models/currentUser/getUser', null, { root: true });
+      } catch (error) {
+        context.commit('api/setError', error, { root: true });
+        throw error;
+      } finally {
+        context.commit('setIsLoading', false);
+      }
+    },
+    async getUserGifts(context) {
+      context.commit('setIsLoading', true);
+
+      try {
+        const userGifts = await ApiClient.getUserGifts();
+
+        context.commit('setUserGifts', userGifts);
       } catch (error) {
         context.commit('api/setError', error, { root: true });
         throw error;
