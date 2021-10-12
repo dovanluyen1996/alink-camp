@@ -116,12 +116,6 @@ export default {
     openPage(url) {
       window.SafariViewController.show({
         url,
-      },
-      (result) => {
-        console.log(result);
-      },
-      (error) => {
-        console.log(error);
       });
     },
   },

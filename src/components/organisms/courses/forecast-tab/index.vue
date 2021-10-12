@@ -69,12 +69,6 @@ export default {
     openReservationPage() {
       window.SafariViewController.show({
         url: this.reservationUrl(),
-      },
-      (result) => {
-        console.log(result);
-      },
-      (error) => {
-        console.log(error);
       });
     },
   },
