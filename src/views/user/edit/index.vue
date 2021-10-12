@@ -118,6 +118,7 @@ export default {
     user() {
       const user = { ...this.currentUser };
       if (!user.birthdate) user.birthdate = '';
+      if (!user.prefecture) user.prefecture = -1;
 
       return user;
     },
@@ -149,7 +150,9 @@ export default {
     },
     async update() {
       this.closeConfirmDialog();
-      await this.$store.dispatch('models/currentUser/updateUser', this.user);
+      let updatedUser = { ...this.user }
+      if (updatedUser.prefecture === -1) updatedUser.prefecture = '';
+      await this.$store.dispatch('models/currentUser/updateUser', updatedUser);
       this.showCompletedDialog();
     },
     async getCurrentUser() {

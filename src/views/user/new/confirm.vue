@@ -64,13 +64,13 @@ export default {
   },
   computed: {
     birthdateText() {
-      return this.user.birthdate && this.$moment(this.user.birthdate).format('YYYY/MM/DD');
+      return this.user.birthdate ? this.$moment(this.user.birthdate).format('YYYY/MM/DD') : '設定なし';
     },
     prefectureText() {
       const prefecture = settings.views.prefectures.find(
         _prefecture => _prefecture.value === this.user.prefecture,
       );
-      return prefecture ? prefecture.text : '';
+      return prefecture ? prefecture.text : '設定なし';
     },
     isLoading() {
       return this.$store.getters['models/currentUser/isLoading'];
@@ -81,7 +81,10 @@ export default {
       this.$store.dispatch('appNavigator/pop');
     },
     submitUserData() {
-      this.$store.dispatch('models/currentUser/updateUser', this.user).then(() => {
+      let confirmedUser = { ...this.user };
+      if (confirmedUser.prefecture === -1) confirmedUser.prefecture = '';
+
+      this.$store.dispatch('models/currentUser/updateUser', confirmedUser).then(() => {
         IdfaAaidPlugin.init();
         const ADJUST_TOKEN = (window.device.platform === 'iOS') ? process.env.ADJUST_TOKEN_IOS : process.env.ADJUST_TOKEN_ANDROID;
         const adjustEvent = new AdjustEvent(ADJUST_TOKEN.REGISTRATION_COMPLETED_EVENT_ID);
