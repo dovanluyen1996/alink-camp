@@ -1,7 +1,7 @@
 <template>
   <date-field
     v-model="inputedValue"
-    title="生年月日"
+    title="生年月日（任意）"
     :errors="errors"
   />
 </template>

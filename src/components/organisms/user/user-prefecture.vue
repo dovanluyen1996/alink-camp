@@ -3,7 +3,7 @@
     v-model="selectedValue"
     :options="prefectureOptions"
     placeholder="都道府県を選択してください"
-    title="お住まい"
+    title="お住まい（任意）"
     :errors="errors"
   />
 </template>

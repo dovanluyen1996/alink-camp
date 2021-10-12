@@ -7,10 +7,6 @@
       <loading :visible="isLoading" />
       <base-form>
         <confirm-field
-          :value="genderText"
-          title="性別"
-        />
-        <confirm-field
           :value="birthdateText"
           title="生年月日"
         />
@@ -67,12 +63,8 @@ export default {
     },
   },
   computed: {
-    genderText() {
-      const gender = settings.views.genders.find(_gender => _gender.value === this.user.gender);
-      return gender ? gender.text : '';
-    },
     birthdateText() {
-      return this.$moment(this.user.birthdate).format('YYYY/MM/DD');
+      return this.user.birthdate && this.$moment(this.user.birthdate).format('YYYY/MM/DD');
     },
     prefectureText() {
       const prefecture = settings.views.prefectures.find(

@@ -9,17 +9,7 @@
         <base-form>
           <validation-provider
             v-slot="{ errors }"
-            rules="required-select"
-            name="性別"
-          >
-            <user-gender
-              v-model="user.gender"
-              :errors="errors"
-            />
-          </validation-provider>
-          <validation-provider
-            v-slot="{ errors }"
-            rules="required|required-past-day"
+            rules="required-past-day"
             name="生年月日"
           >
             <user-birthdate
@@ -29,7 +19,6 @@
           </validation-provider>
           <validation-provider
             v-slot="{ errors }"
-            rules="required-select"
             name="お住まい"
           >
             <user-prefecture
@@ -51,7 +40,6 @@
 <script>
 // components
 import BaseForm from '@/components/organisms/form/base-form';
-import UserGender from '@/components/organisms/user/user-gender';
 import UserBirthdate from '@/components/organisms/user/user-birthdate';
 import UserPrefecture from '@/components/organisms/user/user-prefecture';
 import CustomSubmit from '@/components/organisms/form/custom-submit';
@@ -63,7 +51,6 @@ export default {
   name: 'UserNewUserData',
   components: {
     BaseForm,
-    UserGender,
     UserBirthdate,
     UserPrefecture,
     CustomSubmit,
@@ -71,7 +58,6 @@ export default {
   data() {
     return {
       user: {
-        gender: -1,
         birthdate: '1980-01-01',
         prefecture: -1,
       },

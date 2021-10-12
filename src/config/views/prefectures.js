@@ -1,5 +1,9 @@
 export default [
   {
+    value: null,
+    text: '設定なし',
+  },
+  {
     value: 1,
     text: '北海道',
   },
