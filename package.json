@@ -157,7 +157,7 @@
       "cordova-plugin-background-mode": {},
       "cordova-plugin-ionic-keyboard": {},
       "cordova-plugin-customurlscheme": {
-        "URL_SCHEME": "jp.or.jwa.tenkijp.golf.stg"
+        "URL_SCHEME": "jp.rights.alink.golftenki.dev"
       },
       "cordova-plugin-screen-orientation": {},
       "cordova-plugin-safariviewcontroller": {},
