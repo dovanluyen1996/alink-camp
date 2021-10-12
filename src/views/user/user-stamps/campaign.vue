@@ -114,13 +114,7 @@ export default {
       await this.$store.dispatch('models/sponsor/getSponsors');
     },
     openPage(url) {
-      if (window.device.platform === 'iOS') {
-        window.SafariViewController.show({
-          url,
-        });
-      } else {
-        window.open(url, '_blank', 'location=yes');
-      }
+      this.$helpers.openPageByUrl(url);
     },
   },
 };
