@@ -57,6 +57,8 @@ const initializeVue = () => {
 
   AdjustPlugin.init();
 
+  window.open = cordova.InAppBrowser.open;
+
   new Vue({
     el: '#app',
     store,

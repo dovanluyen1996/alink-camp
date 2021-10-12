@@ -132,12 +132,6 @@ export default {
   },
 
   openPageByUrl(url) {
-    if (window.device.platform === 'iOS') {
-      window.SafariViewController.show({
-        url,
-      });
-    } else {
-      window.open(url, '_blank', 'location=yes');
-    }
+    window.open(url, '_blank', 'location=no,toolbarposition=top');
   },
 };
