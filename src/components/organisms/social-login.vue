@@ -80,21 +80,27 @@ export default {
       const providerUrl = `${domain}/authorize?response_mode=form_post&identity_provider=${provider}&response_type=${type}&client_id=${clientId}&redirect_uri=${callback}&scope=${scope}`;
 
       localStorage.setItem('externalProviderSignIn', true);
-      window.SafariViewController.show({
-        url: providerUrl,
-      },
-      (result) => {
-        console.log(result);
-      },
-      (error) => {
-        console.log(error);
-        this.showSignInError();
-      });
+      if (window.device.platform === 'iOS') {
+        window.SafariViewController.show({
+          url: providerUrl,
+        },
+        (result) => {
+          console.log(result);
+        },
+        (error) => {
+          console.log(error);
+          this.showSignInError();
+        });
+      } else {
+        window.open(providerUrl, '_system');
+      }
     },
     addHandleOpenUrlAfterLogin() {
       window.handleOpenURL = async(url) => {
         // Close SafariViewController after login success
-        window.SafariViewController.hide();
+        if (window.device.platform === 'iOS') {
+          window.SafariViewController.hide();
+        }
 
         this.isLoading = true;
         const code = this.oauthCode(url);

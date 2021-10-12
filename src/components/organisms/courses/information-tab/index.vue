@@ -127,9 +127,7 @@ export default {
   },
   methods: {
     openPage(url) {
-      window.SafariViewController.show({
-        url,
-      });
+      this.$helpers.openPageByUrl(url);
     },
   },
 };

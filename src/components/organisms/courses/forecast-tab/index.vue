@@ -67,9 +67,7 @@ export default {
       return this.course.jalanUrl;
     },
     openReservationPage() {
-      window.SafariViewController.show({
-        url: this.reservationUrl(),
-      });
+      this.$helpers.openPageByUrl(this.reservationUrl());
     },
   },
 };
