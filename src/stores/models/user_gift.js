@@ -8,6 +8,9 @@ export default {
     isLoading: false,
   },
   getters: {
+    findByGiftId: state => giftId => state.userGifts.find(
+      userGift => userGift.giftId === giftId,
+    ),
     isLoading: state => state.isLoading,
   },
   mutations: {

@@ -9,6 +9,7 @@
       <template #footer>
         <v-ons-button
           modifier="large--cta rounded"
+          :disabled="isApplied(gift)"
           @click="clickGift(gift)"
         >
           抽選応募する
@@ -25,6 +26,13 @@ export default {
   name: 'GiftList',
   components: {
     CardGift,
+  },
+  computed: {
+    isApplied() {
+      return function(gift) {
+        return this.$store.getters['models/userGift/findByGiftId'](gift.id);
+      };
+    }
   },
   props: {
     gifts: {
