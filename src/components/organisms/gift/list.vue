@@ -14,6 +14,11 @@
         >
           抽選応募する
         </v-ons-button>
+        <template v-if="isApplied(gift)">
+          <div class="already-applied">
+            既にこのアカウントで応募済みです
+          </div>
+        </template>
       </template>
     </card-gift>
   </div>
@@ -48,3 +53,10 @@ export default {
   },
 };
 </script>
+
+<style scoped lang="scss">
+.already-applied {
+  margin-top: 10px;
+  text-align: center;
+}
+</style>
