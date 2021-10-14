@@ -127,7 +127,7 @@ const onBackButton = (event) => {
   //    -> If open other page -> back to previous screen like button 「<」
   //    -> If is openning Top Page of Tab -> set Active Tab to App Top
   if (tabbarActiveIndex === settings.views.appTabbar.tabIndexes.courseWeather) {
-    cordova.plugins.backgroundMode.moveToBackground();
+    store.commit('components/confirmAppExitDialog/setVisible', true);
   } else {
     resetTabPage(tabbarActiveIndex);
   }

@@ -88,6 +88,8 @@
         @close="closePurchaseError"
       />
     </div>
+
+    <confirm-app-exit-dialog></confirm-app-exit-dialog>
   </v-ons-page>
 </template>
 
@@ -98,6 +100,7 @@ import ErrorDialog from '@/components/organisms/error-dialog';
 import Greeting from '@/components/organisms/purchase-information/greeting';
 import PurchasePoint from '@/components/organisms/purchase-information/point';
 import UsingNote from '@/components/organisms/purchase-information/using-note';
+import ConfirmAppExitDialog from '@/components/organisms/dialog/confirm-app-exit-dialog';
 
 // pages
 import StartIndex from '@/views/start';
@@ -110,6 +113,7 @@ export default {
     Greeting,
     PurchasePoint,
     UsingNote,
+    ConfirmAppExitDialog,
   },
   data() {
     return {
