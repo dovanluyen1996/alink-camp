@@ -126,20 +126,14 @@ export default {
       await this.checkChargedStatusComplete(isCharged);
     },
     async checkChargedStatusComplete(isCharged) {
-      this.isLoading = true;
-
-      setTimeout(async() => {
-        this.isLoading = false;
-
-        if (isCharged) {
-          const isAuthenticated = await this.isAuthenticated();
-          if (isAuthenticated) {
-            this.checkBeforeGoToAppTabbar();
-          }
-        } else {
-          this.$store.dispatch('appNavigator/replace', PurchaseInformation);
+      if (isCharged) {
+        const isAuthenticated = await this.isAuthenticated();
+        if (isAuthenticated) {
+          this.checkBeforeGoToAppTabbar();
         }
-      }, 1000);
+      } else {
+        this.$store.dispatch('appNavigator/replace', PurchaseInformation);
+      }
     },
     closeCheckChargedStatusError() {
       this.checkChargedStatusErrorVisible = false;
