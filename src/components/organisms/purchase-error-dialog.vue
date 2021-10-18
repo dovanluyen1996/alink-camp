@@ -26,7 +26,6 @@ export default {
 
     window.addEventListener('onPurchaserInfoUpdated', async(purchaserInfo) => {
       const isCharged = Object.entries(purchaserInfo.entitlements.active).length > 0;
-      console.log(isCharged);
 
       if (!isCharged) await this.$store.dispatch('appNavigator/reset', PurchaseInformation);
     },
