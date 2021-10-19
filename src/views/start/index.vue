@@ -34,7 +34,7 @@
       />
     </div>
 
-    <confirm-app-exit-dialog></confirm-app-exit-dialog>
+    <confirm-app-exit-dialog />
   </v-ons-page>
 </template>
 
