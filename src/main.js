@@ -81,66 +81,7 @@ const initializeVue = () => {
   });
 };
 
-const resetTabPage = (tabbarActiveIndex) => {
-  switch (tabbarActiveIndex) {
-  case settings.views.appTabbar.tabIndexes.courseSearch:
-    if (store.state.courseSearchNavigator.stack.length > 1) {
-      store.dispatch('courseSearchNavigator/pop');
-    } else {
-      store.commit('appTabbar/setActiveIndex', settings.views.appTabbar.tabIndexes.courseWeather);
-    }
-    break;
-  case settings.views.appTabbar.tabIndexes.scores:
-    if (store.state.scoresNavigator.stack.length > 1) {
-      store.dispatch('scoresNavigator/pop');
-    } else {
-      store.commit('appTabbar/setActiveIndex', settings.views.appTabbar.tabIndexes.courseWeather);
-    }
-    break;
-  case settings.views.appTabbar.tabIndexes.windForecast:
-    if (store.state.windForecastNavigator.stack.length > 1) {
-      store.dispatch('windForecastNavigator/pop');
-    } else {
-      store.commit('appTabbar/setActiveIndex', settings.views.appTabbar.tabIndexes.courseWeather);
-    }
-    break;
-  case settings.views.appTabbar.tabIndexes.menu:
-    if (store.state.menuNavigator.stack.length > 1) {
-      store.dispatch('menuNavigator/pop');
-    } else {
-      store.commit('appTabbar/setActiveIndex', settings.views.appTabbar.tabIndexes.courseWeather);
-    }
-    break;
-  default:
-    break;
-  }
-};
-
-const onBackButton = (event) => {
-  // check appTabbar index
-  const tabbarActiveIndex = store.state.appTabbar.activeIndex;
-
-  // If active index is App Top -> move to background
-  //
-  // If active index isn't App Top
-  // -> check is open other page in each tab
-  //    -> If open other page -> back to previous screen like button 「<」
-  //    -> If is openning Top Page of Tab -> set Active Tab to App Top
-  if (tabbarActiveIndex === settings.views.appTabbar.tabIndexes.courseWeather) {
-    store.commit('components/confirmAppExitDialog/setVisible', true);
-  } else {
-    resetTabPage(tabbarActiveIndex);
-  }
-
-  // To prevent back button exit application event.
-  event.preventDefault();
-  event.stop();
-
-  return false;
-};
-
 document.addEventListener('deviceready', initializeVue, false);
-document.addEventListener('backbutton', onBackButton, false);
 
 const plugin = {
   install() {
