@@ -4,16 +4,13 @@
       <loading :visible="isLoading" />
       <div class="start-page__top">
         <img
-          src="@/assets/images/start/logo.png"
-          width="145px"
-          height="160px"
+          src="@/assets/images/start/logo-start.png"
+          width="315px"
+          height="119px"
           class="app-logo"
         >
-        <div class="app-name">
-          ゴルフ天気
-        </div>
         <div class="app-version">
-          <small>
+          <small class="value">
             ver {{ appVersion }}
           </small>
         </div>
@@ -154,7 +151,7 @@ export default {
   text-align: center;
 
   &__top {
-    margin-bottom: 112px;
+    margin-bottom: 180px;
   }
 
   &__bottom {
@@ -167,19 +164,24 @@ export default {
   }
 }
 
-.app-logo {
-  margin-bottom: 20px;
-}
-
-.app-name {
-  font-size: 20px;
-  font-weight: 600;
-  line-height: 34px;
-}
-
 .app-version {
-  font-size: 15px;
+  width: 315px;
+  margin: 0 auto;
+  font-size: 18px;
   font-weight: 600;
-  line-height: 26px;
+  color: white;
+  text-align: left;
+
+  .value {
+    padding-left: 180px;
+  }
+}
+
+/deep/ {
+  .page__background {
+    background-image: url('~@/assets/images/background-start.png');
+    background-position: center;
+    background-size: cover;
+  }
 }
 </style>
