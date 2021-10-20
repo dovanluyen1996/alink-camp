@@ -12,7 +12,6 @@
       />
       <user-stamps-campaign />
     </div>
-
   </v-ons-page>
 </template>
 
