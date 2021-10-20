@@ -6,7 +6,7 @@
       @deviceBackButton="deviceBackButton"
     />
 
-    <confirm-app-exit-dialog :is-shown.sync="isShown"/>
+    <confirm-app-exit-dialog :is-shown.sync="confirmAppExitVisible"/>
   </div>
 </template>
 
@@ -21,7 +21,7 @@ export default {
   },
   data() {
     return {
-      isShown: false,
+      confirmAppExitVisible: false,
     };
   },
   computed: {
@@ -47,7 +47,7 @@ export default {
       //    -> If open other page -> back to previous screen like button 「<」
       //    -> If is openning Top Page of Tab -> set Active Tab to App Top
       if (tabbarActiveIndex === settings.views.appTabbar.tabIndexes.courseWeather) {
-        this.isShown = true;
+        this.confirmAppExitVisible = true;
       } else {
         this.resetTabPage(tabbarActiveIndex);
       }
