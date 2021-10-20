@@ -13,7 +13,6 @@
       <user-stamps-campaign />
     </div>
 
-    <confirm-app-exit-dialog />
   </v-ons-page>
 </template>
 
@@ -35,13 +34,9 @@ import WindForecastIndexPage from '@/views/wind-forecast/index';
 import CourseWeatherIndexPage from '@/views/course-weather/index';
 import MenuIndexPage from '@/views/menu/index';
 
-// components
-import ConfirmAppExitDialog from '@/components/organisms/dialog/confirm-app-exit-dialog';
-
 export default {
   components: {
     UserStampsCampaign,
-    ConfirmAppExitDialog,
   },
   data() {
     return {

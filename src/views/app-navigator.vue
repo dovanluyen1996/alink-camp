@@ -1,16 +1,29 @@
 <template>
-  <v-ons-navigator
-    :page-stack="pageStack"
-    :pop-page="popPage"
-    @deviceBackButton="deviceBackButton"
-  />
+  <div>
+    <v-ons-navigator
+      :page-stack="pageStack"
+      :pop-page="popPage"
+      @deviceBackButton="deviceBackButton"
+    />
+
+    <confirm-app-exit-dialog :is-shown.sync="isShown"/>
+  </div>
 </template>
 
 <script>
 import StartIndex from '@/views/start';
 import settings from '@/config/settings';
+import ConfirmAppExitDialog from '@/components/organisms/dialog/confirm-app-exit-dialog';
 
 export default {
+  components: {
+    ConfirmAppExitDialog,
+  },
+  data() {
+    return {
+      isShown: false,
+    };
+  },
   computed: {
     pageStack() {
       return this.$store.state.appNavigator.stack;
@@ -34,7 +47,7 @@ export default {
       //    -> If open other page -> back to previous screen like button 「<」
       //    -> If is openning Top Page of Tab -> set Active Tab to App Top
       if (tabbarActiveIndex === settings.views.appTabbar.tabIndexes.courseWeather) {
-        this.$store.commit('components/confirmAppExitDialog/setVisible', true);
+        this.isShown = true;
       } else {
         this.resetTabPage(tabbarActiveIndex);
       }

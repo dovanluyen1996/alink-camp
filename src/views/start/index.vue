@@ -33,8 +33,6 @@
         @close="closeCheckChargedStatusError"
       />
     </div>
-
-    <confirm-app-exit-dialog />
   </v-ons-page>
 </template>
 
@@ -48,14 +46,10 @@ import FirstGuidance from '@/views/first-guidance';
 import PurchaseInformation from '@/views/purchase-information';
 import ErrorDialog from '@/components/organisms/error-dialog';
 
-// components
-import ConfirmAppExitDialog from '@/components/organisms/dialog/confirm-app-exit-dialog';
-
 export default {
   name: 'StartIndex',
   components: {
     ErrorDialog,
-    ConfirmAppExitDialog,
   },
   mixins: [CheckCompleteRegistration],
   data() {

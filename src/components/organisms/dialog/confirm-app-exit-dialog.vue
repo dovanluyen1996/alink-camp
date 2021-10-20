@@ -1,6 +1,6 @@
 <template>
   <v-ons-alert-dialog
-    :visible="isVisible"
+    :visible.sync="isVisible"
   >
     <template #title>
       アプリ終了の確認
@@ -27,14 +27,25 @@
 <script>
 export default {
   name: 'ConfirmAppExitDialog',
+  props: {
+    isShown: {
+      type: Boolean,
+      required: true,
+    },
+  },
   computed: {
-    isVisible() {
-      return this.$store.state.components.confirmAppExitDialog.isVisible;
+    isVisible: {
+      get() {
+        return this.isShown;
+      },
+      set(newValue) {
+        this.$emit('update:isShown', newValue);
+      },
     },
   },
   methods: {
     cancel() {
-      this.$store.commit('components/confirmAppExitDialog/setVisible', false);
+      this.isVisible = false;
     },
     appExit() {
       navigator.app.exitApp();
