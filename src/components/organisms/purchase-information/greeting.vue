@@ -1,16 +1,20 @@
 <template>
   <div class="greeting">
-    <div class="greeting__title">
+    <div class="greeting__logo">
       <img
-        :src="require('@/assets/images/purchase-information/icon-with-text.png')"
-        width="188px"
+        :src="require('@/assets/images/purchase-information/logo.png')"
+        width="283px"
+        height="107px"
       >
+    </div>
+    <div class="greeting__title">
       <p>天気を把握して、コース予約や準備に</p>
     </div>
     <div class="greeting__content">
       <img
         :src="require('@/assets/images/purchase-information/medal.png')"
-        width="41%"
+        width="124px"
+        height="120px"
       >
     </div>
   </div>
@@ -26,51 +30,37 @@ export default {
 @import '@/assets/scss/_variables.scss';
 
 .greeting {
+  background-image: url('~@/assets/images/purchase-information/background-purchase.png');
+  background-position: center;
+  background-size: cover;
+
+  &__logo {
+    display: flex;
+    justify-content: center;
+    padding-top: 17px;
+  }
+
   &__title {
     display: flex;
-    flex-flow: column;
-    align-items: center;
     justify-content: center;
-    height: 98px;
-    padding: 0 12px;
-    color: #fff;
-    background-color: $color-green;
 
     p {
-      margin-top: 10px;
-      margin-bottom: 0;
+      padding: 5px 12px;
       font-size: 16px;
-      font-weight: 300;
+      font-weight: 600;
+      color: white;
+      background-color: $color-green;
+      border: 1px solid white;
     }
   }
 
   &__content {
     display: flex;
-    flex-flow: column;
-    align-items: center;
-    text-align: center;
-    background-image: url('~@/assets/images/purchase-information/background-purchase.png');
-    background-repeat: no-repeat;
-    background-position: bottom;
-    background-size: 100% 100%;
+    justify-content: center;
 
     img {
-      padding: 70px 0;
-    }
-
-    /deep/ {
-      .button[class*="button--rounded"] {
-        height: 44px;
-        padding: 0 20px;
-        margin-bottom: 35px;
-        font-size: 20px;
-        font-weight: 600;
-        line-height: 2;
-        color: #fff;
-        background-color: $color-orange;
-        border: 2px solid #fff;
-        border-radius: 30px;
-      }
+      padding-top: 20px;
+      padding-bottom: 35px;
     }
   }
 }
