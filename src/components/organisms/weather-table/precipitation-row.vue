@@ -8,7 +8,7 @@
     </th>
     <template v-for="(precipitation, index) in precipitations">
       <td :key="index">
-        {{ precipitation || '--' }}
+        {{ precipitationText(precipitation) || '--' }}
       </td>
     </template>
   </tr>
@@ -29,6 +29,11 @@ export default {
     precipitations() {
       return this.forecastData.map(data => data.precip);
     },
+  },
+  methods: {
+    precipitationText(precipitation) {
+      return this.$helpers.isEmpty(precipitation) ? '--' : precipitation;
+    }
   },
 };
 </script>

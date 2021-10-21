@@ -13,7 +13,7 @@
     </th>
     <template v-for="(windSpeed, index) in windSpeeds">
       <td :key="index">
-        {{ windSpeed || '--' }}
+        {{ windSpeedText(windSpeed) }}
       </td>
     </template>
   </tr>
@@ -36,6 +36,11 @@ export default {
       type: Boolean,
       default: false,
     },
+  },
+  methods: {
+    windSpeedText(windSpeed) {
+      return this.$helpers.isEmpty(windSpeed) ? '--' : windSpeed;
+    }
   },
 };
 </script>

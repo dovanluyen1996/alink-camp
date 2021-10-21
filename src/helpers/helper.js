@@ -55,6 +55,15 @@ export default {
     return moment(time).isAfter(moment());
   },
 
+  isEmpty(value) {
+    if (!value) {
+      if (value !== 0) {
+        return true;
+      }
+    }
+    return false;
+  },
+
   isEmptyObject(object) {
     return Object.keys(object).length === 0;
   },
