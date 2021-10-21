@@ -56,12 +56,7 @@ export default {
   },
 
   isEmpty(value) {
-    if (!value) {
-      if (value !== 0) {
-        return true;
-      }
-    }
-    return false;
+    return !value && value !== 0
   },
 
   isEmptyObject(object) {
