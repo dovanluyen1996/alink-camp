@@ -40,7 +40,7 @@ export default {
   methods: {
     windSpeedText(windSpeed) {
       return this.$helpers.isEmpty(windSpeed) ? '--' : windSpeed;
-    }
+    },
   },
 };
 </script>

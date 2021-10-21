@@ -33,7 +33,7 @@ export default {
   methods: {
     precipitationText(precipitation) {
       return this.$helpers.isEmpty(precipitation) ? '--' : precipitation;
-    }
+    },
   },
 };
 </script>

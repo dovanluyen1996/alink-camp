@@ -56,7 +56,7 @@ export default {
   },
 
   isEmpty(value) {
-    return !value && value !== 0
+    return !value && value !== 0;
   },
 
   isEmptyObject(object) {
