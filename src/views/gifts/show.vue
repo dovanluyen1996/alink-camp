@@ -109,7 +109,7 @@ export default {
   },
   data() {
     return {
-      email: this.$store.state.models.currentUser.user.email,
+      email: '',
       confirmVisible: false,
       completedVisible: false,
       isButtonShown: true,
