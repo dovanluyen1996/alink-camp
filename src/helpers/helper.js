@@ -136,6 +136,8 @@ export default {
   },
 
   openPageByUrl(url) {
-    window.open(url, '_blank', 'location=no,toolbarposition=top');
+    window.SafariViewController.show({
+      url: url,
+    });
   },
 };

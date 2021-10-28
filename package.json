@@ -158,8 +158,7 @@
         "URL_SCHEME": "jp.rights.alink.golftenki.dev"
       },
       "cordova-plugin-screen-orientation": {},
-      "cordova-plugin-safariviewcontroller": {},
-      "cordova-plugin-inappbrowser": {}
+      "cordova-plugin-safariviewcontroller": {}
     },
     "platforms": [
       "android",
