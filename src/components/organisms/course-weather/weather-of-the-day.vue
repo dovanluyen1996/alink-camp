@@ -1,7 +1,7 @@
 <template>
   <div class="course-weather-of-the-day">
     <div class="course-weather-of-the-day-title">
-      予定日当日のお天気
+      予定日当日の天気
     </div>
     <v-ons-row>
       <v-ons-col width="50%">

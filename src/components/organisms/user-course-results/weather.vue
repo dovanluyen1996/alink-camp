@@ -2,7 +2,7 @@
   <v-ons-col class="course-weather-col">
     <div class="course-weather-date">
       {{ weather.date | moment('M/D') }}
-      お天気
+      天気
     </div>
     <weather-image
       :weather="weather"

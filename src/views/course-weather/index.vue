@@ -1,6 +1,6 @@
 <template>
   <v-ons-page @show="show">
-    <custom-toolbar title="コースお天気" />
+    <custom-toolbar title="コース天気" />
     <div class="content">
       <loading :visible="isLoading" />
       <no-data v-if="userCourses.length === 0 && userCoursePlans.length === 0">

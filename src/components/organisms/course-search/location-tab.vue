@@ -22,7 +22,7 @@
       <course-search-date-field v-model="targetDate" />
 
       <annotations-block>
-        ※予報は本日から10日目までとなります。それ以上は過去のお天気をもとに予測したデータとなります。<br>
+        ※予報は本日から10日目までとなります。それ以上は過去の天気をもとに予測したデータとなります。<br>
         ※紫外線、風の強さに関しては10日目までの予報となります。
       </annotations-block>
 

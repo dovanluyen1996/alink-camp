@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="card__title">
-      お天気詳細情報
+      天気詳細情報
     </div>
     <check-field
       v-model="inputedSunnyValue"

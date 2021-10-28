@@ -15,7 +15,7 @@
               alt="purchase-point-1"
             >
           </template>
-          過去のお天気データを活用して最適なコースを検索できます。
+          過去の天気データを活用して最適なコースを検索できます。
         </purchase-point>
 
         <purchase-point :content-full-width="true">
