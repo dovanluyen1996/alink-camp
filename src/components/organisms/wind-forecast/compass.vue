@@ -43,7 +43,7 @@ export default {
   data() {
     return {
       windSpeed: 0,
-      windDirection: '北',
+      windDirection: '南',
       windDirectionDeg: 0,
       compassHeading: 0,
       compassHeadingDeg: 0,
