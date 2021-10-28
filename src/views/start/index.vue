@@ -82,9 +82,9 @@ export default {
       }
     },
     async isAuthenticated() {
-      const session_headers = await ApiClient.buildSessionHeaders();
+      const sessionHeaders = await ApiClient.buildSessionHeaders();
 
-      return this.$helpers.isPresentObject(session_headers)
+      return this.$helpers.isPresentObject(sessionHeaders);
     },
     async start() {
       await this.$store.dispatch('models/appStart/getAppStart');
