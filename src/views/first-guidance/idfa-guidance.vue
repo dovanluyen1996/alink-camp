@@ -45,11 +45,13 @@
 </template>
 
 <script>
+import ApiClient from '@/api_client';
+
 // components
 import ContentWithFooter from '@/components/organisms/content-with-footer';
 
 // pages
-import UserNew from '@/views/user/new';
+import AppTabbar from '@/views/app-tabbar';
 
 // config
 import IdfaAaidPlugin from '@/config/idfa';
@@ -69,19 +71,21 @@ export default {
       if (window.device.platform === 'iOS') {
         this.isShownIdfaAlert = true;
       } else {
-        this.goToUserNew();
+        this.goToAppTabbar();
       }
     },
     closeIdfaAlert() {
       this.isShownIdfaAlert = false;
       this.goToUserNew();
     },
-    goToUserNew() {
+    async goToAppTabbar() {
       IdfaAaidPlugin.init();
       const ADJUST_TOKEN = (window.device.platform === 'iOS') ? process.env.ADJUST_TOKEN_IOS : process.env.ADJUST_TOKEN_ANDROID;
       const adjustEvent = new AdjustEvent(ADJUST_TOKEN.TUTORIAL_COMPLETED_EVENT_ID);
       Adjust.trackEvent(adjustEvent);
-      this.$store.dispatch('appNavigator/push', UserNew);
+
+      await ApiClient.signUp();
+      this.$store.dispatch('appNavigator/push', AppTabbar);
     },
   },
 };

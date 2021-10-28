@@ -22,9 +22,6 @@ class ApiClient extends HttpClient {
         config.data = FormDataBuilder.toFormData(ObjectKeyConverter.camelToSnake(config.data));
       }
 
-      const accessToken = await this.buildAccessToken();
-      if (accessToken) config.headers[settings.authorization.accessToken.header] = accessToken;
-
       const sessionHeaders = await this.buildSessionHeaders();
       if (sessionHeaders) config.headers = { ...config.headers, ...sessionHeaders };
 
