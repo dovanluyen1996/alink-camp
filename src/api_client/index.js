@@ -4,7 +4,6 @@ import HttpClient from '@/lib/http_client';
 import ObjectKeyConverter from '@/lib/object_key_converter';
 import FormDataBuilder from '@/lib/form_data_builder';
 import modules from '@/api_client/modules';
-import cognito from '@/cognito';
 
 class ApiClient extends HttpClient {
   constructor() {
@@ -58,18 +57,6 @@ class ApiClient extends HttpClient {
 
       throw errorObject;
     });
-  }
-
-  async buildAccessToken() {
-    try {
-      const session = await cognito.isAuthenticated();
-
-      return `${settings.authorization.accessToken.valuePrefix} ${session.accessToken.jwtToken}`;
-    } catch (err) {
-      console.log(err);
-
-      return null;
-    }
   }
 
   isNewestAppVersion(appVersion, newestVersion) {
