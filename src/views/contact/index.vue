@@ -83,27 +83,11 @@
       </template>
     </v-ons-alert-dialog>
 
-    <v-ons-alert-dialog
-      :visible.sync="completeDialogVisible"
-      cancelable
-      modifier="notitle"
-    >
-      <span
-        class="alert-dialog-close-btn"
-        @click="closeCompleteDialog()"
-      />
-
-      お問い合わせ内容を送信しました。
-
-      <template #footer>
-        <v-ons-button
-          modifier="cta"
-          @click="closeCompleteDialog()"
-        >
-          閉じる
-        </v-ons-button>
-      </template>
-    </v-ons-alert-dialog>
+    <completed-dialog
+      action="sendContact"
+      :is-visible="completedDialogVisible"
+      @close="closeCompletedDialog"
+    />
   </v-ons-page>
 </template>
 
@@ -113,6 +97,7 @@ import ContactInquiry from '@/components/organisms/contacts/contact-inquiry';
 import ContactContent from '@/components/organisms/contacts/contact-content';
 import CardWithTitle from '@/components/organisms/card-with-title';
 import ContentWithFooter from '@/components/organisms/content-with-footer';
+import CompletedDialog from '@/components/organisms/dialog/completed-dialog';
 
 export default {
   components: {
@@ -120,6 +105,7 @@ export default {
     ContactContent,
     CardWithTitle,
     ContentWithFooter,
+    CompletedDialog,
   },
   data() {
     return {
@@ -128,7 +114,7 @@ export default {
         category: -1,
       },
       confirmDialogVisible: false,
-      completeDialogVisible: false,
+      completedDialogVisible: false,
       isButtonShown: true,
     };
   },
@@ -152,11 +138,11 @@ export default {
     closeConfirmDialog() {
       this.confirmDialogVisible = false;
     },
-    showCompleteDialog() {
-      this.completeDialogVisible = true;
+    showCompletedDialog() {
+      this.completedDialogVisible = true;
     },
-    closeCompleteDialog() {
-      this.completeDialogVisible = false;
+    closeCompletedDialog() {
+      this.completedDialogVisible = false;
 
       this.$store.dispatch('menuNavigator/pop');
     },
@@ -173,7 +159,7 @@ export default {
       this.closeConfirmDialog();
       await this.$store.dispatch('models/contact/sendContact', params);
 
-      this.showCompleteDialog();
+      this.showCompletedDialog();
     },
     onKeyBoardShow() {
       this.isButtonShown = false;
@@ -193,20 +179,6 @@ export default {
 
 <style lang="scss" scoped>
 /deep/ {
-  .alert-dialog--notitle {
-    .alert-dialog-title {
-      display: none;
-    }
-
-    .alert-dialog-content {
-      padding: 18px 20px 8px;
-    }
-
-    .alert-dialog-footer {
-      padding: 24px 0;
-    }
-  }
-
   .card-width-title {
     .card-title {
       margin-top: 20px;

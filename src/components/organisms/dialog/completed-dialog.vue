@@ -41,6 +41,8 @@ export default {
       case 'deleteResult':
       case 'deletePlan':
         return '削除完了';
+      case 'sendContact':
+        return 'お問い合わせ完了';
       default:
         return null;
       }
@@ -59,6 +61,8 @@ export default {
         return '予定日を登録しました。';
       case 'deletePlan':
         return '予定日を削除しました。';
+      case 'sendContact':
+        return 'お問い合わせ内容を送信しました。';
       default:
         return null;
       }
