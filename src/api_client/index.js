@@ -26,7 +26,7 @@ class ApiClient extends HttpClient {
       if (accessToken) config.headers[settings.authorization.accessToken.header] = accessToken;
 
       const sessionHeaders = await this.buildSessionHeaders();
-      config.headers = { ...config.headers, ...sessionHeaders };
+      if (sessionHeaders) config.headers = { ...config.headers, ...sessionHeaders };
 
       return config;
     });
