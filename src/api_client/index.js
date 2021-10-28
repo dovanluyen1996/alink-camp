@@ -25,6 +25,9 @@ class ApiClient extends HttpClient {
       const accessToken = await this.buildAccessToken();
       if (accessToken) config.headers[settings.authorization.accessToken.header] = accessToken;
 
+      const sessionHeaders = await this.buildSessionHeaders();
+      config.headers = { ...config.headers, ...sessionHeaders };
+
       return config;
     });
 
@@ -35,6 +38,8 @@ class ApiClient extends HttpClient {
         throw (error);
       }
       this._log([`[${response.config.method.toUpperCase()}] ${response.config.url} Response: ${response.status}`, response.data]);
+
+      this.saveSession(response.headers);
 
       if (response && response.data) {
         response.data = ObjectKeyConverter.snakeToCamel(response.data);
@@ -86,6 +91,37 @@ class ApiClient extends HttpClient {
       console.log(e);
       return true;
     }
+  }
+
+  saveSession(headers) {
+    if (!headers.client) return;
+    if (!headers['access-token']) return;
+    if (!headers.uid) return;
+
+    localStorage.setItem(
+      this.storageKey,
+      JSON.stringify({
+        client: headers.client,
+        'access-token': headers['access-token'],
+        uid: headers.uid,
+      }),
+    );
+  }
+
+  async buildSessionHeaders() {
+    const session = this.readSession();
+    if (!session) return {};
+
+    const headers = {};
+    if (session.client) headers.client = session.client;
+    if (session['access-token']) headers['access-token'] = session['access-token'];
+    if (session.uid) headers.uid = session.uid;
+
+    return headers;
+  }
+
+  readSession() {
+    return JSON.parse(localStorage.getItem(this.storageKey));
   }
 }
 
