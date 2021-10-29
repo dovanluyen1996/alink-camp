@@ -76,7 +76,7 @@ export default {
     },
     closeIdfaAlert() {
       this.isShownIdfaAlert = false;
-      this.goToUserNew();
+      this.goToAppTabbar();
     },
     async goToAppTabbar() {
       IdfaAaidPlugin.init();
