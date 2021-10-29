@@ -76,7 +76,7 @@ class ApiClient extends HttpClient {
   }
 
   saveSession(headers) {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       if (!headers.client) return resolve();
       if (!headers['access-token']) return resolve();
       if (!headers.uid) return resolve();
@@ -90,12 +90,12 @@ class ApiClient extends HttpClient {
         }),
       );
 
-      resolve();
+      return resolve();
     });
   }
 
   buildSessionHeaders() {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       const session = this.readSession();
       if (!session) return resolve({});
 
@@ -104,7 +104,7 @@ class ApiClient extends HttpClient {
       if (session['access-token']) headers['access-token'] = session['access-token'];
       if (session.uid) headers.uid = session.uid;
 
-      resolve(headers);
+      return resolve(headers);
     });
   }
 
