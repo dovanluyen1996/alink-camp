@@ -30,6 +30,8 @@
           </template>
         </base-form>
       </validation-observer>
+
+      ※データを引継ぐのに大切なIDです、メモを残すなど必ず保存してください
     </div>
 
     <v-ons-alert-dialog :visible="isShownComfirmDialog">
