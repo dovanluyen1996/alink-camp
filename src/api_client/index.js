@@ -22,7 +22,7 @@ class ApiClient extends HttpClient {
       }
 
       const sessionHeaders = await this.buildSessionHeaders();
-      if (sessionHeaders) config.headers = { ...config.headers, ...sessionHeaders };
+      config.headers = { ...config.headers, ...sessionHeaders };
 
       return config;
     });
@@ -92,16 +92,18 @@ class ApiClient extends HttpClient {
     );
   }
 
-  async buildSessionHeaders() {
-    const session = this.readSession();
-    if (!session) return {};
+  buildSessionHeaders() {
+    return new Promise(resolve => {
+      const session = this.readSession();
+      if (!session) return resolve({});
 
-    const headers = {};
-    if (session.client) headers.client = session.client;
-    if (session['access-token']) headers['access-token'] = session['access-token'];
-    if (session.uid) headers.uid = session.uid;
+      const headers = {};
+      if (session.client) headers.client = session.client;
+      if (session['access-token']) headers['access-token'] = session['access-token'];
+      if (session.uid) headers.uid = session.uid;
 
-    return headers;
+      resolve(headers);
+    });
   }
 
   readSession() {
