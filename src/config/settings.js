@@ -18,7 +18,7 @@ export default {
     },
   },
   regex: {
-    password: /^(?=.*?[a-z])(?=.*?\d).{6,}$/,
+    password: /^[0-9]{4}$/,
   },
   app_store: {
     ios: 'https://itunes.apple.com/jp/app/id1584902038?mt=8',
