@@ -35,8 +35,6 @@ class ApiClient extends HttpClient {
       }
       this._log([`[${response.config.method.toUpperCase()}] ${response.config.url} Response: ${response.status}`, response.data]);
 
-      this.saveSession(response.headers);
-
       if (response && response.data) {
         response.data = ObjectKeyConverter.snakeToCamel(response.data);
       }
@@ -78,18 +76,22 @@ class ApiClient extends HttpClient {
   }
 
   saveSession(headers) {
-    if (!headers.client) return;
-    if (!headers['access-token']) return;
-    if (!headers.uid) return;
+    return new Promise(resolve => {
+      if (!headers.client) return resolve();
+      if (!headers['access-token']) return resolve();
+      if (!headers.uid) return resolve();
 
-    localStorage.setItem(
-      this.storageKey,
-      JSON.stringify({
-        client: headers.client,
-        'access-token': headers['access-token'],
-        uid: headers.uid,
-      }),
-    );
+      localStorage.setItem(
+        this.storageKey,
+        JSON.stringify({
+          client: headers.client,
+          'access-token': headers['access-token'],
+          uid: headers.uid,
+        }),
+      );
+
+      resolve();
+    });
   }
 
   buildSessionHeaders() {
