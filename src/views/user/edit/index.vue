@@ -16,7 +16,7 @@
             name="パスワード"
           >
             <password-field
-              v-model="passwrod"
+              v-model="password"
               :can-show-password="true"
               help="※4文字の半角数字で登録して下さい"
               title="パスワード"
@@ -107,7 +107,7 @@ export default {
     return {
       isShownComfirmDialog: false,
       completedVisible: false,
-      passwrod: ''
+      password: ''
     };
   },
   computed: {
@@ -143,7 +143,7 @@ export default {
     },
     async update() {
       this.closeConfirmDialog();
-      let updatedUser = { password: this.passwrod }
+      let updatedUser = { password: this.password }
       await this.$store.dispatch('models/currentUser/updateUser', updatedUser);
       this.showCompletedDialog();
     },
