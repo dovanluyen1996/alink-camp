@@ -12,7 +12,7 @@
           />
           <validation-provider
             v-slot="{ errors }"
-            rules="required|password"
+            rules="password"
             name="パスワード"
           >
             <password-field
@@ -31,7 +31,17 @@
         </base-form>
       </validation-observer>
 
-      ※データを引継ぐのに大切なIDです、メモを残すなど必ず保存してください
+      <p class="notice">
+        ※パスワードを設定していない場合は、データ引き継ぎはご利用いただけません
+      </p>
+
+      <p class="notice">
+        ※データを引継ぐのに大切なIDです、メモを残すなど必ず保存をしてください
+      </p>
+
+      <p class="notice">
+        ※再インストールや機種変更時にアプリTOPのデータを引継ぐよりご利用ください
+      </p>
     </div>
 
     <v-ons-alert-dialog :visible="isShownComfirmDialog">
@@ -159,6 +169,10 @@ export default {
 <style lang="scss" scoped>
 .content {
   padding-bottom: 20px;
+}
+
+.notice {
+  margin: 20px;
 }
 
 /deep/ .form-buttons {
