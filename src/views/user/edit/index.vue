@@ -18,7 +18,7 @@
             <password-field
               v-model="password"
               :can-show-password="true"
-              help="※6文字以上の半角英数字で登録して下さい"
+              :help="help"
               title="パスワード"
               :errors="errors"
             />
@@ -121,6 +121,16 @@ export default {
     },
     isLoading() {
       return this.$store.getters['models/currentUser/isLoading'];
+    },
+    help() {
+      if (this.user.hasPassword) {
+        return `
+          ※6文字以上の半角英数字で登録して下さい
+          ※既にパスワードは登録済みです
+        `
+      } else {
+        return '※6文字以上の半角英数字で登録して下さい'
+      }
     },
   },
   async created() {
