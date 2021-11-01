@@ -18,7 +18,7 @@
             <password-field
               v-model="password"
               :can-show-password="true"
-              help="※4文字の半角数字で登録して下さい"
+              help="※6文字以上の半角英数字で登録して下さい"
               title="パスワード"
               :errors="errors"
             />
