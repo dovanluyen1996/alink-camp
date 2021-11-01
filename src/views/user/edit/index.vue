@@ -46,11 +46,10 @@
 
     <v-ons-alert-dialog :visible="isShownComfirmDialog">
       <template #title>
-        設定変更確認
+        {{ confirmDialogTitle }}
       </template>
 
-      データ引継ぎ設定の内容を変更します。<br>
-      よろしいですか？
+      {{ confirmDialogBody }}
 
       <template #footer>
         <v-ons-button
@@ -105,6 +104,8 @@ export default {
   },
   data() {
     return {
+      confirmDialogTitle: '',
+      confirmDialogBody: '',
       isShownComfirmDialog: false,
       completedVisible: false,
       password: ''
@@ -133,6 +134,14 @@ export default {
   },
   methods: {
     showConfirmDialog() {
+      if (this.password.length === 0) {
+        this.confirmDialogTitle = 'パスワード未設定の注意'
+        this.confirmDialogBody = 'パスワードが未設定のため、データの引継ぎはできません。よろしいですか？'
+      } else {
+        this.confirmDialogTitle = '設定変更確認'
+        this.confirmDialogBody = 'データ引継ぎ設定の内容を変更します。よろしいですか？'
+      }
+
       this.isShownComfirmDialog = true;
     },
     closeConfirmDialog() {
