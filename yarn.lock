@@ -3234,11 +3234,6 @@ cordova-plugin-idfa@^2.0.0:
   resolved "https://registry.yarnpkg.com/cordova-plugin-idfa/-/cordova-plugin-idfa-2.0.0.tgz#058d53db1eb0350be50e860b74fc2c9ccb52394a"
   integrity sha512-oxTLXf97xYBmfTTR6R/yMIXf/NzG8CRhr8L9w0bqD4ZBq7SILukVUI4YR7bAtfWpCQTbEJXFbMXLzzTIQONLQg==
 
-cordova-plugin-inappbrowser@^5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/cordova-plugin-inappbrowser/-/cordova-plugin-inappbrowser-5.0.0.tgz#2f1cf3ebfecf43bdd175a74743ee426832054951"
-  integrity sha512-MqnpmUQ/iy6hxtIGDdlIhy8aNi1pNanLATpbnkk7uCqW9YQ4rH/dGK9zESbZ50pUi2A2D2QMjBXNV175TJK5OQ==
-
 cordova-plugin-ionic-keyboard@2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/cordova-plugin-ionic-keyboard/-/cordova-plugin-ionic-keyboard-2.2.0.tgz#53ba9ccd5e765165446a094cfe042a2ddd87d81d"

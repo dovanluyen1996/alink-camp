@@ -74,7 +74,6 @@
     "cordova-plugin-device-orientation": "^2.0.1",
     "cordova-plugin-geolocation": "^4.1.0",
     "cordova-plugin-idfa": "^2.0.0",
-    "cordova-plugin-inappbrowser": "^5.0.0",
     "cordova-plugin-safariviewcontroller": "^2.0.0",
     "cordova-plugin-screen-orientation": "^3.0.2",
     "cordova-plugin-splashscreen": "^6.0.0",
