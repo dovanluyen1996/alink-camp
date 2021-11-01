@@ -71,10 +71,11 @@
       :visible.sync="completedVisible"
     >
       <template #title>
-        変更完了
+        引継ぎ設定を完了しました
       </template>
 
-      情報を変更しました。
+      機種変更または、アプリの再インストール後にデータを引継ぐために必要な情報です。<br>
+      必ずメモなどをして保管をしてください。
 
       <template #footer>
         <v-ons-button
