@@ -164,6 +164,7 @@ export default {
       this.closeConfirmDialog();
       let updatedUser = { password: this.password }
       await this.$store.dispatch('models/currentUser/updateUser', updatedUser);
+      this.password = ''
       this.showCompletedDialog();
     },
     async getCurrentUser() {
