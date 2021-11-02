@@ -18,7 +18,7 @@
             <password-field
               v-model="password"
               :can-show-password="true"
-              :help="help"
+              :help="help()"
               title="パスワード"
               :errors="errors"
             />
@@ -118,16 +118,6 @@ export default {
     isLoading() {
       return this.$store.getters['models/currentUser/isLoading'];
     },
-    help() {
-      if (this.currentUser.hasPassword) {
-        return `
-          ※6文字以上の半角英数字で登録して下さい
-          ※既にパスワードは登録済みです
-        `
-      } else {
-        return '※6文字以上の半角英数字で登録して下さい'
-      }
-    },
   },
   async created() {
     await this.getCurrentUser();
@@ -177,6 +167,16 @@ export default {
       const activeField = document.activeElement;
       if (activeField) {
         activeField.scrollIntoView(true);
+      }
+    },
+    help() {
+      if (this.currentUser.hasPassword) {
+        return `
+          ※6文字以上の半角英数字で登録して下さい
+          ※既にパスワードは登録済みです
+        `
+      } else {
+        return '※6文字以上の半角英数字で登録して下さい'
       }
     },
   },
