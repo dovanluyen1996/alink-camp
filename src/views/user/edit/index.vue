@@ -108,7 +108,7 @@ export default {
       confirmDialogBody: '',
       isShownComfirmDialog: false,
       completedVisible: false,
-      password: ''
+      password: '',
     };
   },
   computed: {
@@ -131,11 +131,11 @@ export default {
   methods: {
     showConfirmDialog() {
       if (this.password.length === 0) {
-        this.confirmDialogTitle = 'パスワード未設定の注意'
-        this.confirmDialogBody = 'パスワードが未設定のため、データの引継ぎはできません。よろしいですか？'
+        this.confirmDialogTitle = 'パスワード未設定の注意';
+        this.confirmDialogBody = 'パスワードが未設定のため、データの引継ぎはできません。よろしいですか？';
       } else {
-        this.confirmDialogTitle = '設定変更確認'
-        this.confirmDialogBody = 'データ引継ぎ設定の内容を変更します。よろしいですか？'
+        this.confirmDialogTitle = '設定変更確認';
+        this.confirmDialogBody = 'データ引継ぎ設定の内容を変更します。よろしいですか？';
       }
 
       this.isShownComfirmDialog = true;
@@ -148,9 +148,9 @@ export default {
     },
     async update() {
       this.closeConfirmDialog();
-      let updatedUser = { password: this.password }
+      const updatedUser = { password: this.password };
       await this.$store.dispatch('models/currentUser/updateUser', updatedUser);
-      this.password = ''
+      this.password = '';
       this.showCompletedDialog();
     },
     async getCurrentUser() {
@@ -174,10 +174,9 @@ export default {
         return `
           ※6文字以上の半角英数字で登録して下さい
           ※既にパスワードは登録済みです
-        `
-      } else {
-        return '※6文字以上の半角英数字で登録して下さい'
+        `;
       }
+      return '※6文字以上の半角英数字で登録して下さい';
     },
   },
 };
