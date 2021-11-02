@@ -7,7 +7,7 @@
         <base-form>
           <has-editable-button-field
             title="引継ぎID"
-            :value="user.code"
+            :value="currentUser.code"
             :editable="false"
           />
           <validation-provider
@@ -115,15 +115,11 @@ export default {
     currentUser() {
       return this.$store.state.models.currentUser.user;
     },
-    user() {
-      const user = { ...this.currentUser };
-      return user;
-    },
     isLoading() {
       return this.$store.getters['models/currentUser/isLoading'];
     },
     help() {
-      if (this.user.hasPassword) {
+      if (this.currentUser.hasPassword) {
         return `
           ※6文字以上の半角英数字で登録して下さい
           ※既にパスワードは登録済みです
