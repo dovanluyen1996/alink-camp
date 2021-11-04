@@ -18,7 +18,7 @@
     "browser": "cordova build browser && cordova run browser",
     "browser:dev": "cordova build browser && cordova run browser",
     "browser:prd": "cordova build browser --release && cordova run browser --release",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint --no-fix"
   },
   "dependencies": {
     "amazon-cognito-identity-js": "^5.0.3",
