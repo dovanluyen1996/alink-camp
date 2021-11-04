@@ -12,7 +12,7 @@
           />
           <validation-provider
             v-slot="{ errors }"
-            rules="password"
+            rules="required|password"
             name="パスワード"
           >
             <password-field
@@ -46,10 +46,10 @@
 
     <v-ons-alert-dialog :visible="isShownComfirmDialog">
       <template #title>
-        {{ confirmDialogTitle }}
+        設定変更確認
       </template>
 
-      {{ confirmDialogBody }}
+      データ引継ぎ設定の内容を変更します。よろしいですか？
 
       <template #footer>
         <v-ons-button
@@ -104,8 +104,6 @@ export default {
   },
   data() {
     return {
-      confirmDialogTitle: '',
-      confirmDialogBody: '',
       isShownComfirmDialog: false,
       completedVisible: false,
       password: '',
@@ -130,14 +128,6 @@ export default {
   },
   methods: {
     showConfirmDialog() {
-      if (this.password.length === 0) {
-        this.confirmDialogTitle = 'パスワード未設定の注意';
-        this.confirmDialogBody = 'パスワードが未設定のため、データの引継ぎはできません。よろしいですか？';
-      } else {
-        this.confirmDialogTitle = '設定変更確認';
-        this.confirmDialogBody = 'データ引継ぎ設定の内容を変更します。よろしいですか？';
-      }
-
       this.isShownComfirmDialog = true;
     },
     closeConfirmDialog() {
@@ -150,7 +140,6 @@ export default {
       this.closeConfirmDialog();
       const updatedUser = { password: this.password };
       await this.$store.dispatch('models/currentUser/updateUser', updatedUser);
-      this.password = '';
       this.showCompletedDialog();
     },
     async getCurrentUser() {
