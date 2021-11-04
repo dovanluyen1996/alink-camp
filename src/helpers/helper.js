@@ -137,7 +137,7 @@ export default {
 
   openPageByUrl(url) {
     window.SafariViewController.show({
-      url: url,
+      url,
     });
   },
 };

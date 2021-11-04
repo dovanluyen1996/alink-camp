@@ -150,7 +150,7 @@ export default {
     },
     async update() {
       this.closeConfirmDialog();
-      let updatedUser = { ...this.user }
+      const updatedUser = { ...this.user };
       if (updatedUser.prefecture === -1) updatedUser.prefecture = '';
       await this.$store.dispatch('models/currentUser/updateUser', updatedUser);
       this.showCompletedDialog();

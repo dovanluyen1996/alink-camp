@@ -6,7 +6,7 @@
       @deviceBackButton="deviceBackButton"
     />
 
-    <confirm-app-exit-dialog :is-shown.sync="confirmAppExitVisible"/>
+    <confirm-app-exit-dialog :is-shown.sync="confirmAppExitVisible" />
   </div>
 </template>
 

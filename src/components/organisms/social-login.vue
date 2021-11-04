@@ -7,8 +7,8 @@
     <v-ons-card
       v-for="(service, index) in services.filter(sv => isShowService(sv.name))"
       :key="index"
-      @click="signIn(service.name)"
       :class="['social-login-card', service.modifierClass]"
+      @click="signIn(service.name)"
     >
       <div class="social-login-name">
         <img

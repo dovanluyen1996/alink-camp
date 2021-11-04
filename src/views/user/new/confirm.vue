@@ -81,7 +81,7 @@ export default {
       this.$store.dispatch('appNavigator/pop');
     },
     submitUserData() {
-      let confirmedUser = { ...this.user };
+      const confirmedUser = { ...this.user };
       if (confirmedUser.prefecture === -1) confirmedUser.prefecture = '';
 
       this.$store.dispatch('models/currentUser/updateUser', confirmedUser).then(() => {
