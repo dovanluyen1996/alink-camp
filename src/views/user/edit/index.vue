@@ -6,32 +6,20 @@
       <validation-observer v-slot="{ handleSubmit }">
         <base-form>
           <has-editable-button-field
-            :title="isSocialSignIn() ? 'ソーシャルログイン利用中' : 'メールアドレス'"
-            :value="user.email"
+            title="引継ぎID"
+            :value="currentUser.code"
             :editable="false"
           />
-          <has-editable-button-field
-            v-if="!isSocialSignIn()"
-            title="パスワード"
-            value="**************"
-            @clickEdit="goToEditPassword"
-          />
           <validation-provider
             v-slot="{ errors }"
-            rules="required-past-day"
-            name="生年月日"
+            rules="required|password"
+            name="パスワード"
           >
-            <user-birthdate
-              v-model="user.birthdate"
-              :errors="errors"
-            />
-          </validation-provider>
-          <validation-provider
-            v-slot="{ errors }"
-            name="お住まい"
-          >
-            <user-prefecture
-              v-model="user.prefecture"
+            <password-field
+              v-model="password"
+              :can-show-password="true"
+              :help="help()"
+              title="パスワード"
               :errors="errors"
             />
           </validation-provider>
@@ -42,6 +30,18 @@
           </template>
         </base-form>
       </validation-observer>
+
+      <p class="notice">
+        ※パスワードを設定していない場合は、データ引き継ぎはご利用いただけません
+      </p>
+
+      <p class="notice">
+        ※データを引継ぐのに大切なIDです、メモを残すなど必ず保存をしてください
+      </p>
+
+      <p class="notice">
+        ※再インストールや機種変更時にアプリTOPのデータを引継ぐよりご利用ください
+      </p>
     </div>
 
     <v-ons-alert-dialog :visible="isShownComfirmDialog">
@@ -71,10 +71,11 @@
       :visible.sync="completedVisible"
     >
       <template #title>
-        変更完了
+        引継ぎ設定を完了しました
       </template>
 
-      情報を変更しました。
+      機種変更または、アプリの再インストール後にデータを引継ぐために必要な情報です。<br>
+      必ずメモなどをして保管をしてください。
 
       <template #footer>
         <v-ons-button
@@ -91,36 +92,27 @@
 // components
 import BaseForm from '@/components/organisms/form/base-form';
 import HasEditableButtonField from '@/components/organisms/form/has-editable-button-field';
-import UserBirthdate from '@/components/organisms/user/user-birthdate';
-import UserPrefecture from '@/components/organisms/user/user-prefecture';
 import CustomSubmit from '@/components/organisms/form/custom-submit';
-import ChangePasswordView from '@/views/user/edit/change-password';
+import PasswordField from '@/components/organisms/form/password-field';
 
 export default {
   name: 'UserNewUserData',
   components: {
     BaseForm,
     HasEditableButtonField,
-    UserBirthdate,
-    UserPrefecture,
     CustomSubmit,
+    PasswordField,
   },
   data() {
     return {
       isShownComfirmDialog: false,
       completedVisible: false,
+      password: '',
     };
   },
   computed: {
     currentUser() {
       return this.$store.state.models.currentUser.user;
-    },
-    user() {
-      const user = { ...this.currentUser };
-      if (!user.birthdate) user.birthdate = '';
-      if (!user.prefecture) user.prefecture = -1;
-
-      return user;
     },
     isLoading() {
       return this.$store.getters['models/currentUser/isLoading'];
@@ -136,9 +128,6 @@ export default {
     window.removeEventListener('keyboardDidShow', this.onKeyBoardShow);
   },
   methods: {
-    goToEditPassword() {
-      this.$store.dispatch('menuNavigator/push', ChangePasswordView);
-    },
     showConfirmDialog() {
       this.isShownComfirmDialog = true;
     },
@@ -150,8 +139,7 @@ export default {
     },
     async update() {
       this.closeConfirmDialog();
-      const updatedUser = { ...this.user };
-      if (updatedUser.prefecture === -1) updatedUser.prefecture = '';
+      const updatedUser = { password: this.password };
       await this.$store.dispatch('models/currentUser/updateUser', updatedUser);
       this.showCompletedDialog();
     },
@@ -171,8 +159,14 @@ export default {
         activeField.scrollIntoView(true);
       }
     },
-    isSocialSignIn() {
-      return JSON.parse(localStorage.getItem('externalProviderSignIn'));
+    help() {
+      if (this.currentUser.hasPassword) {
+        return `
+          ※6文字以上の半角英数字で登録して下さい
+          ※既にパスワードは登録済みです
+        `;
+      }
+      return '※6文字以上の半角英数字で登録して下さい';
     },
   },
 };
@@ -181,6 +175,10 @@ export default {
 <style lang="scss" scoped>
 .content {
   padding-bottom: 20px;
+}
+
+.notice {
+  margin: 20px;
 }
 
 /deep/ .form-buttons {

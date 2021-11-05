@@ -22,8 +22,8 @@
     <p
       v-if="help"
       class="password-field-help"
+      v-text="help"
     >
-      {{ help }}
     </p>
   </base-field>
 </template>
@@ -85,6 +85,7 @@ export default {
 <style lang="scss" scoped>
 .password-field-help {
   margin-bottom: 0;
+  white-space: pre-line;
 }
 
 .check-field {

@@ -4,11 +4,15 @@
     <div class="content">
       <loading :visible="isLoading" />
       <base-form>
-        <user-email v-model="user.email" />
+        <text-field
+          v-model="user.code"
+          title="引継ぎID"
+        />
         <user-password
           v-model="user.password"
           :can-show-password="false"
           :has-help="false"
+          title="パスワード"
         />
         <template #buttons>
           <div>
@@ -16,25 +20,14 @@
               ログイン
             </custom-submit>
           </div>
-          <div>
-            <v-ons-button
-              modifier="white"
-              class="go-to-password-reminder"
-              @click="goToPasswordReminder"
-            >
-              パスワードを忘れた方はこちら
-            </v-ons-button>
-          </div>
         </template>
       </base-form>
-
-      <social-login />
     </div>
 
     <error-dialog
-      title="ログインに失敗しました"
+      title="引継ぎエラー"
       :is-visible="signInErrorVisible"
-      :error-message="errorMessage"
+      error-message="入力された引継ぎIDまたはパスワードが一致しません。再度ご確認の上入力してください。"
       @close="closeSignInError"
     />
   </v-ons-page>
@@ -45,90 +38,51 @@ import CheckCompleteRegistration from '@/mixins/checkCompleteRegistration';
 
 // components
 import BaseForm from '@/components/organisms/form/base-form';
-import UserEmail from '@/components/organisms/user/user-email';
+import TextField from '@/components/organisms/form/text-field';
 import UserPassword from '@/components/organisms/user/user-password';
 import CustomSubmit from '@/components/organisms/form/custom-submit';
-import SocialLogin from '@/components/organisms/social-login';
 import ErrorDialog from '@/components/organisms/error-dialog';
 
-// pages
-import PasswordReminder from '@/views/auth/password-reminder';
-import ResendConfirmCode from '@/views/user/new/resend-confirm-code';
+import ApiClient from '@/api_client';
 
 export default {
   name: 'SignIn',
   components: {
     BaseForm,
-    UserEmail,
+    TextField,
     UserPassword,
     CustomSubmit,
-    SocialLogin,
     ErrorDialog,
   },
   mixins: [CheckCompleteRegistration],
   data() {
     return {
       user: {
-        email: '',
+        code: '',
         password: '',
       },
-      error: null,
       signInErrorVisible: false,
       isLoading: false,
     };
   },
-  computed: {
-    errorMessage() {
-      if (!this.error) return '';
-
-      switch (this.error.code) {
-      case 'NotAuthorizedException':
-        return 'メールアドレスまたはパスワードが違います。';
-      case 'InvalidParameterException':
-        return 'メールアドレスが不正です。';
-      case 'UserNotConfirmedException':
-        return 'ユーザーが認証されていません。';
-      default:
-        return 'ログインに失敗しました';
-      }
-    },
-  },
   methods: {
-    goToPasswordReminder() {
-      this.$store.dispatch('appNavigator/push', PasswordReminder);
-    },
     async signIn() {
       this.isLoading = true;
-      this.$cognito.login(this.user.email, this.user.password)
-        .then(async(result) => {
-          console.log(result);
-          this.checkBeforeGoToAppTabbar();
-        })
-        .catch((err) => {
-          this.error = err;
-          this.showSignInError();
-        })
-        .finally(() => {
-          this.isLoading = false;
-        });
+
+      try {
+        await ApiClient.signIn({ ...this.user });
+        this.checkBeforeGoToAppTabbar();
+      } catch (error) {
+        this.showSignInError();
+      } finally {
+        this.isLoading = false;
+      }
     },
     showSignInError() {
       this.signInErrorVisible = true;
     },
     closeSignInError() {
       this.signInErrorVisible = false;
-
-      if (this.isNotConfirmed()) {
-        this.$store.dispatch('appNavigator/push', {
-          extends: ResendConfirmCode,
-          onsNavigatorProps: {
-            email: this.user.email,
-          },
-        });
-      }
-    },
-    isNotConfirmed() {
-      return this.error.code === 'UserNotConfirmedException';
     },
   },
 };

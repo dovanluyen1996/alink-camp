@@ -4,7 +4,6 @@ import HttpClient from '@/lib/http_client';
 import ObjectKeyConverter from '@/lib/object_key_converter';
 import FormDataBuilder from '@/lib/form_data_builder';
 import modules from '@/api_client/modules';
-import cognito from '@/cognito';
 
 class ApiClient extends HttpClient {
   constructor() {
@@ -22,8 +21,8 @@ class ApiClient extends HttpClient {
         config.data = FormDataBuilder.toFormData(ObjectKeyConverter.camelToSnake(config.data));
       }
 
-      const accessToken = await this.buildAccessToken();
-      if (accessToken) config.headers[settings.authorization.accessToken.header] = accessToken;
+      const sessionHeaders = await this.buildSessionHeaders();
+      config.headers = { ...config.headers, ...sessionHeaders };
 
       return config;
     });
@@ -58,18 +57,6 @@ class ApiClient extends HttpClient {
     });
   }
 
-  async buildAccessToken() {
-    try {
-      const session = await cognito.isAuthenticated();
-
-      return `${settings.authorization.accessToken.valuePrefix} ${session.accessToken.jwtToken}`;
-    } catch (err) {
-      console.log(err);
-
-      return null;
-    }
-  }
-
   isNewestAppVersion(appVersion, newestVersion) {
     try {
       const appVersions = appVersion.split('.');
@@ -86,6 +73,43 @@ class ApiClient extends HttpClient {
       console.log(e);
       return true;
     }
+  }
+
+  saveSession(headers) {
+    return new Promise((resolve) => {
+      if (!headers.client) return resolve();
+      if (!headers['access-token']) return resolve();
+      if (!headers.uid) return resolve();
+
+      localStorage.setItem(
+        this.storageKey,
+        JSON.stringify({
+          client: headers.client,
+          'access-token': headers['access-token'],
+          uid: headers.uid,
+        }),
+      );
+
+      return resolve();
+    });
+  }
+
+  buildSessionHeaders() {
+    return new Promise((resolve) => {
+      const session = this.readSession();
+      if (!session) return resolve({});
+
+      const headers = {};
+      if (session.client) headers.client = session.client;
+      if (session['access-token']) headers['access-token'] = session['access-token'];
+      if (session.uid) headers.uid = session.uid;
+
+      return resolve(headers);
+    });
+  }
+
+  readSession() {
+    return JSON.parse(localStorage.getItem(this.storageKey));
   }
 }
 

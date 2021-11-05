@@ -17,6 +17,7 @@ import WeatherApi from './weather_api';
 import AppStartApi from './app_start_api';
 import UserDevisesApi from './user_devises_api';
 import SubscriptionsApi from './subscriptions_api';
+import AuthApi from './auth_api';
 
 export default {
   NoticesApi,
@@ -38,4 +39,5 @@ export default {
   AppStartApi,
   UserDevisesApi,
   SubscriptionsApi,
+  AuthApi,
 };

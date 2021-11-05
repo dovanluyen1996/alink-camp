@@ -35,6 +35,7 @@
 
 <script>
 import CheckCompleteRegistration from '@/mixins/checkCompleteRegistration';
+import ApiClient from '@/api_client';
 
 // pages
 import SignIn from '@/views/auth/sign-in';
@@ -81,13 +82,9 @@ export default {
       }
     },
     async isAuthenticated() {
-      let authResult = null;
-      try {
-        authResult = await this.$cognito.isAuthenticated();
-      } catch (err) {
-        console.error(err);
-      }
-      return authResult;
+      const sessionHeaders = await ApiClient.buildSessionHeaders();
+
+      return this.$helpers.isPresentObject(sessionHeaders);
     },
     async start() {
       await this.$store.dispatch('models/appStart/getAppStart');
