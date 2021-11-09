@@ -22,7 +22,7 @@
                 :key="forecast.date"
                 :colspan="spanCount(forecast)"
                 :date-time="forecast.date"
-                class="date-col"
+                :class="['date-col', saturdayCol(forecast.date), sundayCol(forecast.date)]"
               >
                 <div class="date-col__display-date">
                   {{ displayDate(forecast.date) }}
@@ -204,6 +204,12 @@ export default {
 
       return count;
     },
+    saturdayCol(date) {
+      return this.$helpers.isSaturday(date) ? 'date-row__sarturday' : '';
+    },
+    sundayCol(date) {
+      return this.$helpers.isSunday(date) ? 'date-row__sunday' : '';
+    },
   },
 };
 </script>
@@ -228,6 +234,16 @@ export default {
 
 .date-row {
   text-align: left;
+
+  &__sarturday {
+    color: #113095;
+    background-color: #e3f6ff;
+  }
+
+  &__sunday {
+    color: #9d1d1d;
+    background-color: #ffeaea;
+  }
 }
 
 .is-today {
