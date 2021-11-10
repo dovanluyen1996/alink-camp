@@ -5,6 +5,7 @@
       :style="compassHeadingStyle"
     >
       <div
+        v-if="windSpeed > 0.0"
         class="wind-direction wind-speed"
         :class="[windSpeedRate]"
         :style="windDirectionStyle"
