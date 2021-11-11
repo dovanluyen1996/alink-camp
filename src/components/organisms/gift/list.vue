@@ -54,5 +54,6 @@ export default {
 .already-applied {
   margin-top: 10px;
   text-align: center;
+  color: #de133c;
 }
 </style>
