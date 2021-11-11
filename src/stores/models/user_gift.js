@@ -15,7 +15,7 @@ export default {
   },
   mutations: {
     setUserGifts(state, userGifts) {
-      state.userGifts = userGifts
+      state.userGifts = userGifts;
     },
     addUserGift(state, userGift) {
       state.userGifts.push(userGift);

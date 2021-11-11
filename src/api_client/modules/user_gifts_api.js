@@ -6,5 +6,5 @@ export default {
   async getUserGifts() {
     const response = await this.get('/user_gifts');
     return response.data;
-  }
+  },
 };
