@@ -53,7 +53,7 @@ export default {
 <style scoped lang="scss">
 .already-applied {
   margin-top: 10px;
-  text-align: center;
   color: #de133c;
+  text-align: center;
 }
 </style>
