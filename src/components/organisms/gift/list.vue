@@ -32,13 +32,6 @@ export default {
   components: {
     CardGift,
   },
-  computed: {
-    isApplied() {
-      return function(gift) {
-        return this.$store.getters['models/userGift/findByGiftId'](gift.id);
-      };
-    }
-  },
   props: {
     gifts: {
       type: Array,
@@ -49,6 +42,9 @@ export default {
   methods: {
     clickGift(gift) {
       this.$emit('click', gift.id);
+    },
+    isApplied(gift) {
+      return !!this.$store.getters['models/userGift/findByGiftId'](gift.id);
     },
   },
 };
