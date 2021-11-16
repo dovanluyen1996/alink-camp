@@ -16,7 +16,7 @@
         </v-ons-button>
         <template v-if="isApplied(gift)">
           <div class="already-applied">
-            既にこのアカウントで応募済みです
+            ※既にこのアカウントで応募済みです
           </div>
         </template>
       </template>
