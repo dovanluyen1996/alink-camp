@@ -62,7 +62,7 @@
         天気情報がありません
       </template>
 
-      天気情報がまだ発表されていません。
+      天気情報がまだ発表されていません
 
       <template #footer>
         <v-ons-button @click="closeNoForecastWindMessage()">
