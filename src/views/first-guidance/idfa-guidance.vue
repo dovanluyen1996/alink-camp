@@ -85,6 +85,8 @@ export default {
       Adjust.trackEvent(adjustEvent);
 
       await ApiClient.signUp();
+      this.$helpers.createUserDevise();
+
       this.$store.dispatch('appNavigator/push', AppTabbar);
     },
   },
