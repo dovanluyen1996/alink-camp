@@ -1,3 +1,4 @@
+import Vue from 'vue';
 import ApiClient from '@/api_client';
 
 export default {
@@ -15,7 +16,7 @@ export default {
   },
   mutations: {
     setUserGifts(state, userGifts) {
-      state.userGifts = userGifts;
+      Vue.set(state, 'userGifts', userGifts);
     },
     addUserGift(state, userGift) {
       state.userGifts.push(userGift);
