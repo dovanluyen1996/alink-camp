@@ -39,12 +39,16 @@ export default {
       required: true,
     },
   },
+  computed: {
+    isApplied() {
+      return function(gift) {
+        return !!this.$store.getters['models/userGift/findByGiftId'](gift.id);
+      };
+    },
+  },
   methods: {
     clickGift(gift) {
       this.$emit('click', gift.id);
-    },
-    isApplied(gift) {
-      return !!this.$store.getters['models/userGift/findByGiftId'](gift.id);
     },
   },
 };
