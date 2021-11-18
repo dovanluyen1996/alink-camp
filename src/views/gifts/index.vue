@@ -52,6 +52,7 @@ export default {
     await this.getGifts();
     await this.getCurrentUser();
     await this.getUserStamp();
+    await this.getUserGifts();
   },
   methods: {
     goToGift(giftId) {
@@ -70,6 +71,9 @@ export default {
     },
     async getUserStamp() {
       await this.$store.dispatch('models/userStamp/getUserStamp');
+    },
+    async getUserGifts() {
+      await this.$store.dispatch('models/userGift/getUserGifts');
     },
   },
 };

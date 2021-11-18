@@ -9,10 +9,16 @@
       <template #footer>
         <v-ons-button
           modifier="large--cta rounded"
+          :disabled="isApplied(gift)"
           @click="clickGift(gift)"
         >
           抽選応募する
         </v-ons-button>
+        <template v-if="isApplied(gift)">
+          <div class="already-applied">
+            ※既にこのアカウントで応募済みです
+          </div>
+        </template>
       </template>
     </card-gift>
   </div>
@@ -33,6 +39,13 @@ export default {
       required: true,
     },
   },
+  computed: {
+    isApplied() {
+      return function(gift) {
+        return !!this.$store.getters['models/userGift/findByGiftId'](gift.id);
+      };
+    },
+  },
   methods: {
     clickGift(gift) {
       this.$emit('click', gift.id);
@@ -40,3 +53,11 @@ export default {
   },
 };
 </script>
+
+<style scoped lang="scss">
+.already-applied {
+  margin-top: 10px;
+  color: #de133c;
+  text-align: center;
+}
+</style>
