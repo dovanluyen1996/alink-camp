@@ -56,6 +56,20 @@
         </v-ons-button>
       </template>
     </v-ons-alert-dialog>
+
+    <v-ons-alert-dialog :visible.sync="noForecastWindDialogVisible">
+      <template #title>
+        天気情報がありません
+      </template>
+
+      天気情報がまだ発表されていません
+
+      <template #footer>
+        <v-ons-button @click="closeNoForecastWindDialog()">
+          OK
+        </v-ons-button>
+      </template>
+    </v-ons-alert-dialog>
   </v-ons-page>
 </template>
 
@@ -78,6 +92,7 @@ export default {
       forecastWind: {},
       forecastWindErrorVisible: false,
       compassErrorVisible: false,
+      noForecastWindDialogVisible: false,
       forecastWindErrorErrorMsg: '',
     };
   },
@@ -101,8 +116,10 @@ export default {
       let forecastWind = {};
 
       this.forecastWindErrorVisible = false;
+      this.closeNoForecastWindDialog();
       try {
         forecastWind = await this.$store.dispatch('models/weather/getForecastWind', params);
+        if (this.$helpers.isEmptyObject(forecastWind)) this.noForecastWindDialogVisible = true;
       } catch (error) {
         this.forecastWindErrorErrorMsg = error.message;
         this.forecastWindErrorVisible = true;
@@ -124,6 +141,9 @@ export default {
     closeCompassErrorDialog() {
       this.compassErrorVisible = false;
       this.$store.commit('windForecastNavigator/pop');
+    },
+    closeNoForecastWindDialog() {
+      this.noForecastWindDialogVisible = false;
     },
     async onResume() {
       this.forecastWind = await this.getForecastWind();
