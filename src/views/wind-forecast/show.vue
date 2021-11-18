@@ -116,6 +116,7 @@ export default {
       let forecastWind = {};
 
       this.forecastWindErrorVisible = false;
+      this.closeNoForecastWindDialog();
       try {
         forecastWind = await this.$store.dispatch('models/weather/getForecastWind', params);
         if (this.$helpers.isEmptyObject(forecastWind)) this.noForecastWindDialogVisible = true;
