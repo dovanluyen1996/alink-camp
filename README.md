@@ -99,9 +99,9 @@ yarn run android:prd
 
 ### Android12 （API level 31） での注意点
 
-配信前にAndroidManifest.xml を手動で修正する必要がある
+配信前にAndroidManifest.xml を手動で修正する必要がある （[詳細](https://github.com/rights-s/alink-golf_tenki-client/issues/1011)）
 - AndroidStudio で plutforms/android フォルダを開く
 - app>src/main/AndroidManifest.xml を開く
 - <intent-filter>をもつ親要素（`< activity >` `<service>` `<receiver>` など）の属性に `android:exported="true|false"` を追記する  
 
-以降は通常通り aab を作成すればよい
+以降は通常通り aab を作成すればよい 
