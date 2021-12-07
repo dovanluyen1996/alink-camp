@@ -65,8 +65,25 @@ export default {
   }
 }
 
+.custom-card {
+  .card-tab {
+    margin: 20px 10px 0;
+  }
+}
+
 .card__content {
   position: relative;
+}
+
+.course-show {
+  .custom-card {
+    .card {
+      margin: 0;
+      padding: 0;
+      background: none;
+      border-radius: 0;
+    }
+  }
 }
 
 .card-tab-button {

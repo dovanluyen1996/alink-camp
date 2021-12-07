@@ -1,26 +1,30 @@
 <template>
   <div class="courses-forecast-tab">
-    <transition name="fade">
-      <hourly-weather v-if="isShownHourly">
-        <template #switcher>
-          <forecast-switcher :segment-index.sync="segmentIndex" />
-        </template>
-      </hourly-weather>
+    <div class="wrapper-table">
+      <transition name="fade">
+        <hourly-weather v-if="isShownHourly">
+          <template #switcher>
+            <forecast-switcher :segment-index.sync="segmentIndex" />
+          </template>
+        </hourly-weather>
 
-      <ten-days-weather v-if="isShownTenDays">
-        <template #switcher>
-          <forecast-switcher :segment-index.sync="segmentIndex" />
-        </template>
-      </ten-days-weather>
-    </transition>
+        <ten-days-weather v-if="isShownTenDays">
+          <template #switcher>
+            <forecast-switcher :segment-index.sync="segmentIndex" />
+          </template>
+        </ten-days-weather>
+      </transition>
 
-    <a
-      v-if="reservationUrl()"
-      class="reservation-button button button--large--cta button--rounded"
-      @click="openReservationPage()"
-    >
-      ゴルフコースの予約をする
-    </a>
+      <div class="ml-mr-30">
+        <a
+          v-if="reservationUrl()"
+          class="reservation-button button button--large--cta button--rounded"
+          @click="openReservationPage()"
+        >
+          ゴルフコースの予約をする
+        </a>
+      </div>
+    </div>
 
     <monthly-weather />
   </div>
@@ -100,5 +104,16 @@ export default {
   top: 0;
   width: 100%;
   opacity: 0;
+}
+
+.wrapper-table{
+  width: 100%;
+  margin-bottom: 30px;
+  padding: 10px 0 30px;
+  background: #fff;
+}
+
+.ml-mr-30{
+  margin: 0 30px;
 }
 </style>

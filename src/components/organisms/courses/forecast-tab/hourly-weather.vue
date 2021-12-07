@@ -4,53 +4,55 @@
       1時間ごとの天気
     </div>
 
-    <slot name="switcher" />
+    <div class="custom-table">
+      <slot name="switcher" />
 
-    <template v-if="$helpers.isPresentObject(forecastData)">
-      <sticky-table class="hourly-weather-table">
-        <tr class="date-row">
-          <th
-            scope="row"
-            class="th"
-          >
-            日
-          </th>
-          <!-- NOTE: colspan = number of hourly-data plus sunset and sunrise cols -->
-          <template v-for="forecast in forecastHourly.items">
-            <template v-if="spanCount(forecast)">
-              <td
-                :key="forecast.date"
-                :colspan="spanCount(forecast)"
-                :date-time="forecast.date"
-                :class="['date-col', saturdayCol(forecast.date), sundayCol(forecast.date)]"
-              >
-                <div class="date-col__display-date">
-                  {{ displayDate(forecast.date) }}
-                  <span
-                    v-if="isScheduledDate(forecast.date)"
-                    class="is-today"
-                  >
-                    ゴルフ予定日
-                  </span>
-                </div>
-              </td>
+      <template v-if="$helpers.isPresentObject(forecastData)">
+        <sticky-table class="hourly-weather-table">
+          <tr class="date-row">
+            <th
+              scope="row"
+              class="th"
+            >
+              日
+            </th>
+            <!-- NOTE: colspan = number of hourly-data plus sunset and sunrise cols -->
+            <template v-for="forecast in forecastHourly.items">
+              <template v-if="spanCount(forecast)">
+                <td
+                  :key="forecast.date"
+                  :colspan="spanCount(forecast)"
+                  :date-time="forecast.date"
+                  :class="['date-col', saturdayCol(forecast.date), sundayCol(forecast.date)]"
+                >
+                  <div class="date-col__display-date">
+                    {{ displayDate(forecast.date) }}
+                    <span
+                      v-if="isScheduledDate(forecast.date)"
+                      class="is-today"
+                    >
+                      ゴルフ予定日
+                    </span>
+                  </div>
+                </td>
+              </template>
             </template>
-          </template>
-        </tr>
-        <time-row :forecast-data="margedForecastsAndSuns" />
-        <weather-row :weathers="margedForecastsAndSuns" />
-        <precipitation-row :forecast-data="forecastData" />
-        <temperature-row :forecast-data="forecastData" />
-        <wind-direction-row :wind-directions="windDirections" />
-        <wind-speed-row :wind-speeds="windSpeeds" />
-      </sticky-table>
-    </template>
+          </tr>
+          <time-row :forecast-data="margedForecastsAndSuns" />
+          <weather-row :weathers="margedForecastsAndSuns" />
+          <precipitation-row :forecast-data="forecastData" />
+          <temperature-row :forecast-data="forecastData" />
+          <wind-direction-row :wind-directions="windDirections" />
+          <wind-speed-row :wind-speeds="windSpeeds" />
+        </sticky-table>
+      </template>
 
-    <template v-else>
-      <div class="no-forecast">
-        表示できる天気情報がありません
-      </div>
-    </template>
+      <template v-else>
+        <div class="no-forecast">
+          表示できる天気情報がありません
+        </div>
+      </template>
+    </div>
   </div>
 </template>
 
@@ -253,5 +255,9 @@ export default {
 .no-forecast {
   margin: 2rem auto 2rem auto;
   text-align: center;
+}
+
+.custom-table{
+  padding: 0 10px;
 }
 </style>

@@ -31,6 +31,7 @@
         <card-with-tab
           :tabs="tabs"
           :active-index="activeIndexTab"
+          :class="{'custom-card': activeIndexTab === 0}"
           @switchTab="switchTab"
         />
       </div>
