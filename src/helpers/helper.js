@@ -136,8 +136,12 @@ export default {
   },
 
   openPageByUrl(url) {
-    window.SafariViewController.show({
-      url,
-    });
+    if (window.device.platform === 'iOS') {
+      window.SafariViewController.show({
+        url,
+      });
+    } else {
+      window.open(url, '_system');
+    }
   },
 };
