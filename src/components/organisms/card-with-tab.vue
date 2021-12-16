@@ -76,13 +76,11 @@ export default {
 }
 
 .course-show {
-  .custom-card {
-    .card {
-      margin: 0;
-      padding: 0;
-      background: none;
-      border-radius: 0;
-    }
+  .card {
+    margin: 0;
+    padding: 0;
+    background: none;
+    border-radius: 0;
   }
 }
 
