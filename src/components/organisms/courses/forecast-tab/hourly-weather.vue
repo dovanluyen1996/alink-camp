@@ -257,7 +257,7 @@ export default {
   text-align: center;
 }
 
-.custom-table{
+.custom-table {
   padding: 0 10px;
 }
 </style>

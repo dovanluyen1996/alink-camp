@@ -106,14 +106,14 @@ export default {
   opacity: 0;
 }
 
-.wrapper-table{
+.wrapper-table {
   width: 100%;
-  margin-bottom: 30px;
   padding: 10px 0 30px;
+  margin-bottom: 30px;
   background: #fff;
 }
 
-.ml-mr-30{
+.ml-mr-30 {
   margin: 0 30px;
 }
 </style>

@@ -77,8 +77,8 @@ export default {
 
 .course-show {
   .card {
-    margin: 0;
     padding: 0;
+    margin: 0;
     background: none;
     border-radius: 0;
   }

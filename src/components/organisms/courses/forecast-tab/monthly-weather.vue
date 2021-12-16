@@ -28,10 +28,10 @@ export default {
 @import '@/assets/scss/_variables.scss';
 
 .hourly-weather {
-  margin: 40px 30px 30px;
   padding: 30px;
-  border-radius: 10px;
+  margin: 40px 30px 30px;
   background: #fff;
+  border-radius: 10px;
 }
 
 .chart-header {

@@ -180,14 +180,14 @@ export default {
   }
 }
 
-.wrapper-table{
+.wrapper-table {
   width: 100%;
-  margin-bottom: 30px;
   padding: 10px 0 30px;
+  margin-bottom: 30px;
   background: #fff;
 }
 
-.custom-table{
+.custom-table {
   padding: 0 10px;
 }
 </style>
