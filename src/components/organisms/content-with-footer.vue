@@ -68,7 +68,7 @@ export default {
         font-size: 20px;
         font-weight: 600;
         color: #fff;
-        background-color: #ffc134;
+        background-color: #ff980b;
       }
     }
   }
@@ -77,7 +77,7 @@ export default {
 .content-with-footer[class*="guidance-content"] {
   padding: 0 16px;
   color: #fff;
-  background-color: #256c14;
+  background-color: #f2ebd3;
 
   .content-with-footer__content {
     display: flex;

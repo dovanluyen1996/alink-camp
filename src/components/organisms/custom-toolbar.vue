@@ -53,8 +53,8 @@ export default {
 }
 
 .toolbar {
-  &--green {
-    background: #80b700;
+  &--red {
+    background: #c83200;
   }
 }
 
