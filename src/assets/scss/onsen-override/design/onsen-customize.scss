@@ -157,6 +157,23 @@ $button-height--rounded: 36px;
     background-color: #ff6b34;
   }
 
+  &--red {
+    background-color: #a82e05;
+  }
+
+  &--search {
+    display: inline-flex;
+    column-gap: 5px;
+    align-items: center;
+    justify-content: center;
+    width: 200px;
+
+    &__description {
+      margin-top: 20px;
+      margin-bottom: 150px;
+    }
+  }
+
   .alert-dialog-footer & {
     min-width: 140px;
   }
@@ -227,7 +244,7 @@ $button-height--rounded: 36px;
  Page
 ---------- */
 .page__background {
-  background-image: url('~@/assets/images/background-app.jpg');
+  background-image: url('~@/assets/images/background-app.png');
   background-position: center;
   background-size: cover;
 }
