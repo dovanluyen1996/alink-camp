@@ -107,7 +107,7 @@ export default {
 
 <style lang="scss" scoped>
 .background {
-  background: #299025;
+  background: #f2ebd3;
 }
 
 .content {
@@ -125,12 +125,12 @@ export default {
 
 .list-item {
   font-weight: 600;
-  color: #fff;
+  color: #000;
 
   &--chevron::before,
   &__expand-chevron {
-    border-right-color: #fff;
-    border-bottom-color: #fff;
+    border-right-color: #000;
+    border-bottom-color: #000;
   }
 }
 </style>
