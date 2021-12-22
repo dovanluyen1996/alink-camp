@@ -22,12 +22,10 @@
         </template>
       </no-data>
 
-      <content-with-footer v-else>
-        <plan-list
-          :plans="plans"
-          @click="goToPlanDetail"
-        />
-      </content-with-footer>
+      <plan-list
+        :plans="plans"
+        @click="goToPlanDetail"
+      />
     </div>
   </v-ons-page>
 </template>
@@ -36,14 +34,12 @@
 // components
 import NoData from '@/components/organisms/no-data';
 import PlanList from '@/components/organisms/plan-list.vue';
-import ContentWithFooter from '@/components/organisms/content-with-footer';
 
 export default {
   name: 'PlansIndex',
   components: {
     NoData,
     PlanList,
-    ContentWithFooter,
   },
   data() {
     return {
