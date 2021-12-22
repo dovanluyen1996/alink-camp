@@ -130,6 +130,7 @@ $button-height--rounded: 36px;
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 200px;
 
     &::before {
       display: inline-block;
@@ -172,6 +173,14 @@ $button-height--rounded: 36px;
       margin-top: 20px;
       margin-bottom: 150px;
     }
+  }
+
+  &--more {
+    display: inline-flex;
+    column-gap: 5px;
+    align-items: center;
+    justify-content: center;
+    width: 200px;
   }
 
   .alert-dialog-footer & {
