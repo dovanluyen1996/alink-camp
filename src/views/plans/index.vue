@@ -39,6 +39,9 @@ import CampsiteList from '@/components/organisms/campsite-list';
 // page
 import CampsitePlan from '@/views/plans/campsite-plan';
 
+//page
+import ListPlan from './list-plan';
+
 export default {
   name: 'CampsitesIndex',
   components: {
