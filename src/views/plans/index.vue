@@ -22,7 +22,7 @@
         </template>
       </no-data>
 
-      <plan-list
+      <plan-list v-else
         :plans="plans"
         @click="goToPlanDetail"
       />
