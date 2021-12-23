@@ -42,8 +42,8 @@ import CampsitePlan from '@/views/plans/campsite-plan';
 // page
 import CampPlan from '@/views/plans/camp-plan';
 
-//page
-import ListPlan from './list-plan';
+// page
+import CampPlan from '@/views/plans/camp-plan';
 
 export default {
   name: 'CampsitesIndex',
