@@ -111,8 +111,7 @@ export default {
     goToPlanSearch() {
       // TODO: Redirect to Plan Search
     },
-    goToPlanDetail() {
-      // TODO: Redirect to Plan Detail
+    goToCampPlan() {
       this.$store.dispatch('plansNavigator/push', CampPlan);
     },
   },

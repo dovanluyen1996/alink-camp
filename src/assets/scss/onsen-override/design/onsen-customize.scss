@@ -180,6 +180,10 @@ $button-height--rounded: 36px;
     align-items: center;
     justify-content: center;
     width: 200px;
+
+    &__description {
+      margin-top: 10px;
+    }
   }
 
   .alert-dialog-footer & {
@@ -227,6 +231,14 @@ $button-height--rounded: 36px;
     border-radius: 50%;
     box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.25), 0 1px 4px rgba(0, 0, 0, 0.25);
   }
+}
+
+/* ----------
+ Customize Icon
+---------- */
+.icon-add {
+  width: 24px;
+  height: 24px;
 }
 
 /* ----------
