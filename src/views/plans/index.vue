@@ -22,7 +22,7 @@
         </template>
       </no-data>
 
-      <plan-list v-else
+      <camp-location-list v-else
         :plans="plans"
         @click="goToPlanDetail"
       />
@@ -33,13 +33,13 @@
 <script>
 // components
 import NoData from '@/components/organisms/no-data';
-import PlanList from '@/components/organisms/plan-list.vue';
+import CampLocationList from '@/components/organisms/camp-location-list';
 
 export default {
   name: 'PlansIndex',
   components: {
     NoData,
-    PlanList,
+    CampLocationList,
   },
   data() {
     return {
