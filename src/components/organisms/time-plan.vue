@@ -1,49 +1,33 @@
 <template>
   <v-ons-card>
     <v-ons-list modifier="noborder">
-      <p class="list__title">終了前の計画</p>
+      <p class="list__title">
+        終了前の計画
+      </p>
       <v-ons-list-item
+        v-for="time in presents"
+        :key="time.id"
         modifier="longdivider chevron"
-        @click="clickPrefecture(prefecture)"
+        @click="goToPlanPresent"
       >
         <div class="center">
-          <span class="list-item__title">2021/11/30（金）</span>
-        </div>
-      </v-ons-list-item>
-      <v-ons-list-item
-        modifier="longdivider chevron"
-        @click="clickPrefecture(prefecture)"
-      >
-        <div class="center">
-          <span class="list-item__title">2021/11/30（金）</span>
+          <span class="list-item__title">{{ time.text }}</span>
         </div>
       </v-ons-list-item>
     </v-ons-list>
 
     <v-ons-list modifier="noborder">
-      <p class="list__title">過去の計画</p>
+      <p class="list__title">
+        過去の計画
+      </p>
       <v-ons-list-item
+        v-for="time in pasts"
+        :key="time.id"
         modifier="longdivider chevron"
-        @click="clickPrefecture(prefecture)"
+        @click="goToPlanPast"
       >
         <div class="center">
-          <span class="list-item__title">2021/11/30（金）</span>
-        </div>
-      </v-ons-list-item>
-      <v-ons-list-item
-        modifier="longdivider chevron"
-        @click="clickPrefecture(prefecture)"
-      >
-        <div class="center">
-          <span class="list-item__title">2021/11/30（金）</span>
-        </div>
-      </v-ons-list-item>
-      <v-ons-list-item
-        modifier="longdivider chevron"
-        @click="clickPrefecture(prefecture)"
-      >
-        <div class="center">
-          <span class="list-item__title">2021/11/30（金）</span>
+          <span class="list-item__title">{{ time.text }}</span>
         </div>
       </v-ons-list-item>
     </v-ons-list>
@@ -54,10 +38,23 @@
 
 export default {
   name: 'TimePlan',
-  data() {
+  props: {
+    presents: {
+      type: Array,
+      default: () => [],
+    },
+    pasts: {
+      type: Array,
+      default: () => [],
+    },
   },
   methods: {
-    
+    goToPlanPresent() {
+      // TODO: Redirect to Plan Present
+    },
+    goToPlanPast() {
+      // TODO: Redirect to Plan Past
+    },
   },
 };
 </script>
@@ -65,12 +62,13 @@ export default {
 <style lang="scss" scoped>
 @import '@/assets/scss/_variables.scss';
 
-::v-deep {
+/deep/ {
   .card {
-    text-align: center;
     padding-top: 5px;
     padding-bottom: 0;
+    text-align: center;
   }
+
   .list {
     &__title {
       font-size: 18px;
@@ -85,20 +83,19 @@ export default {
 }
 
 .list-item {
-  border-bottom: 1px solid #d9d9d9;
   border-top: 1px solid #d9d9d9;
+  border-bottom: 1px solid #d9d9d9;
 
   &__title {
-    text-align: center;
     margin-bottom: 5px;
     font-size: 18px;
     line-height: 1.2;
+    text-align: center;
   }
 
   &__subtitle {
     font-size: $font-size-small;
     color: $color-subtext;
   }
-  
 }
 </style>
