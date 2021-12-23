@@ -1,9 +1,9 @@
 <template>
   <v-ons-card>
     <v-ons-list modifier="noborder">
-      <p class="list__title">
+      <span class="list__title">
         終了前の計画
-      </p>
+      </span>
       <v-ons-list-item
         v-for="time in presents"
         :key="time.id"
@@ -17,9 +17,9 @@
     </v-ons-list>
 
     <v-ons-list modifier="noborder">
-      <p class="list__title">
+      <span class="list__title">
         過去の計画
-      </p>
+      </span>
       <v-ons-list-item
         v-for="time in pasts"
         :key="time.id"
@@ -70,6 +70,8 @@ export default {
   }
 
   .list {
+    margin-bottom: 25px;
+
     &__title {
       font-size: 18px;
       font-weight: 600;
@@ -91,11 +93,6 @@ export default {
     font-size: 18px;
     line-height: 1.2;
     text-align: center;
-  }
-
-  &__subtitle {
-    font-size: $font-size-small;
-    color: $color-subtext;
   }
 }
 </style>
