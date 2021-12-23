@@ -21,7 +21,6 @@
 </template>
 
 <script>
-
 import TimePlan from '@/components/organisms/plan/time-plan';
 
 export default {
