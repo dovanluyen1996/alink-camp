@@ -47,7 +47,6 @@ export default {
           text: '2021/11/30（金)',
         },
       ],
-
       pasts: [
         {
           id: 1,

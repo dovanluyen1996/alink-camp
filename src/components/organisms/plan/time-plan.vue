@@ -1,7 +1,7 @@
 <template>
     <div class="time-plan">
       <span class="time-plan__title">
-          終了前の計画
+        終了前の計画
       </span>
       <v-ons-list modifier="noborder">
         <v-ons-list-item
@@ -17,7 +17,7 @@
       </v-ons-list>
 
       <span class="time-plan__title">
-          過去の計画
+        過去の計画
       </span>
       <v-ons-list modifier="noborder">
         <v-ons-list-item
