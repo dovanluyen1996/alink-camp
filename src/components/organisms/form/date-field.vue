@@ -8,6 +8,7 @@
       :placeholder="placeholder"
       type="date"
       :errors="errors"
+      :showPlaceholder="showPlaceholder"
     />
     <annotations-block
       v-if="help"
@@ -51,6 +52,10 @@ export default {
     errors: {
       type: Array,
       default: () => [],
+    },
+    showPlaceholder: {
+      type: Boolean,
+      default: false,
     },
   },
   computed: {
