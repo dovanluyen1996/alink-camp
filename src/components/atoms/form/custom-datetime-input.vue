@@ -37,6 +37,10 @@ export default {
       type: Array,
       default: () => [],
     },
+    showPlaceholder: {
+      type: Boolean,
+      default: false,
+    },
   },
   computed: {
     inputedValue: {
@@ -56,7 +60,8 @@ export default {
         isInvalid = !this.inputedValue.match(/\d{1,2}:\d{1,2}/g);
       }
 
-      return this.placeholder && isInvalid;
+      const result = this.showPlaceholder ? this.placeholder : this.placeholder && isInvalid;
+      return result;
     },
   },
 };
@@ -69,9 +74,10 @@ export default {
   background-repeat: no-repeat;
   background-position: right center;
   background-size: 34px 30px;
-  border: 2px solid $color-border;
+  border: 1px solid $color-border;
 
   &[type="date"] {
+    background-color: #fff;
     background-image: url('~@/assets/images/form/date.png');
   }
 
@@ -110,6 +116,7 @@ export default {
 
     /deep/ {
       input {
+        height: 50px;
         opacity: 0;
       }
     }
