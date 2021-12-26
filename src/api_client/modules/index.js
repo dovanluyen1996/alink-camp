@@ -18,6 +18,7 @@ import AppStartApi from './app_start_api';
 import UserDevisesApi from './user_devises_api';
 import SubscriptionsApi from './subscriptions_api';
 import AuthApi from './auth_api';
+import ItemsApi from './items_api';
 
 export default {
   NoticesApi,
@@ -40,4 +41,5 @@ export default {
   UserDevisesApi,
   SubscriptionsApi,
   AuthApi,
+  ItemsApi,
 };
