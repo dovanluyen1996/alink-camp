@@ -57,11 +57,11 @@ export default {
         context.commit('setIsLoading', false);
       }
     },
-    async destroyUsersFavorite(context, { campsiteId }) {
+    async deleteUsersFavorite(context, { campsiteId }) {
       context.commit('setIsLoading', true);
 
       try {
-        const usersFavorite = await ApiClient.destroyUsersFavorite(campsiteId);
+        const usersFavorite = await ApiClient.deleteUsersFavorite(campsiteId);
 
         context.commit('deleteUsersFavorite', usersFavorite);
       } catch (error) {

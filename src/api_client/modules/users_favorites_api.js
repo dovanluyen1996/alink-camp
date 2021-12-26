@@ -7,7 +7,7 @@ export default {
     const response = await this.post('/users_favorites', params);
     return response.data;
   },
-  async destroyUsersFavorite(id) {
+  async deleteUsersFavorite(id) {
     const response = await this.delete(`/users_favorites/${id}`);
     return response.data;
   },
