@@ -16,6 +16,7 @@ import userCourseResult from './user_course_result';
 import weather from './weather';
 import appStart from './app_start';
 import subscription from './subscription';
+import usersFavorite from './users_favorite';
 
 export default {
   strict: true,
@@ -39,5 +40,6 @@ export default {
     weather,
     appStart,
     subscription,
+    usersFavorite,
   },
 };
