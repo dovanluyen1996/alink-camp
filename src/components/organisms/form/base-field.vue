@@ -7,9 +7,9 @@
     >
       {{ title }}
     </div>
-    <div class="input-field-card">
+    <v-ons-card class="input-field-card">
       <slot />
-    </div>
+    </v-ons-card>
   </div>
 </template>
 
