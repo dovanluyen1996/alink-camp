@@ -11,7 +11,7 @@
       <v-ons-card>
         <v-ons-button
           class="button--red button--more button--more__description"
-          @click="goToCampDayPlan"
+          @click="goToAddPlan"
         >
           <img
             :src="require('@/assets/images/form/icon-add.png')"
@@ -31,7 +31,7 @@
 
 <script>
 import TimePlan from '@/components/organisms/plan/time-plan';
-import CampDayPlan from '@/views/plans/camp-day-plan';
+import AddPlan from '@/views/plans/add-plan';
 
 export default {
   components: {
@@ -71,8 +71,8 @@ export default {
     };
   },
   methods: {
-    goToCampDayPlan() {
-      this.$store.dispatch('plansNavigator/push', CampDayPlan);
+    goToAddPlan() {
+      this.$store.dispatch('plansNavigator/push', AddPlan);
     },
   },
 };
