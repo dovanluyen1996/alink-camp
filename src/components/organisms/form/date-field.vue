@@ -8,7 +8,6 @@
       :placeholder="placeholder"
       type="date"
       :errors="errors"
-      :showPlaceholder="showPlaceholder"
     />
     <annotations-block
       v-if="help"
@@ -53,10 +52,6 @@ export default {
       type: Array,
       default: () => [],
     },
-    showPlaceholder: {
-      type: Boolean,
-      default: false,
-    },
   },
   computed: {
     inputedValue: {
@@ -73,6 +68,6 @@ export default {
 
 <style lang="scss" scoped>
 .date-field-help {
-  margin-top: 13px;
+  margin-top: 35px;
 }
 </style>
