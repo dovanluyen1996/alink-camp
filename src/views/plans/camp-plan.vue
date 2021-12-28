@@ -14,7 +14,7 @@
       <v-ons-card>
         <v-ons-button
           class="button--red button--more button--more__description"
-          @click="goToCampDayPlan"
+          @click="goToAddPlan"
         >
           <img
             :src="require('@/assets/images/form/icon-add.png')"
@@ -39,16 +39,20 @@ import AddPlan from '@/components/organisms/plan/add-plan';
 =======
 <script>
 import TimePlan from '@/components/organisms/plan/time-plan';
+<<<<<<< HEAD
 import CampDayPlan from '@/views/plans/camp-day-plan';
 >>>>>>> 965e8c5 (screen plan day)
+=======
+import AddPlan from '@/views/plans/add-plan';
+>>>>>>> fa7c8c2 (update screen add plan)
 
 export default {
   components: {
     AddPlan,
   },
   methods: {
-    goToCampDayPlan() {
-      this.$store.dispatch('plansNavigator/push', CampDayPlan);
+    goToAddPlan() {
+      this.$store.dispatch('plansNavigator/push', AddPlan);
     },
   },
 };

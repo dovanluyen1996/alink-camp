@@ -11,23 +11,24 @@
 </template>
 
 <script>
-import DayPlan from '@/components/organisms/plan/day-plan';
+import DatePlan from '@/components/organisms/plan/add-plan/date-plan';
 
 export default {
+  name: 'AddPlan',
   data() {
     return {
       tabs: [
         {
           label: '計画日',
-          page: DayPlan,
+          page: DatePlan,
         },
         {
           label: '持ち物',
-          page: DayPlan,
+          page: DatePlan,
         },
         {
           label: '予定詳細',
-          page: DayPlan,
+          page: DatePlan,
         },
       ],
     };
@@ -35,6 +36,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+@import '@/assets/scss/_variables.scss';
 
 /deep/ {
   .tabbar {
@@ -45,7 +47,7 @@ export default {
     }
 
     :checked + .tabbar--material__button {
-      color: #fff;
+      color: $color-white;
     }
 
     .active {
@@ -60,7 +62,7 @@ export default {
 
   .content-with-footer {
     &__footer {
-      bottom: 15px;
+      bottom: 90px;
     }
   }
 }

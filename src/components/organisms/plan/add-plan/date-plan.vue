@@ -1,12 +1,13 @@
 <template>
   <v-ons-page>
-    <v-ons-col class="text">
-      <v-ons-row class="text__desc">
-        〇〇〇〇〇〇〇〇〇〇〇〇<br>〇〇〇〇〇〇〇〇〇〇〇〇キャンズ場
-      </v-ons-row>
-    </v-ons-col>
     <div class="content">
       <loading :visible="isLoading" />
+      <div class="text">
+        <v-ons-row class="text__desc">
+          〇〇〇〇〇〇〇〇〇〇〇〇<br>〇〇〇〇〇〇〇〇〇〇〇〇キャンズ場
+        </v-ons-row>
+      </div>
+
       <validation-observer>
         <content-with-footer>
           <validation-provider
@@ -17,7 +18,6 @@
               v-model="dateValueCheckIn"
               placeholder="チェックイン"
               :errors="errors"
-              :showPlaceholder="true"
               class="date-field__des"
             />
           </validation-provider>
@@ -30,7 +30,6 @@
               placeholder="チェックイン"
               help="※天気予報のPUSHは予報が確定してからになります"
               :errors="errors"
-              :showPlaceholder="true"
             />
           </validation-provider>
 
@@ -81,10 +80,15 @@ export default {
 @import "@/assets/scss/_variables.scss";
 
 /deep/ {
+  .card {
+    padding-top: 0;
+    background: none;
+  }
+
   .text {
     display: grid;
     justify-content: center;
-    background-color: #fff;
+    background-color: $color-white;
 
     &__desc {
       padding: 15px;
@@ -116,7 +120,7 @@ export default {
 
   .date-field {
     &__des {
-      margin-top: 31px;
+      margin-top: 50px;
     }
   }
 }
