@@ -1,18 +1,12 @@
 /* Custom Theme for Onsen UI 2.11.2 */
 
-/* Custom Theme for Onsen UI 2.11.2 */
-
-/* Custom Theme for Onsen UI 2.11.2 */
-
-/* Custom Theme for Onsen UI 2.11.2 */
-
 :root {
   /* variables for iOS components */
   --background-color: #f2ebd3;
   --text-color: #222;
   --sub-text-color: #a5a5a5;
   --highlight-color: #A82E05;
-  --second-highlight-color: #FF980B;
+  --second-highlight-color: #A82E05;
   --border-color: #d9d9d9;
   --button-background-color: var(--highlight-color);
   --button-cta-background-color: var(--second-highlight-color);

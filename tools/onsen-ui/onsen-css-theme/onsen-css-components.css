@@ -1400,7 +1400,7 @@ h4, h5, h6 {
   border-radius: 3px;
   transition: none;
   border: none;
-  background-color: #FF980B;
+  background-color: #A82E05;
   color: white;
 }
 .button--cta:hover {
@@ -1411,7 +1411,7 @@ h4, h5, h6 {
 }
 .button--cta:active {
   color: white;
-  background-color: #FF980B;
+  background-color: #A82E05;
   transition: none;
   opacity: 0.2;
 }
@@ -1573,7 +1573,7 @@ h4, h5, h6 {
   border-radius: 3px;
   transition: none;
   border: none;
-  background-color: #FF980B;
+  background-color: #A82E05;
   color: white;
   font-size: 17px;
   font-weight: 500;
@@ -1591,7 +1591,7 @@ h4, h5, h6 {
 }
 .button--large--cta:active { /* stylelint-disable-line */
   color: white;
-  background-color: #FF980B;
+  background-color: #A82E05;
   transition: none;
   opacity: 0.2;
 }
