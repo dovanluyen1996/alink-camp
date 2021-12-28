@@ -37,10 +37,6 @@ export default {
       type: Array,
       default: () => [],
     },
-    showPlaceholder: {
-      type: Boolean,
-      default: false,
-    },
   },
   computed: {
     inputedValue: {
@@ -60,8 +56,7 @@ export default {
         isInvalid = !this.inputedValue.match(/\d{1,2}:\d{1,2}/g);
       }
 
-      const result = this.showPlaceholder ? this.placeholder : this.placeholder && isInvalid;
-      return result;
+      return this.placeholder && isInvalid;
     },
   },
 };
