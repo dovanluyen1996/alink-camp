@@ -8,10 +8,7 @@
             :key="tent.id"
             :modifier="modifier"
           >
-            <div
-              class="list-item__box"
-              :class="{ 'list-item--active': tent.user_id }"
-            >
+            <div :class="['list-item__box', {'list-item--active': tent.user_id}]">
               <div class="center">
                 <div class="list-item__title">
                   <span>
@@ -76,7 +73,7 @@ export default {
   }
 
   &--active {
-    background-color: $color-has-user-id;
+    background-color: #f29678;
   }
 
   &__title {
