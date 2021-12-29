@@ -6,7 +6,7 @@
           <v-ons-list-item
             v-for="tent in tents"
             :key="tent.id"
-            :modifier="modifier"
+            modifier="chevron"
           >
             <div :class="['list-item__box', {'list-item--active': tent.user_id}]">
               <div class="center">
@@ -31,15 +31,6 @@ export default {
     tents: {
       type: Array,
       default: () => [],
-    },
-    hasChevron: {
-      type: Boolean,
-      default: true,
-    },
-  },
-  computed: {
-    modifier() {
-      return `longdivider ${this.hasChevron ? 'chevron' : ''}`;
     },
   },
 };
