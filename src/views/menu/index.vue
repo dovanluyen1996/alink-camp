@@ -34,6 +34,13 @@
 
         <v-ons-list-item
           modifier="nodivider chevron"
+          @click="goToTents"
+        >
+          アイテム設定
+        </v-ons-list-item>
+
+        <v-ons-list-item
+          modifier="nodivider chevron"
           @click="goToUserEdit"
         >
           データ引継ぎ設定
@@ -74,6 +81,7 @@ import UserEdit from '@/views/user/edit';
 import PrivacyPolicyView from '@/views/privacy-policy/index.vue';
 import TermsOfServiceView from '@/views/terms-of-service/index';
 import AboutSubscriptionView from '@/views/about-subscription/index';
+import TentsView from '@/views/tents/index';
 
 export default {
   methods: {
@@ -100,6 +108,9 @@ export default {
     },
     goToAboutSubscription() {
       this.$store.dispatch('menuNavigator/push', AboutSubscriptionView);
+    },
+    goToTents() {
+      this.$store.dispatch('menuNavigator/push', TentsView);
     },
   },
 };
