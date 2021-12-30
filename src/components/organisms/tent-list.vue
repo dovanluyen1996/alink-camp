@@ -55,7 +55,7 @@ export default {
   }
 
   &--active {
-    background-color: #f29678;
+    background-color: #f2967857;
   }
 
   &__title {

@@ -1,5 +1,5 @@
 <template>
-  <v-ons-page @show="show">
+  <v-ons-page>
     <custom-toolbar
       title="アイテム設定"
       :disabled-back-button="true"
@@ -85,16 +85,20 @@ export default {
 
 <style lang="scss" scoped>
 /deep/ {
+  .page__background {
+    background-image: none;
+  }
+
   .content-with-footer {
     &__footer {
       display: flex;
-      justify-content: right;
+      justify-content: flex-end;
     }
 
     .button {
-      margin-right: 20px;
       display: flex;
       align-items: center;
+      margin-right: 20px;
     }
   }
 }
