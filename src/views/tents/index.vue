@@ -1,7 +1,7 @@
 <template>
   <v-ons-page @show="show">
     <custom-toolbar
-      title="コース検索"
+      title="アイテム設定"
       :disabled-back-button="true"
     />
 
@@ -13,10 +13,8 @@
         />
 
         <template #footer>
-          <v-ons-button
-            modifier="cta rounded red"
-          >
-            <v-ons-icon icon="fa-plus" />
+          <v-ons-button modifier="cta rounded red">
+            <img src="@/assets/images/red-cross.png">
             アイテム追加
           </v-ons-button>
         </template>
@@ -87,17 +85,16 @@ export default {
 
 <style lang="scss" scoped>
 /deep/ {
-  .page__background {
-    background-image: none;
-  }
-
   .content-with-footer {
     &__footer {
-      text-align: right;
+      display: flex;
+      justify-content: right;
     }
 
     .button {
       margin-right: 20px;
+      display: flex;
+      align-items: center;
     }
   }
 }

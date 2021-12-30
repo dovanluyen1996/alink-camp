@@ -37,13 +37,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.tent-list {
-  &[fullscreen] {
-    height: 100%;
-    overflow: hidden;
-  }
-}
-
 .card {
   padding-top: 5px;
   padding-bottom: 0;
@@ -58,6 +51,7 @@ export default {
 
   &__box {
     width: 100%;
+    padding-left: 7px;
   }
 
   &--active {
