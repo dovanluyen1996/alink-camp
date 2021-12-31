@@ -18,7 +18,10 @@
         </div>
 
         <template #footer>
-          <v-ons-button modifier="cta rounded red">
+          <v-ons-button
+            modifier="cta rounded red"
+            @click="goToTentsNew"
+          >
             <img src="@/assets/images/red-cross.png">
             アイテム追加
           </v-ons-button>
@@ -32,6 +35,9 @@
 // components
 import ContentWithFooter from '@/components/organisms/content-with-footer';
 import ItemList from '@/components/organisms/item-list';
+
+// pages
+import TentsNewView from '@/views/tents/new';
 
 export default {
   name: 'ItemsIndex',
@@ -84,6 +90,11 @@ export default {
         },
       ],
     };
+  },
+  methods: {
+    goToTentsNew() {
+      this.$store.dispatch('menuNavigator/push', TentsNewView);
+    },
   },
 };
 </script>
