@@ -1,0 +1,154 @@
+<template>
+  <div class="items-table">
+    <div class="items">
+      <div class="items__title">
+          <div class="items__label">
+            全選択
+          </div>
+          <div class="items__label">
+            全選択
+          </div>
+          <div class="items__label items__label--red">
+            ラベルソート
+          </div>
+      </div>
+
+      <div
+          v-for="label in labels"
+          :key="label"
+          :class="['items__list', {'items__list--active': label.user_id}]"
+      >
+        <div class="items__list--content">
+          <check-field
+            :label="label.name"
+          />
+        </div>
+        <div class="items__list--label">
+          <div class="items__list--label-tick">
+            ラベルB
+          </div>
+          <div class="items__list--label-tick">
+            ラベルA
+          </div>
+          <div class="items__list--label-tick">
+            ラベルB
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+// components
+import CheckField from '@/components/organisms/form/check-field';
+
+export default {
+  components: {
+    CheckField,
+  },
+  data() {
+    return {
+      labels: [
+        {
+          name: 'オリジナルテント',
+          user_id: 1,
+        },
+        {
+          name: 'オリジナルテント',
+          user_id: null,
+        },
+        {
+          name: 'オリジナルテント',
+          user_id: 2,
+        },
+        {
+          name: 'オリジナルテント',
+          user_id: 3,
+        },
+        {
+          name: 'オリジナルテント',
+          user_id: null,
+        },
+        {
+          name: 'オリジナルテント',
+          user_id: null,
+        },
+        {
+          name: 'オリジナルテント',
+          user_id: null,
+        },
+      ],
+    };
+  },
+};
+</script>
+
+<style lang="scss" scoped>
+@import "@/assets/scss/_variables.scss";
+
+.items-table {
+  padding: 20px 10px;
+
+  .items {
+    width: 100%;
+    background-color: $color-white;
+
+    &__title {
+      position: relative;
+      padding: 5px;
+      background-color: #eae5e5;
+    }
+
+    &__label {
+      display: inline-block;
+      width: 77px;
+      padding: 5px 10px;
+      margin-right: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      color: $color-white;
+      text-align: center;
+      background-color: #0061ca;
+      border-radius: 15px;
+
+      &--red {
+        position: absolute;
+        right: 0;
+        width: 70px;
+        padding: 8px 5px;
+        margin-right: 5px;
+        font-size: 10px;
+        background-color: #a82e05;
+      }
+    }
+  }
+
+  .items__list {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 5px;
+    font-size: 12px;
+    font-weight: 600;
+    border: 1px solid #d9d9d9;
+
+    &--active {
+      background-color: #f29678;
+    }
+
+    &--content,
+    &--label {
+      display: flex;
+      column-gap: 5px;
+      align-items: center;
+    }
+
+    &--label-tick {
+      padding: 5px 8px;
+      color: $color-white;
+      background-color: #4c7dae;
+    }
+  }
+}
+</style>
