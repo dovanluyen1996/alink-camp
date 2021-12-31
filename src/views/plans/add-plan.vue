@@ -33,7 +33,6 @@ export default {
         {
           label: '持ち物',
           page: ListItemCamp,
-          props: { campsite: this.campsite },
         },
         {
           label: '予定詳細',

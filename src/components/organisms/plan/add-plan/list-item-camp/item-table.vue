@@ -68,12 +68,6 @@ export default {
     background: $color-white;
     border: 1px solid $color-border-dark !important;
   }
-
-  .items__list {
-    &--active {
-      background-color: $color-active-orange;
-    }
-  }
 }
 
 .items-table {
@@ -122,6 +116,10 @@ export default {
     font-size: 12px;
     font-weight: 600;
     border: 1px solid #d9d9d9;
+
+    &--active {
+      background-color: $color-active-orange;
+    }
 
     &--content,
     &--label {
