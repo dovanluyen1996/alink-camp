@@ -22,7 +22,7 @@ export default {
 
       if (index < 0) return;
 
-      Vue.delete(state.userCourseResults, index);
+      Vue.delete(state.usersFavorites, index);
     },
     setIsLoading(state, isLoading) {
       state.isLoading = isLoading;
