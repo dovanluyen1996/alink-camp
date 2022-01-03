@@ -17,10 +17,11 @@ export default {
       Vue.set(state, 'items', items);
     },
     setItem(state, item) {
+      Vue.set(state, 'item', item);
+
       const index = state.items.findIndex(_item => _item.id === item.id);
       if (index < 0) return;
 
-      Vue.set(state, 'item', item);
       Vue.set(state.items, index, item);
     },
     addItem(state, item) {
