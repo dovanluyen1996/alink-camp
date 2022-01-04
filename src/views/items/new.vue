@@ -67,6 +67,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+/deep/ {
+  .page__background {
+    background-image: none;
+  }
+}
+
 .add-button {
   width: 280px;
   background-color: #ff980b;
