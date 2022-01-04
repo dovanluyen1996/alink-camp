@@ -12,7 +12,7 @@
       </div>
     </div>
     <v-ons-input
-      v-model="inputtedValue"
+      v-model="inputedValue"
       type="text"
       class="tent-name__input"
       :placeholder="placeholder"
@@ -40,7 +40,7 @@ export default {
     },
   },
   computed: {
-    inputtedValue: {
+    inputedValue: {
       get() {
         return this.value;
       },

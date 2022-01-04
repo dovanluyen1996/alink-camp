@@ -78,12 +78,12 @@ export default {
   }
 
   &__box {
-    height: 100px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    margin-top: 10px;
+    height: 100px;
     padding-bottom: 20px;
+    margin-top: 10px;
   }
 
   &__text {
