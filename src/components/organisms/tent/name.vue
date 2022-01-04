@@ -60,7 +60,7 @@ export default {
 
 .tent-name {
   padding: 0 20px;
-  margin-top: 20px;
+  margin-top: 30px;
 
   &__top {
     display: flex;

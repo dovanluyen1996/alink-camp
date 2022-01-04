@@ -1,9 +1,9 @@
 <template>
   <div class="tent-sticker">
-    <div class="tent-sticker__top">
-      <span class="tent-sticker__title">
-        ラベル
-      </span>
+    <span class="tent-sticker__title">
+      ラベル
+    </span>
+    <div class="tent-sticker__box">
       <div
         v-if="sticker && sticker.labels.length > 0"
         class="tent-sticker__labels"
@@ -16,23 +16,21 @@
           {{ label }}
         </div>
       </div>
-    </div>
-    <div class="tent-sticker__content">
       <p
-        v-if="!sticker.labels.length > 0"
+        v-else
         class="tent-sticker__text"
       >
         設定しているラベルがありません。
       </p>
-      <div class="tent-sticker__button">
-        <v-ons-button modifier="cta red">
-          <img
-            class="tent-sticker__image"
-            src="@/assets/images/red-cross.png"
-          >
-          ラベル編集
-        </v-ons-button>
-      </div>
+    </div>
+    <div class="tent-sticker__button">
+      <v-ons-button modifier="cta red">
+        <img
+          class="tent-sticker__image"
+          src="@/assets/images/red-cross.png"
+        >
+        ラベル編集
+      </v-ons-button>
     </div>
   </div>
 </template>
@@ -51,27 +49,21 @@ export default {
 
 <style lang="scss" scoped>
 .tent-sticker {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
   height: 190px;
   padding: 0 20px;
   margin-top: 10px;
 
-  &__top {
+  &__title {
     display: flex;
     flex-direction: column;
     justify-content: start;
-  }
-
-  &__title {
     font-size: 18px;
     font-weight: 600;
   }
 
   &__labels {
     display: flex;
-    margin-top: 10px;
+    justify-content: flex-start;
   }
 
   &__label {
@@ -85,18 +77,24 @@ export default {
     background-color: #4c7dae;
   }
 
-  &__content {
+  &__box {
+    height: 100px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-    height: 100px;
-    padding: 20px;
+    justify-content: space-between;
+    margin-top: 10px;
+    padding-bottom: 20px;
   }
 
   &__text {
     font-size: 14px;
     font-weight: 600;
+    text-align: center;
+  }
+
+  &__button {
+    display: flex;
+    justify-content: center;
   }
 
   &__image {
@@ -108,8 +106,8 @@ export default {
   .button {
     display: flex;
     align-items: center;
-    justify-content: center;
     width: 200px;
+    padding-left: 30px;
   }
 }
 </style>
