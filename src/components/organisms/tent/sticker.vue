@@ -18,12 +18,12 @@
       </div>
     </div>
     <div class="tent-sticker__content">
-      <div
+      <p
         v-if="!sticker.labels.length > 0"
         class="tent-sticker__text"
       >
         設定しているラベルがありません。
-      </div>
+      </p>
       <div class="tent-sticker__button">
         <v-ons-button modifier="cta red">
           <img

@@ -1,9 +1,9 @@
 <template>
   <div class="tent-name">
     <div class="tent-name__top">
-      <div class="tent-name__title">
+      <span class="tent-name__title">
         アイテム名
-      </div>
+      </span>
       <div
         v-if="sticker.user_id"
         class="tent-name__sub-title"
