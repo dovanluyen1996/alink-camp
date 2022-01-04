@@ -1,15 +1,15 @@
 <template>
   <div class="tent-name">
     <div class="tent-name__top">
-      <span class="tent-name__title">
+      <div class="tent-name__title">
         アイテム名
-      </span>
-      <div
+      </div>
+      <span
         v-if="sticker.user_id"
         class="tent-name__sub-title"
       >
         （全角10文字以内）
-      </div>
+      </span>
     </div>
     <v-ons-input
       v-model="inputedValue"
