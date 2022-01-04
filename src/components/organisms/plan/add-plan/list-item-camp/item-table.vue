@@ -6,7 +6,7 @@
             全選択
           </div>
           <div class="items__label">
-            全選択
+            全解除
           </div>
           <div class="items__label items__label--red">
             ラベルソート

@@ -1,5 +1,5 @@
 <template>
-  <div class="table-test">
+  <div class="table-weather">
     <table class="table">
       <tbody>
         <tr>
@@ -30,7 +30,6 @@
               >
             </div>
             <span
-              :key="index"
               :date-day="item.date"
               :class="[saturdayCol(item.date), sundayCol(item.date)]"
               v-html="displayDate(item.date)"
@@ -67,7 +66,6 @@ export default {
           date: '12/31/2021',
         },
         {
-          isCheckInDate: true,
           date: '01/01/2022',
         },
         {
@@ -94,7 +92,7 @@ export default {
 <style lang="scss" scoped>
 @import "@/assets/scss/_variables.scss";
 
-.table-test {
+.table-weather {
   box-sizing: border-box;
   width: 100%;
   padding: 10px;
@@ -127,9 +125,14 @@ export default {
     }
 
     .date-check {
+      position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
+
+      span {
+        padding: 0 12px;
+      }
     }
 
     .icon-weather {
@@ -138,12 +141,13 @@ export default {
     }
 
     .image-cheked {
+      position: absolute;
+      left: 5px;
       display: flex;
       align-items: center;
       justify-content: center;
       width: 27px;
       height: 16px;
-      margin-right: 5px;
 
       img {
         width: 18px;
