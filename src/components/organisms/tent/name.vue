@@ -15,7 +15,6 @@
       v-model="inputedValue"
       type="text"
       class="tent-name__input"
-      :placeholder="placeholder"
     />
     <div
       v-if="errors.length"
@@ -48,9 +47,6 @@ export default {
         this.$emit('input', newValue);
       },
     },
-    placeholder() {
-      return this.sticker.user_id ? '' : 'テント';
-    },
   },
 };
 </script>
@@ -81,10 +77,6 @@ export default {
     width: 100%;
     margin-top: 2px;
     text-align: center;
-  }
-
-  ::placeholder {
-    color: #222;
   }
 }
 
