@@ -62,12 +62,16 @@ export default {
       items: [
         {
           isCheckInDate: true,
+          isCheckOutDate: false,
           date: '12/31/2021',
         },
         {
+          isCheckInDate: false,
+          isCheckOutDate: false,
           date: '01/01/2022',
         },
         {
+          isCheckInDate: false,
           isCheckOutDate: true,
           date: '01/02/2022',
         },

@@ -18,7 +18,7 @@
         <template #footer>
           <v-ons-button
             modifier="large--cta rounded"
-            @click="gotoRegistration"
+            @click="goToRegistration"
           >
             登録
           </v-ons-button>
@@ -26,7 +26,7 @@
           <v-ons-button
             modifier="large--cta rounded"
             class="button--search-day"
-            @click="gotoListPlan"
+            @click="goToListPlan"
           >
             過去の計画一覧
           </v-ons-button>
@@ -47,6 +47,20 @@ export default {
     ForecastTable,
     ItemTable,
     ContentWithFooter,
+  },
+  computed: {
+    isLoading() {
+      // TODO: return status of Loading
+      return false;
+    },
+  },
+  methods: {
+    goToRegistration() {
+      // TODO: Redirect to Registration
+    },
+    goToListPlan() {
+      // TODO: Redirect to List Plan
+    },
   },
 };
 </script>
