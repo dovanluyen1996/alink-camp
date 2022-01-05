@@ -23,6 +23,7 @@
       </no-data>
 
       <camp-site v-else
+        :isShowFavoriteMark="true"
         :plans="plans"
         @click="goToPlanDetail"
       />
