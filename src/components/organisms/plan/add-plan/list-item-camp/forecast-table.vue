@@ -33,7 +33,7 @@
               :date-day="item.date"
               :class="[saturdayCol(item.date), sundayCol(item.date)]"
               v-html="displayDate(item.date)"
-            >
+            />
           </td>
           <td>
             <img
@@ -54,7 +54,6 @@
 </template>
 
 <script>
-// components
 
 export default {
   name: 'ForecastTableDate',
@@ -77,7 +76,7 @@ export default {
   },
   methods: {
     displayDate(date) {
-      return this.$helpers.toShortString(date);
+      return this.$helpers.toShortDayString(date);
     },
     saturdayCol(date) {
       return this.$helpers.isSaturday(date) ? 'date-col__sarturday' : '';

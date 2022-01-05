@@ -9,6 +9,9 @@ export default {
     return moment(targetDate).format('YYYY/MM/DD (dd)');
   },
   toShortString(targetDate) {
+    return moment(targetDate).format('M/D (dd)');
+  },
+  toShortDayString(targetDate) {
     return moment(targetDate).format('MM/DD (dd)');
   },
   toDayString(targetDate) {
