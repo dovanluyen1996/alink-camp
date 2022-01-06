@@ -20,10 +20,10 @@ export default {
       Vue.set(state, 'campsites', newCampsites);
     },
     setCampsite(state, campsite) {
-      const index = state.campsites.findIndex(_campsite => _campsite.id === campsite.id);
+      const index = state.campsites.campsites.findIndex(_campsite => _campsite.id === campsite.id);
       if (index < 0) return;
 
-      Vue.set(state.campsites, index, campsite);
+      Vue.set(state.campsites.campsites, index, campsite);
     },
     setIsLoading(state, isLoading) {
       state.isLoading = isLoading;
