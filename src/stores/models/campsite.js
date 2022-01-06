@@ -5,12 +5,19 @@ export default {
   strict: true,
   namespaced: true,
   state: {
-    campsites: [],
+    campsites: {
+      campsites: [],
+      totalCount: 0,
+    },
     isLoading: false,
   },
   mutations: {
     setCampsites(state, campsites) {
-      Vue.set(state, 'campsites', campsites);
+      const newCampsites = state.campsites;
+      newCampsites.campsites = [...newCampsites.campsites, ...campsites.campsites];
+      newCampsites.totalCount = campsites.totalCount;
+
+      Vue.set(state, 'campsites', newCampsites);
     },
     setCampsite(state, campsite) {
       const index = state.campsites.findIndex(_campsite => _campsite.id === campsite.id);
