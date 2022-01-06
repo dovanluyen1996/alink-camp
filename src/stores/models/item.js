@@ -5,7 +5,6 @@ export default {
   strict: true,
   namespaced: true,
   state: {
-    item: {},
     items: [],
     isLoading: false,
   },
@@ -17,8 +16,6 @@ export default {
       Vue.set(state, 'items', items);
     },
     setItem(state, item) {
-      Vue.set(state, 'item', item);
-
       const index = state.items.findIndex(_item => _item.id === item.id);
       if (index < 0) return;
 
