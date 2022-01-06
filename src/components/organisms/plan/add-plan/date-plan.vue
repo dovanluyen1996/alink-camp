@@ -27,7 +27,7 @@
           >
             <date-field
               v-model="dateValueCheckOut"
-              placeholder="チェックイン"
+              placeholder="チェックアウト"
               help="※天気予報のPUSHは予報が確定してからになります"
               :errors="errors"
             />
@@ -96,11 +96,15 @@ export default {
     }
   }
 
-  .button {
-    &--more {
-      margin: 0 auto;
-    }
+  .content-with-footer {
+    height: 84%;
 
+    &__footer {
+      bottom: 0;
+    }
+  }
+
+  .button {
     &--search-day {
       margin-top: 20px !important;
     }
