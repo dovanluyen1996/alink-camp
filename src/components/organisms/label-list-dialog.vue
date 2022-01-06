@@ -12,10 +12,11 @@
         :key="index"
         class="label-list__item"
       >
-        <checkbox-field
-          v-model="selectedLabels"
+        <check-field
+          v-model="checkboxValues[index]"
           :label="label.name"
           :disable="isDisable(label.name)"
+          :disable-label="false"
         />
       </div>
     </div>
@@ -35,11 +36,11 @@
 
 <script>
 // components
-import CheckboxField from '@/components/organisms/form/checkbox-field';
+import CheckField from '@/components/organisms/form/check-field';
 
 export default {
   components: {
-    CheckboxField,
+    CheckField,
   },
   props: {
     isVisibleLabelList: {
@@ -61,13 +62,26 @@ export default {
         { name: 'Test9' },
         { name: 'Test10' },
       ],
-      selectedLabels: [],
+      checkboxValues: [],
     };
+  },
+  created() {
+    // TODO: Call api for the labels before this
+    this.labels.forEach(() => {
+      this.checkboxValues.push(false);
+    });
   },
   methods: {
     isDisable(labelName) {
-      if (this.selectedLabels.length >= 3) {
-        return this.selectedLabels.indexOf(labelName) === -1;
+      const selectedLabels = [];
+      this.checkboxValues.forEach((checkbox, index) => {
+        if (checkbox) {
+          selectedLabels.push(this.labels[index].name);
+        }
+      });
+
+      if (selectedLabels.length >= 3) {
+        return selectedLabels.indexOf(labelName) === -1;
       }
       return false;
     },
@@ -102,7 +116,8 @@ export default {
   }
 
   .alert-dialog-container {
-    max-height: 72vh;
+    max-height: 78vh;
+    margin-top: -20px;
     overflow: scroll;
   }
 

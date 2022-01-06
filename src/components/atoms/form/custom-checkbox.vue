@@ -1,5 +1,5 @@
 <template>
-  <div class="custom-input">
+  <div :class="['custom-input', {'custom-input--disabled': disable }]">
     <input
       v-model="checkedValue"
       type="checkbox"
@@ -46,6 +46,11 @@ export default {
   width: 24px;
   height: 24px;
   border: 2px solid $color-border;
+
+  &--disabled {
+    background: #e1dbdb;
+    border: 1px solid #707070;
+  }
 
   &__field {
     position: absolute;
