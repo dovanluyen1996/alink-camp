@@ -5,7 +5,6 @@ export default {
   strict: true,
   namespaced: true,
   state: {
-    campsite: {},
     campsites: [],
     isLoading: false,
   },
@@ -14,8 +13,6 @@ export default {
       Vue.set(state, 'campsites', campsites);
     },
     setCampsite(state, campsite) {
-      Vue.set(state, 'campsite', campsite);
-
       const index = state.campsites.findIndex(_campsite => _campsite.id === campsite.id);
       if (index < 0) return;
 
