@@ -82,6 +82,7 @@ export default {
 /deep/ {
   .card {
     padding-top: 0;
+    margin: 0;
     background: none;
   }
 
@@ -117,6 +118,7 @@ export default {
 
   .custom-input-date.is-shown-placeholder input {
     display: flex;
+    padding-left: 80px;
     font-size: 18px;
     text-align: center;
     opacity: 1;
