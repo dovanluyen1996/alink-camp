@@ -11,6 +11,7 @@
       <v-ons-card>
         <v-ons-button
           class="button--red button--more button--more__description"
+          @click="goToAddPlan"
         >
           <img
             :src="require('@/assets/images/form/icon-add.png')"
@@ -30,6 +31,7 @@
 
 <script>
 import TimePlan from '@/components/organisms/plan/time-plan';
+import AddPlan from '@/views/plans/add-plan';
 
 export default {
   components: {
@@ -66,6 +68,11 @@ export default {
         },
       ],
     };
+  },
+  methods: {
+    goToAddPlan() {
+      this.$store.dispatch('plansNavigator/push', AddPlan);
+    },
   },
 };
 </script>
