@@ -2,18 +2,17 @@
   <v-ons-page>
     <div class="content">
       <div class="text">
-        <v-ons-row class="text__desc">
-          〇〇〇〇〇〇〇〇〇〇〇〇<br>〇〇〇〇〇〇〇〇〇〇〇〇キャンズ場
-        </v-ons-row>
-      </div>
-
-      <detail-table :items=items />
+          <v-ons-row class="text__desc">
+            〇〇〇〇〇〇〇〇〇〇〇〇<br>〇〇〇〇〇〇〇〇〇〇〇〇キャンプ場
+          </v-ons-row>
+        </div>
+        <detail-table :items=items />
 
       <content-with-footer>
         <template #footer>
           <v-ons-button
             modifier="large--cta rounded"
-            @click="gotoRegistration"
+            @click="goToRegistration()"
           >
             登録
           </v-ons-button>
@@ -21,7 +20,7 @@
           <v-ons-button
             modifier="large--cta rounded"
             class="button--search-day"
-            @click="gotoListPlan"
+            @click="goToListPlan()"
           >
             過去の計画一覧
           </v-ons-button>
@@ -45,16 +44,16 @@ export default {
     return {
       items: [
         {
-          date: '31/12',
+          date: '12/31',
         },
         {
           date: '01/01',
         },
         {
-          date: '02/01',
+          date: '01/02',
         },
         {
-          date: '03/01',
+          date: '01/03',
         },
       ],
     };

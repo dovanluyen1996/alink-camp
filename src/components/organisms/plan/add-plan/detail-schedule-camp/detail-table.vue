@@ -23,8 +23,8 @@
               v-for="(detail,index) in details"
               :key=index
           >
-            <td class="time-col">
-              {{ detail.time_col }}
+            <td class="target">
+              {{ detail.targetAt }}
             </td>
             <td>
               <div class="weather">
@@ -37,30 +37,32 @@
             <td>
               <div class="temperature">
                 <span class="temperature__value">
-                  {{ detail.temperature__value }}
+                  {{ detail.temp }}
                 </span>
                 <span class="temperature__unit">
                   ℃
                 </span>
               </div>
             </td>
-            <td>10</td>
-            <td>99</td>
+            <td>{{ detail.precipitation }}</td>
+            <td>{{ detail.wind }}</td>
             <td class="task">
               <div class="task__text">
                 <span>
-                  {{ detail.textTask }}
+                  {{ detail.content }}
                 </span>
               </div>
               <img
                   :src="require('@/assets/images/weathers/icon-more.png')"
                   class="task__icon"
                   v-if="detail.isAddTask"
+                  @click="showPopup()"
                 >
                 <img
                   :src="require('@/assets/images/weathers/icon-edit.png')"
                   class="task__icon"
                   v-if="detail.isEditTask"
+                  @click="showPopup()"
                 >
             </td>
           </tr>
@@ -70,13 +72,19 @@
       <div class="circle"></div>
       <div class="circle"></div>
     </div>
+    <edit-dialog-task :isVisible="updateDataVisible" @close="closePopup" />
   </div>
 </template>
 
 <script>
+// components
+import EditDialogTask from '@/components/organisms/edit-dialog-task';
 
 export default {
   name: 'DetailTable',
+  components: {
+    EditDialogTask,
+  },
   props: {
     items: {
       type: Array,
@@ -87,55 +95,80 @@ export default {
     return {
       details: [
         {
-          time_col: 0,
-          temperature__value: 10,
-          textTask: '焚き火の準備と食事の準備をするあああああああ...',
+          targetAt: 0,
+          temp: 10,
+          content: '焚き火の準備と食事の準備をするあああああああ...',
+          precipitation: '10',
+          wind: '99',
           isEditTask: true,
         },
         {
-          time_col: 1,
-          temperature__value: 11,
-          textTask: '',
+          targetAt: 1,
+          temp: 11,
+          content: '',
+          precipitation: '10',
+          wind: '99',
           isAddTask: true,
         },
         {
-          time_col: 2,
-          temperature__value: 10,
-          textTask: '焚き火の準備と食事の準備をするあああああああ...',
+          targetAt: 2,
+          temp: 10,
+          content: '焚き火の準備と食事の準備をするあああああああ...',
+          precipitation: '10',
+          wind: '99',
           isEditTask: true,
         },
         {
-          time_col: 3,
-          temperature__value: 11,
-          textTask: '',
+          targetAt: 3,
+          temp: 11,
+          content: '',
+          precipitation: '10',
+          wind: '99',
           isAddTask: true,
         },
         {
-          time_col: 4,
-          temperature__value: 10,
-          textTask: '焚き火の準備と食事の準備をするあああああああ...',
+          targetAt: 4,
+          temp: 10,
+          content: '焚き火の準備と食事の準備をするあああああああ...',
+          precipitation: '10',
+          wind: '99',
           isEditTask: true,
         },
         {
-          time_col: 5,
-          temperature__value: 11,
-          textTask: '',
+          targetAt: 5,
+          temp: 11,
+          content: '',
+          precipitation: '10',
+          wind: '99',
           isAddTask: true,
         },
         {
-          time_col: 6,
-          temperature__value: 10,
-          textTask: '焚き火の準備と食事の準備をするあああああああ...',
+          targetAt: 6,
+          temp: 10,
+          content: '焚き火の準備と食事の準備をするあああああああ...',
+          precipitation: '10',
+          wind: '99',
           isEditTask: true,
         },
         {
-          time_col: 7,
-          temperature__value: 11,
-          textTask: '',
+          targetAt: 7,
+          temp: 11,
+          content: '',
+          precipitation: '10',
+          wind: '99',
           isAddTask: true,
         },
       ],
+      updateDataVisible: false,
     };
+  },
+  methods: {
+    showPopup() {
+      this.updateDataVisible = true;
+    },
+    closePopup() {
+      this.updateDataVisible = false;
+    },
   },
 };
 </script>
@@ -179,7 +212,7 @@ export default {
     }
 
     .detail-task,
-    .time-col {
+    .target {
       font-size: 12px;
     }
 
