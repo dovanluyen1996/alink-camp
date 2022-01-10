@@ -16,7 +16,6 @@
           v-model="checkboxValues[index]"
           :label="label.name"
           :disable="isDisable(label.name)"
-          :disable-label="false"
         />
       </div>
     </div>

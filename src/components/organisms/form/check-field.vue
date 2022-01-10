@@ -7,7 +7,7 @@
     <span
       v-if="label"
       class="check-field__label-text"
-      :class="{ disabled: disable && disableLabel }"
+      :class="{ disabled: disable }"
     >
       {{ label }}
     </span>
@@ -35,10 +35,6 @@ export default {
     disable: {
       type: Boolean,
       default: false,
-    },
-    disableLabel: {
-      type: Boolean,
-      default: true,
     },
   },
   computed: {
