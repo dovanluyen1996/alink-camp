@@ -2,7 +2,7 @@
   <div class="table-detail">
     <div class="card-detail"
       v-for="(item, index) in items"
-      :key=index
+      :key="index"
     >
       <div class="date-detail">
         <span>
@@ -21,7 +21,7 @@
           </tr>
           <tr class="detail-row"
               v-for="(detail,index) in details"
-              :key=index
+              :key="index"
           >
             <td class="target">
               {{ detail.targetAt }}
@@ -55,13 +55,13 @@
               <img
                   :src="require('@/assets/images/weathers/icon-more.png')"
                   class="task__icon"
-                  v-if="detail.isAddTask"
+                  v-if="isContentEmpty(detail.content)"
                   @click="showPopup()"
                 >
                 <img
                   :src="require('@/assets/images/weathers/icon-edit.png')"
                   class="task__icon"
-                  v-if="detail.isEditTask"
+                  v-else
                   @click="showPopup()"
                 >
             </td>
@@ -100,7 +100,6 @@ export default {
           content: '焚き火の準備と食事の準備をするあああああああ...',
           precipitation: '10',
           wind: '99',
-          isEditTask: true,
         },
         {
           targetAt: 1,
@@ -108,7 +107,6 @@ export default {
           content: '',
           precipitation: '10',
           wind: '99',
-          isAddTask: true,
         },
         {
           targetAt: 2,
@@ -116,7 +114,6 @@ export default {
           content: '焚き火の準備と食事の準備をするあああああああ...',
           precipitation: '10',
           wind: '99',
-          isEditTask: true,
         },
         {
           targetAt: 3,
@@ -124,7 +121,6 @@ export default {
           content: '',
           precipitation: '10',
           wind: '99',
-          isAddTask: true,
         },
         {
           targetAt: 4,
@@ -132,7 +128,6 @@ export default {
           content: '焚き火の準備と食事の準備をするあああああああ...',
           precipitation: '10',
           wind: '99',
-          isEditTask: true,
         },
         {
           targetAt: 5,
@@ -140,7 +135,6 @@ export default {
           content: '',
           precipitation: '10',
           wind: '99',
-          isAddTask: true,
         },
         {
           targetAt: 6,
@@ -148,7 +142,6 @@ export default {
           content: '焚き火の準備と食事の準備をするあああああああ...',
           precipitation: '10',
           wind: '99',
-          isEditTask: true,
         },
         {
           targetAt: 7,
@@ -156,7 +149,6 @@ export default {
           content: '',
           precipitation: '10',
           wind: '99',
-          isAddTask: true,
         },
       ],
       updateDataVisible: false,
@@ -168,6 +160,9 @@ export default {
     },
     closePopup() {
       this.updateDataVisible = false;
+    },
+    isContentEmpty(content) {
+      return (content === '' ? true : false);
     },
   },
 };
@@ -225,6 +220,7 @@ export default {
 
     .temperature {
       display: inline-flex;
+      padding: 5px;
 
       &__value {
         font-size: 10px;
