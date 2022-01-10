@@ -53,15 +53,15 @@
                 </span>
               </div>
               <img
+                  v-if="isContentEmpty(detail.content)"
                   :src="require('@/assets/images/weathers/icon-more.png')"
                   class="task__icon"
-                  v-if="isContentEmpty(detail.content)"
                   @click="showPopup()"
                 >
                 <img
+                  v-else
                   :src="require('@/assets/images/weathers/icon-edit.png')"
                   class="task__icon"
-                  v-else
                   @click="showPopup()"
                 >
             </td>
@@ -162,7 +162,7 @@ export default {
       this.updateDataVisible = false;
     },
     isContentEmpty(content) {
-      return (content === '' ? true : false);
+      return content === '';
     },
   },
 };

@@ -101,7 +101,7 @@ export default {
 
   .content-with-footer__footer {
     position: fixed;
-    bottom: 0;
+    bottom: 20px;
     left: inherit;
 
     .button {

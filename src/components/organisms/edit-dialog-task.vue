@@ -1,11 +1,12 @@
 <template>
   <v-ons-alert-dialog
     :visible.sync="isVisible"
-    class="custom-alert-dialog"
+    class="custom-edit-alert-dialog"
   >
-    <textarea class="textarea_dialog"/>
+    <textarea class="textarea_dialog" />
     <template #footer>
       <v-ons-button
+        class="button--edit-dialog"
         @click="closeTask()"
       >
         保存
@@ -37,27 +38,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped>
-@import "@/assets/scss/_variables.scss";
-
-.custom-alert-dialog {
-  background: none;
-  border-radius: none;
-
-  .alert-dialog-container {
-    padding: 0;
-  }
-
-  .textarea_dialog {
-    width: 100%;
-    height: 150px;
-    resize: none;
-  }
-
-  .alert-dialog-title {
-    display: none !important;
-  }
-}
-
-</style>
