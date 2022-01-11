@@ -2,11 +2,11 @@
   <div class="item-list">
     <v-ons-card>
       <div class="content">
-        <v-ons-list>
+        <v-ons-list modifier="noborder">
           <v-ons-list-item
             v-for="item in items"
             :key="item.id"
-            modifier="chevron"
+            modifier="chevron nodivider"
           >
             <div :class="['list-item__box', {'list-item--active': item.user_id}]">
               <div class="center">
@@ -63,11 +63,21 @@ export default {
     align-items: center;
     margin-bottom: 5px;
     font-size: 18px;
+    font-weight: 300;
     line-height: 1.2;
   }
 }
 
 /deep/ {
+  .list {
+    padding: 20px 0;
+  }
+
+  .list-item {
+    border-top: 1px solid #d9d9d9;
+    border-bottom: 1px solid #d9d9d9;
+  }
+
   .list-item__center {
     padding: 12px 0;
   }
