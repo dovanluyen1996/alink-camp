@@ -56,7 +56,7 @@ export default {
       // TODO: Redirect to Plan Present
     },
     goToPlanPast() {
-      // TODO: Redirect to Plan Past
+      this.$store.dispatch('plansNavigator/push', DetailPastPlan);
     },
   },
 };

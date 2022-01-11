@@ -219,10 +219,23 @@ export default {
 }
 
 .share-button {
-  min-width: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   height: 24px;
   margin-top: 10px;
   font-size: 12px;
   line-height: 16px;
+
+  &::before {
+    display: inline-block;
+    width: 13px;
+    height: 15px;
+    margin-right: 6px;
+    content: '';
+    background-image: url("~@/assets/images/sharing-icon.png");
+    background-position: center;
+    background-size: 100%;
+  }
 }
 </style>
