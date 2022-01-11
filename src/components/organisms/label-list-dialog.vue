@@ -69,11 +69,9 @@ export default {
   },
   computed: {
     selectedLabels() {
-      const checkedLabels = [];
-      this.checkboxValues.forEach((checkbox, index) => {
-        if (checkbox) checkedLabels.push(this.labels[index].name);
-      });
-      return checkedLabels;
+      return this.labels
+        .filter((_, index) => this.checkboxValues[index])
+        .map(label => label.name);
     },
   },
   created() {
