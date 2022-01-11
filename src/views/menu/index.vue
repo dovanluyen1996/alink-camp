@@ -34,7 +34,7 @@
 
         <v-ons-list-item
           modifier="nodivider chevron"
-          @click="goToTents"
+          @click="goToItems"
         >
           アイテム設定
         </v-ons-list-item>
@@ -81,7 +81,7 @@ import UserEdit from '@/views/user/edit';
 import PrivacyPolicyView from '@/views/privacy-policy/index.vue';
 import TermsOfServiceView from '@/views/terms-of-service/index';
 import AboutSubscriptionView from '@/views/about-subscription/index';
-import TentsView from '@/views/tents/index';
+import ItemsView from '@/views/items/index';
 
 export default {
   methods: {
@@ -109,8 +109,8 @@ export default {
     goToAboutSubscription() {
       this.$store.dispatch('menuNavigator/push', AboutSubscriptionView);
     },
-    goToTents() {
-      this.$store.dispatch('menuNavigator/push', TentsView);
+    goToItems() {
+      this.$store.dispatch('menuNavigator/push', ItemsView);
     },
   },
 };

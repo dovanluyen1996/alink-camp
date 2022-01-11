@@ -1,18 +1,18 @@
 <template>
-  <div class="tent-list">
+  <div class="item-list">
     <v-ons-card>
       <div class="content">
         <v-ons-list>
           <v-ons-list-item
-            v-for="tent in tents"
-            :key="tent.id"
+            v-for="item in items"
+            :key="item.id"
             modifier="chevron"
           >
-            <div :class="['list-item__box', {'list-item--active': tent.user_id}]">
+            <div :class="['list-item__box', {'list-item--active': item.user_id}]">
               <div class="center">
                 <div class="list-item__title">
                   <span>
-                    {{ tent.name }}
+                    {{ item.name }}
                   </span>
                 </div>
               </div>
@@ -26,9 +26,9 @@
 
 <script>
 export default {
-  name: 'TentList',
+  name: 'ItemList',
   props: {
-    tents: {
+    items: {
       type: Array,
       default: () => [],
     },

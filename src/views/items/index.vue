@@ -7,9 +7,9 @@
 
     <div class="content">
       <content-with-footer>
-        <tent-list
-          v-if="tents.length > 0"
-          :tents="tents"
+        <item-list
+          v-if="items.length > 0"
+          :items="items"
         />
 
         <template #footer>
@@ -26,17 +26,17 @@
 <script>
 // components
 import ContentWithFooter from '@/components/organisms/content-with-footer';
-import TentList from '@/components/organisms/tent-list';
+import ItemList from '@/components/organisms/item-list';
 
 export default {
-  name: 'TentsIndex',
+  name: 'ItemsIndex',
   components: {
     ContentWithFooter,
-    TentList,
+    ItemList,
   },
   data() {
     return {
-      tents: [
+      items: [
         {
           name: 'オリジナルテント',
           user_id: 1,
