@@ -66,11 +66,54 @@
                 >
             </td>
           </tr>
+
+          <tr class="circle-grid">
+            <td colspan="6">
+              <div class="circle"></div>
+              <div class="circle"></div>
+              <div class="circle"></div>
+            </td>
+          </tr>
+
+          <tr class="detail-row">
+            <td class="target">
+              10
+            </td>
+            <td>
+              <div class="weather">
+                <img
+                  :src="require('@/assets/images/weathers/sun.png')"
+                  class="icon-weather"
+                >
+              </div>
+            </td>
+            <td>
+              <div class="temperature">
+                <span class="temperature__value">
+                  11
+                </span>
+                <span class="temperature__unit">
+                  ℃
+                </span>
+              </div>
+            </td>
+            <td>99</td>
+            <td>10</td>
+            <td class="task">
+              <div class="task__text">
+                <span>
+                  と食事の準備
+                </span>
+              </div>
+              <img
+                :src="require('@/assets/images/weathers/icon-edit.png')"
+                class="task__icon"
+                @click="showPopup()"
+              >
+            </td>
+          </tr>
         </tbody>
       </table>
-      <div class="circle"></div>
-      <div class="circle"></div>
-      <div class="circle"></div>
     </div>
     <edit-dialog-task :isVisible="updateDataVisible" @close="closePopup" />
   </div>
@@ -183,8 +226,12 @@ export default {
 
   .table {
     width: 100%;
+    margin-bottom: 140px;
     text-align: center;
-    background-color: #fff;
+
+    .detail-row {
+      background-color: $color-white;
+    }
 
     th {
       height: 31px;
@@ -197,13 +244,6 @@ export default {
       height: 34px;
       font-size: 10px;
       font-weight: 600;
-    }
-
-    th,
-    td {
-      border-top: 1px solid $color-border;
-      border-right: 1px solid $color-border;
-      border-left: none;
     }
 
     .detail-task,
@@ -265,14 +305,20 @@ export default {
     }
   }
 
-  .circle {
-    width: 20px;
-    height: 20px;
-    margin: 0 auto;
-    margin-top: 5px;
-    background-color: $color-white;
-    border: 1px solid $color-border-hight;
-    border-radius: 50%;
+  .circle-grid {
+    td {
+      border: none;
+    }
+
+    .circle {
+      width: 20px;
+      height: 20px;
+      margin: 0 auto;
+      margin-top: 5px;
+      background-color: $color-white;
+      border: 1px solid $color-border-hight;
+      border-radius: 50%;
+    }
   }
 }
 </style>
