@@ -26,7 +26,10 @@
       >
         キャンセル
       </v-ons-button>
-      <v-ons-button modifier="primary">
+      <v-ons-button
+        modifier="primary"
+        @click="registerLabel"
+      >
         選択
       </v-ons-button>
     </template>
@@ -64,6 +67,15 @@ export default {
       checkboxValues: [],
     };
   },
+  computed: {
+    selectedLabels() {
+      const checkedLabels = [];
+      this.checkboxValues.forEach((checkbox, index) => {
+        if (checkbox) checkedLabels.push(this.labels[index].name);
+      });
+      return checkedLabels;
+    },
+  },
   created() {
     // TODO: Call api for the labels before this
     this.labels.forEach(() => {
@@ -72,20 +84,13 @@ export default {
   },
   methods: {
     isDisable(labelName) {
-      const selectedLabels = [];
-      this.checkboxValues.forEach((checkbox, index) => {
-        if (checkbox) {
-          selectedLabels.push(this.labels[index].name);
-        }
-      });
-
-      if (selectedLabels.length >= 3) {
-        return selectedLabels.indexOf(labelName) === -1;
-      }
-      return false;
+      return this.selectedLabels.length >= 3 && !this.selectedLabels.includes(labelName);
     },
     closeLabelList() {
       this.$emit('update:isVisibleLabelList', false);
+    },
+    registerLabel() {
+      // TODO: Implement function when register label
     },
   },
 };
