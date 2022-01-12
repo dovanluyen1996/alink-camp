@@ -12,7 +12,7 @@
         <template #actions>
           <v-ons-button
             class="button--red button--search button--search__description"
-            @click="goToCampsiteSearch"
+            @click="goToPlanSearch"
           >
             <img
               :src="require('@/assets/images/form/search-top.png')"
@@ -25,7 +25,7 @@
       <campsite v-else
         :isShowFavoriteMark="true"
         :campsites="campsites"
-        @click="goToCampsiteDetail"
+        @click="goToPlanDetail"
       />
     </div>
   </v-ons-page>
@@ -105,11 +105,11 @@ export default {
     };
   },
   methods: {
-    goToCampsiteSearch() {
-      // TODO: Redirect to Campsite Search
+    goToPlanSearch() {
+      // TODO: Redirect to Plan Search
     },
-    goToCampsiteDetail() {
-      // TODO: Redirect to Campsite Detail
+    goToPlanDetail() {
+      // TODO: Redirect to Plan Detail
     },
   },
 };
