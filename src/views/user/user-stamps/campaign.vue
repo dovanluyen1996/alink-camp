@@ -124,7 +124,7 @@ export default {
 /deep/ {
   .alert-dialog-title {
     color: #fff;
-    background: #299025;
+    background: #c83200;
   }
 
   .alert-dialog-content {
