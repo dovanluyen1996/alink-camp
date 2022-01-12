@@ -17,6 +17,9 @@ import weather from './weather';
 import appStart from './app_start';
 import subscription from './subscription';
 import usersFavorite from './users_favorite';
+import label from './label';
+import item from './item';
+import spot from './spot';
 
 export default {
   strict: true,
@@ -41,5 +44,8 @@ export default {
     appStart,
     subscription,
     usersFavorite,
+    label,
+    item,
+    spot,
   },
 };

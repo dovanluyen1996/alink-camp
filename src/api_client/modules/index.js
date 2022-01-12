@@ -19,6 +19,9 @@ import UserDevisesApi from './user_devises_api';
 import SubscriptionsApi from './subscriptions_api';
 import AuthApi from './auth_api';
 import UsersFavoritesApi from './users_favorites_api';
+import LabelsApi from './labels_api';
+import ItemsApi from './items_api';
+import SpotsApi from './spots_api';
 
 export default {
   NoticesApi,
@@ -42,4 +45,7 @@ export default {
   SubscriptionsApi,
   AuthApi,
   UsersFavoritesApi,
+  LabelsApi,
+  ItemsApi,
+  SpotsApi,
 };
