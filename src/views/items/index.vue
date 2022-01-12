@@ -1,9 +1,6 @@
 <template>
   <v-ons-page>
-    <custom-toolbar
-      title="アイテム設定"
-      :disabled-back-button="true"
-    />
+    <custom-toolbar title="アイテム設定" />
 
     <div class="content">
       <content-with-footer>
