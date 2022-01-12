@@ -105,7 +105,7 @@ h4, h5, h6 {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
-  background-color: #94eb94;
+  background-color: #f2ebd3;
   position: absolute;
   top: 0;
   left: 0;
@@ -121,7 +121,7 @@ h4, h5, h6 {
   display: none;
 }
 .page__content {
-  background-color: #94eb94;
+  background-color: #f2ebd3;
   position: absolute;
   top: 0;
   left: 0;
@@ -130,7 +130,7 @@ h4, h5, h6 {
   box-sizing: border-box;
 }
 .page__background {
-  background-color: #94eb94;
+  background-color: #f2ebd3;
   position: absolute;
   top: 0;
   left: 0;
@@ -465,7 +465,7 @@ h4, h5, h6 {
   -webkit-appearance: none;
      -moz-appearance: none;
           appearance: none;
-  background-image: linear-gradient(#0061ca, #0061ca);
+  background-image: linear-gradient(#A82E05, #A82E05);
   background-position: left center;
   background-size: 0% 2px;
   background-repeat: no-repeat;
@@ -534,7 +534,7 @@ h4, h5, h6 {
 }
 .range__input::-ms-fill-lower {
   height: 2px;
-  background-color: #0061ca;
+  background-color: #A82E05;
 }
 .range__input::-ms-tooltip {
   display: none;
@@ -791,7 +791,7 @@ h4, h5, h6 {
   height: 44px;
   padding-left: 0;
   padding-right: 0;
-  background: #2693cc;
+  background: #C83200;
   color: #ffffff;
   color: rgba(255, 255, 255, 1);
   box-shadow: none;
@@ -811,7 +811,7 @@ h4, h5, h6 {
   }
 }
 .toolbar__bg {
-  background: #2693cc;
+  background: #C83200;
 }
 .toolbar__item {
   box-sizing: border-box;
@@ -968,7 +968,7 @@ h4, h5, h6 {
   height: 44px;
   padding-left: 0;
   padding-right: 0;
-  background: #2693cc;
+  background: #C83200;
   color: #ffffff;
   color: rgba(255, 255, 255, 1);
   box-shadow: none;
@@ -1054,7 +1054,7 @@ h4, h5, h6 {
   border-bottom: 0;
   box-shadow: 0 1px 5px rgba(0, 0, 0, .3);
   padding: 0;
-  background-color: #fff;
+  background-color: #C83200;
   background-size: 0;
 }
 /*~
@@ -1087,7 +1087,8 @@ h4, h5, h6 {
   font-weight: 400;
   font-size: 20px;
   font-weight: 500;
-  color: #31313a;
+  color: #ffffff;;
+  color: rgba(255, 255, 255, 1);;
   height: 56px;
   min-width: 72px;
   width: auto;
@@ -1099,7 +1100,8 @@ h4, h5, h6 {
   font-weight: 400;
   font-size: 20px;
   font-weight: 500;
-  color: #31313a;
+  color: #ffffff;;
+  color: rgba(255, 255, 255, 1);;
   height: 56px;
   width: auto;
   -webkit-box-flex: 1;
@@ -1211,7 +1213,7 @@ h4, h5, h6 {
   letter-spacing: 0;
   color: white;
   vertical-align: middle;
-  background-color: #0061ca;
+  background-color: #A82E05;
   border: 0 solid currentColor;
   border-radius: 3px;
   transition: none;
@@ -1223,7 +1225,7 @@ h4, h5, h6 {
   transition: none;
 }
 .button:active {
-  background-color: #0061ca;
+  background-color: #A82E05;
   transition: none;
   opacity: 0.2;
 }
@@ -1245,17 +1247,17 @@ h4, h5, h6 {
 */
 .button--outline {
   background-color: transparent;
-  border: 1px solid #0061ca;
-  color: #0061ca;
+  border: 1px solid #A82E05;
+  color: #A82E05;
 }
 .button--outline:active {
-  background-color: color-mod(#0061ca tint(70%));
-  border: 1px solid #0061ca;
-  color: #0061ca;
+  background-color: color-mod(#A82E05 tint(70%));
+  border: 1px solid #A82E05;
+  color: #A82E05;
   opacity: 1;
 }
 .button--outline:hover {
-  border: 1px solid #0061ca;
+  border: 1px solid #A82E05;
   transition: 0;
 }
 /*~
@@ -1322,7 +1324,7 @@ h4, h5, h6 {
   letter-spacing: 0;
   color: white;
   vertical-align: middle;
-  background-color: #0061ca;
+  background-color: #A82E05;
   border: 0 solid currentColor;
   border-radius: 3px;
   transition: none;
@@ -1330,7 +1332,7 @@ h4, h5, h6 {
   border: 1px solid transparent;
   box-shadow: none;
   background: transparent;
-  color: #0061ca;
+  color: #A82E05;
   border: none;
 }
 .button--quiet:disabled,
@@ -1351,7 +1353,7 @@ h4, h5, h6 {
   border: none;
   transition: none;
   opacity: 0.2;
-  color: #0061ca;
+  color: #A82E05;
 }
 /*~
   name: Call To Action Button
@@ -1393,12 +1395,12 @@ h4, h5, h6 {
   letter-spacing: 0;
   color: white;
   vertical-align: middle;
-  background-color: #0061ca;
+  background-color: #A82E05;
   border: 0 solid currentColor;
   border-radius: 3px;
   transition: none;
   border: none;
-  background-color: #ffc134;
+  background-color: #A82E05;
   color: white;
 }
 .button--cta:hover {
@@ -1409,7 +1411,7 @@ h4, h5, h6 {
 }
 .button--cta:active {
   color: white;
-  background-color: #ffc134;
+  background-color: #A82E05;
   transition: none;
   opacity: 0.2;
 }
@@ -1436,7 +1438,7 @@ h4, h5, h6 {
   text-align: center;
 }
 .button--large:active {
-  background-color: #0061ca;
+  background-color: #A82E05;
   transition: none;
   opacity: 0.2;
   transition: none;
@@ -1492,7 +1494,7 @@ h4, h5, h6 {
   letter-spacing: 0;
   color: white;
   vertical-align: middle;
-  background-color: #0061ca;
+  background-color: #A82E05;
   border: 0 solid currentColor;
   border-radius: 3px;
   transition: none;
@@ -1505,13 +1507,13 @@ h4, h5, h6 {
   background: transparent;
   border: 1px solid transparent;
   box-shadow: none;
-  color: #0061ca;
+  color: #A82E05;
   text-align: center;
 }
 .button--large--quiet:active { /* stylelint-disable-line */
   transition: none;
   opacity: 0.2;
-  color: #0061ca;
+  color: #A82E05;
   background: transparent;
   border: 1px solid transparent;
   box-shadow: none;
@@ -1566,12 +1568,12 @@ h4, h5, h6 {
   letter-spacing: 0;
   color: white;
   vertical-align: middle;
-  background-color: #0061ca;
+  background-color: #A82E05;
   border: 0 solid currentColor;
   border-radius: 3px;
   transition: none;
   border: none;
-  background-color: #ffc134;
+  background-color: #A82E05;
   color: white;
   font-size: 17px;
   font-weight: 500;
@@ -1589,7 +1591,7 @@ h4, h5, h6 {
 }
 .button--large--cta:active { /* stylelint-disable-line */
   color: white;
-  background-color: #ffc134;
+  background-color: #A82E05;
   transition: none;
   opacity: 0.2;
 }
@@ -1638,7 +1640,7 @@ h4, h5, h6 {
   letter-spacing: 0;
   color: white;
   vertical-align: middle;
-  background-color: #0061ca;
+  background-color: #A82E05;
   border: 0 solid currentColor;
   border-radius: 3px;
   transition: none;
@@ -1727,7 +1729,7 @@ h4, h5, h6 {
   letter-spacing: 0;
   color: white;
   vertical-align: middle;
-  background-color: #0061ca;
+  background-color: #A82E05;
   border: 0 solid currentColor;
   border-radius: 3px;
   transition: none;
@@ -1837,8 +1839,8 @@ h4, h5, h6 {
   font-weight: 400;
   border-radius: 0;
   background-color: transparent;
-  color: #2693cc;
-  border: 1px solid #2693cc;
+  color: #C83200;
+  border: 1px solid #C83200;
   border-top-width: 1px;
   border-bottom-width: 1px;
   border-right-width: 1px;
@@ -1864,17 +1866,17 @@ h4, h5, h6 {
   outline: 0;
 }
 :checked + .button-bar__button {
-  background-color: #2693cc;
+  background-color: #C83200;
   color: #fff;
   transition: none;
 }
 .button-bar__button:active,
 :active + .button-bar__button {
-  background-color: color-mod(#2693cc tint(70%));
-  border: 0 solid #2693cc;
-  border-top: 1px solid #2693cc;
-  border-bottom: 1px solid #2693cc;
-  border-right: 1px solid #2693cc;
+  background-color: color-mod(#C83200 tint(70%));
+  border: 0 solid #C83200;
+  border-top: 1px solid #C83200;
+  border-bottom: 1px solid #C83200;
+  border-right: 1px solid #C83200;
   font-size: 13px;
   width: 100%;
   transition: none;
@@ -1967,8 +1969,8 @@ h4, h5, h6 {
   font-weight: 400;
   border-radius: 0;
   background-color: transparent;
-  color: #2693cc;
-  border: 1px solid #2693cc;
+  color: #F57148;
+  border: 1px solid #F57148;
   border-top-width: 1px;
   border-bottom-width: 1px;
   border-right-width: 1px;
@@ -1995,17 +1997,17 @@ h4, h5, h6 {
   outline: 0;
 }
 :active + .segment__button {
-  background-color: color-mod(#2693cc tint(70%));
-  border: 0 solid #2693cc;
-  border-top: 1px solid #2693cc;
-  border-bottom: 1px solid #2693cc;
-  border-right: 1px solid #2693cc;
+  background-color: color-mod(#F57148 tint(70%));
+  border: 0 solid #F57148;
+  border-top: 1px solid #F57148;
+  border-bottom: 1px solid #F57148;
+  border-right: 1px solid #F57148;
   font-size: 13px;
   width: 100%;
   transition: none;
 }
 :checked + .segment__button {
-  background-color: #2693cc;
+  background-color: #F57148;
   color: #fff;
   transition: none;
 }
@@ -2150,7 +2152,7 @@ h4, h5, h6 {
   margin: 0;
   padding: 0;
   height: 49px;
-  background-color: #299025;
+  background-color: #C83200;
   border-top: 1px solid rgba(204, 204, 204, 0);
   width: 100%;
 }
@@ -2680,7 +2682,8 @@ h4, h5, h6 {
 */
 .toolbar-button--material {
   font-size: 22px;
-  color: #31313a;
+  color: #ffffff;;
+  color: rgba(255, 255, 255, 1);;
   display: inline-block;
   padding: 0 12px;
   height: 100%;
@@ -2735,7 +2738,8 @@ h4, h5, h6 {
 }
 .back-button--material {
   font-size: 22px;
-  color: #31313a;
+  color: #ffffff;;
+  color: rgba(255, 255, 255, 1);;
   display: inline-block;
   padding: 0 12px;
   height: 100%;
@@ -2754,7 +2758,7 @@ h4, h5, h6 {
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: inline-flex;
-  fill: #31313a;
+  fill: rgba(255, 255, 255, 1);;
   -webkit-box-align: center;
   -webkit-align-items: center;
           align-items: center;
@@ -2874,7 +2878,7 @@ h4, h5, h6 {
   opacity: 0;
 }
 :checked + .checkbox__checkmark:before {
-  background: #0061ca;
+  background: #A82E05;
   border: none;
 }
 :checked + .checkbox__checkmark:after {
@@ -2982,7 +2986,7 @@ h4, h5, h6 {
   width: 11px;
   height: 4px;
   background: transparent;
-  border: 2px solid #0061ca;
+  border: 2px solid #A82E05;
   border-top: none;
   border-right: none;
   border-radius: 0;
@@ -3229,7 +3233,7 @@ h4, h5, h6 {
   width: 11px;
   height: 4px;
   background: transparent;
-  border: 2px solid #0061ca;
+  border: 2px solid #A82E05;
   border-top: none;
   border-right: none;
   border-radius: 0;
@@ -4879,7 +4883,7 @@ h4, h5, h6 {
   font-weight: 400;
   border-radius: 4px;
   border: 1px solid #d9d9d9;
-  background-color: #94eb94;
+  background-color: #f2ebd3;
   color: #222;
   letter-spacing: 0;
   box-shadow: none;
@@ -5181,7 +5185,7 @@ h4, h5, h6 {
   height: 44px;
   line-height: 44px;
   outline: none;
-  color: #0061ca;
+  color: #A82E05;
 }
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
 
@@ -5362,7 +5366,7 @@ h4, h5, h6 {
   font-size: 20px;
   font-weight: 500;
   padding: 0 24px;
-  color: #31313a;
+  color: #FFFFFF;
 }
 .alert-dialog-content--material {
   font-family: 'Roboto', 'Noto', sans-serif;
@@ -5661,7 +5665,7 @@ h4, h5, h6 {
 .progress-bar__primary,
 .progress-bar__secondary {
   position: absolute;
-  background-color: #0061ca;
+  background-color: #A82E05;
   top: 0;
   bottom: 0;
   transition: width .3s linear;
@@ -5675,7 +5679,7 @@ h4, h5, h6 {
 .progress-bar--indeterminate:before {
   content: '';
   position: absolute;
-  background-color: #0061ca;
+  background-color: #A82E05;
   top: 0;
   left: 0;
   bottom: 0;
@@ -5687,7 +5691,7 @@ h4, h5, h6 {
 .progress-bar--indeterminate:after {
   content: '';
   position: absolute;
-  background-color: #0061ca;
+  background-color: #A82E05;
   top: 0;
   left: 0;
   bottom: 0;
@@ -5852,7 +5856,7 @@ h4, h5, h6 {
 .progress-circular__primary {
   stroke-dasharray: 1, 200;
   stroke-dashoffset: 0;
-  stroke: #0061ca;
+  stroke: #A82E05;
   transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .progress-circular__secondary {
@@ -5990,7 +5994,7 @@ ons-fab.fab, ons-speed-dial-item.fab, button.fab {
   color: #fff;
   vertical-align: middle;
   text-align: center;
-  background-color: #0061ca;
+  background-color: #A82E05;
   border: 0 solid currentColor;
   border-radius: 50%;
   overflow: hidden;
@@ -5999,7 +6003,7 @@ ons-fab.fab, ons-speed-dial-item.fab, button.fab {
 }
 ons-fab.fab:active, ons-speed-dial-item.fab:active, button.fab:active {
   box-shadow: 0 3px 6 rgba(0, 0, 0, .12);
-  background-color: color-mod(#0061ca a(70%));
+  background-color: color-mod(#A82E05 a(70%));
   transition: all 0.2s ease;
   box-shadow: 0 0 6 rgba(0, 0, 0, .12);
 }
@@ -6069,7 +6073,7 @@ ons-fab.fab--material, ons-speed-dial-item.fab--material, button.fab--material {
   color: #fff;
   vertical-align: middle;
   text-align: center;
-  background-color: #0061ca;
+  background-color: #A82E05;
   border: 0 solid currentColor;
   border-radius: 50%;
   overflow: hidden;
@@ -6578,7 +6582,7 @@ ons-fab.fab--bottom__center, button.fab--bottom__center, .speed-dial.fab--bottom
   height: 56px;
   font-size: 20px;
   text-align: center;
-  color: #0061ca;
+  color: #A82E05;
   background-color: #ffffff;
   background-color: rgba(255, 255, 255, .9);
   border-radius: 0;
