@@ -16,6 +16,7 @@ import userCourseResult from './user_course_result';
 import weather from './weather';
 import appStart from './app_start';
 import subscription from './subscription';
+import item from './item';
 import spot from './spot';
 
 export default {
@@ -40,6 +41,7 @@ export default {
     weather,
     appStart,
     subscription,
+    item,
     spot,
   },
 };
