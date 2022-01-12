@@ -1,8 +1,8 @@
 <template>
-  <div class="plan-list">
+  <div class="campsite-list">
     <div
       v-if="title"
-      class="plan-list-title"
+      class="campsite-list-title"
     >
       {{ title }}
     </div>
@@ -11,29 +11,23 @@
       <div class="content">
         <v-ons-list modifier="noborder">
           <v-ons-list-item
-            v-for="plan in plans"
-            :key="plan.id"
+            v-for="campsite in campsites"
+            :key="campsite.id"
             :modifier="modifier"
-            @click="clickPlan(plan)"
+            @click="clickCampsite(campsite)"
           >
             <div class="center">
               <div class="list-item__title">
                 <span>
-                  {{ plan.name }}
+                  {{ campsite.name }}
                   <img
-                    v-if="isShowFavoriteMark && isPlanFavorite(plan)"
+                    v-if="isShowFavoriteMark && campsite.isFavorited"
                     src="@/assets/images/user/user-plan/favorite.png"
                     width="18px"
                   >
                 </span>
-                <span
-                  v-if="currentLocation"
-                  class="plan-distance"
-                >
-                  {{ getDistance(plan.latitude, plan.longitude) }}
-                </span>
               </div>
-              <span class="list-item__subtitle">{{ plan.address }}</span>
+              <span class="list-item__subtitle">{{ campsite.address }}</span>
             </div>
             <div class="right">
               <slot name="right" />
@@ -46,16 +40,15 @@
 </template>
 
 <script>
-import LatLon from 'geodesy/latlon-ellipsoidal-vincenty.js';
 
 export default {
-  name: 'PlanList',
+  name: 'CampsiteList',
   props: {
     title: {
       type: String,
       default: null,
     },
-    plans: {
+    campsites: {
       type: Array,
       default: () => [],
     },
@@ -91,28 +84,10 @@ export default {
         this.isFullscreen = true;
       }
     },
-    clickPlan(plan) {
-      this.$emit('click', plan);
-    },
-    getDistance(latitude, longitude) {
-      // eslint-disable-next-line max-len
-      const currentPoint = new LatLon(this.currentLocation.longitude, this.currentLocation.latitude);
-      const planPoint = new LatLon(longitude, latitude);
-      let distance = currentPoint.distanceTo(planPoint);
-
-      if (distance >= 1000) {
-        const convertKm = distance / 1000;
-        const converFirstDecimal = Math.round(convertKm * 10) / 10;
-        distance = `${converFirstDecimal} km`;
-      } else {
-        distance = `${Math.round(distance)} m`;
-      }
-
-      return distance;
-    },
-    isPlanFavorite(plan) {
-      // TODO: When implement Logic, please update condition for favorite
-      return plan.isFavorited;
+    clickCampsite(campsite) {
+      // NOTE: Please implement add viewed campsite when implement Logic
+      // this.addViewedCourse(course);
+      this.$emit('click', campsite);
     },
   },
 };
@@ -122,7 +97,7 @@ export default {
 @import '@/assets/scss/_variables.scss';
 @import '@/assets/scss/_mixins.scss';
 
-.plan-list {
+.campsite-list {
   &[fullscreen] {
     height: 100%;
     overflow: hidden;
@@ -134,7 +109,7 @@ export default {
   padding-bottom: 0;
 }
 
-.plan-list-title {
+.campsite-list-title {
   @include title-style;
 
   margin-top: 25px;
@@ -162,19 +137,5 @@ export default {
     font-size: $font-size-small;
     color: $color-subtext;
   }
-}
-
-.plan-distance {
-  box-sizing: border-box;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 60px;
-  height: 18px;
-  padding: 0 12px;
-  margin-left: 8px;
-  font-size: $font-size-small;
-  background: #f2f2f2;
-  border-radius: 9px;
 }
 </style>

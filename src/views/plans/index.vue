@@ -4,7 +4,7 @@
     <div class="content">
       <!-- TODO: When implement Logic, plase use Loading in Store  -->
       <!-- <loading :visible="isLoading" /> -->
-      <no-data v-if="plans.length === 0">
+      <no-data v-if="campsites.length === 0">
         <p>
           まだお気に入りや予定日設定して<br>
           いるコースがありません。コース検索より、設定してください
@@ -12,7 +12,7 @@
         <template #actions>
           <v-ons-button
             class="button--red button--search button--search__description"
-            @click="goToPlanSearch"
+            @click="goToCampsiteSearch"
           >
             <img
               :src="require('@/assets/images/form/search-top.png')"
@@ -24,8 +24,8 @@
 
       <campsite v-else
         :isShowFavoriteMark="true"
-        :plans="plans"
-        @click="goToPlanDetail"
+        :campsites="campsites"
+        @click="goToCampsiteDetail"
       />
     </div>
   </v-ons-page>
@@ -37,14 +37,14 @@ import NoData from '@/components/organisms/no-data';
 import Campsite from '@/components/organisms/campsite';
 
 export default {
-  name: 'PlansIndex',
+  name: 'CampsitesIndex',
   components: {
     NoData,
     Campsite,
   },
   data() {
     return {
-      plans: [
+      campsites: [
         {
           id: 1,
           name: '〇〇〇キャンプ場',
@@ -105,11 +105,11 @@ export default {
     };
   },
   methods: {
-    goToPlanSearch() {
-      // TODO: Redirect to Plan Search
+    goToCampsiteSearch() {
+      // TODO: Redirect to Campsite Search
     },
-    goToPlanDetail() {
-      // TODO: Redirect to Plan Detail
+    goToCampsiteDetail() {
+      // TODO: Redirect to Campsite Detail
     },
   },
 };
