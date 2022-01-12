@@ -13,7 +13,7 @@
         class="label-list__item"
       >
         <check-field
-          v-model="checkboxValues[index]"
+          v-model="labels[index].value"
           :label="label.name"
           :disable="isDisable(label.name)"
         />
@@ -53,32 +53,25 @@ export default {
   data() {
     return {
       labels: [
-        { name: 'Test1' },
-        { name: 'Test2' },
-        { name: 'Test3' },
-        { name: 'Test4' },
-        { name: 'Test5' },
-        { name: 'Test6' },
-        { name: 'Test7' },
-        { name: 'Test8' },
-        { name: 'Test9' },
-        { name: 'Test10' },
+        { name: 'Test1', value: false },
+        { name: 'Test2', value: false },
+        { name: 'Test3', value: false },
+        { name: 'Test4', value: false },
+        { name: 'Test5', value: false },
+        { name: 'Test6', value: false },
+        { name: 'Test7', value: false },
+        { name: 'Test8', value: false },
+        { name: 'Test9', value: false },
+        { name: 'Test10', value: false },
       ],
-      checkboxValues: [],
     };
   },
   computed: {
     selectedLabels() {
       return this.labels
-        .filter((_, index) => this.checkboxValues[index])
+        .filter(label => label.value)
         .map(label => label.name);
     },
-  },
-  created() {
-    // TODO: Call api for the labels before this
-    this.labels.forEach(() => {
-      this.checkboxValues.push(false);
-    });
   },
   methods: {
     isDisable(labelName) {
