@@ -144,7 +144,7 @@ export default {
 
   td {
     a {
-      color: #0061ca;
+      color: #9883de;
       text-decoration: none;
     }
   }
@@ -158,7 +158,7 @@ export default {
 .map-link {
   position: relative;
   margin-left: 10px;
-  color: #0061ca;
+  color: #9883de;
 
   &__target {
     position: absolute;
