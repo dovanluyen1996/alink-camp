@@ -92,7 +92,7 @@ export default {
   min-height: 40px;
   margin: 0 4px;
   color: #fff;
-  background: #0061ca;
+  background: #c83200;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 

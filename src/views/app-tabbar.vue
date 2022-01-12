@@ -41,23 +41,23 @@ export default {
     return {
       tabs: [
         {
-          label: 'コース天気',
+          label: 'キャンプ天気',
           icon: 'weather',
           page: CourseWeatherNavigator,
         },
         {
-          label: 'コース検索',
+          label: 'キャンプ場検索',
           icon: 'search',
           page: CourseSearchNavigator,
         },
         {
-          label: 'スコア',
-          icon: 'score',
+          label: 'キャンプ計画',
+          icon: 'plan',
           page: ScoresNavigator,
         },
         {
-          label: '今の風',
-          icon: 'wind',
+          label: '周辺情報',
+          icon: 'nearby',
           page: WindForecastNavigator,
         },
         {
@@ -127,7 +127,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$tabs: weather, search, score, wind, menu;
+$tabs: weather, search, plan, nearby, menu;
 
 /deep/ .tabbar {
   ons-icon {
