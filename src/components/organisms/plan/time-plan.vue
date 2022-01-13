@@ -5,7 +5,7 @@
       </span>
       <v-ons-list modifier="noborder">
         <v-ons-list-item
-          v-for="time in presents"
+          v-for="time in future_plans"
           :key="time.id"
           modifier="chevron"
           @click="goToPlanPresent"
@@ -21,7 +21,7 @@
       </span>
       <v-ons-list modifier="noborder">
         <v-ons-list-item
-          v-for="time in pasts"
+          v-for="time in past_plans"
           :key="time.id"
           modifier="chevron"
           @click="goToPlanPast"
@@ -39,11 +39,11 @@
 export default {
   name: 'TimePlan',
   props: {
-    presents: {
+    future_plans: {
       type: Array,
       default: () => [],
     },
-    pasts: {
+    past_plans: {
       type: Array,
       default: () => [],
     },

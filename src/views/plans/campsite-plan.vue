@@ -20,8 +20,8 @@
         </v-ons-button>
 
         <time-plan
-          :presents="presents"
-          :pasts="pasts"
+          :future_plans="future_plans"
+          :past_plans="past_plans"
         />
       </v-ons-card>
     </div>
@@ -37,7 +37,7 @@ export default {
   },
   data() {
     return {
-      presents: [
+      future_plans: [
         {
           id: 1,
           text: '2021/11/30（金)',
@@ -47,7 +47,7 @@ export default {
           text: '2021/11/30（金)',
         },
       ],
-      pasts: [
+      past_plans: [
         {
           id: 1,
           text: '2021/11/30（金)',
