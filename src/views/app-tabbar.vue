@@ -19,7 +19,7 @@
 import settings from '@/config/settings';
 
 // tabs
-import CourseWeatherNavigator from '@/views/course-weather/course-weather-navigator';
+import CampsiteWeatherNavigator from '@/views/campsite-weather/campsite-weather-navigator';
 import CourseSearchNavigator from '@/views/course-search/course-search-navigator';
 import PlansNavigator from '@/views/plans/plans-navigator';
 import WindForecastNavigator from '@/views/wind-forecast/wind-forecast-navigator';
@@ -43,7 +43,7 @@ export default {
         {
           label: 'キャンプ天気',
           icon: 'weather',
-          page: CourseWeatherNavigator,
+          page: CampsiteWeatherNavigator,
         },
         {
           label: 'キャンプ場検索',
