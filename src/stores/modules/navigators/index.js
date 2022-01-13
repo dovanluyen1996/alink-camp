@@ -4,6 +4,7 @@ import courseWeatherNavigator from './course-weather-navigator';
 import scoresNavigator from './scores-navigator';
 import windForecastNavigator from './wind-forecast-navigator';
 import menuNavigator from './menu-navigator';
+import campsiteWeatherNavigator from './campsite-weather-navigator';
 
 export default {
   appNavigator,
@@ -12,4 +13,5 @@ export default {
   scoresNavigator,
   windForecastNavigator,
   menuNavigator,
+  campsiteWeatherNavigator,
 };
