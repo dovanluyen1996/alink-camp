@@ -22,7 +22,7 @@
         </template>
       </no-data>
 
-      <campsite v-else
+      <campsite-list v-else
         :isShowFavoriteMark="true"
         :campsites="campsites"
         @click="goToPlanDetail"
@@ -34,13 +34,13 @@
 <script>
 // components
 import NoData from '@/components/organisms/no-data';
-import Campsite from '@/components/organisms/campsite';
+import CampsiteList from '@/components/organisms/campsite-list';
 
 export default {
   name: 'CampsitesIndex',
   components: {
     NoData,
-    Campsite,
+    CampsiteList,
   },
   data() {
     return {
