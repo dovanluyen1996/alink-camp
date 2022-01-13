@@ -9,6 +9,14 @@
           :items="items"
         />
 
+        <div
+          v-else
+          class="items__note"
+        >
+          <p>アイテムが登録されていません。</p>
+          <p>アイテム追加より登録して下さい。</p>
+        </div>
+
         <template #footer>
           <v-ons-button modifier="cta rounded red">
             <img src="@/assets/images/red-cross.png">
@@ -87,6 +95,10 @@ export default {
   }
 
   .content-with-footer {
+    &__content {
+      position: relative;
+    }
+
     &__footer {
       display: flex;
       justify-content: flex-end;
@@ -97,6 +109,20 @@ export default {
       align-items: center;
       margin-right: 20px;
     }
+  }
+}
+
+.items__note {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  text-align: center;
+  transform: translate(-50%, -50%);
+
+  & > p {
+    font-size: 18px;
+    font-weight: 600;
   }
 }
 </style>
