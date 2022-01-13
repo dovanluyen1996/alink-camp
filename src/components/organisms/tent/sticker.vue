@@ -64,12 +64,13 @@ export default {
   &__labels {
     display: flex;
     justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 5px;
   }
 
   &__label {
-    width: 62px;
     height: 20px;
-    margin-right: 5px;
+    padding: 2px 5px;
     font-size: 12px;
     font-weight: 600;
     color: #fff;
