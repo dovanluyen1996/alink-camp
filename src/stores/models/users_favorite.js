@@ -8,6 +8,13 @@ export default {
     usersFavorites: [],
     isLoading: false,
   },
+  getters: {
+    isLoading: state => state.isLoading,
+    all: state => state.usersFavorites,
+    findByCampsiteId: state => campsiteId => state.usersFavorites.find(
+      favorite => favorite.id === campsiteId,
+    ),
+  },
   mutations: {
     setUsersFavorites(state, usersFavorites) {
       Vue.set(state, 'usersFavorites', usersFavorites);
