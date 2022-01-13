@@ -21,14 +21,14 @@ import settings from '@/config/settings';
 // tabs
 import CourseWeatherNavigator from '@/views/course-weather/course-weather-navigator';
 import CourseSearchNavigator from '@/views/course-search/course-search-navigator';
-import ScoresNavigator from '@/views/scores/scores-navigator';
+import PlansNavigator from '@/views/plans/plans-navigator';
 import WindForecastNavigator from '@/views/wind-forecast/wind-forecast-navigator';
 import MenuNavigator from '@/views/menu/menu-navigator';
 import UserStampsCampaign from '@/views/user/user-stamps/campaign';
 
 // pages
 import CourseSearchIndexPage from '@/views/course-search/index';
-import ScoresIndexPage from '@/views/scores/index';
+import PlansIndexPage from '@/views/plans/index';
 import WindForecastIndexPage from '@/views/wind-forecast/index';
 import CourseWeatherIndexPage from '@/views/course-weather/index';
 import MenuIndexPage from '@/views/menu/index';
@@ -53,7 +53,7 @@ export default {
         {
           label: 'キャンプ計画',
           icon: 'plan',
-          page: ScoresNavigator,
+          page: PlansNavigator,
         },
         {
           label: '周辺情報',
@@ -80,7 +80,7 @@ export default {
     isNavigatorBusy() {
       return this.$store.state.courseWeatherNavigator.isBusy
         || this.$store.state.courseSearchNavigator.isBusy
-        || this.$store.state.scoresNavigator.isBusy
+        || this.$store.state.plansNavigator.isBusy
         || this.$store.state.windForecastNavigator.isBusy
         || this.$store.state.menuNavigator.isBusy;
     },
@@ -109,8 +109,8 @@ export default {
       case settings.views.appTabbar.tabIndexes.courseSearch:
         this.$store.dispatch('courseSearchNavigator/reset', CourseSearchIndexPage);
         break;
-      case settings.views.appTabbar.tabIndexes.scores:
-        this.$store.dispatch('scoresNavigator/reset', ScoresIndexPage);
+      case settings.views.appTabbar.tabIndexes.plans:
+        this.$store.dispatch('plansNavigator/reset', PlansIndexPage);
         break;
       case settings.views.appTabbar.tabIndexes.windForecast:
         this.$store.dispatch('windForecastNavigator/reset', WindForecastIndexPage);
