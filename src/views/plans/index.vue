@@ -37,7 +37,7 @@ import NoData from '@/components/organisms/no-data';
 import CampsiteList from '@/components/organisms/campsite-list';
 
 // page
-import CampPlan from '@/views/plans/camp-plan';
+import CampsitePlan from '@/views/plans/campsite-plan';
 
 export default {
   name: 'CampsitesIndex',
@@ -112,7 +112,7 @@ export default {
       // TODO: Redirect to Plan Search
     },
     goToPlanDetail() {
-      this.$store.dispatch('plansNavigator/push', CampPlan);
+      this.$store.dispatch('plansNavigator/push', CampsitePlan);
     },
   },
 };
