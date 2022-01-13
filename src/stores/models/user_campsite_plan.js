@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import moment from 'moment';
 import ApiClient from '@/api_client';
 
 export default {
@@ -7,6 +8,12 @@ export default {
   state: {
     userCampsitePlans: [],
     isLoading: false,
+  },
+  getters: {
+    isLoading: state => state.isLoading,
+    inFuture: state => state.userCampsitePlans.filter(
+      userCoursePlan => moment(userCoursePlan.startedDate).startOf('days').isSameOrAfter(moment().startOf('days')),
+    ),
   },
   mutations: {
     setUserCampsitePlans(state, userCampsitePlans) {
