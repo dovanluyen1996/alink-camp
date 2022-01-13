@@ -1,9 +1,6 @@
 <template>
   <v-ons-page>
-    <custom-toolbar
-      title="オリジナルアイテム"
-      :disabled-back-button="true"
-    />
+    <custom-toolbar title="オリジナルアイテム" />
 
     <div class="content">
       <validation-observer>
