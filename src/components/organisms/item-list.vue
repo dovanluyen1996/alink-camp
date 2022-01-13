@@ -56,6 +56,7 @@ export default {
 
   &--active {
     background-color: #f2967857;
+    border: 1px solid #d9d9d9
   }
 
   &__title {
@@ -75,7 +76,10 @@ export default {
 
   .list-item {
     border-top: 1px solid #d9d9d9;
-    border-bottom: 1px solid #d9d9d9;
+
+    &:last-child {
+      border-bottom: 1px solid #d9d9d9;
+    }
   }
 
   .list-item__center {
