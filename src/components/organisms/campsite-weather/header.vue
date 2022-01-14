@@ -8,7 +8,7 @@
         width="18px"
       >
     </div>
-    <div class="course-address">
+    <div class="campsite-address">
       {{ campsite.address }}
     </div>
   </div>
