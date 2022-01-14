@@ -16,7 +16,7 @@
         キャンセル
       </v-ons-button>
       <v-ons-button
-        @click="clickDelete()"
+        @click="clickEdit()"
       >
         削除する
       </v-ons-button>
@@ -26,7 +26,7 @@
 
 <script>
 export default {
-  name: 'DeleteDialog',
+  name: 'EditDialog',
   props: {
     isShown: {
       type: Boolean,
@@ -47,18 +47,9 @@ export default {
     cancel() {
       this.isVisible = false;
     },
-    clickDelete() {
-      this.$emit('clickDelete');
+    clickEdit() {
+      this.$emit('clickEdit');
     },
   },
 };
 </script>
-
-<style lang="scss" scoped>
-/deep/ {
-  .alert-dialog-content {
-    font-size: 15px;
-    font-weight: 300;
-  }
-}
-</style>

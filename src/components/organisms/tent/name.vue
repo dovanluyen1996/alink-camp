@@ -37,6 +37,10 @@ export default {
       type: Object,
       default: null,
     },
+    value: {
+      type: String,
+      default: '',
+    },
   },
   computed: {
     inputedValue: {

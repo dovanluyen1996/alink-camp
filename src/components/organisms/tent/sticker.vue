@@ -63,9 +63,9 @@ export default {
 
   &__labels {
     display: flex;
-    justify-content: flex-start;
     flex-wrap: wrap;
     gap: 5px;
+    justify-content: flex-start;
   }
 
   &__label {
