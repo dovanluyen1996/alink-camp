@@ -1,6 +1,7 @@
 <template>
   <v-ons-card
     class="campsite-weather-show"
+    @click="goToCampsiteDetail"
   >
     <campsite-weather-header
       :campsite="useCampsite"
@@ -106,6 +107,9 @@ export default {
 
       const forecasts = await this.$store.dispatch('models/weather/getForecast14Days', params);
       return forecasts;
+    },
+    goToCampsiteDetail() {
+
     },
     isPresent(forecastObject) {
       return this.$helpers.isPresentObject(forecastObject);
