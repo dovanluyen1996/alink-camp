@@ -17,7 +17,7 @@
             />
             <item-sticker
               :sticker="sticker"
-              @showLabelDialog="showLabelDialog"
+              @showLabelListDialog="showLabelListDialog"
             />
             <template #footer>
               <v-ons-button

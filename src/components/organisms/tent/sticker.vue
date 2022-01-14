@@ -26,7 +26,7 @@
       </div>
       <div
         class="tent-sticker__button"
-        @click="showLabelDialog"
+        @click="showLabelListDialog"
       >
         <v-ons-button modifier="cta red">
           <img
@@ -50,8 +50,8 @@ export default {
     },
   },
   methods: {
-    showLabelDialog() {
-      this.$emit('showLabelDialog');
+    showLabelListDialog() {
+      this.$emit('showLabelListDialog');
     },
   },
 };
