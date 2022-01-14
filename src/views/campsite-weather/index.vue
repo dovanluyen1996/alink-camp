@@ -11,7 +11,7 @@
         <template #actions>
           <v-ons-button
             modifier="cta"
-            @click="goToCourseSearch"
+            @click="goToCampsiteSearch"
           >
             キャンプ場検索
           </v-ons-button>
@@ -34,9 +34,6 @@
 </template>
 
 <script>
-// pages
-import CourseSearchIndex from '@/views/course-search/index';
-
 // components
 import NoData from '@/components/organisms/no-data';
 import CampsiteWeatherContent from '@/components/organisms/campsite-weather/content';
@@ -88,18 +85,8 @@ export default {
       await this.$store.dispatch('models/userCampsitePlan/getUserCampsitePlans');
       await this.$store.dispatch('models/usersFavorite/getUsersFavorites');
     },
-    goToCourseSearch() {
-      this.$store.commit('courseSearchNavigator/setEnableBusy', false);
-      this.$store.dispatch('courseSearchNavigator/reset', {
-        extends: CourseSearchIndex,
-        onsNavigatorOptions: {
-          callback: () => {
-            this.$store.commit('courseSearchNavigator/setEnableBusy', true);
-          },
-        },
-      });
+    goToCampsiteSearch() {
 
-      this.$store.commit('appTabbar/setActiveIndexFromTabName', 'courseSearch');
     },
   },
 };
