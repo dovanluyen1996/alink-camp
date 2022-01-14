@@ -13,8 +13,8 @@
           v-else
           class="items__note"
         >
-          <p>アイテムが登録されていません。</p>
-          <p>アイテム追加より登録して下さい。</p>
+          アイテムが登録されていません。<br>
+          アイテム追加より登録して下さい。
         </div>
 
         <template #footer>
@@ -117,12 +117,9 @@ export default {
   top: 50%;
   left: 50%;
   width: 100%;
+  font-size: 18px;
+  font-weight: 600;
   text-align: center;
   transform: translate(-50%, -50%);
-
-  & > p {
-    font-size: 18px;
-    font-weight: 600;
-  }
 }
 </style>
