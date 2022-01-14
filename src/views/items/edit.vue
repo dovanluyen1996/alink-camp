@@ -43,12 +43,12 @@
       </validation-observer>
     </div>
 
-    <edit-dialog
+    <confirm-dialog
       :is-shown.sync="isShownEditDialog"
-      @clickEdit="updateItem"
+      @clickConfirm="updateItem"
     >
       アイテム情報を編集します。よろしいですか？
-    </edit-dialog>
+    </confirm-dialog>
 
     <completed-dialog
       :action="action"
@@ -65,7 +65,7 @@ import ContentWithFooter from '@/components/organisms/content-with-footer';
 import ItemName from '@/components/organisms/item/name';
 import ItemSticker from '@/components/organisms/item/sticker';
 import DeleteDialogWithIcon from '@/components/organisms/dialog/delete-dialog-with-icon';
-import EditDialog from '@/components/organisms/dialog/edit-dialog';
+import ConfirmDialog from '@/components/organisms/dialog/confirm-dialog';
 import CompletedDialog from '@/components/organisms/dialog/completed-dialog';
 
 export default {
@@ -77,7 +77,7 @@ export default {
     ItemSticker,
     DeleteDialogWithIcon,
     CompletedDialog,
-    EditDialog,
+    ConfirmDialog,
   },
   props: {
     item: {
@@ -105,13 +105,15 @@ export default {
   },
   methods: {
     updateItem() {
-      // TODO: Implement function when update item
       this.closeEditDialog();
+      // TODO: Implement function below this
+
       this.showCompletedDialog('updateItem');
     },
     deleteItem() {
-      // TODO: Implement function when delete item
       this.closeDeleteConfirmDialog();
+      // TODO: Implement function below this
+
       this.showCompletedDialog('deleteItem');
     },
     closeDeleteConfirmDialog() {

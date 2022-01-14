@@ -26,7 +26,7 @@
 
 <script>
 export default {
-  name: 'EditDialog',
+  name: 'ConfirmDialog',
   props: {
     isShown: {
       type: Boolean,
@@ -48,7 +48,7 @@ export default {
       this.isVisible = false;
     },
     clickEdit() {
-      this.$emit('clickEdit');
+      this.$emit('clickConfirm');
     },
   },
 };

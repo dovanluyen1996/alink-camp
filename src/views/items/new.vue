@@ -20,6 +20,7 @@
               <v-ons-button
                 modifier="cta rounded"
                 class="add-button"
+                @click="showConfirmCreateItemDialog"
               >
                 登録する
               </v-ons-button>
@@ -28,6 +29,20 @@
         </validation-provider>
       </validation-observer>
     </div>
+
+    <confirm-dialog
+      :is-shown.sync="isShownConfirmCreateItemDialog"
+      @clickConfirm="createItem"
+    >
+      新たに〇〇〇〇〇〇を作成します。<br>
+      よろしいですか？
+    </confirm-dialog>
+
+    <completed-dialog
+      :action="action"
+      :is-visible="completedDialogVisible"
+      @close="closeCompletedDialog"
+    />
   </v-ons-page>
 </template>
 
@@ -37,6 +52,8 @@ import CustomToolbar from '@/components/organisms/custom-toolbar.vue';
 import ContentWithFooter from '@/components/organisms/content-with-footer';
 import ItemName from '@/components/organisms/item/name';
 import ItemSticker from '@/components/organisms/item/sticker';
+import ConfirmDialog from '@/components/organisms/dialog/confirm-dialog';
+import CompletedDialog from '@/components/organisms/dialog/completed-dialog';
 
 export default {
   name: 'ItemsNew',
@@ -45,6 +62,8 @@ export default {
     ContentWithFooter,
     ItemName,
     ItemSticker,
+    ConfirmDialog,
+    CompletedDialog,
   },
   data() {
     return {
@@ -57,7 +76,31 @@ export default {
           'ラベルB',
         ],
       },
+      isShownConfirmCreateItemDialog: false,
+      completedDialogVisible: false,
+      action: '',
     };
+  },
+  methods: {
+    createItem() {
+      this.closeConfirmCreateItemDialog();
+      // TODO: Implement function below this
+
+      this.showCompletedDialog('createItem');
+    },
+    showCompletedDialog(action) {
+      this.action = action;
+      this.completedDialogVisible = true;
+    },
+    closeCompletedDialog() {
+      this.completedDialogVisible = false;
+    },
+    showConfirmCreateItemDialog() {
+      this.isShownConfirmCreateItemDialog = true;
+    },
+    closeConfirmCreateItemDialog() {
+      this.isShownConfirmCreateItemDialog = false;
+    },
   },
 };
 
@@ -67,6 +110,11 @@ export default {
 /deep/ {
   .page__background {
     background-image: none;
+  }
+
+  .alert-dialog-content {
+    font-size: 15px;
+    font-weight: 300;
   }
 }
 
