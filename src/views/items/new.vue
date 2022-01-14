@@ -10,12 +10,12 @@
           name="アイテム名"
         >
           <content-with-footer>
-            <tent-name
-              v-model="tentName"
+            <item-name
+              v-model="itemName"
               :errors="errors"
               :sticker="sticker"
             />
-            <tent-sticker :sticker="sticker" />
+            <item-sticker :sticker="sticker" />
             <template #footer>
               <v-ons-button
                 modifier="cta rounded"
@@ -35,20 +35,20 @@
 // components
 import CustomToolbar from '@/components/organisms/custom-toolbar.vue';
 import ContentWithFooter from '@/components/organisms/content-with-footer';
-import TentName from '@/components/organisms/tent/name';
-import TentSticker from '@/components/organisms/tent/sticker';
+import ItemName from '@/components/organisms/item/name';
+import ItemSticker from '@/components/organisms/item/sticker';
 
 export default {
-  name: 'TentsNew',
+  name: 'ItemsNew',
   components: {
     CustomToolbar,
     ContentWithFooter,
-    TentName,
-    TentSticker,
+    ItemName,
+    ItemSticker,
   },
   data() {
     return {
-      tentName: '',
+      itemName: '',
       sticker: {
         user_id: 1,
         labels: [

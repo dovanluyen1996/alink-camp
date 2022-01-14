@@ -1,32 +1,32 @@
 <template>
-  <div class="tent-sticker">
-    <span class="tent-sticker__title">
+  <div class="item-sticker">
+    <span class="item-sticker__title">
       ラベル
     </span>
-    <div class="tent-sticker__box">
+    <div class="item-sticker__box">
       <div
         v-if="sticker && sticker.labels.length > 0"
-        class="tent-sticker__labels"
+        class="item-sticker__labels"
       >
         <div
           v-for="label in sticker.labels"
           :key="label"
-          class="tent-sticker__label"
+          class="item-sticker__label"
         >
           {{ label }}
         </div>
       </div>
       <p
         v-else
-        class="tent-sticker__text"
+        class="item-sticker__text"
       >
         設定しているラベルがありません。
       </p>
     </div>
-    <div class="tent-sticker__button">
+    <div class="item-sticker__button">
       <v-ons-button modifier="cta red">
         <img
-          class="tent-sticker__image"
+          class="item-sticker__image"
           src="@/assets/images/red-cross.png"
         >
         ラベル編集
@@ -37,7 +37,7 @@
 
 <script>
 export default {
-  name: 'TentSticker',
+  name: 'ItemSticker',
   props: {
     sticker: {
       type: Object,
@@ -48,7 +48,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.tent-sticker {
+.item-sticker {
   height: 190px;
   padding: 0 20px;
   margin-top: 10px;

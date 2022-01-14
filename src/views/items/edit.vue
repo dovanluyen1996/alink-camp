@@ -4,7 +4,7 @@
       <template #right>
         <delete-dialog-with-icon
           :is-shown.sync="isShownDeleteDialog"
-          @clickDelete="deleteTent"
+          @clickDelete="deleteItem"
         >
           このアイテムを削除します。<br>
           よろしいですか？ <br>
@@ -22,13 +22,13 @@
           name="アイテム名"
         >
           <content-with-footer>
-            <tent-name
-              v-model="tentName"
+            <item-name
+              v-model="itemName"
               :errors="errors"
               :sticker="sticker"
-              :value="tent.name"
+              :value="item.name"
             />
-            <tent-sticker :sticker="sticker" />
+            <item-sticker :sticker="sticker" />
             <template #footer>
               <v-ons-button
                 modifier="cta rounded"
@@ -45,7 +45,7 @@
 
     <edit-dialog
       :is-shown.sync="isShownEditDialog"
-      @clickEdit="updateTent"
+      @clickEdit="updateItem"
     >
       アイテム情報を編集します。よろしいですか？
     </edit-dialog>
@@ -62,25 +62,25 @@
 // components
 import CustomToolbar from '@/components/organisms/custom-toolbar.vue';
 import ContentWithFooter from '@/components/organisms/content-with-footer';
-import TentName from '@/components/organisms/tent/name';
-import TentSticker from '@/components/organisms/tent/sticker';
+import ItemName from '@/components/organisms/item/name';
+import ItemSticker from '@/components/organisms/item/sticker';
 import DeleteDialogWithIcon from '@/components/organisms/dialog/delete-dialog-with-icon';
 import EditDialog from '@/components/organisms/dialog/edit-dialog';
 import CompletedDialog from '@/components/organisms/dialog/completed-dialog';
 
 export default {
-  name: 'TentsEdit',
+  name: 'ItemsEdit',
   components: {
     CustomToolbar,
     ContentWithFooter,
-    TentName,
-    TentSticker,
+    ItemName,
+    ItemSticker,
     DeleteDialogWithIcon,
     CompletedDialog,
     EditDialog,
   },
   props: {
-    tent: {
+    item: {
       type: Object,
       default: null,
       required: true,
@@ -88,7 +88,7 @@ export default {
   },
   data() {
     return {
-      tentName: this.tent.name,
+      itemName: this.item.name,
       sticker: {
         user_id: 1,
         labels: [
@@ -104,15 +104,15 @@ export default {
     };
   },
   methods: {
-    updateTent() {
-      // TODO: Implement function when update the tent
+    updateItem() {
+      // TODO: Implement function when update item
       this.closeEditDialog();
-      this.showCompletedDialog('updateTent');
+      this.showCompletedDialog('updateItem');
     },
-    deleteTent() {
-      // TODO: Implement function when delete the tent
+    deleteItem() {
+      // TODO: Implement function when delete item
       this.closeDeleteConfirmDialog();
-      this.showCompletedDialog('deleteTent');
+      this.showCompletedDialog('deleteItem');
     },
     closeDeleteConfirmDialog() {
       this.isShownDeleteDialog = false;

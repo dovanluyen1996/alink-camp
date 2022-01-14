@@ -40,8 +40,8 @@ export default {
         return '登録完了';
       case 'deleteResult':
       case 'deletePlan':
-      case 'deleteTent':
-      case 'updateTent':
+      case 'deleteItem':
+      case 'updateItem':
         return '削除完了';
       case 'sendContact':
         return 'お問い合わせ完了';
@@ -65,8 +65,8 @@ export default {
         return '予定日を削除しました。';
       case 'sendContact':
         return 'お問い合わせ内容を送信しました。';
-      case 'deleteTent':
-      case 'updateTent':
+      case 'deleteItem':
+      case 'updateItem':
         return '削除が完了しました。';
       default:
         return null;

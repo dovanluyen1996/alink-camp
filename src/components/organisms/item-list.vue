@@ -7,7 +7,7 @@
             v-for="item in items"
             :key="item.id"
             modifier="chevron nodivider"
-            @click="goToTentsEdit(tent)"
+            @click="goToItemsEdit(item)"
           >
             <div :class="['list-item__box', {'list-item--active': item.user_id}]">
               <div class="center">
@@ -27,7 +27,7 @@
 
 <script>
 // pages
-import TentsEdit from '@/views/tents/edit';
+import ItemsEdit from '@/views/items/edit';
 
 export default {
   name: 'ItemList',
@@ -38,10 +38,10 @@ export default {
     },
   },
   methods: {
-    goToTentsEdit(tent) {
+    goToItemsEdit(item) {
       this.$store.dispatch('appNavigator/push', {
-        extends: TentsEdit,
-        onsNavigatorProps: { tent },
+        extends: ItemsEdit,
+        onsNavigatorProps: { item },
       });
     },
   },

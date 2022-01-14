@@ -1,12 +1,12 @@
 <template>
-  <div class="tent-name">
-    <div class="tent-name__top">
-      <div class="tent-name__title">
+  <div class="item-name">
+    <div class="item-name__top">
+      <div class="item-name__title">
         アイテム名
       </div>
       <span
         v-if="sticker.user_id"
-        class="tent-name__sub-title"
+        class="item-name__sub-title"
       >
         （全角10文字以内）
       </span>
@@ -14,7 +14,7 @@
     <v-ons-input
       v-model="inputedValue"
       type="text"
-      class="tent-name__input"
+      class="item-name__input"
     />
     <div
       v-if="errors.length"
@@ -27,7 +27,7 @@
 
 <script>
 export default {
-  name: 'TentName',
+  name: 'ItemName',
   props: {
     errors: {
       type: Array,
@@ -58,7 +58,7 @@ export default {
 <style lang="scss" scoped>
 @import '@/assets/scss/_mixins.scss';
 
-.tent-name {
+.item-name {
   padding: 0 20px;
   margin-top: 30px;
 
