@@ -6,7 +6,7 @@
       <content-with-footer>
         <search-field
           v-model="searchText"
-          @click="goToCampsiteSearch"
+          @searched="goToCampsiteSearch"
         />
         <div class="location-history">
           閲覧履歴
@@ -24,7 +24,7 @@ import CampsiteList from '@/components/organisms/campsite-list';
 import ContentWithFooter from '@/components/organisms/content-with-footer';
 
 export default {
-  name: 'CourseSearch',
+  name: 'CampsiteSearch',
   components: {
     SearchField,
     CampsiteList,
