@@ -14,13 +14,13 @@
       </div>
 
       <div
-          v-for="label in labels"
-          :key="label"
-          :class="['items__list', {'items__list--active': label.user_id}]"
+          v-for="item in labels"
+          :key="item"
+          :class="['items__list', {'items__list--active': item.user_id}]"
       >
         <div class="items__list--content">
           <check-field
-            :label="label.name"
+            :label="item.name"
           />
         </div>
         <div class="items__list--label">
@@ -47,39 +47,11 @@ export default {
   components: {
     CheckField,
   },
-  data() {
-    return {
-      labels: [
-        {
-          name: 'オリジナルテント',
-          user_id: 1,
-        },
-        {
-          name: 'オリジナルテント',
-          user_id: null,
-        },
-        {
-          name: 'オリジナルテント',
-          user_id: 2,
-        },
-        {
-          name: 'オリジナルテント',
-          user_id: 3,
-        },
-        {
-          name: 'オリジナルテント',
-          user_id: null,
-        },
-        {
-          name: 'オリジナルテント',
-          user_id: null,
-        },
-        {
-          name: 'オリジナルテント',
-          user_id: null,
-        },
-      ],
-    };
+  props: {
+    labels: {
+      type: Array,
+      default: () => [],
+    },
   },
 };
 </script>
@@ -88,6 +60,7 @@ export default {
 @import "@/assets/scss/_variables.scss";
 
 .items-table {
+  margin-bottom: 100px;
   padding: 20px 10px;
 
   .items {
@@ -134,7 +107,7 @@ export default {
     border: 1px solid #d9d9d9;
 
     &--active {
-      background-color: #f29678;
+      background-color: $color-active-orange;
     }
 
     &--content,

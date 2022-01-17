@@ -37,7 +37,7 @@
           </td>
           <td>
             <img
-              :src="require('@/assets/images/weathers/sun.png')"
+              :src="require('@/assets/images/weathers/weather/02.png')"
               class="icon-weather"
             >
           </td>
@@ -80,7 +80,7 @@ export default {
   },
   methods: {
     displayDate(date) {
-      return this.$helpers.toShortDayString(date);
+      return this.$helpers.toShortStringWithZero(date);
     },
     saturdayCol(date) {
       return this.$helpers.isSaturday(date) ? 'date-col__sarturday' : '';

@@ -11,7 +11,7 @@ export default {
   toShortString(targetDate) {
     return moment(targetDate).format('M/D (dd)');
   },
-  toShortDayString(targetDate) {
+  toShortStringWithZero(targetDate) {
     return moment(targetDate).format('MM/DD (dd)');
   },
   toDayString(targetDate) {

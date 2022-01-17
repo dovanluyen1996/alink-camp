@@ -12,7 +12,18 @@
       </div>
 
       <forecast-table />
-      <item-table />
+      <item-table
+        v-if="labels.length > 0"
+        :labels="labels"
+      />
+
+      <div
+        v-else
+        class="items__note"
+      >
+        アイテムが登録されていません。<br>
+        アイテム追加より登録して下さい。
+      </div>
 
       <content-with-footer>
         <template #footer>
@@ -48,6 +59,40 @@ export default {
     ItemTable,
     ContentWithFooter,
   },
+  data() {
+    return {
+      labels: [
+        {
+          name: 'オリジナルテント',
+          user_id: 1,
+        },
+        {
+          name: 'オリジナルテント',
+          user_id: null,
+        },
+        {
+          name: 'オリジナルテント',
+          user_id: 2,
+        },
+        {
+          name: 'オリジナルテント',
+          user_id: 3,
+        },
+        {
+          name: 'オリジナルテント',
+          user_id: null,
+        },
+        {
+          name: 'オリジナルテント',
+          user_id: null,
+        },
+        {
+          name: 'オリジナルテント',
+          user_id: null,
+        },
+      ],
+    };
+  },
   computed: {
     isLoading() {
       // TODO: return status of Loading
@@ -77,6 +122,7 @@ export default {
     &__desc {
       padding: 15px;
       font-size: 18px;
+      font-weight: 300;
     }
   }
 
@@ -101,14 +147,23 @@ export default {
     left: 100%;
 
     .button {
-      &--more {
-        margin: 0 auto;
-      }
-
+      
       &--search-day {
         margin-top: 20px !important;
       }
     }
   }
+}
+
+.items__note {
+  position: absolute;
+  top: 65%;
+  left: 50%;
+  width: 100%;
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
+  transform: translate(-50%, -50%);
+  color: $color-white;
 }
 </style>
