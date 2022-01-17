@@ -29,7 +29,7 @@
             <td>
               <div class="weather">
                 <img
-                  :src="require('@/assets/images/weathers/sun.png')"
+                  :src="require('@/assets/images/weathers/weather/01.png')"
                   class="icon-weather"
                 >
               </div>
@@ -64,52 +64,6 @@
                   class="task__icon"
                   @click="showPopup()"
                 >
-            </td>
-          </tr>
-
-          <tr class="circle-grid">
-            <td colspan="6">
-              <div class="circle"></div>
-              <div class="circle"></div>
-              <div class="circle"></div>
-            </td>
-          </tr>
-
-          <tr class="detail-row">
-            <td class="target">
-              10
-            </td>
-            <td>
-              <div class="weather">
-                <img
-                  :src="require('@/assets/images/weathers/sun.png')"
-                  class="icon-weather"
-                >
-              </div>
-            </td>
-            <td>
-              <div class="temperature">
-                <span class="temperature__value">
-                  11
-                </span>
-                <span class="temperature__unit">
-                  ℃
-                </span>
-              </div>
-            </td>
-            <td>99</td>
-            <td>10</td>
-            <td class="task">
-              <div class="task__text">
-                <span>
-                  と食事の準備
-                </span>
-              </div>
-              <img
-                :src="require('@/assets/images/weathers/icon-edit.png')"
-                class="task__icon"
-                @click="showPopup()"
-              >
             </td>
           </tr>
         </tbody>
@@ -188,6 +142,118 @@ export default {
         },
         {
           targetAt: 7,
+          temp: 11,
+          content: '',
+          precipitation: '10',
+          wind: '99',
+        },
+        {
+          targetAt: 8,
+          temp: 10,
+          content: '焚き火の準備と食事の準備をするあああああああ...',
+          precipitation: '10',
+          wind: '99',
+        },
+        {
+          targetAt: 9,
+          temp: 11,
+          content: '',
+          precipitation: '10',
+          wind: '99',
+        },
+        {
+          targetAt: 10,
+          temp: 10,
+          content: '焚き火の準備と食事の準備をするあああああああ...',
+          precipitation: '10',
+          wind: '99',
+        },
+        {
+          targetAt: 11,
+          temp: 11,
+          content: '',
+          precipitation: '10',
+          wind: '99',
+        },
+        {
+          targetAt: 12,
+          temp: 10,
+          content: '焚き火の準備と食事の準備をするあああああああ...',
+          precipitation: '10',
+          wind: '99',
+        },
+        {
+          targetAt: 13,
+          temp: 11,
+          content: '',
+          precipitation: '10',
+          wind: '99',
+        },
+        {
+          targetAt: 14,
+          temp: 10,
+          content: '焚き火の準備と食事の準備をするあああああああ...',
+          precipitation: '10',
+          wind: '99',
+        },
+        {
+          targetAt: 15,
+          temp: 11,
+          content: '',
+          precipitation: '10',
+          wind: '99',
+        },
+        {
+          targetAt: 16,
+          temp: 10,
+          content: '焚き火の準備と食事の準備をするあああああああ...',
+          precipitation: '10',
+          wind: '99',
+        },
+        {
+          targetAt: 17,
+          temp: 11,
+          content: '',
+          precipitation: '10',
+          wind: '99',
+        },
+        {
+          targetAt: 18,
+          temp: 10,
+          content: '焚き火の準備と食事の準備をするあああああああ...',
+          precipitation: '10',
+          wind: '99',
+        },
+        {
+          targetAt: 19,
+          temp: 11,
+          content: '',
+          precipitation: '10',
+          wind: '99',
+        },
+        {
+          targetAt: 20,
+          temp: 10,
+          content: '焚き火の準備と食事の準備をするあああああああ...',
+          precipitation: '10',
+          wind: '99',
+        },
+        {
+          targetAt: 21,
+          temp: 11,
+          content: '',
+          precipitation: '10',
+          wind: '99',
+        },
+        {
+          targetAt: 22,
+          temp: 10,
+          content: '焚き火の準備と食事の準備をするあああああああ...',
+          precipitation: '10',
+          wind: '99',
+        },
+        {
+          targetAt: 23,
           temp: 11,
           content: '',
           precipitation: '10',
@@ -279,6 +345,7 @@ export default {
 
       &__text {
         padding-right: 25px;
+        text-align: left;
       }
 
       &__icon {
@@ -302,22 +369,6 @@ export default {
       padding-left: 5px;
       font-size: 18px;
       font-weight: 600;
-    }
-  }
-
-  .circle-grid {
-    td {
-      border: none;
-    }
-
-    .circle {
-      width: 20px;
-      height: 20px;
-      margin: 0 auto;
-      margin-top: 5px;
-      background-color: $color-white;
-      border: 1px solid $color-border-hight;
-      border-radius: 50%;
     }
   }
 }
