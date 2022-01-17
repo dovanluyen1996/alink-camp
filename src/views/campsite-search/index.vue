@@ -111,4 +111,19 @@ export default {
     width: 150px;
   }
 }
+
+.location-history {
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
+}
+
+/deep/ {
+  .list-item {
+    &::before {
+      content: none !important;
+    }
+  }
+}
+>>>>>>> 02bf050 (screen search campsite top)
 </style>
