@@ -33,6 +33,7 @@ export default {
   },
   methods: {
     closeTask() {
+      // TODO: キャンセル操作
       this.$emit('close');
     },
   },
