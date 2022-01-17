@@ -20,6 +20,7 @@ import settings from '@/config/settings';
 
 // tabs
 import CampsiteWeatherNavigator from '@/views/campsite-weather/campsite-weather-navigator';
+import CourseWeatherNavigator from '@/views/course-weather/course-weather-navigator';
 import CampsiteSearchNavigator from '@/views/campsite-search/campsite-search-navigator';
 import PlansNavigator from '@/views/plans/plans-navigator';
 import WindForecastNavigator from '@/views/wind-forecast/wind-forecast-navigator';
