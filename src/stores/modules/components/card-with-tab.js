@@ -6,6 +6,7 @@ export default {
     showCourseActiveIndex: 0,
     searchCourseActiveIndex: 0,
     aboutSubscriptionActiveIndex: 0,
+    showCampsiteActiveIndex: 0,
   },
   getters: {
     activeIndex: state => state.activeIndex,
@@ -14,8 +15,8 @@ export default {
     setActiveIndex(state, activeIndex) {
       state.activeIndex = activeIndex;
     },
-    setShowCourseActiveIndex(state, activeIndex) {
-      state.showCourseActiveIndex = activeIndex;
+    setShowCampsiteActiveIndex(state, activeIndex) {
+      state.showCampsiteActiveIndex = activeIndex;
     },
     setSearchCourseActiveIndex(state, activeIndex) {
       state.searchCourseActiveIndex = activeIndex;
@@ -26,7 +27,7 @@ export default {
     resetActiveIndex(state) {
       state.activeIndex = 0;
     },
-    resetShowCourseActiveIndex(state) {
+    resetShowCampsiteActiveIndex(state) {
       state.showCourseActiveIndex = 0;
     },
     resetSearchCourseActiveIndex(state) {

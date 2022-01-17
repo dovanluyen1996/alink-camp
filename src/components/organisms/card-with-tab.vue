@@ -75,7 +75,7 @@ export default {
   position: relative;
 }
 
-.course-show {
+.campsite-show {
   .card {
     padding: 0;
     margin: 0;
