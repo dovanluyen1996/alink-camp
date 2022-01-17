@@ -118,7 +118,7 @@ export default {
 
   .custom-input-date.is-shown-placeholder input {
     display: flex;
-    padding-left: 80px;
+    padding-left: 100px;
     font-size: 18px;
     text-align: center;
     opacity: 1;
