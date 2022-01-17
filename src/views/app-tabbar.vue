@@ -22,15 +22,15 @@ import settings from '@/config/settings';
 import CampsiteWeatherNavigator from '@/views/campsite-weather/campsite-weather-navigator';
 import CampsiteSearchNavigator from '@/views/campsite-search/campsite-search-navigator';
 import PlansNavigator from '@/views/plans/plans-navigator';
-import WindForecastNavigator from '@/views/wind-forecast/wind-forecast-navigator';
 import MenuNavigator from '@/views/menu/menu-navigator';
 import UserStampsCampaign from '@/views/user/user-stamps/campaign';
+import SpotSearchNavigator from '@/views/spot-search/spot-search-navigator';
 
 // pages
 import CampsiteSearchIndexPage from '@/views/campsite-search/index';
 import PlansIndexPage from '@/views/plans/index';
-import WindForecastIndexPage from '@/views/wind-forecast/index';
 import CampsiteWeatherIndexPage from '@/views/campsite-weather/index';
+import SpotSearchPage from '@/views/spot-search/index';
 import MenuIndexPage from '@/views/menu/index';
 
 export default {
@@ -58,7 +58,7 @@ export default {
         {
           label: '周辺情報',
           icon: 'nearby',
-          page: WindForecastNavigator,
+          page: SpotSearchPage,
         },
         {
           label: 'メニュー',
@@ -81,7 +81,7 @@ export default {
       return this.$store.state.campsiteWeatherNavigator.isBusy
         || this.$store.state.campsiteSearchNavigator.isBusy
         || this.$store.state.plansNavigator.isBusy
-        || this.$store.state.windForecastNavigator.isBusy
+        || this.$store.state.spotSearchNavigator.isBusy
         || this.$store.state.menuNavigator.isBusy;
     },
   },
@@ -112,8 +112,8 @@ export default {
       case settings.views.appTabbar.tabIndexes.plans:
         this.$store.dispatch('plansNavigator/reset', PlansIndexPage);
         break;
-      case settings.views.appTabbar.tabIndexes.windForecast:
-        this.$store.dispatch('windForecastNavigator/reset', WindForecastIndexPage);
+      case settings.views.appTabbar.tabIndexes.spotSearch:
+        this.$store.dispatch('spotSearchNavigator/reset', SpotSearchNavigator);
         break;
       case settings.views.appTabbar.tabIndexes.menu:
         this.$store.dispatch('menuNavigator/reset', MenuIndexPage);
