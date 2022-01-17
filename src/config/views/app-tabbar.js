@@ -3,7 +3,7 @@ export default {
     courseWeather: 0,
     courseSearch: 1,
     plans: 2,
-    windForecast: 3,
+    spotSearch: 3,
     menu: 4,
   },
 };
