@@ -18,6 +18,9 @@
           :key="item"
           :class="['items__list', {'items__list--active': item.user_id}]"
       >
+      <!-- TODO:
+      表示するアイテム名は7文字まで表示する。8文字以降「…」（例: あああああああ… ）
+      表示するラベル名は4文字まで表示する。5文字以降「…」（例: ああああ… ） -->
         <div class="items__list--content">
           <check-field
             :label="item.name"
@@ -60,8 +63,8 @@ export default {
 @import "@/assets/scss/_variables.scss";
 
 .items-table {
-  margin-bottom: 100px;
   padding: 20px 10px;
+  margin-bottom: 100px;
 
   .items {
     width: 100%;

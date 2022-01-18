@@ -147,7 +147,6 @@ export default {
     left: 100%;
 
     .button {
-      
       &--search-day {
         margin-top: 20px !important;
       }
@@ -162,8 +161,8 @@ export default {
   width: 100%;
   font-size: 18px;
   font-weight: 600;
+  color: $color-white;
   text-align: center;
   transform: translate(-50%, -50%);
-  color: $color-white;
 }
 </style>
