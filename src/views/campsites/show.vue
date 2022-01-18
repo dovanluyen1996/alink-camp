@@ -1,6 +1,6 @@
 <template>
   <v-ons-page @show="show">
-    <loading :visible="isLoading" />
+    <!-- <loading :visible="isLoading" /> -->
     <custom-toolbar title="キャンプ場詳細">
       <template #right>
         <img
@@ -44,12 +44,10 @@
 <script>
 // components
 import CardWithTab from '@/components/organisms/card-with-tab';
+import ContentWithFooter from '@/components/organisms/content-with-footer';
 
 // tab contents
 import CampsiteForecastTab from '@/components/organisms/campsites/forecast-tab';
-
-// pages
-import ContentWithFooter from '@/components/organisms/content-with-footer';
 
 export default {
   name: 'Campsitehow',
@@ -83,9 +81,6 @@ export default {
     };
   },
   computed: {
-    isLoading() {
-      // TODO: handle check isLoading
-    },
     activeIndexTab() {
       return this.$store.state.components.cardWithTab.showCampsiteActiveIndex;
     },
