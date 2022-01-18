@@ -35,7 +35,7 @@
                 class="add-button"
                 @click="showEditDialog"
               >
-                登録する
+                保存する
               </v-ons-button>
             </template>
           </content-with-footer>
