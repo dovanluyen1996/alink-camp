@@ -12,7 +12,7 @@ export default {
   getters: {
     isLoading: state => state.isLoading,
     inFuture: state => state.userCampsitePlans.filter(
-      userCampsitePlan => moment(userCampsitePlan.startedDate).startOf('days').isSameOrAfter(moment().startOf('days')),
+      userCampsitePlan => moment(userCampsitePlan.finishedDate).startOf('days').isSameOrAfter(moment().startOf('days')),
     ),
   },
   mutations: {
