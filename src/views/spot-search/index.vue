@@ -6,7 +6,7 @@
       <div class="spot-search__top">
         <v-ons-button
           modifier="primary"
-          @click="goToSpotSearch"
+          @click="goToSpotSearchByCurrentLocation"
         >
           <img src="@/assets/images/location.png">
           現在位置より検索
@@ -22,7 +22,7 @@
         :is-show-favorite-mark="true"
         :campsites="campsites"
         :has-chevron="false"
-        @click="goToCampsiteDetail"
+        @click="goToSearchSpotByCampsite"
       />
 
       <v-ons-card
@@ -34,7 +34,10 @@
           いるキャンプ場がありません。キャンプ場検索 <br>
           より、設定してください
         </p>
-        <v-ons-button modifier="search">
+        <v-ons-button
+          modifier="search"
+          @click="goToSearchCampsite"
+        >
           <img src="@/assets/images/form/search-top.png">
           キャンプ場検索
         </v-ons-button>
@@ -114,11 +117,14 @@ export default {
     };
   },
   methods: {
-    goToCampsiteDetail() {
-      // TODO: Redirect to Campsite Detail
+    goToSearchSpotByCampsite() {
+      // TODO: Redirect to Campsite
     },
-    goToSpotSearch() {
-      // TODO: Redirect to Spot Search
+    goToSpotSearchByCurrentLocation() {
+      // TODO: Redirect to Current Location
+    },
+    goToSearchCampsite() {
+      // TODO: implement redirect to キャンプ場検索 when implement Logic
     },
   },
 };
