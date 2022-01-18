@@ -109,7 +109,7 @@ export default {
       return forecasts;
     },
     goToCampsiteDetail() {
-
+      // TODO: 詳細のロジック実装時に、ページ遷移を実装する
     },
     isPresent(forecastObject) {
       return this.$helpers.isPresentObject(forecastObject);
