@@ -14,7 +14,6 @@
 
       <template v-if="plan && isPresent(ForecastScheduledDate)">
         <campsite-weather-of-the-day :forecast="ForecastScheduledDate" />
-        <campsite-weather-the-day-before :forecast="ForecastScheduledDate.dayBefore" />
         <campsite-weather-hourly-weather :forecast="ForecastScheduledDate.targetDate" />
       </template>
       <template v-else-if="isPresent(Forecast14Days)">
@@ -38,7 +37,6 @@ import settings from '@/config/settings';
 import CampsiteWeatherHeader from '@/components/organisms/campsite-weather/header';
 import CampsiteWeatherPlan from '@/components/organisms/campsite-weather/plan';
 import CampsiteWeatherOfTheDay from '@/components/organisms/campsite-weather/weather-of-the-day';
-import CampsiteWeatherTheDayBefore from '@/components/organisms/campsite-weather/weather-the-day-before';
 import CampsiteWeatherHourlyWeather from '@/components/organisms/campsite-weather/hourly-weather';
 import CampsiteWeatherCalendar from '@/components/organisms/campsite-weather/calendar';
 
@@ -48,7 +46,6 @@ export default {
     CampsiteWeatherHeader,
     CampsiteWeatherPlan,
     CampsiteWeatherOfTheDay,
-    CampsiteWeatherTheDayBefore,
     CampsiteWeatherHourlyWeather,
     CampsiteWeatherCalendar,
   },
