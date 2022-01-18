@@ -79,8 +79,8 @@ export default {
   }
 
   &__box {
-    height: 80px;
-    margin-top: 10px;
+    margin: 10px 0;
+    min-height: 80px;
   }
 
   &__text {
@@ -104,8 +104,8 @@ export default {
   .button {
     display: flex;
     align-items: center;
+    justify-content: center;
     width: 200px;
-    padding-left: 30px;
   }
 }
 </style>
