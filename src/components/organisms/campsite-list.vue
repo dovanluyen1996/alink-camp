@@ -19,7 +19,10 @@
             <div class="center">
               <div class="list-item__title">
                 <span>
-                  {{ campsite.name }}
+                  <span v-if="campsite.distance">
+                    {{ campsite.name }}  ({{ campsite.distance }}km)
+                  </span>
+                  <span v-else>{{ campsite.name }}</span>
                   <img
                     v-if="isShowFavoriteMark && isFavorite(campsite)"
                     src="@/assets/images/user/user-plan/favorite.png"
