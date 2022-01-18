@@ -18,6 +18,7 @@
         :font-size="fontSize"
       />
     </div>
+    {{ forecast.heatStroke }}
   </div>
 </template>
 
