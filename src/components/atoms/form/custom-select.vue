@@ -74,7 +74,7 @@ export default {
   font-size: 16px;
   font-weight: 600;
   line-height: 28px;
-  background-image: url('~@/assets/images/form/select-arrow.png');
+  background-image: url('~@/assets/images/form/select-arrow-red.png');
   background-size: 30px;
 }
 </style>
