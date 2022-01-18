@@ -17,6 +17,7 @@
           :weather="forecast"
           image-width="60px"
         />
+        {{ accuracyTelop(forecast.accuracyIndex) }}
       </div>
       <div class="campsite-weather-day-temperature">
         <temperature-component
@@ -52,6 +53,22 @@ export default {
     },
   },
   methods: {
+    accuracyTelop(index) {
+      switch (index) {
+      case '1':
+        return 'A';
+      case '2':
+        return 'B';
+      case '3':
+        return 'C';
+      case '4':
+        return 'D';
+      case '5':
+        return 'E';
+      default:
+        return '';
+      }
+    },
     shortDate(date) {
       return this.$helpers.toShortString(date);
     },
