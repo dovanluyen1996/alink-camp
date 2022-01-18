@@ -32,6 +32,7 @@
 </template>
 
 <script>
+import moment from 'moment';
 import settings from '@/config/settings';
 
 // components
@@ -94,7 +95,7 @@ export default {
       if (!this.plan) return null;
       const params = {
         camp_id: this.useCampsite.id,
-        target_date: this.plan.startedDate,
+        target_date: this.targetDate(),
       };
 
       const forecasts = await this.$store.dispatch('models/weather/getForecastScheduledDate', params);
@@ -107,6 +108,9 @@ export default {
 
       const forecasts = await this.$store.dispatch('models/weather/getForecast14Days', params);
       return forecasts;
+    },
+    targetDate() {
+      return moment().startOf('day').isBetween(this.plan.startedDate, this.plan.finishedDate, null, '[]') ? moment().format('YYYY-MM-DD') : this.plan.startedDate;
     },
     goToCampsiteDetail() {
       // TODO: 詳細のロジック実装時に、ページ遷移を実装する
