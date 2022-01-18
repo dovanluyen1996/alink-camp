@@ -1,6 +1,6 @@
 <template>
-  <div :class="['campsite-weather-plan', {'is-today' : isToday}]">
-    {{ plan.startedDate | moment('YYYY/MM/DD') }}〜
+  <div :class="['campsite-weather-plan', {'is-today' : isBetween}]">
+    {{ plan.startedDate | moment('YYYY/MM/DD') }}〜{{ plan.finishedDate | moment('YYYY/MM/DD') }}
     <span class="campsite-weather-plan__count-down">
       {{ showCountDown }}
     </span>
@@ -19,14 +19,11 @@ export default {
     },
   },
   computed: {
-    isToday() {
-      const startedDate = moment(this.plan.startedDate).startOf('days');
-      const today = moment().startOf('days');
-
-      return startedDate.isSame(today);
+    isBetween() {
+      return moment().startOf('day').isBetween(this.plan.startedDate, this.plan.finishedDate, null, '[]');
     },
     showCountDown() {
-      if (this.isToday) return '予定日当日';
+      if (this.isBetween) return '予定日';
 
       const startedDate = moment(this.plan.startedDate).startOf('days');
       const today = moment().startOf('days');
