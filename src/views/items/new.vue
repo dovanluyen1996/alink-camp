@@ -34,8 +34,16 @@
       :is-shown.sync="isShownConfirmCreateItemDialog"
       @clickConfirm="createItem"
     >
-      新たに〇〇〇〇〇〇を作成します。<br>
-      よろしいですか？
+      <template #title>
+        登録確認
+      </template>
+      <template #message>
+        新たに〇〇〇〇〇〇を作成します。<br>
+        よろしいですか？
+      </template>
+      <template #confirmAction>
+        登録する
+      </template>
     </confirm-dialog>
 
     <completed-dialog

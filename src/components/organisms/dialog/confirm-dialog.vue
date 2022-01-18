@@ -3,10 +3,10 @@
     :visible.sync="isVisible"
   >
     <template #title>
-      削除確認
+      <slot name="title"></slot>
     </template>
 
-    <slot />
+    <slot name="message"></slot>
 
     <template #footer>
       <v-ons-button
@@ -16,9 +16,9 @@
         キャンセル
       </v-ons-button>
       <v-ons-button
-        @click="clickEdit()"
+        @click="confirm()"
       >
-        削除する
+        <slot name="confirmAction"></slot>
       </v-ons-button>
     </template>
   </v-ons-alert-dialog>
@@ -47,7 +47,7 @@ export default {
     cancel() {
       this.isVisible = false;
     },
-    clickEdit() {
+    confirm() {
       this.$emit('clickConfirm');
     },
   },

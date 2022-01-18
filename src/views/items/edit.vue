@@ -3,13 +3,12 @@
     <custom-toolbar title="オリジナルアイテム">
       <template #right>
         <delete-dialog-with-icon
-          :is-shown.sync="isShownDeleteDialog"
+          :is-shown.sync="isShownDeleteConfirmDialog"
           @clickDelete="deleteItem"
         >
           このアイテムを削除します。<br>
           よろしいですか？ <br>
-          ※キャンプ計画に入っている場合も削除さ <br>
-          れます
+          ※キャンプ計画に入っている場合も削除されます
         </delete-dialog-with-icon>
       </template>
     </custom-toolbar>
@@ -33,7 +32,7 @@
               <v-ons-button
                 modifier="cta rounded"
                 class="add-button"
-                @click="showEditDialog"
+                @click="showEditConfirmDialog"
               >
                 保存する
               </v-ons-button>
@@ -44,15 +43,23 @@
     </div>
 
     <confirm-dialog
-      :is-shown.sync="isShownEditDialog"
+      :is-shown.sync="isShownEditConfirmDialog"
       @clickConfirm="updateItem"
     >
-      アイテム情報を編集します。よろしいですか？
+      <template #title>
+        編集確認
+      </template>
+      <template #message>
+        アイテム情報を編集します。よろしいですか？
+      </template>
+      <template #confirmAction>
+        編集する
+      </template>
     </confirm-dialog>
 
     <completed-dialog
       :action="action"
-      :is-visible="completedDialogVisible"
+      :is-visible="isShowCompletedDialogVisible"
       @close="closeCompletedDialog"
     />
   </v-ons-page>
@@ -97,15 +104,15 @@ export default {
           'ラベルB',
         ],
       },
-      isShownEditDialog: false,
-      isShownDeleteDialog: false,
-      completedDialogVisible: false,
+      isShownEditConfirmDialog: false,
+      isShownDeleteConfirmDialog: false,
+      isShowCompletedDialogVisible: false,
       action: '',
     };
   },
   methods: {
     updateItem() {
-      this.closeEditDialog();
+      this.closeEditConfirmDialog();
       // TODO: Implement function below this
 
       this.showCompletedDialog('updateItem');
@@ -117,20 +124,20 @@ export default {
       this.showCompletedDialog('deleteItem');
     },
     closeDeleteConfirmDialog() {
-      this.isShownDeleteDialog = false;
+      this.isShownDeleteConfirmDialog = false;
     },
     showCompletedDialog(action) {
       this.action = action;
-      this.completedDialogVisible = true;
+      this.isShowCompletedDialogVisible = true;
     },
     closeCompletedDialog() {
-      this.completedDialogVisible = false;
+      this.isShowCompletedDialogVisible = false;
     },
-    showEditDialog() {
-      this.isShownEditDialog = true;
+    showEditConfirmDialog() {
+      this.isShownEditConfirmDialog = true;
     },
-    closeEditDialog() {
-      this.isShownEditDialog = false;
+    closeEditConfirmDialog() {
+      this.isShownEditConfirmDialog = false;
     },
   },
 };
