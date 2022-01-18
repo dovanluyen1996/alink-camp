@@ -31,7 +31,7 @@
                       v-if="isScheduledDate(forecast.date)"
                       class="is-today"
                     >
-                      ゴルフ予定日
+                      キャンプ予定日
                     </span>
                   </div>
                 </td>
@@ -45,6 +45,10 @@
           <wind-direction-row :wind-directions="windDirections" />
           <wind-speed-row :wind-speeds="windSpeeds" />
         </sticky-table>
+
+        <div class="table-note">
+          信頼度：A～Eの表示は、予報の信頼度です。低い場合は今後の予報が変わる可能性があります
+        </div>
       </template>
 
       <template v-else>
@@ -79,7 +83,214 @@ export default {
   },
   data() {
     return {
-      forecastHourly: {},
+      forecastHourly: {
+        items: [
+          {
+            date: '2022-01-20',
+            sunrise: '05:52',
+            sunset: '16:38',
+            hourlyData: [
+              {
+                forecast_telop: '弱雨',
+                hour: '00',
+                precip: '3',
+                temperature: '7',
+                weatherImageName: 'point_03_past.png',
+                windDirection: '北',
+                windSpeed: '12',
+              },
+              {
+                forecast_telop: '弱雨',
+                hour: '01',
+                precip: '4',
+                temperature: '8',
+                weatherImageName: 'point_03_past.png',
+                windDirection: '北',
+                windSpeed: '32',
+              },
+              {
+                forecast_telop: '弱雨',
+                hour: '02',
+                precip: '5',
+                temperature: '9',
+                weatherImageName: 'point_03_past.png',
+                windDirection: '北',
+                windSpeed: '2',
+              },
+            ],
+          },
+          {
+            date: '2022-01-21',
+            sunrise: '05:52',
+            sunset: '16:38',
+            hourlyData: [
+              {
+                forecast_telop: '弱雨',
+                hour: '00',
+                precip: '3',
+                temperature: '7',
+                weatherImageName: 'point_03_past.png',
+                windDirection: '北',
+                windSpeed: '12',
+              },
+              {
+                forecast_telop: '弱雨',
+                hour: '01',
+                precip: '4',
+                temperature: '8',
+                weatherImageName: 'point_03_past.png',
+                windDirection: '北',
+                windSpeed: '32',
+              },
+              {
+                forecast_telop: '弱雨',
+                hour: '02',
+                precip: '5',
+                temperature: '9',
+                weatherImageName: 'point_03_past.png',
+                windDirection: '北',
+                windSpeed: '2',
+              },
+            ],
+          },
+          {
+            date: '2022-01-22',
+            sunrise: '05:52',
+            sunset: '16:38',
+            hourlyData: [
+              {
+                forecast_telop: '弱雨',
+                hour: '00',
+                precip: '3',
+                temperature: '7',
+                weatherImageName: 'point_03_past.png',
+                windDirection: '北',
+                windSpeed: '12',
+              },
+              {
+                forecast_telop: '弱雨',
+                hour: '01',
+                precip: '4',
+                temperature: '8',
+                weatherImageName: 'point_03_past.png',
+                windDirection: '北',
+                windSpeed: '32',
+              },
+              {
+                forecast_telop: '弱雨',
+                hour: '02',
+                precip: '5',
+                temperature: '9',
+                weatherImageName: 'point_03_past.png',
+                windDirection: '北',
+                windSpeed: '2',
+              },
+            ],
+          },
+          {
+            date: '2022-01-23',
+            sunrise: '05:52',
+            sunset: '16:38',
+            hourlyData: [
+              {
+                forecast_telop: '弱雨',
+                hour: '00',
+                precip: '3',
+                temperature: '7',
+                weatherImageName: 'point_03_past.png',
+                windDirection: '北',
+                windSpeed: '12',
+              },
+              {
+                forecast_telop: '弱雨',
+                hour: '01',
+                precip: '4',
+                temperature: '8',
+                weatherImageName: 'point_03_past.png',
+                windDirection: '北',
+                windSpeed: '32',
+              },
+              {
+                forecast_telop: '弱雨',
+                hour: '02',
+                precip: '5',
+                temperature: '9',
+                weatherImageName: 'point_03_past.png',
+                windDirection: '北',
+                windSpeed: '2',
+              },
+            ],
+          },
+          {
+            date: '2022-01-24',
+            sunrise: '05:52',
+            sunset: '16:38',
+            hourlyData: [
+              {
+                forecast_telop: '弱雨',
+                hour: '00',
+                precip: '3',
+                temperature: '7',
+                weatherImageName: 'point_03_past.png',
+                windDirection: '北',
+                windSpeed: '12',
+              },
+              {
+                forecast_telop: '弱雨',
+                hour: '01',
+                precip: '4',
+                temperature: '8',
+                weatherImageName: 'point_03_past.png',
+                windDirection: '北',
+                windSpeed: '32',
+              },
+              {
+                forecast_telop: '弱雨',
+                hour: '02',
+                precip: '5',
+                temperature: '9',
+                weatherImageName: 'point_03_past.png',
+                windDirection: '北',
+                windSpeed: '2',
+              },
+            ],
+          },
+          {
+            date: '2022-01-25',
+            sunrise: '05:52',
+            sunset: '16:38',
+            hourlyData: [
+              {
+                forecast_telop: '弱雨',
+                hour: '00',
+                precip: '3',
+                temperature: '7',
+                weatherImageName: 'point_03_past.png',
+                windDirection: '北',
+                windSpeed: '12',
+              },
+              {
+                forecast_telop: '弱雨',
+                hour: '01',
+                precip: '4',
+                temperature: '8',
+                weatherImageName: 'point_03_past.png',
+                windDirection: '北',
+                windSpeed: '32',
+              },
+              {
+                forecast_telop: '弱雨',
+                hour: '02',
+                precip: '5',
+                temperature: '9',
+                weatherImageName: 'point_03_past.png',
+                windDirection: '北',
+                windSpeed: '2',
+              },
+            ],
+          },
+        ],
+      },
     };
   },
   computed: {
@@ -166,6 +377,12 @@ export default {
 <style scoped lang="scss">
 @import '@/assets/scss/_variables.scss';
 
+.card {
+  &__title {
+    color: #000;
+  }
+}
+
 /deep/ {
   .table {
     text-align: center;
@@ -200,11 +417,19 @@ export default {
 }
 
 .no-forecast {
-  margin: 2rem auto 2rem auto;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 250px;
 }
 
 .custom-table {
   padding: 0 10px;
+}
+
+.table-note {
+  margin-top: 10px;
+  font-size: 8px;
+  line-height: 14px;
 }
 </style>

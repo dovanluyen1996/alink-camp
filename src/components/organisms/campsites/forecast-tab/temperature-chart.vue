@@ -34,7 +34,37 @@ export default {
   },
   data() {
     return {
-      chartData: {},
+      chartData: {
+        items: [
+          {
+            average: '12.6',
+            date: '2022-01-01',
+            thisYear: '13.7',
+          },
+          {
+            average: '12.1',
+            date: '2022-01-02',
+            thisYear: '13.1',
+          },
+          {
+            average: '12',
+            date: '2022-01-03',
+            thisYear: '13.4',
+          },
+          {
+            average: '11.4',
+            date: '2022-01-04',
+            thisYear: '12.4',
+          },
+          {
+            average: '10.6',
+            date: '2022-01-05',
+            thisYear: '19.8',
+          },
+        ],
+        updatedAt: '2022-01-21 08:00:00',
+        pointName: '酒田',
+      },
       chartUpdatedAt: '',
       pointName: '',
       options: {
@@ -79,6 +109,13 @@ export default {
       // TODO: Handle campsite choosen
     },
   },
+  created() {
+    // TODO: All action below will implement in watcher when implement logic
+
+    this.chartUpdatedAt = this.chartData.updatedAt;
+    this.pointName = this.chartData.pointName;
+    this.fillData(this.chartData.items);
+  },
   methods: {
     fillData(data) {
       this.chartData = {
@@ -117,7 +154,9 @@ export default {
 
 <style scoped lang="scss">
 .no-forecast {
-  margin: 2rem auto 2rem auto;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
 }
 </style>

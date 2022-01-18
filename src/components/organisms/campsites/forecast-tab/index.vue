@@ -18,10 +18,11 @@
       <div class="ml-mr-30">
         <a
           v-if="reservationUrl()"
-          class="reservation-button button button--large--cta button--rounded"
+          class="reservation-button button button--large--cta button--rounded button--custom"
           @click="openReservationPage()"
         >
-          ゴルフコースの予約をする
+          <img src="@/assets/images/booking.png">
+          キャンプ場のホームページへ
         </a>
       </div>
     </div>
@@ -117,5 +118,18 @@ export default {
 
 .ml-mr-30 {
   margin: 0 30px;
+}
+
+.button {
+  &--custom {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f2aa06;
+
+    img {
+      margin-right: 5px;
+    }
+  }
 }
 </style>

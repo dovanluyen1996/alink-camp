@@ -1,7 +1,7 @@
 <template>
   <div class="ten-days-weather">
     <div class="card__title card__title--center">
-      10日間の天気
+      14日間の天気
     </div>
 
     <div class="custom-table">
@@ -25,7 +25,15 @@
           />
           <wind-direction-row :wind-directions="windDirections" />
           <wind-speed-row :wind-speeds="windSpeeds" />
+          <lightning-row :lightnings="lightnings" />
+          <clothes-row :clothes="clothes" />
+          <starry-sky-row :starry-skies="starrySkies" />
+          <ultra-ray-row :ultra-rays="ultraRays" />
         </sticky-table>
+
+        <div class="table-note">
+          信頼度：A～Eの表示は、予報の信頼度です。低い場合は今後の予報が変わる可能性があります
+        </div>
       </template>
 
       <template v-else>
@@ -46,6 +54,10 @@ import ProbPrecipRow from '@/components/organisms/weather-table/prob-precip-row'
 import TemperatureRow from '@/components/organisms/weather-table/temperature-row';
 import WindDirectionRow from '@/components/organisms/weather-table/wind-direction-row';
 import WindSpeedRow from '@/components/organisms/weather-table/wind-speed-row';
+import LightningRow from '@/components/organisms/weather-table/lightning-row';
+import ClothesRow from '@/components/organisms/weather-table/clothes-row';
+import StarrySkyRow from '@/components/organisms/weather-table/starry-sky-row';
+import UltraRayRow from '@/components/organisms/weather-table/ultra-ray-row';
 
 export default {
   name: 'CampsitesForecastTabHourlyWeather',
@@ -57,10 +69,99 @@ export default {
     TemperatureRow,
     WindDirectionRow,
     WindSpeedRow,
+    LightningRow,
+    ClothesRow,
+    StarrySkyRow,
+    UltraRayRow,
   },
   data() {
     return {
-      forecasts: [],
+      forecasts: [
+        {
+          date: '2022-01-20',
+          forecastTelop: '雨',
+          maxTemp: '7',
+          minTemp: '6',
+          precip: '80',
+          weatherImageName: '15.png',
+          windDirection: '北北西',
+          windSpeed: 7,
+          lightning: true,
+          clothe: true,
+          starrySky: true,
+          ultraRay: true,
+        },
+        {
+          date: '2022-01-21',
+          forecastTelop: '雨',
+          maxTemp: '10',
+          minTemp: '6',
+          precip: '80',
+          weatherImageName: '15.png',
+          windDirection: '北北西',
+          windSpeed: 7,
+          lightning: true,
+          clothe: true,
+          starrySky: true,
+          ultraRay: true,
+        },
+        {
+          date: '2022-01-22',
+          forecastTelop: '雨',
+          maxTemp: '17',
+          minTemp: '10',
+          precip: '80',
+          weatherImageName: '15.png',
+          windDirection: '北北西',
+          windSpeed: 7,
+          lightning: true,
+          clothe: true,
+          starrySky: true,
+          ultraRay: true,
+        },
+        {
+          date: '2022-01-23',
+          forecastTelop: '雨',
+          maxTemp: '8',
+          minTemp: '3',
+          precip: '80',
+          weatherImageName: '15.png',
+          windDirection: '北北西',
+          windSpeed: 7,
+          lightning: true,
+          clothe: true,
+          starrySky: true,
+          ultraRay: true,
+        },
+        {
+          date: '2022-01-24',
+          forecastTelop: '雨',
+          maxTemp: '6',
+          minTemp: '1',
+          precip: '80',
+          weatherImageName: '15.png',
+          windDirection: '北北西',
+          windSpeed: 7,
+          lightning: true,
+          clothe: true,
+          starrySky: true,
+          ultraRay: true,
+        },
+        {
+          date: '2022-01-25',
+          forecastTelop: '雨',
+          maxTemp: '17',
+          minTemp: '16',
+          precip: '20',
+          weatherImageName: '15.png',
+          windDirection: '北北西',
+          windSpeed: 7,
+          lightning: true,
+          clothe: true,
+          starrySky: true,
+          ultraRay: true,
+        },
+      ],
     };
   },
   computed: {
@@ -76,6 +177,18 @@ export default {
     precips() {
       return this.forecasts ? this.forecasts.map(item => item.precip) : [];
     },
+    lightnings() {
+      return this.forecasts ? this.forecasts.map(item => item.lightning) : [];
+    },
+    clothes() {
+      return this.forecasts ? this.forecasts.map(item => item.clothe) : [];
+    },
+    ultraRays() {
+      return this.forecasts ? this.forecasts.map(item => item.ultraRay) : [];
+    },
+    starrySkies() {
+      return this.forecasts ? this.forecasts.map(item => item.starrySky) : [];
+    },
   },
   async created() {
     // const forecast10Days = await this.getForecast10Days();
@@ -85,6 +198,12 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.card {
+  &__title {
+    color: #000;
+  }
+}
+
 /deep/ {
   .table {
     text-align: center;
@@ -101,11 +220,19 @@ export default {
 }
 
 .no-forecast {
-  margin: 2rem auto 2rem auto;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 250px;
 }
 
 .custom-table {
   padding: 0 10px;
+}
+
+.table-note {
+  margin-top: 10px;
+  font-size: 8px;
+  line-height: 14px;
 }
 </style>
