@@ -10,7 +10,7 @@
 
       <v-ons-card class="course-weather-and-image">
         <v-ons-row class="course-weather-and-image-row">
-          <user-course-result-weather
+          <campsite-plan-weather
             v-if="weather"
             :weather="weather"
           />
@@ -21,7 +21,7 @@
             <label width="150px">No Data</label>
           </v-ons-col>
           <!-- <plan-image /> -->
-          <user-course-result-image />
+          <campsite-plan-image :value="image" />
         </v-ons-row>
       </v-ons-card>
 
@@ -43,15 +43,15 @@
 
 <script>
 // components
-import UserCourseResultWeather from '@/components/organisms/user-course-results/weather';
-import UserCourseResultImage from '@/components/organisms/user-course-results/image';
+import CampsitePlanWeather from '@/components/organisms/campsite-plans/weather';
+import CampsitePlanImage from '@/components/organisms/campsite-plans/image';
 import ContentWithFooter from '@/components/organisms/content-with-footer';
 import DetailPastTable from '@/components/organisms/plan/detail-past-plan/past-plan-table';
 
 export default {
   components: {
-    UserCourseResultWeather,
-    UserCourseResultImage,
+    CampsitePlanWeather,
+    CampsitePlanImage,
     DetailPastTable,
     ContentWithFooter,
   },
@@ -76,9 +76,12 @@ export default {
           date: '12/31',
           maxTemp: '32',
           minTemp: '18',
-          weatherImageName: 'sun.png',
+          weatherImageName: '01.png',
           forecastTelop: '曇のち晴',
         },
+      image: {
+        url: 'https://www.w3schools.com/css/img_5terre.jpg', // TODO: Please delete this mock data when implement Logic
+      },
     };
   },
 };

@@ -27,7 +27,7 @@
             <td>
               <div class="weather">
                 <img
-                  :src="require('@/assets/images/weathers/sun.png')"
+                  :src="require('@/assets/images/weathers/weather/01.png')"
                   class="icon-weather"
                 >
               </div>

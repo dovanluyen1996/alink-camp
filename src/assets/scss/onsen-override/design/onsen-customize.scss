@@ -186,10 +186,6 @@ $button-height--rounded: 36px;
     background-color: #ff980b !important;
   }
 
-  &--yellow {
-    background-color: #ff980b !important;
-  }
-
   &--red {
     background-color: #a82e05;
   }
@@ -239,29 +235,6 @@ $button-height--rounded: 36px;
       margin-top: 20px;
       margin-bottom: 150px;
     }
-  }
-
-  &--search-day {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    &::before {
-      display: inline-block;
-      width: 20px;
-      height: 20px;
-      margin-right: 6px;
-      content: "";
-      background-image: url("~@/assets/images/form/icon-day.png");
-      background-position: center;
-      background-size: 100%;
-    }
-
-    &__description {
-      margin-top: 20px;
-      margin-bottom: 150px;
-    }
-  }
 
   .alert-dialog-footer & {
     min-width: 140px;
