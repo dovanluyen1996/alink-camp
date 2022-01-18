@@ -48,6 +48,10 @@
         :color-th="false"
         :display-campsite-weather-top="true"
       />
+      <humidity-row
+        :humidity="humidity"
+        :color-th="false"
+      />
     </tbody>
   </table>
 </template>
@@ -57,6 +61,7 @@
 import ProbPrecipRow from '@/components/organisms/weather-table/prob-precip-row';
 import WindDirectionRow from '@/components/organisms/weather-table/wind-direction-row';
 import WindSpeedRow from '@/components/organisms/weather-table/wind-speed-row';
+import HumidityRow from '@/components/organisms/weather-table/humidity-row';
 
 export default {
   name: 'CampsiteWeatherHourlyWeather',
@@ -64,6 +69,7 @@ export default {
     ProbPrecipRow,
     WindDirectionRow,
     WindSpeedRow,
+    HumidityRow,
   },
   props: {
     forecast: {
@@ -107,6 +113,18 @@ export default {
       speeds.push(this.forecast.windSpeed_18);
 
       return speeds;
+    },
+    humidity() {
+      if (!this.forecast) return [null, null, null, null];
+
+      const humidity = [];
+
+      humidity.push(this.forecast.humidity_0);
+      humidity.push(this.forecast.humidity_6);
+      humidity.push(this.forecast.humidity_12);
+      humidity.push(this.forecast.humidity_18);
+
+      return humidity;
     },
   },
 };
