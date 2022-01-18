@@ -1,6 +1,9 @@
 <template>
   <v-ons-page>
-    <custom-toolbar title="周辺検索" />
+    <custom-toolbar
+      title="周辺検索"
+      :disabled-back-button="true"
+    />
 
     <div class="content">
       <div class="spot-search__top">
