@@ -86,7 +86,7 @@ export default {
       await this.$store.dispatch('models/usersFavorite/getUsersFavorites');
     },
     goToCampsiteSearch() {
-
+      // TODO: 検索ページのロジック実装時に、ページ遷移を実装する
     },
   },
 };
