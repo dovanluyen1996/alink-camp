@@ -11,19 +11,6 @@
           {{ campsite.name }}
         </p>
       </div>
-      <div class="search-result__box">
-        <p class="search-result__text">
-          全てのスポット
-        </p>
-        <img
-          v-if="campsite"
-          src="@/assets/images/caret-down-sliver.png"
-        >
-        <img
-          v-else
-          src="@/assets/images/caret-down-red.png"
-        >
-      </div>
       <!-- TODO: When implement Logic, please use Loading in Store  -->
       <!-- <loading :visible="isLoading" /> -->
       <campsite-list
@@ -132,28 +119,6 @@ export default {
     margin-left: 20px;
     font-size: 18px;
     font-weight: 300;
-  }
-
-  &__box {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 10px auto;
-    margin: 20px 20px 0 20px;
-    background-color: #fff;
-    border: 1px solid #707070;
-
-    & > img {
-      position: absolute;
-      right: 20px;
-    }
-  }
-
-  &__text {
-    font-size: 16px;
-    font-weight: 600;
-    color: #888;
   }
 }
 
