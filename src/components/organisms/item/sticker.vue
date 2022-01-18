@@ -79,8 +79,8 @@ export default {
   }
 
   &__box {
-    margin: 10px 0;
     min-height: 80px;
+    margin: 10px 0;
   }
 
   &__text {

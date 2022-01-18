@@ -119,11 +119,6 @@ export default {
   .page__background {
     background-image: none;
   }
-
-  .alert-dialog-content {
-    font-size: 15px;
-    font-weight: 300;
-  }
 }
 
 .add-button {

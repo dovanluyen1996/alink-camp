@@ -53,3 +53,12 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+/deep/ {
+  .alert-dialog-content {
+    font-size: 15px;
+    font-weight: 300;
+  }
+}
+</style>

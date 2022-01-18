@@ -155,11 +155,6 @@ export default {
     align-items: center;
     justify-content: center;
   }
-
-  .alert-dialog-content {
-    font-size: 15px;
-    font-weight: 300;
-  }
 }
 
 .add-button {
