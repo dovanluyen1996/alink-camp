@@ -1,33 +1,21 @@
 <template>
-  <div class="campsite-list">
-    <div
-      v-if="title"
-      class="campsite-list-title"
-    >
-      {{ title }}
-    </div>
-
+  <div class="spot-list">
     <v-ons-card :fullscreen="isFullscreen">
       <div class="content">
         <v-ons-list modifier="noborder">
           <v-ons-list-item
-            v-for="campsite in campsites"
-            :key="campsite.id"
+            v-for="item in spot"
+            :key="item.id"
             :modifier="modifier"
-            @click="clickCampsite(campsite)"
+            @click="clickSpot(item)"
           >
             <div class="center">
               <div class="list-item__title">
                 <span>
-                  {{ campsite.name }}
-                  <img
-                    v-if="isShowFavoriteMark && isFavorite(campsite)"
-                    src="@/assets/images/user/user-plan/favorite.png"
-                    width="18px"
-                  >
+                  {{ item.name }}  ({{ item.distance }}km)
                 </span>
               </div>
-              <span class="list-item__subtitle">{{ campsite.address }}</span>
+              <span class="list-item__subtitle">{{ item.address }}</span>
             </div>
             <div class="right">
               <slot name="right" />
@@ -42,23 +30,15 @@
 <script>
 
 export default {
-  name: 'CampsiteList',
+  name: 'SpotList',
   props: {
-    title: {
-      type: String,
-      default: null,
-    },
-    campsites: {
+    spot: {
       type: Array,
       default: () => [],
     },
     hasChevron: {
       type: Boolean,
       default: true,
-    },
-    isShowFavoriteMark: {
-      type: Boolean,
-      default: false,
     },
   },
   data() {
@@ -75,9 +55,6 @@ export default {
     this.setFullscreen();
   },
   methods: {
-    isFavorite(campsite) {
-      return this.$store.getters['models/usersFavorite/findByCampsiteId'](campsite.id);
-    },
     setFullscreen() {
       // NOTE: propsにしたいところだけれど、
       //       onsenUIが全画面表示をfullscreen属性でやっているので
@@ -87,10 +64,8 @@ export default {
         this.isFullscreen = true;
       }
     },
-    clickCampsite(campsite) {
-      // NOTE: Please implement add viewed campsite when implement Logic
-      // this.addViewedCourse(course);
-      this.$emit('click', campsite);
+    clickSpot(spot) {
+      this.$emit('click', spot);
     },
   },
 };
@@ -98,9 +73,8 @@ export default {
 
 <style lang="scss" scoped>
 @import '@/assets/scss/_variables.scss';
-@import '@/assets/scss/_mixins.scss';
 
-.campsite-list {
+.spot-list {
   &[fullscreen] {
     height: 100%;
     overflow: hidden;
@@ -110,16 +84,6 @@ export default {
 .card {
   padding-top: 5px;
   padding-bottom: 0;
-}
-
-.campsite-list-title {
-  @include title-style;
-
-  margin-top: 25px;
-
-  + .card {
-    margin-top: 14px;
-  }
 }
 
 .center {
