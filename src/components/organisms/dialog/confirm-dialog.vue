@@ -57,8 +57,8 @@ export default {
 <style lang="scss" scoped>
 /deep/ {
   .alert-dialog-container {
-    height: 237px;
     box-sizing: border-box;
+    height: 237px;
   }
 
   .alert-dialog-content {
