@@ -49,7 +49,7 @@
         :display-campsite-weather-top="true"
       />
       <humidity-row
-        :humidity="humidity"
+        :humidities="humidities"
         :color-th="false"
       />
     </tbody>
@@ -114,17 +114,17 @@ export default {
 
       return speeds;
     },
-    humidity() {
+    humidities() {
       if (!this.forecast) return [null, null, null, null];
 
-      const humidity = [];
+      const humidities = [];
 
-      humidity.push(this.forecast.humidity_0);
-      humidity.push(this.forecast.humidity_6);
-      humidity.push(this.forecast.humidity_12);
-      humidity.push(this.forecast.humidity_18);
+      humidities.push(this.forecast.humidity_0);
+      humidities.push(this.forecast.humidity_6);
+      humidities.push(this.forecast.humidity_12);
+      humidities.push(this.forecast.humidity_18);
 
-      return humidity;
+      return humidities;
     },
   },
 };

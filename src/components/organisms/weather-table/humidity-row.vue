@@ -6,9 +6,9 @@
     >
       湿度 (%)
     </th>
-    <template v-for="(value, index) in humidity">
+    <template v-for="(humidity, index) in humidities">
       <td :key="index">
-        {{ value || '--' }}
+        {{ humidity || '--' }}
       </td>
     </template>
   </tr>
@@ -19,7 +19,7 @@
 export default {
   name: 'HumidityRow',
   props: {
-    humidity: {
+    humidities: {
       type: Array,
       required: true,
     },
