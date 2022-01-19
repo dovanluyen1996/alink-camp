@@ -17,6 +17,7 @@
             rules="required|required-future-day"
             name="プレイ予定日"
           >
+            <!-- TODO: Fix show text in Android. Show text in center -->
             <date-field
               v-model="dateValueCheckIn"
               :errors="errors"
@@ -31,6 +32,7 @@
             rules="required|required-future-day"
             name="プレイ予定日"
           >
+            <!-- TODO: Fix show text in Android. Show text in center -->
             <date-field
               v-model="dateValueCheckOut"
               help="※天気予報のPUSHは予報が確定してからになります"
