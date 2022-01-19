@@ -1,5 +1,5 @@
 <template>
-  <v-ons-page>
+  <v-ons-page @show="show">
     <custom-toolbar
       title="周辺検索"
       :disabled-back-button="true"
@@ -18,15 +18,15 @@
           予定日、またはお気に入り設定中のキャンプ場
         </div>
       </div>
-      <!-- TODO: When implement Logic, please use Loading in Store  -->
-      <!-- <loading :visible="isLoading" /> -->
-      <campsite-list
-        v-if="campsites.length > 0"
-        :is-show-favorite-mark="true"
-        :campsites="campsites"
-        :has-chevron="false"
-        @click="goToSearchSpotByCampsite"
-      />
+      <loading :visible="isLoading" />
+      <template v-if="favoriteOrPlanned.length">
+        <campsite-list
+          :is-show-favorite-mark="true"
+          :campsites="favoriteOrPlanned"
+          :has-chevron="false"
+          @click="goToSearchSpotByCampsite"
+        />
+      </template>
 
       <v-ons-card
         v-else
@@ -57,67 +57,43 @@ export default {
   components: {
     CampsiteList,
   },
-  data() {
-    return {
-      campsites: [
-        {
-          id: 1,
-          name: '〇〇〇キャンプ場',
-          address: 'キャンプ場キャンプ場〇〇〇',
-          latitude: 1,
-          longitude: 1,
-          isFavorited: false,
+  computed: {
+    favorites() {
+      const favorites = this.$store.getters['models/usersFavorite/all'];
+      const planIds = this.$store.getters['models/userCampsitePlan/inFuture'].map(plan => plan.campsite.id);
+
+      return favorites.filter(favorite => !planIds.includes(favorite.id));
+    },
+    favoriteOrPlanned() {
+      const favorites = this.$store.getters['models/usersFavorite/all'];
+      let campsites = this.$store.getters['models/userCampsitePlan/inFuture'].map(plan => plan.campsite);
+
+      // uniq campsites
+      campsites = campsites.filter(
+        (campsite, index) => campsites.findIndex(element => element.id === campsite.id) === index,
+      );
+
+      // sort campsites
+      campsites = campsites.sort(
+        (a, b) => {
+          const favorited = favorites.some(favorite => a.id === favorite.id);
+          const aStartedDate = this.$moment(a.startedDate).startOf('days');
+          const bStartedDate = this.$moment(b.startedDate).startOf('days');
+          let sort = 0;
+          sort = aStartedDate.isAfter(bStartedDate) ? 1 : -1;
+          if (aStartedDate.isSame(bStartedDate)) sort = favorited ? -1 : 1;
+          return sort;
         },
-        {
-          id: 2,
-          name: '〇〇〇キャンプ場',
-          address: 'キャンプ場キャンプ場〇〇〇',
-          latitude: 2,
-          longitude: 2,
-          isFavorited: true,
-        },
-        {
-          id: 3,
-          name: '〇〇〇キャンプ場',
-          address: 'キャンプ場キャンプ場〇〇〇',
-          latitude: 3,
-          longitude: 3,
-          isFavorited: false,
-        },
-        {
-          id: 4,
-          name: '〇〇〇キャンプ場',
-          address: 'キャンプ場キャンプ場〇〇〇',
-          latitude: 4,
-          longitude: 4,
-          isFavorited: true,
-        },
-        {
-          id: 5,
-          name: '〇〇〇キャンプ場',
-          address: 'キャンプ場キャンプ場〇〇〇',
-          latitude: 5,
-          longitude: 5,
-          isFavorited: false,
-        },
-        {
-          id: 6,
-          name: '〇〇〇キャンプ場',
-          address: 'キャンプ場キャンプ場〇〇〇',
-          latitude: 6,
-          longitude: 6,
-          isFavorited: true,
-        },
-        {
-          id: 7,
-          name: '〇〇〇キャンプ場',
-          address: 'キャンプ場キャンプ場〇〇〇',
-          latitude: 7,
-          longitude: 7,
-          isFavorited: false,
-        },
-      ],
-    };
+      );
+
+      return campsites.concat(favorites);
+    },
+    isLoading() {
+      const loadPlan = this.$store.getters['models/userCampsitePlan/isLoading'];
+      const loadFavorite = this.$store.getters['models/usersFavorite/isLoading'];
+
+      return loadPlan || loadFavorite;
+    },
   },
   methods: {
     goToSearchSpotByCampsite() {
@@ -128,6 +104,11 @@ export default {
     },
     goToSearchCampsite() {
       // TODO: implement redirect to キャンプ場検索 when implement Logic
+    },
+    async show() {
+      this.$store.dispatch('appTabbar/setLastVisitedAt', this.$helpers.localDateWithHyphenFrom(new Date()));
+      await this.$store.dispatch('models/userCampsitePlan/getUserCampsitePlans');
+      await this.$store.dispatch('models/usersFavorite/getUsersFavorites');
     },
   },
 };
