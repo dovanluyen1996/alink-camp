@@ -30,7 +30,7 @@ import UserStampsCampaign from '@/views/user/user-stamps/campaign';
 import CourseSearchIndexPage from '@/views/course-search/index';
 import ScoresIndexPage from '@/views/scores/index';
 import WindForecastIndexPage from '@/views/wind-forecast/index';
-import CourseWeatherIndexPage from '@/views/course-weather/index';
+import CampsiteWeatherIndexPage from '@/views/campsite-weather/index';
 import MenuIndexPage from '@/views/menu/index';
 
 export default {
@@ -78,7 +78,7 @@ export default {
       },
     },
     isNavigatorBusy() {
-      return this.$store.state.courseWeatherNavigator.isBusy
+      return this.$store.state.campsiteWeatherNavigator.isBusy
         || this.$store.state.courseSearchNavigator.isBusy
         || this.$store.state.scoresNavigator.isBusy
         || this.$store.state.windForecastNavigator.isBusy
@@ -103,8 +103,8 @@ export default {
       if (this.isNavigatorBusy) return;
 
       switch (event.activeIndex) {
-      case settings.views.appTabbar.tabIndexes.courseWeather:
-        this.$store.dispatch('courseWeatherNavigator/reset', CourseWeatherIndexPage);
+      case settings.views.appTabbar.tabIndexes.campsiteWeather:
+        this.$store.dispatch('courseWeatherNavigator/reset', CampsiteWeatherIndexPage);
         break;
       case settings.views.appTabbar.tabIndexes.courseSearch:
         this.$store.dispatch('courseSearchNavigator/reset', CourseSearchIndexPage);
