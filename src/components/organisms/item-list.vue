@@ -39,7 +39,7 @@ export default {
   },
   methods: {
     goToItemsEdit(item) {
-      this.$store.dispatch('appNavigator/push', {
+      this.$store.dispatch('menuNavigator/push', {
         extends: ItemsEdit,
         onsNavigatorProps: { item },
       });
