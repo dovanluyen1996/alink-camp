@@ -3,8 +3,7 @@
     <table-header
       title="月毎の気温予測詳細"
     />
-    <!-- Handle v-if if data present -->
-
+    <!-- TODO: Handle v-if if data present -->
     <template v-if="true">
       <custom-select
         v-model="selectedMonth"

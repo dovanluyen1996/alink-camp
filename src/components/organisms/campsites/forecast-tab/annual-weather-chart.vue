@@ -4,8 +4,8 @@
       title="年間の天気傾向"
     />
     <!-- TODO: Handle v-if if data present -->
-
     <template v-if="true">
+      <!-- TODO: show chart when implement Logic. Delete annual-weather-chart.png image -->
       <img
         class="image-temp"
         src="@/assets/images/annual-weather-chart.png"
