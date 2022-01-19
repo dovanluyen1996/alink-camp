@@ -45,6 +45,7 @@ import CampsiteName from '@/components/organisms/campsite-name';
 
 // tab contents
 import CampsiteForecastTab from '@/components/organisms/campsites/forecast-tab';
+import CampsiteRainyTab from '@/components/organisms/campsites/rainy';
 
 export default {
   name: 'Campsitehow',
@@ -68,7 +69,7 @@ export default {
         },
         {
           label: '雨雲の動き',
-          component: CampsiteForecastTab,
+          component: CampsiteRainyTab,
         },
         {
           label: '施設詳細',
