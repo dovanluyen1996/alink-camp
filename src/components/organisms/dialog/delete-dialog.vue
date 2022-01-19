@@ -10,7 +10,7 @@
 
     <template #footer>
       <v-ons-button
-        modifier="quiet dark"
+        modifier="quiet quiet-dark"
         @click="cancel()"
       >
         キャンセル

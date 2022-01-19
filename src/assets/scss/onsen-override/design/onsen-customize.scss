@@ -112,7 +112,7 @@ $button-height--rounded: 36px;
   }
 
   &--quiet-dark {
-    color: inherit;
+    color: $color-default;
   }
 
   &--cta {
@@ -172,10 +172,6 @@ $button-height--rounded: 36px;
       margin-top: 20px;
       margin-bottom: 150px;
     }
-  }
-
-  &--dark {
-    color: #222;
   }
 
   &--more {
