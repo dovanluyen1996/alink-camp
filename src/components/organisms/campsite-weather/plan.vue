@@ -1,6 +1,6 @@
 <template>
   <div :class="['campsite-weather-plan', {'is-today' : isBetween}]">
-    {{ plan.startedDate | moment('YYYY/MM/DD') }}〜{{ plan.finishedDate | moment('YYYY/MM/DD') }}
+    {{ longDate(plan.startedDate) }}〜{{ longDate(plan.finishedDate) }}
     <span class="campsite-weather-plan__count-down">
       {{ showCountDown }}
     </span>
@@ -19,6 +19,9 @@ export default {
     },
   },
   computed: {
+    longDate() {
+      return date => this.$helpers.toLongString(date);
+    },
     isBetween() {
       return moment().startOf('day').isBetween(this.plan.startedDate, this.plan.finishedDate, null, '[]');
     },
