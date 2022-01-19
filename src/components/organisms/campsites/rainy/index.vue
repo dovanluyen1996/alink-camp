@@ -1,6 +1,8 @@
 <template>
   <div class="rainy-tab">
     <div class="rainy-wrapper">
+      <!-- TODO: Implement Map when implement logic -->
+
       <img src="@/assets/images/rainy.png">
     </div>
   </div>
