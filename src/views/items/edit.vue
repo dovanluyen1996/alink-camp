@@ -1,6 +1,7 @@
 <template>
   <v-ons-page>
     <custom-toolbar title="オリジナルアイテム">
+      <!-- TODO: 運営が用意したアイテムのとき、基本アイテムと表示する -->
       <template #right>
         <delete-dialog-with-icon
           :is-shown.sync="isShownDeleteConfirmDialog"
@@ -148,12 +149,6 @@ export default {
 /deep/ {
   .page__background {
     background-image: none;
-  }
-
-  .tool-bar__right {
-    display: flex;
-    align-items: center;
-    justify-content: center;
   }
 }
 

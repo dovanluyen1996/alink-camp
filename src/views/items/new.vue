@@ -48,7 +48,7 @@
 
     <completed-dialog
       :action="action"
-      :is-visible="completedDialogVisible"
+      :is-visible="isShowCompletedDialogVisible"
       @close="closeCompletedDialog"
     />
   </v-ons-page>
@@ -85,7 +85,7 @@ export default {
         ],
       },
       isShownConfirmCreateItemDialog: false,
-      completedDialogVisible: false,
+      isShowCompletedDialogVisible: false,
       action: '',
     };
   },
@@ -98,10 +98,10 @@ export default {
     },
     showCompletedDialog(action) {
       this.action = action;
-      this.completedDialogVisible = true;
+      this.isShowCompletedDialogVisible = true;
     },
     closeCompletedDialog() {
-      this.completedDialogVisible = false;
+      this.isShowCompletedDialogVisible = false;
     },
     showConfirmCreateItemDialog() {
       this.isShownConfirmCreateItemDialog = true;
