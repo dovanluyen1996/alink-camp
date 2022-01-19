@@ -25,14 +25,14 @@
           <card-with-tab
             :tabs="tabs"
             :active-index="activeIndexTab"
-            :class="{'custom-card': activeIndexTab === 0}"
+            class="custom-card"
             @switchTab="switchTab"
           />
         </div>
 
         <template #footer>
           <v-ons-button modifier="cta rounded red">
-            <img src="@/assets/images/red-cross.png">
+            <img class="mr-10" src="@/assets/images/red-cross.png">
             計画の追加
           </v-ons-button>
         </template>
@@ -130,18 +130,18 @@ export default {
     &__footer {
       display: flex;
       justify-content: flex-end;
-    }
 
-    .button {
-      display: flex;
-      align-items: center;
-      padding: 5px 15px;
-      margin-right: 20px;
-
-      img {
-        margin-right: 5px;
+      .button {
+        display: flex;
+        align-items: center;
+        padding: 5px 15px;
+        margin-right: 20px;
       }
     }
+  }
+
+  .mr-10 {
+    margin-right: 10px;
   }
 }
 </style>
