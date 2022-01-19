@@ -12,10 +12,17 @@
       </span>
     </div>
     <v-ons-input
+      v-if="sticker.user_id"
       v-model="inputedValue"
       type="text"
       class="item-name__input"
     />
+    <div
+      v-else
+      class="item-name__box"
+    >
+      <span class="item-name__note">テント</span>
+    </div>
     <div
       v-if="errors.length"
       class="input-error-msg"
@@ -81,6 +88,20 @@ export default {
     width: 100%;
     margin-top: 2px;
     text-align: center;
+  }
+
+  &__box {
+    display: flex;
+    align-items: center;
+    padding: 7px;
+    margin-top: 5px;
+    background-color: #fff;
+  }
+
+  &__note {
+    padding-left: 5px;
+    font-size: 18px;
+    font-weight: 600;
   }
 }
 
