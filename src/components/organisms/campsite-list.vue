@@ -21,7 +21,7 @@
                 <span>
                   {{ campsite.name }}
                   <img
-                    v-if="isShowFavoriteMark && campsite.isFavorited"
+                    v-if="isShowFavoriteMark && isFavorited(campsite)"
                     src="@/assets/images/user/user-plan/favorite.png"
                     width="18px"
                   >
@@ -69,6 +69,9 @@ export default {
   computed: {
     modifier() {
       return `longdivider ${this.hasChevron ? 'chevron' : ''}`;
+    },
+    isFavorited() {
+      return campsite => this.$store.getters['models/usersFavorite/findByCampsiteId'](campsite.id);
     },
   },
   mounted() {
