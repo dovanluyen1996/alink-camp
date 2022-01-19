@@ -56,6 +56,11 @@ export default {
 
 <style lang="scss" scoped>
 /deep/ {
+  .alert-dialog-container {
+    height: 237px;
+    box-sizing: border-box;
+  }
+
   .alert-dialog-content {
     font-size: 15px;
     font-weight: 300;
