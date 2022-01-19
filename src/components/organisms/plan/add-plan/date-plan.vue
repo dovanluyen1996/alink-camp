@@ -10,24 +10,29 @@
 
       <validation-observer>
         <content-with-footer>
+          <div class="card__title card__title--center card__title--top">
+            チェックイン
+          </div>
           <validation-provider
             rules="required|required-future-day"
             name="プレイ予定日"
           >
             <date-field
               v-model="dateValueCheckIn"
-              placeholder="チェックイン"
               :errors="errors"
               class="date-field__des"
             />
           </validation-provider>
+
+          <div class="card__title card__title--center">
+            チェックアウト
+          </div>
           <validation-provider
             rules="required|required-future-day"
             name="プレイ予定日"
           >
             <date-field
               v-model="dateValueCheckOut"
-              placeholder="チェックアウト"
               help="※天気予報のPUSHは予報が確定してからになります"
               :errors="errors"
             />
@@ -86,6 +91,14 @@ export default {
     background: none;
   }
 
+  .card__title {
+    color: #000;
+  }
+
+  .card__title--top {
+    margin-top: 25px;
+  }
+
   .text {
     display: grid;
     justify-content: center;
@@ -111,23 +124,10 @@ export default {
     }
   }
 
-  .custom-input-date.is-shown-placeholder::before {
-    font-size: 12px;
-    font-weight: 300;
-  }
-
-  .custom-input-date.is-shown-placeholder input {
+  .custom-input-date input {
     display: flex;
-    padding-left: 100px;
-    font-size: 18px;
-    text-align: center;
-    opacity: 1;
-  }
-
-  .date-field {
-    &__des {
-      margin-top: 50px;
-    }
+    height: 50px;
+    text-align: center !important;
   }
 }
 </style>
