@@ -32,6 +32,7 @@ import ContentWithFooter from '@/components/organisms/content-with-footer';
 
 // tab contents
 import CampsiteSearchAreaTab from '@/components/organisms/campsite-search/area-tab';
+import CampsiteSearchLocationTab from '@/components/organisms/campsite-search/location-tab';
 
 export default {
   name: 'CampsiteConditionsSearch',
@@ -50,7 +51,7 @@ export default {
         {
           name: 'location',
           label: '現在位置より検索',
-          component: CampsiteSearchAreaTab,
+          component: CampsiteSearchLocationTab,
         },
       ],
     };
