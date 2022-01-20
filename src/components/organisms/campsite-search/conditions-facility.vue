@@ -61,35 +61,35 @@ export default {
         },
         {
           value: 2,
-          text: '河畔',
+          text: '臨海',
         },
         {
           value: 3,
-          text: '河畔',
+          text: '高原',
         },
         {
           value: 4,
-          text: '河畔',
+          text: '湖畔',
         },
         {
           value: 5,
-          text: '河畔',
+          text: '林間',
         },
         {
           value: 6,
-          text: '河畔',
+          text: '公園',
         },
         {
           value: 7,
-          text: '河畔',
+          text: '海岸',
         },
         {
           value: 8,
-          text: '河畔',
+          text: '山間',
         },
         {
           value: 9,
-          text: '河畔',
+          text: 'その他',
         },
       ],
       facilitys: [
@@ -115,19 +115,55 @@ export default {
         },
         {
           value: 6,
-          text: 'バンガローなどの宿泊施設有',
+          text: 'トレーラーハウス有',
         },
         {
           value: 7,
-          text: '常設テント・ティピー・パオの有',
+          text: 'バンガローなどの宿泊施設有',
         },
         {
           value: 8,
-          text: '水洗トイレの有',
+          text: '常設テント・ティピー・パオの有',
         },
         {
           value: 9,
+          text: 'AC電源付きサイトの有',
+        },
+        {
+          value: 10,
+          text: 'ランドリーの有',
+        },
+        {
+          value: 11,
+          text: '水洗トイレの有',
+        },
+        {
+          value: 12,
+          text: '温水シャワーの有',
+        },
+        {
+          value: 13,
+          text: 'お風呂有',
+        },
+        {
+          value: 14,
           text: '温泉有',
+        },
+        {
+          value: 15,
+          text: 'バリアフリー施設有',
+        },
+        {
+          value: 16,
+          text: '直火が可',
+        },
+        {
+          value: 17,
+          text: 'ペット連れが可',
+        },
+        {
+          value: 18,
+          text: '花火が可',
         },
       ],
       nearby: [
@@ -161,10 +197,14 @@ export default {
         },
         {
           value: 8,
-          text: '周辺のレジャー施設',
+          text: '周辺の温泉施設',
         },
         {
           value: 9,
+          text: '周辺の観光牧場',
+        },
+        {
+          value: 10,
           text: '周辺のレジャー施設',
         },
       ],
@@ -198,8 +238,11 @@ export default {
 
   &--item {
     display: flex;
-    column-gap: 10px;
     align-items: center;
+  }
+
+  .check-field {
+    margin-right: 10px;
   }
 }
 

@@ -216,11 +216,14 @@ export default {
 }
 
 .button--plus {
-  column-gap: 10px;
   width: 100%;
   margin: 25px 0 12px;
   background-color: #c83200;
   border-radius: 0;
+
+  img {
+    margin-right: 10px;
+  }
 }
 
 /deep/ {
