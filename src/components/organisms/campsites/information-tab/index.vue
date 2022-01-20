@@ -34,6 +34,7 @@ export default {
 <style scoped lang="scss">
   .information-tab {
     .information-wrapper {
+      padding-bottom: 20px;
       margin-bottom: 30px;
       background-color: #fff;
     }

@@ -1,10 +1,19 @@
 <template>
   <div class="wrapper-item">
-    <div class="title">
-      <slot name="title" />
+    <div
+      class="title"
+      @click="toggleContentItem"
+    >
+      <slot
+        name="title"
+        :isShowContentItem="isShowContentItem"
+      />
     </div>
 
-    <div class="content">
+    <div
+      v-show="isShowContentItem"
+      class="content"
+    >
       <slot name="content" />
     </div>
   </div>
@@ -13,6 +22,16 @@
 <script>
 export default {
   name: 'CampsitesInformationTabItem',
+  data() {
+    return {
+      isShowContentItem: true,
+    };
+  },
+  methods: {
+    toggleContentItem() {
+      this.isShowContentItem = !this.isShowContentItem;
+    },
+  },
 };
 </script>
 

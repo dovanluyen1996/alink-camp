@@ -1,13 +1,11 @@
 <template>
   <div class="wrapper-content-item">
     <div class="sub-title">
-      <slot name="sub-title">
-      </slot>
+      <slot name="sub-title" />
     </div>
 
     <div class="sub-content">
-      <slot name="sub-content">
-      </slot>
+      <slot name="sub-content" />
     </div>
   </div>
 </template>

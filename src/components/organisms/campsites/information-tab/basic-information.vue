@@ -1,8 +1,15 @@
 <template>
   <information-tab-item>
-    <template #title>
+    <template #title="{ isShowContentItem }">
       基本情報
-      <img src="@/assets/images/icon-circle-minus.png">
+      <img
+        v-if="isShowContentItem"
+        src="@/assets/images/icon-circle-minus.png"
+      >
+      <img
+        v-else
+        src="@/assets/images/icon-circle-plus.png"
+      >
     </template>
 
     <template #content>
@@ -42,7 +49,10 @@
 
         <template #sub-content>
           <!-- TODO: Implement href="tel:" by campsite phone number when implement logic -->
-          <a class="phone-link" href="tel:090-9999-9999">
+          <a
+            class="phone-link"
+            href="tel:090-9999-9999"
+          >
             090-9999-9999
           </a>
         </template>

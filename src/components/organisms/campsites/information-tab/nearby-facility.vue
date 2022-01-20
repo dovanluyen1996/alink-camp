@@ -1,8 +1,15 @@
 <template>
   <information-tab-item>
-    <template #title>
+    <template #title="{ isShowContentItem }">
       周辺施設
-      <img src="@/assets/images/icon-circle-minus.png">
+      <img
+        v-if="isShowContentItem"
+        src="@/assets/images/icon-circle-minus.png"
+      >
+      <img
+        v-else
+        src="@/assets/images/icon-circle-plus.png"
+      >
     </template>
 
     <template #content>
