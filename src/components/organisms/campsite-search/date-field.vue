@@ -25,7 +25,7 @@
 import CustomDatetimeInput from '@/components/atoms/form/custom-datetime-input';
 
 export default {
-  name: 'CourseSearchDateField',
+  name: 'CampsiteSearchDateField',
   components: {
     CustomDatetimeInput,
   },
@@ -59,14 +59,9 @@ export default {
   text-align: center;
 
   /deep/ {
-    .custom-date-field {
-      border: 2px solid #d9d9d9;
-    }
-
     .custom-input-date {
-      width: 170px;
+      width: 160px;
       margin: 0 auto;
-      border: none;
 
       &.is-shown-placeholder::before {
         justify-content: center;

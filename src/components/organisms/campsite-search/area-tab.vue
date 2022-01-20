@@ -93,8 +93,7 @@
       <template #title>
         該当するコースがありません
       </template>
-      検索した結果、条件に合うゴルフコースがありませんでした。<br>
-      お手数ですが、再度検索条件を設定してください。
+      検索結果に該当するキャンプ場がありませんでした。お手数ですが条件を変えてお試しください。
       <template #footer>
         <v-ons-button @click="closeSearchResultEmptyDialog()">
           OK
@@ -142,13 +141,19 @@ export default {
   },
   computed: {
     searched() {
+      // TODO: This method is copied from `courses/area-tab.vue`.
+      // Please rewrite when implement Logic
       return this.$store.state.course.searched;
     },
     activeIndex() {
+      // TODO: This method is copied from `courses/area-tab.vue`.
+      // Please rewrite when implement Logic
       return this.$store.state.components.cardWithTab.searchCourseActiveIndex;
     },
   },
   watch: {
+    // TODO: This method is copied from `courses/area-tab.vue`.
+    // Please rewrite when implement Logic
     searched() {
       // If current tab is not area, don't search area
       if (this.activeIndex !== 0) return;

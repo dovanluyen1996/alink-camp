@@ -1,13 +1,11 @@
 <template>
   <div>
-    <div class="custom-date-field">
-      <v-ons-input
-        v-model="inputedValue"
-        :type="type"
-        :placeholder="placeholder"
-        :class="['custom-input-date', {'is-shown-placeholder' : isShownPlaceholder}]"
-      />
-    </div>
+    <v-ons-input
+      v-model="inputedValue"
+      :type="type"
+      :placeholder="placeholder"
+      :class="['custom-input-date', {'is-shown-placeholder' : isShownPlaceholder}]"
+    />
     <div
       v-if="errors.length"
       class="input-error-msg"
