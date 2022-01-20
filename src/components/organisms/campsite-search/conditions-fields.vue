@@ -84,6 +84,8 @@ export default {
   },
   computed: {
     activeIndex() {
+      // TODO: This method is copied from `courses/area-tab.vue`.
+      // Please rewrite when implement Logic
       return this.$store.state.course.activeIndex;
     },
     inputedSunnyValue: {

@@ -74,6 +74,7 @@
         >
         施設条件
       </v-ons-button>
+
       <annotations-block>
         ロケーションや周辺施設などの条件を絞り込めます
       </annotations-block>
@@ -160,7 +161,8 @@ export default {
     },
   },
   methods: {
-    // TODO: This method is copied from `courses/area-tab.vue`. Please rewrite when implement Logic
+    // TODO: This method is copied from `courses/area-tab.vue`.
+    // Please rewrite when implement Logic
     search() {
       this.$refs.searchArea.validate()
         .then(async(valid) => {
