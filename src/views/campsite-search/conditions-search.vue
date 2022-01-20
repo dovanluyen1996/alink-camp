@@ -12,7 +12,7 @@
         />
         <template #footer>
           <v-ons-button
-            class="button--orange"
+            class="button--search"
             modifier="large--cta rounded"
             :disabled="searched"
             @click="search()"
@@ -102,8 +102,23 @@ export default {
   }
 
   .content-with-footer__footer {
-    .button {
+    .button--search {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 48px !important;
       background-color: #ff980b !important;
+
+      &::before {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        margin-right: 6px;
+        content: '';
+        background-image: url("~@/assets/images/form/search-top.png");
+        background-position: center;
+        background-size: 100%;
+      }
     }
   }
 }

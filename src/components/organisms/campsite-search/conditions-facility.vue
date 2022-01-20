@@ -219,7 +219,7 @@ export default {
   padding-bottom: 15px;
   margin-top: 20px;
   margin-bottom: 10px;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 600;
   color: #000;
   border-bottom: 1px solid #d9d9d9;
@@ -228,8 +228,8 @@ export default {
 .location-grid,
 .facility,
 .nearby-information {
-  font-size: 16px;
-  font-weight: 600;
+  font-size: 14px;
+  font-weight: 300;
 }
 
 .location-grid {

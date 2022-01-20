@@ -250,6 +250,16 @@ export default {
       height: 50px;
     }
   }
+
+  .annotations-block {
+    font-size: 12px !important;
+    font-weight: 300;
+    color: #000 !important;
+  }
+
+  .card__title {
+    color: #000 !important;
+  }
 }
 
 </style>
