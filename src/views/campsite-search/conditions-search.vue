@@ -1,6 +1,6 @@
 <template>
   <v-ons-page @show="show()">
-    <custom-toolbar title="コース検索" />
+    <custom-toolbar title="キャンプ場検索" />
 
     <div class="content">
       <content-with-footer>

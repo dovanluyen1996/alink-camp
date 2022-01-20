@@ -30,10 +30,10 @@
 
       <v-ons-button
         class="button--plus button--more button--more__description"
-        @click="isShowWether = !isShowWether"
+        @click="toggleWeather()"
       >
         <img
-          v-if="isShowWether"
+          v-if="isShowWeather"
           :src="require('@/assets/images/icon-minus.png')"
           class="icon-minus"
         >
@@ -55,12 +55,12 @@
         :wind.sync="wind"
         :uv.sync="uv"
         :date.sync="targetDate"
-        v-show="isShowWether"
+        v-show="isShowWeather"
       />
 
       <v-ons-button
         class="button--plus button--more button--more__description"
-        @click="isShowFacility = !isShowFacility"
+        @click="toggleFacility()"
       >
         <img
           v-if="isShowFacility"
@@ -105,7 +105,7 @@
 
 <script>
 // pages
-import SearchResult from '@/views/course-search/search-result';
+// TODO: Search Result page still not implement
 
 // components
 import CustomSelect from '@/components/atoms/form/custom-select';
@@ -135,7 +135,7 @@ export default {
       sunny: false,
       wind: false,
       uv: false,
-      isShowWether: false,
+      isShowWeather: false,
       isShowFacility: false,
     };
   },
@@ -160,6 +160,7 @@ export default {
     },
   },
   methods: {
+    // TODO: This method is copied from `courses/area-tab.vue`. Please rewrite when implement Logic
     search() {
       this.$refs.searchArea.validate()
         .then(async(valid) => {
@@ -191,15 +192,14 @@ export default {
     showSearchResultEmptyDialog() {
       this.searchResultEmptyVisible = true;
     },
-    goToSearchResult(params) {
-      const searchConditions = { ...params, type: 'area' };
-      this.$store.dispatch('courseSearchNavigator/push', {
-        extends: SearchResult,
-        onsNavigatorProps: {
-          title: 'コース検索結果',
-          searchConditions,
-        },
-      });
+    goToSearchResult() {
+      // TODO: Redirect to Search Result page
+    },
+    toggleWeather() {
+      this.isShowWeather = !this.isShowWeather;
+    },
+    toggleFacility() {
+      this.isShowFacility = !this.isShowFacility;
     },
   },
 };
