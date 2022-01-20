@@ -28,10 +28,7 @@
 
         <template #footer>
           <v-ons-button modifier="cta rounded red">
-            <img
-              class="mr-10"
-              src="@/assets/images/red-cross.png"
-            >
+            <img class="mr-10" src="@/assets/images/red-cross.png">
             計画の追加
           </v-ons-button>
         </template>

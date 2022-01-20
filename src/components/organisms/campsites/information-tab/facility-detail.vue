@@ -2,7 +2,7 @@
   <information-tab-item>
     <template #title>
       施設詳細
-      <img src="@/assets/images/information-item.png">
+      <img src="@/assets/images/icon-circle-minus.png">
     </template>
 
     <template #content>
@@ -115,7 +115,7 @@ import InformationTabItem from '@/components/atoms/information-tab/item';
 import ContentItem from '@/components/atoms/information-tab/content-item';
 
 export default {
-  name: 'CampsitesInfomationFacilityDetail',
+  name: 'CampsitesInformationFacilityDetail',
   components: {
     InformationTabItem,
     ContentItem,

@@ -2,7 +2,7 @@
   <information-tab-item>
     <template #title>
       基本情報
-      <img src="@/assets/images/information-item.png">
+      <img src="@/assets/images/icon-circle-minus.png">
     </template>
 
     <template #content>
@@ -41,7 +41,8 @@
         </template>
 
         <template #sub-content>
-          <a class="phone-link">
+          <!-- TODO: Implement href="tel:" by campsite phone number when implement logic -->
+          <a class="phone-link" href="tel:090-9999-9999">
             090-9999-9999
           </a>
         </template>
@@ -127,7 +128,7 @@ import InformationTabItem from '@/components/atoms/information-tab/item';
 import ContentItem from '@/components/atoms/information-tab/content-item';
 
 export default {
-  name: 'CampsitesInfomationFeatureTab',
+  name: 'CampsitesInformationFeatureTab',
   components: {
     InformationTabItem,
     ContentItem,

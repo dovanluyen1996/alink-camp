@@ -12,9 +12,7 @@
 
 <script>
 export default {
-  name: 'CampsitesInfomationTabItem',
-  components: {
-  },
+  name: 'CampsitesInformationTabItem',
 };
 </script>
 

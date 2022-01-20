@@ -18,7 +18,7 @@
 import InformationTabItem from '@/components/atoms/information-tab/item';
 
 export default {
-  name: 'CampsitesInfomationFeatureTab',
+  name: 'CampsitesInformationFeatureTab',
   components: {
     InformationTabItem,
   },
