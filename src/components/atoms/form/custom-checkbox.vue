@@ -45,7 +45,7 @@ export default {
   display: inline-block;
   width: 24px;
   height: 24px;
-  border: 2px solid $color-border-hight;
+  border: 1px solid $color-border;
 
   &__field {
     position: absolute;

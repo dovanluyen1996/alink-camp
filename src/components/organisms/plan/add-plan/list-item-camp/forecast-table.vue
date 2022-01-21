@@ -5,30 +5,22 @@
         <tr>
           <th>日程</th>
           <th>天気</th>
-          <th>降水量<br>(mm/h)</th>
+          <th>
+            降水量
+            <br>
+            <span class="text-small">(mm/h)</span>
+          </th>
           <th>気温</th>
+          <th>
+            風
+            <br>
+            <span class="text-small">(m/s)</span>
+          </th>
         </tr>
         <tr v-for="(item, index) in items"
             :key=index
         >
           <td class="date-check">
-            <div
-              class="image-cheked image-cheked__background-checkin"
-              v-if="item.isCheckInDate"
-            >
-              <img
-                :src="require('@/assets/images/weathers/checkin-camp.png')"
-              >
-            </div>
-
-            <div
-              class="image-cheked image-cheked__background-checkout"
-              v-if="item.isCheckOutDate"
-            >
-              <img
-                :src="require('@/assets/images/weathers/checkout-camp.png')"
-              >
-            </div>
             <span
               :date-day="item.date"
               :class="[saturdayCol(item.date), sundayCol(item.date)]"
@@ -41,11 +33,20 @@
               class="icon-weather"
             >
           </td>
-          <td>0</td>
+          <td>{{ item.precipitation }}</td>
           <td>
             <span class="text-red">32°C </span>
             &nbsp;/&nbsp;
             <span class="text-blue">12°C</span>
+          </td>
+          <td>
+            <div class="wind-direction">
+              <img
+                :src="require('@/assets/images/weathers/wind-direction.png')"
+                class="icon-wind"
+              >
+              <span>{{ item.wind }}</span>
+            </div>
           </td>
         </tr>
       </tbody>
@@ -61,19 +62,19 @@ export default {
     return {
       items: [
         {
-          isCheckInDate: true,
-          isCheckOutDate: false,
           date: '12/31/2021',
+          precipitation: '0',
+          wind: '99',
         },
         {
-          isCheckInDate: false,
-          isCheckOutDate: false,
           date: '01/01/2022',
+          precipitation: '0',
+          wind: '99',
         },
         {
-          isCheckInDate: false,
-          isCheckOutDate: true,
           date: '01/02/2022',
+          precipitation: '0',
+          wind: '99',
         },
       ],
     };
@@ -110,12 +111,19 @@ export default {
       height: 31px;
       font-size: 12px;
       font-weight: 600;
+      color: #100101;
       background-color: #eae5e5;
+    }
+
+    .text-small {
+      display: block;
+      font-size: 8px;
     }
 
     td {
       height: 34px;
       font-size: 14px;
+      font-weight: 300;
     }
 
     th,
@@ -143,35 +151,27 @@ export default {
       height: 21px;
     }
 
-    .image-cheked {
-      position: absolute;
-      left: 5px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 27px;
-      height: 16px;
-
-      img {
-        width: 18px;
-        height: 6.5px;
-      }
-
-      &__background-checkout {
-        background-color: #ff0d0d;
-      }
-
-      &__background-checkin {
-        background-color: #0ca206;
-      }
-    }
-
     .text-red {
-      color: #f00;
+      color: #f53939;
     }
 
     .text-blue {
       color: #0097ff;
+    }
+
+    .wind-direction {
+      display: grid;
+      align-items: center;
+      justify-content: center;
+
+      .icon-wind {
+        width: 15px;
+        height: 17px;
+      }
+
+      span {
+        font-size: 10px;
+      }
     }
   }
 }

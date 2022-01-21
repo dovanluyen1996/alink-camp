@@ -7,6 +7,13 @@
           〇〇〇〇〇〇〇〇〇〇〇〇<br>〇〇〇〇〇〇〇〇〇〇〇〇キャンズ場
         </v-ons-row>
       </div>
+
+      <v-ons-button
+        class="button--share"
+      >
+        持ち物共有
+      </v-ons-button>
+
       <div class="title-center">
         天気予報
       </div>
@@ -117,6 +124,7 @@ export default {
   .text {
     display: grid;
     justify-content: center;
+    margin-bottom: 25px;
     background-color: #fff;
 
     &__desc {
@@ -164,5 +172,29 @@ export default {
   color: $color-white;
   text-align: center;
   transform: translate(-50%, -50%);
+}
+
+.button--share {
+  position: absolute;
+  right: 10px;
+  display: flex;
+  align-items: center;
+  width: 120px;
+  height: 34px;
+  font-weight: 600;
+  color: 14px;
+  background-color: #fcb515;
+  border-radius: 15px;
+
+  &::before {
+    display: inline-block;
+    width: 19px;
+    height: 22px;
+    margin-right: 6px;
+    content: '';
+    background-image: url("~@/assets/images/weathers/icon-share.png");
+    background-position: center;
+    background-size: 100%;
+  }
 }
 </style>

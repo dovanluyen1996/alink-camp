@@ -11,6 +11,7 @@
           <div class="items__label items__label--red">
             ラベルソート
           </div>
+          <!-- TODO: Show ラベル一覧 when PR #90 was merged -->
       </div>
 
       <div
@@ -125,6 +126,12 @@ export default {
       color: $color-white;
       background-color: #4c7dae;
     }
+  }
+}
+
+/deep/ {
+  .custom-input {
+    border: 1px solid $color-border-dark !important;
   }
 }
 </style>
