@@ -1,7 +1,7 @@
 <template>
   <div class="campsite-weather-of-the-day">
     <div class="campsite-weather-of-the-day-title">
-      予定日当日の天気
+      {{ shortDate }}のお天気
     </div>
     <v-ons-row>
       <v-ons-col width="50%">
@@ -44,6 +44,8 @@
 </template>
 
 <script>
+import moment from 'moment';
+
 // components
 import WeatherImage from '@/components/atoms/weather-image';
 import CampsiteWeatherTemperatures from '@/components/organisms/campsite-weather/temperatures';
@@ -68,6 +70,12 @@ export default {
     forecast: {
       type: Object,
       required: true,
+    },
+  },
+  computed: {
+    shortDate() {
+      const targetDate = this.forecast.targetDate.date;
+      return moment(targetDate).format('M/D');
     },
   },
 };
