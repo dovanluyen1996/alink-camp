@@ -49,8 +49,9 @@ export default {
     .title {
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-end;
       height: 30px;
+      padding-right: calc(50% - 35px);
       font-size: 12px;
       font-weight: 600;
       line-height: 20px;
