@@ -72,7 +72,6 @@ export default {
   border: 1px solid $color-border;
 
   &[type="date"] {
-    background-color: $color-white;
     background-image: url('~@/assets/images/form/date.png');
   }
 
@@ -111,7 +110,6 @@ export default {
 
     /deep/ {
       input {
-        height: 50px;
         opacity: 0;
       }
     }
