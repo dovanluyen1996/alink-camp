@@ -15,7 +15,6 @@ export default {
 
 .annotations-block {
   font-size: $font-size-small;
-  color: $color-white;
-  text-align: center;
+  color: $color-subtext;
 }
 </style>

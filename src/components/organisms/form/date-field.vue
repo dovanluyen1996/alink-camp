@@ -68,6 +68,6 @@ export default {
 
 <style lang="scss" scoped>
 .date-field-help {
-  margin-top: 35px;
+  margin-top: 13px;
 }
 </style>

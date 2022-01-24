@@ -35,7 +35,6 @@
             <!-- TODO: Fix show text in Android. Show text in center -->
             <date-field
               v-model="dateValueCheckOut"
-              help="※天気予報のPUSHは予報が確定してからになります"
               :errors="errors"
             />
           </validation-provider>
@@ -88,9 +87,12 @@ export default {
 
 /deep/ {
   .card {
-    padding-top: 0;
-    margin: 0;
-    background: none;
+    text-align: center;
+
+    .custom-input-date {
+      width: auto;
+      min-width: 180px;
+    }
   }
 
   .card__title {
@@ -128,7 +130,6 @@ export default {
 
   .custom-input-date input {
     display: flex;
-    height: 50px;
     text-align: center !important;
   }
 }
