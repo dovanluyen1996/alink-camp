@@ -19,14 +19,13 @@
         </div>
       </div>
       <loading :visible="isLoading" />
-      <template v-if="favoriteOrPlanned.length">
-        <campsite-list
-          :is-show-favorite-mark="true"
-          :campsites="favoriteOrPlanned"
-          :has-chevron="false"
-          @click="goToSearchSpotByCampsite"
-        />
-      </template>
+      <campsite-list
+        v-if="favoriteOrPlanned.length > 0"
+        :is-show-favorite-mark="true"
+        :campsites="favoriteOrPlanned"
+        :has-chevron="false"
+        @click="goToSearchSpotByCampsite"
+      />
 
       <v-ons-card
         v-else
@@ -52,6 +51,9 @@
 <script>
 // components
 import CampsiteList from '@/components/organisms/campsite-list';
+
+// pages
+import SearchResult from '@/views/spot-search/search-result';
 
 export default {
   components: {
@@ -96,8 +98,16 @@ export default {
     },
   },
   methods: {
-    goToSearchSpotByCampsite() {
-      // TODO: Redirect to Campsite
+    goToSearchSpotByCampsite(campsite) {
+      this.$store.dispatch('spotSearchNavigator/push', {
+        extends: SearchResult,
+        onsNavigatorProps: {
+          location: {
+            latitude: campsite.latitude,
+            longitude: campsite.longitude,
+          },
+        },
+      });
     },
     goToSpotSearchByCurrentLocation() {
       // TODO: Redirect to Current Location
