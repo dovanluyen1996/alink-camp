@@ -41,10 +41,8 @@
           </td>
           <td>
             <div class="wind-direction">
-              <img
-                :src="require('@/assets/images/weathers/wind-direction.png')"
-                class="icon-wind"
-              >
+              <!-- // TODO: change class when do logic -->
+              <div class="wind-speed wind-speed--danger" />
               <span>{{ item.wind }}</span>
             </div>
           </td>
@@ -96,6 +94,13 @@ export default {
 <style lang="scss" scoped>
 @import "@/assets/scss/_variables.scss";
 
+/deep/ {
+  table td,
+  table th {
+    border: none;
+  }
+}
+
 .table-weather {
   box-sizing: border-box;
   width: 100%;
@@ -120,6 +125,10 @@ export default {
       font-size: 8px;
     }
 
+    tr {
+      border: 1px solid $color-border;
+    }
+
     td {
       height: 34px;
       font-size: 14px;
@@ -129,10 +138,7 @@ export default {
     th,
     td {
       padding: 0;
-      border-top: 1px solid $color-border;
-      border-right: 1px solid $color-border;
-      border-bottom: none;
-      border-left: none;
+      border-right: 1px solid $color-border !important;
     }
 
     .date-check {
@@ -159,14 +165,31 @@ export default {
       color: #0097ff;
     }
 
+    .wind-speed {
+      background-position: center;
+      background-size: cover;
+
+      &--normal {
+        background-image: url('~@/assets/images/weathers/wind-speed/background-normal.png');
+      }
+
+      &--strong {
+        background-image: url('~@/assets/images/weathers/wind-speed/background-strong.png');
+      }
+
+      &--danger {
+        background-image: url('~@/assets/images/weathers/wind-speed/background-danger.png');
+      }
+    }
+
     .wind-direction {
       display: grid;
       align-items: center;
       justify-content: center;
 
-      .icon-wind {
-        width: 15px;
-        height: 17px;
+      .wind-speed {
+        width: 10px;
+        height: 16px;
       }
 
       span {

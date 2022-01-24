@@ -155,6 +155,8 @@ export default {
     left: 100%;
 
     .button {
+      font-size: 14px !important;
+
       &--search-day {
         margin-top: 20px !important;
       }
@@ -192,7 +194,7 @@ export default {
     height: 22px;
     margin-right: 6px;
     content: '';
-    background-image: url("~@/assets/images/weathers/icon-share.png");
+    background-image: url("~@/assets/images/icon-share.png");
     background-position: center;
     background-size: 100%;
   }

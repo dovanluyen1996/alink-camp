@@ -15,9 +15,9 @@
       </div>
 
       <div
-          v-for="item in labels"
-          :key="item"
-          :class="['items__list', {'items__list--active': item.user_id}]"
+        v-for="item in labels"
+        :key="item"
+        :class="['items__list', {'items__list--active': item.user_id}]"
       >
       <!-- TODO:
       表示するアイテム名は7文字まで表示する。8文字以降「…」（例: あああああああ… ）
@@ -62,6 +62,19 @@ export default {
 
 <style lang="scss" scoped>
 @import "@/assets/scss/_variables.scss";
+
+/deep/ {
+  .custom-input {
+    background: $color-white;
+    border: 1px solid $color-border-dark !important;
+  }
+
+  .items__list {
+    &--active {
+      background-color: $color-active-orange;
+    }
+  }
+}
 
 .items-table {
   padding: 20px 10px;
@@ -110,10 +123,6 @@ export default {
     font-weight: 600;
     border: 1px solid #d9d9d9;
 
-    &--active {
-      background-color: $color-active-orange;
-    }
-
     &--content,
     &--label {
       display: flex;
@@ -126,12 +135,6 @@ export default {
       color: $color-white;
       background-color: #4c7dae;
     }
-  }
-}
-
-/deep/ {
-  .custom-input {
-    border: 1px solid $color-border-dark !important;
   }
 }
 </style>
