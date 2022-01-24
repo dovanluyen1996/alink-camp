@@ -17,8 +17,8 @@
 
     <div class="search-detail-button">
       <v-ons-button
-        modifier="large rounded"
-        class="button--orange button--search-detail"
+        modifier="large rounded orange"
+        class="button--search-detail"
         @click="goToConditionsSearch"
       >
         こだわり条件で検索する

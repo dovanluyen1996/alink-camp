@@ -8,10 +8,12 @@
           v-model="searchText"
           @searched="goToCampsiteSearch"
         />
-        <div class="location-history">
-          閲覧履歴
-        </div>
-        <campsite-list :campsites="campsites" />
+        <campsite-list
+          v-if="campsites.length > 0"
+          :campsites="campsites"
+          :has-chevron="false"
+          title="閲覧履歴"
+        />
       </content-with-footer>
     </div>
   </v-ons-page>
@@ -107,20 +109,6 @@ export default {
 .content-with-footer {
   .button {
     width: 150px;
-  }
-}
-
-.location-history {
-  font-size: 18px;
-  font-weight: 600;
-  text-align: center;
-}
-
-/deep/ {
-  .list-item {
-    &::before {
-      content: none !important;
-    }
   }
 }
 </style>
