@@ -35,7 +35,6 @@
 </template>
 
 <script>
-
 export default {
   name: 'TimePlan',
   props: {
@@ -110,5 +109,4 @@ export default {
 .list-item:first-child {
   border-top: 1px solid #d9d9d9;
 }
-
 </style>

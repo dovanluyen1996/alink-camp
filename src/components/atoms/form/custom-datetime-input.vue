@@ -69,7 +69,7 @@ export default {
   background-repeat: no-repeat;
   background-position: right center;
   background-size: 34px 30px;
-  border: 2px solid $color-border;
+  border: 1px solid $color-border;
 
   &[type="date"] {
     background-image: url('~@/assets/images/form/date.png');
