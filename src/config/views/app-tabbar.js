@@ -1,6 +1,6 @@
 export default {
   tabIndexes: {
-    courseWeather: 0,
+    campsiteWeather: 0,
     courseSearch: 1,
     plans: 2,
     windForecast: 3,

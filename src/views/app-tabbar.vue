@@ -19,7 +19,7 @@
 import settings from '@/config/settings';
 
 // tabs
-import CourseWeatherNavigator from '@/views/course-weather/course-weather-navigator';
+import CampsiteWeatherNavigator from '@/views/campsite-weather/campsite-weather-navigator';
 import CourseSearchNavigator from '@/views/course-search/course-search-navigator';
 import PlansNavigator from '@/views/plans/plans-navigator';
 import WindForecastNavigator from '@/views/wind-forecast/wind-forecast-navigator';
@@ -30,7 +30,7 @@ import UserStampsCampaign from '@/views/user/user-stamps/campaign';
 import CourseSearchIndexPage from '@/views/course-search/index';
 import PlansIndexPage from '@/views/plans/index';
 import WindForecastIndexPage from '@/views/wind-forecast/index';
-import CourseWeatherIndexPage from '@/views/course-weather/index';
+import CampsiteWeatherIndexPage from '@/views/campsite-weather/index';
 import MenuIndexPage from '@/views/menu/index';
 
 export default {
@@ -43,7 +43,7 @@ export default {
         {
           label: 'キャンプ天気',
           icon: 'weather',
-          page: CourseWeatherNavigator,
+          page: CampsiteWeatherNavigator,
         },
         {
           label: 'キャンプ場検索',
@@ -78,7 +78,7 @@ export default {
       },
     },
     isNavigatorBusy() {
-      return this.$store.state.courseWeatherNavigator.isBusy
+      return this.$store.state.campsiteWeatherNavigator.isBusy
         || this.$store.state.courseSearchNavigator.isBusy
         || this.$store.state.plansNavigator.isBusy
         || this.$store.state.windForecastNavigator.isBusy
@@ -103,8 +103,8 @@ export default {
       if (this.isNavigatorBusy) return;
 
       switch (event.activeIndex) {
-      case settings.views.appTabbar.tabIndexes.courseWeather:
-        this.$store.dispatch('courseWeatherNavigator/reset', CourseWeatherIndexPage);
+      case settings.views.appTabbar.tabIndexes.campsiteWeather:
+        this.$store.dispatch('courseWeatherNavigator/reset', CampsiteWeatherIndexPage);
         break;
       case settings.views.appTabbar.tabIndexes.courseSearch:
         this.$store.dispatch('courseSearchNavigator/reset', CourseSearchIndexPage);
