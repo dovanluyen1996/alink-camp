@@ -45,6 +45,24 @@
         </v-ons-button>
       </v-ons-card>
     </div>
+    <v-ons-alert-dialog
+      :visible.sync="geoLocationErrorVisible"
+    >
+      <template #title>
+        位置情報が取得できませんでした
+      </template>
+
+      位置情報が取得できませんでした。<br>
+      お手数ですが、通信状況の良いところで再度お試しください。または、アプリの設定にて位置情報送信の許諾をしているかご確認ください
+
+      <template #footer>
+        <v-ons-button
+          @click="closeGeoLocationErrorDialog()"
+        >
+          OK
+        </v-ons-button>
+      </template>
+    </v-ons-alert-dialog>
   </v-ons-page>
 </template>
 
@@ -55,9 +73,18 @@ import CampsiteList from '@/components/organisms/campsite-list';
 // pages
 import SearchResult from '@/views/spot-search/search-result';
 
+import settings from '@/config/settings';
+
 export default {
   components: {
     CampsiteList,
+  },
+  data() {
+    return {
+      geoLocationErrorVisible: false,
+      latitude: null,
+      longitude: null,
+    };
   },
   computed: {
     favorites() {
@@ -110,7 +137,22 @@ export default {
       });
     },
     goToSpotSearchByCurrentLocation() {
-      // TODO: Redirect to Current Location
+      Promise.resolve()
+        .then(() => this.getGeoLocation())
+        .then(() => {
+          this.$store.dispatch('spotSearchNavigator/push', {
+            extends: SearchResult,
+            onsNavigatorProps: {
+              location: {
+                latitude: this.latitude,
+                longitude: this.longitude,
+              },
+            },
+          });
+        })
+        .catch((e) => {
+          console.error(e);
+        });
     },
     goToSearchCampsite() {
       // TODO: implement redirect to キャンプ場検索 when implement Logic
@@ -119,6 +161,32 @@ export default {
       this.$store.dispatch('appTabbar/setLastVisitedAt', this.$helpers.localDateWithHyphenFrom(new Date()));
       await this.$store.dispatch('models/userCampsitePlan/getUserCampsitePlans');
       await this.$store.dispatch('models/usersFavorite/getUsersFavorites');
+    },
+    getGeoLocation() {
+      return new Promise((resolve, reject) => {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            this.latitude = position.coords.latitude;
+            this.longitude = position.coords.longitude;
+
+            resolve();
+          }, (e) => {
+            this.latitude = null;
+            this.longitude = null;
+            this.showGeoLocationErrorDialog();
+
+            reject(e);
+          }, {
+            timeout: settings.locationServices.timeout,
+          },
+        );
+      });
+    },
+    closeGeoLocationErrorDialog() {
+      this.geoLocationErrorVisible = false;
+    },
+    showGeoLocationErrorDialog() {
+      this.geoLocationErrorVisible = true;
     },
   },
 };
