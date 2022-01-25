@@ -28,7 +28,10 @@
               :sticker="sticker"
               :value="item.name"
             />
-            <item-sticker :sticker="sticker" />
+            <item-sticker
+              :sticker="sticker"
+              @showLabelListDialog="showLabelListDialog"
+            />
             <template #footer>
               <v-ons-button
                 modifier="cta rounded"
@@ -42,6 +45,8 @@
         </validation-provider>
       </validation-observer>
     </div>
+
+    <label-list-dialog :is-visible-label-list.sync="isVisibleLabelListDialog" />
 
     <confirm-dialog
       :is-shown.sync="isShownEditConfirmDialog"
@@ -75,6 +80,7 @@ import ItemSticker from '@/components/organisms/item/sticker';
 import DeleteDialogWithIcon from '@/components/organisms/dialog/delete-dialog-with-icon';
 import ConfirmDialog from '@/components/organisms/dialog/confirm-dialog';
 import CompletedDialog from '@/components/organisms/dialog/completed-dialog';
+import LabelListDialog from '@/components/organisms/label-list-dialog';
 
 export default {
   name: 'ItemsEdit',
@@ -86,6 +92,7 @@ export default {
     DeleteDialogWithIcon,
     CompletedDialog,
     ConfirmDialog,
+    LabelListDialog,
   },
   props: {
     item: {
@@ -109,6 +116,7 @@ export default {
       isShownDeleteConfirmDialog: false,
       isShowCompletedDialogVisible: false,
       action: '',
+      isVisibleLabelListDialog: false,
     };
   },
   methods: {
@@ -139,6 +147,9 @@ export default {
     },
     closeEditConfirmDialog() {
       this.isShownEditConfirmDialog = false;
+    },
+    showLabelListDialog() {
+      this.isVisibleLabelListDialog = true;
     },
   },
 };
