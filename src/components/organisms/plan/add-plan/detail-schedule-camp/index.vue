@@ -84,13 +84,6 @@ export default {
     }
   }
 
-  .title-center {
-    padding: 32px 0 0;
-    font-size: 18px;
-    font-weight: 600;
-    text-align: center;
-  }
-
   .content-with-footer {
     height: 0;
 
@@ -106,6 +99,7 @@ export default {
 
     .button {
       margin: 0 55px !important;
+      font-size: 14px !important;
 
       &--search-day {
         margin-top: 20px !important;

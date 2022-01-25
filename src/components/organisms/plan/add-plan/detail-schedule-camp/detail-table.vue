@@ -54,13 +54,13 @@
               </div>
               <img
                   v-if="isContentEmpty(detail.content)"
-                  :src="require('@/assets/images/weathers/icon-more.png')"
+                  :src="require('@/assets/images/icon-more.png')"
                   class="task__icon"
                   @click="showPopup()"
                 >
                 <img
                   v-else
-                  :src="require('@/assets/images/weathers/icon-edit.png')"
+                  :src="require('@/assets/images/icon-edit.png')"
                   class="task__icon"
                   @click="showPopup()"
                 >
@@ -292,7 +292,6 @@ export default {
 
   .table {
     width: 100%;
-    margin-bottom: 140px;
     text-align: center;
 
     .detail-row {
@@ -307,7 +306,7 @@ export default {
     }
 
     td {
-      height: 34px;
+      height: 45px;
       font-size: 10px;
       font-weight: 600;
     }
@@ -346,6 +345,7 @@ export default {
       &__text {
         padding-right: 25px;
         text-align: left;
+        font-size: 12px;
       }
 
       &__icon {

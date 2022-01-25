@@ -17,19 +17,11 @@
 
 <script>
 export default {
-  components: {
-  },
   props: {
     isVisible: {
       type: Boolean,
       default: false,
     },
-  },
-  data() {
-    return {
-      items: [
-      ],
-    };
   },
   methods: {
     closeTask() {
@@ -39,3 +31,16 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+
+/deep/ {
+  .button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 32px;
+    font-size: 12px;
+  }
+}
+</style>
