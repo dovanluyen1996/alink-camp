@@ -15,11 +15,7 @@
     </custom-toolbar>
     <div class="content">
       <content-with-footer>
-        <div class="text">
-          <v-ons-row class="text__desc">
-            〇〇〇〇〇〇〇〇〇〇〇〇<br>〇〇〇〇〇〇〇〇〇〇〇〇キャンズ場
-          </v-ons-row>
-        </div>
+        <campsite-name :campsite-name="campsite.name" />
 
         <div class="campsite-show">
           <card-with-tab
@@ -45,6 +41,7 @@
 // components
 import CardWithTab from '@/components/organisms/card-with-tab';
 import ContentWithFooter from '@/components/organisms/content-with-footer';
+import CampsiteName from '@/components/organisms/campsite-name';
 
 // tab contents
 import CampsiteForecastTab from '@/components/organisms/campsites/forecast-tab';
@@ -54,6 +51,7 @@ export default {
   components: {
     CardWithTab,
     ContentWithFooter,
+    CampsiteName,
   },
   props: {
     campsite: {
@@ -103,17 +101,6 @@ export default {
 @import "@/assets/scss/_variables.scss";
 
 /deep/ {
-  .text {
-    display: grid;
-    justify-content: center;
-    background-color: $color-white;
-
-    &__desc {
-      padding: 15px;
-      font-size: 18px;
-    }
-  }
-
   .toolbar {
     &__right {
       display: flex;

@@ -13,7 +13,7 @@
           :campsites="campsites"
           :has-chevron="false"
           title="閲覧履歴"
-          @click="goToCampsiteShow(campsite)"
+          @click="goToCampsiteShow"
         />
       </content-with-footer>
     </div>
