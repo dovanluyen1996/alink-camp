@@ -7,7 +7,10 @@
             v-for="spot in spots"
             :key="spot.id"
           >
-            <div class="center">
+            <div
+              class="center"
+              @click="openMap(spot)"
+            >
               <div class="list-item__title">
                 <span>
                   {{ spot.name }} ({{ Math.round(spot.distance) }}km)
@@ -36,6 +39,11 @@ export default {
     return {
       isFullscreen: false,
     };
+  },
+  computed: {
+    openMap() {
+      return spot => this.$helpers.openPageByUrl(`https://maps.google.com/?q=${encodeURI(spot.name)}`);
+    },
   },
   mounted() {
     this.setFullscreen();
