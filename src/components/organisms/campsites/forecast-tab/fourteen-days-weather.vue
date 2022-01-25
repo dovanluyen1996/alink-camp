@@ -1,5 +1,5 @@
 <template>
-  <div class="ten-days-weather">
+  <div class="fourteen-days-weather">
     <div class="card__title card__title--center">
       14日間の天気
     </div>
@@ -8,13 +8,9 @@
       <slot name="switcher" />
 
       <template v-if="$helpers.isPresentObject(forecasts)">
-        <sticky-table class="ten-days-weather-table">
+        <sticky-table class="fourteen-days-weather-table">
           <date-row :forecast-data="forecasts" />
           <weather-row :weathers="forecasts" />
-          <prob-precip-row
-            :prob-precips="precips"
-            :is-show-ten-days="true"
-          />
           <temperature-row
             :forecast-data="forecasts"
             :is-highest="true"
@@ -22,6 +18,14 @@
           <temperature-row
             :forecast-data="forecasts"
             :is-lowest="true"
+          />
+          <prob-precip-row
+            :prob-precips="precips"
+            :is-show-fourteen-days="true"
+          />
+          <prob-humidity-row
+            :prob-humidities="humidities"
+            :is-show-fourteen-days="true"
           />
           <wind-direction-row :wind-directions="windDirections" />
           <wind-speed-row :wind-speeds="windSpeeds" />
@@ -51,6 +55,7 @@ import StickyTable from '@/components/organisms/sticky-table';
 import DateRow from '@/components/organisms/weather-table/date-row';
 import WeatherRow from '@/components/organisms/weather-table/weather-row';
 import ProbPrecipRow from '@/components/organisms/weather-table/prob-precip-row';
+import ProbHumidityRow from '@/components/organisms/weather-table/prob-humidity-row';
 import TemperatureRow from '@/components/organisms/weather-table/temperature-row';
 import WindDirectionRow from '@/components/organisms/weather-table/wind-direction-row';
 import WindSpeedRow from '@/components/organisms/weather-table/wind-speed-row';
@@ -66,6 +71,7 @@ export default {
     DateRow,
     WeatherRow,
     ProbPrecipRow,
+    ProbHumidityRow,
     TemperatureRow,
     WindDirectionRow,
     WindSpeedRow,
@@ -91,6 +97,9 @@ export default {
     },
     precips() {
       return this.forecasts ? this.forecasts.map(item => item.precip) : [];
+    },
+    humidities() {
+      return this.forecasts ? this.forecasts.map(item => item.humidity) : [];
     },
     lightnings() {
       return this.forecasts ? this.forecasts.map(item => item.lightning) : [];

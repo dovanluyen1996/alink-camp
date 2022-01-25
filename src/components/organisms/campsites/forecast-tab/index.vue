@@ -8,11 +8,11 @@
           </template>
         </hourly-weather>
 
-        <ten-days-weather v-if="isShownTenDays">
+        <fourteen-days-weather v-if="isShownFourteenDays">
           <template #switcher>
             <forecast-switcher :segment-index.sync="segmentIndex" />
           </template>
-        </ten-days-weather>
+        </fourteen-days-weather>
       </transition>
 
       <div class="ml-mr-30">
@@ -35,12 +35,12 @@
 // components
 import ForecastSwitcher from '@/components/organisms/campsites/forecast-tab/forecast-switcher';
 import HourlyWeather from '@/components/organisms/campsites/forecast-tab/hourly-weather';
-import TenDaysWeather from '@/components/organisms/campsites/forecast-tab/ten-days-weather';
+import FourteenDaysWeather from '@/components/organisms/campsites/forecast-tab/fourteen-days-weather';
 import MonthlyWeather from '@/components/organisms/campsites/forecast-tab/monthly-weather';
 
 const segmentIndexes = {
   hourly: 0,
-  tenDays: 1,
+  fourteenDays: 1,
 };
 
 export default {
@@ -48,7 +48,7 @@ export default {
   components: {
     ForecastSwitcher,
     HourlyWeather,
-    TenDaysWeather,
+    FourteenDaysWeather,
     MonthlyWeather,
   },
   data() {
@@ -60,8 +60,8 @@ export default {
     isShownHourly() {
       return this.segmentIndex === segmentIndexes.hourly;
     },
-    isShownTenDays() {
-      return this.segmentIndex === segmentIndexes.tenDays;
+    isShownFourteenDays() {
+      return this.segmentIndex === segmentIndexes.fourteenDays;
     },
     campsites() {
       // handle choosen campsite
