@@ -36,4 +36,15 @@ export default {
   width: 95%;
   margin: 15px auto;
 }
+
+/deep/ {
+  .segment__button {
+    color: #ed6538;
+    border-color: #ed6538;
+  }
+
+  :checked + .segment__button {
+    background-color: #ed6538;
+  }
+}
 </style>
