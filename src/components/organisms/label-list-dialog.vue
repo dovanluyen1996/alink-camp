@@ -82,6 +82,7 @@ export default {
     },
     registerLabel() {
       // TODO: Implement function when register label
+      this.$emit('update:isVisibleLabelList', false);
     },
   },
 };

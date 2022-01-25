@@ -94,6 +94,7 @@ export default {
       isShownConfirmCreateItemDialog: false,
       isShowCompletedDialogVisible: false,
       action: '',
+      isVisibleLabelList: false,
     };
   },
   methods: {
@@ -116,7 +117,7 @@ export default {
     closeConfirmCreateItemDialog() {
       this.isShownConfirmCreateItemDialog = false;
     },
-    showLabelList() {
+    showLabelListDialog() {
       this.isVisibleLabelList = true;
     },
   },
