@@ -136,26 +136,6 @@ export default {
   background-color: #fff;
   border-radius: 5px;
 
-  &__top {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-  }
-
-  &__title {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 50px;
-    font-size: 16px;
-    font-weight: 600;
-    color: #fff;
-    background-color: #c83200;
-  }
-
   &__text {
     display: flex;
     align-items: center;
@@ -179,22 +159,6 @@ export default {
     height: 34px;
     padding-left: 5px;
     border-top: 1px solid #d9d9d9;
-  }
-
-  &__footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 50px;
-    padding: 30px 20px;
-
-    .button {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 140px;
-      padding: 15px;
-    }
   }
 }
 
