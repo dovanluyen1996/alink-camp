@@ -27,7 +27,7 @@
         キャンセル
       </v-ons-button>
       <v-ons-button
-        modifier="primary"
+        modifier="primary rounded"
         @click="registerLabel"
       >
         選択
