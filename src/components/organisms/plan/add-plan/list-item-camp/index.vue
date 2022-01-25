@@ -13,6 +13,7 @@
       >
         持ち物共有
       </v-ons-button>
+      <!-- TODO: 持ち物共有は編集時のみ表示する -->
 
       <div class="title-center">
         天気予報
@@ -124,7 +125,6 @@ export default {
   .text {
     display: grid;
     justify-content: center;
-    margin-bottom: 25px;
     background-color: #fff;
 
     &__desc {
@@ -183,6 +183,7 @@ export default {
   align-items: center;
   width: 120px;
   height: 34px;
+  margin-top: 17px;
   font-weight: 600;
   color: 14px;
   background-color: #fcb515;
