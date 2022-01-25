@@ -8,12 +8,12 @@
         </v-ons-row>
       </div>
 
+      <!-- TODO: 持ち物共有は編集時のみ表示する -->
       <v-ons-button
         class="button--share"
       >
         持ち物共有
       </v-ons-button>
-      <!-- TODO: 持ち物共有は編集時のみ表示する -->
 
       <div class="title-center">
         天気予報
