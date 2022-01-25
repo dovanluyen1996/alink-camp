@@ -126,6 +126,9 @@ export default {
   },
   methods: {
     goToSearchSpotByCampsite(campsite) {
+      // Reset before search result
+      this.$store.dispatch('models/spot/resetSpots');
+
       this.$store.dispatch('spotSearchNavigator/push', {
         extends: SearchResult,
         onsNavigatorProps: {
@@ -140,6 +143,9 @@ export default {
       Promise.resolve()
         .then(() => this.getGeoLocation())
         .then(() => {
+          // Reset before search result
+          this.$store.dispatch('models/spot/resetSpots');
+
           this.$store.dispatch('spotSearchNavigator/push', {
             extends: SearchResult,
             onsNavigatorProps: {

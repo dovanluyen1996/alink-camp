@@ -24,6 +24,14 @@ export default {
 
       Vue.set(state, 'spots', newSpots);
     },
+    resetSpots(state) {
+      const spots = {
+        spots: [],
+        totalCount: 0,
+      };
+
+      Vue.set(state, 'spots', spots);
+    },
     setIsLoading(state, isLoading) {
       state.isLoading = isLoading;
     },
@@ -42,6 +50,9 @@ export default {
       } finally {
         context.commit('setIsLoading', false);
       }
+    },
+    resetSpots(context) {
+      context.commit('resetSpots');
     },
   },
 };
