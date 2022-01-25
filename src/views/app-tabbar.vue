@@ -58,7 +58,7 @@ export default {
         {
           label: '周辺情報',
           icon: 'nearby',
-          page: SpotSearchPage,
+          page: SpotSearchNavigator,
         },
         {
           label: 'メニュー',
@@ -113,7 +113,7 @@ export default {
         this.$store.dispatch('plansNavigator/reset', PlansIndexPage);
         break;
       case settings.views.appTabbar.tabIndexes.spotSearch:
-        this.$store.dispatch('spotSearchNavigator/reset', SpotSearchNavigator);
+        this.$store.dispatch('spotSearchNavigator/reset', SpotSearchPage);
         break;
       case settings.views.appTabbar.tabIndexes.menu:
         this.$store.dispatch('menuNavigator/reset', MenuIndexPage);
