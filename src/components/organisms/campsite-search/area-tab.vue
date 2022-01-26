@@ -39,8 +39,8 @@
         >
         <img
           v-else
-          :src="require('@/assets/images/form/icon-add.png')"
-          class="icon-add"
+          :src="require('@/assets/images/icon-plus.png')"
+          class="icon-plus"
         >
         気象条件
       </v-ons-button>
@@ -69,8 +69,8 @@
         >
         <img
           v-else
-          :src="require('@/assets/images/form/icon-add.png')"
-          class="icon-add"
+          :src="require('@/assets/images/icon-plus.png')"
+          class="icon-plus"
         >
         施設条件
       </v-ons-button>
@@ -217,6 +217,7 @@ export default {
   overflow: hidden;
 }
 
+.icon-plus,
 .icon-minus {
   width: 24px;
   height: 24px;
@@ -236,19 +237,6 @@ export default {
 /deep/ {
   .select {
     width: 100%;
-
-    .select-input {
-      height: 50px !important;
-      text-align: center;
-    }
-  }
-
-  .custom-input-date {
-    input {
-      display: flex;
-      align-items: center;
-      height: 50px;
-    }
   }
 
   .annotations-block {

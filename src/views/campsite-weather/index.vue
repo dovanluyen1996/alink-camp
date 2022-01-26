@@ -11,11 +11,7 @@
         <template #actions>
           <v-ons-button
             modifier="cta"
-<<<<<<< HEAD
             @click="goToCampsiteSearch"
-=======
-            @click="goToCourseSearch"
->>>>>>> 605c69f (キャンプ場をタブに紐付け)
           >
             キャンプ場検索
           </v-ons-button>
@@ -38,12 +34,6 @@
 </template>
 
 <script>
-<<<<<<< HEAD
-=======
-// pages
-import CourseSearchIndex from '@/views/course-search/index';
-
->>>>>>> 605c69f (キャンプ場をタブに紐付け)
 // components
 import NoData from '@/components/organisms/no-data';
 import CampsiteWeatherContent from '@/components/organisms/campsite-weather/content';
@@ -95,23 +85,8 @@ export default {
       await this.$store.dispatch('models/userCampsitePlan/getUserCampsitePlans');
       await this.$store.dispatch('models/usersFavorite/getUsersFavorites');
     },
-<<<<<<< HEAD
     goToCampsiteSearch() {
       // TODO: 検索ページのロジック実装時に、ページ遷移を実装する
-=======
-    goToCourseSearch() {
-      this.$store.commit('courseSearchNavigator/setEnableBusy', false);
-      this.$store.dispatch('courseSearchNavigator/reset', {
-        extends: CourseSearchIndex,
-        onsNavigatorOptions: {
-          callback: () => {
-            this.$store.commit('courseSearchNavigator/setEnableBusy', true);
-          },
-        },
-      });
-
-      this.$store.commit('appTabbar/setActiveIndexFromTabName', 'courseSearch');
->>>>>>> 605c69f (キャンプ場をタブに紐付け)
     },
   },
 };
