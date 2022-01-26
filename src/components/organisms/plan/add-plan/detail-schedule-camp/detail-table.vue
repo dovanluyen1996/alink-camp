@@ -20,8 +20,14 @@
             <th>時</th>
             <th>天気</th>
             <th>気温</th>
-            <th>降水量<br>(mm/h)</th>
-            <th>風<br>(m/s)</th>
+            <th>
+              降水量<br>
+              <span class="text-small">(mm/h)</span>
+            </th>
+            <th>
+              風<br>
+              <span class="text-small">(m/s)</span>
+            </th>
             <th>タスク</th>
           </tr>
           <tr class="detail-row"
@@ -301,6 +307,12 @@ export default {
 
     .detail-row {
       background-color: $color-white;
+    }
+
+    .text-small {
+      display: block;
+      padding: 0 9px;
+      font-size: 8px;
     }
 
     th {
