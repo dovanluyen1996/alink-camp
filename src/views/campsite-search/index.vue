@@ -102,6 +102,9 @@ export default {
   methods: {
     goToCampsiteSearch() {
       // TODO: handle go to campsite search
+      // Console data when search success, please remove them when implement goto campsite search
+      console.log(this.$store.getters['models/campsite/all']);
+      console.log(this.$store.getters['models/campsite/totalCount']);
     },
     goToCampsiteShow(campsite) {
       this.$store.dispatch('campsiteSearchNavigator/push', {

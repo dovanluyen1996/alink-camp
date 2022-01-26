@@ -74,18 +74,18 @@ export default {
       },
     },
     recordCount() {
-      return this.$store.getters['models/course/size'];
+      return this.$store.getters['models/campsite/size'];
     },
   },
   methods: {
     async searchByName() {
       // Clear before search result
-      this.$store.dispatch('models/course/resetCourses');
+      this.$store.dispatch('models/campsite/resetCampsites');
 
       const params = {
         name: this.inputedValue,
       };
-      await this.$store.dispatch('models/course/getCourses', params);
+      await this.$store.dispatch('models/campsite/getCampsites', params);
 
       if (this.recordCount) {
         // Send search condition params to paging in search result
