@@ -1,8 +1,8 @@
 <template>
-  <div class="text">
-    <v-ons-row class="text__desc">
+  <div class="campsite-name">
+    <span class="campsite-name__inner">
       {{ campsiteName }}
-    </v-ons-row>
+    </span>
   </div>
 </template>
 
@@ -19,16 +19,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/scss/_variables.scss";
+.campsite-name {
+  padding: 7px 30px;
+  margin-bottom: 30px;
+  font-size: 18px;
+  word-break: break-all;
+  background: #fff;
 
-.text {
-  display: grid;
-  justify-content: center;
-  background-color: $color-white;
-
-  &__desc {
-    padding: 15px;
-    font-size: 18px;
+  &__inner {
+    display: inline-block;
+    text-align: left;
   }
 }
 </style>
