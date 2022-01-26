@@ -73,11 +73,6 @@ export default {
 }
 
 /deep/ {
-  .custom-input-date {
-    width: 180px;
-    margin: 0 auto;
-  }
-
   .upload-button {
     margin-bottom: -20px;
   }
