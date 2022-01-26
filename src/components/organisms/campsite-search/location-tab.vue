@@ -4,12 +4,12 @@
       ref="searchLocation"
     >
       <div class="card__title card__title--center">
-        エリアを指定（必須）
+        検索範囲選択（必須）
       </div>
       <validation-provider
         v-slot="{ errors }"
         rules="required-select"
-        name="都道府県"
+        name="検索範囲"
       >
         <custom-select
           v-model="distance"
@@ -30,17 +30,17 @@
 
       <v-ons-button
         class="button--plus button--more button--more__description"
-        @click="isShowWether = !isShowWether"
+        @click="toggleWeather()"
       >
         <img
-          v-if="isShowWether"
+          v-if="isShowWeather"
           :src="require('@/assets/images/icon-minus.png')"
           class="icon-minus"
         >
         <img
           v-else
-          :src="require('@/assets/images/form/icon-add.png')"
-          class="icon-add"
+          :src="require('@/assets/images/icon-plus.png')"
+          class="icon-plus"
         >
         気象条件
       </v-ons-button>
@@ -55,12 +55,12 @@
         :wind.sync="wind"
         :uv.sync="uv"
         :date.sync="targetDate"
-        v-show="isShowWether"
+        v-show="isShowWeather"
       />
 
       <v-ons-button
         class="button--plus button--more button--more__description"
-        @click="isShowFacility = !isShowFacility"
+        @click="toggleFacility()"
       >
         <img
           v-if="isShowFacility"
@@ -69,8 +69,8 @@
         >
         <img
           v-else
-          :src="require('@/assets/images/form/icon-add.png')"
-          class="icon-add"
+          :src="require('@/assets/images/icon-plus.png')"
+          class="icon-plus"
         >
         施設条件
       </v-ons-button>
@@ -88,14 +88,14 @@
       />
     </validation-observer>
 
-    <v-ons-alert-dialog :visible.sync="searchResultEmptyVisible">
+    <v-ons-alert-dialog :visible.sync="geoLocationErrorVisible">
       <template #title>
         該当するコースがありません
       </template>
       位置情報が取得できませんでした。<br>
       お手数ですが、通信状況の良いところで再度お試しください。
       <template #footer>
-        <v-ons-button @click="closeSearchResultEmptyDialog()">
+        <v-ons-button @click="closeGeoLocationErrorDialog()">
           OK
         </v-ons-button>
       </template>
@@ -163,16 +163,19 @@ export default {
       lon: null,
       upper_rad: null,
       lower_rad: null,
-      searchResultEmptyVisible: false,
       geoLocationErrorVisible: false,
-      isShowWether: false,
+      isShowWeather: false,
       isShowFacility: false,
     };
   },
   computed: {
+    // TODO: This method is copied from `courses/location-tab.vue`.
+    // Please rewrite when implement Logic
     searched() {
       return this.$store.state.course.searched;
     },
+    // TODO: This method is copied from `courses/location-tab.vue`.
+    // Please rewrite when implement Logic
     activeIndex() {
       return this.$store.state.components.cardWithTab.searchCourseActiveIndex;
     },
@@ -300,16 +303,22 @@ export default {
       });
     },
     closeSearchResultEmptyDialog() {
-      this.searchResultEmptyVisible = false;
+      this.geoLocationErrorVisible = false;
     },
     showSearchResultEmptyDialog() {
-      this.searchResultEmptyVisible = true;
+      this.geoLocationErrorVisible = true;
     },
     closeGeoLocationErrorDialog() {
       this.geoLocationErrorVisible = false;
     },
     showGeoLocationErrorDialog() {
       this.geoLocationErrorVisible = true;
+    },
+    toggleWeather() {
+      this.isShowWeather = !this.isShowWeather;
+    },
+    toggleFacility() {
+      this.isShowFacility = !this.isShowFacility;
     },
   },
 };
@@ -339,19 +348,6 @@ export default {
 /deep/ {
   .select {
     width: 100%;
-
-    .select-input {
-      height: 50px !important;
-      text-align: center;
-    }
-  }
-
-  .custom-input-date {
-    input {
-      display: flex;
-      align-items: center;
-      height: 50px;
-    }
   }
 
   .annotations-block {
