@@ -138,37 +138,29 @@ export default {
   },
   computed: {
     searched() {
-      // TODO: This method is copied from `courses/area-tab.vue`.
-      // Please rewrite when implement Logic
-      return this.$store.state.course.searched;
+      return this.$store.state.campsite.searched;
     },
     activeIndex() {
-      // TODO: This method is copied from `courses/area-tab.vue`.
-      // Please rewrite when implement Logic
-      return this.$store.state.components.cardWithTab.searchCourseActiveIndex;
+      return this.$store.state.components.cardWithTab.searchCampsiteActiveIndex;
     },
   },
   watch: {
-    // TODO: This method is copied from `courses/area-tab.vue`.
-    // Please rewrite when implement Logic
     searched() {
       // If current tab is not area, don't search area
       if (this.activeIndex !== 0) return;
       // Watch click search button event.
       if (!this.searched) return;
       // Reset search flag to false
-      this.$store.commit('course/setSearched', false);
+      this.$store.commit('campsite/setSearched', false);
 
       this.search();
     },
   },
   methods: {
-    // TODO: This method is copied from `courses/area-tab.vue`.
-    // Please rewrite when implement Logic
     search() {
       this.$refs.searchArea.validate()
         .then(async(valid) => {
-          this.$store.dispatch('models/course/resetCourses');
+          this.$store.dispatch('models/campsite/resetCampsites');
 
           if (!valid) return;
 
@@ -181,9 +173,9 @@ export default {
             uv: this.uv ? 1 : 0,
           };
 
-          await this.$store.dispatch('models/course/getCourses', params);
+          await this.$store.dispatch('models/campsite/getCampsites', params);
 
-          if (this.$store.getters['models/course/size']) {
+          if (this.$store.getters['models/campsite/size']) {
             this.goToSearchResult(params);
           } else {
             this.showSearchResultEmptyDialog();
@@ -198,6 +190,9 @@ export default {
     },
     goToSearchResult() {
       // TODO: Redirect to Search Result page
+      // Console data when search success, please remove them when implement goto campsite search
+      console.log(this.$store.getters['models/campsite/all']);
+      console.log(this.$store.getters['models/campsite/totalCount']);
     },
     toggleWeather() {
       this.isShowWeather = !this.isShowWeather;
