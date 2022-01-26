@@ -20,7 +20,7 @@
           <v-ons-button
             modifier="large--cta rounded"
             class="button--search-day"
-            @click="goToListPlan()"
+            @click="goToDetailPlan()"
           >
             過去の計画一覧
           </v-ons-button>
@@ -62,8 +62,8 @@ export default {
     goToRegistration() {
       // TODO: Redirect to Registration
     },
-    goToListPlan() {
-      // TODO: Redirect to List Plan
+    goToDetailPlan() {
+      // TODO: Redirect to Detail Plan
     },
   },
 };
