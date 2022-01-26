@@ -135,5 +135,4 @@ export default {
     }
   }
 }
->>>>>>> 02bf050 (screen search campsite top)
 </style>
