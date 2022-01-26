@@ -1,6 +1,6 @@
 <template>
   <v-ons-page>
-    <custom-toolbar title="新規計画" />
+    <custom-toolbar title="12/31からの計画" />
     <v-ons-tabbar
       position="top"
       :tabs="tabs"

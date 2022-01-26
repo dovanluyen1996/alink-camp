@@ -30,7 +30,7 @@
       <content-with-footer>
         <template #footer>
           <v-ons-button
-            modifier="large--cta rounded"
+            modifier="large--cta yellow rounded"
             @click="gotoEdit()"
           >
             編集保存
