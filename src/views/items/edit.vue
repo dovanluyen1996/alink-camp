@@ -35,7 +35,7 @@
                 class="add-button"
                 @click="showEditConfirmDialog"
               >
-                保存する
+                保存
               </v-ons-button>
             </template>
           </content-with-footer>
@@ -54,7 +54,7 @@
         アイテム情報を編集します。よろしいですか？
       </template>
       <template #confirmAction>
-        編集する
+        編集
       </template>
     </confirm-dialog>
 

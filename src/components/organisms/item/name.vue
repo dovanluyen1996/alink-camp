@@ -93,7 +93,7 @@ export default {
   &__box {
     display: flex;
     align-items: center;
-    padding: 7px;
+    height: 50px;
     margin-top: 5px;
     background-color: #fff;
   }
@@ -107,12 +107,12 @@ export default {
 
 /deep/ {
   .text-input {
-    height: 43px;
+    height: 50px;
     padding: 0;
     font-size: 18px;
     text-indent: 8px;
     background: #fff;
-    border: 2px solid #90bfd8;
+    border: 1px solid #90bfd8;
   }
 }
 </style>

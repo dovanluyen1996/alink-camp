@@ -18,7 +18,7 @@
       <v-ons-button
         @click="clickDelete()"
       >
-        削除する
+        削除
       </v-ons-button>
     </template>
   </v-ons-alert-dialog>

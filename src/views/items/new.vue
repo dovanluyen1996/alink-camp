@@ -22,7 +22,7 @@
                 class="add-button"
                 @click="showConfirmCreateItemDialog"
               >
-                登録する
+                登録
               </v-ons-button>
             </template>
           </content-with-footer>
@@ -42,7 +42,7 @@
         よろしいですか？
       </template>
       <template #confirmAction>
-        登録する
+        登録
       </template>
     </confirm-dialog>
 
