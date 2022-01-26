@@ -6,8 +6,8 @@
       <!-- <loading :visible="isLoading" /> -->
       <no-data v-if="campsites.length === 0">
         <p>
-          まだお気に入りや予定日設定して<br>
-          いるコースがありません。コース検索より、設定してください
+          まだキャンプ計画がありません。<br>
+          キャンプ場検索より、計画を作成してください。
         </p>
         <template #actions>
           <v-ons-button
@@ -36,8 +36,9 @@
 import NoData from '@/components/organisms/no-data';
 import CampsiteList from '@/components/organisms/campsite-list';
 
-// page
+// pages
 import CampsitePlan from '@/views/plans/campsite-plan';
+import CampsiteSearchIndex from '@/views/campsite-search/index';
 
 export default {
   name: 'CampsitesIndex',
@@ -45,71 +46,27 @@ export default {
     NoData,
     CampsiteList,
   },
-  data() {
-    return {
-      campsites: [
-        {
-          id: 1,
-          name: '〇〇〇キャンプ場',
-          address: 'キャンプ場キャンプ場〇〇〇',
-          latitude: 1,
-          longitude: 1,
-          isFavorited: false,
-        },
-        {
-          id: 2,
-          name: '〇〇〇キャンプ場',
-          address: 'キャンプ場キャンプ場〇〇〇',
-          latitude: 2,
-          longitude: 2,
-          isFavorited: true,
-        },
-        {
-          id: 3,
-          name: '〇〇〇キャンプ場',
-          address: 'キャンプ場キャンプ場〇〇〇',
-          latitude: 3,
-          longitude: 3,
-          isFavorited: false,
-        },
-        {
-          id: 4,
-          name: '〇〇〇キャンプ場',
-          address: 'キャンプ場キャンプ場〇〇〇',
-          latitude: 4,
-          longitude: 4,
-          isFavorited: true,
-        },
-        {
-          id: 5,
-          name: '〇〇〇キャンプ場',
-          address: 'キャンプ場キャンプ場〇〇〇',
-          latitude: 5,
-          longitude: 5,
-          isFavorited: false,
-        },
-        {
-          id: 6,
-          name: '〇〇〇キャンプ場',
-          address: 'キャンプ場キャンプ場〇〇〇',
-          latitude: 6,
-          longitude: 6,
-          isFavorited: true,
-        },
-        {
-          id: 7,
-          name: '〇〇〇キャンプ場',
-          address: 'キャンプ場キャンプ場〇〇〇',
-          latitude: 7,
-          longitude: 7,
-          isFavorited: false,
-        },
-      ],
-    };
+  computed: {
+    campsites() {
+      return [];
+    },
+    plans() {
+      return [];
+    }
   },
   methods: {
     goToPlanSearch() {
-      // TODO: Redirect to Plan Search
+      this.$store.commit('campsiteSearchNavigator/setEnableBusy', false);
+      this.$store.dispatch('campsiteSearchNavigator/reset', {
+        extends: CampsiteSearchIndex,
+        onsNavigatorOptions: {
+          callback: () => {
+            this.$store.commit('campsiteSearchNavigator/setEnableBusy', true);
+          },
+        },
+      });
+
+      this.$store.commit('appTabbar/setActiveIndexFromTabName', 'campsiteSearch');
     },
     goToPlanDetail() {
       this.$store.dispatch('plansNavigator/push', CampsitePlan);
