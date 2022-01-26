@@ -20,14 +20,14 @@ import settings from '@/config/settings';
 
 // tabs
 import CampsiteWeatherNavigator from '@/views/campsite-weather/campsite-weather-navigator';
-import CourseSearchNavigator from '@/views/course-search/course-search-navigator';
+import CampsiteSearchNavigator from '@/views/campsite-search/campsite-search-navigator';
 import PlansNavigator from '@/views/plans/plans-navigator';
 import WindForecastNavigator from '@/views/wind-forecast/wind-forecast-navigator';
 import MenuNavigator from '@/views/menu/menu-navigator';
 import UserStampsCampaign from '@/views/user/user-stamps/campaign';
 
 // pages
-import CourseSearchIndexPage from '@/views/course-search/index';
+import CampsiteSearchIndexPage from '@/views/campsite-search/index';
 import PlansIndexPage from '@/views/plans/index';
 import WindForecastIndexPage from '@/views/wind-forecast/index';
 import CampsiteWeatherIndexPage from '@/views/campsite-weather/index';
@@ -48,7 +48,7 @@ export default {
         {
           label: 'キャンプ場検索',
           icon: 'search',
-          page: CourseSearchNavigator,
+          page: CampsiteSearchNavigator,
         },
         {
           label: 'キャンプ計画',
@@ -79,7 +79,7 @@ export default {
     },
     isNavigatorBusy() {
       return this.$store.state.campsiteWeatherNavigator.isBusy
-        || this.$store.state.courseSearchNavigator.isBusy
+        || this.$store.state.campsiteSearchNavigator.isBusy
         || this.$store.state.plansNavigator.isBusy
         || this.$store.state.windForecastNavigator.isBusy
         || this.$store.state.menuNavigator.isBusy;
@@ -106,8 +106,8 @@ export default {
       case settings.views.appTabbar.tabIndexes.campsiteWeather:
         this.$store.dispatch('courseWeatherNavigator/reset', CampsiteWeatherIndexPage);
         break;
-      case settings.views.appTabbar.tabIndexes.courseSearch:
-        this.$store.dispatch('courseSearchNavigator/reset', CourseSearchIndexPage);
+      case settings.views.appTabbar.tabIndexes.campsiteSearch:
+        this.$store.dispatch('campsiteSearchNavigator/reset', CampsiteSearchIndexPage);
         break;
       case settings.views.appTabbar.tabIndexes.plans:
         this.$store.dispatch('plansNavigator/reset', PlansIndexPage);
