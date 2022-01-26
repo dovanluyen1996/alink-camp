@@ -29,11 +29,10 @@
       :visible.sync="searchResultEmptyVisible"
     >
       <template #title>
-        該当するコースがありません
+        該当キャンプ場がありません
       </template>
 
-      検索した結果、条件に合うゴルフコースがありませんでした。<br>
-      お手数ですが、再度検索条件を設定してください。
+      検索結果に該当するキャンプ場がありませんでした。お手数ですが条件を変えてお試しください。
 
       <template #footer>
         <v-ons-button
