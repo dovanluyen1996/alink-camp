@@ -40,10 +40,11 @@ export default {
 /deep/ {
   .segment__button {
     color: #ed6538;
-    border-color: #ed6538;
+    border: 1px solid #ed6538;
   }
 
   :checked + .segment__button {
+    color: #fff;
     background-color: #ed6538;
   }
 }
