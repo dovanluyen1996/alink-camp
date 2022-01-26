@@ -8,6 +8,11 @@
         <span>
           {{ item.date }}
         </span>
+        <v-ons-button
+        class="button--share"
+        >
+          持ち物共有
+        </v-ons-button>
       </div>
       <table class="table">
         <tbody>
@@ -287,7 +292,7 @@ export default {
   overflow: auto;
 
   .card-detail {
-    margin-top: 50px;
+    margin-top: 10px;
   }
 
   .table {
@@ -299,7 +304,7 @@ export default {
     }
 
     th {
-      height: 31px;
+      height: 36px;
       font-size: 12px;
       font-weight: 600;
       background-color: #eae5e5;
@@ -344,8 +349,8 @@ export default {
 
       &__text {
         padding-right: 25px;
-        text-align: left;
         font-size: 12px;
+        text-align: left;
       }
 
       &__icon {
@@ -358,18 +363,44 @@ export default {
       }
     }
   }
+}
 
-  .date-detail {
-    display: flex;
-    align-items: center;
-    height: 34px;
-    background-color: #f29678;
+.date-detail {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 43px;
+  background-color: #eae5e5;
 
-    span {
-      padding-left: 5px;
-      font-size: 18px;
-      font-weight: 600;
-    }
+  span {
+    padding-left: 5px;
+    font-size: 18px;
+    font-weight: 600;
+  }
+}
+
+.button--share {
+  position: absolute;
+  right: 10px;
+  display: flex;
+  align-items: center;
+  width: 110px;
+  height: 29px;
+  font-size: 14px;
+  font-weight: 600;
+  background-color: #ff980b;
+  border-radius: 15px;
+
+  &::before {
+    display: inline-block;
+    width: 13px;
+    height: 15px;
+    margin-right: 6px;
+    content: '';
+    background-image: url("~@/assets/images/icon-share.png");
+    background-position: center;
+    background-size: 100%;
   }
 }
 </style>

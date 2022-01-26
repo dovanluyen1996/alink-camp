@@ -11,7 +11,7 @@
       <content-with-footer>
         <template #footer>
           <v-ons-button
-            modifier="large--cta rounded"
+            modifier="large--cta yellow rounded"
             @click="goToRegistration()"
           >
             登録
