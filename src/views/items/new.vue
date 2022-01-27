@@ -33,7 +33,7 @@
       </validation-observer>
     </div>
 
-    <label-list-dialog :is-visible-label-list.sync="isVisibleLabelList" />
+    <label-list-dialog :is-visible-label-list.sync="isVisibleLabelListDialog" />
 
     <confirm-dialog
       :is-shown.sync="isShownConfirmCreateItemDialog"
@@ -94,7 +94,7 @@ export default {
       isShownConfirmCreateItemDialog: false,
       isShowCompletedDialogVisible: false,
       action: '',
-      isVisibleLabelList: false,
+      isVisibleLabelListDialog: false,
     };
   },
   methods: {
@@ -118,7 +118,7 @@ export default {
       this.isShownConfirmCreateItemDialog = false;
     },
     showLabelListDialog() {
-      this.isVisibleLabelList = true;
+      this.isVisibleLabelListDialog = true;
     },
   },
 };
