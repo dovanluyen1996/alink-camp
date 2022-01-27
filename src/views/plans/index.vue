@@ -2,8 +2,7 @@
   <v-ons-page @show="show">
     <custom-toolbar title="キャンプ計画" />
     <div class="content">
-      <!-- TODO: When implement Logic, plase use Loading in Store  -->
-      <!-- <loading :visible="isLoading" /> -->
+      <loading :visible="isLoading" />
       <no-data v-if="campsites.length === 0">
         <p>
           まだキャンプ計画がありません。<br>
@@ -48,14 +47,13 @@ export default {
     CampsiteList,
   },
   computed: {
-    campsites() {
-      return [];
+    isLoading() {
+      return this.$store.getters['models/userCampsitePlan/isLoading'];
     },
     campsites() {
       // お気に入りまたは予定ありのキャンプ場
       const favoritedCampsites = this.$store.getters['models/usersFavorite/all'];
       let campsites = this.$store.getters['models/userCampsitePlan/all'].map(plan => plan.campsite);
-
 
       // uniq campsites
       campsites = campsites.filter(
