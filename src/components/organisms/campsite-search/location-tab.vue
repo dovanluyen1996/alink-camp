@@ -74,6 +74,7 @@
         >
         施設条件
       </v-ons-button>
+
       <annotations-block>
         ロケーションや周辺施設などの条件を絞り込めます
       </annotations-block>
@@ -116,9 +117,7 @@
       お手数ですが、通信状況の良いところで再度お試しください。または、アプリの設定にて位置情報送信の許諾をしているかご確認ください
 
       <template #footer>
-        <v-ons-button
-          @click="closeGeoLocationErrorDialog()"
-        >
+        <v-ons-button @click="closeGeoLocationErrorDialog()">
           OK
         </v-ons-button>
       </template>
