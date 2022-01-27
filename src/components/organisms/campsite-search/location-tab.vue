@@ -88,14 +88,37 @@
       />
     </validation-observer>
 
-    <v-ons-alert-dialog :visible.sync="geoLocationErrorVisible">
+    <v-ons-alert-dialog
+      :visible.sync="searchResultEmptyVisible"
+    >
       <template #title>
         該当するコースがありません
       </template>
+
       位置情報が取得できませんでした。<br>
       お手数ですが、通信状況の良いところで再度お試しください。
+
       <template #footer>
-        <v-ons-button @click="closeGeoLocationErrorDialog()">
+        <v-ons-button @click="closeSearchResultEmptyDialog()">
+          OK
+        </v-ons-button>
+      </template>
+    </v-ons-alert-dialog>
+
+    <v-ons-alert-dialog
+      :visible.sync="geoLocationErrorVisible"
+    >
+      <template #title>
+        位置情報が取得できませんでした
+      </template>
+
+      位置情報が取得できませんでした。<br>
+      お手数ですが、通信状況の良いところで再度お試しください。または、アプリの設定にて位置情報送信の許諾をしているかご確認ください
+
+      <template #footer>
+        <v-ons-button
+          @click="closeGeoLocationErrorDialog()"
+        >
           OK
         </v-ons-button>
       </template>
@@ -163,6 +186,7 @@ export default {
       lon: null,
       upper_rad: null,
       lower_rad: null,
+      searchResultEmptyVisible: false,
       geoLocationErrorVisible: false,
       isShowWeather: false,
       isShowFacility: false,
@@ -303,10 +327,10 @@ export default {
       });
     },
     closeSearchResultEmptyDialog() {
-      this.geoLocationErrorVisible = false;
+      this.searchResultEmptyVisible = false;
     },
     showSearchResultEmptyDialog() {
-      this.geoLocationErrorVisible = true;
+      this.searchResultEmptyVisible = true;
     },
     closeGeoLocationErrorDialog() {
       this.geoLocationErrorVisible = false;
@@ -329,6 +353,7 @@ export default {
   overflow: hidden;
 }
 
+.icon-plus,
 .icon-minus {
   width: 24px;
   height: 24px;
