@@ -222,7 +222,7 @@ export default {
 
 .table-note {
   margin-top: 10px;
-  font-size: 8px;
+  font-size: 12px;
   line-height: 14px;
 }
 </style>
