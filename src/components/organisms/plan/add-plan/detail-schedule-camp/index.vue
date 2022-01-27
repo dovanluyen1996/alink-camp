@@ -2,11 +2,11 @@
   <v-ons-page>
     <div class="content">
       <div class="text">
-          <v-ons-row class="text__desc">
-            〇〇〇〇〇〇〇〇〇〇〇〇<br>〇〇〇〇〇〇〇〇〇〇〇〇キャンプ場
-          </v-ons-row>
-        </div>
-        <detail-table :items=items />
+        <v-ons-row class="text__desc">
+          〇〇〇〇〇〇〇〇〇〇〇〇<br>〇〇〇〇〇〇〇〇〇〇〇〇キャンプ場
+        </v-ons-row>
+      </div>
+      <detail-table :items=items />
 
       <content-with-footer>
         <template #footer>

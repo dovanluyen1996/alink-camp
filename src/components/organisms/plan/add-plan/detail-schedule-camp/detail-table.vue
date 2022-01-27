@@ -301,6 +301,10 @@ export default {
     margin-top: 10px;
   }
 
+  .card-detail:last-child {
+    margin-bottom: 140px;
+  }
+
   .table {
     width: 100%;
     text-align: center;
