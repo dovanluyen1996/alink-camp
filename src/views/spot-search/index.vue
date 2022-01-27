@@ -124,13 +124,13 @@ export default {
   },
   methods: {
     goToSearchSpotByCampsite(campsite) {
-      this.$store.dispatch('appNavigator/push', {
+      this.$store.dispatch('spotSearchNavigator/push', {
         extends: SearchResult,
         onsNavigatorProps: { campsite },
       });
     },
     goToSpotSearchByCurrentLocation() {
-      this.$store.dispatch('appNavigator/push', SearchResult);
+      this.$store.dispatch('spotSearchNavigator/push', SearchResult);
     },
     goToSearchCampsite() {
       // TODO: implement redirect to キャンプ場検索 when implement Logic
