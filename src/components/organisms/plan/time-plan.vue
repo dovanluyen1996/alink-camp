@@ -39,6 +39,9 @@
 </template>
 
 <script>
+// View
+import DetailPastPlan from '@/views/plans/detail-past-plan';
+
 export default {
   name: 'TimePlan',
   props: {

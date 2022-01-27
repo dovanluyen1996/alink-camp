@@ -233,7 +233,7 @@ export default {
     height: 15px;
     margin-right: 6px;
     content: '';
-    background-image: url("~@/assets/images/sharing-icon.png");
+    background-image: url("~@/assets/images/icon-share.png");
     background-position: center;
     background-size: 100%;
   }

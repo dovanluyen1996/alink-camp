@@ -22,7 +22,7 @@ import CustomImageUpload from '@/components/atoms/form/custom-image-upload';
 import DeleteDialog from '@/components/organisms/dialog/delete-dialog';
 
 export default {
-  name: 'UserCourseResultImage',
+  name: 'CampsitePlanImage',
   components: {
     CustomImageUpload,
     DeleteDialog,

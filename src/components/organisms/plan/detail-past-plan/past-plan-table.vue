@@ -50,13 +50,13 @@
               </div>
               <img
                   v-if="isContentEmpty(detail.content)"
-                  :src="require('@/assets/images/weathers/icon-more.png')"
+                  :src="require('@/assets/images/icon-more.png')"
                   class="task__icon"
                   @click="showPopup()"
                 >
                 <img
                   v-else
-                  :src="require('@/assets/images/weathers/icon-edit.png')"
+                  :src="require('@/assets/images/icon-edit.png')"
                   class="task__icon"
                   @click="showPopup()"
                 >
@@ -172,7 +172,7 @@ export default {
 
     td {
       height: 34px;
-      font-size: 10px;
+      font-size: 12px;
       font-weight: 600;
     }
 
@@ -193,14 +193,13 @@ export default {
       padding: 5px;
 
       &__value {
-        font-size: 10px;
+        font-size: 12px;
         font-weight: 600;
       }
 
       &__unit {
-        padding-top: 2px;
-        font-size: 8px;
-        font-weight: 300;
+        font-size: 12px;
+        font-weight: 600;
       }
     }
 
@@ -209,6 +208,8 @@ export default {
 
       &__text {
         padding-right: 25px;
+        font-size: 12px;
+        text-align: left;
       }
 
       &__icon {
@@ -225,12 +226,12 @@ export default {
   .date-detail {
     display: flex;
     align-items: center;
-    height: 34px;
-    background-color: #f29678;
+    justify-content: center;
+    height: 43px;
+    background-color: #eae5e5;
 
     span {
-      padding-left: 5px;
-      font-size: 18px;
+      font-size: 14px;
       font-weight: 600;
     }
   }

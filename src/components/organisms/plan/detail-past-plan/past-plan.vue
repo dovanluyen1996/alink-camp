@@ -31,7 +31,7 @@
         <template #footer>
           <v-ons-button
             modifier="large--cta yellow rounded"
-            @click="gotoEdit()"
+            @click="goToEdit()"
           >
             編集保存
           </v-ons-button>
@@ -84,6 +84,11 @@ export default {
       },
     };
   },
+  methods: {
+    goToEdit() {
+      // TODO: Show edit confirmation dialog
+    },
+  },
 };
 </script>
 
@@ -92,7 +97,7 @@ export default {
 
 /deep/ {
   .card {
-    margin: 20px 8px;
+    margin: 20px 10px;
   }
 
   .text {
@@ -121,6 +126,7 @@ export default {
 
     .button {
       margin: 0 55px !important;
+      font-size: 14px !important;
     }
   }
 }
