@@ -110,7 +110,9 @@
       位置情報が取得できませんでした。お手数ですが、通信状況の良いところで再度お試しください。
 
       <template #footer>
-        <v-ons-button @click="closeGeoLocationErrorDialog()">
+        <v-ons-button
+          @click="closeGeoLocationErrorDialog()"
+        >
           OK
         </v-ons-button>
       </template>
