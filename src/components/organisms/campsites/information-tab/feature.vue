@@ -49,7 +49,7 @@ export default {
 
     .content {
       padding: 0 10px 10px;
-      font-size: 8px;
+      font-size: 12px;
     }
   }
 </style>

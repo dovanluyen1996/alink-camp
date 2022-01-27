@@ -66,7 +66,7 @@ export default {
   &--custom-button {
     height: 25px;
     padding: 5px 20px;
-    font-size: 8px;
+    font-size: 12px;
     font-weight: 600;
     line-height: 15px;
     color: #fff;

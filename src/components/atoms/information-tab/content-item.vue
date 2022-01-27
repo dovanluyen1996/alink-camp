@@ -22,14 +22,14 @@ export default {
   line-height: 14px;
 
   .sub-title {
-    font-size: 8px;
+    font-size: 12px;
     font-weight: 600;
     border-bottom: 1px solid #c83200;
   }
 
   .sub-content {
     padding-top: 10px;
-    font-size: 8px;
+    font-size: 12px;
   }
 }
 </style>

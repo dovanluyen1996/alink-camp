@@ -54,14 +54,13 @@ export default {
       padding-right: calc(50% - 35px);
       font-size: 12px;
       font-weight: 600;
-      line-height: 20px;
       border-top: 4px solid #c83200;
       border-bottom: 1px solid #c83200;
     }
 
     .content {
       padding: 0 10px 10px;
-      font-size: 8px;
+      font-size: 12px;
     }
   }
 </style>
