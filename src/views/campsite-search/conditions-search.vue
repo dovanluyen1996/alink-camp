@@ -107,6 +107,7 @@ export default {
       align-items: center;
       justify-content: center;
       margin: 0 48px !important;
+      font-size: 14px !important;
       background-color: #ff980b !important;
 
       &::before {
