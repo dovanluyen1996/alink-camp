@@ -70,14 +70,16 @@ export default {
     modifier() {
       return `longdivider ${this.hasChevron ? 'chevron' : ''}`;
     },
+    isFavorite() {
+      return function(campsite) {
+        return this.$store.getters['models/usersFavorite/findByCampsiteId'](campsite.id);
+      };
+    },
   },
   mounted() {
     this.setFullscreen();
   },
   methods: {
-    isFavorite(campsite) {
-      return this.$store.getters['models/usersFavorite/findByCampsiteId'](campsite.id);
-    },
     setFullscreen() {
       // NOTE: propsにしたいところだけれど、
       //       onsenUIが全画面表示をfullscreen属性でやっているので
