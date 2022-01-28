@@ -1,15 +1,7 @@
 <template>
   <information-tab-item>
-    <template #title="{ isShowContentItem }">
+    <template #title>
       施設詳細
-      <img
-        v-if="isShowContentItem"
-        src="@/assets/images/icon-circle-minus.png"
-      >
-      <img
-        v-else
-        src="@/assets/images/icon-circle-plus.png"
-      >
     </template>
 
     <template #content>
@@ -94,6 +86,7 @@
         <template #sub-content>
           AC電源付きサイト &nbsp;&nbsp; × <br>
           ランドリー &nbsp;&nbsp; ○ <br>
+          水洗トイレ &nbsp;&nbsp; ○ <br>
           温水シャワー &nbsp;&nbsp; ○ <br>
           風呂 &nbsp;&nbsp; × <br>
           温泉 &nbsp;&nbsp; × <br>

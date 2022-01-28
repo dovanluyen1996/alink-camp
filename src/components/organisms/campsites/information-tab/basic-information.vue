@@ -1,15 +1,7 @@
 <template>
   <information-tab-item>
-    <template #title="{ isShowContentItem }">
+    <template #title>
       基本情報
-      <img
-        v-if="isShowContentItem"
-        src="@/assets/images/icon-circle-minus.png"
-      >
-      <img
-        v-else
-        src="@/assets/images/icon-circle-plus.png"
-      >
     </template>
 
     <template #content>
@@ -138,7 +130,7 @@ import InformationTabItem from '@/components/atoms/information-tab/item';
 import ContentItem from '@/components/atoms/information-tab/content-item';
 
 export default {
-  name: 'CampsitesInformationFeatureTab',
+  name: 'CampsitesBasicInformation',
   components: {
     InformationTabItem,
     ContentItem,

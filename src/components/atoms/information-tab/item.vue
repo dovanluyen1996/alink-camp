@@ -6,8 +6,15 @@
     >
       <slot
         name="title"
-        :isShowContentItem="isShowContentItem"
       />
+      <img
+        v-if="isShowContentItem"
+        src="@/assets/images/icon-circle-minus.png"
+      >
+      <img
+        v-else
+        src="@/assets/images/icon-circle-plus.png"
+      >
     </div>
 
     <div
