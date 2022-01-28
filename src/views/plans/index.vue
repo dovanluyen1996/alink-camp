@@ -66,13 +66,15 @@ export default {
           const aIsFavorited = favoritedCampsites.some(campsite => a.id === campsite.id);
           const bIsFavorited = favoritedCampsites.some(campsite => b.id === campsite.id);
 
-          if(aIsFavorited == bIsFavorited) return 0;
+          if (aIsFavorited === bIsFavorited) return 0;
           return aIsFavorited ? -1 : 1;
         },
       );
 
       const campsiteIds = campsites.map(campsite => campsite.id);
-      const noPlanFavorites = favoritedCampsites.filter(favorite => !campsiteIds.includes(favorite.id));
+      const noPlanFavorites = favoritedCampsites.filter(
+        favorite => !campsiteIds.includes(favorite.id),
+      );
 
       return campsites.concat(noPlanFavorites);
     },
