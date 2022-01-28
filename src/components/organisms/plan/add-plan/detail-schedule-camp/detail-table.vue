@@ -9,7 +9,8 @@
           {{ item.date }}
         </span>
         <v-ons-button
-        class="button--share"
+          modifier="yellow"
+          class="button--share"
         >
           予定共有
         </v-ons-button>
@@ -401,7 +402,6 @@ export default {
   height: 29px;
   font-size: 14px;
   font-weight: 600;
-  background-color: #ff980b;
   border-radius: 15px;
 
   &::before {
