@@ -140,12 +140,12 @@ export default {
   &__text {
     display: flex;
     align-items: center;
-    justify-content: center;
     width: 100%;
     height: 50px;
     margin: 0;
+    margin-left: 10px;
     font-size: 14px;
-    font-weight: 600;
+    font-weight: 300;
     color: #222;
     background-color: #fff;
   }
