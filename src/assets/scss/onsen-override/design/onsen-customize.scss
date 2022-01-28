@@ -112,7 +112,7 @@ $button-height--rounded: 36px;
   }
 
   &--quiet-dark {
-    color: inherit;
+    color: $color-default;
   }
 
   &--cta {
@@ -154,7 +154,7 @@ $button-height--rounded: 36px;
   }
 
   &--orange {
-    background-color: #ff6b34;
+    background-color: #ff980b;
   }
 
   &--red {
@@ -183,6 +183,28 @@ $button-height--rounded: 36px;
 
     &__description {
       margin-top: 10px;
+    }
+  }
+
+  &--search-day {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &::before {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      margin-right: 6px;
+      content: '';
+      background-image: url("~@/assets/images/form/icon-day.png");
+      background-position: center;
+      background-size: 100%;
+    }
+
+    &__description {
+      margin-top: 20px;
+      margin-bottom: 150px;
     }
   }
 

@@ -19,17 +19,17 @@
 import settings from '@/config/settings';
 
 // tabs
-import CourseWeatherNavigator from '@/views/course-weather/course-weather-navigator';
-import CourseSearchNavigator from '@/views/course-search/course-search-navigator';
+import CampsiteWeatherNavigator from '@/views/campsite-weather/campsite-weather-navigator';
+import CampsiteSearchNavigator from '@/views/campsite-search/campsite-search-navigator';
 import PlansNavigator from '@/views/plans/plans-navigator';
 import MenuNavigator from '@/views/menu/menu-navigator';
 import UserStampsCampaign from '@/views/user/user-stamps/campaign';
 import SpotSearchNavigator from '@/views/spot-search/spot-search-navigator';
 
 // pages
-import CourseSearchIndexPage from '@/views/course-search/index';
+import CampsiteSearchIndexPage from '@/views/campsite-search/index';
 import PlansIndexPage from '@/views/plans/index';
-import CourseWeatherIndexPage from '@/views/course-weather/index';
+import CampsiteWeatherIndexPage from '@/views/campsite-weather/index';
 import SpotSearchPage from '@/views/spot-search/index';
 import MenuIndexPage from '@/views/menu/index';
 
@@ -43,12 +43,12 @@ export default {
         {
           label: 'キャンプ天気',
           icon: 'weather',
-          page: CourseWeatherNavigator,
+          page: CampsiteWeatherNavigator,
         },
         {
           label: 'キャンプ場検索',
           icon: 'search',
-          page: CourseSearchNavigator,
+          page: CampsiteSearchNavigator,
         },
         {
           label: 'キャンプ計画',
@@ -58,7 +58,7 @@ export default {
         {
           label: '周辺情報',
           icon: 'nearby',
-          page: SpotSearchPage,
+          page: SpotSearchNavigator,
         },
         {
           label: 'メニュー',
@@ -78,8 +78,8 @@ export default {
       },
     },
     isNavigatorBusy() {
-      return this.$store.state.courseWeatherNavigator.isBusy
-        || this.$store.state.courseSearchNavigator.isBusy
+      return this.$store.state.campsiteWeatherNavigator.isBusy
+        || this.$store.state.campsiteSearchNavigator.isBusy
         || this.$store.state.plansNavigator.isBusy
         || this.$store.state.spotSearchNavigator.isBusy
         || this.$store.state.menuNavigator.isBusy;
@@ -103,17 +103,17 @@ export default {
       if (this.isNavigatorBusy) return;
 
       switch (event.activeIndex) {
-      case settings.views.appTabbar.tabIndexes.courseWeather:
-        this.$store.dispatch('courseWeatherNavigator/reset', CourseWeatherIndexPage);
+      case settings.views.appTabbar.tabIndexes.campsiteWeather:
+        this.$store.dispatch('courseWeatherNavigator/reset', CampsiteWeatherIndexPage);
         break;
-      case settings.views.appTabbar.tabIndexes.courseSearch:
-        this.$store.dispatch('courseSearchNavigator/reset', CourseSearchIndexPage);
+      case settings.views.appTabbar.tabIndexes.campsiteSearch:
+        this.$store.dispatch('campsiteSearchNavigator/reset', CampsiteSearchIndexPage);
         break;
       case settings.views.appTabbar.tabIndexes.plans:
         this.$store.dispatch('plansNavigator/reset', PlansIndexPage);
         break;
       case settings.views.appTabbar.tabIndexes.spotSearch:
-        this.$store.dispatch('spotSearchNavigator/reset', SpotSearchNavigator);
+        this.$store.dispatch('spotSearchNavigator/reset', SpotSearchPage);
         break;
       case settings.views.appTabbar.tabIndexes.menu:
         this.$store.dispatch('menuNavigator/reset', MenuIndexPage);

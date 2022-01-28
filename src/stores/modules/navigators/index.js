@@ -6,6 +6,8 @@ import scoresNavigator from './scores-navigator';
 import windForecastNavigator from './wind-forecast-navigator';
 import plansNavigator from './plans-navigator';
 import menuNavigator from './menu-navigator';
+import campsiteWeatherNavigator from './campsite-weather-navigator';
+import campsiteSearchNavigator from './campsite-search-navigator';
 import spotSearchNavigator from './spot-search-navigator';
 
 export default {
@@ -16,5 +18,7 @@ export default {
   plansNavigator,
   windForecastNavigator,
   menuNavigator,
+  campsiteWeatherNavigator,
+  campsiteSearchNavigator,
   spotSearchNavigator,
 };
