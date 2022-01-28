@@ -6,6 +6,7 @@
     <textarea class="textarea_dialog" />
     <template #footer>
       <v-ons-button
+        modifier="yellow"
         class="button--edit-dialog"
         @click="closeTask()"
       >
@@ -41,7 +42,6 @@ export default {
     justify-content: center;
     height: 32px;
     font-size: 12px;
-    background-color: #ff980b;
   }
 }
 </style>

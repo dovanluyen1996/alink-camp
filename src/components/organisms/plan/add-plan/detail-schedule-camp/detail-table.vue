@@ -11,7 +11,7 @@
         <v-ons-button
         class="button--share"
         >
-          持ち物共有
+          予定共有
         </v-ons-button>
       </div>
       <table class="table">
