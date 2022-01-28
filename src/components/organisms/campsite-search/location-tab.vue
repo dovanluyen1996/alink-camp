@@ -93,11 +93,10 @@
       :visible.sync="searchResultEmptyVisible"
     >
       <template #title>
-        該当するコースがありません
+        該当キャンプ場がありません
       </template>
 
-      位置情報が取得できませんでした。<br>
-      お手数ですが、通信状況の良いところで再度お試しください。
+      検索結果に該当するキャンプ場がありませんでした。お手数ですが条件を変えてお試しください。
 
       <template #footer>
         <v-ons-button @click="closeSearchResultEmptyDialog()">
@@ -113,8 +112,7 @@
         位置情報が取得できませんでした
       </template>
 
-      位置情報が取得できませんでした。<br>
-      お手数ですが、通信状況の良いところで再度お試しください。または、アプリの設定にて位置情報送信の許諾をしているかご確認ください
+      位置情報が取得できませんでした。お手数ですが、通信状況の良いところで再度お試しください。
 
       <template #footer>
         <v-ons-button @click="closeGeoLocationErrorDialog()">
