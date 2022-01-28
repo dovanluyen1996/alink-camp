@@ -1,10 +1,10 @@
 <template>
-  <v-ons-page>
+  <v-ons-page @show="show">
     <custom-toolbar title="計画一覧" />
     <div class="content">
       <v-ons-col class="text">
         <v-ons-row class="text__desc">
-          〇〇〇〇〇〇〇〇〇〇〇〇<br>〇〇〇〇〇〇〇〇〇〇〇〇キャンズ場
+          {{ campsite.name }}
         </v-ons-row>
       </v-ons-col>
 
@@ -21,8 +21,8 @@
         </v-ons-button>
 
         <time-plan
-          :future_plans="future_plans"
-          :past_plans="past_plans"
+          :future-plans="futurePlans"
+          :past-plans="pastPlans"
         />
       </v-ons-card>
     </div>
@@ -37,37 +37,21 @@ export default {
   components: {
     TimePlan,
   },
-  data() {
-    return {
-      future_plans: [
-        {
-          id: 1,
-          text: '2021/11/30（金)',
-        },
-        {
-          id: 2,
-          text: '2021/11/30（金)',
-        },
-      ],
-      past_plans: [
-        {
-          id: 1,
-          text: '2021/11/30（金)',
-        },
-        {
-          id: 2,
-          text: '2021/11/30（金)',
-        },
-        {
-          id: 3,
-          text: '2021/11/30（金)',
-        },
-        {
-          id: 4,
-          text: '2021/11/30（金)',
-        },
-      ],
-    };
+  props: {
+    campsite: {
+      type: Object,
+      required: true,
+    },
+  },
+  computed: {
+    futurePlans() {
+      const plans = this.$store.getters['models/userCampsitePlan/inFuture'];
+      return plans.filter(plan => plan.campsite.id === this.campsite.id);
+    },
+    pastPlans() {
+      const plans = this.$store.getters['models/userCampsitePlan/inPast'];
+      return plans.filter(plan => plan.campsite.id === this.campsite.id);
+    },
   },
   methods: {
     goToAddPlan() {

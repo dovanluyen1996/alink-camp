@@ -15,6 +15,9 @@ export default {
     inFuture: state => state.userCampsitePlans.filter(
       userCampsitePlan => moment(userCampsitePlan.finishedDate).startOf('days').isSameOrAfter(moment().startOf('days')),
     ),
+    inPast: state => state.userCampsitePlans.filter(
+      userCampsitePlan => moment(userCampsitePlan.finishedDate).startOf('days').isBefore(moment().startOf('days')),
+    ),
   },
   mutations: {
     setUserCampsitePlans(state, userCampsitePlans) {
