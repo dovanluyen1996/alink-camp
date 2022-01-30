@@ -87,14 +87,14 @@ export default {
     };
   },
   computed: {
-    favorites() {
+    favoriteCampsitesOnly() {
       const favorites = this.$store.getters['models/usersFavorite/all'];
       const planIds = this.$store.getters['models/userCampsitePlan/inFuture'].map(plan => plan.campsite.id);
 
       return favorites.filter(favorite => !planIds.includes(favorite.id));
     },
     favoriteOrPlanned() {
-      const favorites = this.$store.getters['models/usersFavorite/all'];
+      const allFavoriteCampsites = this.$store.getters['models/usersFavorite/all'];
       let campsites = this.$store.getters['models/userCampsitePlan/inFuture'].map(plan => plan.campsite);
 
       // uniq campsites
@@ -105,7 +105,7 @@ export default {
       // sort campsites
       campsites = campsites.sort(
         (a, b) => {
-          const favorited = favorites.some(favorite => a.id === favorite.id);
+          const favorited = allFavoriteCampsites.some(favorite => a.id === favorite.id);
           const aStartedDate = this.$moment(a.startedDate).startOf('days');
           const bStartedDate = this.$moment(b.startedDate).startOf('days');
           let sort = 0;
@@ -115,7 +115,7 @@ export default {
         },
       );
 
-      return campsites.concat(favorites);
+      return campsites.concat(this.favoriteCampsitesOnly);
     },
     isLoading() {
       const loadPlan = this.$store.getters['models/userCampsitePlan/isLoading'];

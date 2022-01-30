@@ -3,8 +3,8 @@ export default {
     const response = await this.get('/weather/forecast_scheduled_date', params);
     return response.data;
   },
-  async getForecast10Days(params) {
-    const response = await this.get('/weather/forecast_10days', params);
+  async getForecast14Days(params) {
+    const response = await this.get('/weather/forecast_14days', params);
     return response.data;
   },
   async getForecastHourly(params) {

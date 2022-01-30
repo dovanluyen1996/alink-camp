@@ -24,11 +24,11 @@ export default {
         context.commit('setIsLoading', false);
       }
     },
-    async getForecast10Days(context, params) {
+    async getForecast14Days(context, params) {
       context.commit('setIsLoading', true);
 
       try {
-        return await ApiClient.getForecast10Days(params);
+        return await ApiClient.getForecast14Days(params);
       } finally {
         context.commit('setIsLoading', false);
       }

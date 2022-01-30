@@ -61,4 +61,10 @@ export default {
   height: 44px;
   margin: 8px 6px;
 }
+
+/deep/ {
+  .alert-dialog-title {
+    margin-bottom: 5px;
+  }
+}
 </style>

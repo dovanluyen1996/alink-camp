@@ -34,12 +34,15 @@ export default {
       switch (this.action) {
       case 'updateResult':
       case 'updatePlan':
+      case 'updateItem':
         return '編集完了';
       case 'createResult':
       case 'createPlan':
+      case 'createItem':
         return '登録完了';
       case 'deleteResult':
       case 'deletePlan':
+      case 'deleteItem':
         return '削除完了';
       case 'sendContact':
         return 'お問い合わせ完了';
@@ -59,10 +62,16 @@ export default {
         return '予定日を編集しました。';
       case 'createPlan':
         return '予定日を登録しました。';
+      case 'createItem':
+        return '登録しました。';
       case 'deletePlan':
         return '予定日を削除しました。';
       case 'sendContact':
         return 'お問い合わせ内容を送信しました。';
+      case 'deleteItem':
+        return '削除が完了しました。';
+      case 'updateItem':
+        return '編集が完了しました。';
       default:
         return null;
       }

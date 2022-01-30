@@ -2,7 +2,7 @@
   <div class="search-field">
     <v-ons-search-input
       v-model="inputedValue"
-      placeholder="コース名などを入力"
+      placeholder="キャンプ場名などを入力"
       class="search-form"
       @keyup.enter="searchByEnter"
     />
@@ -12,6 +12,16 @@
         @click="searchByName"
       >
         検索する
+      </v-ons-button>
+    </div>
+
+    <div class="search-detail-button">
+      <v-ons-button
+        modifier="large rounded orange"
+        class="button--search-detail"
+        @click="goToConditionsSearch"
+      >
+        こだわり条件で検索する
       </v-ons-button>
     </div>
 
@@ -99,11 +109,36 @@ export default {
 
 <style lang="scss" scoped>
 .search-field {
-  margin: 20px 20px 45px;
+  margin: 20px 20px 25px;
 }
 
 .search-button {
   margin: 0 10px;
+
+  .button {
+    background-color: #c83200;
+  }
+}
+
+.search-detail-button {
+  margin: 20px 10px;
+}
+
+.button--search-detail {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &::before {
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    margin-right: 6px;
+    content: '';
+    background-image: url("~@/assets/images/icon-sun.png");
+    background-position: center;
+    background-size: 100%;
+  }
 }
 
 .search-form {
