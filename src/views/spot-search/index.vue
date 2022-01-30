@@ -58,7 +58,7 @@ export default {
     CampsiteList,
   },
   computed: {
-    favoritesOnly() {
+    favoriteCampsitesOnly() {
       const favorites = this.$store.getters['models/usersFavorite/all'];
       const planIds = this.$store.getters['models/userCampsitePlan/inFuture'].map(plan => plan.campsite.id);
 
@@ -86,7 +86,7 @@ export default {
         },
       );
 
-      return campsites.concat(this.favoritesOnly);
+      return campsites.concat(this.favoriteCampsitesOnly);
     },
     isLoading() {
       const loadPlan = this.$store.getters['models/userCampsitePlan/isLoading'];
