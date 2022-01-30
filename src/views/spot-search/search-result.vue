@@ -6,7 +6,7 @@
     <custom-toolbar :title="周辺検索" />
     <div class="content">
       <no-data v-if="spots.length === 0">
-        条件に合うコースが見つかりません
+        条件に合う周辺情報が見つかりません
       </no-data>
 
       <spot-list
