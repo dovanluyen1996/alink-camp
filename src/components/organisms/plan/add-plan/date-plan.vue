@@ -56,6 +56,12 @@
         </content-with-footer>
       </validation-observer>
     </div>
+
+    <completed-dialog
+      action="createPlan"
+      :is-visible="completedDialogVisible"
+      @close="closeCompletedDialog"
+    />
   </v-ons-page>
 </template>
 
@@ -63,22 +69,30 @@
 // components
 import DateField from '@/components/organisms/form/date-field';
 import ContentWithFooter from '@/components/organisms/content-with-footer';
+import CompletedDialog from '@/components/organisms/dialog/completed-dialog';
 
 export default {
   components: {
     DateField,
     ContentWithFooter,
+    CompletedDialog,
   },
   data() {
     return {
       startedDate: '',
       finishedDate: '',
+      completedDialogVisible: false,
     };
   },
   props: {
     campsite: {
       type: Object,
       required: true,
+    },
+  },
+  computed: {
+    isLoading() {
+      return this.$store.getters['models/userCampsitePlan/isLoading'];
     },
   },
   methods: {
@@ -90,8 +104,18 @@ export default {
       };
 
       await this.$store.dispatch('models/userCampsitePlan/createUserCampsitePlan', params);
+
+      this.showCompletedDialog();
     },
     async goToListPlan() {
+      await this.$store.dispatch('plansNavigator/pop');
+    },
+    showCompletedDialog() {
+      console.log(this.$store.state);
+      this.completedDialogVisible = true;
+    },
+    async closeCompletedDialog() {
+      this.completedDialogVisible = false;
       await this.$store.dispatch('plansNavigator/pop');
     },
   },
