@@ -48,7 +48,7 @@ export default {
       return this.$store.getters['models/userCampsitePlan/inFuture']({ campsiteId: this.campsite.id });
     },
     pastPlans() {
-      return  this.$store.getters['models/userCampsitePlan/inPast']({ campsiteId: this.campsite.id });
+      return this.$store.getters['models/userCampsitePlan/inPast']({ campsiteId: this.campsite.id });
     },
   },
   methods: {
