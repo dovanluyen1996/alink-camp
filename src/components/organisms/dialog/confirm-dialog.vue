@@ -3,10 +3,10 @@
     :visible.sync="isVisible"
   >
     <template #title>
-      削除確認
+      <slot name="title"></slot>
     </template>
 
-    <slot />
+    <slot name="message"></slot>
 
     <template #footer>
       <v-ons-button
@@ -16,9 +16,9 @@
         キャンセル
       </v-ons-button>
       <v-ons-button
-        @click="clickDelete()"
+        @click="confirm()"
       >
-        削除
+        <slot name="confirmAction"></slot>
       </v-ons-button>
     </template>
   </v-ons-alert-dialog>
@@ -26,7 +26,7 @@
 
 <script>
 export default {
-  name: 'DeleteDialog',
+  name: 'ConfirmDialog',
   props: {
     isShown: {
       type: Boolean,
@@ -47,8 +47,8 @@ export default {
     cancel() {
       this.isVisible = false;
     },
-    clickDelete() {
-      this.$emit('clickDelete');
+    confirm() {
+      this.$emit('clickConfirm');
     },
   },
 };
@@ -57,6 +57,7 @@ export default {
 <style lang="scss" scoped>
 /deep/ {
   .alert-dialog-container {
+    position: relative;
     box-sizing: border-box;
     height: 237px;
   }
@@ -64,6 +65,11 @@ export default {
   .alert-dialog-content {
     font-size: 15px;
     font-weight: 300;
+  }
+
+  .alert-dialog-footer {
+    position: absolute;
+    bottom: 0;
   }
 }
 </style>

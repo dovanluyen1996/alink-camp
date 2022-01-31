@@ -7,6 +7,7 @@
             v-for="item in items"
             :key="item.id"
             modifier="chevron nodivider"
+            @click="goToItemsEdit(item)"
           >
             <div :class="['list-item__box', {'list-item--active': item.user_id}]">
               <div class="center">
@@ -25,12 +26,23 @@
 </template>
 
 <script>
+// pages
+import ItemsEdit from '@/views/items/edit';
+
 export default {
   name: 'ItemList',
   props: {
     items: {
       type: Array,
       default: () => [],
+    },
+  },
+  methods: {
+    goToItemsEdit(item) {
+      this.$store.dispatch('menuNavigator/push', {
+        extends: ItemsEdit,
+        onsNavigatorProps: { item },
+      });
     },
   },
 };
