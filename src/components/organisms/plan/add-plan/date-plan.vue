@@ -15,7 +15,7 @@
           <validation-provider
             v-slot="{ errors }"
             rules="required|required-future-day"
-            name="checkIn"
+            name="チェックイン"
           >
             <date-field
               v-model="startedDate"
@@ -27,8 +27,8 @@
 
           <validation-provider
             v-slot="{ errors }"
-            rules="required|required-future-day-since:@checkIn"
-            name="checkOut"
+            rules="required|required-future-day-since:@チェックイン"
+            name="チェックアウト"
           >
             <date-field
               v-model="finishedDate"
