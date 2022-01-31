@@ -15,6 +15,12 @@ import DatePlan from '@/components/organisms/plan/add-plan/date-plan';
 
 export default {
   name: 'AddPlan',
+  props: {
+    campsite: {
+      type: Object,
+      required: true,
+    },
+  },
   data() {
     return {
       tabs: [
@@ -35,12 +41,6 @@ export default {
         },
       ],
     };
-  },
-  props: {
-    campsite: {
-      type: Object,
-      required: true,
-    },
   },
 };
 </script>

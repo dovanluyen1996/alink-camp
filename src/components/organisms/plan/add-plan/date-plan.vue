@@ -77,18 +77,18 @@ export default {
     ContentWithFooter,
     CompletedDialog,
   },
+  props: {
+    campsite: {
+      type: Object,
+      required: true,
+    },
+  },
   data() {
     return {
       startedDate: '',
       finishedDate: '',
       completedDialogVisible: false,
     };
-  },
-  props: {
-    campsite: {
-      type: Object,
-      required: true,
-    },
   },
   computed: {
     isLoading() {
