@@ -4,7 +4,7 @@
       <loading :visible="isLoading" />
       <div class="text">
         <v-ons-row class="text__desc">
-          〇〇〇〇〇〇〇〇〇〇〇〇<br>〇〇〇〇〇〇〇〇〇〇〇〇キャンズ場
+          {{ campsite.name }}
         </v-ons-row>
       </div>
 
@@ -40,7 +40,7 @@
           <template #footer>
             <v-ons-button
               modifier="large--cta rounded"
-              @click="gotoRegistration"
+              @click="goToRegistration"
             >
               登録
             </v-ons-button>
@@ -48,7 +48,7 @@
             <v-ons-button
               modifier="large--cta rounded"
               class="button--search-day"
-              @click="gotoListPlan"
+              @click="goToListPlan"
             >
               過去の計画一覧
             </v-ons-button>
@@ -69,12 +69,18 @@ export default {
     DateField,
     ContentWithFooter,
   },
+  props: {
+    campsite: {
+      type: Object,
+      required: true,
+    },
+  },
   methods: {
-    gotoRegistration() {
+    goToRegistration() {
       // TODO: Redirect to Registration
     },
-    gotoListPlan() {
-      // TODO: Redirect to List Plan
+    async goToListPlan() {
+      await this.$store.dispatch('plansNavigator/pop');
     },
   },
 };
