@@ -6,14 +6,14 @@
     >
       星空
     </th>
-    <template v-for="(_starrySky, index) in starrySkies">
+    <template v-for="(star, index) in stars">
       <td
         :key="index"
       >
         <div
-          class="starry-sky-row"
+          class="star-row"
         >
-          <img src="@/assets/images/starry-sky.png">
+          <img :src="image(star)">
         </div>
       </td>
     </template>
@@ -22,11 +22,19 @@
 
 <script>
 export default {
-  name: 'ForecastTableStarrySkyRow',
+  name: 'ForecastTableStarRow',
   props: {
-    starrySkies: {
+    stars: {
       type: Array,
       required: true,
+    },
+  },
+  methods: {
+    image(star) {
+      if (!star) return this.$helpers.getImage('weathers/star/00.png');
+
+      const image = this.$helpers.getImage(`weathers/star/${star}`);
+      return image || this.$helpers.getImage('weathers/star/00.png');
     },
   },
 };
@@ -35,7 +43,7 @@ export default {
 <style scoped lang="scss">
 @import '@/assets/scss/_variables.scss';
 
-.starry-sky-row {
+.star-row {
   font-size: $font-size-small;
   text-align: center;
   white-space: nowrap;

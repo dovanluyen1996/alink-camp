@@ -87,6 +87,9 @@ export default {
     };
   },
   computed: {
+    campsite() {
+      return this.$store.getters['campsite/choosenCampsite'];
+    },
     margedForecastsAndSuns() {
       if (!this.forecastHourly.items) return [];
 
@@ -129,8 +132,13 @@ export default {
       return this.forecastData ? this.forecastData.map(item => item.windSpeed) : [];
     },
   },
+  watch: {
+    async campsite() {
+      this.forecastHourly = await this.getForecastHourly();
+    },
+  },
   async created() {
-    // this.forecastHourly = await this.getForecastHourly();
+    this.forecastHourly = await this.getForecastHourly();
   },
   methods: {
     displayDate(date) {
@@ -149,6 +157,15 @@ export default {
 
       const newTime = time.split(':');
       return (Number(newTime[0]) * 60) + Number(newTime[1] || 0);
+    },
+    async getForecastHourly() {
+      if (!this.campsite.id) return {};
+
+      const params = {
+        campsite_id: this.campsite.id,
+      };
+      const forecastHourly = await this.$store.dispatch('models/weather/getForecastHourly', params);
+      return forecastHourly;
     },
     spanCount(forecast) {
       let count = forecast.hourlyData.filter(data => data.hour).length;

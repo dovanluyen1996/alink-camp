@@ -6,14 +6,14 @@
     >
       落雷
     </th>
-    <template v-for="(_lightning, index) in lightnings">
+    <template v-for="(thunder, index) in thunders">
       <td
         :key="index"
       >
         <div
-          class="lightning-row"
+          class="thunder-row"
         >
-          <img src="@/assets/images/lightning.png">
+          <img :src="image(thunder)">
         </div>
       </td>
     </template>
@@ -22,11 +22,19 @@
 
 <script>
 export default {
-  name: 'ForecastTableLightningRow',
+  name: 'ForecastTableThunderRow',
   props: {
-    lightnings: {
+    thunders: {
       type: Array,
       required: true,
+    },
+  },
+  methods: {
+    image(thunder) {
+      if (!thunder) return this.$helpers.getImage('weathers/thunder/thunder_large_none.png');
+
+      const image = this.$helpers.getImage(`weathers/thunder/thunder_large_${thunder}.png`);
+      return image || this.$helpers.getImage('weathers/thunder/thunder_large_none.png');
     },
   },
 };
@@ -35,7 +43,7 @@ export default {
 <style scoped lang="scss">
 @import '@/assets/scss/_variables.scss';
 
-.lightning-row {
+.thunder-row {
   font-size: $font-size-small;
   text-align: center;
   white-space: nowrap;

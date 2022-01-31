@@ -1,6 +1,6 @@
 <template>
   <v-ons-page @show="show">
-    <!-- <loading :visible="isLoading" /> -->
+    <loading :visible="isLoading" />
     <custom-toolbar title="キャンプ場詳細">
       <template #right>
         <img
@@ -82,6 +82,9 @@ export default {
     activeIndexTab() {
       return this.$store.state.components.cardWithTab.showCampsiteActiveIndex;
     },
+    isLoading() {
+      return this.$store.getters['campsite/isLoading'];
+    },
   },
   created() {
     this.resetCardWithTab();
@@ -92,6 +95,12 @@ export default {
     },
     resetCardWithTab() {
       this.$store.commit('components/cardWithTab/resetShowCampsiteActiveIndex');
+    },
+    async show() {
+      await this.getCampsite();
+    },
+    async getCampsite() {
+      await this.$store.dispatch('campsite/getChoosenCampsite', this.campsite.id);
     },
   },
 };

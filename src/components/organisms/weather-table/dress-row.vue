@@ -6,14 +6,14 @@
     >
       服装
     </th>
-    <template v-for="(_clothe, index) in clothes">
+    <template v-for="(dress, index) in dresses">
       <td
         :key="index"
       >
         <div
-          class="clothes-row"
+          class="dress-row"
         >
-          <img src="@/assets/images/clothes.png">
+          <img :src="image(dress)">
         </div>
       </td>
     </template>
@@ -22,11 +22,19 @@
 
 <script>
 export default {
-  name: 'ForecastTableClothesRow',
+  name: 'ForecastTableDressRow',
   props: {
-    clothes: {
+    dresses: {
       type: Array,
       required: true,
+    },
+  },
+  methods: {
+    image(dress) {
+      if (!dress) return this.$helpers.getImage('weathers/dress/00.png');
+
+      const image = this.$helpers.getImage(`weathers/dress/${dress}`);
+      return image || this.$helpers.getImage('weathers/dress/00.png');
     },
   },
 };
@@ -35,7 +43,7 @@ export default {
 <style scoped lang="scss">
 @import '@/assets/scss/_variables.scss';
 
-.clothes-row {
+.dress-row {
   font-size: $font-size-small;
   text-align: center;
   white-space: nowrap;
