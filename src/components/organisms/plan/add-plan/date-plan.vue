@@ -8,31 +8,29 @@
         </v-ons-row>
       </div>
 
-      <validation-observer>
+      <validation-observer
+        v-slot="{ handleSubmit }"
+      >
         <content-with-footer>
-          <div class="card__title card__title--center card__title--top">
-            チェックイン
-          </div>
           <validation-provider
             rules="required|required-future-day"
-            name="プレイ予定日"
+            name="チェックイン"
           >
             <date-field
-              v-model="dateValueCheckIn"
+              v-model="startedDate"
+              title="チェックイン"
               :errors="errors"
               class="date-field__des"
             />
           </validation-provider>
 
-          <div class="card__title card__title--center">
-            チェックアウト
-          </div>
           <validation-provider
             rules="required|required-future-day"
-            name="プレイ予定日"
+            name="チェックアウト"
           >
             <date-field
-              v-model="dateValueCheckOut"
+              v-model="finishedDate"
+              title="チェックアウト"
               :errors="errors"
             />
           </validation-provider>
@@ -40,7 +38,7 @@
           <template #footer>
             <v-ons-button
               modifier="large--cta rounded"
-              @click="goToRegistration"
+              @click="handleSubmit(goToRegistration)"
             >
               登録
             </v-ons-button>
@@ -69,6 +67,12 @@ export default {
     DateField,
     ContentWithFooter,
   },
+  data() {
+    return {
+      startedDate: '',
+      finishedDate: '',
+    };
+  },
   props: {
     campsite: {
       type: Object,
@@ -76,8 +80,14 @@ export default {
     },
   },
   methods: {
-    goToRegistration() {
-      // TODO: Redirect to Registration
+    async goToRegistration() {
+      const params = {
+        campsiteId: this.campsite.id,
+        startedDate: this.startedDate,
+        finishedDate: this.finishedDate,
+      };
+
+      await this.$store.dispatch('models/userCampsitePlan/createUserCampsitePlan', params);
     },
     async goToListPlan() {
       await this.$store.dispatch('plansNavigator/pop');
