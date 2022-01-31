@@ -12,7 +12,7 @@ export default {
   getters: {
     isLoading: state => state.isLoading,
     all: state => state.userCampsitePlans,
-    inFuture: state => (object) => {
+    inFuture: state => (object = {}) => {
       let plans = state.userCampsitePlans.filter(
         userCampsitePlan => moment(userCampsitePlan.finishedDate).startOf('days').isSameOrAfter(moment().startOf('days')),
       );
@@ -21,7 +21,7 @@ export default {
 
       return plans;
     },
-    inPast: state => (object) => {
+    inPast: state => (object = {}) => {
       let plans = state.userCampsitePlans.filter(
         userCampsitePlan => moment(userCampsitePlan.finishedDate).startOf('days').isBefore(moment().startOf('days')),
       );
