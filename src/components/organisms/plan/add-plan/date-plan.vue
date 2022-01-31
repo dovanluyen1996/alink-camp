@@ -13,8 +13,9 @@
       >
         <content-with-footer>
           <validation-provider
+            v-slot="{ errors }"
             rules="required|required-future-day"
-            name="チェックイン"
+            name="checkIn"
           >
             <date-field
               v-model="startedDate"
@@ -25,8 +26,9 @@
           </validation-provider>
 
           <validation-provider
-            rules="required|required-future-day"
-            name="チェックアウト"
+            v-slot="{ errors }"
+            rules="required|required-future-day-since:@checkIn"
+            name="checkOut"
           >
             <date-field
               v-model="finishedDate"

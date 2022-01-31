@@ -39,6 +39,15 @@ extend('required-future-day', (value) => {
   return `${moment().format('YYYY/MM/DD')}より後を指定してください`;
 });
 
+extend('required-future-day-since', (value, target) => {
+  const targetDate = moment(target[0]);
+  if (value && target && moment(value).isSameOrAfter(targetDate, 'day')) {
+    return true;
+  }
+
+  return `${targetDate.format('YYYY/MM/DD')}より後を指定してください`;
+});
+
 extend('required-past-day', (value) => {
   if (value && moment(value).isSameOrBefore(moment(), 'day')) {
     return true;
