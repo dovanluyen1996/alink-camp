@@ -42,6 +42,7 @@
           <weather-row :weathers="margedForecastsAndSuns" />
           <precipitation-row :forecast-data="forecastData" />
           <temperature-row :forecast-data="forecastData" />
+          <humidity-row :humidities="humidities" />
           <wind-direction-row :wind-directions="windDirections" />
           <wind-speed-row :wind-speeds="windSpeeds" />
         </sticky-table>
@@ -61,11 +62,14 @@
 </template>
 
 <script>
+import moment from 'moment';
+
 // components
 import StickyTable from '@/components/organisms/sticky-table';
 import TimeRow from '@/components/organisms/weather-table/time-row';
 import WeatherRow from '@/components/organisms/weather-table/weather-row';
 import PrecipitationRow from '@/components/organisms/weather-table/precipitation-row';
+import HumidityRow from '@/components/organisms/weather-table/humidity-row';
 import TemperatureRow from '@/components/organisms/weather-table/temperature-row';
 import WindDirectionRow from '@/components/organisms/weather-table/wind-direction-row';
 import WindSpeedRow from '@/components/organisms/weather-table/wind-speed-row';
@@ -77,6 +81,7 @@ export default {
     TimeRow,
     WeatherRow,
     PrecipitationRow,
+    HumidityRow,
     TemperatureRow,
     WindDirectionRow,
     WindSpeedRow,
@@ -125,6 +130,9 @@ export default {
 
       return forecastData;
     },
+    humidities() {
+      return this.forecastData ? this.forecastData.map(item => item.humidity) : [];
+    },
     windDirections() {
       return this.forecastData ? this.forecastData.map(item => item.windDirection) : [];
     },
@@ -145,10 +153,12 @@ export default {
       return this.$helpers.toDayString(date);
     },
     isScheduledDate(date) {
-      console.log(date);
-      // TODO: Handle is schedule date
+      const futurePlans = this.$store.getters['models/userCampsitePlan/inFuture'];
+      const targetDate = moment(date).startOf('day');
 
-      return false;
+      if (futurePlans.length === 0) return false;
+
+      return futurePlans.some(plan => targetDate.isBetween(plan.startedDate, plan.finishedDate, null, '[]'));
     },
     convertMinutes(time) {
       // NOTE: 日の出日の入りを天気予報にマージするため

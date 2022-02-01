@@ -98,9 +98,13 @@ export default {
     },
     async show() {
       await this.getCampsite();
+      await this.getUserCampsitePlans();
     },
     async getCampsite() {
       await this.$store.dispatch('campsite/getChoosenCampsite', this.campsite.id);
+    },
+    async getUserCampsitePlans() {
+      await this.$store.dispatch('models/userCampsitePlan/getUserCampsitePlans', { campsite_id: this.campsite.id });
     },
   },
 };
