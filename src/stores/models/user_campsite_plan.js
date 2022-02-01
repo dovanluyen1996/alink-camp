@@ -11,6 +11,7 @@ export default {
   },
   getters: {
     isLoading: state => state.isLoading,
+    all: state => state.userCampsitePlans,
     inFuture: state => state.userCampsitePlans.filter(
       userCampsitePlan => moment(userCampsitePlan.finishedDate).startOf('days').isSameOrAfter(moment().startOf('days')),
     ),

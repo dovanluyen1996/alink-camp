@@ -1,13 +1,12 @@
 <template>
-  <v-ons-page>
+  <v-ons-page @show="show">
     <custom-toolbar title="キャンプ計画" />
     <div class="content">
-      <!-- TODO: When implement Logic, plase use Loading in Store  -->
-      <!-- <loading :visible="isLoading" /> -->
+      <loading :visible="isLoading" />
       <no-data v-if="campsites.length === 0">
         <p>
-          まだお気に入りや予定日設定して<br>
-          いるコースがありません。コース検索より、設定してください
+          まだキャンプ計画がありません。<br>
+          キャンプ場検索より、計画を作成してください。
         </p>
         <template #actions>
           <v-ons-button
@@ -22,8 +21,9 @@
         </template>
       </no-data>
 
-      <campsite-list v-else
-        :isShowFavoriteMark="true"
+      <campsite-list
+        v-else
+        :is-show-favorite-mark="true"
         :campsites="campsites"
         @click="goToPlanDetail"
       />
@@ -36,8 +36,9 @@
 import NoData from '@/components/organisms/no-data';
 import CampsiteList from '@/components/organisms/campsite-list';
 
-// page
+// pages
 import CampsitePlan from '@/views/plans/campsite-plan';
+import CampsiteSearchIndex from '@/views/campsite-search/index';
 
 export default {
   name: 'CampsitesIndex',
@@ -45,74 +46,66 @@ export default {
     NoData,
     CampsiteList,
   },
-  data() {
-    return {
-      campsites: [
-        {
-          id: 1,
-          name: '〇〇〇キャンプ場',
-          address: 'キャンプ場キャンプ場〇〇〇',
-          latitude: 1,
-          longitude: 1,
-          isFavorited: false,
+  computed: {
+    isLoading() {
+      return this.$store.getters['models/userCampsitePlan/isLoading'];
+    },
+    campsites() {
+      // お気に入りまたは予定ありのキャンプ場
+      const favoritedCampsites = this.$store.getters['models/usersFavorite/all'];
+      let campsites = this.$store.getters['models/userCampsitePlan/all'].map(plan => plan.campsite);
+
+      // uniq campsites
+      campsites = campsites.filter(
+        (campsite, index) => campsites.findIndex(element => element.id === campsite.id) === index,
+      );
+
+      // 順番: 1.予定日あり+お気に入り, 2.予定あり, 3.お気に入り
+      campsites = campsites.sort(
+        (a, b) => {
+          const aIsFavorited = favoritedCampsites.some(campsite => a.id === campsite.id);
+          const bIsFavorited = favoritedCampsites.some(campsite => b.id === campsite.id);
+
+          if (aIsFavorited === bIsFavorited) return 0;
+          return aIsFavorited ? -1 : 1;
         },
-        {
-          id: 2,
-          name: '〇〇〇キャンプ場',
-          address: 'キャンプ場キャンプ場〇〇〇',
-          latitude: 2,
-          longitude: 2,
-          isFavorited: true,
-        },
-        {
-          id: 3,
-          name: '〇〇〇キャンプ場',
-          address: 'キャンプ場キャンプ場〇〇〇',
-          latitude: 3,
-          longitude: 3,
-          isFavorited: false,
-        },
-        {
-          id: 4,
-          name: '〇〇〇キャンプ場',
-          address: 'キャンプ場キャンプ場〇〇〇',
-          latitude: 4,
-          longitude: 4,
-          isFavorited: true,
-        },
-        {
-          id: 5,
-          name: '〇〇〇キャンプ場',
-          address: 'キャンプ場キャンプ場〇〇〇',
-          latitude: 5,
-          longitude: 5,
-          isFavorited: false,
-        },
-        {
-          id: 6,
-          name: '〇〇〇キャンプ場',
-          address: 'キャンプ場キャンプ場〇〇〇',
-          latitude: 6,
-          longitude: 6,
-          isFavorited: true,
-        },
-        {
-          id: 7,
-          name: '〇〇〇キャンプ場',
-          address: 'キャンプ場キャンプ場〇〇〇',
-          latitude: 7,
-          longitude: 7,
-          isFavorited: false,
-        },
-      ],
-    };
+      );
+
+      const campsiteIds = campsites.map(campsite => campsite.id);
+      const noPlanFavorites = favoritedCampsites.filter(
+        favorite => !campsiteIds.includes(favorite.id),
+      );
+
+      return campsites.concat(noPlanFavorites);
+    },
   },
   methods: {
+    async getPlans() {
+      await this.$store.dispatch('models/userCampsitePlan/getUserCampsitePlans');
+    },
+    async getUsersFavorites() {
+      await this.$store.dispatch('models/usersFavorite/getUsersFavorites');
+    },
     goToPlanSearch() {
-      // TODO: Redirect to Plan Search
+      this.$store.commit('campsiteSearchNavigator/setEnableBusy', false);
+      this.$store.dispatch('campsiteSearchNavigator/reset', {
+        extends: CampsiteSearchIndex,
+        onsNavigatorOptions: {
+          callback: () => {
+            this.$store.commit('campsiteSearchNavigator/setEnableBusy', true);
+          },
+        },
+      });
+
+      this.$store.commit('appTabbar/setActiveIndexFromTabName', 'campsiteSearch');
     },
     goToPlanDetail() {
       this.$store.dispatch('plansNavigator/push', CampsitePlan);
+    },
+    async show() {
+      this.$store.dispatch('appTabbar/setLastVisitedAt', this.$helpers.localDateWithHyphenFrom(new Date()));
+      await this.getPlans();
+      await this.getUsersFavorites();
     },
   },
 };
