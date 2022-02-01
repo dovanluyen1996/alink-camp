@@ -42,7 +42,10 @@
           <weather-row :weathers="margedForecastsAndSuns" />
           <precipitation-row :forecast-data="forecastData" />
           <temperature-row :forecast-data="forecastData" />
-          <humidity-row :humidities="humidities" />
+          <humidity-row
+            :humidities="humidities"
+            :is-show-hourly="true"
+          />
           <wind-direction-row :wind-directions="windDirections" />
           <wind-speed-row :wind-speeds="windSpeeds" />
         </sticky-table>
