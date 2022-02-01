@@ -41,6 +41,7 @@
           :weather="weather"
           image-width="40px"
         />
+        {{ accuracyText[weather.accuracyIndex] }}
       </td>
     </template>
   </tr>
@@ -63,6 +64,17 @@ export default {
       type: Number,
       default: 5,
     },
+  },
+  data() {
+    return {
+      accuracyText: {
+        1: 'A',
+        2: 'B',
+        3: 'C',
+        4: 'D',
+        5: 'E',
+      },
+    };
   },
 };
 </script>
