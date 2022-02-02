@@ -57,7 +57,7 @@ export default {
       const plans = this.$store.getters['models/userCampsitePlan/inPast']({ campsiteId: this.campsite.id });
 
       return plans.sort(
-        (a, b) => (moment(a.startedDate).isBefore(b.startedDate) ? 1 : -1),
+        (a, b) => (moment(a.startedDate).isAfter(b.startedDate) ? -1 : 1),
       );
     },
   },
