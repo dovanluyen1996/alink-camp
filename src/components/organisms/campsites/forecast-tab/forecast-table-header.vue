@@ -3,14 +3,26 @@
     <v-ons-col class="table-title">
       {{ title }}
     </v-ons-col>
+    <v-ons-col class="table-update">
+      <div>（地点 : {{ pointName || '--' }}）</div>
+      <div>{{ updatedAt ? `${$helpers.toShortWithTimeString(updatedAt)}発表` : '--' }}</div>
+    </v-ons-col>
   </v-ons-row>
 </template>
 
 <script>
 export default {
-  name: 'CampsitesForecastChartHeader',
+  name: 'CampsitesForecastTableHeader',
   props: {
     title: {
+      type: String,
+      default: '',
+    },
+    updatedAt: {
+      type: String,
+      default: '',
+    },
+    pointName: {
       type: String,
       default: '',
     },
@@ -35,4 +47,11 @@ export default {
   font-weight: 600;
 }
 
+.table-update {
+  align-self: flex-end;
+  padding-right: 7px;
+  padding-bottom: 3px;
+  font-size: $font-size-small;
+  text-align: right;
+}
 </style>

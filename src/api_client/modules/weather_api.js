@@ -27,4 +27,8 @@ export default {
     const response = await this.get('/weather/past', params);
     return response.data;
   },
+  async getForecastYearlyTemp(params) {
+    const response = await this.get('/weather/forecast_yearly_temp', params);
+    return response.data;
+  },
 };

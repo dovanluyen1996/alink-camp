@@ -2,12 +2,13 @@
   <div class="temperature-table-container">
     <table-header
       title="月毎の気温予測詳細"
+      :updated-at="tableUpdatedAt"
+      :point-name="pointName"
     />
-    <!-- TODO: Handle v-if if data present -->
-    <template v-if="true">
+    <template v-if="$helpers.isPresentObject(temperatureData)">
       <custom-select
         v-model="selectedMonth"
-        :options="optionMonths.map(month => ({ value: month, text: month }))"
+        :options="optionMonths.map(month => ({ value: month, text: `${parseInt(month, 10)}月` }))"
       />
       <table class="temperature-table">
         <tr>
@@ -15,21 +16,13 @@
           <th>最高気温</th>
           <th>最低気温</th>
         </tr>
-        <tr>
-          <td>上旬</td>
-          <td>99.9℃</td>
-          <td>99.9℃</td>
-        </tr>
-        <tr>
-          <td>中旬</td>
-          <td>99.9℃</td>
-          <td>99.9℃</td>
-        </tr>
-        <tr>
-          <td>下旬</td>
-          <td>99.9℃</td>
-          <td>99.9℃</td>
-        </tr>
+        <template v-for="(temperature, index) in monthlyTemperature()">
+          <tr :key="index">
+            <td>{{ temperature.period }}</td>
+            <td>{{ temperature.miniTemp }}</td>
+            <td>{{ temperature.maxTemp }}</td>
+          </tr>
+        </template>
       </table>
     </template>
 
@@ -42,6 +35,8 @@
 </template>
 
 <script>
+import moment from 'moment';
+
 import TableHeader from '@/components/organisms/campsites/forecast-tab/forecast-table-header';
 import CustomSelect from '@/components/atoms/form/custom-select';
 
@@ -54,9 +49,40 @@ export default {
   data() {
     return {
       temperatureData: {},
-      optionMonths: ['1月', '2月', '3月', '4月'],
+      optionMonths: [],
       selectedMonth: '',
+      tableUpdatedAt: '',
+      pointName: '',
     };
+  },
+  computed: {
+    campsite() {
+      return this.$store.getters['campsite/choosenCampsite'];
+    },
+  },
+  watch: {
+    async campsite() {
+      const forecastYearlyTemp = await this.getForecastYearlyTemp();
+      if (forecastYearlyTemp) {
+        const convertData = forecastYearlyTemp.items.map(item => [item.month, item.periodData]);
+        this.temperatureData = Object.fromEntries(convertData);
+        this.optionMonths = forecastYearlyTemp.items.map(item => item.month);
+        this.selectedMonth = moment().format('M').padStart(2, '0');
+        this.tableUpdatedAt = forecastYearlyTemp.updatedAt;
+        this.pointName = forecastYearlyTemp.pointName;
+      }
+    },
+  },
+  methods: {
+    monthlyTemperature() {
+      return this.temperatureData[this.selectedMonth];
+    },
+    async getForecastYearlyTemp() {
+      if (!this.campsite.id) return null;
+
+      const forecastYearlyTemp = await this.$store.dispatch('models/weather/getForecastYearlyTemp', { campsite_id: this.campsite.id });
+      return forecastYearlyTemp;
+    },
   },
 };
 </script>
