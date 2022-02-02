@@ -43,7 +43,6 @@ extend('required-future-day-since', (value, target) => {
   if (!target[0]) return true;
 
   const targetDate = moment(target[0]);
-  console.log(target);
   if (value && moment(value).isSameOrAfter(targetDate, 'day')) {
     return true;
   }
