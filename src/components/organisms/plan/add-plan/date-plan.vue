@@ -117,6 +117,8 @@ export default {
   },
   methods: {
     async createPlan() {
+      this.confirmDialogVisible = false;
+
       const params = {
         campsiteId: this.campsite.id,
         startedDate: this.startedDate,
@@ -134,7 +136,6 @@ export default {
       this.confirmDialogVisible = true;
     },
     showCompletedDialog() {
-      this.confirmDialogVisible = false;
       this.completedDialogVisible = true;
     },
     async closeCompletedDialog() {
