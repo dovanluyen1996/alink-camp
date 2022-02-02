@@ -40,7 +40,7 @@
           <template #footer>
             <v-ons-button
               modifier="large--cta rounded"
-              @click="handleSubmit(goToRegistration)"
+              @click="handleSubmit(showConfirmDialog)"
             >
               登録
             </v-ons-button>
@@ -57,6 +57,23 @@
       </validation-observer>
     </div>
 
+    <confirm-dialog
+      :is-shown.sync="confirmDialogVisible"
+      @clickConfirm="createPlan"
+    >
+      <template #title>
+        登録確認
+      </template>
+
+      <template #message>
+        キャンプ計画を登録します。よろしいですか？
+      </template>
+
+      <template #confirmAction>
+        登録
+      </template>
+    </confirm-dialog>
+
     <completed-dialog
       action="createPlan"
       :is-visible="completedDialogVisible"
@@ -69,12 +86,14 @@
 // components
 import DateField from '@/components/organisms/form/date-field';
 import ContentWithFooter from '@/components/organisms/content-with-footer';
+import ConfirmDialog from '@/components/organisms/dialog/confirm-dialog';
 import CompletedDialog from '@/components/organisms/dialog/completed-dialog';
 
 export default {
   components: {
     DateField,
     ContentWithFooter,
+    ConfirmDialog,
     CompletedDialog,
   },
   props: {
@@ -87,6 +106,7 @@ export default {
     return {
       startedDate: '',
       finishedDate: '',
+      confirmDialogVisible: false,
       completedDialogVisible: false,
     };
   },
@@ -96,7 +116,7 @@ export default {
     },
   },
   methods: {
-    async goToRegistration() {
+    async createPlan() {
       const params = {
         campsiteId: this.campsite.id,
         startedDate: this.startedDate,
@@ -110,8 +130,11 @@ export default {
     async goToListPlan() {
       await this.$store.dispatch('plansNavigator/pop');
     },
+    showConfirmDialog() {
+      this.confirmDialogVisible = true;
+    },
     showCompletedDialog() {
-      console.log(this.$store.state);
+      this.confirmDialogVisible = false;
       this.completedDialogVisible = true;
     },
     async closeCompletedDialog() {
