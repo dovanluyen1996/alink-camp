@@ -33,6 +33,8 @@
 import TimePlan from '@/components/organisms/plan/time-plan';
 import AddPlan from '@/views/plans/add-plan';
 
+import moment from 'moment';
+
 export default {
   components: {
     TimePlan,
@@ -45,10 +47,18 @@ export default {
   },
   computed: {
     futurePlans() {
-      return this.$store.getters['models/userCampsitePlan/inFuture']({ campsiteId: this.campsite.id });
+      const plans = this.$store.getters['models/userCampsitePlan/inFuture']({ campsiteId: this.campsite.id });
+
+      return plans.sort(
+        (a, b) => (moment(a.startedDate).isBefore(b.startedDate) ? -1 : 1),
+      );
     },
     pastPlans() {
-      return this.$store.getters['models/userCampsitePlan/inPast']({ campsiteId: this.campsite.id });
+      const plans = this.$store.getters['models/userCampsitePlan/inPast']({ campsiteId: this.campsite.id });
+
+      return plans.sort(
+        (a, b) => (moment(a.startedDate).isBefore(b.startedDate) ? 1 : -1),
+      );
     },
   },
   methods: {
