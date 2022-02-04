@@ -1,6 +1,6 @@
 <template>
   <v-ons-page @show="show">
-    <!-- <loading :visible="isLoading" /> -->
+    <loading :visible="isLoading" />
     <custom-toolbar title="キャンプ場詳細">
       <template #right>
         <favorite-campsite :campsite="campsite" />
@@ -75,6 +75,9 @@ export default {
   computed: {
     activeIndexTab() {
       return this.$store.state.components.cardWithTab.showCampsiteActiveIndex;
+    },
+    isLoading() {
+      return this.$store.getters['models/usersFavorite/isLoading'];
     },
   },
   created() {
