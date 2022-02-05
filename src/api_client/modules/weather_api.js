@@ -31,4 +31,8 @@ export default {
     const response = await this.get('/weather/forecast_yearly_temp', params);
     return response.data;
   },
+  async getForecastYearlyWeatherRate(params) {
+    const response = await this.get('/weather/forecast_yearly_weather_rate', params);
+    return response.data;
+  },
 };
