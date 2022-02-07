@@ -20,17 +20,30 @@ export default {
       required: true,
     },
   },
+  data() {
+    return {
+      preventDoubleSubmit: false,
+    };
+  },
   computed: {
     isFavorite() {
       return this.$store.getters['models/usersFavorite/findByCampsiteId'](this.campsite.id);
     },
   },
   methods: {
-    favorite() {
-      return this.$store.dispatch('models/usersFavorite/createUsersFavorite', { campsiteId: this.campsite.id });
+    async favorite() {
+      if (this.preventDoubleSubmit) return;
+
+      this.preventDoubleSubmit = true;
+      await this.$store.dispatch('models/usersFavorite/createUsersFavorite', { campsiteId: this.campsite.id });
+      this.preventDoubleSubmit = false;
     },
-    unfavorite() {
-      return this.$store.dispatch('models/usersFavorite/deleteUsersFavorite', { campsiteId: this.campsite.id });
+    async unfavorite() {
+      if (this.preventDoubleSubmit) return;
+
+      this.preventDoubleSubmit = true;
+      await this.$store.dispatch('models/usersFavorite/deleteUsersFavorite', { campsiteId: this.campsite.id });
+      this.preventDoubleSubmit = false;
     },
   },
 };
