@@ -1,5 +1,4 @@
 import Vue from 'vue';
-import ApiClient from '@/api_client';
 
 export default {
   strict: true,
@@ -28,6 +27,9 @@ export default {
     setFinishedDate(state, finishedDate) {
       Vue.set(state.params, 'finishedDate', finishedDate);
     },
+    setItemIds(state, itemIds) {
+      Vue.set(state.params, 'itemIds', itemIds);
+    },
   },
   actions: {
     setCampsiteId(context, campsiteId) {
@@ -38,6 +40,9 @@ export default {
     },
     setFinishedDate(context, finishedDate) {
       context.commit('setFinishedDate', finishedDate);
+    },
+    setItemIds(context, itemIds) {
+      context.commit('setItemIds', itemIds);
     },
   },
 };

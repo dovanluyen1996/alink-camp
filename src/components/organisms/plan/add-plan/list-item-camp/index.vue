@@ -38,7 +38,7 @@
         <template #footer>
           <v-ons-button
             modifier="large--cta rounded"
-            @click="goToRegistration"
+            @click="showConfirmDialog"
           >
             登録
           </v-ons-button>
@@ -53,6 +53,29 @@
         </template>
       </content-with-footer>
     </div>
+
+    <confirm-dialog
+      :is-shown.sync="confirmDialogVisible"
+      @clickConfirm="createPlan"
+    >
+      <template #title>
+        登録確認
+      </template>
+
+      <template #message>
+        キャンプ計画を登録します。よろしいですか？
+      </template>
+
+      <template #confirmAction>
+        登録
+      </template>
+    </confirm-dialog>
+
+    <completed-dialog
+      action="createPlan"
+      :is-visible="completedDialogVisible"
+      @close="closeCompletedDialog"
+    />
   </v-ons-page>
 </template>
 
@@ -61,12 +84,16 @@
 import ItemTable from '@/components/organisms/plan/add-plan/list-item-camp/item-table';
 import ForecastTable from '@/components/organisms/plan/add-plan/list-item-camp/forecast-table';
 import ContentWithFooter from '@/components/organisms/content-with-footer';
+import ConfirmDialog from '@/components/organisms/dialog/confirm-dialog';
+import CompletedDialog from '@/components/organisms/dialog/completed-dialog';
 
 export default {
   components: {
     ForecastTable,
     ItemTable,
     ContentWithFooter,
+    ConfirmDialog,
+    CompletedDialog,
   },
   props: {
     campsite: {
@@ -77,6 +104,8 @@ export default {
   data() {
     return {
       checkedItemIds: [],
+      confirmDialogVisible: false,
+      completedDialogVisible: false,
     };
   },
   computed: {
@@ -89,9 +118,7 @@ export default {
   },
   watch: {
     async checkedItemIds() {
-      // TODO: store に保存する
-      // await this.$store.dispatch('plan/setItemIds', this.checkedItemIds);
-      console.log(this.checkedItemIds);
+      await this.$store.dispatch('plan/setItemIds', this.checkedItemIds);
     },
   },
   methods: {
@@ -100,14 +127,28 @@ export default {
     },
     async show() {
       await this.getItems();
-      console.log('show');
-      console.log(this.campsite);
     },
-    goToRegistration() {
-      // TODO: Redirect to Registration
+    async createPlan() {
+      this.confirmDialogVisible = false;
+
+      const params = this.$store.getters['plan/params'];
+
+      await this.$store.dispatch('models/userCampsitePlan/createUserCampsitePlan', params);
+
+      this.showCompletedDialog();
     },
-    goToListPlan() {
-      // TODO: Redirect to List Plan
+    async goToListPlan() {
+      await this.$store.dispatch('plansNavigator/pop');
+    },
+    showConfirmDialog() {
+      this.confirmDialogVisible = true;
+    },
+    showCompletedDialog() {
+      this.completedDialogVisible = true;
+    },
+    async closeCompletedDialog() {
+      this.completedDialogVisible = false;
+      await this.$store.dispatch('plansNavigator/pop');
     },
   },
 };
