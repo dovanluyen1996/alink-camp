@@ -12,7 +12,7 @@
 
 <script>
 export default {
-  name: 'CampsitesForecastTableHeader',
+  name: 'CampsitesForecastHeader',
   props: {
     title: {
       type: String,
