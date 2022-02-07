@@ -34,16 +34,22 @@ export default {
     async favorite() {
       if (this.preventDoubleSubmit) return;
 
-      this.preventDoubleSubmit = true;
-      await this.$store.dispatch('models/usersFavorite/createUsersFavorite', { campsiteId: this.campsite.id });
-      this.preventDoubleSubmit = false;
+      try {
+        this.preventDoubleSubmit = true;
+        await this.$store.dispatch('models/usersFavorite/createUsersFavorite', { campsiteId: this.campsite.id });
+      } finally {
+        this.preventDoubleSubmit = false;
+      }
     },
     async unfavorite() {
       if (this.preventDoubleSubmit) return;
 
-      this.preventDoubleSubmit = true;
-      await this.$store.dispatch('models/usersFavorite/deleteUsersFavorite', { campsiteId: this.campsite.id });
-      this.preventDoubleSubmit = false;
+      try {
+        this.preventDoubleSubmit = true;
+        await this.$store.dispatch('models/usersFavorite/deleteUsersFavorite', { campsiteId: this.campsite.id });
+      } finally {
+        this.preventDoubleSubmit = false;
+      }
     },
   },
 };
