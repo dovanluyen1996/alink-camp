@@ -2,7 +2,6 @@
   <div class="annual-weather-container">
     <chart-header
       title="年間の天気傾向"
-      :updated-at="chartUpdatedAt"
       :point-name="pointName"
     />
     <template v-if="$helpers.isPresentObject(chartData)">
@@ -22,7 +21,7 @@
 
 <script>
 import BarChart from '@/components/atoms/chart/bar-chart';
-import ChartHeader from '@/components/organisms/campsites/forecast-tab/forecast-chart-header';
+import ChartHeader from '@/components/organisms/campsites/forecast-tab/forecast-header';
 
 export default {
   name: 'CampsitesForecastAnnualWeatherChart',
@@ -33,7 +32,6 @@ export default {
   data() {
     return {
       chartData: {},
-      chartUpdatedAt: '',
       pointName: '',
       options: {
         maintainAspectRatio: false,
@@ -73,7 +71,6 @@ export default {
     async campsite() {
       const forecastYearlyWeatherRate = await this.getForecastYearlyWeatherRate();
       if (forecastYearlyWeatherRate) {
-        this.chartUpdatedAt = forecastYearlyWeatherRate.updatedAt;
         this.pointName = forecastYearlyWeatherRate.pointName;
         this.fillData(forecastYearlyWeatherRate.items);
       }

@@ -2,7 +2,6 @@
   <div class="temperature-table-container">
     <table-header
       title="月毎の気温予測詳細"
-      :updated-at="tableUpdatedAt"
       :point-name="pointName"
     />
     <template v-if="$helpers.isPresentObject(temperatureData)">
@@ -37,7 +36,7 @@
 <script>
 import moment from 'moment';
 
-import TableHeader from '@/components/organisms/campsites/forecast-tab/forecast-table-header';
+import TableHeader from '@/components/organisms/campsites/forecast-tab/forecast-header';
 import CustomSelect from '@/components/atoms/form/custom-select';
 
 export default {
@@ -51,7 +50,6 @@ export default {
       temperatureData: {},
       optionMonths: [],
       selectedMonth: '',
-      tableUpdatedAt: '',
       pointName: '',
     };
   },
@@ -68,7 +66,6 @@ export default {
         this.temperatureData = Object.fromEntries(convertData);
         this.optionMonths = forecastYearlyTemp.items.map(item => item.month);
         this.selectedMonth = moment().format('M').padStart(2, '0');
-        this.tableUpdatedAt = forecastYearlyTemp.updatedAt;
         this.pointName = forecastYearlyTemp.pointName;
       }
     },
