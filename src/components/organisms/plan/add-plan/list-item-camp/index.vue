@@ -1,10 +1,10 @@
 <template>
-  <v-ons-page>
+  <v-ons-page @show="show">
     <div class="content">
       <loading :visible="isLoading" />
       <div class="text">
         <v-ons-row class="text__desc">
-          〇〇〇〇〇〇〇〇〇〇〇〇<br>〇〇〇〇〇〇〇〇〇〇〇〇キャンズ場
+          {{ campsite.name }}
         </v-ons-row>
       </div>
 
@@ -67,6 +67,12 @@ export default {
     ItemTable,
     ContentWithFooter,
   },
+  props: {
+    campsite: {
+      type: Object,
+      required: true,
+    },
+  },
   data() {
     return {
       labels: [
@@ -108,6 +114,10 @@ export default {
     },
   },
   methods: {
+    show() {
+      console.log('show');
+      console.log(this.campsite);
+    },
     goToRegistration() {
       // TODO: Redirect to Registration
     },
