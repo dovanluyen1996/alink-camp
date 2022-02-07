@@ -44,7 +44,14 @@ export default {
   },
   methods: {
     async show() {
+      await this.setCampsiteId();
+      await this.getItems();
+    },
+    async setCampsiteId() {
       await this.$store.dispatch('plan/setCampsiteId', this.campsite.id);
+    },
+    async getItems() {
+      await this.$store.dispatch('models/item/getItems');
     },
   },
 };

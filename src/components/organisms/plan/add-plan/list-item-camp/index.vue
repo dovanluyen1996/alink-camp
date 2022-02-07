@@ -122,12 +122,6 @@ export default {
     },
   },
   methods: {
-    async getItems() {
-      await this.$store.dispatch('models/item/getItems');
-    },
-    async show() {
-      await this.getItems();
-    },
     async createPlan() {
       this.confirmDialogVisible = false;
 
