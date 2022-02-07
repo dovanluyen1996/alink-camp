@@ -1,5 +1,5 @@
 <template>
-  <v-ons-page>
+  <v-ons-page @show="show">
     <custom-toolbar title="新規計画" />
     <v-ons-tabbar
       position="top"
@@ -41,6 +41,11 @@ export default {
         },
       ],
     };
+  },
+  methods: {
+    async show() {
+      await this.$store.dispatch('plan/setCampsiteId', this.campsite.id);
+    },
   },
 };
 </script>
