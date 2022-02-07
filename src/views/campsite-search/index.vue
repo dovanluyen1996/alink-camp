@@ -13,6 +13,7 @@
           :campsites="campsites"
           :has-chevron="false"
           title="閲覧履歴"
+          @click="goToCampsiteShow"
         />
       </content-with-footer>
     </div>
@@ -22,6 +23,7 @@
 <script>
 // components
 import SearchField from '@/components/organisms/form/search-field.vue';
+import CampsiteShow from '@/views/campsites/show';
 import CampsiteList from '@/components/organisms/campsite-list';
 import ContentWithFooter from '@/components/organisms/content-with-footer';
 
@@ -100,6 +102,14 @@ export default {
   methods: {
     goToCampsiteSearch() {
       // TODO: handle go to campsite search
+    },
+    goToCampsiteShow(campsite) {
+      this.$store.dispatch('campsiteSearchNavigator/push', {
+        extends: CampsiteShow,
+        onsNavigatorProps: {
+          campsite,
+        },
+      });
     },
   },
 };
