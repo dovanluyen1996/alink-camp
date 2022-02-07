@@ -99,8 +99,13 @@ export default {
 
       this.$store.commit('appTabbar/setActiveIndexFromTabName', 'campsiteSearch');
     },
-    goToPlanDetail() {
-      this.$store.dispatch('plansNavigator/push', CampsitePlan);
+    goToPlanDetail(campsite) {
+      this.$store.dispatch('plansNavigator/push', {
+        extends: CampsitePlan,
+        onsNavigatorProps: {
+          campsite,
+        },
+      });
     },
     async show() {
       this.$store.dispatch('appTabbar/setLastVisitedAt', this.$helpers.localDateWithHyphenFrom(new Date()));
