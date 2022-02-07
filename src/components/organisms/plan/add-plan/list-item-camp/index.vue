@@ -22,6 +22,7 @@
       <forecast-table />
       <item-table
         v-if="items.length > 0"
+        :checked-item-ids.sync="checkedItemIds"
         :items="items"
       />
 
@@ -73,12 +74,24 @@ export default {
       required: true,
     },
   },
+  data() {
+    return {
+      checkedItemIds: [],
+    };
+  },
   computed: {
     items() {
-      return this.$store.getters['models/item/all']
+      return this.$store.getters['models/item/all'];
     },
     isLoading() {
       return this.$store.getters['models/item/isLoading'];
+    },
+  },
+  watch: {
+    async checkedItemIds() {
+      // TODO: store に保存する
+      // await this.$store.dispatch('plan/setItemIds', this.checkedItemIds);
+      console.log(this.checkedItemIds);
     },
   },
   methods: {

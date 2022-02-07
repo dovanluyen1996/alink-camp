@@ -23,8 +23,11 @@
       表示するアイテム名は7文字まで表示する。8文字以降「…」（例: あああああああ… ）
       表示するラベル名は4文字まで表示する。5文字以降「…」（例: ああああ… ） -->
         <div class="items__list--content">
-          <check-field
+          <check-group-field
+            :checked-values.sync="checkedItems"
+            :checked-value="item.id"
             :label="item.name"
+            :disable="disable"
           />
         </div>
         <div class="items__list--label">
@@ -45,16 +48,30 @@
 
 <script>
 // components
-import CheckField from '@/components/organisms/form/check-field';
+import CheckGroupField from '@/components/organisms/form/check-group-field';
 
 export default {
   components: {
-    CheckField,
+    CheckGroupField,
   },
   props: {
+    checkedItemIds: {
+      type: Array,
+      default: () => [],
+    },
     items: {
       type: Array,
       default: () => [],
+    },
+  },
+  computed: {
+    checkedItems: {
+      get() {
+        return this.checkedItemIds;
+      },
+      set(newValue) {
+        this.$emit('update:checkedItemIds', newValue);
+      },
     },
   },
 };
