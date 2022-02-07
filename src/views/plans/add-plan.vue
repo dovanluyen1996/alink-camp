@@ -12,6 +12,7 @@
 
 <script>
 import DatePlan from '@/components/organisms/plan/add-plan/date-plan';
+import ListItemCamp from '@/components/organisms/plan/add-plan/list-item-camp/index';
 
 export default {
   name: 'AddPlan',
@@ -31,7 +32,7 @@ export default {
         },
         {
           label: '持ち物',
-          page: DatePlan,
+          page: ListItemCamp,
           props: { campsite: this.campsite },
         },
         {
