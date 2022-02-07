@@ -4,7 +4,7 @@
     class="forecast-switcher"
   >
     <button>時間ごと</button>
-    <button>10日間</button>
+    <button>14日間</button>
   </v-ons-segment>
 </template>
 

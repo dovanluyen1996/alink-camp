@@ -5,15 +5,15 @@
       :class="{th : colorTh}"
     >
       <span v-if="isShowFourteenDays">
-        降水<br>確率
+        湿度
       </span>
       <span v-else>
-        降水確率
+        湿度
       </span>
     </th>
-    <template v-for="(probPrecip, index) in probPrecips">
+    <template v-for="(probHumidity, index) in probHumidities">
       <td :key="index">
-        {{ probPrecip ? `${probPrecip}%` : '--' }}
+        {{ probHumidity ? `${probHumidity}%` : '--' }}
       </td>
     </template>
   </tr>
@@ -22,9 +22,9 @@
 <script>
 
 export default {
-  name: 'ForecastTableWindProbPrecipsRow',
+  name: 'ForecastTableWindProbHumiditiesRow',
   props: {
-    probPrecips: {
+    probHumidities: {
       type: Array,
       required: true,
     },

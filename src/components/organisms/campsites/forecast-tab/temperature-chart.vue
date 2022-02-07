@@ -117,7 +117,9 @@ export default {
 
 <style scoped lang="scss">
 .no-forecast {
-  margin: 2rem auto 2rem auto;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
 }
 </style>

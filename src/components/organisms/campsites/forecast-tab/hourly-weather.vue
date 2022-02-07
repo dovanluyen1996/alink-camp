@@ -31,7 +31,7 @@
                       v-if="isScheduledDate(forecast.date)"
                       class="is-today"
                     >
-                      ゴルフ予定日
+                      キャンプ予定日
                     </span>
                   </div>
                 </td>
@@ -45,6 +45,10 @@
           <wind-direction-row :wind-directions="windDirections" />
           <wind-speed-row :wind-speeds="windSpeeds" />
         </sticky-table>
+
+        <div class="table-note">
+          信頼度：A～Eの表示は、予報の信頼度です。低い場合は今後の予報が変わる可能性があります
+        </div>
       </template>
 
       <template v-else>
@@ -166,6 +170,12 @@ export default {
 <style scoped lang="scss">
 @import '@/assets/scss/_variables.scss';
 
+.card {
+  &__title {
+    color: #000;
+  }
+}
+
 /deep/ {
   .table {
     text-align: center;
@@ -200,11 +210,19 @@ export default {
 }
 
 .no-forecast {
-  margin: 2rem auto 2rem auto;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 250px;
 }
 
 .custom-table {
   padding: 0 10px;
+}
+
+.table-note {
+  margin-top: 10px;
+  font-size: 12px;
+  line-height: 14px;
 }
 </style>
