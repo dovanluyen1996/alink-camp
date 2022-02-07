@@ -1,193 +1,84 @@
 <template>
-  <div class="campsites-information-tab">
-    <div class="wrapper-table">
-      <div class="custom-table">
-        <table class="campsites-information">
-          <tr>
-            <th
-              class="th"
-              scope="row"
-            >
-              住所
-            </th>
-            <td>
-              {{ campsite.address }}
-              <!-- NOTE: テキストリンクは当たり判定が小さすぎるので広げる処置 -->
-              <span class="map-link">
-                MAP
-                <a
-                  class="map-link__target"
-                  @click="openPage(mapUrl)"
-                >
-                </a></span>
-            </td>
-          </tr>
-          <tr>
-            <th
-              class="th"
-              scope="row"
-            >
-              電話番号&#9312;
-            </th>
-            <td>
-              <a
-                v-if="campsite.phone"
-                :href="`tel:${campsite.phone}`"
-              >
-                {{ campsite.phone }}
-              </a>
-            </td>
-          </tr>
-          <tr>
-            <th
-              class="th"
-              scope="row"
-            >
-              電話番号&#9313;
-            </th>
-            <td>
-              <a
-                v-if="campsite.phone2"
-                :href="`tel:${campsite.phone2}`"
-              >
-                {{ campsite.phone2 }}
-              </a>
-            </td>
-          </tr>
-          <tr>
-            <th
-              class="th"
-              scope="row"
-            >
-              ホームページ
-            </th>
-            <td>
-              <a
-                v-if="campsite.url"
-                @click="openPage(campsite.url)"
-              >
-                {{ campsite.url }}
-              </a>
-            </td>
-          </tr>
-          <tr>
-            <th
-              class="th"
-              scope="row"
-            >
-              予約
-            </th>
-            <td>
-              <a
-                v-if="campsite.jalanUrl"
-                @click="openPage(campsite.jalanUrl)"
-              >
-                {{ campsite.jalanUrl }}
-              </a>
-            </td>
-          </tr>
-          <tr>
-            <th
-              class="th"
-              scope="row"
-            >
-              コース紹介
-            </th>
-            <td>
-              {{ campsite.jalanDescription }}
-            </td>
-          </tr>
-          <tr>
-            <th
-              class="th"
-              scope="row"
-            >
-              備考
-            </th>
-            <td>
-              {{ campsite.note }}
-            </td>
-          </tr>
-        </table>
+  <div class="information-tab">
+    <div class="information-wrapper">
+      <div class="feature-wrapper">
+        <div class="title">
+          特徴
+        </div>
 
-        <div class="campsite-image">
-          <img :src="campsite.jalanImagePath">
+        <div class="content">
+          <div class="content-body">
+            筑波山の中腹にあるキャンプ場。山の斜面にテントサイトやBBQサイトがあり、登山のベースキャンプとしても気軽に利用できる。
+            広大な施設内では数多くの植物が見られ、自然を思いっきり満喫できる。
+          </div>
         </div>
       </div>
+      <basic-information />
+      <facility-detail />
+      <nearby-facility />
+      <!-- TODO: 不要ならロジック時に交通アクセスを削除する -->
+      <traffic />
     </div>
   </div>
 </template>
 
 <script>
+
+// components
+import BasicInformation from '@/components/organisms/campsites/information-tab/basic-information';
+import FacilityDetail from '@/components/organisms/campsites/information-tab/facility-detail';
+import NearbyFacility from '@/components/organisms/campsites/information-tab/nearby-facility';
+import Traffic from '@/components/organisms/campsites/information-tab/traffic';
+
 export default {
-  name: 'CampsitesInformationTab',
-  computed: {
-    campsite() {
-      // TODO: Hanlde campsite choosen
-    },
-    mapUrl() {
-      return `https://maps.google.com/?q=${encodeURI(this.campsite.name)}`;
-    },
-  },
-  methods: {
-    openPage(url) {
-      this.$helpers.openPageByUrl(url);
-    },
+  name: 'CampsiteInformationTab',
+  components: {
+    BasicInformation,
+    FacilityDetail,
+    NearbyFacility,
+    Traffic,
   },
 };
 </script>
 
-<style lang="scss" scoped>
-.campsites-information {
-  width: 100%;
-  word-break: break-all;
-
-  td {
-    a {
-      color: #9883de;
-      text-decoration: none;
+<style scoped lang="scss">
+  .information-tab {
+    .information-wrapper {
+      padding-bottom: 20px;
+      margin-bottom: 30px;
+      background-color: #fff;
     }
   }
-}
 
-.th {
-  text-align: left;
-  white-space: nowrap;
-}
-
-.map-link {
-  position: relative;
-  margin-left: 10px;
-  color: #9883de;
-
-  &__target {
-    position: absolute;
-    top: -10px;
-    right: -10px;
-    bottom: -10px;
-    left: -10px;
-    text-decoration: none;
+  .content-body {
+    margin-top: 15px;
   }
-}
 
-.campsite-image {
-  margin-top: 15px;
-  text-align: center;
+  .title {
+    img {
+      margin-left: 5px;
+    }
+  }
 
-  img {
+  .feature-wrapper {
     width: 100%;
-    height: auto;
+    background-color: #fff;
+
+    .title {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 30px;
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 20px;
+      border-top: 4px solid #c83200;
+      border-bottom: 1px solid #c83200;
+    }
+
+    .content {
+      padding: 0 10px 10px;
+      font-size: 12px;
+    }
   }
-}
-
-.wrapper-table {
-  width: 100%;
-  padding: 10px 0 30px;
-  margin-bottom: 30px;
-  background: #fff;
-}
-
-.custom-table {
-  padding: 0 10px;
-}
 </style>
