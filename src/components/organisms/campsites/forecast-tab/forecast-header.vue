@@ -5,7 +5,6 @@
     </v-ons-col>
     <v-ons-col class="table-update">
       <div>（地点 : {{ pointName || '--' }}）</div>
-      <div>{{ updatedAt ? `${$helpers.toShortWithTimeString(updatedAt)}発表` : '--' }}</div>
     </v-ons-col>
   </v-ons-row>
 </template>
@@ -15,10 +14,6 @@ export default {
   name: 'CampsitesForecastHeader',
   props: {
     title: {
-      type: String,
-      default: '',
-    },
-    updatedAt: {
       type: String,
       default: '',
     },
