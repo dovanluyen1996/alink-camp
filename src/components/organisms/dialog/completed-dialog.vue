@@ -61,7 +61,7 @@ export default {
       case 'updatePlan':
         return '予定日を編集しました。';
       case 'createPlan':
-        return '予定日を登録しました。';
+        return '登録が完了しました。';
       case 'createItem':
         return '登録しました。';
       case 'deletePlan':

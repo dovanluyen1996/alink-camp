@@ -15,20 +15,29 @@ import DatePlan from '@/components/organisms/plan/add-plan/date-plan';
 
 export default {
   name: 'AddPlan',
+  props: {
+    campsite: {
+      type: Object,
+      required: true,
+    },
+  },
   data() {
     return {
       tabs: [
         {
           label: '計画日',
           page: DatePlan,
+          props: { campsite: this.campsite },
         },
         {
           label: '持ち物',
           page: DatePlan,
+          props: { campsite: this.campsite },
         },
         {
           label: '予定詳細',
           page: DatePlan,
+          props: { campsite: this.campsite },
         },
       ],
     };

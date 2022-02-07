@@ -63,7 +63,12 @@ export default {
   },
   methods: {
     goToAddPlan() {
-      this.$store.dispatch('plansNavigator/push', AddPlan);
+      this.$store.dispatch('plansNavigator/push', {
+        extends: AddPlan,
+        onsNavigatorProps: {
+          campsite: this.campsite,
+        },
+      });
     },
   },
 };
