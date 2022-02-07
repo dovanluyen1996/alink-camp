@@ -2,10 +2,10 @@
   <div class="items-table">
     <div class="items">
       <div class="items__title">
-        <div class="items__label">
+        <div class="items__label" @click="selectAll">
           全選択
         </div>
-        <div class="items__label">
+        <div class="items__label" @click="unSelectAll">
           全解除
         </div>
         <div class="items__label items__label--red">
@@ -72,6 +72,14 @@ export default {
       set(newValue) {
         this.$emit('update:checkedItemIds', newValue);
       },
+    },
+  },
+  methods: {
+    selectAll() {
+      this.checkedItemIds = this.items.map(item => item.id);
+    },
+    unSelectAll() {
+      this.checkedItemIds = [];
     },
   },
 };
