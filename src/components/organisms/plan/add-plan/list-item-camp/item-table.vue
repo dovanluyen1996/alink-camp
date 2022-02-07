@@ -15,7 +15,7 @@
       </div>
 
       <div
-        v-for="item in labels"
+        v-for="item in items"
         :key="item"
         :class="['items__list', {'items__list--active': item.user_id}]"
       >
@@ -52,7 +52,7 @@ export default {
     CheckField,
   },
   props: {
-    labels: {
+    items: {
       type: Array,
       default: () => [],
     },

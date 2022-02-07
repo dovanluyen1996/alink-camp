@@ -21,8 +21,8 @@
 
       <forecast-table />
       <item-table
-        v-if="labels.length > 0"
-        :labels="labels"
+        v-if="items.length > 0"
+        :items="items"
       />
 
       <div
@@ -73,48 +73,20 @@ export default {
       required: true,
     },
   },
-  data() {
-    return {
-      labels: [
-        {
-          name: 'オリジナルテント',
-          user_id: 1,
-        },
-        {
-          name: 'オリジナルテント',
-          user_id: null,
-        },
-        {
-          name: 'オリジナルテント',
-          user_id: 2,
-        },
-        {
-          name: 'オリジナルテント',
-          user_id: 3,
-        },
-        {
-          name: 'オリジナルテント',
-          user_id: null,
-        },
-        {
-          name: 'オリジナルテント',
-          user_id: null,
-        },
-        {
-          name: 'オリジナルテント',
-          user_id: null,
-        },
-      ],
-    };
-  },
   computed: {
+    items() {
+      return this.$store.getters['models/item/all']
+    },
     isLoading() {
-      // TODO: return status of Loading
-      return false;
+      return this.$store.getters['models/item/isLoading'];
     },
   },
   methods: {
-    show() {
+    async getItems() {
+      await this.$store.dispatch('models/item/getItems');
+    },
+    async show() {
+      await this.getItems();
       console.log('show');
       console.log(this.campsite);
     },

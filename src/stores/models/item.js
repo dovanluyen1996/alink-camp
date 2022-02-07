@@ -8,6 +8,10 @@ export default {
     items: [],
     isLoading: false,
   },
+  getters: {
+    isLoading: state => state.isLoading,
+    all: state => state.items,
+  },
   mutations: {
     setIsLoading(state, isLoading) {
       state.isLoading = isLoading;
