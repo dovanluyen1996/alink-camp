@@ -53,6 +53,9 @@
 // components
 import CampsiteList from '@/components/organisms/campsite-list';
 
+// pages
+import SearchResult from '@/views/spot-search/search-result';
+
 export default {
   components: {
     CampsiteList,
@@ -120,11 +123,14 @@ export default {
     };
   },
   methods: {
-    goToSearchSpotByCampsite() {
-      // TODO: Redirect to Campsite
+    goToSearchSpotByCampsite(campsite) {
+      this.$store.dispatch('spotSearchNavigator/push', {
+        extends: SearchResult,
+        onsNavigatorProps: { campsite },
+      });
     },
     goToSpotSearchByCurrentLocation() {
-      // TODO: Redirect to Current Location
+      this.$store.dispatch('spotSearchNavigator/push', SearchResult);
     },
     goToSearchCampsite() {
       // TODO: implement redirect to キャンプ場検索 when implement Logic
