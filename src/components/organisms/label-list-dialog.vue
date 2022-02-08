@@ -113,7 +113,6 @@ export default {
 
   .alert-dialog-container {
     max-height: 78vh;
-    margin-top: -20px;
     overflow: scroll;
   }
 
@@ -142,8 +141,6 @@ export default {
     align-items: center;
     width: 100%;
     height: 50px;
-    margin: 0;
-    margin-left: 10px;
     font-size: 14px;
     font-weight: 300;
     color: #222;
