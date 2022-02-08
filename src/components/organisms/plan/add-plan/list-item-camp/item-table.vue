@@ -71,7 +71,6 @@ export default {
 }
 
 .items-table {
-  margin-bottom: 100px;
   padding: 20px 10px;
   margin-bottom: 100px;
 
