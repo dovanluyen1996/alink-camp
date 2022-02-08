@@ -13,6 +13,7 @@
 <script>
 import DatePlan from '@/components/organisms/plan/add-plan/date-plan';
 import ListItemCamp from '@/components/organisms/plan/add-plan/list-item-camp/index';
+import DetailScheduleCamp from '@/components/organisms/plan/add-plan/detail-schedule-camp/index';
 
 export default {
   name: 'AddPlan',
@@ -33,12 +34,10 @@ export default {
         {
           label: '持ち物',
           page: ListItemCamp,
-          props: { campsite: this.campsite },
         },
         {
           label: '予定詳細',
-          page: DatePlan,
-          props: { campsite: this.campsite },
+          page: DetailScheduleCamp,
         },
       ],
     };
