@@ -11,11 +11,12 @@
         </template>
 
         <template #sub-content>
-          大田区下丸子～～～～～
+          {{ campsite.address }}
           <span class="map-link">
             MAP
             <a
               class="map-link__target"
+              @click="openPage(mapUrl)"
             >
             </a>
           </span>
@@ -28,8 +29,11 @@
         </template>
 
         <template #sub-content>
-          <a class="website-link">
-            http://～～～
+          <a
+            class="website-link"
+            @click="openPage(campsite.url)"
+          >
+            {{ campsite.url }}
           </a>
         </template>
       </content-item>
@@ -40,12 +44,11 @@
         </template>
 
         <template #sub-content>
-          <!-- TODO: Implement href="tel:" by campsite phone number when implement logic -->
           <a
             class="phone-link"
-            href="tel:090-9999-9999"
+            :href="'tel:' + campsite.phone"
           >
-            090-9999-9999
+            {{ campsite.phone }}
           </a>
         </template>
       </content-item>
@@ -56,7 +59,7 @@
         </template>
 
         <template #sub-content>
-          予約受付中
+          {{ campsite.reservable }}
         </template>
       </content-item>
 
@@ -66,7 +69,7 @@
         </template>
 
         <template #sub-content>
-          5〜9月
+          {{ campsite.businessPeriod }}
         </template>
       </content-item>
 
@@ -76,7 +79,7 @@
         </template>
 
         <template #sub-content>
-          イン10:00〜15:00 アウト10:00（デイキャンプアウト17:00）
+          {{ campsite.businessHours }}
         </template>
       </content-item>
 
@@ -86,8 +89,7 @@
         </template>
 
         <template #sub-content>
-          期間中月〜木曜、祝日の場合は営業、7月15日〜8月31日は無休 <br>
-          事前予約利用者がない場合は休業
+          {{ campsite.holiday }}
         </template>
       </content-item>
 
@@ -97,7 +99,7 @@
         </template>
 
         <template #sub-content>
-          サイト利用料＝500円、小学生未満無料/
+          {{ campsite.fee }}
         </template>
       </content-item>
 
@@ -107,7 +109,7 @@
         </template>
 
         <template #sub-content>
-          −
+          {{ campsite.creditCard }}
         </template>
       </content-item>
 
@@ -117,7 +119,7 @@
         </template>
 
         <template #sub-content>
-          テント専用15張り、サイトは土
+          {{ campsite.details }}
         </template>
       </content-item>
     </template>
@@ -131,6 +133,19 @@ import ContentItem from '@/components/atoms/information-tab/content-item';
 
 export default {
   name: 'CampsitesBasicInformation',
+  computed: {
+    campsite() {
+      return this.$store.getters['campsite/choosenCampsite'];
+    },
+    mapUrl() {
+      return `https://maps.google.com/?q=${encodeURI(this.campsite.name)}`;
+    },
+  },
+  methods: {
+    openPage(url) {
+      this.$helpers.openPageByUrl(url);
+    },
+  },
   components: {
     InformationTabItem,
     ContentItem,
