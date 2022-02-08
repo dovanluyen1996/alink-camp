@@ -61,7 +61,12 @@ export default {
     height: 237px;
   }
 
+  .alert-dialog-title {
+    margin-bottom: 5px;
+  }
+
   .alert-dialog-content {
+    min-height: 96px;
     font-size: 15px;
     font-weight: 300;
   }
