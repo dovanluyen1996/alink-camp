@@ -94,7 +94,7 @@ export default {
     async getForecastScheduledDate() {
       if (!this.plan) return null;
       const params = {
-        camp_id: this.useCampsite.id,
+        campsite_id: this.useCampsite.id,
         target_date: this.targetDate(),
       };
 
@@ -103,7 +103,7 @@ export default {
     },
     async getForecast14Days() {
       const params = {
-        camp_id: this.useCampsite.id,
+        campsite_id: this.useCampsite.id,
       };
 
       const forecasts = await this.$store.dispatch('models/weather/getForecast14Days', params);

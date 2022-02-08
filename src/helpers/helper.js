@@ -11,6 +11,9 @@ export default {
   toShortString(targetDate) {
     return moment(targetDate).format('M/D (dd)');
   },
+  toShortStringWithZero(targetDate) {
+    return moment(targetDate).format('MM/DD (dd)');
+  },
   toDayString(targetDate) {
     if (!targetDate) return '';
     return moment(targetDate).format('DD日 (dd)');

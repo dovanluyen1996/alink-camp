@@ -62,7 +62,7 @@ export default {
     },
     sunsRowspan: {
       type: Number,
-      default: 5,
+      default: 6,
     },
   },
   data() {

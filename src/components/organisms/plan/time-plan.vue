@@ -1,48 +1,52 @@
 <template>
-    <div class="time-plan">
+  <div class="time-plan">
+    <template v-if="futurePlans.length">
       <span class="time-plan__title">
         終了前の計画
       </span>
       <v-ons-list modifier="noborder">
         <v-ons-list-item
-          v-for="time in future_plans"
-          :key="time.id"
+          v-for="plan in futurePlans"
+          :key="plan.id"
           modifier="chevron"
           @click="goToPlanPresent"
         >
           <div class="center">
-            <span class="list-item__title">{{ time.text }}</span>
+            <span class="list-item__title">{{ $helpers.toLongString(plan.startedDate) }}</span>
           </div>
         </v-ons-list-item>
       </v-ons-list>
+    </template>
 
+    <template v-if="pastPlans.length">
       <span class="time-plan__title">
         過去の計画
       </span>
       <v-ons-list modifier="noborder">
         <v-ons-list-item
-          v-for="time in past_plans"
-          :key="time.id"
+          v-for="plan in pastPlans"
+          :key="plan.id"
           modifier="chevron"
           @click="goToPlanPast"
         >
           <div class="center">
-            <span class="list-item__title">{{ time.text }}</span>
+            <span class="list-item__title">{{ $helpers.toLongString(plan.startedDate) }}</span>
           </div>
         </v-ons-list-item>
       </v-ons-list>
-    </div>
+    </template>
+  </div>
 </template>
 
 <script>
 export default {
   name: 'TimePlan',
   props: {
-    future_plans: {
+    futurePlans: {
       type: Array,
       default: () => [],
     },
-    past_plans: {
+    pastPlans: {
       type: Array,
       default: () => [],
     },

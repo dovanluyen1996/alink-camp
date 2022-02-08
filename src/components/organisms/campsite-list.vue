@@ -21,7 +21,7 @@
                 <span>
                   {{ campsite.name }}
                   <img
-                    v-if="isShowFavoriteMark && campsite.isFavorited"
+                    v-if="isShowFavoriteMark && isFavorite(campsite)"
                     src="@/assets/images/user/user-plan/favorite.png"
                     width="18px"
                   >
@@ -75,6 +75,9 @@ export default {
     this.setFullscreen();
   },
   methods: {
+    isFavorite(campsite) {
+      return this.$store.getters['models/usersFavorite/findByCampsiteId'](campsite.id);
+    },
     setFullscreen() {
       // NOTE: propsにしたいところだけれど、
       //       onsenUIが全画面表示をfullscreen属性でやっているので

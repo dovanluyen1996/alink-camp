@@ -47,13 +47,13 @@ export default {
   computed: {
     favoriteCampsites() {
       const favorites = this.$store.getters['models/usersFavorite/all'];
-      const planIds = this.$store.getters['models/userCampsitePlan/inFuture'].map(plan => plan.campsite.id);
+      const planIds = this.$store.getters['models/userCampsitePlan/inFuture']().map(plan => plan.campsite.id);
 
       return favorites.filter(favorite => !planIds.includes(favorite.id));
     },
     futurePlans() {
       const favorites = this.$store.getters['models/usersFavorite/all'];
-      const plans = this.$store.getters['models/userCampsitePlan/inFuture'];
+      const plans = this.$store.getters['models/userCampsitePlan/inFuture']();
 
       const results = plans.sort(
         (a, b) => {
