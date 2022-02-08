@@ -6,22 +6,7 @@
 
     <template #content>
       <div class="content-body">
-        車：東北自動車道・矢板ＩＣより車で15分。東北自動車道・宇都宮ＩＣより車で40分。国道4号氏家より国道293号へ車で10分 <br>
-        電車：ＪＲ氏家駅よりタクシー３０分
-
-        <div class="traffic-map">
-          <!-- TODO: Implement google map when implement logic -->
-          <img
-            class="image-temp"
-            src="@/assets/images/google-map.png"
-          >
-
-          <div class="traffic-button">
-            <v-ons-button modifier="cta rounded custom-button">
-              GoogleMapで見る
-            </v-ons-button>
-          </div>
-        </div>
+        {{ campsite.access }}
       </div>
     </template>
   </information-tab-item>
@@ -33,6 +18,11 @@ import InformationTabItem from '@/components/atoms/information-tab/item';
 
 export default {
   name: 'CampsitesInformationTraffic',
+  computed: {
+    campsite() {
+      return this.$store.getters['campsite/choosenCampsite'];
+    },
+  },
   components: {
     InformationTabItem,
   },
