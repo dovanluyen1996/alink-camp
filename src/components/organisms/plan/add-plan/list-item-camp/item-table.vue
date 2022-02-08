@@ -81,7 +81,7 @@ export default {
   },
   methods: {
     itemLabel(label, limit) {
-      return this.$helpers.trancate(label, limit)
+      return this.$helpers.trancate(label, limit);
     },
     selectAll() {
       this.$emit('update:checkedItemIds', this.items.map(item => item.id));
