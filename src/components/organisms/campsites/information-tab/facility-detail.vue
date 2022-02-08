@@ -11,7 +11,7 @@
         </template>
 
         <template #sub-content>
-          炊事棟、水洗トイレ、温水シャワーほか
+          {{ campsite.facilities }}
         </template>
       </content-item>
 
@@ -21,8 +21,7 @@
         </template>
 
         <template #sub-content>
-          管理人10:00-15:00定時常駐（宿泊利用者がいる場合のみ）/チェックイン <br>
-          10:00-15:00/アウト10:00/デイキャンプはアウト17:00/
+          {{ campsite.management }}
         </template>
       </content-item>
 
@@ -32,7 +31,7 @@
         </template>
 
         <template #sub-content>
-          毛布、布団、調理器具
+          {{ campsite.rental }}
         </template>
       </content-item>
 
@@ -42,7 +41,7 @@
         </template>
 
         <template #sub-content>
-          薪
+          {{ campsite.shopLineup }}
         </template>
       </content-item>
 
@@ -52,7 +51,7 @@
         </template>
 
         <template #sub-content>
-          不可
+          {{ campsite.styleAutoCamping }}
         </template>
       </content-item>
 
@@ -62,7 +61,7 @@
         </template>
 
         <template #sub-content>
-          常時可
+          {{ campsite.styleDayCamping }}
         </template>
       </content-item>
 
@@ -72,9 +71,9 @@
         </template>
 
         <template #sub-content>
-          トレーラーハウス &nbsp;&nbsp; × <br>
-          バンガロー等 &nbsp;&nbsp; × <br>
-          常設テント等 &nbsp;&nbsp; ×
+          トレーラーハウス &nbsp;&nbsp; {{ campsite.facilityTrailerHouse }} <br>
+          バンガロー等 &nbsp;&nbsp; {{ campsite.facilityBungalow }} <br>
+          常設テント等 &nbsp;&nbsp; {{ campsite.facilityPermanentTent }}
         </template>
       </content-item>
 
@@ -84,13 +83,13 @@
         </template>
 
         <template #sub-content>
-          AC電源付きサイト &nbsp;&nbsp; × <br>
-          ランドリー &nbsp;&nbsp; ○ <br>
-          水洗トイレ &nbsp;&nbsp; ○ <br>
-          温水シャワー &nbsp;&nbsp; ○ <br>
-          風呂 &nbsp;&nbsp; × <br>
-          温泉 &nbsp;&nbsp; × <br>
-          バリアフリー施設 &nbsp;&nbsp; ×
+          AC電源付きサイト &nbsp;&nbsp; {{ campsite.facilityAc }} <br>
+          ランドリー &nbsp;&nbsp; {{ campsite.facilityLaundry }} <br>
+          水洗トイレ &nbsp;&nbsp; {{ campsite.facilityFlushToilet }} <br>
+          温水シャワー &nbsp;&nbsp; {{ campsite.facilityShower }} <br>
+          風呂 &nbsp;&nbsp; {{ campsite.facilityBathroom }} <br>
+          温泉 &nbsp;&nbsp; {{ campsite.facilityHotSpring }} <br>
+          バリアフリー施設 &nbsp;&nbsp; {{ campsite.facilityBarrierFree }}
         </template>
       </content-item>
 
@@ -100,9 +99,9 @@
         </template>
 
         <template #sub-content>
-          直火 全面禁止 <br>
-          ペット 全面禁止 <br>
-          花火 全面禁止
+          直火 {{ campsite.ruleDirectHeat }} <br>
+          ペット {{ campsite.rulePets }} <br>
+          花火 {{ campsite.ruleFirework }}
         </template>
       </content-item>
     </template>
@@ -116,6 +115,11 @@ import ContentItem from '@/components/atoms/information-tab/content-item';
 
 export default {
   name: 'CampsitesInformationFacilityDetail',
+  computed: {
+    campsite() {
+      return this.$store.getters['campsite/choosenCampsite'];
+    },
+  },
   components: {
     InformationTabItem,
     ContentItem,
