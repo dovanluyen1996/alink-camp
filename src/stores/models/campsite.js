@@ -71,5 +71,8 @@ export default {
         context.commit('setIsLoading', false);
       }
     },
+    resetCampsites(context) {
+      context.commit('resetCampsites');
+    },
   },
 };

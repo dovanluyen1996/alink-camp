@@ -97,8 +97,6 @@ export default {
       ],
     };
   },
-  computed: {
-  },
   methods: {
     goToCampsiteSearchResult() {
       // TODO: handle go to campsite search
