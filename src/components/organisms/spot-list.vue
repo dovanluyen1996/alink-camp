@@ -49,9 +49,6 @@ export default {
     };
   },
   computed: {
-    openMap() {
-      return spot => this.$helpers.openPageByUrl(`https://maps.google.com/?q=${encodeURI(spot.name)}`);
-    },
     modifier() {
       return `longdivider ${this.hasChevron ? 'chevron' : ''}`;
     },
@@ -60,6 +57,9 @@ export default {
     this.setFullscreen();
   },
   methods: {
+    openMap(spot) {
+      this.$helpers.openPageByUrl(`https://maps.google.com/?q=${encodeURI(spot.name)}`);
+    },
     setFullscreen() {
       // NOTE: propsにしたいところだけれど、
       //       onsenUIが全画面表示をfullscreen属性でやっているので
