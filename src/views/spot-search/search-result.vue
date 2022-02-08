@@ -84,3 +84,34 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.search-result {
+  &__campsite {
+    padding: 5px 20px;
+    background-color: #fff;
+  }
+
+  &__campsite-name {
+    margin-left: 20px;
+    font-size: 18px;
+    font-weight: 300;
+  }
+}
+
+/deep/ {
+  .list-item {
+    border-bottom: 1px solid #d9d9d9;
+
+    &__title {
+      font-size: 18px;
+      font-weight: 300;
+    }
+
+    &__subtitle {
+      font-weight: 300;
+      color: #00000080;
+    }
+  }
+}
+</style>

@@ -2,10 +2,11 @@
   <div class="spot-list">
     <v-ons-card :fullscreen="isFullscreen">
       <div class="content">
-        <v-ons-list>
+        <v-ons-list modifier="noborder">
           <v-ons-list-item
             v-for="spot in spots"
             :key="spot.id"
+            :modifier="modifier"
           >
             <div
               class="center"
@@ -17,6 +18,9 @@
                 </span>
               </div>
               <span class="list-item__subtitle">{{ spot.address }}</span>
+            </div>
+            <div class="right">
+              <slot name="right" />
             </div>
           </v-ons-list-item>
         </v-ons-list>
@@ -34,6 +38,10 @@ export default {
       type: Array,
       default: () => [],
     },
+    hasChevron: {
+      type: Boolean,
+      default: true,
+    },
   },
   data() {
     return {
@@ -43,6 +51,9 @@ export default {
   computed: {
     openMap() {
       return spot => this.$helpers.openPageByUrl(`https://maps.google.com/?q=${encodeURI(spot.name)}`);
+    },
+    modifier() {
+      return `longdivider ${this.hasChevron ? 'chevron' : ''}`;
     },
   },
   mounted() {
@@ -64,7 +75,6 @@ export default {
 
 <style lang="scss" scoped>
 @import '@/assets/scss/_variables.scss';
-@import '@/assets/scss/_mixins.scss';
 
 .spot-list {
   &[fullscreen] {

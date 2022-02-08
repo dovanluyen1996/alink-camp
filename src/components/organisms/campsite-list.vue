@@ -78,6 +78,9 @@ export default {
     this.setFullscreen();
   },
   methods: {
+    isFavorite(campsite) {
+      return this.$store.getters['models/usersFavorite/findByCampsiteId'](campsite.id);
+    },
     setFullscreen() {
       // NOTE: propsにしたいところだけれど、
       //       onsenUIが全画面表示をfullscreen属性でやっているので

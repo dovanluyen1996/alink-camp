@@ -4,35 +4,35 @@
       <loading :visible="isLoading" />
       <div class="text">
         <v-ons-row class="text__desc">
-          〇〇〇〇〇〇〇〇〇〇〇〇<br>〇〇〇〇〇〇〇〇〇〇〇〇キャンズ場
+          {{ campsite.name }}
         </v-ons-row>
       </div>
 
-      <validation-observer>
+      <validation-observer
+        v-slot="{ handleSubmit }"
+      >
         <content-with-footer>
-          <div class="card__title card__title--center card__title--top">
-            チェックイン
-          </div>
           <validation-provider
+            v-slot="{ errors }"
             rules="required|required-future-day"
-            name="プレイ予定日"
+            name="チェックイン"
           >
             <date-field
-              v-model="dateValueCheckIn"
+              v-model="startedDate"
+              title="チェックイン"
               :errors="errors"
               class="date-field__des"
             />
           </validation-provider>
 
-          <div class="card__title card__title--center">
-            チェックアウト
-          </div>
           <validation-provider
-            rules="required|required-future-day"
-            name="プレイ予定日"
+            v-slot="{ errors }"
+            rules="required|required-future-day-since:@チェックイン"
+            name="チェックアウト"
           >
             <date-field
-              v-model="dateValueCheckOut"
+              v-model="finishedDate"
+              title="チェックアウト"
               :errors="errors"
             />
           </validation-provider>
@@ -40,7 +40,7 @@
           <template #footer>
             <v-ons-button
               modifier="large--cta rounded"
-              @click="gotoRegistration"
+              @click="handleSubmit(showConfirmDialog)"
             >
               登録
             </v-ons-button>
@@ -48,7 +48,7 @@
             <v-ons-button
               modifier="large--cta rounded"
               class="button--search-day"
-              @click="gotoListPlan"
+              @click="goToListPlan"
             >
               過去の計画一覧
             </v-ons-button>
@@ -56,6 +56,29 @@
         </content-with-footer>
       </validation-observer>
     </div>
+
+    <confirm-dialog
+      :is-shown.sync="confirmDialogVisible"
+      @clickConfirm="createPlan"
+    >
+      <template #title>
+        登録確認
+      </template>
+
+      <template #message>
+        キャンプ計画を登録します。よろしいですか？
+      </template>
+
+      <template #confirmAction>
+        登録
+      </template>
+    </confirm-dialog>
+
+    <completed-dialog
+      action="createPlan"
+      :is-visible="completedDialogVisible"
+      @close="closeCompletedDialog"
+    />
   </v-ons-page>
 </template>
 
@@ -63,18 +86,61 @@
 // components
 import DateField from '@/components/organisms/form/date-field';
 import ContentWithFooter from '@/components/organisms/content-with-footer';
+import ConfirmDialog from '@/components/organisms/dialog/confirm-dialog';
+import CompletedDialog from '@/components/organisms/dialog/completed-dialog';
 
 export default {
   components: {
     DateField,
     ContentWithFooter,
+    ConfirmDialog,
+    CompletedDialog,
+  },
+  props: {
+    campsite: {
+      type: Object,
+      required: true,
+    },
+  },
+  data() {
+    return {
+      startedDate: '',
+      finishedDate: '',
+      confirmDialogVisible: false,
+      completedDialogVisible: false,
+    };
+  },
+  computed: {
+    isLoading() {
+      return this.$store.getters['models/userCampsitePlan/isLoading'];
+    },
   },
   methods: {
-    gotoRegistration() {
-      // TODO: Redirect to Registration
+    async createPlan() {
+      this.confirmDialogVisible = false;
+
+      const params = {
+        campsiteId: this.campsite.id,
+        startedDate: this.startedDate,
+        finishedDate: this.finishedDate,
+      };
+
+      await this.$store.dispatch('models/userCampsitePlan/createUserCampsitePlan', params);
+
+      this.showCompletedDialog();
     },
-    gotoListPlan() {
-      // TODO: Redirect to List Plan
+    async goToListPlan() {
+      await this.$store.dispatch('plansNavigator/pop');
+    },
+    showConfirmDialog() {
+      this.confirmDialogVisible = true;
+    },
+    showCompletedDialog() {
+      this.completedDialogVisible = true;
+    },
+    async closeCompletedDialog() {
+      this.completedDialogVisible = false;
+      await this.$store.dispatch('plansNavigator/pop');
     },
   },
 };

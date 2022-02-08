@@ -89,6 +89,31 @@ $alert-dialog-radius: 8px;
   }
 }
 
+.custom-edit-alert-dialog {
+  margin-top: -200px;
+
+  .alert-dialog {
+    background: none;
+    border-radius: 0;
+  }
+
+  .alert-dialog-title {
+    display: none !important;
+  }
+
+  .alert-dialog-content {
+    background: $color-white;
+    border: 1px solid $color-border-dark;
+
+    .textarea_dialog {
+      width: 98%;
+      height: 150px;
+      resize: none;
+      border: none;
+    }
+  }
+}
+
 /* ----------
  Form
 ---------- */
@@ -157,6 +182,10 @@ $button-height--rounded: 36px;
     background-color: #ff980b;
   }
 
+  &--yellow {
+    background-color: #ff980b !important;
+  }
+
   &--red {
     background-color: #a82e05;
   }
@@ -210,6 +239,11 @@ $button-height--rounded: 36px;
 
   .alert-dialog-footer & {
     min-width: 140px;
+  }
+
+  &--edit-dialog {
+    min-width: 190px !important;
+    border-radius: 20px;
   }
 }
 

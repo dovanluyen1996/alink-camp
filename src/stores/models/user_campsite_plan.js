@@ -11,9 +11,25 @@ export default {
   },
   getters: {
     isLoading: state => state.isLoading,
-    inFuture: state => state.userCampsitePlans.filter(
-      userCampsitePlan => moment(userCampsitePlan.finishedDate).startOf('days').isSameOrAfter(moment().startOf('days')),
-    ),
+    all: state => state.userCampsitePlans,
+    inFuture: state => (object = {}) => {
+      let plans = state.userCampsitePlans.filter(
+        userCampsitePlan => moment(userCampsitePlan.finishedDate).startOf('days').isSameOrAfter(moment().startOf('days')),
+      );
+
+      if (object.campsiteId) plans = plans.filter(plan => plan.campsite.id === object.campsiteId);
+
+      return plans;
+    },
+    inPast: state => (object = {}) => {
+      let plans = state.userCampsitePlans.filter(
+        userCampsitePlan => moment(userCampsitePlan.finishedDate).startOf('days').isBefore(moment().startOf('days')),
+      );
+
+      if (object.campsiteId) plans = plans.filter(plan => plan.campsite.id === object.campsiteId);
+
+      return plans;
+    },
   },
   mutations: {
     setUserCampsitePlans(state, userCampsitePlans) {
