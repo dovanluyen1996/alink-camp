@@ -26,13 +26,12 @@
         :class="['items__list', {'items__list--active': item.user_id}]"
       >
         <!-- TODO:
-      表示するアイテム名は7文字まで表示する。8文字以降「…」（例: あああああああ… ）
       表示するラベル名は4文字まで表示する。5文字以降「…」（例: ああああ… ） -->
         <div class="items__list--content">
           <check-group-field
             :checked-values.sync="checkedItems"
             :checked-value="item.id"
-            :label="item.name"
+            :label="itemLabel(item.name, 7)"
             :disable="disable"
           />
         </div>
@@ -81,6 +80,9 @@ export default {
     },
   },
   methods: {
+    itemLabel(label, limit) {
+      return this.$helpers.trancate(label, limit)
+    },
     selectAll() {
       this.$emit('update:checkedItemIds', this.items.map(item => item.id));
     },
