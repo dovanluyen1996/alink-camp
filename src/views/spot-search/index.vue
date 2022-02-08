@@ -89,13 +89,13 @@ export default {
   computed: {
     favoriteCampsitesOnly() {
       const favorites = this.$store.getters['models/usersFavorite/all'];
-      const planIds = this.$store.getters['models/userCampsitePlan/inFuture'].map(plan => plan.campsite.id);
+      const planIds = this.$store.getters['models/userCampsitePlan/inFuture']().map(plan => plan.campsite.id);
 
       return favorites.filter(favorite => !planIds.includes(favorite.id));
     },
     favoriteOrPlanned() {
       const allFavoriteCampsites = this.$store.getters['models/usersFavorite/all'];
-      let campsites = this.$store.getters['models/userCampsitePlan/inFuture'].map(plan => plan.campsite);
+      let campsites = this.$store.getters['models/userCampsitePlan/inFuture']().map(plan => plan.campsite);
 
       // uniq campsites
       campsites = campsites.filter(
