@@ -2,16 +2,16 @@
   <div class="items-table">
     <div class="items">
       <div class="items__title">
-          <div class="items__label">
-            全選択
-          </div>
-          <div class="items__label">
-            全解除
-          </div>
-          <div class="items__label items__label--red">
-            ラベルソート
-          </div>
-          <!-- TODO: Show ラベル一覧 when PR #90 was merged -->
+        <div class="items__label">
+          全選択
+        </div>
+        <div class="items__label">
+          全解除
+        </div>
+        <div class="items__label items__label--red">
+          ラベルソート
+        </div>
+        <!-- TODO: Show ラベル一覧 when PR #90 was merged -->
       </div>
 
       <div
@@ -19,7 +19,7 @@
         :key="item"
         :class="['items__list', {'items__list--active': item.user_id}]"
       >
-      <!-- TODO:
+        <!-- TODO:
       表示するアイテム名は7文字まで表示する。8文字以降「…」（例: あああああああ… ）
       表示するラベル名は4文字まで表示する。5文字以降「…」（例: ああああ… ） -->
         <div class="items__list--content">

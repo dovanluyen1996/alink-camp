@@ -6,7 +6,7 @@
           〇〇〇〇〇〇〇〇〇〇〇〇<br>〇〇〇〇〇〇〇〇〇〇〇〇キャンプ場
         </v-ons-row>
       </div>
-      <detail-table :items=items />
+      <detail-table :items="items" />
 
       <content-with-footer>
         <template #footer>

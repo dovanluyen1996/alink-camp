@@ -1,8 +1,9 @@
 <template>
   <div class="table-detail">
-    <div class="card-detail"
+    <div
       v-for="(item, index) in items"
       :key="index"
+      class="card-detail"
     >
       <div class="date-detail">
         <span>
@@ -31,9 +32,10 @@
             </th>
             <th>タスク</th>
           </tr>
-          <tr class="detail-row"
-              v-for="(detail,index) in details"
-              :key="index"
+          <tr
+            v-for="(detail,index) in details"
+            :key="index"
+            class="detail-row"
           >
             <td class="target">
               {{ detail.targetAt }}
@@ -65,23 +67,26 @@
                 </span>
               </div>
               <img
-                  v-if="isContentEmpty(detail.content)"
-                  :src="require('@/assets/images/icon-more.png')"
-                  class="task__icon"
-                  @click="showPopup()"
-                >
-                <img
-                  v-else
-                  :src="require('@/assets/images/icon-edit.png')"
-                  class="task__icon"
-                  @click="showPopup()"
-                >
+                v-if="isContentEmpty(detail.content)"
+                :src="require('@/assets/images/icon-more.png')"
+                class="task__icon"
+                @click="showPopup()"
+              >
+              <img
+                v-else
+                :src="require('@/assets/images/icon-edit.png')"
+                class="task__icon"
+                @click="showPopup()"
+              >
             </td>
           </tr>
         </tbody>
       </table>
     </div>
-    <edit-dialog-task :isVisible="updateDataVisible" @close="closePopup" />
+    <edit-dialog-task
+      :is-visible="updateDataVisible"
+      @close="closePopup"
+    />
   </div>
 </template>
 

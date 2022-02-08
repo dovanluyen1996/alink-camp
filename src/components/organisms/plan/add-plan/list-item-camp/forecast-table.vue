@@ -17,8 +17,9 @@
             <span class="text-small">(m/s)</span>
           </th>
         </tr>
-        <tr v-for="(item, index) in items"
-            :key=index
+        <tr
+          v-for="(item, index) in items"
+          :key="index"
         >
           <td class="date-check">
             <span
