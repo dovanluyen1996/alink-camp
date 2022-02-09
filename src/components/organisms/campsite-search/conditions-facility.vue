@@ -68,17 +68,17 @@ export default {
         },
         {
           value: 2,
-          text: '臨海',
+          text: '湖畔',
           checked: false,
         },
         {
           value: 3,
-          text: '高原',
+          text: '海岸',
           checked: false,
         },
         {
           value: 4,
-          text: '湖畔',
+          text: '臨海',
           checked: false,
         },
         {
@@ -88,17 +88,17 @@ export default {
         },
         {
           value: 6,
-          text: '公園',
+          text: '山間',
           checked: false,
         },
         {
           value: 7,
-          text: '海岸',
+          text: '高原',
           checked: false,
         },
         {
           value: 8,
-          text: '山間',
+          text: '公園',
           checked: false,
         },
         {

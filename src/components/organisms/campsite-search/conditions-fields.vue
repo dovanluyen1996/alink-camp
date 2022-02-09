@@ -21,12 +21,12 @@
     </div>
     <check-field
       v-model="inputedWindValue"
-      label="風が穏やかな予報のコース"
+      label="風が穏やかな予報のキャンプ場"
       :disable="isWindValueDisable"
     />
     <check-field
       v-model="inputedUvValue"
-      label="紫外線が弱い予報のコース"
+      label="紫外線が弱い予報のキャンプ場"
       :disable="isUvValueDisable"
     />
   </div>
@@ -69,11 +69,11 @@ export default {
       temperatureLabels: [
         {
           value: 1,
-          text: '近隣の中でも暖かいゴルフ場',
+          text: '近隣の中でも暖かいキャンプ場',
         },
         {
           value: 2,
-          text: '近隣の中でも涼しいゴルフ場',
+          text: '近隣の中でも涼しいキャンプ場',
         },
         {
           value: 0,

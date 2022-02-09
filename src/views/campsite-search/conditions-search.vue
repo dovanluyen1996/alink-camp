@@ -13,7 +13,7 @@
         <template #footer>
           <v-ons-button
             class="button--search"
-            modifier="large--cta rounded"
+            modifier="large--cta rounded orange"
             :disabled="searched"
             @click="search()"
           >
@@ -108,7 +108,6 @@ export default {
       justify-content: center;
       margin: 0 48px !important;
       font-size: 14px !important;
-      background-color: #ff980b !important;
 
       &::before {
         display: inline-block;

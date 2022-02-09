@@ -86,7 +86,7 @@
 
     <v-ons-alert-dialog :visible.sync="searchResultEmptyVisible">
       <template #title>
-        該当するコースがありません
+        該当キャンプ場がありません
       </template>
       検索結果に該当するキャンプ場がありませんでした。お手数ですが条件を変えてお試しください。
       <template #footer>
@@ -223,7 +223,9 @@ export default {
 
 .button--plus {
   width: 100%;
+  height: 32px;
   margin: 25px 0 12px;
+  font-size: 16px;
   background-color: #c83200;
   border-radius: 0;
 
@@ -233,10 +235,6 @@ export default {
 }
 
 /deep/ {
-  .select {
-    width: 100%;
-  }
-
   .annotations-block {
     font-size: 12px !important;
     font-weight: 300;
