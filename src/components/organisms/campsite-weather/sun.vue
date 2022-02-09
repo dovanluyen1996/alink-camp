@@ -1,19 +1,32 @@
 <template>
   <v-ons-row class="campsite-weather-sun">
     <v-ons-col>
-      <img
-        src="@/assets/images/weathers/sunrise.png"
-        width="12px"
-      >
-      {{ sunrise || '--:--' }}
+      <div class="campsite-weather-sun__box">
+        <div class="campsite-weather-sun__top">
+          <span>日の出</span>
+          <img
+            src="@/assets/images/weathers/sunrise.png"
+            width="25px"
+          >
+        </div>
+        <div class="campsite-weather-sun__date-time">
+          {{ sunrise || '--:--' }}
+        </div>
+      </div>
     </v-ons-col>
     <v-ons-col>
-      &nbsp;
-      <img
-        src="@/assets/images/weathers/sunset.png"
-        width="12px"
-      >
-      {{ sunset || '--:--' }}
+      <div class="campsite-weather-sun__box">
+        <div class="campsite-weather-sun__top">
+          <span>日の入</span>
+          <img
+            src="@/assets/images/weathers/sunset.png"
+            width="25px"
+          >
+        </div>
+        <div class="campsite-weather-sun__date-time">
+          {{ sunset || '--:--' }}
+        </div>
+      </div>
     </v-ons-col>
   </v-ons-row>
 </template>
@@ -39,10 +52,32 @@ export default {
 
 .campsite-weather-sun {
   flex-wrap: nowrap;
-  padding: 5px 6px 0;
-  margin-top: 5px;
+  padding-left: 5px;
   font-size: $font-size-small;
   white-space: nowrap;
-  border-top: 1px solid $color-border;
+
+  &__box {
+    display: flex;
+    align-items: center;
+    margin-right: 5px;
+  }
+
+  &__top {
+    display: flex;
+    flex-direction: column;
+    margin-right: 8px;
+
+    & > span {
+      font-size: 6px;
+      font-weight: 600;
+    }
+  }
+
+  &__date-time {
+    margin-top: 5px;
+    font-size: 9px;
+    font-weight: 300;
+    color: #222;
+  }
 }
 </style>

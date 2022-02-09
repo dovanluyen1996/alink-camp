@@ -40,10 +40,10 @@ export default {
 .dress-title {
   @include title-style;
 
-  font-size: $font-size-small;
+  font-size: 6px;
 }
 
 .dress-label {
-  font-size: $font-size-small;
+  font-size: 6px;
 }
 </style>

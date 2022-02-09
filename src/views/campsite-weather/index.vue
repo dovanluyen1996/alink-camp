@@ -1,6 +1,9 @@
 <template>
   <v-ons-page @show="show">
-    <custom-toolbar title="キャンプ天気" />
+    <custom-toolbar
+      title="キャンプ天気"
+      :disabled-back-button="true"
+    />
     <div class="content">
       <loading :visible="isLoading" />
       <no-data v-if="favoriteCampsites.length === 0 && futurePlans.length === 0">

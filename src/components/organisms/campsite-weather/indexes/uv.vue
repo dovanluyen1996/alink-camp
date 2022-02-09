@@ -56,10 +56,10 @@ export default {
 .uv-title {
   @include title-style;
 
-  font-size: $font-size-small;
+  font-size: 6px;
 }
 
 .uv-label {
-  font-size: $font-size-small;
+  font-size: 6px;
 }
 </style>

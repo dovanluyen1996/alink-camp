@@ -42,15 +42,22 @@ export default {
 @import '@/assets/scss/_variables.scss';
 
 .campsite-weather-plan {
+  position: relative;
+  height: 20px;
   padding: 5px 10px;
-  margin-top: 5px;
+  padding-left: 30px;
   margin-bottom: 10px;
   font-size: $font-size-small;
-  background: #f2f2f2;
+  font-weight: 300;
+  color: #000;
+  background: #f5e9e6;
 
   &__count-down {
+    position: absolute;
+    right: 10px;
     margin-left: 10px;
     font-weight: 600;
+    color: #eb2727;
   }
 
   &.is-today {

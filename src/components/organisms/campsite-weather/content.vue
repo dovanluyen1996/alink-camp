@@ -1,12 +1,12 @@
 <template>
-  <v-ons-card
+  <div
     class="campsite-weather-show"
     @click="goToCampsiteDetail"
   >
     <campsite-weather-header
       :campsite="useCampsite"
     />
-    <div class="campsite-weather-detail">
+    <v-ons-card class="campsite-weather-detail">
       <campsite-weather-plan
         v-if="plan"
         :plan="plan"
@@ -14,8 +14,8 @@
 
       <template v-if="plan && isPresent(ForecastScheduledDate)">
         <campsite-weather-of-the-day :forecast="ForecastScheduledDate" />
-        <campsite-weather-the-day-after :forecast="ForecastScheduledDate.dayAfter" />
         <campsite-weather-hourly-weather :forecast="ForecastScheduledDate.targetDate" />
+        <campsite-weather-the-day-after :forecast="ForecastScheduledDate.dayAfter" />
       </template>
       <template v-else-if="isPresent(Forecast14Days)">
         <campsite-weather-calendar
@@ -27,8 +27,8 @@
           表示できる天気情報がありません
         </div>
       </template>
-    </div>
-  </v-ons-card>
+    </v-ons-card>
+  </div>
 </template>
 
 <script>
@@ -149,13 +149,27 @@ export default {
 
 .campsite-weather-time-table {
   width: 100%;
+  font-size: 10px;
+  font-weight: 300;
+}
+
+/deep/ {
+  .card {
+    padding: 0;
+    margin: 10px;
+    border-radius: 0;
+  }
+
+  .temperature__unit {
+    margin-left: 0;
+  }
+
+  .campsite-weather-day:last-child {
+    border-right: 1px solid #d9d9d9;
+  }
 }
 
 @media screen and (min-width: 320px) {
-  .campsite-weather-of-the-day {
-    width: 61%;
-  }
-
   .campsite-weather-the-day-before {
     width: 36%;
     margin-left: 3%;

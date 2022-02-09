@@ -55,10 +55,10 @@ export default {
 .thunder-title {
   @include title-style;
 
-  font-size: $font-size-small;
+  font-size: 6px;
 }
 
 .thunder-label {
-  font-size: $font-size-small;
+  font-size: 6px;
 }
 </style>

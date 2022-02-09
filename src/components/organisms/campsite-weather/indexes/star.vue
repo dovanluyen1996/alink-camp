@@ -40,10 +40,10 @@ export default {
 .star-title {
   @include title-style;
 
-  font-size: $font-size-small;
+  font-size: 6px;
 }
 
 .star-label {
-  font-size: $font-size-small;
+  font-size: 6px;
 }
 </style>

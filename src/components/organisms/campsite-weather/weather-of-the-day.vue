@@ -4,29 +4,27 @@
       {{ shortDate }}のお天気
     </div>
     <v-ons-row>
-      <v-ons-col width="50%">
+      <v-ons-col width="30%">
         <weather-image
           :weather="forecast.targetDate"
           :is-shown-name="true"
-          image-width="66px"
+          image-width="66.5px"
         />
       </v-ons-col>
-      <v-ons-col width="50%">
+      <v-ons-col width="70%">
         <campsite-weather-temperatures
           :forecast="forecast.targetDate"
-          font-size="18px"
+          font-size="20px"
         />
       </v-ons-col>
     </v-ons-row>
-    <v-ons-row>
+    <v-ons-row class="weather-indexes">
       <v-ons-col>
         <campsite-weather-sun
           :sunrise="forecast.sunrise"
           :sunset="forecast.sunset"
         />
       </v-ons-col>
-    </v-ons-row>
-    <v-ons-row class="weather-indexes">
       <v-ons-col>
         <campsite-weather-thunder-index :forecast="forecast.targetDate" />
       </v-ons-col>
@@ -82,8 +80,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '@/assets/scss/_variables.scss';
-
 .campsite-weather-of-the-day {
   margin-bottom: 10px;
   text-align: center;
@@ -92,19 +88,48 @@ export default {
 .campsite-weather-of-the-day-title {
   padding: 9px;
   margin-bottom: 10px;
+  font-size: 12px;
   font-weight: 600;
   line-height: 1;
   text-align: center;
-  background: $color-th;
 }
 
 .weather-indexes {
   flex-wrap: nowrap;
+  padding-top: 10px;
   margin-top: 15px;
   color: #017f45;
+  border-top: 1px solid #d9d9d9;
 
   ons-col {
     padding: 0 2px;
+  }
+}
+
+/deep/ {
+  .weather-name {
+    font-size: 9px;
+    font-weight: 300;
+  }
+
+  .campsite-weather-sun__top {
+    & > span {
+      color: #007540;
+    }
+  }
+
+  .thunder-title,
+  .thunder-label,
+  .dress-title,
+  .uv-title,
+  .uv-label,
+  .star-title,
+  .star-label {
+    color: #007540;
+  }
+
+  .campsite-weather-temperatures {
+    justify-content: center;
   }
 }
 </style>
