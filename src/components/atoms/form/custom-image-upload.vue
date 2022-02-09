@@ -222,6 +222,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+  min-width: 140px;
   height: 24px;
   margin-top: 10px;
   font-size: 12px;
