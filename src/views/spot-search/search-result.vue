@@ -31,7 +31,7 @@ export default {
   props: {
     location: {
       type: Object,
-      default: () => null,
+      default: null,
     },
   },
   data() {
