@@ -136,6 +136,7 @@ export default {
             latitude: campsite.latitude,
             longitude: campsite.longitude,
           },
+          campsite,
         },
       });
     },
