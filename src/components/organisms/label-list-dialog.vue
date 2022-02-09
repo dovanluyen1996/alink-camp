@@ -139,8 +139,8 @@ export default {
   &__text {
     display: flex;
     align-items: center;
-    width: 100%;
     height: 50px;
+    padding-left: 5px;
     font-size: 14px;
     font-weight: 300;
     color: #222;
