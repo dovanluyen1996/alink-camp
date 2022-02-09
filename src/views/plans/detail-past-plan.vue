@@ -4,9 +4,9 @@
       <template #right>
         <delete-dialog-with-icon
           :is-shown.sync="isShownDeleteDialog"
-          @clickDelete="deleteUserCourseResult"
+          @clickDelete="deletePlan"
         >
-          このキャンプ計画または思い出を編集します。<br>
+          このキャンプ計画または思い出を削除します。<br>
           よろしいですか？
         </delete-dialog-with-icon>
       </template>
@@ -66,9 +66,9 @@ export default {
     closeCompletedDialog() {
       this.completedDialogVisible = false;
     },
-    deleteUserCourseResult() {
+    deletePlan() {
       this.isShownDeleteDialog = false;
-      this.showCompletedDialog('deleteResult');
+      this.showCompletedDialog('deleteItem');
     },
   },
 };
