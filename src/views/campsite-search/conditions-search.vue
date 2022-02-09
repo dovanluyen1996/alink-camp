@@ -17,7 +17,7 @@
             :disabled="searched"
             @click="search()"
           >
-            検索する
+            検索
           </v-ons-button>
         </template>
       </content-with-footer>

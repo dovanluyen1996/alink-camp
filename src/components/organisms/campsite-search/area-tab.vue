@@ -39,7 +39,7 @@
         >
         <img
           v-else
-          :src="require('@/assets/images/icon-plus.png')"
+          :src="require('@/assets/images/red-cross.png')"
           class="icon-plus"
         >
         気象条件
@@ -69,7 +69,7 @@
         >
         <img
           v-else
-          :src="require('@/assets/images/icon-plus.png')"
+          :src="require('@/assets/images/red-cross.png')"
           class="icon-plus"
         >
         施設条件
@@ -219,7 +219,6 @@ export default {
 
 .icon-plus,
 .icon-minus {
-  width: 24px;
   height: 24px;
 }
 
@@ -249,5 +248,4 @@ export default {
     color: #000 !important;
   }
 }
-
 </style>

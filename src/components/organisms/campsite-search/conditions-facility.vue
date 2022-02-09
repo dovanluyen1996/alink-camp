@@ -9,8 +9,9 @@
         :key=item.value
         class="location-grid--item"
       >
-        <check-field />
-        <label>{{ item.text }}</label>
+        <check-field
+          :label="item.text"
+        />
       </div>
     </div>
 
@@ -23,8 +24,9 @@
         :key=item.value
         class="facility-flex"
       >
-        <label>{{ item.text }}</label>
-        <check-field />
+        <check-field
+          :label="item.text"
+        />
       </div>
     </div>
 
@@ -37,8 +39,9 @@
         :key=item.value
         class="nearby-flex"
       >
-        <label>{{ item.text }}</label>
-        <check-field />
+        <check-field
+          :label="item.text"
+        />
       </div>
     </div>
   </div>
@@ -232,6 +235,10 @@ export default {
   font-weight: 300;
 }
 
+.check-field {
+  font-weight: 300;
+}
+
 .location-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -249,6 +256,21 @@ export default {
 .facility-flex,
 .nearby-flex {
   display: flex;
+  align-items: center;
   justify-content: space-between;
+}
+
+/deep/ {
+  .facility,
+  .nearby-information {
+    .custom-input {
+      position: absolute;
+      right: 0;
+    }
+
+    .check-field__label-text {
+      margin-left: 0;
+    }
+  }
 }
 </style>

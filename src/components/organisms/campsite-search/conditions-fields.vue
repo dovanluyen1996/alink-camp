@@ -150,6 +150,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import '@/assets/scss/_variables.scss';
+
 .card__title {
   padding-bottom: 15px;
   margin-top: 20px;
@@ -157,7 +159,13 @@ export default {
   font-size: 16px;
   font-weight: 600;
   color: #000;
-  border-bottom: 1px solid #d9d9d9;
+  border-bottom: 1px solid $color-border;
 }
 
+/deep/ {
+  .custom-radio-label,
+  .check-field {
+    font-weight: 300 !important;
+  }
+}
 </style>
