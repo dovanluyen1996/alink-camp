@@ -45,7 +45,7 @@
         気象条件
       </v-ons-button>
 
-      <annotations-block>
+      <annotations-block v-show="isShowAnnotationWeather">
         天気予報、気温などの気象条件で絞り込めます
       </annotations-block>
 
@@ -75,16 +75,11 @@
         施設条件
       </v-ons-button>
 
-      <annotations-block>
+      <annotations-block v-show="isShowAnnotationFacility">
         ロケーションや周辺施設などの条件を絞り込めます
       </annotations-block>
 
       <campsite-search-conditions-facility
-        :sunny.sync="sunny"
-        :temperature.sync="temperature"
-        :wind.sync="wind"
-        :uv.sync="uv"
-        :date.sync="targetDate"
         v-show="isShowFacility"
       />
     </validation-observer>
@@ -137,6 +132,8 @@ export default {
       uv: false,
       isShowWeather: false,
       isShowFacility: false,
+      isShowAnnotationWeather: true,
+      isShowAnnotationFacility: true,
     };
   },
   computed: {
@@ -204,9 +201,11 @@ export default {
     },
     toggleWeather() {
       this.isShowWeather = !this.isShowWeather;
+      this.isShowAnnotationWeather = !this.isShowAnnotationWeather;
     },
     toggleFacility() {
       this.isShowFacility = !this.isShowFacility;
+      this.isShowAnnotationFacility = !this.isShowAnnotationFacility;
     },
   },
 };

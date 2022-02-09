@@ -5,11 +5,12 @@
     </div>
     <div class="location-grid">
       <div
-        v-for="item in locations"
-        :key=item.value
+        v-for="(item, index) in locations"
+        :key="index"
         class="location-grid--item"
       >
         <check-field
+          v-model="item.checked"
           :label="item.text"
         />
       </div>
@@ -20,11 +21,12 @@
     </div>
     <div class="facility">
       <div
-        v-for="item in facilitys"
-        :key=item.value
+        v-for="(item, index) in facilities"
+        :key="index"
         class="facility-flex"
       >
         <check-field
+          v-model="item.checked"
           :label="item.text"
         />
       </div>
@@ -35,11 +37,12 @@
     </div>
     <div class="nearby-information">
       <div
-        v-for="item in nearby"
-        :key=item.value
+        v-for="(item, index) in nearbies"
+        :key="index"
         class="nearby-flex"
       >
         <check-field
+          v-model="item.checked"
           :label="item.text"
         />
       </div>
@@ -61,157 +64,211 @@ export default {
         {
           value: 1,
           text: '河畔',
+          checked: false,
         },
         {
           value: 2,
           text: '臨海',
+          checked: false,
         },
         {
           value: 3,
           text: '高原',
+          checked: false,
         },
         {
           value: 4,
           text: '湖畔',
+          checked: false,
         },
         {
           value: 5,
           text: '林間',
+          checked: false,
         },
         {
           value: 6,
           text: '公園',
+          checked: false,
         },
         {
           value: 7,
           text: '海岸',
+          checked: false,
         },
         {
           value: 8,
           text: '山間',
+          checked: false,
         },
         {
           value: 9,
           text: 'その他',
+          checked: false,
         },
       ],
-      facilitys: [
+      facilities: [
         {
           value: 1,
-          text: 'カードの利用可',
+          text: 'カード利用可',
+          checked: false,
         },
         {
           value: 2,
           text: '駐車場有',
+          checked: false,
         },
         {
           value: 3,
           text: '駅から徒歩5分以内',
+          checked: false,
         },
         {
           value: 4,
           text: 'オートキャンプ可能',
+          checked: false,
         },
         {
           value: 5,
           text: 'デイキャンプ可能',
+          checked: false,
         },
         {
           value: 6,
           text: 'トレーラーハウス有',
+          checked: false,
         },
         {
           value: 7,
           text: 'バンガローなどの宿泊施設有',
+          checked: false,
         },
         {
           value: 8,
-          text: '常設テント・ティピー・パオの有',
+          text: '常設テント・ティピー・パオ有',
+          checked: false,
         },
         {
           value: 9,
-          text: 'AC電源付きサイトの有',
+          text: 'AC電源付きサイト有',
+          checked: false,
         },
         {
           value: 10,
-          text: 'ランドリーの有',
+          text: 'ランドリー有',
+          checked: false,
         },
         {
           value: 11,
-          text: '水洗トイレの有',
+          text: '水洗トイレ有',
+          checked: false,
         },
         {
           value: 12,
-          text: '温水シャワーの有',
+          text: '温水シャワー有',
+          checked: false,
         },
         {
           value: 13,
-          text: 'お風呂有',
+          text: '風呂有',
+          checked: false,
         },
         {
           value: 14,
           text: '温泉有',
+          checked: false,
         },
         {
           value: 15,
           text: 'バリアフリー施設有',
+          checked: false,
         },
         {
           value: 16,
-          text: '直火が可',
+          text: '直火可',
+          checked: false,
         },
         {
           value: 17,
-          text: 'ペット連れが可',
+          text: 'ペット連れ可',
+          checked: false,
         },
         {
           value: 18,
-          text: '花火が可',
+          text: '花火可',
+          checked: false,
         },
       ],
-      nearby: [
+      nearbies: [
         {
           value: 1,
           text: '周辺でのカヌー可',
+          checked: false,
         },
         {
           value: 2,
           text: '周辺での釣り可',
+          checked: false,
         },
         {
           value: 3,
           text: '周辺でのトレッキング可',
+          checked: false,
         },
         {
           value: 4,
           text: '周辺でのスターウォッチング可',
+          checked: false,
         },
         {
           value: 5,
-          text: '周辺でのスターウォッチング可',
+          text: '周辺でのバードウォッチング可',
+          checked: false,
         },
         {
           value: 6,
           text: '周辺での海水浴可',
+          checked: false,
         },
         {
           value: 7,
-          text: '周辺での海水浴可',
+          text: '周辺での水遊び可',
+          checked: false,
         },
         {
           value: 8,
           text: '周辺の温泉施設',
+          checked: false,
         },
         {
           value: 9,
           text: '周辺の観光牧場',
+          checked: false,
         },
         {
           value: 10,
           text: '周辺のレジャー施設',
+          checked: false,
         },
       ],
     };
+  },
+  computed: {
+    selectedLocations() {
+      return this.locations
+        .filter(location => location.checked)
+        .map(location => location.text);
+    },
+    selectedFacilities() {
+      return this.facilities
+        .filter(facility => facility.checked)
+        .map(facility => facility.text);
+    },
+    selectedNearbies() {
+      return this.nearbies
+        .filter(nearby => nearby.checked)
+        .map(nearby => nearby.text);
+    },
   },
 };
 </script>
