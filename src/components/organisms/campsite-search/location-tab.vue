@@ -39,13 +39,13 @@
         >
         <img
           v-else
-          :src="require('@/assets/images/icon-plus.png')"
+          :src="require('@/assets/images/red-cross.png')"
           class="icon-plus"
         >
         気象条件
       </v-ons-button>
 
-      <annotations-block>
+      <annotations-block v-show="isShowAnnotationWeather">
         天気予報、気温などの気象条件で絞り込めます
       </annotations-block>
 
@@ -69,22 +69,17 @@
         >
         <img
           v-else
-          :src="require('@/assets/images/icon-plus.png')"
+          :src="require('@/assets/images/red-cross.png')"
           class="icon-plus"
         >
         施設条件
       </v-ons-button>
 
-      <annotations-block>
+      <annotations-block v-show="isShowAnnotationFacility">
         ロケーションや周辺施設などの条件を絞り込めます
       </annotations-block>
 
       <campsite-search-conditions-facility
-        :sunny.sync="sunny"
-        :temperature.sync="temperature"
-        :wind.sync="wind"
-        :uv.sync="uv"
-        :date.sync="targetDate"
         v-show="isShowFacility"
       />
     </validation-observer>
@@ -187,6 +182,8 @@ export default {
       geoLocationErrorVisible: false,
       isShowWeather: false,
       isShowFacility: false,
+      isShowAnnotationWeather: true,
+      isShowAnnotationFacility: true,
     };
   },
   computed: {
@@ -337,9 +334,11 @@ export default {
     },
     toggleWeather() {
       this.isShowWeather = !this.isShowWeather;
+      this.isShowAnnotationWeather = !this.isShowAnnotationWeather;
     },
     toggleFacility() {
       this.isShowFacility = !this.isShowFacility;
+      this.isShowAnnotationFacility = !this.isShowAnnotationFacility;
     },
   },
 };
@@ -352,13 +351,13 @@ export default {
 
 .icon-plus,
 .icon-minus {
-  width: 24px;
   height: 24px;
 }
 
 .button--plus {
   width: 100%;
   margin: 25px 0 12px;
+  font-size: 16px;
   background-color: #c83200;
   border-radius: 0;
 
@@ -368,10 +367,6 @@ export default {
 }
 
 /deep/ {
-  .select {
-    width: 100%;
-  }
-
   .annotations-block {
     font-size: 12px !important;
     font-weight: 300;
