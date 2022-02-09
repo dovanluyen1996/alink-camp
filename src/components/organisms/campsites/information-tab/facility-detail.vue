@@ -51,7 +51,7 @@
         </template>
 
         <template #sub-content>
-          {{ campsite.styleAutoCamping }}
+          {{ autoCamping }}
         </template>
       </content-item>
 
@@ -61,7 +61,7 @@
         </template>
 
         <template #sub-content>
-          {{ campsite.styleDayCamping }}
+          {{ dayCamping }}
         </template>
       </content-item>
 
@@ -71,9 +71,9 @@
         </template>
 
         <template #sub-content>
-          トレーラーハウス &nbsp;&nbsp; {{ campsite.facilityTrailerHouse }} <br>
-          バンガロー等 &nbsp;&nbsp; {{ campsite.facilityBungalow }} <br>
-          常設テント等 &nbsp;&nbsp; {{ campsite.facilityPermanentTent }}
+          トレーラーハウス &nbsp;&nbsp; {{ campsite.facilityTrailerHouse ? '○' : '×' }} <br>
+          バンガロー等 &nbsp;&nbsp; {{ campsite.facilityBungalow ? '○' : '×' }} <br>
+          常設テント等 &nbsp;&nbsp; {{ campsite.facilityPermanentTent ? '○' : '×' }}
         </template>
       </content-item>
 
@@ -83,13 +83,13 @@
         </template>
 
         <template #sub-content>
-          AC電源付きサイト &nbsp;&nbsp; {{ campsite.facilityAc }} <br>
-          ランドリー &nbsp;&nbsp; {{ campsite.facilityLaundry }} <br>
-          水洗トイレ &nbsp;&nbsp; {{ campsite.facilityFlushToilet }} <br>
-          温水シャワー &nbsp;&nbsp; {{ campsite.facilityShower }} <br>
-          風呂 &nbsp;&nbsp; {{ campsite.facilityBathroom }} <br>
-          温泉 &nbsp;&nbsp; {{ campsite.facilityHotSpring }} <br>
-          バリアフリー施設 &nbsp;&nbsp; {{ campsite.facilityBarrierFree }}
+          AC電源付きサイト &nbsp;&nbsp; {{ campsite.facilityAc ? '○' : '×' }} <br>
+          ランドリー &nbsp;&nbsp; {{ campsite.facilityLaundry ? '○' : '×' }} <br>
+          水洗トイレ &nbsp;&nbsp; {{ campsite.facilityFlushToilet ? '○' : '×' }} <br>
+          温水シャワー &nbsp;&nbsp; {{ campsite.facilityShower ? '○' : '×' }} <br>
+          風呂 &nbsp;&nbsp; {{ campsite.facilityBathroom ? '○' : '×' }} <br>
+          温泉 &nbsp;&nbsp; {{ campsite.facilityHotSpring ? '○' : '×' }} <br>
+          バリアフリー施設 &nbsp;&nbsp; {{ campsite.facilityBarrierFree ? '○' : '×' }}
         </template>
       </content-item>
 
@@ -99,9 +99,9 @@
         </template>
 
         <template #sub-content>
-          直火 {{ campsite.ruleDirectHeat }} <br>
-          ペット {{ campsite.rulePets }} <br>
-          花火 {{ campsite.ruleFirework }}
+          直火 {{ directHeat }} <br>
+          ペット {{ pets }} <br>
+          花火 {{ firework }}
         </template>
       </content-item>
     </template>
@@ -118,6 +118,26 @@ export default {
   computed: {
     campsite() {
       return this.$store.getters['campsite/choosenCampsite'];
+    },
+    autoCamping() {
+      if (this.campsite.styleAutoCamping > 1) return '';
+      return this.campsite.styleAutoCamping === 1 ? '可' : '不可';
+    },
+    dayCamping() {
+      if (this.campsite.styleDayCamping > 1) return '';
+      return this.campsite.styleDayCamping === 1 ? '常時可' : '不可';
+    },
+    directHeat() {
+      if (this.campsite.ruleDirectHeat > 1) return '';
+      return this.campsite.ruleDirectHeat === 1 ? '可' : '全面禁止';
+    },
+    pets() {
+      if (this.campsite.rulePets > 1) return '';
+      return this.campsite.rulePets === 1 ? '可' : '全面禁止';
+    },
+    firework() {
+      if (this.campsite.ruleFirework > 1) return '';
+      return this.campsite.ruleFirework === 1 ? '可' : '全面禁止';
     },
   },
   components: {

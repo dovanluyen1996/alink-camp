@@ -109,7 +109,7 @@
         </template>
 
         <template #sub-content>
-          {{ campsite.creditCard }}
+          {{ campsite.creditCard ? '可' : '不可' }}
         </template>
       </content-item>
 
