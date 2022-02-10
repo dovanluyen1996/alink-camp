@@ -13,7 +13,7 @@
         <template #footer>
           <v-ons-button
             class="button--search"
-            modifier="large--cta rounded orange"
+            modifier="large--cta rounded yellow"
             :disabled="searched"
             @click="search()"
           >

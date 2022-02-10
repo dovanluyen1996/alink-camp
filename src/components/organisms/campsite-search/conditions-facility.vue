@@ -274,6 +274,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import '@/assets/scss/_variables.scss';
 
 .card__title {
   padding-bottom: 15px;
@@ -282,7 +283,7 @@ export default {
   font-size: 16px;
   font-weight: 600;
   color: #000;
-  border-bottom: 1px solid #d9d9d9;
+  border-bottom: 1px solid $color-border;
 }
 
 .location-grid,
