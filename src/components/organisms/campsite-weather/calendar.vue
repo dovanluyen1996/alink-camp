@@ -25,12 +25,12 @@
         <div class="campsite-weather-day-temperature">
           <temperature-component
             :value="forecast.maxTemp"
-            font-size="13px"
+            font-size="12px"
             class="temperature-high"
           />&nbsp;/&nbsp;
           <temperature-component
             :value="forecast.minTemp"
-            font-size="13px"
+            font-size="12px"
             class="temperature-low"
           />
         </div>
@@ -184,22 +184,26 @@ export default {
 }
 
 .campsite-weather-footer {
+  display: flex;
   min-height: 27px;
-  font-size: 10px;
+  font-size: $font-size-small;
   font-weight: 300;
   color: #0d0101;
-  display: flex;
 }
 
 .campsite-weather-footer-left {
-  width: 55px;
+  width: 120px;
+}
+
+.campsite-weather-footer-right {
+  padding: 0 20px 10px 0;
 }
 
 .campsite-weather-accuracy-index {
   position: absolute;
   right: 5px;
   bottom: 1px;
-  font-size: 10px;
+  font-size: $font-size-small;
   font-weight: 600;
   color: #0d0101;
 }

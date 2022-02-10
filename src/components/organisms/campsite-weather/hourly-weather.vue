@@ -131,11 +131,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '@/assets/scss/_variables.scss';
-
 .campsite-weather-time-table {
   width: 100%;
-  font-size: $font-size-small;
+  font-size: 10px;
   text-align: center;
 }
 </style>

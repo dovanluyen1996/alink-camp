@@ -8,13 +8,13 @@
         <weather-image
           :weather="forecast.targetDate"
           :is-shown-name="true"
-          image-width="66.5px"
+          image-width="66px"
         />
       </v-ons-col>
       <v-ons-col width="70%">
         <campsite-weather-temperatures
           :forecast="forecast.targetDate"
-          font-size="20px"
+          font-size="16px"
         />
       </v-ons-col>
     </v-ons-row>
@@ -80,6 +80,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import '@/assets/scss/_variables.scss';
+
 .campsite-weather-of-the-day {
   text-align: center;
 }
@@ -87,7 +89,7 @@ export default {
 .campsite-weather-of-the-day-title {
   padding: 9px;
   margin-bottom: 10px;
-  font-size: 12px;
+  font-size: $font-size-small;
   font-weight: 600;
   line-height: 1;
   text-align: center;
@@ -107,7 +109,7 @@ export default {
 
 /deep/ {
   .weather-name {
-    font-size: 9px;
+    font-size: $font-size-small;
     font-weight: 300;
   }
 

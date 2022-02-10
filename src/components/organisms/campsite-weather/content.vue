@@ -124,6 +124,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import '@/assets/scss/_variables.scss';
+
 .no-forecast {
   margin: 2rem auto 1rem auto;
   text-align: center;
@@ -157,9 +159,9 @@ export default {
 }
 
 .campsite-weather-separate {
-  background-color: transparent;
-  height: 20px;
   width: 100%;
+  height: 20px;
+  background-color: transparent;
 }
 
 /deep/ {

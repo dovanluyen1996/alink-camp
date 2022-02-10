@@ -36,6 +36,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '@/assets/scss/_variables.scss';
+
 .weather-the-day-after {
   display: flex;
   align-items: center;
@@ -82,6 +84,7 @@ export default {
 
   .campsite-weather-box {
     display: flex;
+    gap: 5px;
     align-items: center;
     height: 100%;
   }
