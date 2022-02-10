@@ -37,11 +37,11 @@
       </v-ons-col>
     </v-ons-row>
     <div class="campsite-weather-footer">
-      <div class="campsite-weather-footer-top">
-        信頼度：A～Eの表示は、予報の信頼度です。低い場合は今後の予報が変わ
+      <div class="campsite-weather-footer-left">
+        信頼度：
       </div>
-      <div class="campsite-weather-footer-bottom">
-        る可能性があります。
+      <div class="campsite-weather-footer-right">
+        A～Eの表示は、予報の信頼度です。低い場合は今後の予報が変わる可能性があります。
       </div>
     </div>
   </div>
@@ -99,7 +99,7 @@ export default {
 }
 
 .campsite-weather-calendar {
-  margin-top: -10px;
+  background-color: #fff;
 }
 
 .campsite-weather-day {
@@ -185,14 +185,14 @@ export default {
 
 .campsite-weather-footer {
   min-height: 27px;
-  padding: 5px 10px;
   font-size: 10px;
   font-weight: 300;
   color: #0d0101;
+  display: flex;
 }
 
-.campsite-weather-footer-bottom {
-  padding-left: 40px;
+.campsite-weather-footer-left {
+  width: 55px;
 }
 
 .campsite-weather-accuracy-index {

@@ -46,7 +46,6 @@ export default {
   height: 20px;
   padding: 5px 10px;
   padding-left: 30px;
-  margin-bottom: 10px;
   font-size: $font-size-small;
   font-weight: 300;
   color: #000;

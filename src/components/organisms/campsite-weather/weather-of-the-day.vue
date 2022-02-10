@@ -81,7 +81,6 @@ export default {
 
 <style scoped lang="scss">
 .campsite-weather-of-the-day {
-  margin-bottom: 10px;
   text-align: center;
 }
 

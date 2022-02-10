@@ -42,6 +42,7 @@ export default {
   justify-content: space-around;
   width: 100%;
   height: 30px;
+  background-color: #fff;
 }
 
 .weather-the-day-after-title {

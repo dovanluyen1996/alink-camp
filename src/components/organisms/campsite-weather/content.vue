@@ -6,7 +6,7 @@
     <campsite-weather-header
       :campsite="useCampsite"
     />
-    <v-ons-card class="campsite-weather-detail">
+    <div class="campsite-weather-detail">
       <campsite-weather-plan
         v-if="plan"
         :plan="plan"
@@ -15,6 +15,7 @@
       <template v-if="plan && isPresent(ForecastScheduledDate)">
         <campsite-weather-of-the-day :forecast="ForecastScheduledDate" />
         <campsite-weather-hourly-weather :forecast="ForecastScheduledDate.targetDate" />
+        <div class="campsite-weather-separate"></div>
         <campsite-weather-the-day-after :forecast="ForecastScheduledDate.dayAfter" />
       </template>
       <template v-else-if="isPresent(Forecast14Days)">
@@ -27,7 +28,7 @@
           表示できる天気情報がありません
         </div>
       </template>
-    </v-ons-card>
+    </div>
   </div>
 </template>
 
@@ -131,6 +132,7 @@ export default {
 .campsite-weather-detail {
   display: flex;
   flex-wrap: wrap;
+  margin: 20px;
 }
 
 .campsite-weather-plan {
@@ -139,7 +141,7 @@ export default {
 
 .campsite-weather-of-the-day {
   width: 100%;
-  margin-bottom: 10px;
+  background-color: #fff;
 }
 
 .campsite-weather-the-day-before {
@@ -151,12 +153,18 @@ export default {
   width: 100%;
   font-size: 10px;
   font-weight: 300;
+  background-color: #fff;
+}
+
+.campsite-weather-separate {
+  background-color: transparent;
+  height: 20px;
+  width: 100%;
 }
 
 /deep/ {
   .card {
     padding: 0;
-    margin: 10px;
     border-radius: 0;
   }
 
