@@ -216,7 +216,11 @@ export default {
   overflow: hidden;
 }
 
-.icon-plus,
+.icon-plus {
+  width: 21px;
+  height: 21px;
+}
+
 .icon-minus {
   height: 24px;
 }
@@ -230,7 +234,7 @@ export default {
   border-radius: 0;
 
   img {
-    margin-right: 10px;
+    margin-right: 5px;
   }
 }
 
