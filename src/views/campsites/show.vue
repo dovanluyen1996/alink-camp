@@ -1,16 +1,9 @@
 <template>
   <v-ons-page @show="show">
-    <!-- <loading :visible="isLoading" /> -->
+    <loading :visible="isLoading" />
     <custom-toolbar title="キャンプ場詳細">
       <template #right>
-        <img
-          v-if="isFavorite"
-          src="@/assets/images/bookmark.png"
-        >
-        <img
-          v-else
-          src="@/assets/images/gray-bookmark.png"
-        >
+        <favorite-campsite :campsite="campsite" />
       </template>
     </custom-toolbar>
     <div class="content">
@@ -42,6 +35,7 @@
 import CardWithTab from '@/components/organisms/card-with-tab';
 import ContentWithFooter from '@/components/organisms/content-with-footer';
 import CampsiteName from '@/components/organisms/campsite-name';
+import FavoriteCampsite from '@/components/organisms/campsites/favorite';
 
 // tab contents
 import CampsiteForecastTab from '@/components/organisms/campsites/forecast-tab';
@@ -54,6 +48,7 @@ export default {
     CardWithTab,
     ContentWithFooter,
     CampsiteName,
+    FavoriteCampsite,
   },
   props: {
     campsite: {
@@ -77,12 +72,14 @@ export default {
           component: CampsiteInformationTab,
         },
       ],
-      isFavorite: true,
     };
   },
   computed: {
     activeIndexTab() {
       return this.$store.state.components.cardWithTab.showCampsiteActiveIndex;
+    },
+    isLoading() {
+      return this.$store.getters['models/usersFavorite/isLoading'];
     },
   },
   created() {
@@ -94,6 +91,10 @@ export default {
     },
     resetCardWithTab() {
       this.$store.commit('components/cardWithTab/resetShowCampsiteActiveIndex');
+    },
+    async show() {
+      this.$store.dispatch('appTabbar/setLastVisitedAt', this.$helpers.localDateWithHyphenFrom(new Date()));
+      await this.$store.dispatch('models/usersFavorite/getUsersFavorites');
     },
   },
 };
