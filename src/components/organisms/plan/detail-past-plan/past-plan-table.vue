@@ -1,9 +1,26 @@
 <template>
   <div class="table-detail">
     <div class="card-detail"
-      v-for="(item, index) in items"
+      v-for="(item, index) in weather"
       :key="index"
     >
+      <v-ons-card class="course-weather-and-image">
+        <v-ons-row class="course-weather-and-image-row">
+          <campsite-plan-weather
+            v-if="weather"
+            :weather="weather[index]"
+          />
+          <v-ons-col
+            v-else
+            class="no-data"
+          >
+            <label width="150px">No Data</label>
+          </v-ons-col>
+          <!-- <plan-image /> -->
+          <campsite-plan-image :value="image" />
+        </v-ons-row>
+      </v-ons-card>
+
       <div class="date-detail">
         <span>
           {{ item.date }}
@@ -18,8 +35,8 @@
             <th>タスク</th>
           </tr>
           <tr class="detail-row"
-              v-for="(detail,index) in details"
-              :key="index"
+            v-for="(detail, i) in item.details"
+            :key="i"
           >
             <td class="target">
               {{ detail.targetAt }}
@@ -71,63 +88,220 @@
 
 <script>
 // components
+import CampsitePlanWeather from '@/components/organisms/campsite-plans/weather';
+import CampsitePlanImage from '@/components/organisms/campsite-plans/image';
 import EditDialogTask from '@/components/organisms/edit-dialog-task';
 
 export default {
   name: 'DetailTable',
   components: {
+    CampsitePlanWeather,
+    CampsitePlanImage,
     EditDialogTask,
-  },
-  props: {
-    items: {
-      type: Array,
-      default: () => [],
-    },
   },
   data() {
     return {
-      details: [
+      weather: [
         {
-          targetAt: 0,
-          temp: 10,
-          content: '焚き火の準備と食事の準備をするあああああああ...',
+          date: '12/31',
+          maxTemp: '32',
+          minTemp: '18',
+          weatherImageName: '01.png',
+          forecastTelop: '曇のち晴',
+          details: [
+            {
+              targetAt: 0,
+              temp: 10,
+              content: '焚き火の準備と食事の準備をするあああああああ...',
+            },
+            {
+              targetAt: 1,
+              temp: 11,
+              content: '',
+            },
+            {
+              targetAt: 2,
+              temp: 10,
+              content: '焚き火の準備と食事の準備をするあああああああ...',
+            },
+            {
+              targetAt: 3,
+              temp: 11,
+              content: '',
+            },
+            {
+              targetAt: 4,
+              temp: 10,
+              content: '焚き火の準備と食事の準備をするあああああああ...',
+            },
+            {
+              targetAt: 5,
+              temp: 11,
+              content: '',
+            },
+            {
+              targetAt: 6,
+              temp: 10,
+              content: '焚き火の準備と食事の準備をするあああああああ...',
+            },
+            {
+              targetAt: 7,
+              temp: 11,
+              content: '',
+            },
+          ],
         },
         {
-          targetAt: 1,
-          temp: 11,
-          content: '',
+          date: '01/01',
+          maxTemp: '32',
+          minTemp: '18',
+          weatherImageName: '01.png',
+          forecastTelop: '曇のち晴',
+          details: [
+            {
+              targetAt: 0,
+              temp: 10,
+              content: '焚き火の準備と食事の準備をするあああああああ...',
+            },
+            {
+              targetAt: 1,
+              temp: 11,
+              content: '',
+            },
+            {
+              targetAt: 2,
+              temp: 10,
+              content: '焚き火の準備と食事の準備をするあああああああ...',
+            },
+            {
+              targetAt: 3,
+              temp: 11,
+              content: '',
+            },
+            {
+              targetAt: 4,
+              temp: 10,
+              content: '焚き火の準備と食事の準備をするあああああああ...',
+            },
+            {
+              targetAt: 5,
+              temp: 11,
+              content: '',
+            },
+            {
+              targetAt: 6,
+              temp: 10,
+              content: '焚き火の準備と食事の準備をするあああああああ...',
+            },
+            {
+              targetAt: 7,
+              temp: 11,
+              content: '',
+            },
+          ],
         },
         {
-          targetAt: 2,
-          temp: 10,
-          content: '焚き火の準備と食事の準備をするあああああああ...',
+          date: '01/02',
+          maxTemp: '32',
+          minTemp: '18',
+          weatherImageName: '01.png',
+          forecastTelop: '曇のち晴',
+          details: [
+            {
+              targetAt: 0,
+              temp: 10,
+              content: '焚き火の準備と食事の準備をするあああああああ...',
+            },
+            {
+              targetAt: 1,
+              temp: 11,
+              content: '',
+            },
+            {
+              targetAt: 2,
+              temp: 10,
+              content: '焚き火の準備と食事の準備をするあああああああ...',
+            },
+            {
+              targetAt: 3,
+              temp: 11,
+              content: '',
+            },
+            {
+              targetAt: 4,
+              temp: 10,
+              content: '焚き火の準備と食事の準備をするあああああああ...',
+            },
+            {
+              targetAt: 5,
+              temp: 11,
+              content: '',
+            },
+            {
+              targetAt: 6,
+              temp: 10,
+              content: '焚き火の準備と食事の準備をするあああああああ...',
+            },
+            {
+              targetAt: 7,
+              temp: 11,
+              content: '',
+            },
+          ],
         },
         {
-          targetAt: 3,
-          temp: 11,
-          content: '',
-        },
-        {
-          targetAt: 4,
-          temp: 10,
-          content: '焚き火の準備と食事の準備をするあああああああ...',
-        },
-        {
-          targetAt: 5,
-          temp: 11,
-          content: '',
-        },
-        {
-          targetAt: 6,
-          temp: 10,
-          content: '焚き火の準備と食事の準備をするあああああああ...',
-        },
-        {
-          targetAt: 7,
-          temp: 11,
-          content: '',
+          date: '01/03',
+          maxTemp: '32',
+          minTemp: '18',
+          weatherImageName: '01.png',
+          forecastTelop: '曇のち晴',
+          details: [
+            {
+              targetAt: 0,
+              temp: 10,
+              content: '焚き火の準備と食事の準備をするあああああああ...',
+            },
+            {
+              targetAt: 1,
+              temp: 11,
+              content: '',
+            },
+            {
+              targetAt: 2,
+              temp: 10,
+              content: '焚き火の準備と食事の準備をするあああああああ...',
+            },
+            {
+              targetAt: 3,
+              temp: 11,
+              content: '',
+            },
+            {
+              targetAt: 4,
+              temp: 10,
+              content: '焚き火の準備と食事の準備をするあああああああ...',
+            },
+            {
+              targetAt: 5,
+              temp: 11,
+              content: '',
+            },
+            {
+              targetAt: 6,
+              temp: 10,
+              content: '焚き火の準備と食事の準備をするあああああああ...',
+            },
+            {
+              targetAt: 7,
+              temp: 11,
+              content: '',
+            },
+          ],
         },
       ],
+      image: {
+        url: 'https://www.w3schools.com/css/img_5terre.jpg', // TODO: Please delete this mock data when implement Logic
+      },
       updateDataVisible: false,
     };
   },
@@ -233,6 +407,78 @@ export default {
     span {
       font-size: 14px;
       font-weight: 600;
+    }
+  }
+}
+
+.course-weather-and-image {
+  text-align: center;
+}
+
+.course-weather-and-image-row {
+  flex-direction: column;
+}
+
+.course-weather-col {
+  margin-right: 0;
+  margin-bottom: 15px;
+}
+
+@media screen and (min-width: 320px) {
+  .course-weather-and-image-row {
+    flex-direction: row;
+  }
+
+  .course-weather-col {
+    flex: 0 0 50%;
+    max-width: 50%;
+    padding-right: 0;
+    margin-bottom: 0;
+  }
+
+  .course-image-col {
+    flex: 0 0 50%;
+    max-width: 50%;
+    padding-left: 5px;
+
+    .share-button {
+      min-width: 90%;
+    }
+  }
+}
+
+@media screen and (min-width: 375px) {
+  .course-weather-col {
+    padding-right: 15px;
+  }
+
+  .course-image-col {
+    padding-left: 0;
+
+    .share-button {
+      min-width: 140px;
+    }
+  }
+}
+
+.no-data {
+  margin: auto;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+@media screen and (min-width: 320px) {
+  .course-image-col {
+    .share-button {
+      min-width: 95%;
+    }
+  }
+}
+
+@media screen and (min-width: 375px) {
+  .course-image-col {
+    .share-button {
+      min-width: 140px;
     }
   }
 }
