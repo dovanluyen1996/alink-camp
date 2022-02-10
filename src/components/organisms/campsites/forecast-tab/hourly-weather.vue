@@ -156,7 +156,7 @@ export default {
       return this.$helpers.toDayString(date);
     },
     isScheduledDate(date) {
-      const futurePlans = this.$store.getters['models/userCampsitePlan/inFuture']();
+      const futurePlans = this.$store.getters['models/userCampsitePlan/inFuture']({ campsiteId: this.campsite.id });
       const targetDate = moment(date).startOf('day');
 
       if (futurePlans.length === 0) return false;
