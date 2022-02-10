@@ -349,20 +349,25 @@ export default {
   overflow: hidden;
 }
 
-.icon-plus,
+.icon-plus {
+  width: 21px;
+  height: 21px;
+}
+
 .icon-minus {
   height: 24px;
 }
 
 .button--plus {
   width: 100%;
+  height: 32px;
   margin: 25px 0 12px;
   font-size: 16px;
   background-color: #c83200;
   border-radius: 0;
 
   img {
-    margin-right: 10px;
+    margin-right: 5px;
   }
 }
 
