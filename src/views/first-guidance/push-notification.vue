@@ -3,15 +3,20 @@
     <custom-toolbar
       modifier="green"
       title="PUSH通知許可"
+      :disabled-back-button="true"
     />
 
     <div class="content">
       <content-with-footer class="guidance-content">
-        <img
-          src="@/assets/images/guidances/push-noti.png"
-          width="118px"
-        >
-        <p>PUSH通知をONにすることで、ゴルフプレイ中に雨雲が近づいた場合や、予定日設定したゴルフ場の天気予報を定期的にお知らせいたします。</p>
+        <div class="guidance-content__box">
+          <img
+            src="@/assets/images/guidances/push-noti.png"
+            width="117px"
+          >
+        </div>
+        <p>
+          PUSH通知をＯＮにすることで、急な雨へのＰＵＳＨ通知や、最適なキャンプ場の検索に活用いただけます。
+        </p>
 
         <template #footer>
           <v-ons-button
@@ -69,5 +74,18 @@ export default {
 <style lang="scss" scoped>
 .call-to-purchase {
   height: auto;
+}
+
+.guidance-content {
+  &__box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 260px;
+
+    & > img {
+      height: 117px;
+    }
+  }
 }
 </style>

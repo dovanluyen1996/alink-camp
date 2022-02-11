@@ -3,15 +3,20 @@
     <custom-toolbar
       modifier="green"
       title="位置情報取得"
+      :disabled-back-button="true"
     />
 
     <div class="content">
       <content-with-footer class="guidance-content">
-        <img
-          src="@/assets/images/guidances/location-service.png"
-          width="114px"
-        >
-        <p>位置情報をONにすることで、プレイ日のゴルフコース上空の風向きや、ゴルフ場のご予約に便利な気象情報を利用したゴルフコース検索をご利用いただけます。</p>
+        <div class="guidance-content__box">
+          <img
+            src="@/assets/images/guidances/location-service.png"
+            width="143px"
+          >
+        </div>
+        <p>
+          位置情報をＯＮにすることで、最適なキャンプ場の検索に活用いただけます。
+        </p>
 
         <template #footer>
           <v-ons-button
@@ -91,5 +96,20 @@ export default {
 <style lang="scss" scoped>
 .call-to-purchase {
   height: auto;
+}
+
+.guidance-content {
+  &__box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 260px;
+    background-color: transparent;
+
+    & > img {
+      height: 114px;
+    }
+  }
 }
 </style>
