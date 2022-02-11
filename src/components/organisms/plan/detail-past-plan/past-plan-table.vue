@@ -16,7 +16,6 @@
           >
             <label width="150px">No Data</label>
           </v-ons-col>
-          <!-- <plan-image /> -->
           <campsite-plan-image :value="image" />
         </v-ons-row>
       </v-ons-card>
@@ -101,6 +100,8 @@ export default {
   },
   data() {
     return {
+      // TODO: ロジックに合うようにデータ構造を変更する
+      // Change the data structure to fit the logic.
       weather: [
         {
           date: '12/31',
