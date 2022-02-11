@@ -49,9 +49,18 @@ export default {
 
 /deep/ {
   .tabbar {
-    background-color: #c83200;
+    display: flex;
+    align-items: center;
+    height: 36px;
+    background-color: #ef6539;
+
+    &__button {
+      height: auto;
+      line-height: 36px;
+    }
 
     &__content {
+      top: 36px !important;
       bottom: 0;
     }
 
@@ -62,7 +71,9 @@ export default {
     .active {
       .tabbar__label {
         display: inline;
-        padding: 5px 18px;
+        padding: 2px 15px;
+        font-size: 16px;
+        font-weight: 600;
         background-color: #631900;
         border-radius: 15px;
       }
