@@ -3,7 +3,7 @@
     :infinite-scroll="search"
     @show="show"
   >
-    <custom-toolbar :title="周辺検索" />
+    <custom-toolbar title="周辺検索" />
     <div class="content">
       <div
         v-if="campsite"
