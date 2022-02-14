@@ -98,6 +98,15 @@ export default {
     campsite() {
       return this.$store.getters['campsite/choosenCampsite'];
     },
+    futurePlans() {
+      return this.$store.getters['models/userCampsitePlan/inFuture']({ campsiteId: this.campsite.id });
+    },
+    nearestPlan() {
+      const sortPlans = [...this.futurePlans].sort(
+        (a, b) => moment(a.startedDate).diff(b.startedDate),
+      );
+      return sortPlans[0] || null;
+    },
     margedForecastsAndSuns() {
       if (!this.forecastHourly.items) return [];
 
@@ -151,17 +160,45 @@ export default {
   async created() {
     this.forecastHourly = await this.getForecastHourly();
   },
+  updated() {
+    this.$nextTick(() => {
+      this.tableScrollNow();
+    });
+  },
   methods: {
+    tableScrollNow() {
+      // NOTE: セルのdate-time属性に時刻を入れてスクロール位置を取得している
+      const table = this.$el.querySelector('.hourly-weather-table');
+      if (!table) return;
+
+      const dateRow = table.querySelector('.date-row');
+      const timeRow = table.querySelector('.time-row');
+      const th = timeRow.querySelector('th');
+      const today = this.$moment();
+      let nowCol = null;
+
+      // if plan-date exists and not today, set the scroll's target to that plan-date
+      if (this.nearestPlan && this.$helpers.isAfterDate(this.nearestPlan.startedDate, today)) {
+        nowCol = dateRow.querySelector(`[date-time="${this.nearestPlan.startedDate}"]`);
+      }
+      const targetAt = today.format('HH');
+      // otherwise, set the scroll's to current time
+      nowCol = nowCol || timeRow.querySelector(`[date-time="${targetAt}"]`);
+
+      if (!nowCol) return;
+      const x = nowCol.offsetLeft - th.offsetWidth;
+
+      table.scrollTo(x, 0);
+    },
     displayDate(date) {
       return this.$helpers.toDayString(date);
     },
     isScheduledDate(date) {
-      const futurePlans = this.$store.getters['models/userCampsitePlan/inFuture']({ campsiteId: this.campsite.id });
       const targetDate = moment(date).startOf('day');
 
-      if (futurePlans.length === 0) return false;
+      if (this.futurePlans.length === 0) return false;
 
-      return futurePlans.some(plan => targetDate.isBetween(plan.startedDate, plan.finishedDate, null, '[]'));
+      return this.futurePlans.some(plan => targetDate.isBetween(plan.startedDate, plan.finishedDate, null, '[]'));
     },
     convertMinutes(time) {
       // NOTE: 日の出日の入りを天気予報にマージするため
