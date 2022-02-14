@@ -44,9 +44,6 @@
 // components
 import SpotList from '@/components/organisms/spot-list';
 
-// pages
-import SpotSearch from '@/views/spot-search/index';
-
 export default {
   name: 'SpotSearchResult',
   components: {
@@ -119,7 +116,7 @@ export default {
     },
     goToSpotSearch() {
       this.closeDialog();
-      this.$store.dispatch('spotSearchNavigator/push', SpotSearch);
+      this.$store.dispatch('spotSearchNavigator/pop');
     },
   },
 };
