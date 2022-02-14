@@ -211,4 +211,10 @@ export default {
     margin-left: 20px;
   }
 }
+
+@media only screen and (max-width: 375px) {
+  .campsite-weather-plan {
+    padding-left: 0 !important;
+  }
+}
 </style>

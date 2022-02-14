@@ -59,6 +59,6 @@ export default {
 }
 
 .thunder-label {
-  font-size: 6px;
+  font-size: 4.5px;
 }
 </style>

@@ -126,6 +126,7 @@ export default {
   height: 24px;
   font-size: 10px;
   font-weight: 300;
+  color: #100101;
   background: $color-th;
 }
 
@@ -158,7 +159,13 @@ export default {
     }
 
     .weather-image {
-      height: 41px;
+      height: 41px !important;
+    }
+
+    .weather {
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   }
 }
@@ -186,17 +193,15 @@ export default {
 .campsite-weather-footer {
   display: flex;
   min-height: 27px;
+  margin: 5px 10px 5px 18px;
   font-size: $font-size-small;
   font-weight: 300;
   color: #0d0101;
 }
 
 .campsite-weather-footer-left {
-  width: 120px;
-}
-
-.campsite-weather-footer-right {
-  padding: 0 20px 10px 0;
+  width: 90px;
+  white-space: nowrap;
 }
 
 .campsite-weather-accuracy-index {

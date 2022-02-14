@@ -122,15 +122,22 @@ export default {
   .thunder-title,
   .thunder-label,
   .dress-title,
+  .dress-label,
   .uv-title,
   .uv-label,
   .star-title,
   .star-label {
+    font-weight: 600;
     color: #007540;
   }
 
   .campsite-weather-temperatures {
     justify-content: center;
+  }
+
+  .temperature__value {
+    font-size: 20px;
+    font-weight: 600;
   }
 }
 </style>

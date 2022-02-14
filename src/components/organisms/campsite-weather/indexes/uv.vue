@@ -60,6 +60,6 @@ export default {
 }
 
 .uv-label {
-  font-size: 6px;
+  font-size: 4.5px;
 }
 </style>

@@ -134,6 +134,15 @@ export default {
 .campsite-weather-time-table {
   width: 100%;
   font-size: 10px;
+  font-weight: 300;
+  color: #100101;
   text-align: center;
+}
+
+/deep/ {
+  tr > td,
+  th {
+    font-weight: 300;
+  }
 }
 </style>
