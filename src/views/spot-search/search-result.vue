@@ -14,27 +14,42 @@
         </p>
       </div>
 
-      <no-data v-if="spots.length === 0">
-        条件に合う周辺情報が見つかりません
-      </no-data>
-
       <spot-list
-        v-else
+        v-if="spots.length > 0"
         :spots="spots"
       />
+
+      <v-ons-alert-dialog
+        :visible.sync="searchResultEmpty"
+      >
+        <template #title>
+          該当する周辺情報がありません
+        </template>
+
+        検索結果に該当する周辺情報がありませんでした。お手数ですが条件を変えてお試しください。
+
+        <template #footer>
+          <v-ons-button
+            @click="goToSpotSearch()"
+          >
+            OK
+          </v-ons-button>
+        </template>
+      </v-ons-alert-dialog>
     </div>
   </v-ons-page>
 </template>
 
 <script>
 // components
-import NoData from '@/components/organisms/no-data';
 import SpotList from '@/components/organisms/spot-list';
+
+// pages
+import SpotSearch from '@/views/spot-search/index';
 
 export default {
   name: 'SpotSearchResult',
   components: {
-    NoData,
     SpotList,
   },
   props: {
@@ -50,6 +65,7 @@ export default {
   data() {
     return {
       page: 1,
+      searchResultEmpty: false,
     };
   },
   computed: {
@@ -93,6 +109,17 @@ export default {
         .then(() => {
           this.page += 1;
         });
+      if (this.totalCount === 0) this.showDialog();
+    },
+    closeDialog() {
+      this.searchResultEmpty = false;
+    },
+    showDialog() {
+      this.searchResultEmpty = true;
+    },
+    goToSpotSearch() {
+      this.closeDialog();
+      this.$store.dispatch('spotSearchNavigator/push', SpotSearch);
     },
   },
 };
