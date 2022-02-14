@@ -3,14 +3,7 @@
     <loading :visible="isLoading" />
     <custom-toolbar title="キャンプ場詳細">
       <template #right>
-        <img
-          v-if="isFavorite"
-          src="@/assets/images/bookmark.png"
-        >
-        <img
-          v-else
-          src="@/assets/images/gray-bookmark.png"
-        >
+        <favorite-campsite :campsite="campsite" />
       </template>
     </custom-toolbar>
     <div class="content">
@@ -42,6 +35,7 @@
 import CardWithTab from '@/components/organisms/card-with-tab';
 import ContentWithFooter from '@/components/organisms/content-with-footer';
 import CampsiteName from '@/components/organisms/campsite-name';
+import FavoriteCampsite from '@/components/organisms/campsites/favorite';
 
 // tab contents
 import CampsiteForecastTab from '@/components/organisms/campsites/forecast-tab';
@@ -54,6 +48,7 @@ export default {
     CardWithTab,
     ContentWithFooter,
     CampsiteName,
+    FavoriteCampsite,
   },
   props: {
     campsite: {
@@ -77,7 +72,6 @@ export default {
           component: CampsiteInformationTab,
         },
       ],
-      isFavorite: true,
     };
   },
   computed: {
@@ -85,7 +79,7 @@ export default {
       return this.$store.state.components.cardWithTab.showCampsiteActiveIndex;
     },
     isLoading() {
-      return this.$store.getters['campsite/isLoading'];
+      return this.$store.getters['campsite/isLoading'] || this.$store.getters['models/usersFavorite/isLoading'];
     },
   },
   created() {
@@ -99,14 +93,20 @@ export default {
       this.$store.commit('components/cardWithTab/resetShowCampsiteActiveIndex');
     },
     async show() {
+      this.$store.dispatch('appTabbar/setLastVisitedAt', this.$helpers.localDateWithHyphenFrom(new Date()));
+
       await this.getCampsite();
       await this.getUserCampsitePlans();
+      await this.getUsersFavorites();
     },
     async getCampsite() {
       await this.$store.dispatch('campsite/getChoosenCampsite', this.campsite.id);
     },
     async getUserCampsitePlans() {
       await this.$store.dispatch('models/userCampsitePlan/getUserCampsitePlans', { campsite_id: this.campsite.id });
+    },
+    async getUsersFavorites() {
+      await this.$store.dispatch('models/usersFavorite/getUsersFavorites');
     },
   },
 };

@@ -39,6 +39,9 @@
 </template>
 
 <script>
+// View
+import DetailPastPlan from '@/views/plans/detail-past-plan';
+
 export default {
   name: 'TimePlan',
   props: {
@@ -56,7 +59,7 @@ export default {
       // TODO: Redirect to Plan Present
     },
     goToPlanPast() {
-      // TODO: Redirect to Plan Past
+      this.$store.dispatch('plansNavigator/push', DetailPastPlan);
     },
   },
 };
