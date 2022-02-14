@@ -2,15 +2,13 @@
   <div class="items-table">
     <div class="items">
       <div class="items__title">
-        <div
-          class="items__label"
-          @click="selectAll"
+        <div class="items__label items__label--plus"
+            @click="selectAll"
         >
           全選択
         </div>
-        <div
-          class="items__label"
-          @click="unSelectAll"
+        <div class="items__label items__label--minus"
+            @click="unSelectAll"
         >
           全解除
         </div>
@@ -113,31 +111,70 @@ export default {
 
     &__title {
       position: relative;
-      padding: 5px;
+      padding: 10px 5px;
       background-color: #eae5e5;
     }
 
     &__label {
-      display: inline-block;
-      width: 77px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 85px;
+      height: 24px;
       padding: 5px 10px;
       margin-right: 10px;
       font-size: 14px;
       font-weight: 600;
       color: $color-white;
       text-align: center;
-      background-color: #0061ca;
-      border-radius: 15px;
+      background-color: #742a2a;
+    }
+  }
 
-      &--red {
-        position: absolute;
-        right: 0;
-        width: 70px;
-        padding: 8px 5px;
-        margin-right: 5px;
-        font-size: 12px;
-        background-color: #a82e05;
-      }
+  .items__label--red {
+    position: absolute;
+    right: 0;
+    width: 101px;
+    margin-right: 5px;
+    font-size: 10px;
+    background-color: #a82e05;
+    border-radius: 15px;
+
+    &::before {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      margin-right: 6px;
+      content: '';
+      background-image: url("~@/assets/images/icon-sort.png");
+      background-position: center;
+      background-size: 100%;
+    }
+  }
+
+  .items__label--plus {
+    &::before {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      margin-right: 6px;
+      content: '';
+      background-image: url("~@/assets/images/icon-choose-plus.png");
+      background-position: center;
+      background-size: 100%;
+    }
+  }
+
+  .items__label--minus {
+    &::before {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      margin-right: 6px;
+      content: '';
+      background-image: url("~@/assets/images/icon-choose-minus.png");
+      background-position: center;
+      background-size: 100%;
     }
   }
 
