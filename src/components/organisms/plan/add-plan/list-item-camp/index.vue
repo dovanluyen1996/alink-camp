@@ -10,7 +10,7 @@
 
       <!-- TODO: 持ち物共有は編集時のみ表示する -->
       <v-ons-button
-        class="button--share"
+        class="button--share button--yellow"
       >
         持ち物共有
       </v-ons-button>
