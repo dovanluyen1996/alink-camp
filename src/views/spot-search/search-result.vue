@@ -57,7 +57,7 @@ export default {
       return this.$store.getters['models/spot/all'];
     },
     totalCount() {
-      return this.$store.getters['models/spots/totalCount'];
+      return this.$store.getters['models/spot/totalCount'];
     },
   },
   methods: {
