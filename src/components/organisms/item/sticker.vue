@@ -23,7 +23,10 @@
         設定しているラベルがありません。
       </p>
     </div>
-    <div class="item-sticker__button">
+    <div
+      class="item-sticker__button"
+      @click="showLabelListDialog"
+    >
       <v-ons-button modifier="cta red">
         <img
           class="item-sticker__image"
@@ -42,6 +45,11 @@ export default {
     sticker: {
       type: Object,
       default: null,
+    },
+  },
+  methods: {
+    showLabelListDialog() {
+      this.$emit('showLabelListDialog');
     },
   },
 };
