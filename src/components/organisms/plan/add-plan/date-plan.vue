@@ -115,15 +115,19 @@ export default {
       return this.$store.getters['models/userCampsitePlan/isLoading'];
     },
   },
+  watch: {
+    async startedDate() {
+      await this.$store.dispatch('plan/setStartedDate', this.startedDate);
+    },
+    async finishedDate() {
+      await this.$store.dispatch('plan/setFinishedDate', this.finishedDate);
+    },
+  },
   methods: {
     async createPlan() {
       this.confirmDialogVisible = false;
 
-      const params = {
-        campsiteId: this.campsite.id,
-        startedDate: this.startedDate,
-        finishedDate: this.finishedDate,
-      };
+      const params = this.$store.getters['plan/params'];
 
       await this.$store.dispatch('models/userCampsitePlan/createUserCampsitePlan', params);
 
