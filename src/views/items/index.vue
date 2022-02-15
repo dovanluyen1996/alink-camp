@@ -1,8 +1,9 @@
 <template>
-  <v-ons-page>
+  <v-ons-page @show="show">
     <custom-toolbar title="アイテム設定" />
 
     <div class="content">
+      <loading :visible="isLoading" />
       <content-with-footer>
         <item-list
           v-if="items.length > 0"
@@ -45,53 +46,18 @@ export default {
     ContentWithFooter,
     ItemList,
   },
-  data() {
-    return {
-      items: [
-        {
-          name: 'オリジナルテント',
-          user_id: 1,
-        },
-        {
-          name: 'オリジナルテント',
-          user_id: null,
-        },
-        {
-          name: 'オリジナルテント',
-          user_id: null,
-        },
-        {
-          name: 'オリジナルテント',
-          user_id: 2,
-        },
-        {
-          name: 'オリジナルテント',
-          user_id: 3,
-        },
-        {
-          name: 'オリジナルテント',
-          user_id: 4,
-        },
-        {
-          name: 'オリジナルテント',
-          user_id: null,
-        },
-        {
-          name: 'オリジナルテント',
-          user_id: null,
-        },
-        {
-          name: 'オリジナルテント',
-          user_id: 5,
-        },
-        {
-          name: 'オリジナルテント',
-          user_id: 6,
-        },
-      ],
-    };
+  computed: {
+    items() {
+      return this.$store.getters['models/item/all'];
+    },
+    isLoading() {
+      return this.$store.getters['models/item/isLoading'];
+    },
   },
   methods: {
+    async show() {
+      await this.$store.dispatch('models/item/getItems');
+    },
     goToItemsNew() {
       this.$store.dispatch('menuNavigator/push', ItemsNewView);
     },
