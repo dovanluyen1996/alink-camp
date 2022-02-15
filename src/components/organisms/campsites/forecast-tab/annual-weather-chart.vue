@@ -70,16 +70,19 @@ export default {
   watch: {
     async campsite() {
       const forecastYearlyWeatherRate = await this.getForecastYearlyWeatherRate();
+      const sortItems = forecastYearlyWeatherRate.items.sort(
+        (a, b) => parseInt(a.month, 10) - parseInt(b.month, 10),
+      );
       if (forecastYearlyWeatherRate) {
         this.pointName = forecastYearlyWeatherRate.pointName;
-        this.fillData(forecastYearlyWeatherRate.items);
+        this.fillData(sortItems);
       }
     },
   },
   methods: {
     fillData(data) {
       this.chartData = {
-        labels: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+        labels: data.map(datum => `${parseInt(datum.month, 10)}月`),
         datasets: [
           {
             label: '晴',
