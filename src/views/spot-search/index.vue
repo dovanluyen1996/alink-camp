@@ -6,12 +6,12 @@
     />
 
     <div class="content">
-      <div class="spot-search__top">
+      <div class="spot-search">
         <v-ons-button
-          modifier="primary"
+          class="buttop-search"
+          modifier="yellow"
           @click="goToSpotSearchByCurrentLocation"
         >
-          <img src="@/assets/images/location.png">
           現在位置より検索
         </v-ons-button>
         <div class="spot-search__text">
@@ -141,14 +141,8 @@ export default {
 
 <style lang="scss" scoped>
 .spot-search {
-  &__top {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-    height: 100px;
-    margin: 30px 0 10px 0;
-  }
+  margin-bottom: -12px;
+  text-align: center;
 
   &__text {
     font-size: 14px;
@@ -169,6 +163,26 @@ export default {
       font-weight: 600;
       color: #000;
     }
+  }
+}
+
+.buttop-search {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  margin: 50px 50px 25px;
+  border-radius: 15px;
+
+  &::before {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    margin-right: 6px;
+    content: '';
+    background-image: url("~@/assets/images/location.png");
+    background-position: center;
+    background-size: 100%;
   }
 }
 
