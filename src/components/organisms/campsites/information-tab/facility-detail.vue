@@ -51,7 +51,7 @@
         </template>
 
         <template #sub-content>
-          {{ autoCamping }}
+          {{ campsite.styleAutoCamping ? '可' : '不可' }}
         </template>
       </content-item>
 
@@ -71,9 +71,9 @@
         </template>
 
         <template #sub-content>
-          トレーラーハウス &nbsp;&nbsp; {{ campsite.facilityTrailerHouse ? '○' : '×' }} <br>
-          バンガロー等 &nbsp;&nbsp; {{ campsite.facilityBungalow ? '○' : '×' }} <br>
-          常設テント等 &nbsp;&nbsp; {{ campsite.facilityPermanentTent ? '○' : '×' }}
+          トレーラーハウス &nbsp;&nbsp; {{ campsite.facilityTrailerHouse === 1 ? 'あり' : 'なし' }} <br>
+          バンガロー等 &nbsp;&nbsp; {{ campsite.facilityBungalow === 1 ? 'あり' : 'なし' }} <br>
+          常設テント等 &nbsp;&nbsp; {{ campsite.facilityPermanentTent === 1 ? 'あり' : 'なし' }}
         </template>
       </content-item>
 
@@ -83,13 +83,13 @@
         </template>
 
         <template #sub-content>
-          AC電源付きサイト &nbsp;&nbsp; {{ campsite.facilityAc ? '○' : '×' }} <br>
-          ランドリー &nbsp;&nbsp; {{ campsite.facilityLaundry ? '○' : '×' }} <br>
-          水洗トイレ &nbsp;&nbsp; {{ campsite.facilityFlushToilet ? '○' : '×' }} <br>
-          温水シャワー &nbsp;&nbsp; {{ campsite.facilityShower ? '○' : '×' }} <br>
-          風呂 &nbsp;&nbsp; {{ campsite.facilityBathroom ? '○' : '×' }} <br>
-          温泉 &nbsp;&nbsp; {{ campsite.facilityHotSpring ? '○' : '×' }} <br>
-          バリアフリー施設 &nbsp;&nbsp; {{ campsite.facilityBarrierFree ? '○' : '×' }}
+          AC電源付きサイト &nbsp;&nbsp; {{ campsite.facilityAc === 1 ? 'あり' : 'なし' }} <br>
+          ランドリー &nbsp;&nbsp; {{ campsite.facilityLaundry === 1 ? 'あり' : 'なし' }} <br>
+          水洗トイレ &nbsp;&nbsp; {{ campsite.facilityFlushToilet === 1 ? 'あり' : 'なし' }} <br>
+          温水シャワー &nbsp;&nbsp; {{ campsite.facilityShower === 1 ? 'あり' : 'なし' }} <br>
+          風呂 &nbsp;&nbsp; {{ campsite.facilityBathroom === 1 ? 'あり' : 'なし' }} <br>
+          温泉 &nbsp;&nbsp; {{ campsite.facilityHotSpring === 1 ? 'あり' : 'なし' }} <br>
+          バリアフリー施設 &nbsp;&nbsp; {{ campsite.facilityBarrierFree === 1 ? 'あり' : 'なし' }}
         </template>
       </content-item>
 
@@ -119,25 +119,81 @@ export default {
     campsite() {
       return this.$store.getters['campsite/choosenCampsite'];
     },
-    autoCamping() {
-      if (this.campsite.styleAutoCamping > 1) return '';
-      return this.campsite.styleAutoCamping === 1 ? '可' : '不可';
-    },
     dayCamping() {
-      if (this.campsite.styleDayCamping > 1) return '';
-      return this.campsite.styleDayCamping === 1 ? '常時可' : '不可';
+      let label = '';
+
+      switch (this.campsite.styleDayCamping) {
+      case 0:
+        label = '不可';
+        break;
+      case 1:
+        label = '常時可';
+        break;
+      case 2:
+        label = '期間により可';
+        break;
+      default:
+        label = '';
+      }
+
+      return label;
     },
     directHeat() {
-      if (this.campsite.ruleDirectHeat > 1) return '';
-      return this.campsite.ruleDirectHeat === 1 ? '可' : '全面禁止';
+      let label = '';
+
+      switch (this.campsite.ruleDirectHeat) {
+      case 0:
+        label = '禁止事項なし';
+        break;
+      case 1:
+        label = '全面禁止';
+        break;
+      case 2:
+        label = '一部禁止・条件付き可';
+        break;
+      default:
+        label = '';
+      }
+
+      return label;
     },
     pets() {
-      if (this.campsite.rulePets > 1) return '';
-      return this.campsite.rulePets === 1 ? '可' : '全面禁止';
+      let label = '';
+
+      switch (this.campsite.rulePets) {
+      case 0:
+        label = '禁止事項なし';
+        break;
+      case 1:
+        label = '全面禁止';
+        break;
+      case 2:
+        label = '一部禁止・条件付き可';
+        break;
+      default:
+        label = '';
+      }
+
+      return label;
     },
     firework() {
-      if (this.campsite.ruleFirework > 1) return '';
-      return this.campsite.ruleFirework === 1 ? '可' : '全面禁止';
+      let label = '';
+
+      switch (this.campsite.ruleFirework) {
+      case 0:
+        label = '禁止事項なし';
+        break;
+      case 1:
+        label = '全面禁止';
+        break;
+      case 2:
+        label = '一部禁止・条件付き可';
+        break;
+      default:
+        label = '';
+      }
+
+      return label;
     },
   },
   components: {

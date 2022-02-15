@@ -109,7 +109,27 @@
         </template>
 
         <template #sub-content>
-          {{ campsite.creditCard ? '可' : '不可' }}
+          {{ creditCard }}
+        </template>
+      </content-item>
+
+      <content-item>
+        <template #sub-title>
+          駐車場
+        </template>
+
+        <template #sub-content>
+          {{ parking }}
+        </template>
+      </content-item>
+
+      <content-item>
+        <template #sub-title>
+          駐車料金
+        </template>
+
+        <template #sub-content>
+          {{ parkingFee }}
         </template>
       </content-item>
 
@@ -136,6 +156,72 @@ export default {
   computed: {
     campsite() {
       return this.$store.getters['campsite/choosenCampsite'];
+    },
+    creditCard() {
+      let label = '';
+
+      switch (this.campsite.creditCard) {
+      case 0:
+        label = '不可';
+        break;
+      case 1:
+        label = '可';
+        break;
+      case 2:
+        label = '情報なし';
+        break;
+      case 3:
+        label = '対象外';
+        break;
+      default:
+        label = '';
+      }
+
+      return label;
+    },
+    parking() {
+      let label = '';
+
+      switch (this.campsite.parking) {
+      case 0:
+        label = '不可';
+        break;
+      case 1:
+        label = '可';
+        break;
+      case 2:
+        label = '情報なし';
+        break;
+      case 3:
+        label = '対象外';
+        break;
+      default:
+        label = '';
+      }
+
+      return label;
+    },
+    parkingFee() {
+      let label = '';
+
+      switch (this.campsite.parkingFee) {
+      case 0:
+        label = '無料';
+        break;
+      case 1:
+        label = '有料';
+        break;
+      case 2:
+        label = '情報なし';
+        break;
+      case 3:
+        label = '対象外';
+        break;
+      default:
+        label = '';
+      }
+
+      return label;
     },
     mapUrl() {
       return `https://maps.google.com/?q=${encodeURI(this.campsite.name)}`;

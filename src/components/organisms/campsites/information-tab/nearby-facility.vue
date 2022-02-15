@@ -6,15 +6,16 @@
 
     <template #content>
       <div class="content-body">
-        カヌー &nbsp;&nbsp; {{ campsite.spotCanoe ? '○' : '×' }} <br>
-        釣り &nbsp;&nbsp; {{ campsite.spotFishing ? '○' : '×' }} <br>
-        トレッキング &nbsp;&nbsp; {{ campsite.spotTrekking ? '○' : '×' }} <br>
-        スターウォッチング &nbsp;&nbsp; {{ campsite.spotStarWatching ? '○' : '×' }} <br>
-        海水浴 &nbsp;&nbsp; {{ campsite.spotSeaBathing ? '○' : '×' }} <br>
-        水遊び &nbsp;&nbsp; {{ campsite.spotWaterplay ? '○' : '×' }} <br>
-        温泉 &nbsp;&nbsp; {{ campsite.spotHotSpring ? '○' : '×' }} <br>
-        観光牧場 &nbsp;&nbsp; {{ campsite.spotFarm ? '○' : '×' }} <br>
-        レジャー施設 &nbsp;&nbsp; {{ campsite.spotLeisure ? '○' : '×' }}
+        カヌー &nbsp;&nbsp; {{ campsite.spotCanoe === 1 ? 'あり' : 'なし' }} <br>
+        釣り &nbsp;&nbsp; {{ campsite.spotFishing === 1 ? 'あり' : 'なし' }} <br>
+        トレッキング &nbsp;&nbsp; {{ campsite.spotTrekking === 1 ? 'あり' : 'なし' }} <br>
+        スターウォッチング &nbsp;&nbsp; {{ campsite.spotStarWatching === 1 ? 'あり' : 'なし' }} <br>
+        バードウォッチング &nbsp;&nbsp; {{ campsite.spotBirdWatching === 1 ? 'あり' : 'なし' }} <br>
+        海水浴 &nbsp;&nbsp; {{ campsite.spotSeaBathing === 1 ? 'あり' : 'なし' }} <br>
+        水遊び &nbsp;&nbsp; {{ campsite.spotWaterplay === 1 ? 'あり' : 'なし' }} <br>
+        温泉 &nbsp;&nbsp; {{ campsite.spotHotSpring === 1 ? 'あり' : 'なし' }} <br>
+        観光牧場 &nbsp;&nbsp; {{ campsite.spotFarm === 1 ? 'あり' : 'なし' }} <br>
+        レジャー施設 &nbsp;&nbsp; {{ campsite.spotLeisure === 1 ? 'あり' : 'なし' }}
       </div>
     </template>
   </information-tab-item>
