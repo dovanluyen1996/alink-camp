@@ -22,8 +22,9 @@ export default {
   justify-content: space-between;
 
   .status {
-    width: 80px;
-    text-align: center;
+    width: 130px;
+    margin-right: 5px;
+    text-align: right;
   }
 }
 </style>
