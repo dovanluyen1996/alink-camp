@@ -47,6 +47,7 @@ export default {
 }
 
 .weather-the-day-after-title {
+  margin-left: -10px;
   font-size: 10px;
   font-weight: 600;
 }
@@ -86,6 +87,12 @@ export default {
     gap: 5px;
     align-items: center;
     height: 100%;
+  }
+}
+
+@media only screen and (max-width: 375px) {
+  .weather-the-day-after-title {
+    margin-left: -5px;
   }
 }
 </style>

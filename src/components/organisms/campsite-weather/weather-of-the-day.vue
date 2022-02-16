@@ -19,22 +19,22 @@
       </v-ons-col>
     </v-ons-row>
     <v-ons-row class="weather-indexes">
-      <v-ons-col>
+      <v-ons-col width="42.5%">
         <campsite-weather-sun
           :sunrise="forecast.sunrise"
           :sunset="forecast.sunset"
         />
       </v-ons-col>
-      <v-ons-col>
+      <v-ons-col width="13%">
         <campsite-weather-thunder-index :forecast="forecast.targetDate" />
       </v-ons-col>
-      <v-ons-col>
+      <v-ons-col width="13%">
         <campsite-weather-dress-index :forecast="forecast.targetDate" />
       </v-ons-col>
-      <v-ons-col>
+      <v-ons-col width="13%">
         <campsite-weather-uv-index :forecast="forecast.targetDate" />
       </v-ons-col>
-      <v-ons-col>
+      <v-ons-col width="18.5%">
         <campsite-weather-star-index :forecast="forecast.targetDate" />
       </v-ons-col>
     </v-ons-row>
@@ -101,10 +101,6 @@ export default {
   margin-top: 15px;
   color: #017f45;
   border-top: 1px solid #d9d9d9;
-
-  ons-col {
-    padding: 0 2px;
-  }
 }
 
 /deep/ {

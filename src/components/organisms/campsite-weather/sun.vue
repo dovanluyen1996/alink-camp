@@ -53,6 +53,7 @@ export default {
 .campsite-weather-sun {
   flex-wrap: nowrap;
   height: 100%;
+  padding-right: 12px;
   padding-left: 5px;
   white-space: nowrap;
   border-right: 1px solid #d9d9d9;
@@ -80,15 +81,7 @@ export default {
 
 /deep/ {
   ons-col {
-    padding-right: 20px;
-  }
-}
-
-@media only screen and (max-width: 375px) {
-  /deep/ {
-    ons-col {
-      padding-right: 10px;
-    }
+    padding-right: 0;
   }
 }
 </style>
