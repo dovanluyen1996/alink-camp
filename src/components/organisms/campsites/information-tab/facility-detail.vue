@@ -71,9 +71,32 @@
         </template>
 
         <template #sub-content>
-          トレーラーハウス &nbsp;&nbsp; {{ campsite.facilityTrailerHouse === 1 ? 'あり' : 'なし' }} <br>
-          バンガロー等 &nbsp;&nbsp; {{ campsite.facilityBungalow === 1 ? 'あり' : 'なし' }} <br>
-          常設テント等 &nbsp;&nbsp; {{ campsite.facilityPermanentTent === 1 ? 'あり' : 'なし' }}
+          <content-status-item>
+            <template #text>
+              トレーラーハウス
+            </template>
+            <template #status>
+              {{ campsite.facilityTrailerHouse === 1 ? 'あり' : 'なし' }}
+            </template>
+          </content-status-item>
+
+          <content-status-item>
+            <template #text>
+              バンガロー等
+            </template>
+            <template #status>
+              {{ campsite.facilityBungalow === 1 ? 'あり' : 'なし' }}
+            </template>
+          </content-status-item>
+
+          <content-status-item>
+            <template #text>
+              常設テント等
+            </template>
+            <template #status>
+              {{ campsite.facilityPermanentTent === 1 ? 'あり' : 'なし' }}
+            </template>
+          </content-status-item>
         </template>
       </content-item>
 
@@ -83,13 +106,68 @@
         </template>
 
         <template #sub-content>
-          AC電源付きサイト &nbsp;&nbsp; {{ campsite.facilityAc === 1 ? 'あり' : 'なし' }} <br>
-          ランドリー &nbsp;&nbsp; {{ campsite.facilityLaundry === 1 ? 'あり' : 'なし' }} <br>
-          水洗トイレ &nbsp;&nbsp; {{ campsite.facilityFlushToilet === 1 ? 'あり' : 'なし' }} <br>
-          温水シャワー &nbsp;&nbsp; {{ campsite.facilityShower === 1 ? 'あり' : 'なし' }} <br>
-          風呂 &nbsp;&nbsp; {{ campsite.facilityBathroom === 1 ? 'あり' : 'なし' }} <br>
-          温泉 &nbsp;&nbsp; {{ campsite.facilityHotSpring === 1 ? 'あり' : 'なし' }} <br>
-          バリアフリー施設 &nbsp;&nbsp; {{ campsite.facilityBarrierFree === 1 ? 'あり' : 'なし' }}
+          <content-status-item>
+            <template #text>
+              AC電源付きサイト
+            </template>
+            <template #status>
+              {{ campsite.facilityAc === 1 ? 'あり' : 'なし' }}
+            </template>
+          </content-status-item>
+
+          <content-status-item>
+            <template #text>
+              ランドリー
+            </template>
+            <template #status>
+              {{ campsite.facilityLaundry === 1 ? 'あり' : 'なし' }}
+            </template>
+          </content-status-item>
+
+          <content-status-item>
+            <template #text>
+              水洗トイレ
+            </template>
+            <template #status>
+              {{ campsite.facilityFlushToilet === 1 ? 'あり' : 'なし' }}
+            </template>
+          </content-status-item>
+
+          <content-status-item>
+            <template #text>
+              温水シャワー
+            </template>
+            <template #status>
+              {{ campsite.facilityShower === 1 ? 'あり' : 'なし' }}
+            </template>
+          </content-status-item>
+
+          <content-status-item>
+            <template #text>
+              風呂
+            </template>
+            <template #status>
+              {{ campsite.facilityBathroom === 1 ? 'あり' : 'なし' }}
+            </template>
+          </content-status-item>
+
+          <content-status-item>
+            <template #text>
+              温泉
+            </template>
+            <template #status>
+              {{ campsite.facilityHotSpring === 1 ? 'あり' : 'なし' }}
+            </template>
+          </content-status-item>
+
+          <content-status-item>
+            <template #text>
+              バリアフリー施設
+            </template>
+            <template #status>
+              {{ campsite.facilityBarrierFree === 1 ? 'あり' : 'なし' }}
+            </template>
+          </content-status-item>
         </template>
       </content-item>
 
@@ -99,9 +177,32 @@
         </template>
 
         <template #sub-content>
-          直火 {{ directHeat }} <br>
-          ペット {{ pets }} <br>
-          花火 {{ firework }}
+          <content-status-item>
+            <template #text>
+              直火
+            </template>
+            <template #status>
+              {{ directHeat }}
+            </template>
+          </content-status-item>
+
+          <content-status-item>
+            <template #text>
+              ペット
+            </template>
+            <template #status>
+              {{ pets }}
+            </template>
+          </content-status-item>
+
+          <content-status-item>
+            <template #text>
+              花火
+            </template>
+            <template #status>
+              {{ firework }}
+            </template>
+          </content-status-item>
         </template>
       </content-item>
     </template>
@@ -112,6 +213,7 @@
 // components
 import InformationTabItem from '@/components/atoms/information-tab/item';
 import ContentItem from '@/components/atoms/information-tab/content-item';
+import ContentStatusItem from '@/components/atoms/information-tab/content-status-item';
 
 export default {
   name: 'CampsitesInformationFacilityDetail',
@@ -199,6 +301,7 @@ export default {
   components: {
     InformationTabItem,
     ContentItem,
+    ContentStatusItem,
   },
 };
 </script>

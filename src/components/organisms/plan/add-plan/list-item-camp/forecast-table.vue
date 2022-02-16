@@ -17,8 +17,9 @@
             <span class="text-small">(m/s)</span>
           </th>
         </tr>
-        <tr v-for="(item, index) in items"
-            :key=index
+        <tr
+          v-for="(item, index) in items"
+          :key="index"
         >
           <td class="date-check">
             <span
@@ -121,6 +122,7 @@ $speed-degrees: 0, 22.5, 45, 67.5, 90, 112.5, 135, 157.5, 180,
       font-weight: 600;
       color: #100101;
       background-color: #eae5e5;
+      border-right: 1px solid $color-border !important;
     }
 
     .text-small {
@@ -136,20 +138,15 @@ $speed-degrees: 0, 22.5, 45, 67.5, 90, 112.5, 135, 157.5, 180,
       height: 34px;
       font-size: 14px;
       font-weight: 300;
+      border-left: 1px solid $color-border !important;
     }
 
     th,
     td {
       padding: 0;
-      border-right: 1px solid $color-border !important;
     }
 
     .date-check {
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
       span {
         padding: 0 12px;
       }
