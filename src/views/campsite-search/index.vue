@@ -39,7 +39,7 @@ export default {
       searchText: '',
       campsites: [
         {
-          id: 980190964,
+          id: 1,
           name: '〇〇〇キャンプ場',
           address: 'キャンプ場キャンプ場〇〇〇',
           latitude: 1,
