@@ -87,7 +87,7 @@ export default {
 }
 
 .campsite-weather-of-the-day-title {
-  padding: 9px;
+  padding-top: 5px;
   margin-bottom: 10px;
   font-size: $font-size-small;
   font-weight: 600;
@@ -97,7 +97,7 @@ export default {
 
 .weather-indexes {
   flex-wrap: nowrap;
-  padding-top: 10px;
+  padding: 5px 0;
   margin-top: 15px;
   color: #017f45;
   border-top: 1px solid #d9d9d9;
@@ -113,12 +113,7 @@ export default {
     font-weight: 300;
   }
 
-  .campsite-weather-sun__top {
-    & > span {
-      color: #007540;
-    }
-  }
-
+  .campsite-weather-sun,
   .thunder-title,
   .thunder-label,
   .dress-title,
@@ -127,6 +122,7 @@ export default {
   .uv-label,
   .star-title,
   .star-label {
+    font-size: 10px;
     font-weight: 600;
     color: #007540;
   }

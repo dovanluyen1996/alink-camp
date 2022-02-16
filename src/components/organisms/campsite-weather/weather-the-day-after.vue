@@ -2,7 +2,6 @@
   <div class="weather-the-day-after">
     <div class="weather-the-day-after-title">
       {{ forecast.date | moment('MM/DD') }}
-      <span>のお天気</span>
     </div>
     <weather-image
       :weather="forecast"

@@ -52,32 +52,43 @@ export default {
 
 .campsite-weather-sun {
   flex-wrap: nowrap;
+  height: 100%;
   padding-left: 5px;
-  font-size: $font-size-small;
   white-space: nowrap;
+  border-right: 1px solid #d9d9d9;
 
   &__box {
     display: flex;
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
     margin-right: 5px;
   }
 
   &__top {
     display: flex;
     flex-direction: column;
+    align-items: center;
     margin-right: 8px;
-
-    & > span {
-      font-size: 6px;
-      font-weight: 600;
-    }
   }
 
   &__date-time {
-    margin-top: 5px;
-    font-size: 9px;
     font-weight: 300;
     color: #222;
+  }
+}
+
+/deep/ {
+  ons-col {
+    padding-right: 20px;
+  }
+}
+
+@media only screen and (max-width: 375px) {
+  /deep/ {
+    ons-col {
+      padding-right: 10px;
+    }
   }
 }
 </style>

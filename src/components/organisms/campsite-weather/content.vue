@@ -11,6 +11,7 @@
         v-if="plan"
         :plan="plan"
       />
+      <div class="campsite-weather-separate"></div>
 
       <template v-if="plan && isPresent(ForecastScheduledDate)">
         <campsite-weather-of-the-day :forecast="ForecastScheduledDate" />
@@ -209,12 +210,6 @@ export default {
     flex: 1;
     width: auto;
     margin-left: 20px;
-  }
-}
-
-@media only screen and (max-width: 375px) {
-  .campsite-weather-plan {
-    padding-left: 0 !important;
   }
 }
 </style>

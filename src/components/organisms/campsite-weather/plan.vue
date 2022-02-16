@@ -54,7 +54,6 @@ export default {
   &__count-down {
     position: absolute;
     right: 10px;
-    margin-left: 10px;
     font-weight: 600;
     color: #eb2727;
   }
@@ -65,6 +64,16 @@ export default {
     .campsite-weather-plan__count-down {
       color: #eb2727;
     }
+  }
+}
+
+@media only screen and (max-width: 375px) {
+  .campsite-weather-plan {
+    padding-left: 2px;
+  }
+
+  .campsite-weather-plan__count-down {
+    right: 2px;
   }
 }
 </style>

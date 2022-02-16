@@ -48,18 +48,3 @@ export default {
   },
 };
 </script>
-
-<style scoped lang="scss">
-@import '@/assets/scss/_mixins.scss';
-@import '@/assets/scss/_variables.scss';
-
-.uv-title {
-  @include title-style;
-
-  font-size: 6px;
-}
-
-.uv-label {
-  font-size: 4.5px;
-}
-</style>
