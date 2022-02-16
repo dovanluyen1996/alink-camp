@@ -46,7 +46,7 @@
         <template #sub-content>
           <a
             class="phone-link"
-            :href="'tel:' + campsite.phone"
+            :href="`tel:${campsite.phone}`"
           >
             {{ campsite.phone }}
           </a>
