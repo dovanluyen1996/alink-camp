@@ -152,30 +152,26 @@ export default {
     }
   }
 
-  .items__label--plus {
-    &::before {
-      display: inline-block;
-      width: 16px;
-      height: 16px;
-      margin-right: 6px;
-      content: '';
-      background-image: url("~@/assets/images/icon-choose-plus.png");
-      background-position: center;
-      background-size: 100%;
-    }
+  .items__label--plus::before {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-right: 6px;
+    content: '';
+    background-image: url("~@/assets/images/icon-choose-plus.png");
+    background-position: center;
+    background-size: 100%;
   }
 
-  .items__label--minus {
-    &::before {
-      display: inline-block;
-      width: 16px;
-      height: 16px;
-      margin-right: 6px;
-      content: '';
-      background-image: url("~@/assets/images/icon-choose-minus.png");
-      background-position: center;
-      background-size: 100%;
-    }
+  .items__label--minus::before {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-right: 6px;
+    content: '';
+    background-image: url("~@/assets/images/icon-choose-minus.png");
+    background-position: center;
+    background-size: 100%;
   }
 
   .items__list {
