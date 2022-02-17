@@ -135,7 +135,7 @@ export default {
         width: 70px;
         padding: 8px 5px;
         margin-right: 5px;
-        font-size: 10px;
+        font-size: 12px;
         background-color: #a82e05;
       }
     }

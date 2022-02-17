@@ -199,7 +199,7 @@ export default {
     .legend {
       display: flex;
       justify-content: flex-end;
-      font-size: 10px;
+      font-size: 12px;
       list-style: none;
 
       li {
