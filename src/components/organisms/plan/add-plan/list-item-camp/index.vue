@@ -1,10 +1,10 @@
 <template>
-  <v-ons-page>
+  <v-ons-page @show="show">
     <div class="content">
       <loading :visible="isLoading" />
       <div class="text">
         <v-ons-row class="text__desc">
-          〇〇〇〇〇〇〇〇〇〇〇〇<br>〇〇〇〇〇〇〇〇〇〇〇〇キャンズ場
+          {{ campsite.name }}
         </v-ons-row>
       </div>
 
@@ -21,8 +21,9 @@
 
       <forecast-table />
       <item-table
-        v-if="labels.length > 0"
-        :labels="labels"
+        v-if="items.length > 0"
+        :checked-item-ids.sync="checkedItemIds"
+        :items="items"
       />
 
       <div
@@ -37,7 +38,7 @@
         <template #footer>
           <v-ons-button
             modifier="large--cta rounded"
-            @click="goToRegistration"
+            @click="showConfirmDialog"
           >
             登録
           </v-ons-button>
@@ -52,6 +53,29 @@
         </template>
       </content-with-footer>
     </div>
+
+    <confirm-dialog
+      :is-shown.sync="confirmDialogVisible"
+      @clickConfirm="createPlan"
+    >
+      <template #title>
+        登録確認
+      </template>
+
+      <template #message>
+        キャンプ計画を登録します。よろしいですか？
+      </template>
+
+      <template #confirmAction>
+        登録
+      </template>
+    </confirm-dialog>
+
+    <completed-dialog
+      action="createPlan"
+      :is-visible="completedDialogVisible"
+      @close="closeCompletedDialog"
+    />
   </v-ons-page>
 </template>
 
@@ -60,59 +84,65 @@
 import ItemTable from '@/components/organisms/plan/add-plan/list-item-camp/item-table';
 import ForecastTable from '@/components/organisms/plan/add-plan/list-item-camp/forecast-table';
 import ContentWithFooter from '@/components/organisms/content-with-footer';
+import ConfirmDialog from '@/components/organisms/dialog/confirm-dialog';
+import CompletedDialog from '@/components/organisms/dialog/completed-dialog';
 
 export default {
   components: {
     ForecastTable,
     ItemTable,
     ContentWithFooter,
+    ConfirmDialog,
+    CompletedDialog,
+  },
+  props: {
+    campsite: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {
-      labels: [
-        {
-          name: 'オリジナルテント',
-          user_id: 1,
-        },
-        {
-          name: 'オリジナルテント',
-          user_id: null,
-        },
-        {
-          name: 'オリジナルテント',
-          user_id: 2,
-        },
-        {
-          name: 'オリジナルテント',
-          user_id: 3,
-        },
-        {
-          name: 'オリジナルテント',
-          user_id: null,
-        },
-        {
-          name: 'オリジナルテント',
-          user_id: null,
-        },
-        {
-          name: 'オリジナルテント',
-          user_id: null,
-        },
-      ],
+      checkedItemIds: [],
+      confirmDialogVisible: false,
+      completedDialogVisible: false,
     };
   },
   computed: {
+    items() {
+      return this.$store.getters['models/item/all'];
+    },
     isLoading() {
-      // TODO: return status of Loading
-      return false;
+      return this.$store.getters['models/item/isLoading'];
+    },
+  },
+  watch: {
+    async checkedItemIds() {
+      await this.$store.dispatch('plan/setItemIds', this.checkedItemIds);
     },
   },
   methods: {
-    goToRegistration() {
-      // TODO: Redirect to Registration
+    async createPlan() {
+      this.confirmDialogVisible = false;
+
+      const params = this.$store.getters['plan/params'];
+
+      await this.$store.dispatch('models/userCampsitePlan/createUserCampsitePlan', params);
+
+      this.showCompletedDialog();
     },
-    goToListPlan() {
-      // TODO: Redirect to List Plan
+    async goToListPlan() {
+      await this.$store.dispatch('plansNavigator/pop');
+    },
+    showConfirmDialog() {
+      this.confirmDialogVisible = true;
+    },
+    showCompletedDialog() {
+      this.completedDialogVisible = true;
+    },
+    async closeCompletedDialog() {
+      this.completedDialogVisible = false;
+      await this.$store.dispatch('plansNavigator/pop');
     },
   },
 };

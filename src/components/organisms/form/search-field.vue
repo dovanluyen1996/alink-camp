@@ -47,6 +47,9 @@
 </template>
 
 <script>
+// pages
+import ConditionsSearch from '@/views/campsite-search/conditions-search';
+
 export default {
   name: 'SearchField',
   props: {
@@ -102,6 +105,9 @@ export default {
     },
     showSearchResultEmptyDialog() {
       this.searchResultEmptyVisible = true;
+    },
+    goToConditionsSearch() {
+      this.$store.dispatch('campsiteSearchNavigator/push', ConditionsSearch);
     },
   },
 };
