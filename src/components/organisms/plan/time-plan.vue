@@ -105,7 +105,6 @@ export default {
     margin-bottom: 5px;
     font-size: 18px;
     line-height: 1.2;
-    text-align: center;
   }
 
   &__center {
