@@ -18,8 +18,8 @@
         <template v-for="(temperature, index) in monthlyTemperature()">
           <tr :key="index">
             <td>{{ temperature.period }}</td>
-            <td>{{ temperature.miniTemp }}</td>
-            <td>{{ temperature.maxTemp }}</td>
+            <td>{{ temperature.miniTemp }}℃</td>
+            <td>{{ temperature.maxTemp }}℃</td>
           </tr>
         </template>
       </table>

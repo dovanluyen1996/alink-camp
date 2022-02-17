@@ -2,10 +2,16 @@
   <div class="items-table">
     <div class="items">
       <div class="items__title">
-        <div class="items__label">
+        <div
+          class="items__label"
+          @click="selectAll"
+        >
           全選択
         </div>
-        <div class="items__label">
+        <div
+          class="items__label"
+          @click="unSelectAll"
+        >
           全解除
         </div>
         <div class="items__label items__label--red">
@@ -15,16 +21,18 @@
       </div>
 
       <div
-        v-for="item in labels"
+        v-for="item in items"
         :key="item"
         :class="['items__list', {'items__list--active': item.user_id}]"
       >
         <!-- TODO:
-      表示するアイテム名は7文字まで表示する。8文字以降「…」（例: あああああああ… ）
       表示するラベル名は4文字まで表示する。5文字以降「…」（例: ああああ… ） -->
         <div class="items__list--content">
-          <check-field
-            :label="item.name"
+          <check-group-field
+            :checked-values.sync="checkedItems"
+            :checked-value="item.id"
+            :label="itemLabel(item.name, 7)"
+            :disable="disable"
           />
         </div>
         <div class="items__list--label">
@@ -45,16 +53,41 @@
 
 <script>
 // components
-import CheckField from '@/components/organisms/form/check-field';
+import CheckGroupField from '@/components/organisms/form/check-group-field';
 
 export default {
   components: {
-    CheckField,
+    CheckGroupField,
   },
   props: {
-    labels: {
+    checkedItemIds: {
       type: Array,
       default: () => [],
+    },
+    items: {
+      type: Array,
+      default: () => [],
+    },
+  },
+  computed: {
+    checkedItems: {
+      get() {
+        return this.checkedItemIds;
+      },
+      set(newValue) {
+        this.$emit('update:checkedItemIds', newValue);
+      },
+    },
+  },
+  methods: {
+    itemLabel(label, limit) {
+      return this.$helpers.truncate(label, limit);
+    },
+    selectAll() {
+      this.$emit('update:checkedItemIds', this.items.map(item => item.id));
+    },
+    unSelectAll() {
+      this.$emit('update:checkedItemIds', []);
     },
   },
 };

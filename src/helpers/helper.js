@@ -5,6 +5,9 @@ import settings from '@/config/settings';
 moment.locale('ja');
 
 export default {
+  truncate(string, limit) {
+    return string.length > limit ? `${string.slice(0, limit)}...` : string;
+  },
   toLongString(targetDate) {
     return moment(targetDate).format('YYYY/MM/DD (dd)');
   },

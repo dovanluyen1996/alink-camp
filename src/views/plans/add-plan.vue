@@ -1,5 +1,5 @@
 <template>
-  <v-ons-page>
+  <v-ons-page @show="show">
     <custom-toolbar title="新規計画" />
     <v-ons-tabbar
       position="top"
@@ -34,6 +34,7 @@ export default {
         {
           label: '持ち物',
           page: ListItemCamp,
+          props: { campsite: this.campsite },
         },
         {
           label: '予定詳細',
@@ -41,6 +42,18 @@ export default {
         },
       ],
     };
+  },
+  methods: {
+    async show() {
+      await this.setCampsiteId();
+      await this.getItems();
+    },
+    async setCampsiteId() {
+      await this.$store.dispatch('plan/setCampsiteId', this.campsite.id);
+    },
+    async getItems() {
+      await this.$store.dispatch('models/item/getItems');
+    },
   },
 };
 </script>
