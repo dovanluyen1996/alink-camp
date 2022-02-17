@@ -5,11 +5,31 @@ export default {
   strict: true,
   namespaced: true,
   state: {
-    spots: [],
+    spots: {
+      spots: [],
+      totalCount: 0,
+    },
     isLoading: false,
+  },
+  getters: {
+    all: state => state.spots.spots,
+    size: state => state.spots.spots.length,
+    totalCount: state => state.spots.totalCount,
   },
   mutations: {
     setSpots(state, spots) {
+      const newSpots = state.spots;
+      newSpots.spots = [...newSpots.spots, ...spots.spots];
+      newSpots.totalCount = spots.totalCount;
+
+      Vue.set(state, 'spots', newSpots);
+    },
+    resetSpots(state) {
+      const spots = {
+        spots: [],
+        totalCount: 0,
+      };
+
       Vue.set(state, 'spots', spots);
     },
     setIsLoading(state, isLoading) {
@@ -17,11 +37,11 @@ export default {
     },
   },
   actions: {
-    async getSpots(context) {
+    async getSpots(context, params) {
       context.commit('setIsLoading', true);
 
       try {
-        const spots = await ApiClient.getSpots();
+        const spots = await ApiClient.getSpots(params);
 
         context.commit('setSpots', spots);
       } catch (error) {
@@ -30,6 +50,9 @@ export default {
       } finally {
         context.commit('setIsLoading', false);
       }
+    },
+    resetSpots(context) {
+      context.commit('resetSpots');
     },
   },
 };

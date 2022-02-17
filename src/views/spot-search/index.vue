@@ -1,5 +1,5 @@
 <template>
-  <v-ons-page>
+  <v-ons-page @show="show">
     <custom-toolbar
       title="周辺検索"
       :disabled-back-button="true"
@@ -18,12 +18,11 @@
           予定日、またはお気に入り設定中のキャンプ場
         </div>
       </div>
-      <!-- TODO: When implement Logic, please use Loading in Store  -->
-      <!-- <loading :visible="isLoading" /> -->
+      <loading :visible="isLoading" />
       <campsite-list
-        v-if="campsites.length > 0"
+        v-if="favoriteOrPlanned.length > 0"
         :is-show-favorite-mark="true"
-        :campsites="campsites"
+        :campsites="favoriteOrPlanned"
         :has-chevron="false"
         @click="goToSearchSpotByCampsite"
       />
@@ -46,6 +45,24 @@
         </v-ons-button>
       </v-ons-card>
     </div>
+    <v-ons-alert-dialog
+      :visible.sync="geoLocationErrorVisible"
+    >
+      <template #title>
+        位置情報が取得できませんでした
+      </template>
+
+      位置情報が取得できませんでした。<br>
+      お手数ですが、通信状況の良いところで再度お試しください。または、アプリの設定にて位置情報送信の許諾をしているかご確認ください
+
+      <template #footer>
+        <v-ons-button
+          @click="closeGeoLocationErrorDialog()"
+        >
+          OK
+        </v-ons-button>
+      </template>
+    </v-ons-alert-dialog>
   </v-ons-page>
 </template>
 
@@ -56,84 +73,127 @@ import CampsiteList from '@/components/organisms/campsite-list';
 // pages
 import SearchResult from '@/views/spot-search/search-result';
 
+import settings from '@/config/settings';
+
 export default {
   components: {
     CampsiteList,
   },
   data() {
     return {
-      campsites: [
-        {
-          id: 1,
-          name: '〇〇〇キャンプ場',
-          address: 'キャンプ場キャンプ場〇〇〇',
-          latitude: 1,
-          longitude: 1,
-          isFavorited: false,
-        },
-        {
-          id: 2,
-          name: '〇〇〇キャンプ場',
-          address: 'キャンプ場キャンプ場〇〇〇',
-          latitude: 2,
-          longitude: 2,
-          isFavorited: true,
-        },
-        {
-          id: 3,
-          name: '〇〇〇キャンプ場',
-          address: 'キャンプ場キャンプ場〇〇〇',
-          latitude: 3,
-          longitude: 3,
-          isFavorited: false,
-        },
-        {
-          id: 4,
-          name: '〇〇〇キャンプ場',
-          address: 'キャンプ場キャンプ場〇〇〇',
-          latitude: 4,
-          longitude: 4,
-          isFavorited: true,
-        },
-        {
-          id: 5,
-          name: '〇〇〇キャンプ場',
-          address: 'キャンプ場キャンプ場〇〇〇',
-          latitude: 5,
-          longitude: 5,
-          isFavorited: false,
-        },
-        {
-          id: 6,
-          name: '〇〇〇キャンプ場',
-          address: 'キャンプ場キャンプ場〇〇〇',
-          latitude: 6,
-          longitude: 6,
-          isFavorited: true,
-        },
-        {
-          id: 7,
-          name: '〇〇〇キャンプ場',
-          address: 'キャンプ場キャンプ場〇〇〇',
-          latitude: 7,
-          longitude: 7,
-          isFavorited: false,
-        },
-      ],
+      geoLocationErrorVisible: false,
+      latitude: null,
+      longitude: null,
     };
+  },
+  computed: {
+    favoriteCampsitesOnly() {
+      const favorites = this.$store.getters['models/usersFavorite/all'];
+      const planIds = this.$store.getters['models/userCampsitePlan/inFuture']().map(plan => plan.campsite.id);
+
+      return favorites.filter(favorite => !planIds.includes(favorite.id));
+    },
+    favoriteOrPlanned() {
+      const allFavoriteCampsites = this.$store.getters['models/usersFavorite/all'];
+      let campsites = this.$store.getters['models/userCampsitePlan/inFuture']().map(plan => plan.campsite);
+
+      // uniq campsites
+      campsites = campsites.filter(
+        (campsite, index) => campsites.findIndex(element => element.id === campsite.id) === index,
+      );
+
+      // sort campsites
+      campsites = campsites.sort(
+        (a, b) => {
+          const favorited = allFavoriteCampsites.some(favorite => a.id === favorite.id);
+          const aStartedDate = this.$moment(a.startedDate).startOf('days');
+          const bStartedDate = this.$moment(b.startedDate).startOf('days');
+          let sort = 0;
+          sort = aStartedDate.isAfter(bStartedDate) ? 1 : -1;
+          if (aStartedDate.isSame(bStartedDate)) sort = favorited ? -1 : 1;
+          return sort;
+        },
+      );
+
+      return campsites.concat(this.favoriteCampsitesOnly);
+    },
+    isLoading() {
+      const loadPlan = this.$store.getters['models/userCampsitePlan/isLoading'];
+      const loadFavorite = this.$store.getters['models/usersFavorite/isLoading'];
+
+      return loadPlan || loadFavorite;
+    },
   },
   methods: {
     goToSearchSpotByCampsite(campsite) {
+      // Reset before search result
+      this.$store.dispatch('models/spot/resetSpots');
+
       this.$store.dispatch('spotSearchNavigator/push', {
         extends: SearchResult,
-        onsNavigatorProps: { campsite },
+        onsNavigatorProps: {
+          location: {
+            latitude: campsite.latitude,
+            longitude: campsite.longitude,
+          },
+          campsite,
+        },
       });
     },
     goToSpotSearchByCurrentLocation() {
-      this.$store.dispatch('spotSearchNavigator/push', SearchResult);
+      Promise.resolve()
+        .then(() => this.getGeoLocation())
+        .then(() => {
+          // Reset before search result
+          this.$store.dispatch('models/spot/resetSpots');
+
+          this.$store.dispatch('spotSearchNavigator/push', {
+            extends: SearchResult,
+            onsNavigatorProps: {
+              location: {
+                latitude: this.latitude,
+                longitude: this.longitude,
+              },
+            },
+          });
+        })
+        .catch((e) => {
+          console.error(e);
+        });
     },
     goToSearchCampsite() {
       // TODO: implement redirect to キャンプ場検索 when implement Logic
+    },
+    async show() {
+      this.$store.dispatch('appTabbar/setLastVisitedAt', this.$helpers.localDateWithHyphenFrom(new Date()));
+      await this.$store.dispatch('models/userCampsitePlan/getUserCampsitePlans');
+      await this.$store.dispatch('models/usersFavorite/getUsersFavorites');
+    },
+    getGeoLocation() {
+      return new Promise((resolve, reject) => {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            this.latitude = position.coords.latitude;
+            this.longitude = position.coords.longitude;
+
+            resolve();
+          }, (e) => {
+            this.latitude = null;
+            this.longitude = null;
+            this.showGeoLocationErrorDialog();
+
+            reject(e);
+          }, {
+            timeout: settings.locationServices.timeout,
+          },
+        );
+      });
+    },
+    closeGeoLocationErrorDialog() {
+      this.geoLocationErrorVisible = false;
+    },
+    showGeoLocationErrorDialog() {
+      this.geoLocationErrorVisible = true;
     },
   },
 };

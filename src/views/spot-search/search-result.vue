@@ -1,7 +1,9 @@
 <template>
-  <v-ons-page>
+  <v-ons-page
+    :infinite-scroll="search"
+    @show="show"
+  >
     <custom-toolbar title="周辺検索" />
-
     <div class="content">
       <div
         v-if="campsite"
@@ -11,12 +13,29 @@
           {{ campsite.name }}
         </p>
       </div>
-      <!-- TODO: When implement Logic, please use Loading in Store  -->
-      <!-- <loading :visible="isLoading" /> -->
+
       <spot-list
-        v-if="spot.length > 0"
-        :spot="spot"
+        v-if="spots.length > 0"
+        :spots="spots"
       />
+
+      <v-ons-alert-dialog
+        :visible.sync="searchResultEmpty"
+      >
+        <template #title>
+          該当する周辺情報がありません
+        </template>
+
+        検索結果に該当する周辺情報がありませんでした。お手数ですが条件を変えてお試しください。
+
+        <template #footer>
+          <v-ons-button
+            @click="goToSpotSearch()"
+          >
+            OK
+          </v-ons-button>
+        </template>
+      </v-ons-alert-dialog>
     </div>
   </v-ons-page>
 </template>
@@ -26,10 +45,15 @@
 import SpotList from '@/components/organisms/spot-list';
 
 export default {
+  name: 'SpotSearchResult',
   components: {
     SpotList,
   },
   props: {
+    location: {
+      type: Object,
+      default: null,
+    },
     campsite: {
       type: Object,
       default: null,
@@ -37,51 +61,63 @@ export default {
   },
   data() {
     return {
-      spot: [
-        {
-          id: 1,
-          name: 'セブンイレブン',
-          address: 'キャンプ場キャンプ場〇〇〇',
-          distance: 999,
-        },
-        {
-          id: 2,
-          name: 'セブンイレブン',
-          address: 'キャンプ場キャンプ場〇〇〇',
-          distance: 999,
-        },
-        {
-          id: 3,
-          name: 'セブンイレブン',
-          address: 'キャンプ場キャンプ場〇〇〇',
-          distance: 999,
-        },
-        {
-          id: 4,
-          name: 'セブンイレブン',
-          address: 'キャンプ場キャンプ場〇〇〇',
-          distance: 999,
-        },
-        {
-          id: 5,
-          name: 'セブンイレブン',
-          address: 'キャンプ場キャンプ場〇〇〇',
-          distance: 999,
-        },
-        {
-          id: 6,
-          name: 'セブンイレブン',
-          address: 'キャンプ場キャンプ場〇〇〇',
-          distance: 999,
-        },
-        {
-          id: 7,
-          name: 'セブンイレブン',
-          address: 'キャンプ場キャンプ場〇〇〇',
-          distance: 999,
-        },
-      ],
+      page: 1,
+      searchResultEmpty: false,
     };
+  },
+  computed: {
+    spots() {
+      return this.$store.getters['models/spot/all'];
+    },
+    totalCount() {
+      return this.$store.getters['models/spot/totalCount'];
+    },
+  },
+  methods: {
+    async search(done) {
+      // if getted spots is the same with total count, finish paging
+      if (this.totalCount === this.$store.getters['models/spot/size']) {
+        if (done) done();
+        return;
+      }
+
+      const searchParams = {
+        latitude: this.location.latitude,
+        longitude: this.location.longitude,
+        page: this.page,
+      };
+
+      await this.$store.dispatch('models/spot/getSpots', searchParams)
+        .then(() => {
+          this.page += 1;
+          if (done) done();
+        });
+    },
+    async show() {
+      this.$store.dispatch('appTabbar/setLastVisitedAt', this.$helpers.localDateWithHyphenFrom(new Date()));
+
+      const searchParams = {
+        latitude: this.location.latitude,
+        longitude: this.location.longitude,
+        page: this.page,
+      };
+
+      await this.$store.dispatch('models/spot/getSpots', searchParams)
+        .then(() => {
+          this.page += 1;
+        });
+      if (this.totalCount === 0) this.showDialog();
+    },
+    closeDialog() {
+      this.searchResultEmpty = false;
+    },
+    showDialog() {
+      this.searchResultEmpty = true;
+    },
+    goToSpotSearch() {
+      this.closeDialog();
+      this.$store.dispatch('spotSearchNavigator/pop');
+    },
   },
 };
 </script>

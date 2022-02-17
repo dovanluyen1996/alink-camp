@@ -1,6 +1,6 @@
 export default {
-  async getSpots() {
-    const response = await this.get('/spots');
+  async getSpots(params) {
+    const response = await this.get('/spots', params);
     return response.data;
   },
 };
