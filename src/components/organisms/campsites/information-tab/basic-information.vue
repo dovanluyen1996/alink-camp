@@ -107,7 +107,27 @@
         </template>
 
         <template #sub-content>
-          −
+          対象外
+        </template>
+      </content-item>
+
+      <content-item>
+        <template #sub-title>
+          駐車場
+        </template>
+
+        <template #sub-content>
+          対象外
+        </template>
+      </content-item>
+
+      <content-item>
+        <template #sub-title>
+          駐車料金
+        </template>
+
+        <template #sub-content>
+          情報なし
         </template>
       </content-item>
 
