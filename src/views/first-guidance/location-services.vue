@@ -107,7 +107,7 @@ export default {
     height: 260px;
     background-color: transparent;
 
-    & > img {
+    img {
       height: 114px;
     }
   }

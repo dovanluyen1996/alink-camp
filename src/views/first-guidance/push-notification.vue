@@ -83,7 +83,7 @@ export default {
     justify-content: center;
     height: 260px;
 
-    & > img {
+    img {
       height: 117px;
     }
   }

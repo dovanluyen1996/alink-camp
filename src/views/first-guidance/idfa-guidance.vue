@@ -103,15 +103,18 @@ export default {
 
 <style lang="scss" scoped>
 .guidance-content {
+  img {
+    margin: 3.5px;
+  }
+
   &__box {
     display: flex;
-    gap: 7px;
     align-items: center;
     justify-content: center;
     width: 100%;
     height: 260px;
 
-    & > img:last-child {
+    img:last-child {
       margin-top: 10px;
     }
   }
