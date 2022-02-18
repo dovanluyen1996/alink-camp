@@ -193,14 +193,14 @@ export default {
 .campsite-weather-footer {
   display: flex;
   min-height: 27px;
-  margin: 5px 10px 5px 18px;
+  padding: 5px 15px 5px 5px;
   font-size: $font-size-small;
   font-weight: 300;
   color: #0d0101;
 }
 
 .campsite-weather-footer-left {
-  width: 90px;
+  width: 50px;
   white-space: nowrap;
 }
 

@@ -1,10 +1,13 @@
 <template>
   <div class="campsite-weather-of-the-day">
-    <div class="campsite-weather-of-the-day-title">
-      {{ shortDate }}のお天気
-    </div>
     <v-ons-row>
-      <v-ons-col width="30%">
+      <v-ons-col
+        class="campsite-weather-of-the-day-box"
+        width="30%"
+      >
+        <div class="campsite-weather-of-the-day-title">
+          {{ shortDate }}のお天気
+        </div>
         <weather-image
           :weather="forecast.targetDate"
           :is-shown-name="true"
@@ -19,22 +22,22 @@
       </v-ons-col>
     </v-ons-row>
     <v-ons-row class="weather-indexes">
-      <v-ons-col width="42.5%">
+      <v-ons-col width="36%">
         <campsite-weather-sun
           :sunrise="forecast.sunrise"
           :sunset="forecast.sunset"
         />
       </v-ons-col>
-      <v-ons-col width="13%">
+      <v-ons-col width="16%">
         <campsite-weather-thunder-index :forecast="forecast.targetDate" />
       </v-ons-col>
-      <v-ons-col width="13%">
+      <v-ons-col width="16%">
         <campsite-weather-dress-index :forecast="forecast.targetDate" />
       </v-ons-col>
-      <v-ons-col width="13%">
+      <v-ons-col width="16%">
         <campsite-weather-uv-index :forecast="forecast.targetDate" />
       </v-ons-col>
-      <v-ons-col width="18.5%">
+      <v-ons-col width="16%">
         <campsite-weather-star-index :forecast="forecast.targetDate" />
       </v-ons-col>
     </v-ons-row>
@@ -88,7 +91,6 @@ export default {
 
 .campsite-weather-of-the-day-title {
   padding-top: 5px;
-  margin-bottom: 10px;
   font-size: $font-size-small;
   font-weight: 600;
   line-height: 1;
@@ -101,6 +103,13 @@ export default {
   margin-top: 15px;
   color: #017f45;
   border-top: 1px solid #d9d9d9;
+}
+
+.campsite-weather-of-the-day-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-left: 30px;
 }
 
 /deep/ {
@@ -130,6 +139,12 @@ export default {
   .temperature__value {
     font-size: 20px;
     font-weight: 600;
+  }
+}
+
+@media only screen and (max-width: 375px) {
+  .campsite-weather-of-the-day-box {
+    padding-left: 10px;
   }
 }
 </style>

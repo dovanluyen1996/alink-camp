@@ -53,8 +53,6 @@ export default {
 .campsite-weather-sun {
   flex-wrap: nowrap;
   height: 100%;
-  padding-right: 12px;
-  padding-left: 5px;
   white-space: nowrap;
   border-right: 1px solid #d9d9d9;
 
@@ -63,14 +61,12 @@ export default {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-right: 5px;
   }
 
   &__top {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-right: 8px;
   }
 
   &__date-time {

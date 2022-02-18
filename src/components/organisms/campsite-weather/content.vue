@@ -135,7 +135,7 @@ export default {
 .campsite-weather-detail {
   display: flex;
   flex-wrap: wrap;
-  margin: 20px;
+  margin: 6px 9px;
 }
 
 .campsite-weather-plan {
@@ -161,7 +161,7 @@ export default {
 
 .campsite-weather-separate {
   width: 100%;
-  height: 20px;
+  height: 6px;
   background-color: transparent;
 }
 
