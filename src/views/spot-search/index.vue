@@ -8,7 +8,7 @@
     <div class="content">
       <div class="spot-search">
         <v-ons-button
-          class="buttop-search"
+          class="button-search"
           modifier="yellow"
           @click="goToSpotSearchByCurrentLocation"
         >
@@ -166,7 +166,7 @@ export default {
   }
 }
 
-.buttop-search {
+.button-search {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -182,7 +182,6 @@ export default {
     content: '';
     background-image: url("~@/assets/images/location.png");
     background-position: center;
-    background-size: 100%;
   }
 }
 
