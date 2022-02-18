@@ -435,13 +435,13 @@ $speed-degrees: 0, 22.5, 45, 67.5, 90, 112.5, 135, 157.5, 180,
       }
 
       .wind-speed {
-        width: 10px;
-        height: 16px;
+        width: 15px;
+        height: 24px;
         margin-left: 2px;
       }
 
       span {
-        font-size: 10px;
+        font-size: 12px;
       }
     }
   }
