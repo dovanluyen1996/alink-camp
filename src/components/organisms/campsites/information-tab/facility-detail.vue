@@ -183,7 +183,7 @@
               直火
             </template>
             <template #status>
-              一部禁止・条件付き可
+              禁止事項なし
             </template>
           </content-status-item>
 
@@ -192,7 +192,7 @@
               ペット
             </template>
             <template #status>
-              一部禁止・条件付き可
+              一部禁止
             </template>
           </content-status-item>
 
