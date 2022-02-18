@@ -194,10 +194,9 @@ export default {
       return this.$helpers.toDayString(date);
     },
     isScheduledDate(date) {
-      const targetDate = moment(date).startOf('day');
-
       if (this.futurePlans.length === 0) return false;
 
+      const targetDate = moment(date).startOf('day');
       return this.futurePlans.some(plan => targetDate.isBetween(plan.startedDate, plan.finishedDate, null, '[]'));
     },
     convertMinutes(time) {
