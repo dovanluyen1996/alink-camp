@@ -37,18 +37,10 @@
       <content-with-footer>
         <template #footer>
           <v-ons-button
-            modifier="large--cta rounded"
+            modifier="large--cta rounded yellow"
             @click="showConfirmDialog"
           >
-            登録
-          </v-ons-button>
-
-          <v-ons-button
-            modifier="large--cta rounded"
-            class="button--search-day"
-            @click="goToListPlan"
-          >
-            過去の計画一覧
+            編集保存
           </v-ons-button>
         </template>
       </content-with-footer>
