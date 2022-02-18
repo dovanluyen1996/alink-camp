@@ -82,6 +82,13 @@ export default {
       return this.$store.getters['campsite/isLoading'] || this.$store.getters['models/usersFavorite/isLoading'];
     },
   },
+  watch: {
+    activeIndexTab() {
+      if (this.activeIndexTab === 1) {
+        this.$helpers.openPageByUrl(process.env.MAP_URL);
+      }
+    },
+  },
   created() {
     this.resetCardWithTab();
   },
