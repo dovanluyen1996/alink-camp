@@ -126,7 +126,10 @@ export default {
 
   .alert-dialog-footer {
     display: flex;
-    gap: 10px;
+
+    & > ons-button {
+      margin: 5px;
+    }
   }
 }
 
@@ -177,8 +180,8 @@ export default {
   }
 
   /deep/ {
-    .alert-dialog-footer {
-      gap: 3px;
+    .alert-dialog-footer ons-button {
+      margin: 2px;
     }
   }
 }
