@@ -4,7 +4,6 @@ import components from '@/stores/modules/components';
 import campsite from '@/stores/modules/campsite';
 import course from '@/stores/modules/course';
 import plan from '@/stores/modules/plan';
-import campsite from '@/stores/modules/campsite';
 import api from '@/stores/modules/api';
 
 export default {
@@ -14,6 +13,5 @@ export default {
   campsite,
   course,
   plan,
-  campsite,
   api,
 };
