@@ -128,7 +128,7 @@ export default {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 150px;
+  width: 149px;
 
   &::before {
     display: inline-block;
@@ -138,7 +138,6 @@ export default {
     content: '';
     background-image: url("~@/assets/images/form/search-top.png");
     background-position: center;
-    background-size: 100%;
   }
 }
 
