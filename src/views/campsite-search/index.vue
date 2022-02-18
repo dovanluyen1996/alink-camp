@@ -6,7 +6,7 @@
       <content-with-footer>
         <search-field
           v-model="searchText"
-          @searched="goToCampsiteSearch"
+          @searched="goToCampsiteSearchResult"
         />
         <campsite-list
           v-if="campsites.length > 0"
@@ -97,11 +97,12 @@ export default {
       ],
     };
   },
-  computed: {
-  },
   methods: {
-    goToCampsiteSearch() {
+    goToCampsiteSearchResult() {
       // TODO: handle go to campsite search
+      // Console data when search success, please remove them when implement goto campsite search
+      console.log(this.$store.getters['models/campsite/all']);
+      console.log(this.$store.getters['models/campsite/totalCount']);
     },
     goToCampsiteShow(campsite) {
       this.$store.dispatch('campsiteSearchNavigator/push', {

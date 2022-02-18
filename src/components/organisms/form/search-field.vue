@@ -29,11 +29,10 @@
       :visible.sync="searchResultEmptyVisible"
     >
       <template #title>
-        該当するコースがありません
+        該当キャンプ場がありません
       </template>
 
-      検索した結果、条件に合うゴルフコースがありませんでした。<br>
-      お手数ですが、再度検索条件を設定してください。
+      検索結果に該当するキャンプ場がありませんでした。お手数ですが条件を変えてお試しください。
 
       <template #footer>
         <v-ons-button
@@ -74,18 +73,18 @@ export default {
       },
     },
     recordCount() {
-      return this.$store.getters['models/course/size'];
+      return this.$store.getters['models/campsite/size'];
     },
   },
   methods: {
     async searchByName() {
       // Clear before search result
-      this.$store.dispatch('models/course/resetCourses');
+      this.$store.dispatch('models/campsite/resetCampsites');
 
       const params = {
         name: this.inputedValue,
       };
-      await this.$store.dispatch('models/course/getCourses', params);
+      await this.$store.dispatch('models/campsite/getCampsites', params);
 
       if (this.recordCount) {
         // Send search condition params to paging in search result

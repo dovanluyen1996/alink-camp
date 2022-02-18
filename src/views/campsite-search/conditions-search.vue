@@ -58,14 +58,10 @@ export default {
   },
   computed: {
     searched() {
-      // TODO: This method is copied from `courses/area-tab.vue`.
-      // Please rewrite when implement Logic
-      return this.$store.state.course.searched;
+      return this.$store.state.campsite.searched;
     },
     activeIndexTab() {
-      // TODO: This method is copied from `courses/area-tab.vue`.
-      // Please rewrite when implement Logic
-      return this.$store.state.components.cardWithTab.searchCourseActiveIndex;
+      return this.$store.state.components.cardWithTab.searchCampsiteActiveIndex;
     },
   },
   created() {
@@ -73,24 +69,16 @@ export default {
   },
   methods: {
     show() {
-      // TODO: This method is copied from `courses/area-tab.vue`.
-      // Please rewrite when implement Logic
-      this.$store.commit('course/setSearched', false);
+      this.$store.commit('campsite/setSearched', false);
     },
     search() {
-      // TODO: This method is copied from `courses/area-tab.vue`.
-      // Please rewrite when implement Logic
-      this.$store.commit('course/setSearched', true);
+      this.$store.commit('campsite/setSearched', true);
     },
     switchTab(index) {
-      // TODO: This method is copied from `courses/area-tab.vue`.
-      // Please rewrite when implement Logic
-      this.$store.commit('components/cardWithTab/setSearchCourseActiveIndex', index);
+      this.$store.commit('components/cardWithTab/setSearchCampsiteActiveIndex', index);
     },
     resetCardWithTab() {
-      // TODO: This method is copied from `courses/area-tab.vue`.
-      // Please rewrite when implement Logic
-      this.$store.commit('components/cardWithTab/resetSearchCourseActiveIndex');
+      this.$store.commit('components/cardWithTab/resetSearchCampsiteActiveIndex');
     },
   },
 };

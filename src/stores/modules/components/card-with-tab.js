@@ -5,6 +5,7 @@ export default {
     activeIndex: 0,
     showCourseActiveIndex: 0,
     searchCourseActiveIndex: 0,
+    searchCampsiteActiveIndex: 0,
     aboutSubscriptionActiveIndex: 0,
     showCampsiteActiveIndex: 0,
   },
@@ -21,6 +22,9 @@ export default {
     setSearchCourseActiveIndex(state, activeIndex) {
       state.searchCourseActiveIndex = activeIndex;
     },
+    setSearchCampsiteActiveIndex(state, activeIndex) {
+      state.searchCampsiteActiveIndex = activeIndex;
+    },
     setAboutSubscriptionActiveIndex(state, activeIndex) {
       state.aboutSubscriptionActiveIndex = activeIndex;
     },
@@ -32,6 +36,9 @@ export default {
     },
     resetSearchCourseActiveIndex(state) {
       state.searchCourseActiveIndex = 0;
+    },
+    resetSearchCampsiteActiveIndex(state) {
+      state.searchCampsiteActiveIndex = 0;
     },
     resetAboutSubscriptionActiveIndex(state) {
       state.aboutSubscriptionActiveIndex = 0;

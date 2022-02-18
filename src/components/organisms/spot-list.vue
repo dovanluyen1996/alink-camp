@@ -4,18 +4,20 @@
       <div class="content">
         <v-ons-list modifier="noborder">
           <v-ons-list-item
-            v-for="item in spot"
-            :key="item.id"
+            v-for="spot in spots"
+            :key="spot.id"
             :modifier="modifier"
-            @click="clickSpot(item)"
           >
-            <div class="center">
+            <div
+              class="center"
+              @click="openMap(spot)"
+            >
               <div class="list-item__title">
                 <span>
-                  {{ item.name }}  ({{ item.distance }}km)
+                  {{ spot.name }} ({{ Math.round(spot.distance) }}km)
                 </span>
               </div>
-              <span class="list-item__subtitle">{{ item.address }}</span>
+              <span class="list-item__subtitle">{{ spot.address }}</span>
             </div>
             <div class="right">
               <slot name="right" />
@@ -32,7 +34,7 @@
 export default {
   name: 'SpotList',
   props: {
-    spot: {
+    spots: {
       type: Array,
       default: () => [],
     },
@@ -55,6 +57,9 @@ export default {
     this.setFullscreen();
   },
   methods: {
+    openMap(spot) {
+      this.$helpers.openPageByUrl(`https://maps.google.com/?q=${encodeURI(spot.name)}`);
+    },
     setFullscreen() {
       // NOTE: propsにしたいところだけれど、
       //       onsenUIが全画面表示をfullscreen属性でやっているので
@@ -63,9 +68,6 @@ export default {
       if (isFullscreen !== null) {
         this.isFullscreen = true;
       }
-    },
-    clickSpot(spot) {
-      this.$emit('click', spot);
     },
   },
 };
