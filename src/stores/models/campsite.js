@@ -11,6 +11,11 @@ export default {
     },
     isLoading: false,
   },
+  getters: {
+    all: state => state.campsites.campsites,
+    size: state => state.campsites.campsites.length,
+    totalCount: state => state.campsites.totalCount,
+  },
   mutations: {
     setCampsites(state, campsites) {
       const newCampsites = state.campsites;
@@ -27,6 +32,14 @@ export default {
     },
     setIsLoading(state, isLoading) {
       state.isLoading = isLoading;
+    },
+    resetCampsites(state) {
+      const campsites = {
+        campsites: [],
+        totalCount: 0,
+      };
+
+      Vue.set(state, 'campsites', campsites);
     },
   },
   actions: {
@@ -57,6 +70,9 @@ export default {
       } finally {
         context.commit('setIsLoading', false);
       }
+    },
+    resetCampsites(context) {
+      context.commit('resetCampsites');
     },
   },
 };
