@@ -103,11 +103,13 @@ export default {
     &--secondary {
       color: #fff;
       background-color: #beb9b8;
+      box-shadow: 0 5px 5px rgba(0, 0, 0, 0.4);
     }
 
     &--primary {
       color: #fff;
       background-color: #9a3210;
+      box-shadow: 0 5px 5px rgba(0, 0, 0, 0.4);
     }
   }
 

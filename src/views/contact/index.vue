@@ -189,5 +189,9 @@ export default {
       line-height: 1.7;
     }
   }
+
+  .button--rounded {
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.4);
+  }
 }
 </style>
