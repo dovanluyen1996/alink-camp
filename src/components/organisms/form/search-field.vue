@@ -8,20 +8,21 @@
     />
     <div class="search-button">
       <v-ons-button
-        modifier="large rounded"
+        class="button-search-top"
+        modifier="large rounded orange"
         @click="searchByName"
       >
-        検索する
+        検索
       </v-ons-button>
     </div>
 
     <div class="search-detail-button">
       <v-ons-button
-        modifier="large rounded orange"
+        modifier="large rounded"
         class="button--search-detail"
         @click="goToConditionsSearch"
       >
-        こだわり条件で検索する
+        こだわり条件で検索
       </v-ons-button>
     </div>
 
@@ -115,13 +116,27 @@ export default {
 <style lang="scss" scoped>
 .search-field {
   margin: 20px 20px 25px;
+  text-align: center;
 }
 
 .search-button {
   margin: 0 10px;
+}
 
-  .button {
-    background-color: #c83200;
+.button-search-top {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 149px;
+
+  &::before {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 6px;
+    content: '';
+    background-image: url("~@/assets/images/form/search-top.png");
+    background-position: center;
   }
 }
 
@@ -133,6 +148,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: #c83200;
 
   &::before {
     display: inline-block;

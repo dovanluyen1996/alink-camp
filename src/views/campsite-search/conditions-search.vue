@@ -97,6 +97,7 @@ export default {
       justify-content: center;
       margin: 0 48px !important;
       font-size: 14px !important;
+      box-shadow: 0 5px 5px rgba(0, 0, 0, 0.4);
 
       &::before {
         display: inline-block;
