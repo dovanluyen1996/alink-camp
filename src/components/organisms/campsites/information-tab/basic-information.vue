@@ -240,7 +240,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-// TODO：ロジック実装時に不要であれば削除する
 .map-link {
   position: relative;
   color: #9883de;
@@ -255,7 +254,6 @@ export default {
   }
 }
 
-// TODO：ロジック実装時に不要であれば削除する
 .website-link,
 .phone-link {
   color: #9883de;

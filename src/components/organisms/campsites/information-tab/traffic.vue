@@ -34,33 +34,4 @@ export default {
   padding-bottom: 100px;
   margin-top: 15px;
 }
-
-.traffic-map {
-  padding: 0 40px;
-}
-
-.image-temp {
-  width: 100%;
-  margin-top: 20px;
-}
-
-.button {
-  &--custom-button {
-    height: 25px;
-    padding: 5px 20px;
-    font-size: 12px;
-    font-weight: 600;
-    line-height: 15px;
-    color: #fff;
-    text-align: center;
-    background-color: #c83200;
-  }
-}
-
-.traffic-button {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  padding-top: 10px;
-}
 </style>
