@@ -4,16 +4,16 @@
       scope="row"
       class="th"
     >
-      星空
+      紫外線
     </th>
-    <template v-for="(_starrySky, index) in starrySkies">
+    <template v-for="(uv, index) in uvs">
       <td
         :key="index"
       >
         <div
-          class="starry-sky-row"
+          class="uv-row"
         >
-          <img src="@/assets/images/starry-sky.png">
+          <img :src="image(uv)">
         </div>
       </td>
     </template>
@@ -22,11 +22,19 @@
 
 <script>
 export default {
-  name: 'ForecastTableStarrySkyRow',
+  name: 'ForecastTableUvRow',
   props: {
-    starrySkies: {
+    uvs: {
       type: Array,
       required: true,
+    },
+  },
+  methods: {
+    image(uv) {
+      if (!uv) return this.$helpers.getImage('weathers/uv/uv_large_none.png');
+
+      const image = this.$helpers.getImage(`weathers/uv/uv_large_${uv}.png`);
+      return image || this.$helpers.getImage('weathers/uv/uv_large_none.png');
     },
   },
 };
@@ -35,7 +43,7 @@ export default {
 <style scoped lang="scss">
 @import '@/assets/scss/_variables.scss';
 
-.starry-sky-row {
+.uv-row {
   font-size: $font-size-small;
   text-align: center;
   white-space: nowrap;

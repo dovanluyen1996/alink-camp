@@ -4,16 +4,16 @@
       scope="row"
       class="th"
     >
-      落雷
+      星空
     </th>
-    <template v-for="(_lightning, index) in lightnings">
+    <template v-for="(star, index) in stars">
       <td
         :key="index"
       >
         <div
-          class="lightning-row"
+          class="star-row"
         >
-          <img src="@/assets/images/lightning.png">
+          <img :src="image(star)">
         </div>
       </td>
     </template>
@@ -22,11 +22,19 @@
 
 <script>
 export default {
-  name: 'ForecastTableLightningRow',
+  name: 'ForecastTableStarRow',
   props: {
-    lightnings: {
+    stars: {
       type: Array,
       required: true,
+    },
+  },
+  methods: {
+    image(star) {
+      if (!star) return this.$helpers.getImage('weathers/star/00.png');
+
+      const image = this.$helpers.getImage(`weathers/star/${star}`);
+      return image || this.$helpers.getImage('weathers/star/00.png');
     },
   },
 };
@@ -35,7 +43,7 @@ export default {
 <style scoped lang="scss">
 @import '@/assets/scss/_variables.scss';
 
-.lightning-row {
+.star-row {
   font-size: $font-size-small;
   text-align: center;
   white-space: nowrap;

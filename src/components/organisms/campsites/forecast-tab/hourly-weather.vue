@@ -42,6 +42,10 @@
           <weather-row :weathers="margedForecastsAndSuns" />
           <precipitation-row :forecast-data="forecastData" />
           <temperature-row :forecast-data="forecastData" />
+          <humidity-row
+            :humidities="humidities"
+            :is-show-hourly="true"
+          />
           <wind-direction-row :wind-directions="windDirections" />
           <wind-speed-row :wind-speeds="windSpeeds" />
         </sticky-table>
@@ -61,11 +65,14 @@
 </template>
 
 <script>
+import moment from 'moment';
+
 // components
 import StickyTable from '@/components/organisms/sticky-table';
 import TimeRow from '@/components/organisms/weather-table/time-row';
 import WeatherRow from '@/components/organisms/weather-table/weather-row';
 import PrecipitationRow from '@/components/organisms/weather-table/precipitation-row';
+import HumidityRow from '@/components/organisms/weather-table/humidity-row';
 import TemperatureRow from '@/components/organisms/weather-table/temperature-row';
 import WindDirectionRow from '@/components/organisms/weather-table/wind-direction-row';
 import WindSpeedRow from '@/components/organisms/weather-table/wind-speed-row';
@@ -77,6 +84,7 @@ export default {
     TimeRow,
     WeatherRow,
     PrecipitationRow,
+    HumidityRow,
     TemperatureRow,
     WindDirectionRow,
     WindSpeedRow,
@@ -87,6 +95,18 @@ export default {
     };
   },
   computed: {
+    campsite() {
+      return this.$store.getters['campsite/choosenCampsite'];
+    },
+    futurePlans() {
+      return this.$store.getters['models/userCampsitePlan/inFuture']({ campsiteId: this.campsite.id });
+    },
+    nearestPlan() {
+      const sortPlans = [...this.futurePlans].sort(
+        (a, b) => moment(a.startedDate).diff(b.startedDate),
+      );
+      return sortPlans[0] || null;
+    },
     margedForecastsAndSuns() {
       if (!this.forecastHourly.items) return [];
 
@@ -122,6 +142,9 @@ export default {
 
       return forecastData;
     },
+    humidities() {
+      return this.forecastData ? this.forecastData.map(item => item.humidity) : [];
+    },
     windDirections() {
       return this.forecastData ? this.forecastData.map(item => item.windDirection) : [];
     },
@@ -129,18 +152,52 @@ export default {
       return this.forecastData ? this.forecastData.map(item => item.windSpeed) : [];
     },
   },
+  watch: {
+    async campsite() {
+      this.forecastHourly = await this.getForecastHourly();
+    },
+  },
   async created() {
-    // this.forecastHourly = await this.getForecastHourly();
+    this.forecastHourly = await this.getForecastHourly();
+  },
+  updated() {
+    this.$nextTick(() => {
+      this.tableScrollNow();
+    });
   },
   methods: {
+    tableScrollNow() {
+      // NOTE: セルのdate-time属性に時刻を入れてスクロール位置を取得している
+      const table = this.$el.querySelector('.hourly-weather-table');
+      if (!table) return;
+
+      const dateRow = table.querySelector('.date-row');
+      const timeRow = table.querySelector('.time-row');
+      const th = timeRow.querySelector('th');
+      const today = this.$moment();
+      let nowCol = null;
+
+      // if plan-date exists and not today, set the scroll's target to that plan-date
+      if (this.nearestPlan && this.$helpers.isAfterDate(this.nearestPlan.startedDate, today)) {
+        nowCol = dateRow.querySelector(`[date-time="${this.nearestPlan.startedDate}"]`);
+      }
+      const targetAt = today.format('HH');
+      // otherwise, set the scroll's to current time
+      nowCol = nowCol || timeRow.querySelector(`[date-time="${targetAt}"]`);
+
+      if (!nowCol) return;
+      const x = nowCol.offsetLeft - th.offsetWidth;
+
+      table.scrollTo(x, 0);
+    },
     displayDate(date) {
       return this.$helpers.toDayString(date);
     },
     isScheduledDate(date) {
-      console.log(date);
-      // TODO: Handle is schedule date
+      if (this.futurePlans.length === 0) return false;
 
-      return false;
+      const targetDate = moment(date).startOf('day');
+      return this.futurePlans.some(plan => targetDate.isBetween(plan.startedDate, plan.finishedDate, null, '[]'));
     },
     convertMinutes(time) {
       // NOTE: 日の出日の入りを天気予報にマージするため
@@ -149,6 +206,15 @@ export default {
 
       const newTime = time.split(':');
       return (Number(newTime[0]) * 60) + Number(newTime[1] || 0);
+    },
+    async getForecastHourly() {
+      if (!this.campsite.id) return {};
+
+      const params = {
+        campsite_id: this.campsite.id,
+      };
+      const forecastHourly = await this.$store.dispatch('models/weather/getForecastHourly', params);
+      return forecastHourly;
     },
     spanCount(forecast) {
       let count = forecast.hourlyData.filter(data => data.hour).length;

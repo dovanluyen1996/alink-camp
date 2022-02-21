@@ -79,7 +79,7 @@ export default {
       return this.$store.state.components.cardWithTab.showCampsiteActiveIndex;
     },
     isLoading() {
-      return this.$store.getters['models/usersFavorite/isLoading'];
+      return this.$store.getters['campsite/isLoading'] || this.$store.getters['models/usersFavorite/isLoading'];
     },
   },
   created() {
@@ -94,6 +94,18 @@ export default {
     },
     async show() {
       this.$store.dispatch('appTabbar/setLastVisitedAt', this.$helpers.localDateWithHyphenFrom(new Date()));
+
+      await this.getCampsite();
+      await this.getUserCampsitePlans();
+      await this.getUsersFavorites();
+    },
+    async getCampsite() {
+      await this.$store.dispatch('campsite/getChoosenCampsite', this.campsite.id);
+    },
+    async getUserCampsitePlans() {
+      await this.$store.dispatch('models/userCampsitePlan/getUserCampsitePlans', { campsite_id: this.campsite.id });
+    },
+    async getUsersFavorites() {
       await this.$store.dispatch('models/usersFavorite/getUsersFavorites');
     },
   },

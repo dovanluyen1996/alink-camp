@@ -23,16 +23,12 @@
             :prob-precips="precips"
             :is-show-fourteen-days="true"
           />
-          <prob-humidity-row
-            :prob-humidities="humidities"
-            :is-show-fourteen-days="true"
-          />
           <wind-direction-row :wind-directions="windDirections" />
           <wind-speed-row :wind-speeds="windSpeeds" />
-          <lightning-row :lightnings="lightnings" />
-          <clothes-row :clothes="clothes" />
-          <starry-sky-row :starry-skies="starrySkies" />
-          <ultra-ray-row :ultra-rays="ultraRays" />
+          <thunder-row :thunders="thunders" />
+          <dress-row :dresses="dresses" />
+          <star-row :stars="stars" />
+          <uv-row :uvs="uvs" />
         </sticky-table>
 
         <div class="table-note">
@@ -50,19 +46,20 @@
 </template>
 
 <script>
+import moment from 'moment';
+
 // components
 import StickyTable from '@/components/organisms/sticky-table';
 import DateRow from '@/components/organisms/weather-table/date-row';
 import WeatherRow from '@/components/organisms/weather-table/weather-row';
 import ProbPrecipRow from '@/components/organisms/weather-table/prob-precip-row';
-import ProbHumidityRow from '@/components/organisms/weather-table/prob-humidity-row';
 import TemperatureRow from '@/components/organisms/weather-table/temperature-row';
 import WindDirectionRow from '@/components/organisms/weather-table/wind-direction-row';
 import WindSpeedRow from '@/components/organisms/weather-table/wind-speed-row';
-import LightningRow from '@/components/organisms/weather-table/lightning-row';
-import ClothesRow from '@/components/organisms/weather-table/clothes-row';
-import StarrySkyRow from '@/components/organisms/weather-table/starry-sky-row';
-import UltraRayRow from '@/components/organisms/weather-table/ultra-ray-row';
+import ThunderRow from '@/components/organisms/weather-table/thunder-row';
+import DressRow from '@/components/organisms/weather-table/dress-row';
+import StarRow from '@/components/organisms/weather-table/star-row';
+import UvRow from '@/components/organisms/weather-table/uv-row';
 
 export default {
   name: 'CampsitesForecastTabHourlyWeather',
@@ -71,14 +68,13 @@ export default {
     DateRow,
     WeatherRow,
     ProbPrecipRow,
-    ProbHumidityRow,
     TemperatureRow,
     WindDirectionRow,
     WindSpeedRow,
-    LightningRow,
-    ClothesRow,
-    StarrySkyRow,
-    UltraRayRow,
+    ThunderRow,
+    DressRow,
+    StarRow,
+    UvRow,
   },
   data() {
     return {
@@ -86,8 +82,15 @@ export default {
     };
   },
   computed: {
-    campsites() {
-      // TODO: Handle campsite choosen
+    campsite() {
+      return this.$store.getters['campsite/choosenCampsite'];
+    },
+    nearestPlan() {
+      const futurePlans = this.$store.getters['models/userCampsitePlan/inFuture']({ campsiteId: this.campsite.id });
+      const sortPlans = [...futurePlans].sort(
+        (a, b) => moment(a.startedDate).diff(b.startedDate),
+      );
+      return sortPlans[0] || null;
     },
     windDirections() {
       return this.forecasts ? this.forecasts.map(item => item.windDirection) : [];
@@ -98,25 +101,55 @@ export default {
     precips() {
       return this.forecasts ? this.forecasts.map(item => item.precip) : [];
     },
-    humidities() {
-      return this.forecasts ? this.forecasts.map(item => item.humidity) : [];
+    thunders() {
+      return this.forecasts ? this.forecasts.map(item => item.thunderIndex) : [];
     },
-    lightnings() {
-      return this.forecasts ? this.forecasts.map(item => item.lightning) : [];
+    dresses() {
+      return this.forecasts ? this.forecasts.map(item => item.dressImageName) : [];
     },
-    clothes() {
-      return this.forecasts ? this.forecasts.map(item => item.clothe) : [];
+    uvs() {
+      return this.forecasts ? this.forecasts.map(item => item.uvIndex) : [];
     },
-    ultraRays() {
-      return this.forecasts ? this.forecasts.map(item => item.ultraRay) : [];
+    stars() {
+      return this.forecasts ? this.forecasts.map(item => item.starImageName) : [];
     },
-    starrySkies() {
-      return this.forecasts ? this.forecasts.map(item => item.starrySky) : [];
+  },
+  watch: {
+    async campsite() {
+      const forecast14Days = await this.getForecast14Days();
+      this.forecasts = forecast14Days.items;
     },
   },
   async created() {
-    // const forecast10Days = await this.getForecast10Days();
-    // this.forecasts = forecast10Days.items;
+    const forecast14Days = await this.getForecast14Days();
+    this.forecasts = forecast14Days.items;
+  },
+  updated() {
+    this.$nextTick(() => {
+      this.tableScrollPlans();
+    });
+  },
+  methods: {
+    tableScrollPlans() {
+      // NOTE: セルのdate-day属性に時刻を入れてスクロール位置を取得している
+      const table = this.$el.querySelector('.fourteen-days-weather-table');
+      if (!table) return;
+
+      const dateRow = table.querySelector('.date-row');
+      const th = dateRow.querySelector('th');
+
+      const plansCol = dateRow.querySelector(`[date-day="${this.nearestPlan.startedDate}"]`);
+      if (!plansCol) return;
+      const x = plansCol.offsetLeft - th.offsetWidth;
+
+      table.scrollTo(x, 0);
+    },
+    async getForecast14Days() {
+      if (!this.campsite.id) return {};
+
+      const forecast14Days = await this.$store.dispatch('models/weather/getForecast14Days', { campsite_id: this.campsite.id });
+      return forecast14Days;
+    },
   },
 };
 </script>

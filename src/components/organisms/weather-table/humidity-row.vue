@@ -4,10 +4,25 @@
       scope="row"
       :class="{th : colorTh}"
     >
-      湿度 (%)
+      <span v-if="isShowHourly">
+        湿度
+      </span>
+      <span v-else>
+        湿度 (%)
+      </span>
     </th>
     <template v-for="(humidity, index) in humidities">
-      <td :key="index">
+      <td
+        v-if="isShowHourly"
+        :key="index"
+      >
+        {{ humidity ? `${humidity}%` : '--' }}
+      </td>
+
+      <td
+        v-else
+        :key="index"
+      >
         {{ humidity || '--' }}
       </td>
     </template>
@@ -26,6 +41,10 @@ export default {
     colorTh: {
       type: Boolean,
       default: true,
+    },
+    isShowHourly: {
+      type: Boolean,
+      default: false,
     },
   },
 };
