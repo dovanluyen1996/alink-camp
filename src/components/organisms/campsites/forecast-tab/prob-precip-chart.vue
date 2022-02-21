@@ -75,8 +75,18 @@ export default {
     };
   },
   computed: {
-    campsites() {
-      // TODO: handle campsite choosen
+    campsite() {
+      return this.$store.getters['campsite/choosenCampsite'];
+    },
+  },
+  watch: {
+    async campsite() {
+      const forecastMonthlyPrecip = await this.getForecastMonthlyPrecip();
+      if (forecastMonthlyPrecip) {
+        this.chartUpdatedAt = forecastMonthlyPrecip.updatedAt;
+        this.pointName = forecastMonthlyPrecip.pointName;
+        this.fillData(forecastMonthlyPrecip.items);
+      }
     },
   },
   methods: {
@@ -115,6 +125,12 @@ export default {
     },
     getAveragePrecip(data) {
       return data.map(item => item.average);
+    },
+    async getForecastMonthlyPrecip() {
+      if (!this.campsite.id) return null;
+
+      const forecastMonthlyPrecip = await this.$store.dispatch('models/weather/getForecastMonthlyPrecip', { campsite_id: this.campsite.id });
+      return forecastMonthlyPrecip;
     },
   },
 };

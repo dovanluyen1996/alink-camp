@@ -78,5 +78,23 @@ export default {
         context.commit('setIsLoading', false);
       }
     },
+    async getForecastYearlyTemp(context, params) {
+      context.commit('setIsLoading', true);
+
+      try {
+        return await ApiClient.getForecastYearlyTemp(params);
+      } finally {
+        context.commit('setIsLoading', false);
+      }
+    },
+    async getForecastYearlyWeatherRate(context, params) {
+      context.commit('setIsLoading', true);
+
+      try {
+        return await ApiClient.getForecastYearlyWeatherRate(params);
+      } finally {
+        context.commit('setIsLoading', false);
+      }
+    },
   },
 };
