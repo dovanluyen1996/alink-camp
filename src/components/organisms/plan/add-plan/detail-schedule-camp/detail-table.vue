@@ -59,7 +59,13 @@
               </div>
             </td>
             <td>{{ detail.precipitation }}</td>
-            <td>{{ detail.wind }}</td>
+            <td>
+              <div class="wind-direction">
+                <!-- // TODO: change class when do logic -->
+                <div class="wind-speed wind-speed--danger" />
+                <span>{{ detail.wind }}</span>
+              </div>
+            </td>
             <td class="task">
               <div class="task__text">
                 <span>
@@ -297,6 +303,9 @@ export default {
 <style lang="scss" scoped>
 @import "@/assets/scss/_variables.scss";
 
+$speed-degrees: 0, 22.5, 45, 67.5, 90, 112.5, 135, 157.5, 180,
+  202.5, 225, 247.5, 270, 292.5, 315, 337.5;
+
 .table-detail {
   box-sizing: border-box;
   width: 100%;
@@ -309,6 +318,20 @@ export default {
 
   .card-detail:last-child {
     margin-bottom: 140px;
+  }
+
+  .date-detail {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 43px;
+    background-color: #eae5e5;
+
+    span {
+      font-size: 14px;
+      font-weight: 600;
+    }
   }
 
   .table {
@@ -381,20 +404,46 @@ export default {
         transform: translate(-50%, -50%);
       }
     }
-  }
-}
 
-.date-detail {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 43px;
-  background-color: #eae5e5;
+    .wind-speed {
+      background-position: center;
+      background-size: cover;
 
-  span {
-    font-size: 14px;
-    font-weight: 600;
+      &--normal {
+        background-image: url('~@/assets/images/weathers/wind-speed/background-normal.png');
+      }
+
+      &--strong {
+        background-image: url('~@/assets/images/weathers/wind-speed/background-strong.png');
+      }
+
+      &--danger {
+        background-image: url('~@/assets/images/weathers/wind-speed/background-danger.png');
+      }
+    }
+
+    .wind-direction {
+      display: grid;
+      align-items: center;
+      justify-content: center;
+
+      @each $degree in $speed-degrees {
+        // generate class has partern: wind-direction--xx-deg
+        &--#{floor($degree)}-deg {
+          transform: rotate(#{$degree}deg);
+        }
+      }
+
+      .wind-speed {
+        width: 15px;
+        height: 24px;
+        margin-left: 2px;
+      }
+
+      span {
+        font-size: 12px;
+      }
+    }
   }
 }
 
