@@ -21,6 +21,9 @@
 </template>
 
 <script>
+// pages
+import SearchResult from '@/views/campsite-search/search-result';
+
 // components
 import SearchField from '@/components/organisms/form/search-field.vue';
 import CampsiteShow from '@/views/campsites/show';
@@ -98,11 +101,14 @@ export default {
     };
   },
   methods: {
-    goToCampsiteSearchResult() {
-      // TODO: handle go to campsite search
-      // Console data when search success, please remove them when implement goto campsite search
-      console.log(this.$store.getters['models/campsite/all']);
-      console.log(this.$store.getters['models/campsite/totalCount']);
+    goToCampsiteSearchResult(searchConditions) {
+      this.$store.dispatch('campsiteSearchNavigator/push', {
+        extends: SearchResult,
+        onsNavigatorProps: {
+          title: 'キャンプ場検索結果',
+          searchConditions,
+        },
+      });
     },
     goToCampsiteShow(campsite) {
       this.$store.dispatch('campsiteSearchNavigator/push', {
