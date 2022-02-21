@@ -120,7 +120,7 @@
 
 <script>
 // pages
-// TODO: Search Result page still not implement
+import SearchResult from '@/views/campsite-search/search-result';
 
 // components
 import CustomSelect from '@/components/atoms/form/custom-select';
@@ -283,8 +283,15 @@ export default {
           }
         });
     },
-    goToSearchResult() {
-      // TODO: Redirect to Search Result page
+    goToSearchResult(params) {
+      const searchConditions = { ...params, type: 'location' };
+      this.$store.dispatch('campsiteSearchNavigator/push', {
+        extends: SearchResult,
+        onsNavigatorProps: {
+          title: 'キャンプ場検索結果',
+          searchConditions,
+        },
+      });
     },
     getGeoLocation() {
       return new Promise((resolve, reject) => {
