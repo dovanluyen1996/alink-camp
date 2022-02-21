@@ -85,7 +85,7 @@ export default {
   watch: {
     activeIndexTab() {
       if (this.activeIndexTab === 1) {
-        this.$helpers.openPageByUrl(process.env.MAP_URL);
+        this.$helpers.openPageByUrl(`${process.env.MAP_URL}?lat=${this.campsite.latitude}&lon=${this.campsite.longitude}`);
       }
     },
   },
