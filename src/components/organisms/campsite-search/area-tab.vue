@@ -100,7 +100,7 @@
 
 <script>
 // pages
-// TODO: Search Result page still not implement
+import SearchResult from '@/views/campsite-search/search-result';
 
 // components
 import CustomSelect from '@/components/atoms/form/custom-select';
@@ -188,11 +188,15 @@ export default {
     showSearchResultEmptyDialog() {
       this.searchResultEmptyVisible = true;
     },
-    goToSearchResult() {
-      // TODO: Redirect to Search Result page
-      // Console data when search success, please remove them when implement goto campsite search
-      console.log(this.$store.getters['models/campsite/all']);
-      console.log(this.$store.getters['models/campsite/totalCount']);
+    goToSearchResult(params) {
+      const searchConditions = { ...params, type: 'area' };
+      this.$store.dispatch('campsiteSearchNavigator/push', {
+        extends: SearchResult,
+        onsNavigatorProps: {
+          title: 'キャンプ場検索結果',
+          searchConditions,
+        },
+      });
     },
     toggleWeather() {
       this.isShowWeather = !this.isShowWeather;
