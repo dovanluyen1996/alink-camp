@@ -3,7 +3,6 @@
     <custom-toolbar
       modifier="green"
       title="位置情報取得"
-      :disabled-back-button="true"
     />
 
     <div class="content">
@@ -15,7 +14,7 @@
           >
         </div>
         <p>
-          位置情報をＯＮにすることで、最適なキャンプ場の検索に活用いただけます。
+          位置情報をONにすることで、最適なキャンプ場や周辺の施設のご案内を利用頂けます。
         </p>
 
         <template #footer>

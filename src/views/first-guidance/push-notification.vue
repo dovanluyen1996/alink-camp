@@ -3,7 +3,6 @@
     <custom-toolbar
       modifier="green"
       title="PUSH通知許可"
-      :disabled-back-button="true"
     />
 
     <div class="content">
@@ -15,7 +14,7 @@
           >
         </div>
         <p>
-          PUSH通知をＯＮにすることで、急な雨へのＰＵＳＨ通知や、最適なキャンプ場の検索に活用いただけます。
+          PUSH通知をONにすることで、予定日の天気予報、キャンプ場に近づく雨雲や、雷、突風などの情報をご確認いただけます。
         </p>
 
         <template #footer>

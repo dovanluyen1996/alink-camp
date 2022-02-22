@@ -3,7 +3,6 @@
     <custom-toolbar
       modifier="green"
       title="キャンプ計画の保存"
-      :disabled-back-button="true"
     />
 
     <div class="content">
@@ -19,8 +18,7 @@
           >
         </div>
         <p>
-          キャンプに必要な道具などの登録もできるのでご活用ください。<br>
-          アカウント設定で、データが保存されます。
+          キャンプの思い出や、持っていくオリジナルアイテムなどの登録もできるので、ぜひメニューよりデータ引継ぎ設定を行って下さい。
         </p>
 
         <template #footer>
