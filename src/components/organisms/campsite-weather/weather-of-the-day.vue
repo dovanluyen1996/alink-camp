@@ -28,6 +28,12 @@
           :sunset="forecast.sunset"
         />
       </v-ons-col>
+      <div
+        v-show="isPurchased"
+        class="campsite-weather-of-the-day-purchase"
+      >
+        各種指数は、プレミアムプラン入会でご確認いただけます。
+      </div>
       <v-ons-col width="16%">
         <campsite-weather-thunder-index :forecast="forecast.targetDate" />
       </v-ons-col>
@@ -73,6 +79,11 @@ export default {
       required: true,
     },
   },
+  data() {
+    return {
+      isPurchased: true,
+    };
+  },
   computed: {
     shortDate() {
       const targetDate = this.forecast.targetDate.date;
@@ -98,6 +109,7 @@ export default {
 }
 
 .weather-indexes {
+  position: relative;
   flex-wrap: nowrap;
   padding: 5px 0;
   margin-top: 15px;
@@ -110,6 +122,19 @@ export default {
   flex-direction: column;
   align-items: center;
   padding-left: 30px;
+}
+
+.campsite-weather-of-the-day-purchase {
+  position: absolute;
+  top: 27px;
+  right: 5px;
+  height: 13px;
+  padding: 0 15px;
+  font-size: 7px;
+  font-weight: 600;
+  color: #f5f2f2;
+  background-color: #ff980b;
+  border-radius: 22px;
 }
 
 /deep/ {
@@ -145,6 +170,16 @@ export default {
 @media only screen and (max-width: 375px) {
   .campsite-weather-of-the-day-box {
     padding-left: 10px;
+  }
+
+  .campsite-weather-of-the-day-purchase {
+    max-width: 50%;
+  }
+}
+
+@media only screen and (min-width: 400px) {
+  .campsite-weather-of-the-day-purchase {
+    right: 5%;
   }
 }
 </style>
