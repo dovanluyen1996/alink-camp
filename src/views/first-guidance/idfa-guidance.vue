@@ -2,7 +2,7 @@
   <v-ons-page>
     <custom-toolbar
       modifier="green"
-      title="スコアデータ保存"
+      title="キャンプ計画の保存"
       :disabled-back-button="true"
     />
 
