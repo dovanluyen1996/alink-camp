@@ -10,7 +10,8 @@
         </p>
         <template #actions>
           <v-ons-button
-            class="button--red button--search button--search__description"
+            class="button--search button--search__description"
+            modifier="orange"
             @click="goToPlanSearch"
           >
             <img
@@ -115,3 +116,20 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+/deep/ {
+  .no-data {
+    padding: 0;
+    white-space: nowrap;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  /deep/ {
+    .no-data {
+      white-space: normal;
+    }
+  }
+}
+</style>
