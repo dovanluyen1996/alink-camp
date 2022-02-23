@@ -29,7 +29,7 @@
         />
       </v-ons-col>
       <div
-        v-show="isPurchased"
+        v-if="!isPurchased"
         class="campsite-weather-of-the-day-purchase"
       >
         各種指数は、プレミアムプラン入会でご確認いただけます。
@@ -128,12 +128,15 @@ export default {
   position: absolute;
   top: 27px;
   right: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   height: 13px;
   padding: 0 15px;
   font-size: 7px;
   font-weight: 600;
   color: #f5f2f2;
-  background-color: #ff980b;
+  background-color: $color-yellow;
   border-radius: 22px;
 }
 
@@ -180,6 +183,7 @@ export default {
 @media only screen and (min-width: 400px) {
   .campsite-weather-of-the-day-purchase {
     right: 5%;
+    min-width: 50%;
   }
 }
 </style>
