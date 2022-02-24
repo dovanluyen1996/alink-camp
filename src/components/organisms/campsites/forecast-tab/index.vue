@@ -1,7 +1,7 @@
 <template>
   <div class="campsites-forecast-tab">
     <div class="wrapper-table">
-      <transition name="fade">
+      <div>
         <hourly-weather v-if="isShownHourly">
           <template #switcher>
             <forecast-switcher :segment-index.sync="segmentIndex" />
@@ -13,7 +13,7 @@
             <forecast-switcher :segment-index.sync="segmentIndex" />
           </template>
         </fourteen-days-weather>
-      </transition>
+      </div>
 
       <div class="ml-mr-30">
         <a
