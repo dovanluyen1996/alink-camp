@@ -200,6 +200,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '@/assets/scss/_variables.scss';
+
 .spot-search {
   margin-bottom: -12px;
   text-align: center;
@@ -251,7 +253,7 @@ export default {
     align-items: center;
     justify-content: space-evenly;
     padding: 10px 20px;
-    background: #ffc134;
+    background: $color-yellow;
 
     & > img {
       margin-right: 10px;
