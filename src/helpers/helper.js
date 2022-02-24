@@ -8,6 +8,18 @@ export default {
   truncate(string, limit) {
     return string.length > limit ? `${string.slice(0, limit)}...` : string;
   },
+  getDateRange(start, end) {
+    const fromDate = moment(start);
+    const toDate = moment(end);
+    const diff = toDate.diff(fromDate, 'days');
+    let range = [];
+
+    for (let i = 0; i <= diff; i++) {
+      range.push(fromDate.add(i, 'days'));
+    }
+
+    return range;
+  },
   toLongString(targetDate) {
     return moment(targetDate).format('YYYY/MM/DD (dd)');
   },

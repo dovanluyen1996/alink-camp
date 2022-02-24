@@ -1,5 +1,6 @@
 <template>
   <div class="table-weather">
+    {{ dateRange() }}
     <table class="table">
       <tbody>
         <tr>
@@ -57,6 +58,16 @@
 
 export default {
   name: 'ForecastTableDate',
+  props: {
+    campsite: {
+      type: Object,
+      required: true,
+    },
+    forecasts: {
+      type: Object,
+      required: true,
+    },
+  },
   data() {
     return {
       items: [
@@ -78,7 +89,35 @@ export default {
       ],
     };
   },
+  computed: {
+    params() {
+      return this.$store.getters['plan/params'];
+    },
+    startedDate() {
+      return this.params.startedDate;
+    },
+    finishedDate() {
+      return this.params.finishedDate;
+    },
+  },
+  watch: {
+    async startedDate() {
+      await this.dateRange();
+    },
+    async finishedDate() {
+      await this.dateRange();
+    },
+  },
   methods: {
+    dateRange() {
+      if(this.startedDate && this.finishedDate) {
+        return this.$helpers.getDateRange(this.startedDate, this.finishedDate);
+      }
+      if(this.startedDate) return [this.startedDate];
+      if(this.finishedDate) return [this.finishedDate];
+
+      return [];
+    },
     displayDate(date) {
       return this.$helpers.toShortStringWithZero(date);
     },

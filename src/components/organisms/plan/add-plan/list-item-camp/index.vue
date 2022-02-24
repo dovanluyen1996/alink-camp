@@ -18,7 +18,10 @@
         </v-ons-button>
       </div>
 
-      <forecast-table />
+      <forecast-table
+        :campsite="campsite"
+        :forecasts="forecasts"
+      />
       <item-table
         v-if="items.length > 0"
         :checked-item-ids.sync="checkedItemIds"
@@ -96,6 +99,10 @@ export default {
   },
   props: {
     campsite: {
+      type: Object,
+      required: true,
+    },
+    forecasts: {
       type: Object,
       required: true,
     },
