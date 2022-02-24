@@ -11,7 +11,7 @@
             カヌー
           </template>
           <template #status>
-            あり
+            {{ campsite.spotCanoe === 1 ? 'あり' : 'なし' }}
           </template>
         </content-status-item>
 
@@ -20,7 +20,7 @@
             釣り
           </template>
           <template #status>
-            なし
+            {{ campsite.spotFishing === 1 ? 'あり' : 'なし' }}
           </template>
         </content-status-item>
 
@@ -29,7 +29,7 @@
             トレッキング
           </template>
           <template #status>
-            あり
+            {{ campsite.spotTrekking === 1 ? 'あり' : 'なし' }}
           </template>
         </content-status-item>
 
@@ -38,7 +38,7 @@
             スターウォッチング
           </template>
           <template #status>
-            なし
+            {{ campsite.spotStarWatching === 1 ? 'あり' : 'なし' }}
           </template>
         </content-status-item>
 
@@ -47,7 +47,7 @@
             バードウォッチング
           </template>
           <template #status>
-            あり
+            {{ campsite.spotBirdWatching === 1 ? 'あり' : 'なし' }}
           </template>
         </content-status-item>
 
@@ -56,7 +56,7 @@
             海水浴
           </template>
           <template #status>
-            なし
+            {{ campsite.spotSeaBathing === 1 ? 'あり' : 'なし' }}
           </template>
         </content-status-item>
 
@@ -65,7 +65,7 @@
             水遊び
           </template>
           <template #status>
-            あり
+            {{ campsite.spotWaterplay === 1 ? 'あり' : 'なし' }}
           </template>
         </content-status-item>
 
@@ -74,7 +74,7 @@
             温泉
           </template>
           <template #status>
-            なし
+            {{ campsite.spotHotSpring === 1 ? 'あり' : 'なし' }}
           </template>
         </content-status-item>
 
@@ -83,7 +83,7 @@
             観光牧場
           </template>
           <template #status>
-            あり
+            {{ campsite.spotFarm === 1 ? 'あり' : 'なし' }}
           </template>
         </content-status-item>
 
@@ -92,7 +92,7 @@
             レジャー施設
           </template>
           <template #status>
-            なし
+            {{ campsite.spotLeisure === 1 ? 'あり' : 'なし' }}
           </template>
         </content-status-item>
       </div>
@@ -107,6 +107,11 @@ import ContentStatusItem from '@/components/atoms/information-tab/content-status
 
 export default {
   name: 'CampsitesInformationNearbyFacility',
+  computed: {
+    campsite() {
+      return this.$store.getters['campsite/choosenCampsite'];
+    },
+  },
   components: {
     InformationTabItem,
     ContentStatusItem,
