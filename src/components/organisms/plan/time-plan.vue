@@ -98,14 +98,13 @@ export default {
 }
 
 .list-item {
+  padding-left: 0;
   margin: 0;
   border-bottom: 1px solid #d9d9d9;
 
   &__title {
     margin-bottom: 5px;
     font-size: 18px;
-    line-height: 1.2;
-    text-align: center;
   }
 
   &__center {
