@@ -6,12 +6,24 @@
         条件に合うキャンプ場が見つかりません
       </no-data>
 
-      <campsite-list
-        v-else
-        :campsites="campsites"
-        :current-location="currentLocation"
-        @click="goToCampsiteShow"
-      />
+      <template v-else>
+        <content-with-footer>
+          <campsite-list
+            :campsites="campsites"
+            :current-location="currentLocation"
+            @click="goToCampsiteShow"
+          />
+          <template #footer v-if="isConditionsChangeable()">
+            <v-ons-button
+              class="button--search"
+              modifier="large--cta rounded yellow"
+              @click="goToConditionsSearch()"
+            >
+              条件変更
+            </v-ons-button>
+          </template>
+        </content-with-footer>
+      </template>
     </div>
   </v-ons-page>
 </template>
@@ -20,6 +32,7 @@
 // components
 import NoData from '@/components/organisms/no-data';
 import CampsiteList from '@/components/organisms/campsite-list';
+import ContentWithFooter from '@/components/organisms/content-with-footer';
 
 // pages
 import CampsiteShow from '@/views/campsites/show';
@@ -29,6 +42,7 @@ export default {
   components: {
     NoData,
     CampsiteList,
+    ContentWithFooter,
   },
   props: {
     title: {
@@ -131,6 +145,36 @@ export default {
         return this.searchByNameParams();
       }
     },
+    isConditionsChangeable() {
+      return ['area', 'location'].includes(this.searchType());
+    },
+    async goToConditionsSearch() {
+      await this.$store.dispatch('campsiteSearchNavigator/pop');
+    },
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.content-with-footer__footer {
+  .button--search {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 48px !important;
+    font-size: 14px !important;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.4);
+
+    &::before {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      margin-right: 6px;
+      content: '';
+      background-image: url("~@/assets/images/form/search-top.png");
+      background-position: center;
+      background-size: 100%;
+    }
+  }
+}
+</style>
