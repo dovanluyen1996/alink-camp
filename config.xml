@@ -25,10 +25,10 @@
         <allow-intent href="market:*" />
         <preference name="AndroidXEnabled" value="true"/>
         <edit-config file="AndroidManifest.xml" mode="merge" target="/manifest/application">
-            <application android:label="ゴルフ天気" />
+            <application android:label="キャンプ天気" />
         </edit-config>
         <edit-config file="AndroidManifest.xml" mode="merge" target="/manifest/application/activity">
-            <activity android:label="ゴルフ天気" />
+            <activity android:label="キャンプ天気" />
         </edit-config>
 
         <config-file target="AndroidManifest.xml" parent="/manifest/application/activity">
@@ -147,7 +147,7 @@
         </config-file>
 
         <edit-config file="*-Info.plist" mode="merge" target="CFBundleDisplayName">
-            <string>ゴルフ天気</string>
+            <string>キャンプ天気</string>
         </edit-config>
     </platform>
 </widget>

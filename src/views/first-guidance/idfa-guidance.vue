@@ -2,18 +2,23 @@
   <v-ons-page>
     <custom-toolbar
       modifier="green"
-      title="スコアデータ保存"
+      title="キャンプ計画の保存"
     />
 
     <div class="content">
-      <content-with-footer class="cguidance-content">
-        <img
-          src="@/assets/images/guidances/score-data.png"
-          width="165px"
-        >
+      <content-with-footer class="guidance-content">
+        <div class="guidance-content__box">
+          <img
+            src="@/assets/images/guidances/campsite-items.png"
+            width="195px"
+          >
+          <img
+            src="@/assets/images/guidances/tasks.png"
+            width="86px"
+          >
+        </div>
         <p>
-          簡単なスコア登録もできるのでご活用ください。またその日の天気や気温、写真のアップロードもできるので、思い出の保存に便利です。
-          データ保存のためにデータ引継ぎ設定をメニューよりしてください。
+          キャンプの思い出や、持っていくオリジナルアイテムなどの登録もできるので、ぜひメニューよりデータ引継ぎ設定を行って下さい。
         </p>
 
         <template #footer>
@@ -32,9 +37,10 @@
       :visible.sync="isShownIdfaAlert"
     >
       <template #title>
-        ゴルフ天気にアプリとWEBの操作履歴の利用を許可しますか？
+        キャンプ天気にアプリとWEBの操作履歴の利用を許可しますか？
       </template>
-      許可の設定により、今後も各種機能改善のご参考にさせていただきます。次へのボタン押下後のポップアップで選択してください
+      許可の設定により、今後も各種機能改善のご参考にさせていただきます。<br>
+      次へのボタン押下後のポップアップで選択してください。
       <template #footer>
         <v-ons-button @click="closeIdfaAlert()">
           次へ
@@ -92,3 +98,30 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.guidance-content {
+  img {
+    margin: 3.5px;
+  }
+
+  &__box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 260px;
+
+    img:last-child {
+      margin-top: 10px;
+    }
+  }
+}
+
+/deep/ {
+  .alert-dialog-content {
+    font-size: 16px;
+    font-weight: 300;
+  }
+}
+</style>
