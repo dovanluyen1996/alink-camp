@@ -49,6 +49,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "@/assets/scss/_variables.scss";
+
 .card {
   padding-top: 5px;
   padding-bottom: 0;
@@ -67,7 +69,7 @@ export default {
   }
 
   &--active {
-    background-color: #f2967857;
+    background-color: $color-active-orange;
     border: 1px solid #d9d9d9;
   }
 

@@ -46,6 +46,8 @@
 </template>
 
 <script>
+import moment from 'moment';
+
 // components
 import StickyTable from '@/components/organisms/sticky-table';
 import DateRow from '@/components/organisms/weather-table/date-row';
@@ -83,6 +85,13 @@ export default {
     campsite() {
       return this.$store.getters['campsite/choosenCampsite'];
     },
+    nearestPlan() {
+      const futurePlans = this.$store.getters['models/userCampsitePlan/inFuture']({ campsiteId: this.campsite.id });
+      const sortPlans = [...futurePlans].sort(
+        (a, b) => moment(a.startedDate).diff(b.startedDate),
+      );
+      return sortPlans[0] || null;
+    },
     windDirections() {
       return this.forecasts ? this.forecasts.map(item => item.windDirection) : [];
     },
@@ -115,7 +124,26 @@ export default {
     const forecast14Days = await this.getForecast14Days();
     this.forecasts = forecast14Days.items;
   },
+  updated() {
+    this.$nextTick(() => {
+      this.tableScrollPlans();
+    });
+  },
   methods: {
+    tableScrollPlans() {
+      // NOTE: セルのdate-day属性に時刻を入れてスクロール位置を取得している
+      const table = this.$el.querySelector('.fourteen-days-weather-table');
+      if (!table) return;
+
+      const dateRow = table.querySelector('.date-row');
+      const th = dateRow.querySelector('th');
+
+      const plansCol = dateRow.querySelector(`[date-day="${this.nearestPlan.startedDate}"]`);
+      if (!plansCol) return;
+      const x = plansCol.offsetLeft - th.offsetWidth;
+
+      table.scrollTo(x, 0);
+    },
     async getForecast14Days() {
       if (!this.campsite.id) return {};
 

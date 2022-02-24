@@ -6,7 +6,7 @@
       <content-with-footer>
         <search-field
           v-model="searchText"
-          @searched="goToCampsiteSearch"
+          @searched="goToCampsiteSearchResult"
         />
         <campsite-list
           v-if="campsites.length > 0"
@@ -21,6 +21,9 @@
 </template>
 
 <script>
+// pages
+import SearchResult from '@/views/campsite-search/search-result';
+
 // components
 import SearchField from '@/components/organisms/form/search-field.vue';
 import CampsiteShow from '@/views/campsites/show';
@@ -97,11 +100,15 @@ export default {
       ],
     };
   },
-  computed: {
-  },
   methods: {
-    goToCampsiteSearch() {
-      // TODO: handle go to campsite search
+    goToCampsiteSearchResult(searchConditions) {
+      this.$store.dispatch('campsiteSearchNavigator/push', {
+        extends: SearchResult,
+        onsNavigatorProps: {
+          title: 'キャンプ場検索結果',
+          searchConditions,
+        },
+      });
     },
     goToCampsiteShow(campsite) {
       this.$store.dispatch('campsiteSearchNavigator/push', {

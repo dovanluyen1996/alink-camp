@@ -120,7 +120,7 @@
 
 <script>
 // pages
-// TODO: Search Result page still not implement
+import SearchResult from '@/views/campsite-search/search-result';
 
 // components
 import CustomSelect from '@/components/atoms/form/custom-select';
@@ -187,20 +187,14 @@ export default {
     };
   },
   computed: {
-    // TODO: This method is copied from `courses/location-tab.vue`.
-    // Please rewrite when implement Logic
     searched() {
-      return this.$store.state.course.searched;
+      return this.$store.state.campsite.searched;
     },
-    // TODO: This method is copied from `courses/location-tab.vue`.
-    // Please rewrite when implement Logic
     activeIndex() {
-      return this.$store.state.components.cardWithTab.searchCourseActiveIndex;
+      return this.$store.state.components.cardWithTab.searchCampsiteActiveIndex;
     },
   },
   watch: {
-    // TODO: This method is copied from `courses/location-tab.vue`.
-    // Please rewrite when implement Logic
     distance(value) {
       // 〜30km：upper_rad=30&lower_rad=
       // 〜50km：upper_rad=50&lower_rad=
@@ -238,8 +232,6 @@ export default {
         this.upper_rad = null;
       }
     },
-    // TODO: This method is copied from `courses/location-tab.vue`.
-    // Please rewrite when implement Logic
     searched() {
       // If current tab is not location, don't search area
       if (this.activeIndex !== 1) return;
@@ -250,8 +242,6 @@ export default {
     },
   },
   methods: {
-    // TODO: This method is copied from `courses/location-tab.vue`.
-    // Please rewrite when implement Logic
     searchByLocation() {
       Promise.resolve()
         .then(() => this.getGeoLocation())
@@ -261,16 +251,14 @@ export default {
         })
         .finally(() => {
           // Reset search flag to false
-          this.$store.commit('course/setSearched', false);
+          this.$store.commit('campsite/setSearched', false);
         });
     },
-    // TODO: This method is copied from `courses/location-tab.vue`.
-    // Please rewrite when implement Logic
     search() {
       this.$refs.searchLocation.validate()
         .then(async(valid) => {
           // Reset before search result
-          this.$store.dispatch('models/course/resetCourses');
+          this.$store.dispatch('models/campsite/resetCampsites');
 
           if (!valid) return;
 
@@ -286,20 +274,25 @@ export default {
             lon: this.lon,
           };
 
-          await this.$store.dispatch('models/course/getCourses', params);
+          await this.$store.dispatch('models/campsite/getCampsites', params);
 
-          if (this.$store.getters['models/course/size']) {
+          if (this.$store.getters['models/campsite/size']) {
             this.goToSearchResult(params);
           } else {
             this.showSearchResultEmptyDialog();
           }
         });
     },
-    goToSearchResult() {
-      // TODO: Redirect to Search Result page
+    goToSearchResult(params) {
+      const searchConditions = { ...params, type: 'location' };
+      this.$store.dispatch('campsiteSearchNavigator/push', {
+        extends: SearchResult,
+        onsNavigatorProps: {
+          title: 'キャンプ場検索結果',
+          searchConditions,
+        },
+      });
     },
-    // TODO: This method is copied from `courses/location-tab.vue`.
-    // Please rewrite when implement Logic
     getGeoLocation() {
       return new Promise((resolve, reject) => {
         navigator.geolocation.getCurrentPosition(

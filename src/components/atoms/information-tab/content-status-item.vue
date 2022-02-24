@@ -23,8 +23,7 @@ export default {
 
   .status {
     width: 130px;
-    margin-right: 5px;
-    text-align: right;
+    text-align: left;
   }
 }
 </style>

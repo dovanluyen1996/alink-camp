@@ -100,7 +100,7 @@
 
 <script>
 // pages
-// TODO: Search Result page still not implement
+import SearchResult from '@/views/campsite-search/search-result';
 
 // components
 import CustomSelect from '@/components/atoms/form/custom-select';
@@ -138,37 +138,29 @@ export default {
   },
   computed: {
     searched() {
-      // TODO: This method is copied from `courses/area-tab.vue`.
-      // Please rewrite when implement Logic
-      return this.$store.state.course.searched;
+      return this.$store.state.campsite.searched;
     },
     activeIndex() {
-      // TODO: This method is copied from `courses/area-tab.vue`.
-      // Please rewrite when implement Logic
-      return this.$store.state.components.cardWithTab.searchCourseActiveIndex;
+      return this.$store.state.components.cardWithTab.searchCampsiteActiveIndex;
     },
   },
   watch: {
-    // TODO: This method is copied from `courses/area-tab.vue`.
-    // Please rewrite when implement Logic
     searched() {
       // If current tab is not area, don't search area
       if (this.activeIndex !== 0) return;
       // Watch click search button event.
       if (!this.searched) return;
       // Reset search flag to false
-      this.$store.commit('course/setSearched', false);
+      this.$store.commit('campsite/setSearched', false);
 
       this.search();
     },
   },
   methods: {
-    // TODO: This method is copied from `courses/area-tab.vue`.
-    // Please rewrite when implement Logic
     search() {
       this.$refs.searchArea.validate()
         .then(async(valid) => {
-          this.$store.dispatch('models/course/resetCourses');
+          this.$store.dispatch('models/campsite/resetCampsites');
 
           if (!valid) return;
 
@@ -181,9 +173,9 @@ export default {
             uv: this.uv ? 1 : 0,
           };
 
-          await this.$store.dispatch('models/course/getCourses', params);
+          await this.$store.dispatch('models/campsite/getCampsites', params);
 
-          if (this.$store.getters['models/course/size']) {
+          if (this.$store.getters['models/campsite/size']) {
             this.goToSearchResult(params);
           } else {
             this.showSearchResultEmptyDialog();
@@ -196,8 +188,15 @@ export default {
     showSearchResultEmptyDialog() {
       this.searchResultEmptyVisible = true;
     },
-    goToSearchResult() {
-      // TODO: Redirect to Search Result page
+    goToSearchResult(params) {
+      const searchConditions = { ...params, type: 'area' };
+      this.$store.dispatch('campsiteSearchNavigator/push', {
+        extends: SearchResult,
+        onsNavigatorProps: {
+          title: 'キャンプ場検索結果',
+          searchConditions,
+        },
+      });
     },
     toggleWeather() {
       this.isShowWeather = !this.isShowWeather;

@@ -21,7 +21,7 @@
     </div>
     <template #footer>
       <v-ons-button
-        modifier="secondary"
+        modifier="secondary rounded"
         @click="closeLabelList"
       >
         キャンセル
@@ -101,8 +101,8 @@ export default {
 
   .button {
     &--secondary {
-      color: #222;
-      background-color: #fff;
+      color: #fff;
+      background-color: #beb9b8;
     }
 
     &--primary {
@@ -122,6 +122,14 @@ export default {
 
   .alert-dialog-content {
     padding: 0;
+  }
+
+  .alert-dialog-footer {
+    display: flex;
+
+    & > ons-button {
+      margin: 5px;
+    }
   }
 }
 
@@ -148,6 +156,8 @@ export default {
   }
 
   &__items {
+    max-height: 350px;
+    overflow: scroll;
     background-color: #fff;
   }
 
@@ -157,7 +167,22 @@ export default {
     height: 34px;
     padding-left: 5px;
     border-top: 1px solid #d9d9d9;
+
+    &:last-child {
+      border-bottom: 1px solid #d9d9d9;
+    }
   }
 }
 
+@media screen and (max-width: 375px) {
+  .label-list__items {
+    max-height: 230px;
+  }
+
+  /deep/ {
+    .alert-dialog-footer ons-button {
+      margin: 2px;
+    }
+  }
+}
 </style>
