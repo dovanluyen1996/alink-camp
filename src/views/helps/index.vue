@@ -49,3 +49,11 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+/deep/ {
+  .button--rounded {
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.4);
+  }
+}
+</style>
