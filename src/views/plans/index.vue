@@ -115,20 +115,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped>
-/deep/ {
-  .no-data {
-    padding: 0;
-    white-space: nowrap;
-  }
-}
-
-@media only screen and (max-width: 400px) {
-  /deep/ {
-    .no-data {
-      white-space: normal;
-    }
-  }
-}
-</style>
