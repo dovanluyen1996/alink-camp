@@ -31,6 +31,8 @@
 </template>
 
 <script>
+import settings from '@/config/settings';
+
 // components
 import CardWithTab from '@/components/organisms/card-with-tab';
 import ContentWithFooter from '@/components/organisms/content-with-footer';
@@ -85,7 +87,10 @@ export default {
   watch: {
     activeIndexTab() {
       if (this.activeIndexTab === 1) {
-        this.$helpers.openPageByUrl(`${process.env.MAP_URL}?lat=${this.campsite.latitude}&lon=${this.campsite.longitude}`);
+        const storageKey = settings.localStorage.keys.session;
+        const session = JSON.parse(localStorage.getItem(storageKey));
+        const params = `lat=${this.campsite.latitude}&lon=${this.campsite.longitude}&uid=${session.uid}&access-token=${session['access-token']}&client=${session.client}`;
+        this.$helpers.openPageByUrl(`${process.env.MAP_URL}?${params}`);
       }
     },
   },

@@ -11,6 +11,8 @@
 </template>
 
 <script>
+import settings from '@/config/settings';
+
 export default {
   name: 'CampsiteRainyTab',
   computed: {
@@ -20,7 +22,10 @@ export default {
   },
   methods: {
     goToMap() {
-      this.$helpers.openPageByUrl(`${process.env.MAP_URL}?lat=${this.campsite.latitude}&lon=${this.campsite.longitude}`);
+      const storageKey = settings.localStorage.keys.session;
+      const session = JSON.parse(localStorage.getItem(storageKey));
+      const params = `lat=${this.campsite.latitude}&lon=${this.campsite.longitude}&uid=${session.uid}&access-token=${session['access-token']}&client=${session.client}`;
+      this.$helpers.openPageByUrl(`${process.env.MAP_URL}?${params}`);
     },
   },
 };
