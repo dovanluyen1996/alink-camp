@@ -1,7 +1,6 @@
 <template>
   <v-ons-page>
-    <custom-toolbar title="オリジナルアイテム">
-      <!-- TODO: 運営が用意したアイテムのとき、基本アイテムと表示する -->
+    <custom-toolbar :title="item.userId === null ? '基本アイテム' : 'オリジナルアイテム'">
       <template #right>
         <delete-dialog-with-icon
           :is-shown.sync="isShownDeleteConfirmDialog"
@@ -25,8 +24,7 @@
             <item-name
               v-model="itemName"
               :errors="errors"
-              :sticker="sticker"
-              :value="item.name"
+              :isUserItem="isUserItem"
             />
             <item-sticker
               :sticker="sticker"
@@ -119,12 +117,26 @@ export default {
       isVisibleLabelListDialog: false,
     };
   },
+  computed: {
+    isUserItem() {
+      return this.item.userId !== null;
+    },
+  },
   methods: {
-    updateItem() {
+    async updateItem() {
       this.closeEditConfirmDialog();
-      // TODO: Implement function below this
 
-      this.showCompletedDialog('updateItem');
+      await this.$store.dispatch('models/item/updateItem', {
+        itemId: this.item.id,
+        params: { name: this.itemName },
+      })
+        .then(() => {
+          this.showCompletedDialog('updateItem');
+        })
+        .catch((err) => {
+          // TODO: 更新失敗のダイアログやトーストなどの表示
+          console.log(err);
+        });
     },
     deleteItem() {
       this.closeDeleteConfirmDialog();
@@ -141,6 +153,7 @@ export default {
     },
     closeCompletedDialog() {
       this.isShowCompletedDialogVisible = false;
+      this.goToItems();
     },
     showEditConfirmDialog() {
       this.isShownEditConfirmDialog = true;
@@ -150,6 +163,9 @@ export default {
     },
     showLabelListDialog() {
       this.isVisibleLabelListDialog = true;
+    },
+    goToItems() {
+      this.$store.dispatch('menuNavigator/pop');
     },
   },
 };
