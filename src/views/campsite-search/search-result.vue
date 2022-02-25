@@ -22,6 +22,19 @@
               条件変更
             </v-ons-button>
           </template>
+          <template #footer v-else-if="isFilteringEnable()">
+            <v-ons-button
+              class="button--search"
+              modifier="large--cta rounded yellow"
+              @click="showFiltering()"
+            >
+              絞り込み
+            </v-ons-button>
+            <campsite-list-filter-dialog
+              :is-visible-filtering.sync="isVisibleFilterDialog"
+              @filter="filter"
+            >
+          </template>
         </content-with-footer>
       </template>
     </div>
@@ -33,6 +46,7 @@
 import NoData from '@/components/organisms/no-data';
 import CampsiteList from '@/components/organisms/campsite-list';
 import ContentWithFooter from '@/components/organisms/content-with-footer';
+import CampsiteListFilterDialog from '@/components/organisms/campsite-search/filter-dialog.vue';
 
 // pages
 import CampsiteShow from '@/views/campsites/show';
@@ -43,6 +57,7 @@ export default {
     NoData,
     CampsiteList,
     ContentWithFooter,
+    CampsiteListFilterDialog,
   },
   props: {
     title: {
@@ -61,6 +76,7 @@ export default {
   data() {
     return {
       page: 2,
+      isVisibleFilterDialog: false,
     };
   },
   computed: {
@@ -95,6 +111,12 @@ export default {
           this.page += 1;
           if (done) done();
         });
+    },
+    async filter(searchParams) {
+      this.page = 2;
+      // TODO: search
+      console.log(searchParams);
+      this.isVisibleFilterDialog = false;
     },
     searchByNameParams() {
       return {
@@ -144,6 +166,12 @@ export default {
       default:
         return this.searchByNameParams();
       }
+    },
+    isFilteringEnable() {
+      return !['area', 'location', 'prefecture'].includes(this.searchType());
+    },
+    showFiltering() {
+      this.isVisibleFilterDialog = true;
     },
     isConditionsChangeable() {
       return ['area', 'location'].includes(this.searchType());

@@ -270,6 +270,42 @@ export default {
         .map(nearby => nearby.text);
     },
   },
+  methods: {
+    searchParams() {
+      // TODO: return parameters
+      return {
+        style_auto_camping: true,
+        style_day_camping: true,
+        facility_trailer_house: true,
+        facility_bungalow: true,
+        facility_permanent_tent: true,
+        facility_ac: true,
+        facility_laundry: true,
+        facility_flush_toilet: true,
+        facility_shower: true,
+        facility_bathroom: true,
+        facility_hot_spring: true,
+        facility_barrier_free: true,
+        rule_direct_heat: true,
+        rule_pets: true,
+        rule_firework: true,
+        spot_canoe: true,
+        spot_fishing: true,
+        spot_trekking: true,
+        spot_star_watching: true,
+        spot_bird_watching: true,
+        spot_sea_bathing: true,
+        spot_waterplay: true,
+        spot_hot_spring: true,
+        spot_farm: true,
+        spot_leisure: true,
+        near_station: true,
+        credit_card: true,
+        parking: true,
+        parking_fee: true,
+      };
+    }
+  }
 };
 </script>
 
