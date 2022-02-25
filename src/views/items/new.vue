@@ -13,7 +13,7 @@
             <item-name
               v-model="itemName"
               :errors="errors"
-              :sticker="sticker"
+              :isUserItem="true"
             />
             <item-sticker
               :sticker="sticker"
@@ -43,7 +43,7 @@
         登録確認
       </template>
       <template #message>
-        新たに〇〇〇〇〇〇を作成します。<br>
+        新たに{{ itemName }}を作成します。<br>
         よろしいですか？
       </template>
       <template #confirmAction>
@@ -98,11 +98,17 @@ export default {
     };
   },
   methods: {
-    createItem() {
+    async createItem() {
       this.closeConfirmCreateItemDialog();
-      // TODO: Implement function below this
 
-      this.showCompletedDialog('createItem');
+      await this.$store.dispatch('models/item/createItem', { name: this.itemName })
+        .then(() => {
+          this.showCompletedDialog('createItem');
+        })
+        .catch((err) => {
+          // TODO: 更新失敗のダイアログやトーストなどの表示
+          console.log(err);
+        });
     },
     showCompletedDialog(action) {
       this.action = action;
@@ -110,6 +116,7 @@ export default {
     },
     closeCompletedDialog() {
       this.isShowCompletedDialogVisible = false;
+      this.goToItems();
     },
     showConfirmCreateItemDialog() {
       this.isShownConfirmCreateItemDialog = true;
@@ -119,6 +126,9 @@ export default {
     },
     showLabelListDialog() {
       this.isVisibleLabelListDialog = true;
+    },
+    goToItems() {
+      this.$store.dispatch('menuNavigator/pop');
     },
   },
 };
