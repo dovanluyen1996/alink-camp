@@ -3,6 +3,7 @@
     <custom-toolbar :title="item.userId === null ? '基本アイテム' : 'オリジナルアイテム'">
       <template #right>
         <delete-dialog-with-icon
+          v-if="isUserItem"
           :is-shown.sync="isShownDeleteConfirmDialog"
           @clickDelete="deleteItem"
         >
@@ -138,11 +139,17 @@ export default {
           console.log(err);
         });
     },
-    deleteItem() {
+    async deleteItem() {
       this.closeDeleteConfirmDialog();
-      // TODO: Implement function below this
 
-      this.showCompletedDialog('deleteItem');
+      await this.$store.dispatch('models/item/deleteItem', { itemId: this.item.id })
+        .then(() => {
+          this.showCompletedDialog('deleteItem');
+        })
+        .catch((err) => {
+          // TODO: 更新失敗のダイアログやトーストなどの表示
+          console.log(err);
+        });
     },
     closeDeleteConfirmDialog() {
       this.isShownDeleteConfirmDialog = false;
