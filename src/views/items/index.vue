@@ -6,8 +6,8 @@
       <loading :visible="isLoading" />
       <content-with-footer>
         <item-list
-          v-if="items.length > 0"
-          :items="items"
+          v-if="sortedItems.length > 0"
+          :items="sortedItems"
         />
 
         <div
@@ -47,8 +47,15 @@ export default {
     ItemList,
   },
   computed: {
-    items() {
-      return this.$store.getters['models/item/all'];
+    sortedItems() {
+      const items = this.$store.getters['models/item/all'];
+      const userItems = items.filter(item => item.userId !== null);
+      const consoleItems = items.filter(item => item.userId === null);
+
+      userItems.sort((a, b) => b.id - a.id);
+      consoleItems.sort((a, b) => a.id - b.id);
+
+      return userItems.concat(consoleItems);
     },
     isLoading() {
       return this.$store.getters['models/item/isLoading'];
