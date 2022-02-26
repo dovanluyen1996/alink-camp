@@ -308,15 +308,15 @@ export default {
 
       // 施設情報
       // チェックがあればパラメーターに含める
-      this.selectedFacilities.forEach(f => { params[f.name] = 1 });
+      this.selectedFacilities.forEach((f) => { params[f.name] = 1; });
 
       // 周辺情報
       // チェックがあればパラメーターに含める
-      this.selectedNearbies.forEach(n => { params[n.name] = 1 });
+      this.selectedNearbies.forEach((n) => { params[n.name] = 1; });
 
       return params;
-    }
-  }
+    },
+  },
 };
 </script>
 
