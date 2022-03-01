@@ -29,22 +29,28 @@
             />
           </td>
           <td>
-            <img
-              :src="require('@/assets/images/weathers/weather/02.png')"
-              class="icon-weather"
-            >
+            <weather-image
+              :weather="item"
+              image-width="35px"
+            />
           </td>
-          <td>{{ item.precipitation }}</td>
+          <td>{{ precipitationText(item.precip) }}</td>
           <td>
-            <span class="text-red">32°C </span>
+            <temperature
+              :value="item.maxTemp"
+              class="text-red"
+            />
             &nbsp;/&nbsp;
-            <span class="text-blue">12°C</span>
+            <temperature
+              :value="item.minTemp"
+              class="text-blue"
+            />
           </td>
           <td>
             <div class="wind-direction">
               <!-- // TODO: change class when do logic -->
               <div class="wind-speed wind-speed--danger" />
-              <span>{{ item.wind }}</span>
+              <span>{{ item.windSpeed }}</span>
             </div>
           </td>
         </tr>
@@ -54,9 +60,15 @@
 </template>
 
 <script>
+import WeatherImage from '@/components/atoms/weather-image';
+import Temperature from '@/components/atoms/temperature';
 
 export default {
   name: 'ForecastTableDate',
+  components: {
+    WeatherImage,
+    Temperature,
+  },
   props: {
     campsite: {
       type: Object,
@@ -115,6 +127,9 @@ export default {
     },
     sundayCol(date) {
       return this.$helpers.isSunday(date) ? 'date-col__sunday' : '';
+    },
+    precipitationText(precipitation) {
+      return this.$helpers.isEmpty(precipitation) ? '--' : precipitation;
     },
   },
 };
