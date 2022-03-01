@@ -102,16 +102,13 @@ export default {
       type: Object,
       required: true,
     },
-    forecasts: {
-      type: Object,
-      required: true,
-    },
   },
   data() {
     return {
       checkedItemIds: [],
       confirmDialogVisible: false,
       completedDialogVisible: false,
+      forecasts: {},
     };
   },
   computed: {
@@ -149,6 +146,16 @@ export default {
     async closeCompletedDialog() {
       this.completedDialogVisible = false;
       await this.$store.dispatch('plansNavigator/pop');
+    },
+    async getForecast14Days() {
+      const params = {
+        campsite_id: this.campsite.id,
+      };
+
+      return await this.$store.dispatch('models/weather/getForecast14Days', params);
+    },
+    async show() {
+      if(this.$helpers.isEmptyObject(this.forecasts)) this.forecasts = await this.getForecast14Days();
     },
   },
 };

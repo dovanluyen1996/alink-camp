@@ -1,6 +1,5 @@
 <template>
   <div class="table-weather">
-    {{ dateRange() }}
     <table class="table">
       <tbody>
         <tr>
@@ -70,23 +69,7 @@ export default {
   },
   data() {
     return {
-      items: [
-        {
-          date: '12/31/2021',
-          precipitation: '0',
-          wind: '99',
-        },
-        {
-          date: '01/01/2022',
-          precipitation: '0',
-          wind: '99',
-        },
-        {
-          date: '01/02/2022',
-          precipitation: '0',
-          wind: '99',
-        },
-      ],
+      dateRange: [],
     };
   },
   computed: {
@@ -99,17 +82,23 @@ export default {
     finishedDate() {
       return this.params.finishedDate;
     },
+    items() {
+      if(!this.dateRange.length || !this.forecasts['items']) return [];
+
+      const items = this.forecasts['items'];
+      return items.filter((item) => this.dateRange.includes(item.date));
+    }
   },
   watch: {
     async startedDate() {
-      await this.dateRange();
+      this.dateRange = await this.getDateRange();
     },
     async finishedDate() {
-      await this.dateRange();
+      this.dateRange = await this.getDateRange();
     },
   },
   methods: {
-    dateRange() {
+    getDateRange() {
       if(this.startedDate && this.finishedDate) {
         return this.$helpers.getDateRange(this.startedDate, this.finishedDate);
       }

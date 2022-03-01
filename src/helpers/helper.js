@@ -15,7 +15,8 @@ export default {
     let range = [];
 
     for (let i = 0; i <= diff; i++) {
-      range.push(fromDate.add(i, 'days'));
+      range.push(fromDate.format('YYYY-MM-DD'));
+      fromDate.add(1, 'days');
     }
 
     return range;

@@ -50,6 +50,10 @@ export default {
       type: Boolean,
       default: true,
     },
+    forecasts: {
+      type: Object,
+      default: () => {},
+    },
   },
   data() {
     return {
@@ -64,7 +68,6 @@ export default {
           page: ListItemCamp,
           props: {
             campsite: this.campsite,
-            forecasts: this.forecasts,
           },
         },
         {
@@ -76,7 +79,6 @@ export default {
       isShownDeleteDialog: false,
       completedDialogVisible: false,
       action: '',
-      forecasts: [],
     };
   },
   computed: {
@@ -90,26 +92,10 @@ export default {
       return this.params.finishedDate;
     },
   },
-  watch: {
-    async startedDate() {
-      await this.getForecast14Days();
-    },
-    async finishedDate() {
-      await this.getForecast14Days();
-    },
-  },
   methods: {
     async show() {
       await this.setCampsiteId();
       await this.getItems();
-    },
-    async getForecast14Days() {
-      const params = {
-        campsite_id: this.campsite.id,
-      };
-
-      const forecasts = await this.$store.dispatch('models/weather/getForecast14Days', params);
-      this.forecasts = forecasts;
     },
     async setCampsiteId() {
       await this.$store.dispatch('plan/setCampsiteId', this.campsite.id);
