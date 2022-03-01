@@ -70,11 +70,10 @@ export default {
   methods: {
     show() {
       this.$store.commit('campsite/setSearched', false);
-
-      // TODO: スクロール位置を先頭に移動したい
-      const scrollContent = this.$el.querySelector('.content-with-footer');
-      // 常にscrollTop = 0
-      console.log('conditions search show', scrollContent.scrollTop);
+      this.moveToTop();
+    },
+    moveToTop() {
+      const scrollContent = this.$el.querySelector('.content-with-footer__content');
       scrollContent.scrollTo(0, 0);
     },
     search() {
