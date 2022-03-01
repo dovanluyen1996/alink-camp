@@ -5,15 +5,15 @@
     </span>
     <div class="item-sticker__box">
       <div
-        v-if="sticker && sticker.labels.length > 0"
+        v-if="labels && labels.length > 0"
         class="item-sticker__labels"
       >
         <div
-          v-for="label in sticker.labels"
+          v-for="label in labels"
           :key="label"
           class="item-sticker__label"
         >
-          {{ label }}
+          {{ label.name }}
         </div>
       </div>
       <p
@@ -40,9 +40,9 @@
 
 <script>
 export default {
-  name: 'ItemSticker',
+  name: 'ItemLabel',
   props: {
-    sticker: {
+    labels: {
       type: Object,
       default: null,
     },

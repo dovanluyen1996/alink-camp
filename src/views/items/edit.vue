@@ -27,8 +27,8 @@
               :errors="errors"
               :isUserItem="isUserItem"
             />
-            <item-sticker
-              :sticker="sticker"
+            <item-label
+              :labels="labels"
               @showLabelListDialog="showLabelListDialog"
             />
             <template #footer>
@@ -75,7 +75,7 @@
 import CustomToolbar from '@/components/organisms/custom-toolbar.vue';
 import ContentWithFooter from '@/components/organisms/content-with-footer';
 import ItemName from '@/components/organisms/item/name';
-import ItemSticker from '@/components/organisms/item/sticker';
+import ItemLabel from '@/components/organisms/item/label';
 import DeleteDialogWithIcon from '@/components/organisms/dialog/delete-dialog-with-icon';
 import ConfirmDialog from '@/components/organisms/dialog/confirm-dialog';
 import CompletedDialog from '@/components/organisms/dialog/completed-dialog';
@@ -87,7 +87,7 @@ export default {
     CustomToolbar,
     ContentWithFooter,
     ItemName,
-    ItemSticker,
+    ItemLabel,
     DeleteDialogWithIcon,
     CompletedDialog,
     ConfirmDialog,
@@ -103,14 +103,7 @@ export default {
   data() {
     return {
       itemName: this.item.name,
-      sticker: {
-        user_id: 1,
-        labels: [
-          'ラベルB',
-          'ラベルA',
-          'ラベルB',
-        ],
-      },
+      labels: this.item.labels,
       isShownEditConfirmDialog: false,
       isShownDeleteConfirmDialog: false,
       isShowCompletedDialogVisible: false,
