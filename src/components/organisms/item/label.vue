@@ -1,35 +1,35 @@
 <template>
-  <div class="item-sticker">
-    <span class="item-sticker__title">
+  <div class="item-label">
+    <span class="item-label__title">
       ラベル
     </span>
-    <div class="item-sticker__box">
+    <div class="item-label__box">
       <div
         v-if="labels && labels.length > 0"
-        class="item-sticker__labels"
+        class="item-label__labels"
       >
         <div
           v-for="label in labels"
           :key="label"
-          class="item-sticker__label"
+          class="item-label__label"
         >
           {{ label.name }}
         </div>
       </div>
       <p
         v-else
-        class="item-sticker__text"
+        class="item-label__text"
       >
         設定しているラベルがありません。
       </p>
     </div>
     <div
-      class="item-sticker__button"
+      class="item-label__button"
       @click="showLabelListDialog"
     >
       <v-ons-button modifier="cta red">
         <img
-          class="item-sticker__image"
+          class="item-label__image"
           src="@/assets/images/red-cross.png"
         >
         ラベル編集
@@ -56,7 +56,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.item-sticker {
+.item-label {
   height: 190px;
   padding: 0 20px;
   margin-top: 10px;
