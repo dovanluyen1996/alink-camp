@@ -12,9 +12,9 @@ export default {
     const fromDate = moment(start);
     const toDate = moment(end);
     const diff = toDate.diff(fromDate, 'days');
-    let range = [];
+    const range = [];
 
-    for (let i = 0; i <= diff; i++) {
+    for (let i = 0; i <= diff; i += 1) {
       range.push(fromDate.format('YYYY-MM-DD'));
       fromDate.add(1, 'days');
     }

@@ -152,10 +152,13 @@ export default {
         campsite_id: this.campsite.id,
       };
 
-      return await this.$store.dispatch('models/weather/getForecast14Days', params);
+      const forecast14Days = await this.$store.dispatch('models/weather/getForecast14Days', params);
+      return forecast14Days;
     },
     async show() {
-      if(this.$helpers.isEmptyObject(this.forecasts)) this.forecasts = await this.getForecast14Days();
+      if (this.$helpers.isEmptyObject(this.forecasts)) {
+        this.forecasts = await this.getForecast14Days();
+      }
     },
   },
 };

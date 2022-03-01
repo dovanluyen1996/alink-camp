@@ -94,11 +94,11 @@ export default {
       return this.params.finishedDate;
     },
     items() {
-      if(!this.dateRange.length || !this.forecasts['items']) return [];
+      if (!this.dateRange.length || !this.forecasts.items) return [];
 
-      const items = this.forecasts['items'];
-      return items.filter((item) => this.dateRange.includes(item.date));
-    }
+      const { items } = this.forecasts;
+      return items.filter(item => this.dateRange.includes(item.date));
+    },
   },
   watch: {
     async startedDate() {
@@ -110,11 +110,11 @@ export default {
   },
   methods: {
     getDateRange() {
-      if(this.startedDate && this.finishedDate) {
+      if (this.startedDate && this.finishedDate) {
         return this.$helpers.getDateRange(this.startedDate, this.finishedDate);
       }
-      if(this.startedDate) return [this.startedDate];
-      if(this.finishedDate) return [this.finishedDate];
+      if (this.startedDate) return [this.startedDate];
+      if (this.finishedDate) return [this.finishedDate];
 
       return [];
     },
