@@ -48,8 +48,7 @@
           </td>
           <td>
             <div class="wind-direction">
-              <!-- // TODO: change class when do logic -->
-              <div class="wind-speed wind-speed--danger" />
+              <div :class="['wind-speed', windSpeedRate(item.windSpeed)]" />
               <span>{{ item.windSpeed }}</span>
             </div>
           </td>
@@ -130,6 +129,17 @@ export default {
     },
     precipitationText(precipitation) {
       return this.$helpers.isEmpty(precipitation) ? '--' : precipitation;
+    },
+    windSpeedRate(windSpeed) {
+      // Unit of measurement: m/s
+      switch (true) {
+      case (windSpeed < 2):
+        return 'wind-speed--normal';
+      case (windSpeed < 5):
+        return 'wind-speed--strong';
+      default:
+        return 'wind-speed--danger';
+      }
     },
   },
 };
