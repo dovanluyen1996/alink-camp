@@ -3,21 +3,31 @@
     <div class="hourly-weather-title">
       未来の天気傾向
     </div>
+    <div v-if="isPurchased">
+      <div class="hourly-weather">
+        <temperature-chart />
+      </div>
 
-    <div class="hourly-weather">
-      <temperature-chart />
+      <div class="hourly-weather">
+        <temperature-table />
+      </div>
+
+      <div class="hourly-weather">
+        <prob-precip-chart />
+      </div>
+
+      <div class="hourly-weather">
+        <annual-weather-chart />
+      </div>
     </div>
 
-    <div class="hourly-weather">
-      <temperature-table />
-    </div>
-
-    <div class="hourly-weather">
-      <prob-precip-chart />
-    </div>
-
-    <div class="hourly-weather">
-      <annual-weather-chart />
+    <div
+      v-else
+      class="not-purchase"
+    >
+      <p>
+        課金LPの魅力バナー
+      </p>
     </div>
   </div>
 </template>
@@ -36,6 +46,19 @@ export default {
     TemperatureTable,
     ProbPrecipChart,
     AnnualWeatherChart,
+  },
+  data() {
+    return {
+      isPurchased: false,
+    };
+  },
+  async created() {
+    await this.setIsPurchased();
+  },
+  methods: {
+    async setIsPurchased() {
+      this.isPurchased = await this.$store.dispatch('purchase/getIsPurchased');
+    },
   },
 };
 </script>
@@ -60,6 +83,24 @@ export default {
   margin: 10px 10px 15px;
   background: $color-white;
   border-radius: 10px;
+}
+
+.not-purchase {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 500px;
+  padding: 10px;
+  margin: 10px 10px 15px;
+  background: $color-white;
+  border: 1px solid #afafaf;
+  border-radius: 10px;
+
+  p {
+    font-size: 16px;
+    font-weight: 600;
+    color: #888;
+  }
 }
 
 .chart-header {
