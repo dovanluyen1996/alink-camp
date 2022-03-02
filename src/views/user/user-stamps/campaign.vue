@@ -94,6 +94,7 @@ export default {
       if (!lastGettedAt || this.$helpers.isAfterDate(value, lastGettedAt)) {
         await this.getUserStamp();
         localStorage.setItem('userStampLastGettedAt', value);
+        if (!await this.$store.dispatch('purchase/getIsPurchased')) return;
         this.isVisible = true;
       }
     },
