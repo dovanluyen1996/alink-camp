@@ -74,7 +74,7 @@ extend('required-bwtween-14days', (end, start) => {
     return true;
   }
 
-  return `日付範囲を14日以内で指定してください`;
+  return '日付範囲を14日以内で指定してください';
 });
 
 extend('max', {
