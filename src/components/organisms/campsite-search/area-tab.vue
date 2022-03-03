@@ -51,7 +51,7 @@
 
       <campsite-search-conditions-fields
         :sunny.sync="sunny"
-        :temperature.sync="temperature"
+        :temperature.sync="max_temp"
         :wind.sync="wind"
         :uv.sync="uv"
         :date.sync="targetDate"
@@ -127,7 +127,7 @@ export default {
       searchResultEmptyVisible: false,
       prefecture: -1,
       targetDate: '',
-      temperature: '',
+      max_temp: '',
       sunny: false,
       wind: false,
       uv: false,
@@ -168,7 +168,7 @@ export default {
           const areaParams = {
             prefecture_id: this.prefecture,
             target_date: this.targetDate,
-            temperature: this.temperature,
+            max_temp: this.max_temp,
             sunny: this.sunny ? 1 : 0,
             wind: this.wind ? 1 : 0,
             uv: this.uv ? 1 : 0,

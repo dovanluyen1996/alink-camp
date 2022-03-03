@@ -160,7 +160,7 @@ export default {
       return {
         prefecture_id: this.searchConditions.prefecture,
         target_date: this.searchConditions.targetDate,
-        temperature: this.searchConditions.temperature,
+        max_temp: this.searchConditions.max_temp,
         sunny: this.searchConditions.sunny,
         wind: this.searchConditions.wind,
         uv: this.searchConditions.uv,
@@ -172,7 +172,7 @@ export default {
         lower_rad: this.searchConditions.lower_rad,
         upper_rad: this.searchConditions.upper_rad,
         target_date: this.searchConditions.targetDate,
-        temperature: this.searchConditions.temperature,
+        max_temp: this.searchConditions.max_temp,
         sunny: this.searchConditions.sunny,
         wind: this.searchConditions.wind,
         uv: this.searchConditions.uv,
