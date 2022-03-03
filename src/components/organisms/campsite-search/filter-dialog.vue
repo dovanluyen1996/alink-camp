@@ -23,13 +23,10 @@
 
 <script>
 // components
-import CheckField from '@/components/organisms/form/check-field';
 import CampsiteSearchConditionsFacility from '@/components/organisms/campsite-search/conditions-facility';
-
 
 export default {
   components: {
-    CheckField,
     CampsiteSearchConditionsFacility,
   },
   props: {
@@ -64,12 +61,13 @@ export default {
     overflow: scroll;
   }
 
-  .alert-dialog-title {
-    margin-bottom: 0;
+  .alert-dialog-content {
+    max-height: 350px;
+    overflow: scroll;
   }
 
-  .alert-dialog-content {
-    padding: 0;
+  .alert-dialog-title {
+    margin-bottom: 0;
   }
 
   .alert-dialog-footer {
@@ -77,6 +75,25 @@ export default {
 
     & > ons-button {
       margin: 5px;
+    }
+  }
+
+  .facility-flex .check-field,
+  .nearby-flex .check-field {
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .custom-input {
+    position: relative !important;
+  }
+}
+
+@media only screen and (max-width: 375px) {
+  /deep/ {
+    .alert-dialog-content {
+      max-height: 230px;
     }
   }
 }
