@@ -2,6 +2,7 @@
   <v-ons-page :infinite-scroll="search">
     <custom-toolbar :title="title" />
     <div class="content">
+      <loading :visible="isLoading" />
       <template v-if="campsites.length === 0">
         <content-with-footer v-if="campsites.length === 0">
           <no-data>
@@ -103,6 +104,9 @@ export default {
     },
     totalCount() {
       return this.$store.getters['models/campsite/totalCount'];
+    },
+    isLoading() {
+      return this.$store.state.models.campsite.isLoading;
     },
   },
   methods: {
