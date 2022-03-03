@@ -101,6 +101,20 @@ export default {
         context.commit('setIsLoading', false);
       }
     },
+    async updateLabel(context, { itemId, params }) {
+      context.commit('setIsLoading', true);
+
+      try {
+        const item = await ApiClient.updateLabel(itemId, params);
+
+        context.commit('updateItem', item);
+      } catch (error) {
+        context.commit('api/setError', error, { root: true });
+        throw error;
+      } finally {
+        context.commit('setIsLoading', false);
+      }
+    },
     async deleteItem(context, { itemId }) {
       context.commit('setIsLoading', true);
 

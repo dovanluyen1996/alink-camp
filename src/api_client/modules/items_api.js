@@ -15,6 +15,10 @@ export default {
     const response = await this.put(`/items/${id}`, params);
     return response.data;
   },
+  async updateLabel(id, params) {
+    const response = await this.put(`/items/${id}/labels`, params);
+    return response.data;
+  },
   async deleteItem(id) {
     const response = await this.delete(`/items/${id}`);
     return response.data;
