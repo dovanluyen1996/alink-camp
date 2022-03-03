@@ -151,7 +151,6 @@ export default {
       };
       await this.$store.dispatch('models/campsite/getCampsites', searchParams)
         .then(() => {
-          console.log('got it !');
           this.page += 1;
           this.isFiltered = true;
         });
