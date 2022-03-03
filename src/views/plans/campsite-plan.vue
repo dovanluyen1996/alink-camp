@@ -21,10 +21,16 @@
         </v-ons-button>
 
         <time-plan
-          :future-plans="futurePlans"
-          :past-plans="pastPlans"
+          :future-plans="displayedFuturePlans"
+          :past-plans="displayedPastPlans"
         />
       </v-ons-card>
+
+      <error-dialog
+        title="新計画を追加できません"
+        :is-visible="isErrorDialogVisible"
+        @close="closeErrorDialog"
+      />
     </div>
   </v-ons-page>
 </template>
@@ -32,18 +38,29 @@
 <script>
 import TimePlan from '@/components/organisms/plan/time-plan';
 import AddPlan from '@/views/plans/add-plan';
+import ErrorDialog from '@/components/organisms/error-dialog';
 
 import moment from 'moment';
 
 export default {
   components: {
     TimePlan,
+    ErrorDialog,
   },
   props: {
     campsite: {
       type: Object,
       required: true,
     },
+  },
+  data() {
+    return {
+      isPurchased: false,
+      isErrorDialogVisible: false,
+    };
+  },
+  async created() {
+    await this.setIsPurchased();
   },
   computed: {
     futurePlans() {
@@ -60,16 +77,36 @@ export default {
         (a, b) => (moment(a.startedDate).isAfter(b.startedDate) ? -1 : 1),
       );
     },
+    displayedFuturePlans() {
+      if (!this.futurePlans.length) return [];
+      return this.isPurchased ? this.futurePlans : [this.futurePlans[0]];
+    },
+    displayedPastPlans() {
+      if (!this.pastPlans.length) return [];
+      return this.isPurchased ? this.pastPlans : [this.pastPlans[0]];
+    },
   },
   methods: {
     goToAddPlan() {
-      this.$store.dispatch('plansNavigator/push', {
-        extends: AddPlan,
-        onsNavigatorProps: {
-          campsite: this.campsite,
-          isShowIconDelete: false,
-        },
-      });
+      if (!this.futurePlans.length) {
+        this.$store.dispatch('plansNavigator/push', {
+          extends: AddPlan,
+          onsNavigatorProps: {
+            campsite: this.campsite,
+          },
+        });
+      } else {
+        this.showErrorDialog();
+      }
+    },
+    showErrorDialog() {
+      this.isErrorDialogVisible = true;
+    },
+    closeErrorDialog() {
+      this.isErrorDialogVisible = false;
+    },
+    async setIsPurchased() {
+      this.isPurchased = await this.$store.dispatch('purchase/getIsPurchased');
     },
   },
 };
