@@ -81,6 +81,7 @@
 
       <campsite-search-conditions-facility
         v-show="isShowFacility"
+        ref="facilityCondition"
       />
     </validation-observer>
 
@@ -164,13 +165,18 @@ export default {
 
           if (!valid) return;
 
-          const params = {
+          const areaParams = {
             prefecture_id: this.prefecture,
             target_date: this.targetDate,
             temperature: this.temperature,
             sunny: this.sunny ? 1 : 0,
             wind: this.wind ? 1 : 0,
             uv: this.uv ? 1 : 0,
+          };
+          const facilityParams = this.$refs.facilityCondition.searchParams();
+          const params = {
+            ...areaParams,
+            ...facilityParams,
           };
 
           await this.$store.dispatch('models/campsite/getCampsites', params);
