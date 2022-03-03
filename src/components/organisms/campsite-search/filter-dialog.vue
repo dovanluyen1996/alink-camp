@@ -46,7 +46,6 @@ export default {
   },
   methods: {
     filter() {
-      // TODO: Implement function when search camp
       this.$emit('filter', this.$refs.facilityCondition.searchParams());
     },
   },

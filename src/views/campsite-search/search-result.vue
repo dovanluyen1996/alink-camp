@@ -2,9 +2,25 @@
   <v-ons-page :infinite-scroll="search">
     <custom-toolbar :title="title" />
     <div class="content">
-      <no-data v-if="campsites.length === 0">
-        条件に合うキャンプ場が見つかりません
-      </no-data>
+      <template v-if="campsites.length === 0">
+        <content-with-footer v-if="campsites.length === 0">
+          <no-data>
+            条件に合うキャンプ場が見つかりません
+          </no-data>
+          <template
+            v-if="isFiltered"
+            #footer
+          >
+            <v-ons-button
+              class="button--search"
+              modifier="large--cta rounded yellow"
+              @click="showFiltering()"
+            >
+              絞り込み
+            </v-ons-button>
+          </template>
+        </content-with-footer>
+      </template>
 
       <template v-else>
         <content-with-footer>
@@ -30,13 +46,14 @@
             >
               絞り込み
             </v-ons-button>
-            <campsite-list-filter-dialog
-              :is-visible-filtering.sync="isVisibleFilterDialog"
-              @filter="filter"
-            >
           </template>
         </content-with-footer>
       </template>
+
+      <campsite-list-filter-dialog
+        :is-visible-filtering.sync="isVisibleFilterDialog"
+        @filter="filter"
+      />
     </div>
   </v-ons-page>
 </template>
@@ -77,6 +94,7 @@ export default {
     return {
       page: 2,
       isVisibleFilterDialog: false,
+      isFiltered: false,
     };
   },
   computed: {
@@ -112,11 +130,21 @@ export default {
           if (done) done();
         });
     },
-    async filter(searchParams) {
-      this.page = 2;
-      // TODO: search
-      console.log(searchParams);
+    async filter(filterParams) {
+      this.$store.dispatch('models/campsite/resetCampsites');
+      this.page = 1;
       this.isVisibleFilterDialog = false;
+
+      const searchParams = {
+        ...filterParams,
+        ...this.searchParams(),
+      };
+      await this.$store.dispatch('models/campsite/getCampsites', searchParams)
+        .then(() => {
+          console.log('got it !');
+          this.page += 1;
+          this.isFiltered = true;
+        });
     },
     searchByNameParams() {
       return {
