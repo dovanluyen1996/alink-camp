@@ -1,14 +1,25 @@
 <template>
   <div class="uv">
-    <div class="uv-title">
-      紫外線
+    <div v-if="isPurchased">
+      <div class="uv-title">
+        紫外線
+      </div>
+      <img
+        :src="image"
+        width="26px"
+      >
+      <div class="uv-label">
+        {{ label }}
+      </div>
     </div>
-    <img
-      :src="image"
-      width="26px"
-    >
-    <div class="uv-label">
-      {{ label }}
+    <div v-else>
+      <div class="uv-title uv-title--unpaid">
+        紫外線
+      </div>
+      <img
+        src="@/assets/images/weathers/uv/00.png"
+        width="26px"
+      >
     </div>
   </div>
 </template>
@@ -20,6 +31,10 @@ export default {
     forecast: {
       type: Object,
       required: true,
+    },
+    isPurchased: {
+      type: Boolean,
+      default: false,
     },
   },
   data() {
