@@ -212,8 +212,8 @@ export default {
   align-items: center;
   width: 109px;
   height: 29px;
+  font-size: 14px;
   font-weight: 600;
-  color: 14px;
   background-color: $color-yellow;
   border-radius: 15px;
 

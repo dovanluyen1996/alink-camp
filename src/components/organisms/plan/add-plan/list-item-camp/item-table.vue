@@ -119,7 +119,7 @@ export default {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 85px;
+      width: 22%;
       height: 24px;
       padding: 5px 10px;
       margin-right: 10px;
@@ -134,9 +134,9 @@ export default {
   .items__label--red {
     position: absolute;
     right: 0;
-    width: 101px;
+    width: 28%;
     margin-right: 5px;
-    font-size: 10px;
+    font-size: 12px;
     background-color: #a82e05;
     border-radius: 15px;
 
