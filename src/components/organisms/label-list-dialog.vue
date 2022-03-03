@@ -12,10 +12,11 @@
         :key="index"
         class="label-list__item"
       >
-        <check-field
-          v-model="labels[index].value"
+        <check-group-field
+          :checked-values.sync="checkedValue"
+          :checked-value="label.id"
           :label="label.name"
-          :disable="isDisable(label.name)"
+          :disable="isDisable(label.id)"
         />
       </div>
     </div>
@@ -38,13 +39,17 @@
 
 <script>
 // components
-import CheckField from '@/components/organisms/form/check-field';
+import CheckGroupField from '@/components/organisms/form/check-group-field';
 
 export default {
   components: {
-    CheckField,
+    CheckGroupField,
   },
   props: {
+    checkedLabelIds: {
+      type: Array,
+      default: () => [],
+    },
     isVisibleLabelList: {
       type: Boolean,
       default: false,
@@ -52,18 +57,7 @@ export default {
   },
   data() {
     return {
-      labels: [
-        { name: 'Test1', value: false },
-        { name: 'Test2', value: false },
-        { name: 'Test3', value: false },
-        { name: 'Test4', value: false },
-        { name: 'Test5', value: false },
-        { name: 'Test6', value: false },
-        { name: 'Test7', value: false },
-        { name: 'Test8', value: false },
-        { name: 'Test9', value: false },
-        { name: 'Test10', value: false },
-      ],
+      checkedValue: [...this.checkedLabelIds],
     };
   },
   computed: {
@@ -72,16 +66,19 @@ export default {
         .filter(label => label.value)
         .map(label => label.name);
     },
+    labels() {
+      return this.$store.getters['models/label/labels'];
+    },
   },
   methods: {
-    isDisable(labelName) {
-      return this.selectedLabels.length >= 3 && !this.selectedLabels.includes(labelName);
+    isDisable(labelId) {
+      return this.checkedValue.length >= 3 && !this.checkedValue.includes(labelId);
     },
     closeLabelList() {
       this.$emit('update:isVisibleLabelList', false);
     },
     registerLabel() {
-      // TODO: Implement function when register label
+      this.$emit('update:checkedLabelIds', [...this.checkedValue]);
       this.$emit('update:isVisibleLabelList', false);
     },
   },
