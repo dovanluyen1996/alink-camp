@@ -12,8 +12,11 @@
           v-for="label in labels"
           :key="label"
           class="item-label__label"
+          :style="styles(label)"
         >
-          {{ label.name }}
+          <span class="item-label__label__text">
+            {{ label.name }}
+          </span>
         </div>
       </div>
       <p
@@ -51,6 +54,11 @@ export default {
     showLabelListDialog() {
       this.$emit('showLabelListDialog');
     },
+    styles(label) {
+      return {
+        '--background-color': label.color,
+      };
+    },
   },
 };
 </script>
@@ -81,9 +89,13 @@ export default {
     padding: 2px 5px;
     font-size: 12px;
     font-weight: 600;
-    color: #fff;
     text-align: center;
-    background-color: #4c7dae;
+    background-color: var(--background-color);
+
+    &__text {
+      color: var(--background-color);
+      filter: invert(100%) grayscale(100%) contrast(100);
+    }
   }
 
   &__box {

@@ -8,6 +8,9 @@ export default {
     labels: [],
     isLoading: false,
   },
+  getters: {
+    labels: state => state.labels,
+  },
   mutations: {
     setIsLoading(state, isLoading) {
       state.isLoading = isLoading;

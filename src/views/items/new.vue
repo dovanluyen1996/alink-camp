@@ -15,8 +15,8 @@
               :errors="errors"
               :isUserItem="true"
             />
-            <item-sticker
-              :sticker="sticker"
+            <item-label
+              :labels="labels"
               @showLabelListDialog="showLabelListDialog"
             />
             <template #footer>
@@ -33,7 +33,10 @@
       </validation-observer>
     </div>
 
-    <label-list-dialog :is-visible-label-list.sync="isVisibleLabelListDialog" />
+    <label-list-dialog
+      :checked-label-ids.sync="labelIds"
+      :is-visible-label-list.sync="isVisibleLabelListDialog"
+    />
 
     <confirm-dialog
       :is-shown.sync="isShownConfirmCreateItemDialog"
@@ -64,7 +67,7 @@
 import CustomToolbar from '@/components/organisms/custom-toolbar.vue';
 import ContentWithFooter from '@/components/organisms/content-with-footer';
 import ItemName from '@/components/organisms/item/name';
-import ItemSticker from '@/components/organisms/item/sticker';
+import ItemLabel from '@/components/organisms/item/label';
 import ConfirmDialog from '@/components/organisms/dialog/confirm-dialog';
 import CompletedDialog from '@/components/organisms/dialog/completed-dialog';
 import LabelListDialog from '@/components/organisms/label-list-dialog';
@@ -75,7 +78,7 @@ export default {
     CustomToolbar,
     ContentWithFooter,
     ItemName,
-    ItemSticker,
+    ItemLabel,
     ConfirmDialog,
     CompletedDialog,
     LabelListDialog,
@@ -83,25 +86,27 @@ export default {
   data() {
     return {
       itemName: '',
-      sticker: {
-        user_id: 1,
-        labels: [
-          'ラベルB',
-          'ラベルA',
-          'ラベルB',
-        ],
-      },
+      labelIds: [],
       isShownConfirmCreateItemDialog: false,
       isShowCompletedDialogVisible: false,
       action: '',
       isVisibleLabelListDialog: false,
     };
   },
+  computed: {
+    labels() {
+      const consolelabels = this.$store.getters['models/label/labels'];
+      return consolelabels.filter(label => this.labelIds.includes(label.id));
+    },
+  },
+  async created() {
+    await this.$store.dispatch('models/label/getLabels');
+  },
   methods: {
     async createItem() {
       this.closeConfirmCreateItemDialog();
 
-      await this.$store.dispatch('models/item/createItem', { name: this.itemName })
+      await this.$store.dispatch('models/item/createItem', { name: this.itemName, label_ids: this.labelIds })
         .then(() => {
           this.showCompletedDialog('createItem');
         })

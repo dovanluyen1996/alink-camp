@@ -45,11 +45,14 @@
       </validation-observer>
     </div>
 
-    <label-list-dialog :is-visible-label-list.sync="isVisibleLabelListDialog" />
+    <label-list-dialog
+      :checked-label-ids.sync="labelIds"
+      :is-visible-label-list.sync="isVisibleLabelListDialog"
+    />
 
     <confirm-dialog
       :is-shown.sync="isShownEditConfirmDialog"
-      @clickConfirm="updateItem"
+      @clickConfirm="isUserItem ? updateItem() : updateLabel()"
     >
       <template #title>
         編集確認
@@ -103,7 +106,7 @@ export default {
   data() {
     return {
       itemName: this.item.name,
-      labels: this.item.labels,
+      labelIds: this.item.labels.map(label => label.id),
       isShownEditConfirmDialog: false,
       isShownDeleteConfirmDialog: false,
       isShowCompletedDialogVisible: false,
@@ -115,6 +118,13 @@ export default {
     isUserItem() {
       return this.item.userId !== null;
     },
+    labels() {
+      const consolelabels = this.$store.getters['models/label/labels'];
+      return consolelabels.filter(label => this.labelIds.includes(label.id));
+    },
+  },
+  async created() {
+    await this.$store.dispatch('models/label/getLabels');
   },
   methods: {
     async updateItem() {
@@ -122,7 +132,22 @@ export default {
 
       await this.$store.dispatch('models/item/updateItem', {
         itemId: this.item.id,
-        params: { name: this.itemName },
+        params: { name: this.itemName, label_ids: this.labelIds },
+      })
+        .then(() => {
+          this.showCompletedDialog('updateItem');
+        })
+        .catch((err) => {
+          // TODO: 更新失敗のダイアログやトーストなどの表示
+          console.log(err);
+        });
+    },
+    async updateLabel() {
+      this.closeEditConfirmDialog();
+
+      await this.$store.dispatch('models/item/updateLabel', {
+        itemId: this.item.id,
+        params: { label_ids: this.labelIds },
       })
         .then(() => {
           this.showCompletedDialog('updateItem');
