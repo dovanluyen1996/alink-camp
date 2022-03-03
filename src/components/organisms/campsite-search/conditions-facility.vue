@@ -299,11 +299,11 @@ export default {
 
       // 施設情報
       // チェックがあればパラメーターに含める
-      this.selectedFacilities.forEach((f) => { params[f.name] = f.value });
+      this.selectedFacilities.forEach((f) => { params[f.name] = f.value; });
 
       // 周辺情報
       // チェックがあればパラメーターに含める
-      this.selectedNearbies.forEach((n) => { params[n.name] = n.value });
+      this.selectedNearbies.forEach((n) => { params[n.name] = n.value; });
 
       return params;
     },

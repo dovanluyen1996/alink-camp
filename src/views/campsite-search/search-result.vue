@@ -30,7 +30,10 @@
             :current-location="currentLocation"
             @click="goToCampsiteShow"
           />
-          <template #footer v-if="isConditionsChangeable()">
+          <template
+            v-if="isConditionsChangeable()"
+            #footer
+          >
             <v-ons-button
               class="button--search"
               modifier="large--cta rounded yellow"
@@ -39,7 +42,10 @@
               条件変更
             </v-ons-button>
           </template>
-          <template #footer v-else-if="isFilteringEnable()">
+          <template
+            v-else-if="isFilteringEnable()"
+            #footer
+          >
             <v-ons-button
               class="button--search"
               modifier="large--cta rounded yellow"
