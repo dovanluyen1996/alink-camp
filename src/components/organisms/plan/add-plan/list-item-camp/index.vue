@@ -36,10 +36,18 @@
       <content-with-footer>
         <template #footer>
           <v-ons-button
-            modifier="large--cta rounded yellow"
-            @click="showConfirmDialog"
+            modifier="large--cta yellow rounded"
+            @click="goToRegistration()"
           >
-            編集保存
+            登録
+          </v-ons-button>
+
+          <v-ons-button
+            modifier="large--cta rounded"
+            class="button--search-day"
+            @click="goToDetailPlan()"
+          >
+            過去の計画一覧
           </v-ons-button>
         </template>
       </content-with-footer>
@@ -135,6 +143,12 @@ export default {
       this.completedDialogVisible = false;
       await this.$store.dispatch('plansNavigator/pop');
     },
+    goToRegistration() {
+      // TODO: Redirect to Registration
+    },
+    goToDetailPlan() {
+      // TODO: Redirect to Detail Plan
+    },
   },
 };
 </script>
@@ -180,7 +194,7 @@ export default {
 
   .content-with-footer__footer {
     position: fixed;
-    bottom: 0;
+    bottom: 0 !important;
     left: 100%;
 
     .button {
