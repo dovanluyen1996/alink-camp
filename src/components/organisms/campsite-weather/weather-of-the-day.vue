@@ -103,10 +103,10 @@ export default {
     },
   },
   async created() {
-    await this.getIsPurchased();
+    await this.setIsPurchased();
   },
   methods: {
-    async getIsPurchased() {
+    async setIsPurchased() {
       this.isPurchased = await this.$store.dispatch('purchase/getIsPurchased');
     },
   },
