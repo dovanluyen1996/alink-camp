@@ -102,6 +102,7 @@ export default {
       page: 2,
       isVisibleFilterDialog: false,
       isFiltered: false,
+      facilityFilterParams: {},
     };
   },
   computed: {
@@ -134,7 +135,12 @@ export default {
         return;
       }
 
-      await this.$store.dispatch('models/campsite/getCampsites', this.searchParams())
+      const searchParams = {
+        ...this.facilityFilterParams,
+        ...this.searchParams(),
+      };
+
+      await this.$store.dispatch('models/campsite/getCampsites', searchParams)
         .then(() => {
           this.page += 1;
           if (done) done();
@@ -144,9 +150,10 @@ export default {
       this.$store.dispatch('models/campsite/resetCampsites');
       this.page = 1;
       this.isVisibleFilterDialog = false;
+      this.facilityFilterParams = { ...filterParams };
 
       const searchParams = {
-        ...filterParams,
+        ...this.facilityFilterParams,
         ...this.searchParams(),
       };
       await this.$store.dispatch('models/campsite/getCampsites', searchParams)
