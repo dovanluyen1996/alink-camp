@@ -183,7 +183,7 @@ export default {
     },
 
     purchaseComplete() {
-      this.$store.dispatch('appNavigator/replace', StartIndex);
+      this.$store.dispatch('menuNavigator/pop');
     },
 
     closePurchaseError() {
