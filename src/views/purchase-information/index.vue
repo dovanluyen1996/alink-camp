@@ -101,9 +101,6 @@ import Greeting from '@/components/organisms/purchase-information/greeting';
 import PurchasePoint from '@/components/organisms/purchase-information/point';
 import UsingNote from '@/components/organisms/purchase-information/using-note';
 
-// pages
-import StartIndex from '@/views/start';
-
 export default {
   name: 'PurchaseInformation',
   components: {
