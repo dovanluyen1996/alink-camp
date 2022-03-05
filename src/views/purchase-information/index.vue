@@ -1,5 +1,7 @@
 <template>
   <v-ons-page>
+    <custom-toolbar title="プレミアムサービスのご案内" />
+
     <div class="content">
       <loading :visible="isLoading" />
       <content-with-footer>
