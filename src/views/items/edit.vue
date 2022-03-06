@@ -143,8 +143,7 @@ export default {
           this.showCompletedDialog('updateItem');
         })
         .catch((err) => {
-          // TODO: 更新失敗のダイアログやトーストなどの表示
-          console.log(err);
+          console.error(err);
         });
     },
     async updateLabel() {
