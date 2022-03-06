@@ -3,7 +3,9 @@
     <custom-toolbar title="オリジナルアイテム" />
 
     <div class="content">
-      <validation-observer>
+      <validation-observer
+        v-slot="{ handleSubmit }"
+      >
         <validation-provider
           v-slot="{ errors }"
           rules="required|max:10"
@@ -23,7 +25,7 @@
               <v-ons-button
                 modifier="cta rounded"
                 class="add-button"
-                @click="showConfirmCreateItemDialog"
+                @click="handleSubmit(showConfirmCreateItemDialog)"
               >
                 登録
               </v-ons-button>
@@ -111,8 +113,7 @@ export default {
           this.showCompletedDialog('createItem');
         })
         .catch((err) => {
-          // TODO: 更新失敗のダイアログやトーストなどの表示
-          console.log(err);
+          console.error(err);
         });
     },
     showCompletedDialog(action) {

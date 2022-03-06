@@ -1,6 +1,6 @@
 <template>
   <v-ons-page>
-    <custom-toolbar :title="item.userId === null ? '基本アイテム' : 'オリジナルアイテム'">
+    <custom-toolbar :title="title">
       <template #right>
         <delete-dialog-with-icon
           v-if="isUserItem"
@@ -15,7 +15,9 @@
     </custom-toolbar>
 
     <div class="content">
-      <validation-observer>
+      <validation-observer
+        v-slot="{ handleSubmit }"
+      >
         <validation-provider
           v-slot="{ errors }"
           rules="required|max:10"
@@ -35,7 +37,7 @@
               <v-ons-button
                 modifier="cta rounded"
                 class="add-button"
-                @click="showEditConfirmDialog"
+                @click="handleSubmit(showEditConfirmDialog)"
               >
                 保存
               </v-ons-button>
@@ -116,7 +118,10 @@ export default {
   },
   computed: {
     isUserItem() {
-      return this.item.userId !== null;
+      return this.$helpers.isUserItem(this.item);
+    },
+    title() {
+      return this.item.userId === null ? '基本アイテム' : 'オリジナルアイテム';
     },
     labels() {
       const consolelabels = this.$store.getters['models/label/labels'];
@@ -153,8 +158,7 @@ export default {
           this.showCompletedDialog('updateItem');
         })
         .catch((err) => {
-          // TODO: 更新失敗のダイアログやトーストなどの表示
-          console.log(err);
+          console.error(err);
         });
     },
     async deleteItem() {
@@ -165,8 +169,7 @@ export default {
           this.showCompletedDialog('deleteItem');
         })
         .catch((err) => {
-          // TODO: 更新失敗のダイアログやトーストなどの表示
-          console.log(err);
+          console.error(err);
         });
     },
     closeDeleteConfirmDialog() {
