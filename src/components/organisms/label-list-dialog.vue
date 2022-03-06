@@ -61,11 +61,6 @@ export default {
     };
   },
   computed: {
-    selectedLabels() {
-      return this.labels
-        .filter(label => label.value)
-        .map(label => label.name);
-    },
     labels() {
       return this.$store.getters['models/label/labels'];
     },
