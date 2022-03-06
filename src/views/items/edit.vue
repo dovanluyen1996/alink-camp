@@ -54,7 +54,7 @@
 
     <confirm-dialog
       :is-shown.sync="isShownEditConfirmDialog"
-      @clickConfirm="isUserItem ? updateItem() : updateLabel()"
+      @clickConfirm="isUserItem ? updateItem() : updateLabels()"
     >
       <template #title>
         編集確認
@@ -141,10 +141,10 @@ export default {
           console.error(err);
         });
     },
-    async updateLabel() {
+    async updateLabels() {
       this.closeEditConfirmDialog();
 
-      await this.$store.dispatch('models/item/updateLabel', {
+      await this.$store.dispatch('models/item/updateLabels', {
         itemId: this.item.id,
         params: { label_ids: this.params.labels.map(label => label.id) },
       })

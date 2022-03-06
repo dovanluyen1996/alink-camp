@@ -101,11 +101,11 @@ export default {
         context.commit('setIsLoading', false);
       }
     },
-    async updateLabel(context, { itemId, params }) {
+    async updateLabels(context, { itemId, params }) {
       context.commit('setIsLoading', true);
 
       try {
-        const item = await ApiClient.updateLabel(itemId, params);
+        const item = await ApiClient.updateLabels(itemId, params);
 
         context.commit('updateItem', item);
       } catch (error) {
