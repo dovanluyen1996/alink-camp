@@ -15,7 +15,9 @@
     </custom-toolbar>
 
     <div class="content">
-      <validation-observer>
+      <validation-observer
+        v-slot="{ handleSubmit }"
+      >
         <validation-provider
           v-slot="{ errors }"
           rules="required|max:10"
@@ -35,7 +37,7 @@
               <v-ons-button
                 modifier="cta rounded"
                 class="add-button"
-                @click="showEditConfirmDialog"
+                @click="handleSubmit(showEditConfirmDialog)"
               >
                 保存
               </v-ons-button>
