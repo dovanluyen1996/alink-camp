@@ -106,8 +106,7 @@ export default {
           this.showCompletedDialog('createItem');
         })
         .catch((err) => {
-          // TODO: 更新失敗のダイアログやトーストなどの表示
-          console.log(err);
+          console.error(err);
         });
     },
     showCompletedDialog(action) {

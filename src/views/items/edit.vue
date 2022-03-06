@@ -138,8 +138,7 @@ export default {
           this.showCompletedDialog('updateItem');
         })
         .catch((err) => {
-          // TODO: 更新失敗のダイアログやトーストなどの表示
-          console.log(err);
+          console.error(err);
         });
     },
     async deleteItem() {
@@ -150,8 +149,7 @@ export default {
           this.showCompletedDialog('deleteItem');
         })
         .catch((err) => {
-          // TODO: 更新失敗のダイアログやトーストなどの表示
-          console.log(err);
+          console.error(err);
         });
     },
     closeDeleteConfirmDialog() {
