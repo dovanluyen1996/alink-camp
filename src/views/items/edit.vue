@@ -120,7 +120,7 @@ export default {
   },
   computed: {
     isUserItem() {
-      return this.item.userId !== null;
+      return this.$helpers.isUserItem(this.item);
     },
     title() {
       return this.item.userId === null ? '基本アイテム' : 'オリジナルアイテム';
