@@ -46,8 +46,8 @@ export default {
   name: 'ItemLabel',
   props: {
     labels: {
-      type: Object,
-      default: null,
+      type: Array,
+      default: () => [],
     },
   },
   methods: {
