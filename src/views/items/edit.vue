@@ -1,6 +1,6 @@
 <template>
   <v-ons-page>
-    <custom-toolbar :title="item.userId === null ? '基本アイテム' : 'オリジナルアイテム'">
+    <custom-toolbar :title="title">
       <template #right>
         <delete-dialog-with-icon
           v-if="isUserItem"
@@ -121,6 +121,9 @@ export default {
   computed: {
     isUserItem() {
       return this.item.userId !== null;
+    },
+    title() {
+      return this.item.userId === null ? '基本アイテム' : 'オリジナルアイテム';
     },
   },
   methods: {
