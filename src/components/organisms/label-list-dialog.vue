@@ -16,7 +16,7 @@
           :checked-values.sync="checkedValue"
           :checked-value="label.id"
           :label="label.name"
-          :disable="isDisable(label.id)"
+          :disable="isDisabled(label.id)"
         />
       </div>
     </div>
@@ -76,7 +76,7 @@ export default {
     },
   },
   methods: {
-    isDisable(labelId) {
+    isDisabled(labelId) {
       return this.checkedValue.length >= 3 && !this.checkedValue.includes(labelId);
     },
     closeLabelList() {
