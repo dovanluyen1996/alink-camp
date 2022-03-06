@@ -25,12 +25,12 @@
         >
           <content-with-footer>
             <item-name
-              v-model="itemName"
+              v-model="params.name"
               :errors="errors"
               :isUserItem="isUserItem"
             />
             <item-label
-              :labels="labels"
+              :labels="params.labels"
               @showLabelListDialog="showLabelListDialog"
             />
             <template #footer>
@@ -48,7 +48,7 @@
     </div>
 
     <label-list-dialog
-      :checked-label-ids.sync="labelIds"
+      :checked-labels.sync="params.labels"
       :is-visible-label-list.sync="isVisibleLabelListDialog"
     />
 
@@ -107,8 +107,10 @@ export default {
   },
   data() {
     return {
-      itemName: this.item.name,
-      labelIds: this.item.labels.map(label => label.id),
+      params: {
+        name: this.item.name,
+        labels: this.item.labels,
+      },
       isShownEditConfirmDialog: false,
       isShownDeleteConfirmDialog: false,
       isShowCompletedDialogVisible: false,
@@ -123,13 +125,6 @@ export default {
     title() {
       return this.item.userId === null ? '基本アイテム' : 'オリジナルアイテム';
     },
-    labels() {
-      const consolelabels = this.$store.getters['models/label/labels'];
-      return consolelabels.filter(label => this.labelIds.includes(label.id));
-    },
-  },
-  async created() {
-    await this.$store.dispatch('models/label/getLabels');
   },
   methods: {
     async updateItem() {
@@ -137,7 +132,7 @@ export default {
 
       await this.$store.dispatch('models/item/updateItem', {
         itemId: this.item.id,
-        params: { name: this.itemName, label_ids: this.labelIds },
+        params: { name: this.params.name, label_ids: this.params.labels.map(label => label.id) },
       })
         .then(() => {
           this.showCompletedDialog('updateItem');
@@ -151,7 +146,7 @@ export default {
 
       await this.$store.dispatch('models/item/updateLabel', {
         itemId: this.item.id,
-        params: { label_ids: this.labelIds },
+        params: { label_ids: this.params.labels.map(label => label.id) },
       })
         .then(() => {
           this.showCompletedDialog('updateItem');

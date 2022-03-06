@@ -13,12 +13,12 @@
         >
           <content-with-footer>
             <item-name
-              v-model="itemName"
+              v-model="params.name"
               :errors="errors"
               :isUserItem="true"
             />
             <item-label
-              :labels="labels"
+              :labels="params.labels"
               @showLabelListDialog="showLabelListDialog"
             />
             <template #footer>
@@ -36,7 +36,7 @@
     </div>
 
     <label-list-dialog
-      :checked-label-ids.sync="labelIds"
+      :checked-labels.sync="params.labels"
       :is-visible-label-list.sync="isVisibleLabelListDialog"
     />
 
@@ -87,28 +87,24 @@ export default {
   },
   data() {
     return {
-      itemName: '',
-      labelIds: [],
+      params: {
+        name: '',
+        labels: [],
+      },
       isShownConfirmCreateItemDialog: false,
       isShowCompletedDialogVisible: false,
       action: '',
       isVisibleLabelListDialog: false,
     };
   },
-  computed: {
-    labels() {
-      const consolelabels = this.$store.getters['models/label/labels'];
-      return consolelabels.filter(label => this.labelIds.includes(label.id));
-    },
-  },
-  async created() {
-    await this.$store.dispatch('models/label/getLabels');
-  },
   methods: {
     async createItem() {
       this.closeConfirmCreateItemDialog();
 
-      await this.$store.dispatch('models/item/createItem', { name: this.itemName, label_ids: this.labelIds })
+      await this.$store.dispatch('models/item/createItem', {
+        name: this.params.name,
+        label_ids: this.params.labels.map(label => label.id),
+      })
         .then(() => {
           this.showCompletedDialog('createItem');
         })

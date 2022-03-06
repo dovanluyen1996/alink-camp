@@ -46,7 +46,7 @@ export default {
     CheckGroupField,
   },
   props: {
-    checkedLabelIds: {
+    checkedLabels: {
       type: Array,
       default: () => [],
     },
@@ -57,7 +57,7 @@ export default {
   },
   data() {
     return {
-      checkedValue: [...this.checkedLabelIds],
+      checkedValue: this.checkedLabels.map(label => label.id),
     };
   },
   computed: {
@@ -70,6 +70,11 @@ export default {
       return this.$store.getters['models/label/labels'];
     },
   },
+  watch: {
+    async isVisibleLabelList() {
+      if (this.isVisibleLabelList) await this.$store.dispatch('models/label/getLabels');
+    },
+  },
   methods: {
     isDisable(labelId) {
       return this.checkedValue.length >= 3 && !this.checkedValue.includes(labelId);
@@ -78,7 +83,7 @@ export default {
       this.$emit('update:isVisibleLabelList', false);
     },
     registerLabel() {
-      this.$emit('update:checkedLabelIds', [...this.checkedValue]);
+      this.$emit('update:checkedLabels', this.labels.filter(label => this.checkedValue.includes(label.id)));
       this.$emit('update:isVisibleLabelList', false);
     },
   },
