@@ -79,11 +79,13 @@ export default {
     },
     displayedFuturePlans() {
       if (!this.futurePlans.length) return [];
-      return this.isPurchased ? this.futurePlans : [this.futurePlans[0]];
+      const newestPlan = this.futurePlans[this.futurePlans.length - 1];
+      return this.isPurchased ? this.futurePlans : [newestPlan];
     },
     displayedPastPlans() {
       if (!this.pastPlans.length) return [];
-      return this.isPurchased ? this.pastPlans : [this.pastPlans[0]];
+      const newestPlan = this.pastPlans[0];
+      return this.isPurchased ? this.pastPlans : [newestPlan];
     },
   },
   methods: {
