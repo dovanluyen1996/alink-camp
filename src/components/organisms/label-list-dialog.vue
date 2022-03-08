@@ -13,7 +13,7 @@
         class="label-list__item"
       >
         <check-group-field
-          :checked-values.sync="checkedValue"
+          :checked-values.sync="checkedValues"
           :checked-value="label.id"
           :label="label.name"
           :disable="isDisabled(label.id)"
@@ -57,7 +57,7 @@ export default {
   },
   data() {
     return {
-      checkedValue: this.checkedLabels.map(label => label.id),
+      checkedValues: this.checkedLabels.map(label => label.id),
     };
   },
   computed: {
@@ -72,13 +72,13 @@ export default {
   },
   methods: {
     isDisabled(labelId) {
-      return this.checkedValue.length >= 3 && !this.checkedValue.includes(labelId);
+      return this.checkedValues.length >= 3 && !this.checkedValues.includes(labelId);
     },
     closeLabelList() {
       this.$emit('update:isVisibleLabelList', false);
     },
     registerLabel() {
-      this.$emit('update:checkedLabels', this.labels.filter(label => this.checkedValue.includes(label.id)));
+      this.$emit('update:checkedLabels', this.labels.filter(label => this.checkedValues.includes(label.id)));
       this.$emit('update:isVisibleLabelList', false);
     },
   },
