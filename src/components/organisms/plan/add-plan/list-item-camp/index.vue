@@ -20,9 +20,9 @@
 
       <forecast-table />
       <item-table
-        v-if="items.length > 0"
+        v-if="sortedItems.length > 0"
         :checked-item-ids.sync="checkedItemIds"
-        :items="items"
+        :items="sortedItems"
       />
 
       <div
@@ -108,8 +108,15 @@ export default {
     };
   },
   computed: {
-    items() {
-      return this.$store.getters['models/item/all'];
+    sortedItems() {
+      const items = this.$store.getters['models/item/all'];
+      const userItems = items.filter(item => item.userId !== null);
+      const consoleItems = items.filter(item => item.userId === null);
+
+      userItems.sort((a, b) => b.id - a.id);
+      consoleItems.sort((a, b) => a.id - b.id);
+
+      return userItems.concat(consoleItems);
     },
     isLoading() {
       return this.$store.getters['models/item/isLoading'];
