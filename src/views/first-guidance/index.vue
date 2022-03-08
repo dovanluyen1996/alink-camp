@@ -9,7 +9,7 @@
       <content-with-footer class="guidance-content">
         <img
           src="@/assets/images/guidances/info-setting.png"
-          width="260px"
+          width="280px"
         >
         <p class="guidance-content__text">
           天気の傾向や施設情報を踏まえたキャンプ場検索で、目的地を決め、予定日設定をする事で、詳細な天気予報をお届けします。
@@ -47,3 +47,11 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.guidance-content {
+  &__text {
+    margin-top: 80px !important;
+  }
+}
+</style>

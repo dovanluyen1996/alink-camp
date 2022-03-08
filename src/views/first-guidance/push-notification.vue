@@ -10,10 +10,10 @@
         <div class="guidance-content__box">
           <img
             src="@/assets/images/guidances/push-noti.png"
-            width="117px"
+            width="280px"
           >
         </div>
-        <p>
+        <p class="guidance-content__text">
           PUSH通知をONにすることで、予定日の天気予報、キャンプ場に近づく雨雲や、雷、突風などの情報をご確認いただけます。
         </p>
 
@@ -80,11 +80,11 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 260px;
+    height: 280px;
+  }
 
-    img {
-      height: 117px;
-    }
+  &__text {
+    margin-top: 80px !important;
   }
 }
 </style>
