@@ -28,6 +28,7 @@
 
       <error-dialog
         title="新計画を追加できません"
+        :error-message="errorMessage"
         :is-visible="isErrorDialogVisible"
         @close="closeErrorDialog"
       />
@@ -57,6 +58,7 @@ export default {
     return {
       isPurchased: false,
       isErrorDialogVisible: false,
+      errorMessage: '',
     };
   },
   async created() {
@@ -79,11 +81,13 @@ export default {
     },
     displayedFuturePlans() {
       if (!this.futurePlans.length) return [];
+
       const newestPlan = this.futurePlans[this.futurePlans.length - 1];
       return this.isPurchased ? this.futurePlans : [newestPlan];
     },
     displayedPastPlans() {
       if (!this.pastPlans.length) return [];
+
       const newestPlan = this.pastPlans[0];
       return this.isPurchased ? this.pastPlans : [newestPlan];
     },
@@ -98,6 +102,7 @@ export default {
           },
         });
       } else {
+        this.errorMessage = 'プレミアムサービスにご登録いただくことで、予定を複数作成することができます。';
         this.showErrorDialog();
       }
     },
