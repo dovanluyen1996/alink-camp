@@ -49,14 +49,20 @@
         天気予報、気温などの気象条件で絞り込めます
       </annotations-block>
 
-      <campsite-search-conditions-fields
-        :sunny.sync="sunny"
-        :temperature.sync="temperature"
-        :wind.sync="wind"
-        :uv.sync="uv"
-        :date.sync="targetDate"
-        v-show="isShowWeather"
-      />
+      <div v-show="isShowWeather">
+        <campsite-search-conditions-fields
+          v-if="isPurchased"
+          :sunny.sync="sunny"
+          :temperature.sync="temperature"
+          :wind.sync="wind"
+          :uv.sync="uv"
+          :date.sync="targetDate"
+        />
+
+        <campsite-search-not-purchased
+          v-else
+        />
+      </div>
 
       <v-ons-button
         class="button--plus button--more button--more__description"
@@ -128,6 +134,7 @@ import CampsiteSearchDateField from '@/components/organisms/campsite-search/date
 import AnnotationsBlock from '@/components/atoms/form/annotations-block';
 import CampsiteSearchConditionsFields from '@/components/organisms/campsite-search/conditions-fields.vue';
 import CampsiteSearchConditionsFacility from '@/components/organisms/campsite-search/conditions-facility.vue';
+import CampsiteSearchNotPurchased from '@/components/organisms/campsite-search/not-purchased.vue';
 
 import settings from '@/config/settings';
 
@@ -139,6 +146,7 @@ export default {
     AnnotationsBlock,
     CampsiteSearchConditionsFields,
     CampsiteSearchConditionsFacility,
+    CampsiteSearchNotPurchased,
   },
   data() {
     return {
@@ -184,6 +192,7 @@ export default {
       isShowFacility: false,
       isShowAnnotationWeather: true,
       isShowAnnotationFacility: true,
+      isPurchased: false,
     };
   },
   computed: {
@@ -193,6 +202,9 @@ export default {
     activeIndex() {
       return this.$store.state.components.cardWithTab.searchCampsiteActiveIndex;
     },
+  },
+  async created() {
+    await this.setIsPurchased();
   },
   watch: {
     distance(value) {
@@ -332,6 +344,9 @@ export default {
     toggleFacility() {
       this.isShowFacility = !this.isShowFacility;
       this.isShowAnnotationFacility = !this.isShowAnnotationFacility;
+    },
+    async setIsPurchased() {
+      this.isPurchased = await this.$store.dispatch('purchase/getIsPurchased');
     },
   },
 };
