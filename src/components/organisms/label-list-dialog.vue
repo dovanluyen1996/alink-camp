@@ -75,6 +75,7 @@ export default {
       return this.checkedValues.length >= 3 && !this.checkedValues.includes(labelId);
     },
     closeLabelList() {
+      this.checkedValues = this.checkedLabels.map(label => label.id);
       this.$emit('update:isVisibleLabelList', false);
     },
     registerLabel() {
