@@ -26,9 +26,9 @@
       v-else
       class="not-purchase"
     >
-      <p>
-        課金LPの魅力バナー
-      </p>
+      <!-- TODO: Delete .not-purchase if it is not needed -->
+
+      <img src="@/assets/images/weather-not-purchase.png">
     </div>
   </div>
 </template>
@@ -92,20 +92,10 @@ export default {
 }
 
 .not-purchase {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 500px;
-  padding: 10px;
-  margin: 10px 10px 15px;
-  background: $color-white;
-  border: 1px solid #afafaf;
-  border-radius: 10px;
+  padding: 30px 10px;
 
-  p {
-    font-size: 16px;
-    font-weight: 600;
-    color: #888;
+  img {
+    width: 100%;
   }
 }
 
