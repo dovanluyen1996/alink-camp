@@ -23,7 +23,7 @@
       <div
         v-for="item in filteredItems"
         :key="item"
-        :class="['items__list', {'items__list--active': item.user_id}]"
+        :class="['items__list', {'items__list--active': item.userId}]"
       >
         <div class="items__list--content">
           <check-group-field
