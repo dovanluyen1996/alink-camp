@@ -125,7 +125,7 @@ export default {
       return this.$helpers.isUserItem(this.item);
     },
     title() {
-      return this.item.userId === null ? '基本アイテム' : 'オリジナルアイテム';
+      return this.isUserItem ? 'オリジナルアイテム' : '基本アイテム';
     },
   },
   methods: {
