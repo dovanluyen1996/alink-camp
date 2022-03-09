@@ -28,7 +28,7 @@
 
       <error-dialog
         title="新計画を追加できません"
-        :error-message="errorMessage"
+        error-message="プレミアムサービスにご登録いただくことで、予定を複数作成することができます。"
         :is-visible="isErrorDialogVisible"
         @close="closeErrorDialog"
       />
@@ -58,7 +58,6 @@ export default {
     return {
       isPurchased: false,
       isErrorDialogVisible: false,
-      errorMessage: '',
     };
   },
   async created() {
@@ -102,7 +101,6 @@ export default {
           },
         });
       } else {
-        this.errorMessage = 'プレミアムサービスにご登録いただくことで、予定を複数作成することができます。';
         this.showErrorDialog();
       }
     },
