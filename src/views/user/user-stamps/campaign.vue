@@ -90,6 +90,8 @@ export default {
   },
   watch: {
     async lastVisitedAt(value) {
+      if (!await this.isPurchased()) return;
+
       const lastGettedAt = localStorage.getItem('userStampLastGettedAt');
       if (!lastGettedAt || this.$helpers.isAfterDate(value, lastGettedAt)) {
         await this.getUserStamp();
@@ -115,6 +117,10 @@ export default {
     },
     openPage(url) {
       this.$helpers.openPageByUrl(url);
+    },
+    async isPurchased() {
+      const hasPurchased = await this.$store.dispatch('purchase/getIsPurchased');
+      return hasPurchased;
     },
   },
 };
