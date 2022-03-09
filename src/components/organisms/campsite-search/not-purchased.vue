@@ -1,10 +1,11 @@
 <template>
   <div
-    class="conditions-box"
+    class="not-purchased-box"
   >
-    <div class="conditions-title">
-      課金LPの魅力バナー
-    </div>
+    <img
+      class="not-purchased-img"
+      src="@/assets/images/purchase-information/banner-LP.png"
+    >
   </div>
 </template>
 
@@ -16,23 +17,15 @@ export default {
 <style scoped lang="scss">
 @import '@/assets/scss/_variables.scss';
 
-.conditions-box {
+.not-purchased-box {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.conditions-title {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 297px;
-  height: 136px;
-  font-size: 16px;
-  color: $color-subtext;
-  background: $color-white;
-  border: 1px solid #afafaf;
-  border-radius: 10px;
+.not-purchased-img {
+  width: 100%;
+  background-size: cover;
 }
 
 </style>

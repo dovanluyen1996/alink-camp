@@ -148,6 +148,11 @@ export default {
     CampsiteSearchConditionsFacility,
     CampsiteSearchNotPurchased,
   },
+  props: {
+    isPurchased: {
+      type: Boolean,
+    },
+  },
   data() {
     return {
       distanceOptions: [
@@ -192,7 +197,6 @@ export default {
       isShowFacility: false,
       isShowAnnotationWeather: true,
       isShowAnnotationFacility: true,
-      isPurchased: false,
     };
   },
   computed: {
@@ -202,9 +206,6 @@ export default {
     activeIndex() {
       return this.$store.state.components.cardWithTab.searchCampsiteActiveIndex;
     },
-  },
-  async created() {
-    await this.setIsPurchased();
   },
   watch: {
     distance(value) {
@@ -344,9 +345,6 @@ export default {
     toggleFacility() {
       this.isShowFacility = !this.isShowFacility;
       this.isShowAnnotationFacility = !this.isShowAnnotationFacility;
-    },
-    async setIsPurchased() {
-      this.isPurchased = await this.$store.dispatch('purchase/getIsPurchased');
     },
   },
 };
