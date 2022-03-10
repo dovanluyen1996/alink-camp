@@ -201,7 +201,9 @@ export default {
   .campsite-weather-of-the-day-box {
     padding-left: 10px;
   }
+}
 
+@media only screen and (max-width: 320px) {
   .campsite-weather-of-the-day-purchase {
     max-width: 50%;
   }
