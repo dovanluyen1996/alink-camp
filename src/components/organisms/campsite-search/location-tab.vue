@@ -193,10 +193,10 @@ export default {
       lower_rad: null,
       searchResultEmptyVisible: false,
       geoLocationErrorVisible: false,
-      isShowWeather: false,
-      isShowFacility: false,
-      isShowAnnotationWeather: true,
-      isShowAnnotationFacility: true,
+      isShowWeather: true,
+      isShowFacility: true,
+      isShowAnnotationWeather: false,
+      isShowAnnotationFacility: false,
     };
   },
   computed: {
