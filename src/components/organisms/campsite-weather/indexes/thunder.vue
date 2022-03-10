@@ -17,7 +17,7 @@
         落雷
       </div>
       <img
-        src="@/assets/images/weathers/thunder/00.png"
+        src="@/assets/images/weathers/thunder/thunder_large_none.png"
         width="26px"
       >
     </div>

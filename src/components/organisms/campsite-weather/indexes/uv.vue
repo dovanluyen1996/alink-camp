@@ -17,7 +17,7 @@
         紫外線
       </div>
       <img
-        src="@/assets/images/weathers/uv/00.png"
+        src="@/assets/images/weathers/uv/uv_large_none.png"
         width="26px"
       >
     </div>
