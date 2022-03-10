@@ -25,10 +25,12 @@
           />
           <wind-direction-row :wind-directions="windDirections" />
           <wind-speed-row :wind-speeds="windSpeeds" />
-          <thunder-row :thunders="thunders" />
-          <dress-row :dresses="dresses" />
-          <star-row :stars="stars" />
-          <uv-row :uvs="uvs" />
+          <template v-if="isPurchased">
+            <thunder-row :thunders="thunders" />
+            <dress-row :dresses="dresses" />
+            <star-row :stars="stars" />
+            <uv-row :uvs="uvs" />
+          </template>
         </sticky-table>
 
         <div class="table-note">
@@ -79,6 +81,7 @@ export default {
   data() {
     return {
       forecasts: [],
+      isPurchased: false,
     };
   },
   computed: {
@@ -121,6 +124,7 @@ export default {
     },
   },
   async created() {
+    await this.setIsPurchased();
     const forecast14Days = await this.getForecast14Days();
     this.forecasts = forecast14Days.items;
   },
@@ -149,6 +153,9 @@ export default {
 
       const forecast14Days = await this.$store.dispatch('models/weather/getForecast14Days', { campsite_id: this.campsite.id });
       return forecast14Days;
+    },
+    async setIsPurchased() {
+      this.isPurchased = await this.$store.dispatch('purchase/getIsPurchased');
     },
   },
 };
