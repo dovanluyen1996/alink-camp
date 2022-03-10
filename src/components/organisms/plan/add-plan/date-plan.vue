@@ -11,35 +11,35 @@
       <validation-observer
         v-slot="{ handleSubmit }"
       >
+        <validation-provider
+          v-slot="{ errors }"
+          rules="required|required-future-day"
+          name="チェックイン"
+        >
+          <date-field
+            v-model="startedDate"
+            title="チェックイン"
+            :errors="errors"
+            class="date-field__des"
+          />
+        </validation-provider>
+
+        <validation-provider
+          v-slot="{ errors }"
+          rules="required|required-future-day-since:@チェックイン"
+          name="チェックアウト"
+        >
+          <date-field
+            v-model="finishedDate"
+            title="チェックアウト"
+            :errors="errors"
+          />
+        </validation-provider>
+
         <content-with-footer>
-          <validation-provider
-            v-slot="{ errors }"
-            rules="required|required-future-day"
-            name="チェックイン"
-          >
-            <date-field
-              v-model="startedDate"
-              title="チェックイン"
-              :errors="errors"
-              class="date-field__des"
-            />
-          </validation-provider>
-
-          <validation-provider
-            v-slot="{ errors }"
-            rules="required|required-future-day-since:@チェックイン|required-bwtween-14days:@チェックイン"
-            name="チェックアウト"
-          >
-            <date-field
-              v-model="finishedDate"
-              title="チェックアウト"
-              :errors="errors"
-            />
-          </validation-provider>
-
           <template #footer>
             <v-ons-button
-              modifier="large--cta rounded"
+              modifier="large--cta yellow rounded"
               @click="handleSubmit(showConfirmDialog)"
             >
               登録
@@ -183,16 +183,19 @@ export default {
   }
 
   .content-with-footer {
-    height: 84%;
-
-    &__footer {
-      bottom: 0;
-    }
+    height: 0;
   }
 
-  .button {
-    &--search-day {
-      margin-top: 20px !important;
+  .content-with-footer__footer {
+    position: fixed;
+    bottom: 0 !important;
+
+    .button {
+      font-size: 14px !important;
+
+      &--search-day {
+        margin-top: 20px !important;
+      }
     }
   }
 
