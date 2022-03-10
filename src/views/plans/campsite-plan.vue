@@ -26,12 +26,20 @@
         />
       </v-ons-card>
 
-      <error-dialog
-        title="新計画を追加できません"
-        error-message="プレミアムサービスにご登録いただくことで、予定を複数作成することができます。"
-        :is-visible="isErrorDialogVisible"
-        @close="closeErrorDialog"
-      />
+      <confirm-dialog
+        :is-shown.sync="isErrorDialogVisible"
+        @clickConfirm="toPurchase"
+      >
+        <template #title>
+          新計画を追加できません
+        </template>
+        <template #message>
+          プレミアムサービスにご登録いただくことで、予定を複数作成することができます。
+        </template>
+        <template #confirmAction>
+          プレミアムへ
+        </template>
+      </confirm-dialog>
     </div>
   </v-ons-page>
 </template>
@@ -39,14 +47,14 @@
 <script>
 import TimePlan from '@/components/organisms/plan/time-plan';
 import AddPlan from '@/views/plans/add-plan';
-import ErrorDialog from '@/components/organisms/error-dialog';
+import ConfirmDialog from '@/components/organisms/dialog/confirm-dialog';
 
 import moment from 'moment';
 
 export default {
   components: {
     TimePlan,
-    ErrorDialog,
+    ConfirmDialog,
   },
   props: {
     campsite: {
@@ -59,9 +67,6 @@ export default {
       isPurchased: false,
       isErrorDialogVisible: false,
     };
-  },
-  async created() {
-    await this.setIsPurchased();
   },
   computed: {
     futurePlans() {
@@ -91,6 +96,9 @@ export default {
       return this.isPurchased ? this.pastPlans : [newestPlan];
     },
   },
+  async created() {
+    await this.setIsPurchased();
+  },
   methods: {
     goToAddPlan() {
       if (!this.futurePlans.length) {
@@ -112,6 +120,11 @@ export default {
     },
     async setIsPurchased() {
       this.isPurchased = await this.$store.dispatch('purchase/getIsPurchased');
+    },
+    toPurchase() {
+      // TODO: Handle to purchase
+
+      this.closeErrorDialog();
     },
   },
 };
