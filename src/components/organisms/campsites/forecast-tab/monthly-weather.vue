@@ -1,6 +1,5 @@
 <template>
   <div>
-    <loading :visible="isLoading" />
     <div class="hourly-weather-title">
       未来の天気傾向
     </div>
@@ -52,11 +51,6 @@ export default {
     return {
       isPurchased: false,
     };
-  },
-  computed: {
-    isLoading() {
-      return this.$store.getters['purchase/isLoading'];
-    },
   },
   async created() {
     await this.setIsPurchased();
