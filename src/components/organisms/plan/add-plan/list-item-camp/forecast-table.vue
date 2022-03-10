@@ -18,38 +18,43 @@
           </th>
         </tr>
         <tr
-          v-for="(item, index) in items"
+          v-for="(date, index) in dateRange"
           :key="index"
         >
           <td class="date-check">
             <span
-              :date-day="item.date"
-              :class="[saturdayCol(item.date), sundayCol(item.date)]"
-              v-html="displayDate(item.date)"
+              :date-day="date"
+              :class="[saturdayCol(date), sundayCol(date)]"
+              v-html="displayDate(date)"
             />
           </td>
           <td>
             <weather-image
-              :weather="item"
+              :weather="items[date]"
               image-width="35px"
             />
           </td>
-          <td>{{ precipitationText(item.precip) }}</td>
+          <td>{{ precipitationText(items[date]) }}</td>
           <td>
             <temperature
-              :value="item.maxTemp"
+              :value="items[date] ? items[date].maxTemp : ''"
               class="text-red"
             />
             &nbsp;/&nbsp;
             <temperature
-              :value="item.minTemp"
+              :value="items[date] ? items[date].minTemp : ''"
               class="text-blue"
             />
           </td>
           <td>
             <div class="wind-direction">
-              <div :class="['wind-speed', windSpeedRate(item.windSpeed)]" />
-              <span>{{ item.windSpeed }}</span>
+              <template v-if="items[date]">
+                <div :class="['wind-speed', windSpeedRate(items[date].windSpeed)]" />
+                <span>{{ items[date].windSpeed }}</span>
+              </template>
+              <template v-else>
+                --
+              </template>
             </div>
           </td>
         </tr>
@@ -97,7 +102,7 @@ export default {
       if (!this.dateRange.length || !this.forecasts.items) return [];
 
       const { items } = this.forecasts;
-      return items.filter(item => this.dateRange.includes(item.date));
+      return items.reduce((acc, cur) => { acc[cur.date] = cur; return acc; }, {});
     },
   },
   watch: {
@@ -127,8 +132,8 @@ export default {
     sundayCol(date) {
       return this.$helpers.isSunday(date) ? 'date-col__sunday' : '';
     },
-    precipitationText(precipitation) {
-      return this.$helpers.isEmpty(precipitation) ? '--' : precipitation;
+    precipitationText(forecast) {
+      return this.$helpers.isEmpty(forecast) ? '--' : forecast.precip;
     },
     windSpeedRate(windSpeed) {
       // Unit of measurement: m/s
