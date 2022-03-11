@@ -94,11 +94,10 @@ export default {
 
   .content-with-footer__footer {
     position: fixed;
-    bottom: 20px;
+    bottom: 0 !important;
     left: inherit;
 
     .button {
-      margin: 0 55px !important;
       font-size: 14px !important;
 
       &--search-day {
