@@ -1,5 +1,7 @@
 <template>
   <v-ons-page>
+    <custom-toolbar title="プレミアムサービスのご案内" />
+
     <div class="content">
       <loading :visible="isLoading" />
       <content-with-footer>
@@ -99,9 +101,6 @@ import Greeting from '@/components/organisms/purchase-information/greeting';
 import PurchasePoint from '@/components/organisms/purchase-information/point';
 import UsingNote from '@/components/organisms/purchase-information/using-note';
 
-// pages
-import StartIndex from '@/views/start';
-
 export default {
   name: 'PurchaseInformation',
   components: {
@@ -181,7 +180,7 @@ export default {
     },
 
     purchaseComplete() {
-      this.$store.dispatch('appNavigator/replace', StartIndex);
+      this.$store.dispatch('menuNavigator/pop');
     },
 
     closePurchaseError() {

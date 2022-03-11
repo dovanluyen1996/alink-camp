@@ -23,12 +23,6 @@
           アプリデータを引き継ぐ
         </v-ons-button>
       </div>
-
-      <error-dialog
-        title="課金エラーが発生しました"
-        :is-visible="checkChargedStatusErrorVisible"
-        @close="closeCheckChargedStatusError"
-      />
     </div>
   </v-ons-page>
 </template>
@@ -41,19 +35,13 @@ import ApiClient from '@/api_client';
 import SignIn from '@/views/auth/sign-in';
 import TermsOfService from '@/views/terms-of-service/confirm';
 import FirstGuidance from '@/views/first-guidance';
-import PurchaseInformation from '@/views/purchase-information';
-import ErrorDialog from '@/components/organisms/error-dialog';
 
 export default {
   name: 'StartIndex',
-  components: {
-    ErrorDialog,
-  },
   mixins: [CheckCompleteRegistration],
   data() {
     return {
       error: null,
-      checkChargedStatusErrorVisible: false,
       appVersion: '',
       isLoading: false,
     };
@@ -67,11 +55,10 @@ export default {
     await this.getAppStart();
     await this.getAppVersion();
 
-    if (BuildInfo.debug) {
-      return this.checkChargedStatusOnlyDebug();
+    const isAuthenticated = await this.isAuthenticated();
+    if (isAuthenticated) {
+      this.checkBeforeGoToAppTabbar();
     }
-
-    return this.checkChargedStatus();
   },
   methods: {
     async getAppStart() {
@@ -102,35 +89,6 @@ export default {
     async goToSignIn() {
       await this.$store.dispatch('models/appStart/getAppStart');
       this.$store.dispatch('appNavigator/push', SignIn);
-    },
-    checkChargedStatus() {
-      Purchases.getPurchaserInfo(
-        async(purchaserInfo) => {
-          const isCharged = Object.entries(purchaserInfo.entitlements.active).length > 0;
-          this.checkChargedStatusComplete(isCharged);
-        },
-        () => {
-          this.checkChargedStatusErrorVisible = true;
-          this.checkChargedStatusComplete(false);
-        },
-      );
-    },
-    async checkChargedStatusOnlyDebug() {
-      const isCharged = JSON.parse(localStorage.getItem('isCharged'));
-      await this.checkChargedStatusComplete(isCharged);
-    },
-    async checkChargedStatusComplete(isCharged) {
-      if (isCharged) {
-        const isAuthenticated = await this.isAuthenticated();
-        if (isAuthenticated) {
-          this.checkBeforeGoToAppTabbar();
-        }
-      } else {
-        this.$store.dispatch('appNavigator/replace', PurchaseInformation);
-      }
-    },
-    closeCheckChargedStatusError() {
-      this.checkChargedStatusErrorVisible = false;
     },
     async getAppVersion() {
       this.appVersion = await cordova.getAppVersion.getVersionNumber();
