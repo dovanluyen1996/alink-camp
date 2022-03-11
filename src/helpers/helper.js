@@ -85,6 +85,10 @@ export default {
     return moment(date).isoWeekday() === 7;
   },
 
+  isUserItem(item) {
+    return item.userId !== null;
+  },
+
   // デバイストークンを送信する
   async createUserDevise() {
     if (window.device.platform === 'iOS') {

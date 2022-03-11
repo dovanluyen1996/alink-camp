@@ -1,9 +1,9 @@
 <template>
   <v-ons-page>
-    <custom-toolbar title="オリジナルアイテム">
-      <!-- TODO: 運営が用意したアイテムのとき、基本アイテムと表示する -->
+    <custom-toolbar :title="title">
       <template #right>
         <delete-dialog-with-icon
+          v-if="isUserItem"
           :is-shown.sync="isShownDeleteConfirmDialog"
           @clickDelete="deleteItem"
         >
@@ -15,7 +15,9 @@
     </custom-toolbar>
 
     <div class="content">
-      <validation-observer>
+      <validation-observer
+        v-slot="{ handleSubmit }"
+      >
         <validation-provider
           v-slot="{ errors }"
           rules="required|max:10"
@@ -25,8 +27,7 @@
             <item-name
               v-model="itemName"
               :errors="errors"
-              :sticker="sticker"
-              :value="item.name"
+              :isUserItem="isUserItem"
             />
             <item-sticker
               :sticker="sticker"
@@ -36,7 +37,7 @@
               <v-ons-button
                 modifier="cta rounded"
                 class="add-button"
-                @click="showEditConfirmDialog"
+                @click="handleSubmit(showEditConfirmDialog)"
               >
                 保存
               </v-ons-button>
@@ -119,18 +120,39 @@ export default {
       isVisibleLabelListDialog: false,
     };
   },
-  methods: {
-    updateItem() {
-      this.closeEditConfirmDialog();
-      // TODO: Implement function below this
-
-      this.showCompletedDialog('updateItem');
+  computed: {
+    isUserItem() {
+      return this.$helpers.isUserItem(this.item);
     },
-    deleteItem() {
-      this.closeDeleteConfirmDialog();
-      // TODO: Implement function below this
+    title() {
+      return this.isUserItem ? 'オリジナルアイテム' : '基本アイテム';
+    },
+  },
+  methods: {
+    async updateItem() {
+      this.closeEditConfirmDialog();
 
-      this.showCompletedDialog('deleteItem');
+      await this.$store.dispatch('models/item/updateItem', {
+        itemId: this.item.id,
+        params: { name: this.itemName },
+      })
+        .then(() => {
+          this.showCompletedDialog('updateItem');
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    },
+    async deleteItem() {
+      this.closeDeleteConfirmDialog();
+
+      await this.$store.dispatch('models/item/deleteItem', { itemId: this.item.id })
+        .then(() => {
+          this.showCompletedDialog('deleteItem');
+        })
+        .catch((err) => {
+          console.error(err);
+        });
     },
     closeDeleteConfirmDialog() {
       this.isShownDeleteConfirmDialog = false;
@@ -141,6 +163,7 @@ export default {
     },
     closeCompletedDialog() {
       this.isShowCompletedDialogVisible = false;
+      this.goToItems();
     },
     showEditConfirmDialog() {
       this.isShownEditConfirmDialog = true;
@@ -150,6 +173,9 @@ export default {
     },
     showLabelListDialog() {
       this.isVisibleLabelListDialog = true;
+    },
+    goToItems() {
+      this.$store.dispatch('menuNavigator/pop');
     },
   },
 };
