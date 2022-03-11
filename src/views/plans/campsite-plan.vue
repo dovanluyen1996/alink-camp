@@ -28,7 +28,7 @@
 
       <confirm-dialog
         :is-shown.sync="isErrorDialogVisible"
-        @clickConfirm="toPurchase"
+        @clickConfirm="goToPurchase"
       >
         <template #title>
           新計画を追加できません
@@ -121,7 +121,7 @@ export default {
     async setIsPurchased() {
       this.isPurchased = await this.$store.dispatch('purchase/getIsPurchased');
     },
-    toPurchase() {
+    goToPurchase() {
       // TODO: Handle to purchase
 
       this.closeErrorDialog();
