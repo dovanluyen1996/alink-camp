@@ -67,6 +67,7 @@ export default {
         extends: AddPlan,
         onsNavigatorProps: {
           campsite: this.campsite,
+          isShowIconDelete: false,
         },
       });
     },
