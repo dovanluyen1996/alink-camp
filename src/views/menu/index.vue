@@ -135,12 +135,13 @@ export default {
 }
 
 .list-item {
+  padding-left: 0;
   font-weight: 600;
   color: #000;
 
   &--chevron::before,
   &__expand-chevron {
-    right: 18px !important;
+    right: 26px !important;
     border-right-color: #000;
     border-bottom-color: #000;
   }
