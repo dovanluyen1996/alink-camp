@@ -25,12 +25,12 @@
         >
           <content-with-footer>
             <item-name
-              v-model="itemName"
+              v-model="params.name"
               :errors="errors"
               :isUserItem="isUserItem"
             />
-            <item-sticker
-              :sticker="sticker"
+            <item-label
+              :labels="params.labels"
               @showLabelListDialog="showLabelListDialog"
             />
             <template #footer>
@@ -47,11 +47,14 @@
       </validation-observer>
     </div>
 
-    <label-list-dialog :is-visible-label-list.sync="isVisibleLabelListDialog" />
+    <label-list-dialog
+      :checked-labels.sync="params.labels"
+      :is-visible-label-list.sync="isVisibleLabelListDialog"
+    />
 
     <confirm-dialog
       :is-shown.sync="isShownEditConfirmDialog"
-      @clickConfirm="updateItem"
+      @clickConfirm="isUserItem ? updateItem() : updateLabels()"
     >
       <template #title>
         編集確認
@@ -77,7 +80,7 @@
 import CustomToolbar from '@/components/organisms/custom-toolbar.vue';
 import ContentWithFooter from '@/components/organisms/content-with-footer';
 import ItemName from '@/components/organisms/item/name';
-import ItemSticker from '@/components/organisms/item/sticker';
+import ItemLabel from '@/components/organisms/item/label';
 import DeleteDialogWithIcon from '@/components/organisms/dialog/delete-dialog-with-icon';
 import ConfirmDialog from '@/components/organisms/dialog/confirm-dialog';
 import CompletedDialog from '@/components/organisms/dialog/completed-dialog';
@@ -89,7 +92,7 @@ export default {
     CustomToolbar,
     ContentWithFooter,
     ItemName,
-    ItemSticker,
+    ItemLabel,
     DeleteDialogWithIcon,
     CompletedDialog,
     ConfirmDialog,
@@ -98,20 +101,14 @@ export default {
   props: {
     item: {
       type: Object,
-      default: null,
       required: true,
     },
   },
   data() {
     return {
-      itemName: this.item.name,
-      sticker: {
-        user_id: 1,
-        labels: [
-          'ラベルB',
-          'ラベルA',
-          'ラベルB',
-        ],
+      params: {
+        name: this.item.name,
+        labels: this.item.labels,
       },
       isShownEditConfirmDialog: false,
       isShownDeleteConfirmDialog: false,
@@ -134,7 +131,21 @@ export default {
 
       await this.$store.dispatch('models/item/updateItem', {
         itemId: this.item.id,
-        params: { name: this.itemName },
+        params: { name: this.params.name, label_ids: this.params.labels.map(label => label.id) },
+      })
+        .then(() => {
+          this.showCompletedDialog('updateItem');
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    },
+    async updateLabels() {
+      this.closeEditConfirmDialog();
+
+      await this.$store.dispatch('models/item/updateLabels', {
+        itemId: this.item.id,
+        params: { label_ids: this.params.labels.map(label => label.id) },
       })
         .then(() => {
           this.showCompletedDialog('updateItem');

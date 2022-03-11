@@ -13,12 +13,12 @@
         >
           <content-with-footer>
             <item-name
-              v-model="itemName"
+              v-model="params.name"
               :errors="errors"
               :isUserItem="true"
             />
-            <item-sticker
-              :sticker="sticker"
+            <item-label
+              :labels="params.labels"
               @showLabelListDialog="showLabelListDialog"
             />
             <template #footer>
@@ -35,7 +35,10 @@
       </validation-observer>
     </div>
 
-    <label-list-dialog :is-visible-label-list.sync="isVisibleLabelListDialog" />
+    <label-list-dialog
+      :checked-labels.sync="params.labels"
+      :is-visible-label-list.sync="isVisibleLabelListDialog"
+    />
 
     <confirm-dialog
       :is-shown.sync="isShownConfirmCreateItemDialog"
@@ -66,7 +69,7 @@
 import CustomToolbar from '@/components/organisms/custom-toolbar.vue';
 import ContentWithFooter from '@/components/organisms/content-with-footer';
 import ItemName from '@/components/organisms/item/name';
-import ItemSticker from '@/components/organisms/item/sticker';
+import ItemLabel from '@/components/organisms/item/label';
 import ConfirmDialog from '@/components/organisms/dialog/confirm-dialog';
 import CompletedDialog from '@/components/organisms/dialog/completed-dialog';
 import LabelListDialog from '@/components/organisms/label-list-dialog';
@@ -77,21 +80,16 @@ export default {
     CustomToolbar,
     ContentWithFooter,
     ItemName,
-    ItemSticker,
+    ItemLabel,
     ConfirmDialog,
     CompletedDialog,
     LabelListDialog,
   },
   data() {
     return {
-      itemName: '',
-      sticker: {
-        user_id: 1,
-        labels: [
-          'ラベルB',
-          'ラベルA',
-          'ラベルB',
-        ],
+      params: {
+        name: '',
+        labels: [],
       },
       isShownConfirmCreateItemDialog: false,
       isShowCompletedDialogVisible: false,
@@ -103,7 +101,10 @@ export default {
     async createItem() {
       this.closeConfirmCreateItemDialog();
 
-      await this.$store.dispatch('models/item/createItem', { name: this.itemName })
+      await this.$store.dispatch('models/item/createItem', {
+        name: this.params.name,
+        label_ids: this.params.labels.map(label => label.id),
+      })
         .then(() => {
           this.showCompletedDialog('createItem');
         })
