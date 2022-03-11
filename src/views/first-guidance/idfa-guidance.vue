@@ -10,14 +10,10 @@
         <div class="guidance-content__box">
           <img
             src="@/assets/images/guidances/campsite-items.png"
-            width="195px"
-          >
-          <img
-            src="@/assets/images/guidances/tasks.png"
-            width="86px"
+            width="280px"
           >
         </div>
-        <p>
+        <p class="guidance-content__text">
           キャンプの思い出や、持っていくオリジナルアイテムなどの登録もできるので、ぜひメニューよりデータ引継ぎ設定を行って下さい。
         </p>
 
@@ -101,20 +97,16 @@ export default {
 
 <style lang="scss" scoped>
 .guidance-content {
-  img {
-    margin: 3.5px;
-  }
-
   &__box {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: 260px;
+    height: 280px;
+  }
 
-    img:last-child {
-      margin-top: 10px;
-    }
+  &__text {
+    margin-top: 80px !important;
   }
 }
 
