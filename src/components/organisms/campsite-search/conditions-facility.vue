@@ -292,9 +292,9 @@ export default {
 
       // ロケーション
       // チェックがあればパラメーターに含める
-      const location = this.selectedLocations;
-      if (location.length) {
-        params.location = location.map(l => l.text);
+      const locations = this.selectedLocations;
+      if (locations.length) {
+        params.location = locations.map(l => l.text);
       }
 
       // 施設情報
