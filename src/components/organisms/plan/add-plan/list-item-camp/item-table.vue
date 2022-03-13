@@ -81,9 +81,9 @@ export default {
 
       const isCheckedLabel = (item) => {
         const labelIds = item.labels.map(label => label.id);
-        if (labelIds.length !== this.checkedLabelIds.length) return false;
+        if (labelIds.length < this.checkedLabelIds.length) return false;
 
-        return labelIds.every(id => this.checkedLabelIds.includes(id));
+        return this.checkedLabelIds.every(id => labelIds.includes(id));
       };
 
       return this.items.filter(isCheckedLabel);
