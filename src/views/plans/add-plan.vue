@@ -3,6 +3,7 @@
     <custom-toolbar title="新規計画">
       <template #right>
         <delete-dialog-with-icon
+          v-show="isShowIconDelete"
           :is-shown.sync="isShownDeleteDialog"
           @clickDelete="deletePlan"
         >
@@ -44,6 +45,10 @@ export default {
     campsite: {
       type: Object,
       required: true,
+    },
+    isShowIconDelete: {
+      type: Boolean,
+      default: true,
     },
   },
   data() {

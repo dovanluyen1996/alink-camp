@@ -9,8 +9,8 @@
           @searched="goToCampsiteSearchResult"
         />
         <campsite-list
-          v-if="campsites.length > 0"
-          :campsites="campsites"
+          v-if="viewedCampsites.length > 0"
+          :campsites="viewedCampsites"
           :has-chevron="false"
           title="閲覧履歴"
           @click="goToCampsiteShow"
@@ -40,65 +40,12 @@ export default {
   data() {
     return {
       searchText: '',
-      campsites: [
-        {
-          id: 1,
-          name: '〇〇〇キャンプ場',
-          address: 'キャンプ場キャンプ場〇〇〇',
-          latitude: 1,
-          longitude: 1,
-          isFavorited: false,
-        },
-        {
-          id: 2,
-          name: '〇〇〇キャンプ場',
-          address: 'キャンプ場キャンプ場〇〇〇',
-          latitude: 2,
-          longitude: 2,
-          isFavorited: true,
-        },
-        {
-          id: 3,
-          name: '〇〇〇キャンプ場',
-          address: 'キャンプ場キャンプ場〇〇〇',
-          latitude: 3,
-          longitude: 3,
-          isFavorited: false,
-        },
-        {
-          id: 4,
-          name: '〇〇〇キャンプ場',
-          address: 'キャンプ場キャンプ場〇〇〇',
-          latitude: 4,
-          longitude: 4,
-          isFavorited: true,
-        },
-        {
-          id: 5,
-          name: '〇〇〇キャンプ場',
-          address: 'キャンプ場キャンプ場〇〇〇',
-          latitude: 5,
-          longitude: 5,
-          isFavorited: false,
-        },
-        {
-          id: 6,
-          name: '〇〇〇キャンプ場',
-          address: 'キャンプ場キャンプ場〇〇〇',
-          latitude: 6,
-          longitude: 6,
-          isFavorited: true,
-        },
-        {
-          id: 7,
-          name: '〇〇〇キャンプ場',
-          address: 'キャンプ場キャンプ場〇〇〇',
-          latitude: 7,
-          longitude: 7,
-          isFavorited: false,
-        },
-      ],
     };
+  },
+  computed: {
+    viewedCampsites() {
+      return this.$store.getters['campsite/viewedCampsites'] || [];
+    },
   },
   methods: {
     goToCampsiteSearchResult(searchConditions) {

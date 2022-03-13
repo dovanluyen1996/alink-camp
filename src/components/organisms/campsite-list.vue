@@ -88,9 +88,12 @@ export default {
       }
     },
     clickCampsite(campsite) {
-      // NOTE: Please implement add viewed campsite when implement Logic
-      // this.addViewedCourse(course);
+      this.addViewedCampsite(campsite);
       this.$emit('click', campsite);
+    },
+    addViewedCampsite(campsite) {
+      // 閲覧履歴としてLocalStorageに保存
+      this.$store.dispatch('campsite/addViewedCampsites', campsite);
     },
   },
 };

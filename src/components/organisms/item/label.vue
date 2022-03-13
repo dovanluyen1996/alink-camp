@@ -1,35 +1,38 @@
 <template>
-  <div class="item-sticker">
-    <span class="item-sticker__title">
+  <div class="item-label">
+    <span class="item-label__title">
       ラベル
     </span>
-    <div class="item-sticker__box">
+    <div class="item-label__box">
       <div
-        v-if="sticker && sticker.labels.length > 0"
-        class="item-sticker__labels"
+        v-if="labels && labels.length > 0"
+        class="item-label__labels"
       >
         <div
-          v-for="label in sticker.labels"
+          v-for="label in labels"
           :key="label"
-          class="item-sticker__label"
+          class="item-label__label"
+          :style="styles(label)"
         >
-          {{ label }}
+          <span class="item-label__label__text">
+            {{ label.name }}
+          </span>
         </div>
       </div>
       <p
         v-else
-        class="item-sticker__text"
+        class="item-label__text"
       >
         設定しているラベルがありません。
       </p>
     </div>
     <div
-      class="item-sticker__button"
+      class="item-label__button"
       @click="showLabelListDialog"
     >
       <v-ons-button modifier="cta red">
         <img
-          class="item-sticker__image"
+          class="item-label__image"
           src="@/assets/images/red-cross.png"
         >
         ラベル編集
@@ -40,23 +43,28 @@
 
 <script>
 export default {
-  name: 'ItemSticker',
+  name: 'ItemLabel',
   props: {
-    sticker: {
-      type: Object,
-      default: null,
+    labels: {
+      type: Array,
+      default: () => [],
     },
   },
   methods: {
     showLabelListDialog() {
       this.$emit('showLabelListDialog');
     },
+    styles(label) {
+      return {
+        '--background-color': label.color,
+      };
+    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-.item-sticker {
+.item-label {
   height: 190px;
   padding: 0 20px;
   margin-top: 10px;
@@ -81,9 +89,13 @@ export default {
     padding: 2px 5px;
     font-size: 12px;
     font-weight: 600;
-    color: #fff;
     text-align: center;
-    background-color: #4c7dae;
+    background-color: var(--background-color);
+
+    &__text {
+      color: var(--background-color);
+      filter: invert(100%) grayscale(100%) contrast(100);
+    }
   }
 
   &__box {

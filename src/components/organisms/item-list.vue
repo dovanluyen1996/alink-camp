@@ -9,7 +9,7 @@
             modifier="chevron nodivider"
             @click="goToItemsEdit(item)"
           >
-            <div :class="['list-item__box', {'list-item--active': item.user_id}]">
+            <div :class="['list-item__box', {'list-item--active': item.userId}]">
               <div class="center">
                 <div class="list-item__title">
                   <span>

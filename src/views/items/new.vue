@@ -3,7 +3,9 @@
     <custom-toolbar title="オリジナルアイテム" />
 
     <div class="content">
-      <validation-observer>
+      <validation-observer
+        v-slot="{ handleSubmit }"
+      >
         <validation-provider
           v-slot="{ errors }"
           rules="required|max:10"
@@ -11,19 +13,19 @@
         >
           <content-with-footer>
             <item-name
-              v-model="itemName"
+              v-model="params.name"
               :errors="errors"
-              :sticker="sticker"
+              :isUserItem="true"
             />
-            <item-sticker
-              :sticker="sticker"
+            <item-label
+              :labels="params.labels"
               @showLabelListDialog="showLabelListDialog"
             />
             <template #footer>
               <v-ons-button
                 modifier="cta rounded"
                 class="add-button"
-                @click="showConfirmCreateItemDialog"
+                @click="handleSubmit(showConfirmCreateItemDialog)"
               >
                 登録
               </v-ons-button>
@@ -33,7 +35,10 @@
       </validation-observer>
     </div>
 
-    <label-list-dialog :is-visible-label-list.sync="isVisibleLabelListDialog" />
+    <label-list-dialog
+      :checked-labels.sync="params.labels"
+      :is-visible-label-list.sync="isVisibleLabelListDialog"
+    />
 
     <confirm-dialog
       :is-shown.sync="isShownConfirmCreateItemDialog"
@@ -43,7 +48,7 @@
         登録確認
       </template>
       <template #message>
-        新たに〇〇〇〇〇〇を作成します。<br>
+        新たに{{ itemName }}を作成します。<br>
         よろしいですか？
       </template>
       <template #confirmAction>
@@ -64,7 +69,7 @@
 import CustomToolbar from '@/components/organisms/custom-toolbar.vue';
 import ContentWithFooter from '@/components/organisms/content-with-footer';
 import ItemName from '@/components/organisms/item/name';
-import ItemSticker from '@/components/organisms/item/sticker';
+import ItemLabel from '@/components/organisms/item/label';
 import ConfirmDialog from '@/components/organisms/dialog/confirm-dialog';
 import CompletedDialog from '@/components/organisms/dialog/completed-dialog';
 import LabelListDialog from '@/components/organisms/label-list-dialog';
@@ -75,21 +80,16 @@ export default {
     CustomToolbar,
     ContentWithFooter,
     ItemName,
-    ItemSticker,
+    ItemLabel,
     ConfirmDialog,
     CompletedDialog,
     LabelListDialog,
   },
   data() {
     return {
-      itemName: '',
-      sticker: {
-        user_id: 1,
-        labels: [
-          'ラベルB',
-          'ラベルA',
-          'ラベルB',
-        ],
+      params: {
+        name: '',
+        labels: [],
       },
       isShownConfirmCreateItemDialog: false,
       isShowCompletedDialogVisible: false,
@@ -98,11 +98,19 @@ export default {
     };
   },
   methods: {
-    createItem() {
+    async createItem() {
       this.closeConfirmCreateItemDialog();
-      // TODO: Implement function below this
 
-      this.showCompletedDialog('createItem');
+      await this.$store.dispatch('models/item/createItem', {
+        name: this.params.name,
+        label_ids: this.params.labels.map(label => label.id),
+      })
+        .then(() => {
+          this.showCompletedDialog('createItem');
+        })
+        .catch((err) => {
+          console.error(err);
+        });
     },
     showCompletedDialog(action) {
       this.action = action;
@@ -110,6 +118,7 @@ export default {
     },
     closeCompletedDialog() {
       this.isShowCompletedDialogVisible = false;
+      this.goToItems();
     },
     showConfirmCreateItemDialog() {
       this.isShownConfirmCreateItemDialog = true;
@@ -119,6 +128,9 @@ export default {
     },
     showLabelListDialog() {
       this.isVisibleLabelListDialog = true;
+    },
+    goToItems() {
+      this.$store.dispatch('menuNavigator/pop');
     },
   },
 };

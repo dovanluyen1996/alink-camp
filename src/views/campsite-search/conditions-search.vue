@@ -70,6 +70,11 @@ export default {
   methods: {
     show() {
       this.$store.commit('campsite/setSearched', false);
+      this.moveToTop();
+    },
+    moveToTop() {
+      const scrollContent = this.$el.querySelector('.content-with-footer__content');
+      scrollContent.scrollTo(0, 0);
     },
     search() {
       this.$store.commit('campsite/setSearched', true);
