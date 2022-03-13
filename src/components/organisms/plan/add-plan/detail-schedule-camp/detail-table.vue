@@ -1,13 +1,13 @@
 <template>
   <div class="table-detail">
     <div
-      v-for="(item, index) in items"
+      v-for="(date, index) in dateRange"
       :key="index"
       class="card-detail"
     >
       <div class="date-detail">
         <span>
-          {{ item.date }}
+          {{ date }}
         </span>
         <v-ons-button
           modifier="yellow"
@@ -33,47 +33,41 @@
             <th>タスク</th>
           </tr>
           <tr
-            v-for="(detail,index) in details"
+            v-for="(hour, index) in hours"
             :key="index"
             class="detail-row"
           >
             <td class="target">
-              {{ detail.targetAt }}
+              {{ hour }}
             </td>
             <td>
-              <div class="weather">
-                <img
-                  :src="require('@/assets/images/weathers/weather/01.png')"
-                  class="icon-weather"
-                >
-              </div>
+              <weather-image
+                :weather="getWeather(date, hour)"
+                image-width="35px"
+              />
             </td>
             <td>
-              <div class="temperature">
-                <span class="temperature__value">
-                  {{ detail.temp }}
-                </span>
-                <span class="temperature__unit">
-                  ℃
-                </span>
-              </div>
+              <temperature
+                :value="getWeather(date, hour) ? getWeather(date, hour).temperature : ''"
+              />
             </td>
-            <td>{{ detail.precipitation }}</td>
+            <td>{{ precipitationText(getWeather(date, hour)) }}</td>
             <td>
               <div class="wind-direction">
-                <!-- // TODO: change class when do logic -->
-                <div class="wind-speed wind-speed--danger" />
-                <span>{{ detail.wind }}</span>
+                <template v-if="getWeather(date, hour)">
+                  <div :class="['wind-speed', windSpeedRate(getWeather(date, hour).windSpeed)]" />
+                  <span>{{ getWeather(date, hour).windSpeed }}</span>
+                </template>
+                <template v-else>
+                  --
+                </template>
               </div>
             </td>
             <td class="task">
               <div class="task__text">
-                <span>
-                  {{ detail.content }}
-                </span>
               </div>
               <img
-                v-if="isContentEmpty(detail.content)"
+                v-if="isContentEmpty('')"
                 :src="require('@/assets/images/icon-more.png')"
                 class="task__icon"
                 @click="showPopup()"
@@ -99,194 +93,92 @@
 <script>
 // components
 import EditDialogTask from '@/components/organisms/edit-dialog-task';
+import WeatherImage from '@/components/atoms/weather-image';
+import Temperature from '@/components/atoms/temperature';
 
 export default {
   name: 'DetailTable',
   components: {
     EditDialogTask,
+    WeatherImage,
+    Temperature,
   },
   props: {
-    items: {
-      type: Array,
-      default: () => [],
+    forecasts: {
+      type: Object,
+      required: true,
     },
   },
   data() {
     return {
-      details: [
-        {
-          targetAt: 0,
-          temp: 10,
-          content: '焚き火の準備と食事の準備をするあああああああ...',
-          precipitation: '10',
-          wind: '99',
-        },
-        {
-          targetAt: 1,
-          temp: 11,
-          content: '',
-          precipitation: '10',
-          wind: '99',
-        },
-        {
-          targetAt: 2,
-          temp: 10,
-          content: '焚き火の準備と食事の準備をするあああああああ...',
-          precipitation: '10',
-          wind: '99',
-        },
-        {
-          targetAt: 3,
-          temp: 11,
-          content: '',
-          precipitation: '10',
-          wind: '99',
-        },
-        {
-          targetAt: 4,
-          temp: 10,
-          content: '焚き火の準備と食事の準備をするあああああああ...',
-          precipitation: '10',
-          wind: '99',
-        },
-        {
-          targetAt: 5,
-          temp: 11,
-          content: '',
-          precipitation: '10',
-          wind: '99',
-        },
-        {
-          targetAt: 6,
-          temp: 10,
-          content: '焚き火の準備と食事の準備をするあああああああ...',
-          precipitation: '10',
-          wind: '99',
-        },
-        {
-          targetAt: 7,
-          temp: 11,
-          content: '',
-          precipitation: '10',
-          wind: '99',
-        },
-        {
-          targetAt: 8,
-          temp: 10,
-          content: '焚き火の準備と食事の準備をするあああああああ...',
-          precipitation: '10',
-          wind: '99',
-        },
-        {
-          targetAt: 9,
-          temp: 11,
-          content: '',
-          precipitation: '10',
-          wind: '99',
-        },
-        {
-          targetAt: 10,
-          temp: 10,
-          content: '焚き火の準備と食事の準備をするあああああああ...',
-          precipitation: '10',
-          wind: '99',
-        },
-        {
-          targetAt: 11,
-          temp: 11,
-          content: '',
-          precipitation: '10',
-          wind: '99',
-        },
-        {
-          targetAt: 12,
-          temp: 10,
-          content: '焚き火の準備と食事の準備をするあああああああ...',
-          precipitation: '10',
-          wind: '99',
-        },
-        {
-          targetAt: 13,
-          temp: 11,
-          content: '',
-          precipitation: '10',
-          wind: '99',
-        },
-        {
-          targetAt: 14,
-          temp: 10,
-          content: '焚き火の準備と食事の準備をするあああああああ...',
-          precipitation: '10',
-          wind: '99',
-        },
-        {
-          targetAt: 15,
-          temp: 11,
-          content: '',
-          precipitation: '10',
-          wind: '99',
-        },
-        {
-          targetAt: 16,
-          temp: 10,
-          content: '焚き火の準備と食事の準備をするあああああああ...',
-          precipitation: '10',
-          wind: '99',
-        },
-        {
-          targetAt: 17,
-          temp: 11,
-          content: '',
-          precipitation: '10',
-          wind: '99',
-        },
-        {
-          targetAt: 18,
-          temp: 10,
-          content: '焚き火の準備と食事の準備をするあああああああ...',
-          precipitation: '10',
-          wind: '99',
-        },
-        {
-          targetAt: 19,
-          temp: 11,
-          content: '',
-          precipitation: '10',
-          wind: '99',
-        },
-        {
-          targetAt: 20,
-          temp: 10,
-          content: '焚き火の準備と食事の準備をするあああああああ...',
-          precipitation: '10',
-          wind: '99',
-        },
-        {
-          targetAt: 21,
-          temp: 11,
-          content: '',
-          precipitation: '10',
-          wind: '99',
-        },
-        {
-          targetAt: 22,
-          temp: 10,
-          content: '焚き火の準備と食事の準備をするあああああああ...',
-          precipitation: '10',
-          wind: '99',
-        },
-        {
-          targetAt: 23,
-          temp: 11,
-          content: '',
-          precipitation: '10',
-          wind: '99',
-        },
-      ],
+      dateRange: [],
+      hours: [...Array(24).keys()],
       updateDataVisible: false,
     };
   },
+  computed: {
+    items() {
+      if (!this.dateRange.length || !this.forecasts.items) return [];
+
+      const items = this.forecasts.items.reduce((dateAcc, dateCur) => {
+        const hourlyData = dateCur.hourlyData.reduce((hourAcc, hourCur) => {
+          hourAcc[parseInt(hourCur.hour, 10)] = hourCur;
+          return hourAcc;
+        }, {});
+
+        dateAcc[dateCur.date] = hourlyData;
+        return dateAcc;
+      }, {});
+
+      return items;
+    },
+    params() {
+      return this.$store.getters['plan/params'];
+    },
+    startedDate() {
+      return this.params.startedDate;
+    },
+    finishedDate() {
+      return this.params.finishedDate;
+    },
+  },
+  watch: {
+    async startedDate() {
+      this.dateRange = await this.getDateRange();
+    },
+    async finishedDate() {
+      this.dateRange = await this.getDateRange();
+    },
+  },
   methods: {
+    getWeather(date, hour) {
+      if (!this.items[date]) return null;
+      if (!this.items[date][hour]) return null;
+
+      return this.items[date][hour];
+    },
+    getDateRange() {
+      if (this.startedDate && this.finishedDate) {
+        return this.$helpers.getDateRange(this.startedDate, this.finishedDate);
+      }
+      if (this.startedDate) return [this.startedDate];
+      if (this.finishedDate) return [this.finishedDate];
+      return [];
+    },
+    precipitationText(weather) {
+      return this.$helpers.isEmpty(weather) ? '--' : weather.precip;
+    },
+    windSpeedRate(windSpeed) {
+      // Unit of measurement: m/s
+      switch (true) {
+      case (windSpeed < 2):
+        return 'wind-speed--normal';
+      case (windSpeed < 5):
+        return 'wind-speed--strong';
+      default:
+        return 'wind-speed--danger';
+      }
+    },
     showPopup() {
       this.updateDataVisible = true;
     },

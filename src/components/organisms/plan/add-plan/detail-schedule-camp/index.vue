@@ -1,12 +1,15 @@
 <template>
-  <v-ons-page>
+  <v-ons-page @show="show">
     <div class="content">
       <div class="text">
         <v-ons-row class="text__desc">
-          〇〇〇〇〇〇〇〇〇〇〇〇<br>〇〇〇〇〇〇〇〇〇〇〇〇キャンプ場
+          {{ campsite.name }}
         </v-ons-row>
       </div>
-      <detail-table :items="items" />
+
+      <detail-table
+        :forecasts="forecasts"
+      />
 
       <content-with-footer>
         <template #footer>
@@ -42,21 +45,14 @@ export default {
   },
   data() {
     return {
-      items: [
-        {
-          date: '12/31',
-        },
-        {
-          date: '01/01',
-        },
-        {
-          date: '01/02',
-        },
-        {
-          date: '01/03',
-        },
-      ],
+      forecasts: {},
     };
+  },
+  props: {
+    campsite: {
+      type: Object,
+      required: true,
+    },
   },
   methods: {
     goToRegistration() {
@@ -64,6 +60,18 @@ export default {
     },
     goToDetailPlan() {
       // TODO: Redirect to Detail Plan
+    },
+    async getForecastHourly() {
+      const params = {
+        campsite_id: this.campsite.id,
+      };
+      const forecastHourly = await this.$store.dispatch('models/weather/getForecastHourly', params);
+      return forecastHourly;
+    },
+    async show() {
+      if (this.$helpers.isEmptyObject(this.forecasts)) {
+        this.forecasts = await this.getForecastHourly();
+      }
     },
   },
 };
