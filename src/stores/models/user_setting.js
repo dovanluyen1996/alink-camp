@@ -79,5 +79,11 @@ export default {
 
       context.commit('setUserSetting', userSetting);
     },
+    setIsEnabledTemperatureDifference(context, value) {
+      const userSetting = { ...context.state.userSetting };
+      userSetting.isEnabledTemperatureDifference = value;
+
+      context.commit('setUserSetting', userSetting);
+    },
   },
 };

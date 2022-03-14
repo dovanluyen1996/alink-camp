@@ -64,6 +64,17 @@
           </span>
         </div>
       </v-ons-list-item>
+      <v-ons-list-item modifier="nodivider">
+        <div class="center">
+          <span class="list-item__title">
+            気温差通知
+            <v-ons-switch v-model="isReceivableTemperatureDifference" />
+          </span>
+          <span class="list-item__subtitle">
+            ※予定日当日に昼から夜にかけて気温差が大きい場合に通知
+          </span>
+        </div>
+      </v-ons-list-item>
 
       <v-ons-list-item v-show="isErrorPushPermisionVisible">
         <div class="center">
@@ -138,6 +149,15 @@ export default {
       },
       async set(newValue) {
         this.$store.dispatch('models/userSetting/setIsEnabledSunriseSunsetNotification', newValue);
+        await this.updateUserSetting();
+      },
+    },
+    isReceivableTemperatureDifference: {
+      get() {
+        return this.userSetting && this.userSetting.isEnabledTemperatureDifference;
+      },
+      async set(newValue) {
+        this.$store.dispatch('models/userSetting/setIsEnabledTemperatureDifference', newValue);
         await this.updateUserSetting();
       },
     },
