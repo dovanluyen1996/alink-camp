@@ -1,38 +1,50 @@
 <template>
-  <v-ons-row class="campsite-weather-calendar">
-    <v-ons-col
-      v-for="(forecast, index) in forecasts"
-      :key="index"
-      width="25%"
-      class="campsite-weather-day"
-    >
-      <div
-        class="campsite-weather-day-date"
-        :class="[saturdayCol(forecast.date), sundayCol(forecast.date)]"
+  <div class="campsite-weather-calendar">
+    <v-ons-row>
+      <v-ons-col
+        v-for="(forecast, index) in forecasts"
+        :key="index"
+        width="25%"
+        class="campsite-weather-day"
       >
-        {{ forecast.date ? shortDate(forecast.date) : '--/--' }}
+        <div
+          class="campsite-weather-day-date"
+          :class="[saturdayCol(forecast.date), sundayCol(forecast.date)]"
+        >
+          {{ forecast.date ? shortDate(forecast.date) : '--/--' }}
+        </div>
+        <div class="campsite-weather-day-weather">
+          <weather-image
+            :weather="forecast"
+            image-width="68px"
+          />
+          <div class="campsite-weather-accuracy-index">
+            {{ accuracyText[forecast.accuracyIndex] }}
+          </div>
+        </div>
+        <div class="campsite-weather-day-temperature">
+          <temperature-component
+            :value="forecast.maxTemp"
+            font-size="12px"
+            class="temperature-high"
+          />&nbsp;/&nbsp;
+          <temperature-component
+            :value="forecast.minTemp"
+            font-size="12px"
+            class="temperature-low"
+          />
+        </div>
+      </v-ons-col>
+    </v-ons-row>
+    <div class="campsite-weather-footer">
+      <div class="campsite-weather-footer-left">
+        信頼度：
       </div>
-      <div class="campsite-weather-day-weather">
-        <weather-image
-          :weather="forecast"
-          image-width="60px"
-        />
-        {{ accuracyText[forecast.accuracyIndex] }}
+      <div class="campsite-weather-footer-right">
+        A～Eの表示は、予報の信頼度です。低い場合は今後の予報が変わる可能性があります。
       </div>
-      <div class="campsite-weather-day-temperature">
-        <temperature-component
-          :value="forecast.maxTemp"
-          font-size="12px"
-          class="temperature-high"
-        />&nbsp;/&nbsp;
-        <temperature-component
-          :value="forecast.minTemp"
-          font-size="12px"
-          class="temperature-low"
-        />
-      </div>
-    </v-ons-col>
-  </v-ons-row>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -87,13 +99,11 @@ export default {
 }
 
 .campsite-weather-calendar {
-  margin-top: -10px;
+  background-color: #fff;
 }
 
 .campsite-weather-day {
-  margin-top: 20px;
   text-align: center;
-  border-top: 1px solid $color-border;
   border-bottom: 1px solid $color-border;
   border-left: 1px solid $color-border;
 
@@ -101,19 +111,29 @@ export default {
   &:last-child {
     border-right: 1px solid $color-border;
   }
+
+  &:nth-child(1),
+  &:nth-child(2),
+  &:nth-child(3),
+  &:nth-child(4) {
+    border-top: 1px solid $color-border;
+  }
 }
 
 .campsite-weather-day-date {
   @include colum-style;
 
   height: 24px;
-  font-size: $font-size-small;
+  font-size: 10px;
+  font-weight: 300;
+  color: #100101;
   background: $color-th;
 }
 
 .campsite-weather-day-weather {
   @include colum-style;
 
+  position: relative;
   height: 50px;
   border-top: 1px solid $color-border;
   border-bottom: 1px solid $color-border;
@@ -129,6 +149,23 @@ export default {
   /deep/ {
     .temperature__unit {
       margin-left: 0;
+      font-size: 10px;
+      font-weight: 300;
+    }
+
+    .temperature__unit,
+    .temperature__value {
+      font-weight: 300;
+    }
+
+    .weather-image {
+      height: 41px !important;
+    }
+
+    .weather {
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   }
 }
@@ -151,5 +188,28 @@ export default {
     color: #9d1d1d;
     background-color: #ffeaea;
   }
+}
+
+.campsite-weather-footer {
+  display: flex;
+  min-height: 27px;
+  padding: 5px 15px 5px 5px;
+  font-size: $font-size-small;
+  font-weight: 300;
+  color: #0d0101;
+}
+
+.campsite-weather-footer-left {
+  width: 50px;
+  white-space: nowrap;
+}
+
+.campsite-weather-accuracy-index {
+  position: absolute;
+  right: 5px;
+  bottom: 1px;
+  font-size: $font-size-small;
+  font-weight: 600;
+  color: #0d0101;
 }
 </style>

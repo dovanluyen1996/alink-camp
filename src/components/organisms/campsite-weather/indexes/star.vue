@@ -32,18 +32,3 @@ export default {
   },
 };
 </script>
-
-<style scoped lang="scss">
-@import '@/assets/scss/_mixins.scss';
-@import '@/assets/scss/_variables.scss';
-
-.star-title {
-  @include title-style;
-
-  font-size: $font-size-small;
-}
-
-.star-label {
-  font-size: $font-size-small;
-}
-</style>

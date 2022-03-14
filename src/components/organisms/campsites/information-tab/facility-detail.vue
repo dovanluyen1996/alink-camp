@@ -11,7 +11,7 @@
         </template>
 
         <template #sub-content>
-          炊事棟、水洗トイレ、温水シャワーほか
+          {{ campsite.facilities }}
         </template>
       </content-item>
 
@@ -21,8 +21,7 @@
         </template>
 
         <template #sub-content>
-          管理人10:00-15:00定時常駐（宿泊利用者がいる場合のみ）/チェックイン <br>
-          10:00-15:00/アウト10:00/デイキャンプはアウト17:00/
+          {{ campsite.management }}
         </template>
       </content-item>
 
@@ -32,7 +31,7 @@
         </template>
 
         <template #sub-content>
-          毛布、布団、調理器具
+          {{ campsite.rental }}
         </template>
       </content-item>
 
@@ -42,7 +41,7 @@
         </template>
 
         <template #sub-content>
-          薪
+          {{ campsite.shopLineup }}
         </template>
       </content-item>
 
@@ -52,7 +51,7 @@
         </template>
 
         <template #sub-content>
-          不可
+          {{ campsite.styleAutoCamping ? '可' : '不可' }}
         </template>
       </content-item>
 
@@ -62,7 +61,7 @@
         </template>
 
         <template #sub-content>
-          常時可
+          {{ dayCamping }}
         </template>
       </content-item>
 
@@ -77,7 +76,7 @@
               トレーラーハウス
             </template>
             <template #status>
-              あり
+              {{ campsite.facilityTrailerHouse === 1 ? 'あり' : 'なし' }}
             </template>
           </content-status-item>
 
@@ -86,7 +85,7 @@
               バンガロー等
             </template>
             <template #status>
-              あり
+              {{ campsite.facilityBungalow === 1 ? 'あり' : 'なし' }}
             </template>
           </content-status-item>
 
@@ -95,7 +94,7 @@
               常設テント等
             </template>
             <template #status>
-              なし
+              {{ campsite.facilityPermanentTent === 1 ? 'あり' : 'なし' }}
             </template>
           </content-status-item>
         </template>
@@ -112,7 +111,7 @@
               AC電源付きサイト
             </template>
             <template #status>
-              不可
+              {{ campsite.facilityAc === 1 ? 'あり' : 'なし' }}
             </template>
           </content-status-item>
 
@@ -121,7 +120,7 @@
               ランドリー
             </template>
             <template #status>
-              不可
+              {{ campsite.facilityLaundry === 1 ? 'あり' : 'なし' }}
             </template>
           </content-status-item>
 
@@ -130,7 +129,7 @@
               水洗トイレ
             </template>
             <template #status>
-              不可
+              {{ campsite.facilityFlushToilet === 1 ? 'あり' : 'なし' }}
             </template>
           </content-status-item>
 
@@ -139,7 +138,7 @@
               温水シャワー
             </template>
             <template #status>
-              不可
+              {{ campsite.facilityShower === 1 ? 'あり' : 'なし' }}
             </template>
           </content-status-item>
 
@@ -148,7 +147,7 @@
               風呂
             </template>
             <template #status>
-              不可
+              {{ campsite.facilityBathroom === 1 ? 'あり' : 'なし' }}
             </template>
           </content-status-item>
 
@@ -157,7 +156,7 @@
               温泉
             </template>
             <template #status>
-              不可
+              {{ campsite.facilityHotSpring === 1 ? 'あり' : 'なし' }}
             </template>
           </content-status-item>
 
@@ -166,7 +165,7 @@
               バリアフリー施設
             </template>
             <template #status>
-              不可
+              {{ campsite.facilityBarrierFree === 1 ? 'あり' : 'なし' }}
             </template>
           </content-status-item>
         </template>
@@ -183,7 +182,7 @@
               直火
             </template>
             <template #status>
-              禁止事項なし
+              {{ directHeat }}
             </template>
           </content-status-item>
 
@@ -192,7 +191,7 @@
               ペット
             </template>
             <template #status>
-              一部禁止
+              {{ pets }}
             </template>
           </content-status-item>
 
@@ -201,7 +200,7 @@
               花火
             </template>
             <template #status>
-              一部禁止・条件付き可
+              {{ firework }}
             </template>
           </content-status-item>
         </template>
@@ -218,6 +217,87 @@ import ContentStatusItem from '@/components/atoms/information-tab/content-status
 
 export default {
   name: 'CampsitesInformationFacilityDetail',
+  computed: {
+    campsite() {
+      return this.$store.getters['campsite/choosenCampsite'];
+    },
+    dayCamping() {
+      let label = '';
+
+      switch (this.campsite.styleDayCamping) {
+      case 0:
+        label = '不可';
+        break;
+      case 1:
+        label = '常時可';
+        break;
+      case 2:
+        label = '期間により可';
+        break;
+      default:
+        label = '';
+      }
+
+      return label;
+    },
+    directHeat() {
+      let label = '';
+
+      switch (this.campsite.ruleDirectHeat) {
+      case 0:
+        label = '禁止事項なし';
+        break;
+      case 1:
+        label = '全面禁止';
+        break;
+      case 2:
+        label = '一部禁止・条件付き可';
+        break;
+      default:
+        label = '';
+      }
+
+      return label;
+    },
+    pets() {
+      let label = '';
+
+      switch (this.campsite.rulePets) {
+      case 0:
+        label = '禁止事項なし';
+        break;
+      case 1:
+        label = '全面禁止';
+        break;
+      case 2:
+        label = '一部禁止・条件付き可';
+        break;
+      default:
+        label = '';
+      }
+
+      return label;
+    },
+    firework() {
+      let label = '';
+
+      switch (this.campsite.ruleFirework) {
+      case 0:
+        label = '禁止事項なし';
+        break;
+      case 1:
+        label = '全面禁止';
+        break;
+      case 2:
+        label = '一部禁止・条件付き可';
+        break;
+      default:
+        label = '';
+      }
+
+      return label;
+    },
+  },
   components: {
     InformationTabItem,
     ContentItem,

@@ -216,7 +216,7 @@ export default {
   margin-top: 17px;
   font-weight: 600;
   color: 14px;
-  background-color: #fcb515;
+  background-color: $color-yellow;
   border-radius: 15px;
 
   &::before {

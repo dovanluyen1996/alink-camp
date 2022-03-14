@@ -5,14 +5,14 @@
         アイテム名
       </div>
       <span
-        v-if="sticker.user_id"
+        v-if="isUserItem"
         class="item-name__sub-title"
       >
         （全角10文字以内）
       </span>
     </div>
     <v-ons-input
-      v-if="sticker.user_id"
+      v-if="isUserItem"
       v-model="inputedValue"
       type="text"
       class="item-name__input"
@@ -21,7 +21,7 @@
       v-else
       class="item-name__box"
     >
-      <span class="item-name__note">テント</span>
+      <span class="item-name__note">{{ inputedValue }}</span>
     </div>
     <div
       v-if="errors.length"
@@ -40,8 +40,8 @@ export default {
       type: Array,
       default: () => [],
     },
-    sticker: {
-      type: Object,
+    isUserItem: {
+      type: Boolean,
       default: null,
     },
     value: {

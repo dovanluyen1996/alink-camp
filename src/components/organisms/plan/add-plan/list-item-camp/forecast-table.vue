@@ -127,7 +127,7 @@ $speed-degrees: 0, 22.5, 45, 67.5, 90, 112.5, 135, 157.5, 180,
 
     .text-small {
       display: block;
-      font-size: 8px;
+      font-size: 12px;
     }
 
     tr {
@@ -200,7 +200,7 @@ $speed-degrees: 0, 22.5, 45, 67.5, 90, 112.5, 135, 157.5, 180,
       }
 
       span {
-        font-size: 10px;
+        font-size: 12px;
       }
     }
   }

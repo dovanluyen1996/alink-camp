@@ -12,10 +12,11 @@
         :key="index"
         class="label-list__item"
       >
-        <check-field
-          v-model="labels[index].value"
+        <check-group-field
+          :checked-values.sync="checkedValues"
+          :checked-value="label.id"
           :label="label.name"
-          :disable="isDisable(label.name)"
+          :disable="isDisabled(label.id)"
         />
       </div>
     </div>
@@ -38,13 +39,17 @@
 
 <script>
 // components
-import CheckField from '@/components/organisms/form/check-field';
+import CheckGroupField from '@/components/organisms/form/check-group-field';
 
 export default {
   components: {
-    CheckField,
+    CheckGroupField,
   },
   props: {
+    checkedLabels: {
+      type: Array,
+      default: () => [],
+    },
     isVisibleLabelList: {
       type: Boolean,
       default: false,
@@ -52,36 +57,29 @@ export default {
   },
   data() {
     return {
-      labels: [
-        { name: 'Test1', value: false },
-        { name: 'Test2', value: false },
-        { name: 'Test3', value: false },
-        { name: 'Test4', value: false },
-        { name: 'Test5', value: false },
-        { name: 'Test6', value: false },
-        { name: 'Test7', value: false },
-        { name: 'Test8', value: false },
-        { name: 'Test9', value: false },
-        { name: 'Test10', value: false },
-      ],
+      checkedValues: this.checkedLabels.map(label => label.id),
     };
   },
   computed: {
-    selectedLabels() {
-      return this.labels
-        .filter(label => label.value)
-        .map(label => label.name);
+    labels() {
+      return this.$store.getters['models/label/labels'];
+    },
+  },
+  watch: {
+    async isVisibleLabelList() {
+      if (this.isVisibleLabelList) await this.$store.dispatch('models/label/getLabels');
     },
   },
   methods: {
-    isDisable(labelName) {
-      return this.selectedLabels.length >= 3 && !this.selectedLabels.includes(labelName);
+    isDisabled(labelId) {
+      return this.checkedValues.length >= 3 && !this.checkedValues.includes(labelId);
     },
     closeLabelList() {
+      this.checkedValues = this.checkedLabels.map(label => label.id);
       this.$emit('update:isVisibleLabelList', false);
     },
     registerLabel() {
-      // TODO: Implement function when register label
+      this.$emit('update:checkedLabels', this.labels.filter(label => this.checkedValues.includes(label.id)));
       this.$emit('update:isVisibleLabelList', false);
     },
   },
@@ -103,11 +101,13 @@ export default {
     &--secondary {
       color: #fff;
       background-color: #beb9b8;
+      box-shadow: 0 5px 5px rgba(0, 0, 0, 0.4);
     }
 
     &--primary {
       color: #fff;
       background-color: #9a3210;
+      box-shadow: 0 5px 5px rgba(0, 0, 0, 0.4);
     }
   }
 

@@ -5,28 +5,25 @@ export default {
   strict: true,
   namespaced: true,
   state: {
-    labels: [],
     isLoading: false,
   },
   getters: {
-    labels: state => state.labels,
+    isLoading: state => state.isLoading,
   },
   mutations: {
     setIsLoading(state, isLoading) {
       state.isLoading = isLoading;
     },
-    setLabels(state, labels) {
-      Vue.set(state, 'labels', labels);
+    setIsPurchased(state, isPurchased) {
+      Vue.set(state, 'isPurchased', isPurchased);
     },
   },
   actions: {
-    async getLabels(context) {
+    async getIsPurchased(context, params) {
       context.commit('setIsLoading', true);
 
       try {
-        const labels = await ApiClient.getLabels();
-
-        context.commit('setLabels', labels);
+        return await ApiClient.getIsPurchased(params);
       } catch (error) {
         context.commit('api/setError', error, { root: true });
         throw error;

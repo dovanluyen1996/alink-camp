@@ -1,18 +1,24 @@
 <template>
   <v-ons-page @show="show">
-    <custom-toolbar title="キャンプ天気" />
+    <custom-toolbar
+      title="キャンプ天気"
+      :disabled-back-button="true"
+    />
     <div class="content">
       <loading :visible="isLoading" />
       <no-data v-if="favoriteCampsites.length === 0 && futurePlans.length === 0">
         <p>
-          まだお気に入りや予定日設定しているキャンプ場がありません。<br>
+          まだお気に入りや予定日設定しているキャンプ場がありません。
           キャンプ場検索より、設定してください。
         </p>
         <template #actions>
           <v-ons-button
-            modifier="cta"
+            modifier="cta orange search"
             @click="goToCampsiteSearch"
           >
+            <img
+              :src="require('@/assets/images/form/search-top.png')"
+            >
             キャンプ場検索
           </v-ons-button>
         </template>

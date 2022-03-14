@@ -3,11 +3,13 @@
     <custom-toolbar title="キャンプ場検索" />
 
     <div class="content">
+      <loading :visible="isLoading" />
       <content-with-footer>
         <card-with-tab
           ref="tabContents"
           :tabs="tabs"
           :active-index="activeIndexTab"
+          :is-purchased="isPurchased"
           @switchTab="switchTab"
         />
         <template #footer>
@@ -54,6 +56,7 @@ export default {
           component: CampsiteSearchLocationTab,
         },
       ],
+      isPurchased: false,
     };
   },
   computed: {
@@ -63,18 +66,21 @@ export default {
     activeIndexTab() {
       return this.$store.state.components.cardWithTab.searchCampsiteActiveIndex;
     },
+    isLoading() {
+      return this.$store.getters['purchase/isLoading'];
+    },
   },
-  created() {
+  async created() {
     this.resetCardWithTab();
+    await this.setIsPurchased();
   },
   methods: {
     show() {
       this.$store.commit('campsite/setSearched', false);
-
-      // TODO: スクロール位置を先頭に移動したい
-      const scrollContent = this.$el.querySelector('.content-with-footer');
-      // 常にscrollTop = 0
-      console.log('conditions search show', scrollContent.scrollTop);
+      this.moveToTop();
+    },
+    moveToTop() {
+      const scrollContent = this.$el.querySelector('.content-with-footer__content');
       scrollContent.scrollTo(0, 0);
     },
     search() {
@@ -85,6 +91,9 @@ export default {
     },
     resetCardWithTab() {
       this.$store.commit('components/cardWithTab/resetSearchCampsiteActiveIndex');
+    },
+    async setIsPurchased() {
+      this.isPurchased = await this.$store.dispatch('purchase/getIsPurchased');
     },
   },
 };

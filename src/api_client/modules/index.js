@@ -24,6 +24,7 @@ import UsersFavoritesApi from './users_favorites_api';
 import LabelsApi from './labels_api';
 import ItemsApi from './items_api';
 import SpotsApi from './spots_api';
+import PurchaseApi from './purchase_api';
 
 export default {
   NoticesApi,
@@ -52,4 +53,5 @@ export default {
   LabelsApi,
   ItemsApi,
   SpotsApi,
+  PurchaseApi,
 };

@@ -10,7 +10,7 @@
         </p>
         <template #actions>
           <v-ons-button
-            class="button--red button--search button--search__description"
+            modifier="orange search"
             @click="goToPlanSearch"
           >
             <img

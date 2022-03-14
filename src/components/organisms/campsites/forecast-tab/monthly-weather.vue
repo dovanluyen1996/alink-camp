@@ -3,21 +3,31 @@
     <div class="hourly-weather-title">
       未来の天気傾向
     </div>
+    <div v-if="isPurchased">
+      <div class="hourly-weather">
+        <temperature-chart />
+      </div>
 
-    <div class="hourly-weather">
-      <temperature-chart />
+      <div class="hourly-weather">
+        <temperature-table />
+      </div>
+
+      <div class="hourly-weather">
+        <prob-precip-chart />
+      </div>
+
+      <div class="hourly-weather">
+        <annual-weather-chart />
+      </div>
     </div>
 
-    <div class="hourly-weather">
-      <temperature-table />
-    </div>
+    <div
+      v-else
+      class="not-purchase"
+    >
+      <!-- TODO: Delete .not-purchase if it is not needed -->
 
-    <div class="hourly-weather">
-      <prob-precip-chart />
-    </div>
-
-    <div class="hourly-weather">
-      <annual-weather-chart />
+      <img src="@/assets/images/weather-not-purchase.png">
     </div>
   </div>
 </template>
@@ -36,6 +46,19 @@ export default {
     TemperatureTable,
     ProbPrecipChart,
     AnnualWeatherChart,
+  },
+  data() {
+    return {
+      isPurchased: false,
+    };
+  },
+  async created() {
+    await this.setIsPurchased();
+  },
+  methods: {
+    async setIsPurchased() {
+      this.isPurchased = await this.$store.dispatch('purchase/getIsPurchased');
+    },
   },
 };
 </script>
@@ -60,6 +83,14 @@ export default {
   margin: 10px 10px 15px;
   background: $color-white;
   border-radius: 10px;
+}
+
+.not-purchase {
+  padding: 30px 10px;
+
+  img {
+    width: 100%;
+  }
 }
 
 .chart-header {

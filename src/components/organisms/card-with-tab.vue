@@ -21,6 +21,7 @@
             <component
               :is="tab.component"
               v-show="isActive(index)"
+              :is-purchased="isPurchased"
             />
           </transition>
         </template>
@@ -40,6 +41,9 @@ export default {
     activeIndex: {
       type: Number,
       default: 0,
+    },
+    isPurchased: {
+      type: Boolean,
     },
   },
   methods: {

@@ -19,6 +19,8 @@ export default {
   },
   beforeCreate() {
     this.$store.dispatch('campsiteSearchNavigator/push', CampsiteSearchIndexPage);
+    // 閲覧履歴をLocalStrageから取得
+    this.$store.dispatch('campsite/setViewedCampsitesByCache');
   },
   methods: {
     onPrePush() {

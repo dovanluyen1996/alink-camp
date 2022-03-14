@@ -7,11 +7,15 @@
 
     <div class="content">
       <content-with-footer class="guidance-content">
-        <img
-          src="@/assets/images/guidances/push-noti.png"
-          width="118px"
-        >
-        <p>PUSH通知をONにすることで、ゴルフプレイ中に雨雲が近づいた場合や、予定日設定したゴルフ場の天気予報を定期的にお知らせいたします。</p>
+        <div class="guidance-content__box">
+          <img
+            src="@/assets/images/guidances/push-noti.png"
+            width="280px"
+          >
+        </div>
+        <p class="guidance-content__text">
+          PUSH通知をONにすることで、予定日の天気予報、キャンプ場に近づく雨雲や、雷、突風などの情報をご確認いただけます。
+        </p>
 
         <template #footer>
           <v-ons-button
@@ -69,5 +73,18 @@ export default {
 <style lang="scss" scoped>
 .call-to-purchase {
   height: auto;
+}
+
+.guidance-content {
+  &__box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 280px;
+  }
+
+  &__text {
+    margin-top: 80px !important;
+  }
 }
 </style>

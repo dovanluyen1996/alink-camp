@@ -42,15 +42,18 @@ export default {
 @import '@/assets/scss/_variables.scss';
 
 .campsite-weather-plan {
-  padding: 5px 10px;
-  margin-top: 5px;
-  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-around;
+  height: 20px;
+  padding: 5px 30px;
   font-size: $font-size-small;
-  background: #f2f2f2;
+  font-weight: 300;
+  color: #000;
+  background: #f5e9e6;
 
   &__count-down {
-    margin-left: 10px;
     font-weight: 600;
+    color: #eb2727;
   }
 
   &.is-today {
@@ -59,6 +62,13 @@ export default {
     .campsite-weather-plan__count-down {
       color: #eb2727;
     }
+  }
+}
+
+@media only screen and (max-width: 375px) {
+  .campsite-weather-plan {
+    padding-right: 5px;
+    padding-left: 5px;
   }
 }
 </style>

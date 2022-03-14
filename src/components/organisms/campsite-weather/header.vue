@@ -34,15 +34,28 @@ export default {
 <style scoped lang="scss">
 @import '@/assets/scss/_mixins.scss';
 
+.campsite-weather-header {
+  padding: 11px;
+  background: #f29678;
+}
+
 .campsite-name {
   @include title-style;
 
   display: inline-block;
   margin-bottom: 3px;
+  font-size: 16px;
+  color: #fff;
   text-align: left;
+
+  & > img {
+    margin-left: 10px;
+  }
 }
 
 .campsite-address {
-  color: #888;
+  font-size: 12px;
+  font-weight: 300;
+  color: #ffffff80;
 }
 </style>

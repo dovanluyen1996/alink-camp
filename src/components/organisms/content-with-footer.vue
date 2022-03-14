@@ -76,7 +76,7 @@ export default {
 
 .content-with-footer[class*="guidance-content"] {
   padding: 0 16px;
-  color: #fff;
+  color: #000;
   background-color: #f2ebd3;
 
   .content-with-footer__content {
@@ -88,7 +88,7 @@ export default {
     p {
       margin-top: 28px;
       font-size: 16px;
-      font-weight: 600;
+      font-weight: 300;
       line-height: 1.5;
     }
   }

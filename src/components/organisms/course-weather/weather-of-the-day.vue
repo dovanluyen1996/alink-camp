@@ -89,9 +89,5 @@ export default {
   flex-wrap: nowrap;
   margin-top: 15px;
   color: #017f45;
-
-  ons-col {
-    padding: 0 2px;
-  }
 }
 </style>

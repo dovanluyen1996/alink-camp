@@ -9,11 +9,10 @@
       <content-with-footer class="guidance-content">
         <img
           src="@/assets/images/guidances/info-setting.png"
-          width="200px"
+          width="280px"
         >
-        <p>
-          ゴルフコース検索をして、プレイ予定日の設定やお気に入りにして頂くことで、
-          詳細な天気予報や服装指数などの当日に向けての準備にご活用いただける情報がアプリのTOPに表示されます。
+        <p class="guidance-content__text">
+          天気の傾向や施設情報を踏まえたキャンプ場検索で、目的地を決め、予定日設定をする事で、詳細な天気予報をお届けします。
         </p>
 
         <template #footer>
@@ -48,3 +47,11 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.guidance-content {
+  &__text {
+    margin-top: 80px !important;
+  }
+}
+</style>

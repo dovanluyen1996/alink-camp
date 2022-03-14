@@ -73,6 +73,8 @@ export default {
 
   &[type="date"] {
     background-image: url('~@/assets/images/form/date.png');
+    background-position: 95%;
+    background-size: 17px;
   }
 
   &[type="time"] {

@@ -306,6 +306,10 @@ $button-height--rounded: 36px;
 ---------- */
 .list-item {
   padding-left: 7px;
+
+  &--chevron::before {
+    right: 5px !important;
+  }
 }
 
 /* ----------

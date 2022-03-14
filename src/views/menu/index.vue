@@ -1,9 +1,17 @@
 <template>
-  <v-ons-page>
+  <v-ons-page @show="show">
     <div class="background" />
 
     <div class="content">
       <v-ons-list>
+        <v-ons-list-item
+          v-if="isPurchased"
+          modifier="nodivider chevron"
+          @click="goToPurchaseInformation"
+        >
+          プレミアムサービス
+        </v-ons-list-item>
+
         <v-ons-list-item
           modifier="nodivider chevron"
           @click="goToNotices"
@@ -73,6 +81,7 @@
 
 <script>
 // pages
+import PurchaseInformation from '@/views/purchase-information/index';
 import NoticesView from '@/views/notices/index';
 import GiftsView from '@/views/gifts/index';
 import UserSettingView from '@/views/user-setting/index';
@@ -84,7 +93,15 @@ import AboutSubscriptionView from '@/views/about-subscription/index';
 import ItemsView from '@/views/items/index';
 
 export default {
+  data() {
+    return {
+      isPurchased: false,
+    };
+  },
   methods: {
+    goToPurchaseInformation() {
+      this.$store.dispatch('menuNavigator/push', PurchaseInformation);
+    },
     goToNotices() {
       this.$store.dispatch('menuNavigator/push', NoticesView);
     },
@@ -111,6 +128,11 @@ export default {
     },
     goToItems() {
       this.$store.dispatch('menuNavigator/push', ItemsView);
+    },
+    async show() {
+      const isPurchased = await this.$store.dispatch('purchase/getIsPurchased');
+
+      this.isPurchased = isPurchased;
     },
   },
 };

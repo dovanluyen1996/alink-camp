@@ -1,7 +1,7 @@
 <template>
   <div class="campsites-forecast-tab">
     <div class="wrapper-table">
-      <transition name="fade">
+      <div>
         <hourly-weather v-if="isShownHourly">
           <template #switcher>
             <forecast-switcher :segment-index.sync="segmentIndex" />
@@ -13,7 +13,7 @@
             <forecast-switcher :segment-index.sync="segmentIndex" />
           </template>
         </fourteen-days-weather>
-      </transition>
+      </div>
 
       <div class="ml-mr-30">
         <a
@@ -81,6 +81,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import '@/assets/scss/_variables.scss';
+
 .campsites-forecast-tab {
   overflow: hidden;
 }
@@ -125,7 +127,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #f2aa06;
+    background-color: $color-yellow;
 
     img {
       margin-right: 5px;

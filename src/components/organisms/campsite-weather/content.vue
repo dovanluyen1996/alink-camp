@@ -1,5 +1,5 @@
 <template>
-  <v-ons-card
+  <div
     class="campsite-weather-show"
     @click="goToCampsiteDetail"
   >
@@ -11,11 +11,13 @@
         v-if="plan"
         :plan="plan"
       />
+      <div class="campsite-weather-separate"></div>
 
       <template v-if="plan && isPresent(ForecastScheduledDate)">
         <campsite-weather-of-the-day :forecast="ForecastScheduledDate" />
-        <campsite-weather-the-day-after :forecast="ForecastScheduledDate.dayAfter" />
         <campsite-weather-hourly-weather :forecast="ForecastScheduledDate.targetDate" />
+        <div class="campsite-weather-separate"></div>
+        <campsite-weather-the-day-after :forecast="ForecastScheduledDate.dayAfter" />
       </template>
       <template v-else-if="isPresent(Forecast14Days)">
         <campsite-weather-calendar
@@ -28,7 +30,7 @@
         </div>
       </template>
     </div>
-  </v-ons-card>
+  </div>
 </template>
 
 <script>
@@ -123,6 +125,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import '@/assets/scss/_variables.scss';
+
 .no-forecast {
   margin: 2rem auto 1rem auto;
   text-align: center;
@@ -131,6 +135,7 @@ export default {
 .campsite-weather-detail {
   display: flex;
   flex-wrap: wrap;
+  margin: 6px 9px;
 }
 
 .campsite-weather-plan {
@@ -139,7 +144,7 @@ export default {
 
 .campsite-weather-of-the-day {
   width: 100%;
-  margin-bottom: 10px;
+  background-color: #fff;
 }
 
 .campsite-weather-the-day-before {
@@ -149,13 +154,33 @@ export default {
 
 .campsite-weather-time-table {
   width: 100%;
+  font-size: 10px;
+  font-weight: 300;
+  background-color: #fff;
+}
+
+.campsite-weather-separate {
+  width: 100%;
+  height: 6px;
+  background-color: transparent;
+}
+
+/deep/ {
+  .card {
+    padding: 0;
+    border-radius: 0;
+  }
+
+  .temperature__unit {
+    margin-left: 0;
+  }
+
+  .campsite-weather-day:last-child {
+    border-right: 1px solid #d9d9d9;
+  }
 }
 
 @media screen and (min-width: 320px) {
-  .campsite-weather-of-the-day {
-    width: 61%;
-  }
-
   .campsite-weather-the-day-before {
     width: 36%;
     margin-left: 3%;

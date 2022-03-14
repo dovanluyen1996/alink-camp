@@ -8,15 +8,13 @@
 
         <div class="content">
           <div class="content-body">
-            筑波山の中腹にあるキャンプ場。山の斜面にテントサイトやBBQサイトがあり、登山のベースキャンプとしても気軽に利用できる。
-            広大な施設内では数多くの植物が見られ、自然を思いっきり満喫できる。
+            {{ campsite.feature }}
           </div>
         </div>
       </div>
       <basic-information />
       <facility-detail />
       <nearby-facility />
-      <!-- TODO: 不要ならロジック時に交通アクセスを削除する -->
       <traffic />
     </div>
   </div>
@@ -32,6 +30,11 @@ import Traffic from '@/components/organisms/campsites/information-tab/traffic';
 
 export default {
   name: 'CampsiteInformationTab',
+  computed: {
+    campsite() {
+      return this.$store.getters['campsite/choosenCampsite'];
+    },
+  },
   components: {
     BasicInformation,
     FacilityDetail,
