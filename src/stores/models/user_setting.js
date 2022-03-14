@@ -73,5 +73,11 @@ export default {
 
       context.commit('setUserSetting', userSetting);
     },
+    setIsEnabledSunriseSunsetNotification(context, value) {
+      const userSetting = { ...context.state.userSetting };
+      userSetting.isEnabledSunriseSunsetNotification = value;
+
+      context.commit('setUserSetting', userSetting);
+    },
   },
 };

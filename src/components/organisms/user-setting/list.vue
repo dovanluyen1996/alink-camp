@@ -53,6 +53,17 @@
           </span>
         </div>
       </v-ons-list-item>
+      <v-ons-list-item modifier="nodivider">
+        <div class="center">
+          <span class="list-item__title">
+            日の出、日の入の通知
+            <v-ons-switch v-model="isReceivableSunriseSunset" />
+          </span>
+          <span class="list-item__subtitle">
+            ※日の出、日の入の30分前にお知らせする通知
+          </span>
+        </div>
+      </v-ons-list-item>
 
       <v-ons-list-item v-show="isErrorPushPermisionVisible">
         <div class="center">
@@ -118,6 +129,15 @@ export default {
       },
       async set(newValue) {
         this.$store.dispatch('models/userSetting/setIsEnabledChangeRainyNotification', newValue);
+        await this.updateUserSetting();
+      },
+    },
+    isReceivableSunriseSunset: {
+      get() {
+        return this.userSetting && this.userSetting.isEnabledSunriseSunsetNotification;
+      },
+      async set(newValue) {
+        this.$store.dispatch('models/userSetting/setIsEnabledSunriseSunsetNotification', newValue);
         await this.updateUserSetting();
       },
     },
