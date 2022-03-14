@@ -61,5 +61,11 @@ export default {
 
       context.commit('setUserSetting', userSetting);
     },
+    setIsEnabledThunderNotification(context, value) {
+      const userSetting = { ...context.state.userSetting };
+      userSetting.isEnabledThunderNotification = value;
+
+      context.commit('setUserSetting', userSetting);
+    },
   },
 };

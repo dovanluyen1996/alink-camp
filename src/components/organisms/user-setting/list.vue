@@ -31,6 +31,17 @@
           </span>
         </div>
       </v-ons-list-item>
+      <v-ons-list-item modifier="nodivider">
+        <div class="center">
+          <span class="list-item__title">
+            落雷＆突風注意報
+            <v-ons-switch v-model="isReceivableThunder" />
+          </span>
+          <span class="list-item__subtitle">
+            ※予定日当日に該当キャンプ場で落雷警報が出た場合にご連絡します
+          </span>
+        </div>
+      </v-ons-list-item>
 
       <v-ons-list-item v-show="isErrorPushPermisionVisible">
         <div class="center">
@@ -78,6 +89,15 @@ export default {
       },
       async set(newValue) {
         this.$store.dispatch('models/userSetting/setIsReceivableWarning', newValue);
+        await this.updateUserSetting();
+      },
+    },
+    isReceivableThunder: {
+      get() {
+        return this.userSetting && this.userSetting.isEnabledThunderNotification;
+      },
+      async set(newValue) {
+        this.$store.dispatch('models/userSetting/setIsEnabledThunderNotification', newValue);
         await this.updateUserSetting();
       },
     },
