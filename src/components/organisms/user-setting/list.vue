@@ -16,14 +16,14 @@
       <v-ons-list-item modifier="nodivider">
         <div class="center">
           <span class="list-item__title">
-            天気の通知
+            予定日の天気を毎日ご連絡
             <v-ons-switch v-model="isReceivableWeatherForecast" />
           </span>
           <span class="list-item__subtitle">
-            ※予定日3日前より定期的に該当コースの天気を通知します
+            ※予定日14日前より定期的に該当キャンプ場の天気をご連絡します。
           </span>
           <span class="list-item__subtitle">
-            ※急な変化の際のキャンセルの判断にご利用ください
+            ※キャンセルの判断にご利用ください
           </span>
         </div>
       </v-ons-list-item>
