@@ -6,6 +6,13 @@
 
     <loading :visible="isLoading" />
     <v-ons-list modifier="noborder">
+      <v-ons-list-item modifier="nodivider" v-show="isErrorPushPermisionVisible">
+        <div class="center">
+          <span class="list-item__alert">
+            PUSH通知の許可がされていません。スマートフォンの設定からキャンプ天気を選択し、通知を許可してください。
+          </span>
+        </div>
+      </v-ons-list-item>
       <v-ons-list-item modifier="nodivider">
         <div class="center">
           <span class="list-item__title">
@@ -83,14 +90,6 @@
           </span>
           <span class="list-item__subtitle">
             ※予定日当日に忘れ物がないかの確認通知
-          </span>
-        </div>
-      </v-ons-list-item>
-
-      <v-ons-list-item v-show="isErrorPushPermisionVisible">
-        <div class="center">
-          <span class="list-item__alert">
-            PUSH通知の許可がされていません。スマートフォンの設定からゴルフ天気を選択し、通知を許可してください
           </span>
         </div>
       </v-ons-list-item>
