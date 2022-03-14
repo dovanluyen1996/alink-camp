@@ -154,4 +154,29 @@ export default {
       window.open(url, '_system');
     }
   },
+
+  spotAddress(spot) {
+    if (!spot) return '';
+
+    // Spot.prefecture is not null
+    let spotAddress = spot.prefecture;
+
+    // Spot.county can null
+    if (spot.county) {
+      spotAddress = `${spotAddress}${spot.county}`;
+    }
+
+    // Spot.city is not null
+    spotAddress = `${spotAddress}${spot.city}`;
+
+    // Spot.house_number is not null
+    spotAddress = `${spotAddress}${spot.houseNumber}`;
+
+    // Spot.apartment can null
+    if (spot.apartment) {
+      spotAddress = `${spotAddress}${spot.apartment}`;
+    }
+
+    return spotAddress;
+  },
 };
