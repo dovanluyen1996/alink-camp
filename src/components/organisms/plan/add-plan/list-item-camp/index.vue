@@ -37,7 +37,7 @@
         <template #footer>
           <v-ons-button
             modifier="large--cta yellow rounded"
-            @click="goToRegistration()"
+            @click="showConfirmDialog"
           >
             登録
           </v-ons-button>
@@ -45,7 +45,7 @@
           <v-ons-button
             modifier="large--cta rounded"
             class="button--search-day"
-            @click="goToDetailPlan()"
+            @click="goToListPlan"
           >
             過去の計画一覧
           </v-ons-button>
@@ -142,12 +142,6 @@ export default {
     async closeCompletedDialog() {
       this.completedDialogVisible = false;
       await this.$store.dispatch('plansNavigator/pop');
-    },
-    goToRegistration() {
-      // TODO: Redirect to Registration
-    },
-    goToDetailPlan() {
-      // TODO: Redirect to Detail Plan
     },
   },
 };
