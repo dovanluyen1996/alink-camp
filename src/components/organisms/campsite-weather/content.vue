@@ -45,6 +45,10 @@ import CampsiteWeatherTheDayAfter from '@/components/organisms/campsite-weather/
 import CampsiteWeatherHourlyWeather from '@/components/organisms/campsite-weather/hourly-weather';
 import CampsiteWeatherCalendar from '@/components/organisms/campsite-weather/calendar';
 
+// pages
+import CampsiteSearchIndexPage from '@/views/campsite-search/index';
+import CampsiteShowPage from '@/views/campsites/show';
+
 export default {
   name: 'CampsiteWeatherContent',
   components: {
@@ -115,7 +119,21 @@ export default {
       return moment().startOf('day').isBetween(this.plan.startedDate, this.plan.finishedDate, null, '[]') ? moment().format('YYYY-MM-DD') : this.plan.startedDate;
     },
     goToCampsiteDetail() {
-      // TODO: 詳細のロジック実装時に、ページ遷移を実装する
+      this.$store.commit('campsiteSearchNavigator/setEnableBusy', false);
+      this.$store.commit('appTabbar/setActiveIndex', settings.views.appTabbar.tabIndexes.campsiteSearch);
+      this.$store.dispatch('campsiteSearchNavigator/reset', CampsiteSearchIndexPage);
+
+      this.$store.dispatch('campsiteSearchNavigator/push', {
+        extends: CampsiteShowPage,
+        onsNavigatorProps: {
+          campsite: this.useCampsite,
+        },
+        onsNavigatorOptions: {
+          callback: () => {
+            this.$store.commit('campsiteSearchNavigator/setEnableBusy', true);
+          },
+        },
+      });
     },
     isPresent(forecastObject) {
       return this.$helpers.isPresentObject(forecastObject);
