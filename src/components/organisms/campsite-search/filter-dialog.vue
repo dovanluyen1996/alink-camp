@@ -70,6 +70,10 @@ export default {
     & > ons-button {
       margin: 5px;
     }
+
+    .button--search {
+      box-shadow: 0 5px 5px rgba(0, 0, 0, 0.4);
+    }
   }
 
   .facility-flex .check-field,
