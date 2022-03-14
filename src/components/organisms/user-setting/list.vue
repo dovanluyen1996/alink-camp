@@ -42,6 +42,17 @@
           </span>
         </div>
       </v-ons-list-item>
+      <v-ons-list-item modifier="nodivider">
+        <div class="center">
+          <span class="list-item__title">
+            予報が晴⇒雨になったら通知
+            <v-ons-switch v-model="isReceivableChangeRainy" />
+          </span>
+          <span class="list-item__subtitle">
+            ※予定日の天気や、設定しているタスクにおいて変化があった場合に通知
+          </span>
+        </div>
+      </v-ons-list-item>
 
       <v-ons-list-item v-show="isErrorPushPermisionVisible">
         <div class="center">
@@ -98,6 +109,15 @@ export default {
       },
       async set(newValue) {
         this.$store.dispatch('models/userSetting/setIsEnabledThunderNotification', newValue);
+        await this.updateUserSetting();
+      },
+    },
+    isReceivableChangeRainy: {
+      get() {
+        return this.userSetting && this.userSetting.isEnabledChangeRainyNotification;
+      },
+      async set(newValue) {
+        this.$store.dispatch('models/userSetting/setIsEnabledChangeRainyNotification', newValue);
         await this.updateUserSetting();
       },
     },

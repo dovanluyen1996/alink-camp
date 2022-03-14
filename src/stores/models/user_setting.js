@@ -67,5 +67,11 @@ export default {
 
       context.commit('setUserSetting', userSetting);
     },
+    setIsEnabledChangeRainyNotification(context, value) {
+      const userSetting = { ...context.state.userSetting };
+      userSetting.isEnabledChangeRainyNotification = value;
+
+      context.commit('setUserSetting', userSetting);
+    },
   },
 };
