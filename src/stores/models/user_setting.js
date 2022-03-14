@@ -49,15 +49,15 @@ export default {
         context.commit('setIsLoading', false);
       }
     },
-    setIsReceivableWeatherForecast(context, value) {
+    setIsEnabledWeatherForecastNotification(context, value) {
       const userSetting = { ...context.state.userSetting };
-      userSetting.isReceivableWeatherForecast = value;
+      userSetting.isEnabledWeatherForecastNotification = value;
 
       context.commit('setUserSetting', userSetting);
     },
-    setIsReceivableWarning(context, value) {
+    setIsEnabledWarningNotification(context, value) {
       const userSetting = { ...context.state.userSetting };
-      userSetting.isReceivableWarning = value;
+      userSetting.isEnabledWarningNotification = value;
 
       context.commit('setUserSetting', userSetting);
     },

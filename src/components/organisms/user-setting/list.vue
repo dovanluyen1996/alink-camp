@@ -119,19 +119,19 @@ export default {
     },
     isReceivableWeatherForecast: {
       get() {
-        return this.userSetting && this.userSetting.isReceivableWeatherForecast;
+        return this.userSetting && this.userSetting.isEnabledWeatherForecastNotification;
       },
       async set(newValue) {
-        this.$store.dispatch('models/userSetting/setIsReceivableWeatherForecast', newValue);
+        this.$store.dispatch('models/userSetting/setIsEnabledWeatherForecastNotification', newValue);
         await this.updateUserSetting();
       },
     },
     isReceivableWarning: {
       get() {
-        return this.userSetting && this.userSetting.isReceivableWarning;
+        return this.userSetting && this.userSetting.isEnabledWarningNotification;
       },
       async set(newValue) {
-        this.$store.dispatch('models/userSetting/setIsReceivableWarning', newValue);
+        this.$store.dispatch('models/userSetting/setIsEnabledWarningNotification', newValue);
         await this.updateUserSetting();
       },
     },
