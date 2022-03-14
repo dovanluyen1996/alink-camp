@@ -35,12 +35,6 @@ export default {
       default: false,
     },
   },
-  data() {
-    return {
-    };
-  },
-  computed: {
-  },
   methods: {
     filter() {
       this.$emit('filter', this.$refs.facilityCondition.searchParams());
