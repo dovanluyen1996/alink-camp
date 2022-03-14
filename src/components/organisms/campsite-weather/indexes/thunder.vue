@@ -1,14 +1,25 @@
 <template>
   <div class="thunder">
-    <div class="thunder-title">
-      落雷
+    <div v-if="isPurchased">
+      <div class="thunder-title">
+        落雷
+      </div>
+      <img
+        :src="image"
+        width="26px"
+      >
+      <div class="thunder-label">
+        {{ label }}
+      </div>
     </div>
-    <img
-      :src="image"
-      width="26px"
-    >
-    <div class="thunder-label">
-      {{ label }}
+    <div v-else>
+      <div class="thunder-title thunder-title--unpaid">
+        落雷
+      </div>
+      <img
+        src="@/assets/images/weathers/thunder/thunder_large_none.png"
+        width="26px"
+      >
     </div>
   </div>
 </template>
@@ -20,6 +31,10 @@ export default {
     forecast: {
       type: Object,
       required: true,
+    },
+    isPurchased: {
+      type: Boolean,
+      default: false,
     },
   },
   data() {

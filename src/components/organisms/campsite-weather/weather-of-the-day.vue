@@ -35,16 +35,28 @@
         各種指数は、プレミアムプラン入会でご確認いただけます。
       </div>
       <v-ons-col width="16%">
-        <campsite-weather-thunder-index :forecast="forecast.targetDate" />
+        <campsite-weather-thunder-index
+          :forecast="forecast.targetDate"
+          :is-purchased="isPurchased"
+        />
       </v-ons-col>
       <v-ons-col width="16%">
-        <campsite-weather-dress-index :forecast="forecast.targetDate" />
+        <campsite-weather-dress-index
+          :forecast="forecast.targetDate"
+          :is-purchased="isPurchased"
+        />
       </v-ons-col>
       <v-ons-col width="16%">
-        <campsite-weather-uv-index :forecast="forecast.targetDate" />
+        <campsite-weather-uv-index
+          :forecast="forecast.targetDate"
+          :is-purchased="isPurchased"
+        />
       </v-ons-col>
       <v-ons-col width="16%">
-        <campsite-weather-star-index :forecast="forecast.targetDate" />
+        <campsite-weather-star-index
+          :forecast="forecast.targetDate"
+          :is-purchased="isPurchased"
+        />
       </v-ons-col>
     </v-ons-row>
   </div>
@@ -88,6 +100,14 @@ export default {
     shortDate() {
       const targetDate = this.forecast.targetDate.date;
       return moment(targetDate).format('M/D');
+    },
+  },
+  async created() {
+    await this.setIsPurchased();
+  },
+  methods: {
+    async setIsPurchased() {
+      this.isPurchased = await this.$store.dispatch('purchase/getIsPurchased');
     },
   },
 };
@@ -160,6 +180,13 @@ export default {
     color: #007540;
   }
 
+  .thunder-title--unpaid,
+  .dress-title--unpaid,
+  .uv-title--unpaid,
+  .star-title--unpaid {
+    color: #ccc;
+  }
+
   .campsite-weather-temperatures {
     justify-content: center;
   }
@@ -174,7 +201,9 @@ export default {
   .campsite-weather-of-the-day-box {
     padding-left: 10px;
   }
+}
 
+@media only screen and (max-width: 320px) {
   .campsite-weather-of-the-day-purchase {
     max-width: 50%;
   }
