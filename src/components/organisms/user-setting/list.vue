@@ -75,6 +75,17 @@
           </span>
         </div>
       </v-ons-list-item>
+      <v-ons-list-item modifier="nodivider">
+        <div class="center">
+          <span class="list-item__title">
+            忘れ物注意の連絡
+            <v-ons-switch v-model="isReceivableItemsLestBehind" />
+          </span>
+          <span class="list-item__subtitle">
+            ※予定日当日に忘れ物がないかの確認通知
+          </span>
+        </div>
+      </v-ons-list-item>
 
       <v-ons-list-item v-show="isErrorPushPermisionVisible">
         <div class="center">
@@ -158,6 +169,15 @@ export default {
       },
       async set(newValue) {
         this.$store.dispatch('models/userSetting/setIsEnabledTemperatureDifference', newValue);
+        await this.updateUserSetting();
+      },
+    },
+    isReceivableItemsLestBehind: {
+      get() {
+        return this.userSetting && this.userSetting.isEnabledItemsLestBehind;
+      },
+      async set(newValue) {
+        this.$store.dispatch('models/userSetting/setIsEnabledItemsLestBehind', newValue);
         await this.updateUserSetting();
       },
     },

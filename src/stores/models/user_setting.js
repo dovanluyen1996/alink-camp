@@ -85,5 +85,11 @@ export default {
 
       context.commit('setUserSetting', userSetting);
     },
+    setIsEnabledItemsLestBehind(context, value) {
+      const userSetting = { ...context.state.userSetting };
+      userSetting.isEnabledItemsLestBehind = value;
+
+      context.commit('setUserSetting', userSetting);
+    },
   },
 };
