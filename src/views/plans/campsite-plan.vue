@@ -2,6 +2,7 @@
   <v-ons-page @show="show">
     <custom-toolbar title="計画一覧" />
     <div class="content">
+      <loading :visible="isLoading" />
       <v-ons-col class="text">
         <v-ons-row class="text__desc">
           {{ campsite.name }}
@@ -31,7 +32,7 @@
         @clickConfirm="goToPurchase"
       >
         <template #title>
-          新計画を追加できません
+          拡張機能
         </template>
         <template #message>
           プレミアムサービスにご登録いただくことで、予定を複数作成することができます。
@@ -95,22 +96,27 @@ export default {
       const newestPlan = this.pastPlans[0];
       return this.isPurchased ? this.pastPlans : [newestPlan];
     },
+    isLoading() {
+      return this.$store.getters['purchase/isLoading'];
+    },
   },
   async created() {
     await this.setIsPurchased();
   },
   methods: {
     goToAddPlan() {
-      if (!this.futurePlans.length) {
-        this.$store.dispatch('plansNavigator/push', {
-          extends: AddPlan,
-          onsNavigatorProps: {
-            campsite: this.campsite,
-          },
-        });
-      } else {
+      const isShowPremium = !this.isPurchased && this.futurePlans.length;
+      if (isShowPremium) {
         this.showErrorDialog();
+        return;
       }
+
+      this.$store.dispatch('plansNavigator/push', {
+        extends: AddPlan,
+        onsNavigatorProps: {
+          campsite: this.campsite,
+        },
+      });
     },
     showErrorDialog() {
       this.isErrorDialogVisible = true;
