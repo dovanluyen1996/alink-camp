@@ -8,15 +8,14 @@
         </v-ons-row>
       </div>
 
-      <!-- TODO: 持ち物共有は編集時のみ表示する -->
-      <v-ons-button
-        class="button--share"
-      >
-        持ち物共有
-      </v-ons-button>
-
       <div class="title-center">
-        天気予報
+        <span>天気予報</span>
+        <!-- TODO: 持ち物共有は編集時のみ表示する -->
+        <v-ons-button
+          class="button--share button--yellow"
+        >
+          持ち物共有
+        </v-ons-button>
       </div>
 
       <forecast-table />
@@ -37,7 +36,7 @@
       <content-with-footer>
         <template #footer>
           <v-ons-button
-            modifier="large--cta rounded"
+            modifier="large--cta yellow rounded"
             @click="showConfirmDialog"
           >
             登録
@@ -165,10 +164,18 @@ export default {
   }
 
   .title-center {
-    padding: 32px 0 0;
-    font-size: 18px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 43px;
+    margin: 10px;
+    margin-bottom: -10px;
+    font-size: 16px;
     font-weight: 600;
+    color: #000;
     text-align: center;
+    background-color: #eae5e5;
   }
 
   .content-with-footer {
@@ -181,7 +188,7 @@ export default {
 
   .content-with-footer__footer {
     position: fixed;
-    bottom: 0;
+    bottom: 0 !important;
     left: 100%;
 
     .button {
@@ -208,21 +215,20 @@ export default {
 
 .button--share {
   position: absolute;
-  right: 10px;
+  right: 7px;
   display: flex;
   align-items: center;
-  width: 120px;
-  height: 34px;
-  margin-top: 17px;
+  width: 109px;
+  height: 29px;
+  font-size: 14px;
   font-weight: 600;
-  color: 14px;
   background-color: $color-yellow;
   border-radius: 15px;
 
   &::before {
     display: inline-block;
-    width: 19px;
-    height: 22px;
+    width: 13px;
+    height: 15px;
     margin-right: 6px;
     content: '';
     background-image: url("~@/assets/images/icon-share.png");

@@ -1,11 +1,29 @@
 <template>
   <v-ons-page @show="show">
-    <custom-toolbar title="新規計画" />
+    <custom-toolbar title="新規計画">
+      <template #right>
+        <delete-dialog-with-icon
+          v-show="isShowIconDelete"
+          :is-shown.sync="isShownDeleteDialog"
+          @clickDelete="deletePlan"
+        >
+          このキャンプ計画または思い出を削除します。<br>
+          よろしいですか？
+        </delete-dialog-with-icon>
+      </template>
+    </custom-toolbar>
+
     <v-ons-tabbar
       position="top"
       :tabs="tabs"
       :visible="true"
       :index.sync="activeIndex"
+    />
+
+    <completed-dialog
+      :action="action"
+      :is-visible="completedDialogVisible"
+      @close="closeCompletedDialog"
     />
   </v-ons-page>
 </template>
@@ -14,13 +32,23 @@
 import DatePlan from '@/components/organisms/plan/add-plan/date-plan';
 import ListItemCamp from '@/components/organisms/plan/add-plan/list-item-camp/index';
 import DetailScheduleCamp from '@/components/organisms/plan/add-plan/detail-schedule-camp/index';
+import CompletedDialog from '@/components/organisms/dialog/completed-dialog';
+import DeleteDialogWithIcon from '@/components/organisms/dialog/delete-dialog-with-icon';
 
 export default {
   name: 'AddPlan',
+  components: {
+    DeleteDialogWithIcon,
+    CompletedDialog,
+  },
   props: {
     campsite: {
       type: Object,
       required: true,
+    },
+    isShowIconDelete: {
+      type: Boolean,
+      default: true,
     },
   },
   data() {
@@ -41,6 +69,10 @@ export default {
           page: DetailScheduleCamp,
         },
       ],
+      activeIndex: 0,
+      isShownDeleteDialog: false,
+      completedDialogVisible: false,
+      action: '',
     };
   },
   methods: {
@@ -53,6 +85,17 @@ export default {
     },
     async getItems() {
       await this.$store.dispatch('models/item/getItems');
+    },
+    showCompletedDialog(action) {
+      this.action = action;
+      this.completedDialogVisible = true;
+    },
+    closeCompletedDialog() {
+      this.completedDialogVisible = false;
+    },
+    deletePlan() {
+      this.isShownDeleteDialog = false;
+      this.showCompletedDialog('deletePlan');
     },
   },
 };
