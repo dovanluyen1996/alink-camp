@@ -65,7 +65,7 @@ export default {
       case 'createItem':
         return '登録しました。';
       case 'deletePlan':
-        return '予定日を削除しました。';
+        return '削除が完了しました。';
       case 'sendContact':
         return 'お問い合わせ内容を送信しました。';
       case 'deleteItem':
