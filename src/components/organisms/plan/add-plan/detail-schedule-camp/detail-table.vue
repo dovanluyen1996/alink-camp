@@ -53,14 +53,23 @@
             </td>
             <td>{{ precipitationText(getWeather(date, hour)) }}</td>
             <td>
-              <div class="wind-direction">
-                <template v-if="getWeather(date, hour)">
+              <div
+                v-if="getWeather(date, hour)"
+                class="wind-direction"
+              >
+                <template v-if="getWeather(date, hour).windDirection === '静穏'">
+                  静穏
+                </template>
+                <template v-else>
                   <div :class="['wind-speed', windSpeedRate(getWeather(date, hour).windSpeed)]" />
                   <span>{{ getWeather(date, hour).windSpeed }}</span>
                 </template>
-                <template v-else>
-                  --
-                </template>
+              </div>
+              <div
+                v-else
+                class="wind-direction"
+              >
+                --
               </div>
             </td>
             <td class="task">
