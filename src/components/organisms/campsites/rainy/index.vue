@@ -34,6 +34,8 @@ export default {
 <style scoped lang="scss">
   .rainy-tab {
     .rainy-wrapper {
+      display: flex;
+      justify-content: center;
       padding: 20px 10px 30px;
       margin-bottom: 30px;
       background-color: #fff;
