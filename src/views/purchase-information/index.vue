@@ -271,5 +271,11 @@ export default {
     background-color: #9f9a97;
     border-radius: 30px;
   }
+
+  .custom-toolbar-title {
+    display: flex;
+    justify-content: center;
+    white-space: nowrap;
+  }
 }
 </style>
