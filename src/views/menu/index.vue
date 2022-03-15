@@ -2,6 +2,7 @@
   <v-ons-page @show="show">
     <div class="background" />
 
+    <loading :visible="isLoading" />
     <div class="content">
       <v-ons-list>
         <v-ons-list-item
@@ -97,6 +98,11 @@ export default {
     return {
       isPurchased: false,
     };
+  },
+  computed: {
+    isLoading() {
+      return this.$store.getters['purchase/isLoading'];
+    },
   },
   methods: {
     goToPurchaseInformation() {
