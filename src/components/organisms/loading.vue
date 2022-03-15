@@ -30,7 +30,7 @@ export default {
 @import '@/assets/scss/onsen-override/base-layout/_variables.scss';
 
 .loading {
-  position: fixed;
+  position: absolute;
   top: $--toolbar-height;
   right: 0;
   bottom: 0;

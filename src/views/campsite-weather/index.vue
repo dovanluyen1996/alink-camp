@@ -4,8 +4,8 @@
       title="キャンプ天気"
       :disabled-back-button="true"
     />
+    <loading :visible="isLoading" />
     <div class="content">
-      <loading :visible="isLoading" />
       <no-data v-if="favoriteCampsites.length === 0 && futurePlans.length === 0">
         <p>
           まだお気に入りや予定日設定しているキャンプ場がありません。
