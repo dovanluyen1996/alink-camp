@@ -1,14 +1,25 @@
 <template>
   <div class="dress">
-    <div class="dress-title">
-      服装
+    <div v-if="isPurchased">
+      <div class="dress-title">
+        服装
+      </div>
+      <img
+        :src="image"
+        width="26px"
+      >
+      <div class="dress-label">
+        {{ forecast ? forecast.dressTelop : '' }}
+      </div>
     </div>
-    <img
-      :src="image"
-      width="26px"
-    >
-    <div class="dress-label">
-      {{ forecast ? forecast.dressTelop : '' }}
+    <div v-else>
+      <div class="dress-title dress-title--unpaid">
+        服装
+      </div>
+      <img
+        src="@/assets/images/weathers/dress/00.png"
+        width="26px"
+      >
     </div>
   </div>
 </template>
@@ -20,6 +31,10 @@ export default {
     forecast: {
       type: Object,
       required: true,
+    },
+    isPurchased: {
+      type: Boolean,
+      default: false,
     },
   },
   computed: {

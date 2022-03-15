@@ -10,10 +10,10 @@
         <div class="guidance-content__box">
           <img
             src="@/assets/images/guidances/location-service.png"
-            width="143px"
+            width="280px"
           >
         </div>
-        <p>
+        <p class="guidance-content__text">
           位置情報をONにすることで、最適なキャンプ場や周辺の施設のご案内を利用頂けます。
         </p>
 
@@ -103,12 +103,12 @@ export default {
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: 260px;
+    height: 280px;
     background-color: transparent;
+  }
 
-    img {
-      height: 114px;
-    }
+  &__text {
+    margin-top: 80px !important;
   }
 }
 </style>

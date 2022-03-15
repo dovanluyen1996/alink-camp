@@ -1,5 +1,7 @@
 <template>
   <v-ons-page>
+    <custom-toolbar title="プレミアムサービスのご案内" />
+
     <div class="content">
       <loading :visible="isLoading" />
       <content-with-footer>
@@ -99,9 +101,6 @@ import Greeting from '@/components/organisms/purchase-information/greeting';
 import PurchasePoint from '@/components/organisms/purchase-information/point';
 import UsingNote from '@/components/organisms/purchase-information/using-note';
 
-// pages
-import StartIndex from '@/views/start';
-
 export default {
   name: 'PurchaseInformation',
   components: {
@@ -133,22 +132,28 @@ export default {
         if (offerings.current !== null && offerings.current.availablePackages.length !== 0) {
           const availablePackage = offerings.current.monthly;
 
-          // eslint-disable-next-line no-unused-vars
-          Purchases.purchasePackage(availablePackage, ({ productIdentifier, purchaserInfo }) => {
-            if (Object.entries(purchaserInfo.entitlements.active).length > 0) {
-              this.purchaseComplete();
-            }
-            this.isLoading = false;
-          },
-          // eslint-disable-next-line no-unused-vars
-          ({ error, userCancelled }) => {
-            if (!userCancelled) {
-              this.checkPurchaseErrorVisible = true;
-              const RestorableErrorCode = 6;
-              this.errorMessage = error.code === RestorableErrorCode ? 'すでに購入済みのアプリです。課金情報を復元してください' : '';
-            }
-            this.isLoading = false;
-          });
+          Purchases.purchasePackage(
+            // eslint-disable-next-line no-unused-vars
+            availablePackage, async({ productIdentifier, purchaserInfo }) => {
+              if (Object.entries(purchaserInfo.entitlements.active).length > 0) {
+                // 課金の識別子をサーバへ送る
+                const params = { app_user_id: purchaserInfo.originalAppUserId };
+                await this.$store.dispatch('models/currentUser/updateUser', params);
+
+                this.purchaseComplete();
+              }
+              this.isLoading = false;
+            },
+            // eslint-disable-next-line no-unused-vars
+            ({ error, userCancelled }) => {
+              if (!userCancelled) {
+                this.checkPurchaseErrorVisible = true;
+                const RestorableErrorCode = 6;
+                this.errorMessage = error.code === RestorableErrorCode ? 'すでに購入済みのアプリです。課金情報を復元してください' : '';
+              }
+              this.isLoading = false;
+            },
+          );
         } else {
           this.isLoading = false;
         }
@@ -161,10 +166,14 @@ export default {
     restorePurchase() {
       this.isLoading = true;
       Purchases.restoreTransactions(
-        (restoredInfo) => {
+        async(restoredInfo) => {
           const entitlements = restoredInfo.entitlements.all;
           const targetEntitlement = entitlements[process.env.REVENUE_CAT_ENTITLEMENT_USE_APP];
           if (targetEntitlement.isActive) {
+            // 課金の識別子をサーバへ送る
+            const params = { app_user_id: restoredInfo.originalAppUserId };
+            await this.$store.dispatch('models/currentUser/updateUser', params);
+
             this.purchaseComplete();
           } else {
             this.checkPurchaseErrorVisible = true;
@@ -181,7 +190,7 @@ export default {
     },
 
     purchaseComplete() {
-      this.$store.dispatch('appNavigator/replace', StartIndex);
+      this.$store.dispatch('menuNavigator/pop');
     },
 
     closePurchaseError() {

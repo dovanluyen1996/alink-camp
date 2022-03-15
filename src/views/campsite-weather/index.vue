@@ -81,8 +81,9 @@ export default {
       const loadPlan = this.$store.getters['models/userCampsitePlan/isLoading'];
       const loadFavorite = this.$store.getters['models/usersFavorite/isLoading'];
       const loadWeather = this.$store.getters['models/weather/isLoading'];
+      const loadPurchase = this.$store.getters['purchase/isLoading'];
 
-      return loadPlan || loadFavorite || loadWeather;
+      return loadPlan || loadFavorite || loadWeather || loadPurchase;
     },
   },
   methods: {

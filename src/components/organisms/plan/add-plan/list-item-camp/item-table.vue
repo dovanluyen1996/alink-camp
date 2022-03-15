@@ -2,13 +2,15 @@
   <div class="items-table">
     <div class="items">
       <div class="items__title">
-        <div class="items__label items__label--plus"
-            @click="selectAll"
+        <div
+          class="items__label items__label--plus"
+          @click="selectAll"
         >
           全選択
         </div>
-        <div class="items__label items__label--minus"
-            @click="unSelectAll"
+        <div
+          class="items__label items__label--minus"
+          @click="unSelectAll"
         >
           全解除
         </div>

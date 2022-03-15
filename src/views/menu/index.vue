@@ -1,9 +1,17 @@
 <template>
-  <v-ons-page>
+  <v-ons-page @show="show">
     <div class="background" />
 
     <div class="content">
       <v-ons-list>
+        <v-ons-list-item
+          v-if="isPurchased"
+          modifier="nodivider chevron"
+          @click="goToPurchaseInformation"
+        >
+          プレミアムサービス
+        </v-ons-list-item>
+
         <v-ons-list-item
           modifier="nodivider chevron"
           @click="goToNotices"
@@ -73,6 +81,7 @@
 
 <script>
 // pages
+import PurchaseInformation from '@/views/purchase-information/index';
 import NoticesView from '@/views/notices/index';
 import GiftsView from '@/views/gifts/index';
 import UserSettingView from '@/views/user-setting/index';
@@ -84,7 +93,15 @@ import AboutSubscriptionView from '@/views/about-subscription/index';
 import ItemsView from '@/views/items/index';
 
 export default {
+  data() {
+    return {
+      isPurchased: false,
+    };
+  },
   methods: {
+    goToPurchaseInformation() {
+      this.$store.dispatch('menuNavigator/push', PurchaseInformation);
+    },
     goToNotices() {
       this.$store.dispatch('menuNavigator/push', NoticesView);
     },
@@ -112,6 +129,11 @@ export default {
     goToItems() {
       this.$store.dispatch('menuNavigator/push', ItemsView);
     },
+    async show() {
+      const isPurchased = await this.$store.dispatch('purchase/getIsPurchased');
+
+      this.isPurchased = isPurchased;
+    },
   },
 };
 </script>
@@ -129,17 +151,19 @@ export default {
 .list {
   width: 100%;
   max-height: 100%;
-  padding-left: 40px;
+  padding-left: 26px;
   overflow: auto;
   background: transparent;
 }
 
 .list-item {
+  padding-left: 0;
   font-weight: 600;
   color: #000;
 
   &--chevron::before,
   &__expand-chevron {
+    right: 26px !important;
     border-right-color: #000;
     border-bottom-color: #000;
   }

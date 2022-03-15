@@ -95,7 +95,7 @@ export default {
     },
     deletePlan() {
       this.isShownDeleteDialog = false;
-      this.showCompletedDialog('deleteItem');
+      this.showCompletedDialog('deletePlan');
     },
   },
 };

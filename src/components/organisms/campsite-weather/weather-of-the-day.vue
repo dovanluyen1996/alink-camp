@@ -28,17 +28,35 @@
           :sunset="forecast.sunset"
         />
       </v-ons-col>
+      <div
+        v-if="!isPurchased"
+        class="campsite-weather-of-the-day-purchase"
+      >
+        各種指数は、プレミアムプラン入会でご確認いただけます。
+      </div>
       <v-ons-col width="16%">
-        <campsite-weather-thunder-index :forecast="forecast.targetDate" />
+        <campsite-weather-thunder-index
+          :forecast="forecast.targetDate"
+          :is-purchased="isPurchased"
+        />
       </v-ons-col>
       <v-ons-col width="16%">
-        <campsite-weather-dress-index :forecast="forecast.targetDate" />
+        <campsite-weather-dress-index
+          :forecast="forecast.targetDate"
+          :is-purchased="isPurchased"
+        />
       </v-ons-col>
       <v-ons-col width="16%">
-        <campsite-weather-uv-index :forecast="forecast.targetDate" />
+        <campsite-weather-uv-index
+          :forecast="forecast.targetDate"
+          :is-purchased="isPurchased"
+        />
       </v-ons-col>
       <v-ons-col width="16%">
-        <campsite-weather-star-index :forecast="forecast.targetDate" />
+        <campsite-weather-star-index
+          :forecast="forecast.targetDate"
+          :is-purchased="isPurchased"
+        />
       </v-ons-col>
     </v-ons-row>
   </div>
@@ -73,10 +91,23 @@ export default {
       required: true,
     },
   },
+  data() {
+    return {
+      isPurchased: true,
+    };
+  },
   computed: {
     shortDate() {
       const targetDate = this.forecast.targetDate.date;
       return moment(targetDate).format('M/D');
+    },
+  },
+  async created() {
+    await this.setIsPurchased();
+  },
+  methods: {
+    async setIsPurchased() {
+      this.isPurchased = await this.$store.dispatch('purchase/getIsPurchased');
     },
   },
 };
@@ -98,6 +129,7 @@ export default {
 }
 
 .weather-indexes {
+  position: relative;
   flex-wrap: nowrap;
   padding: 5px 0;
   margin-top: 15px;
@@ -110,6 +142,22 @@ export default {
   flex-direction: column;
   align-items: center;
   padding-left: 30px;
+}
+
+.campsite-weather-of-the-day-purchase {
+  position: absolute;
+  top: 27px;
+  right: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 13px;
+  padding: 0 15px;
+  font-size: 7px;
+  font-weight: 600;
+  color: #f5f2f2;
+  background-color: $color-yellow;
+  border-radius: 22px;
 }
 
 /deep/ {
@@ -132,6 +180,13 @@ export default {
     color: #007540;
   }
 
+  .thunder-title--unpaid,
+  .dress-title--unpaid,
+  .uv-title--unpaid,
+  .star-title--unpaid {
+    color: #ccc;
+  }
+
   .campsite-weather-temperatures {
     justify-content: center;
   }
@@ -145,6 +200,19 @@ export default {
 @media only screen and (max-width: 375px) {
   .campsite-weather-of-the-day-box {
     padding-left: 10px;
+  }
+}
+
+@media only screen and (max-width: 320px) {
+  .campsite-weather-of-the-day-purchase {
+    max-width: 50%;
+  }
+}
+
+@media only screen and (min-width: 400px) {
+  .campsite-weather-of-the-day-purchase {
+    right: 5%;
+    min-width: 50%;
   }
 }
 </style>
