@@ -4,7 +4,7 @@
       ラベル一覧
     </template>
     <p class="label-list__text">
-      全てのラベルを表示したい場合は、チェックを全て解除または、全てをチェックしてください。
+      全ての持ち物を表示したい場合は、チェックを全て解除してください。
     </p>
     <div class="label-list__items">
       <div
