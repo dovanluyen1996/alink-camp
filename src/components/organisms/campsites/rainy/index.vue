@@ -36,7 +36,7 @@ export default {
     .rainy-wrapper {
       display: flex;
       justify-content: center;
-      padding: 20px 10px 30px;
+      padding: 20px 10px;
       margin-bottom: 30px;
       background-color: #fff;
     }
