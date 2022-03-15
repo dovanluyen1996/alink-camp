@@ -151,17 +151,19 @@ export default {
 .list {
   width: 100%;
   max-height: 100%;
-  padding-left: 40px;
+  padding-left: 26px;
   overflow: auto;
   background: transparent;
 }
 
 .list-item {
+  padding-left: 0;
   font-weight: 600;
   color: #000;
 
   &--chevron::before,
   &__expand-chevron {
+    right: 26px !important;
     border-right-color: #000;
     border-bottom-color: #000;
   }
