@@ -154,8 +154,8 @@ export default {
       const forecast14Days = await this.$store.dispatch('models/weather/getForecast14Days', { campsite_id: this.campsite.id });
       return forecast14Days;
     },
-    async setIsPurchased() {
-      this.isPurchased = await this.$store.dispatch('purchase/getIsPurchased');
+    setIsPurchased() {
+      this.isPurchased = this.$store.getters['purchase/isPurchased'];
     },
   },
 };

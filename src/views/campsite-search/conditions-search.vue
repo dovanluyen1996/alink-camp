@@ -93,8 +93,8 @@ export default {
     resetCardWithTab() {
       this.$store.commit('components/cardWithTab/resetSearchCampsiteActiveIndex');
     },
-    async setIsPurchased() {
-      this.isPurchased = await this.$store.dispatch('purchase/getIsPurchased');
+    setIsPurchased() {
+      this.isPurchased = this.$store.getters['purchase/isPurchased'];
     },
   },
 };

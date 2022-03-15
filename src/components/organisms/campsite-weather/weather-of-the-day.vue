@@ -106,8 +106,8 @@ export default {
     await this.setIsPurchased();
   },
   methods: {
-    async setIsPurchased() {
-      this.isPurchased = await this.$store.dispatch('purchase/getIsPurchased');
+    setIsPurchased() {
+      this.isPurchased = this.$store.getters['purchase/isPurchased'];
     },
   },
 };

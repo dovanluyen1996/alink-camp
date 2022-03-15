@@ -118,8 +118,8 @@ export default {
     openPage(url) {
       this.$helpers.openPageByUrl(url);
     },
-    async isPurchased() {
-      const hasPurchased = await this.$store.dispatch('purchase/getIsPurchased');
+    isPurchased() {
+      const hasPurchased = this.$store.getters['purchase/isPurchased'];
       return hasPurchased;
     },
   },

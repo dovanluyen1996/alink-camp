@@ -130,9 +130,7 @@ export default {
       this.$store.dispatch('menuNavigator/push', ItemsView);
     },
     async show() {
-      const isPurchased = await this.$store.dispatch('purchase/getIsPurchased');
-
-      this.isPurchased = isPurchased;
+      this.isPurchased = this.$store.getters['purchase/isPurchased'];
     },
   },
 };
