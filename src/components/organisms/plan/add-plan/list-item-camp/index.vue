@@ -67,7 +67,7 @@
       </template>
 
       <template #confirmAction>
-        OK
+        登録
       </template>
     </confirm-dialog>
 
