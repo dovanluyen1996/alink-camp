@@ -47,14 +47,23 @@
             />
           </td>
           <td>
-            <div class="wind-direction">
-              <template v-if="items[date]">
+            <div
+              v-if="items[date]"
+              class="wind-direction"
+            >
+              <template v-if="items[date].windSpeed === '' && items[date].windDirection === '静穏'">
+                静穏
+              </template>
+              <template v-else>
                 <div :class="['wind-speed', windSpeedRate(items[date].windSpeed)]" />
                 <span>{{ items[date].windSpeed }}</span>
               </template>
-              <template v-else>
-                --
-              </template>
+            </div>
+            <div
+              v-else
+              class="wind-direction"
+            >
+              --
             </div>
           </td>
         </tr>
