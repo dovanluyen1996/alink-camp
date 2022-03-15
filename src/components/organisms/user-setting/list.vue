@@ -17,7 +17,7 @@
         <div class="center">
           <span class="list-item__title">
             予定日の天気を毎日ご連絡
-            <v-ons-switch v-model="isReceivableWeatherForecast" />
+            <v-ons-switch v-model="isEnabledWeatherForecastNotification" />
           </span>
           <span class="list-item__subtitle">
             ※予定日14日前より定期的に該当キャンプ場の天気をご連絡します。
@@ -31,7 +31,7 @@
         <div class="center">
           <span class="list-item__title">
             雨雲の通知
-            <v-ons-switch v-model="isReceivableWarning" />
+            <v-ons-switch v-model="isEnabledWarningNotification" />
           </span>
           <span class="list-item__subtitle">
             ※予定日当日に該当コースに雨雲が近づいた場合に通知します
@@ -42,7 +42,7 @@
         <div class="center">
           <span class="list-item__title">
             落雷＆突風注意報
-            <v-ons-switch v-model="isReceivableThunder" />
+            <v-ons-switch v-model="isEnabledThunderNotification" />
           </span>
           <span class="list-item__subtitle">
             ※予定日当日に該当キャンプ場で落雷警報が出た場合にご連絡します
@@ -53,7 +53,7 @@
         <div class="center">
           <span class="list-item__title">
             予報が晴⇒雨になったら通知
-            <v-ons-switch v-model="isReceivableChangeRainy" />
+            <v-ons-switch v-model="isEnabledChangeRainyNotification" />
           </span>
           <span class="list-item__subtitle">
             ※予定日の天気や、設定しているタスクにおいて変化があった場合に通知
@@ -64,7 +64,7 @@
         <div class="center">
           <span class="list-item__title">
             日の出、日の入の通知
-            <v-ons-switch v-model="isReceivableSunriseSunset" />
+            <v-ons-switch v-model="isEnabledSunriseSunsetNotification" />
           </span>
           <span class="list-item__subtitle">
             ※日の出、日の入の30分前にお知らせする通知
@@ -75,7 +75,7 @@
         <div class="center">
           <span class="list-item__title">
             気温差通知
-            <v-ons-switch v-model="isReceivableTemperatureDifference" />
+            <v-ons-switch v-model="isEnabledTemperatureDifference" />
           </span>
           <span class="list-item__subtitle">
             ※予定日当日に昼から夜にかけて気温差が大きい場合に通知
@@ -86,7 +86,7 @@
         <div class="center">
           <span class="list-item__title">
             忘れ物注意の連絡
-            <v-ons-switch v-model="isReceivableItemsLestBehind" />
+            <v-ons-switch v-model="isEnabledItemsLestBehind" />
           </span>
           <span class="list-item__subtitle">
             ※予定日当日に忘れ物がないかの確認通知
@@ -117,7 +117,7 @@ export default {
     isLoading() {
       return this.$store.getters['models/userSetting/isLoading'];
     },
-    isReceivableWeatherForecast: {
+    isEnabledWeatherForecastNotification: {
       get() {
         return this.userSetting && this.userSetting.isEnabledWeatherForecastNotification;
       },
@@ -126,7 +126,7 @@ export default {
         await this.updateUserSetting();
       },
     },
-    isReceivableWarning: {
+    isEnabledWarningNotification: {
       get() {
         return this.userSetting && this.userSetting.isEnabledWarningNotification;
       },
@@ -135,7 +135,7 @@ export default {
         await this.updateUserSetting();
       },
     },
-    isReceivableThunder: {
+    isEnabledThunderNotification: {
       get() {
         return this.userSetting && this.userSetting.isEnabledThunderNotification;
       },
@@ -144,7 +144,7 @@ export default {
         await this.updateUserSetting();
       },
     },
-    isReceivableChangeRainy: {
+    isEnabledChangeRainyNotification: {
       get() {
         return this.userSetting && this.userSetting.isEnabledChangeRainyNotification;
       },
@@ -153,7 +153,7 @@ export default {
         await this.updateUserSetting();
       },
     },
-    isReceivableSunriseSunset: {
+    isEnabledSunriseSunsetNotification: {
       get() {
         return this.userSetting && this.userSetting.isEnabledSunriseSunsetNotification;
       },
@@ -162,7 +162,7 @@ export default {
         await this.updateUserSetting();
       },
     },
-    isReceivableTemperatureDifference: {
+    isEnabledTemperatureDifference: {
       get() {
         return this.userSetting && this.userSetting.isEnabledTemperatureDifference;
       },
@@ -171,7 +171,7 @@ export default {
         await this.updateUserSetting();
       },
     },
-    isReceivableItemsLestBehind: {
+    isEnabledItemsLestBehind: {
       get() {
         return this.userSetting && this.userSetting.isEnabledItemsLestBehind;
       },
