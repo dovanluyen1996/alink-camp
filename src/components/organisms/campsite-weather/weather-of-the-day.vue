@@ -32,7 +32,7 @@
         v-if="!isPurchased"
         class="campsite-weather-of-the-day-purchase"
       >
-        各種指数は、プレミアムプラン入会でご確認いただけます。
+        プレミアムプランでご利用可能
       </div>
       <v-ons-col width="16%">
         <campsite-weather-thunder-index
@@ -151,8 +151,8 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 60%;
   height: 13px;
-  padding: 0 15px;
   font-size: 7px;
   font-weight: 600;
   color: #f5f2f2;
@@ -200,19 +200,6 @@ export default {
 @media only screen and (max-width: 375px) {
   .campsite-weather-of-the-day-box {
     padding-left: 10px;
-  }
-}
-
-@media only screen and (max-width: 320px) {
-  .campsite-weather-of-the-day-purchase {
-    max-width: 50%;
-  }
-}
-
-@media only screen and (min-width: 400px) {
-  .campsite-weather-of-the-day-purchase {
-    right: 5%;
-    min-width: 50%;
   }
 }
 </style>
