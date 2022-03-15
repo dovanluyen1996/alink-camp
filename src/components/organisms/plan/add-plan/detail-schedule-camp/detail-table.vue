@@ -73,19 +73,18 @@
               </div>
             </td>
             <td class="task">
-              <div class="task__text">
-              </div>
+              <div class="task__text">{{ taskText(date, hour) }}</div>
               <img
                 v-if="isContentEmpty('')"
                 :src="require('@/assets/images/icon-more.png')"
                 class="task__icon"
-                @click="showPopup()"
+                @click="editTaskAt(date, hour)"
               >
               <img
                 v-else
                 :src="require('@/assets/images/icon-edit.png')"
                 class="task__icon"
-                @click="showPopup()"
+                @click="editTaskAt(date, hour)"
               >
             </td>
           </tr>
@@ -94,6 +93,9 @@
     </div>
     <edit-dialog-task
       :is-visible="updateDataVisible"
+      :tasks="tasks"
+      :targetAt="targetAt"
+      @update-tasks="updateTasks"
       @close="closePopup"
     />
   </div>
@@ -117,10 +119,15 @@ export default {
       type: Object,
       required: true,
     },
+    tasks: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {
       dateRange: [],
+      targetAt: '',
       hours: [...Array(24).keys()],
       updateDataVisible: false,
     };
@@ -160,6 +167,15 @@ export default {
     },
   },
   methods: {
+    taskText(date, hour) {
+      const targetAt = `${date} ${hour}:00`;
+      const task = this.tasks[targetAt] || '';
+
+      return task;
+    },
+    updateTasks(tasks) {
+      this.$emit('update-tasks', tasks);
+    },
     getWeather(date, hour) {
       if (!this.items[date]) return null;
       if (!this.items[date][hour]) return null;
@@ -188,8 +204,9 @@ export default {
         return 'wind-speed--danger';
       }
     },
-    showPopup() {
+    editTaskAt(date, hour) {
       this.updateDataVisible = true;
+      this.targetAt = `${date} ${hour}:00`;
     },
     closePopup() {
       this.updateDataVisible = false;

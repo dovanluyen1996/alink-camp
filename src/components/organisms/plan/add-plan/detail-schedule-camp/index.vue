@@ -9,6 +9,8 @@
 
       <detail-table
         :forecasts="forecasts"
+        :tasks="tasks"
+        @update-tasks="updateTasks"
       />
 
       <content-with-footer>
@@ -45,6 +47,7 @@ export default {
   },
   data() {
     return {
+      tasks: {},
       forecasts: {},
     };
   },
@@ -54,7 +57,17 @@ export default {
       required: true,
     },
   },
+  watch: {
+    async tasks() {
+      const tasksAt = Object.keys(this.tasks);
+      const params = tasksAt.map(at => ({ target_at: at, content: this.tasks[at] }));
+      await this.$store.dispatch('plan/setTasks', params);
+    },
+  },
   methods: {
+    updateTasks(tasks) {
+      this.tasks = { ...tasks };
+    },
     goToRegistration() {
       // TODO: Redirect to Registration
     },

@@ -3,7 +3,7 @@
     :visible.sync="isVisible"
     class="custom-edit-alert-dialog"
   >
-    <textarea class="textarea_dialog" />
+    <textarea v-model="task" class="textarea_dialog" />
     <template #footer>
       <v-ons-button
         modifier="yellow"
@@ -19,14 +19,32 @@
 <script>
 export default {
   props: {
+    tasks: {
+      type: Object,
+      default: () => {},
+    },
+    targetAt: {
+      type: String,
+      default: '',
+    },
     isVisible: {
       type: Boolean,
       default: false,
     },
   },
+  data() {
+    return {
+      task: '',
+    };
+  },
+  watch: {
+    isVisible() {
+      if (this.isVisible) this.task = this.tasks[this.targetAt] || '';
+    },
+  },
   methods: {
     closeTask() {
-      // TODO: キャンセル操作
+      this.$emit('update-tasks', { ...this.tasks, [this.targetAt]: this.task });
       this.$emit('close');
     },
   },
