@@ -59,6 +59,8 @@
 </template>
 
 <script>
+import moment from 'moment';
+
 // components
 import DetailTable from '@/components/organisms/plan/add-plan/detail-schedule-camp/detail-table';
 import ContentWithFooter from '@/components/organisms/content-with-footer';
@@ -94,10 +96,21 @@ export default {
     },
   },
   methods: {
+    inScheduleTasks() {
+      const params = this.$store.getters['plan/params'];
+      const { startedDate, finishedDate } = params;
+
+      if (startedDate === '' || finishedDate === '') return params.tasks;
+
+      const inSchedule = task => moment(task.target_at).isBetween(`${startedDate} 0:00`, `${finishedDate} 23:59`, null, '[]');
+
+      return params.tasks.filter(inSchedule);
+    },
     async createPlan() {
       this.confirmDialogVisible = false;
 
-      const params = this.$store.getters['plan/params'];
+      const params = { ...this.$store.getters['plan/params'] };
+      params.tasks = this.inScheduleTasks();
 
       await this.$store.dispatch('models/userCampsitePlan/createUserCampsitePlan', params);
 
