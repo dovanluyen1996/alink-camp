@@ -2,6 +2,7 @@
   <v-ons-page @show="show">
     <custom-toolbar title="キャンプ場検索" />
 
+    <loading :visible="isLoading" />
     <div class="content">
       <content-with-footer>
         <search-field
@@ -45,6 +46,9 @@ export default {
   computed: {
     viewedCampsites() {
       return this.$store.getters['campsite/viewedCampsites'] || [];
+    },
+    isLoading() {
+      return this.$store.getters['models/campsite/isLoading'];
     },
   },
   methods: {
