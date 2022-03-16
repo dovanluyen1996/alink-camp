@@ -14,50 +14,58 @@
         >
           全解除
         </div>
-        <div class="items__label items__label--red">
+        <div
+          class="items__label items__label--red"
+          @click="showLabelFilterDialog"
+        >
           ラベルソート
         </div>
-        <!-- TODO: Show ラベル一覧 when PR #90 was merged -->
       </div>
 
       <div
-        v-for="item in items"
+        v-for="item in filteredItems"
         :key="item"
-        :class="['items__list', {'items__list--active': item.user_id}]"
+        :class="['items__list', {'items__list--active': item.userId}]"
       >
-        <!-- TODO:
-      表示するラベル名は4文字まで表示する。5文字以降「…」（例: ああああ… ） -->
         <div class="items__list--content">
           <check-group-field
             :checked-values.sync="checkedItems"
             :checked-value="item.id"
-            :label="itemLabel(item.name, 7)"
+            :label="truncate(item.name, 7)"
             :disable="disable"
           />
         </div>
         <div class="items__list--label">
-          <div class="items__list--label-tick">
-            ラベルB
-          </div>
-          <div class="items__list--label-tick">
-            ラベルA
-          </div>
-          <div class="items__list--label-tick">
-            ラベルB
+          <div
+            v-for="label in item.labels"
+            :key="label.id"
+            class="items__list--label-tick"
+            :style="styles(label)"
+          >
+            <span class="items__list--label-tick__text">
+              {{ truncate(label.name, 4) }}
+            </span>
           </div>
         </div>
       </div>
     </div>
+
+    <label-filter-dialog
+      :checked-label-ids.sync="checkedLabelIds"
+      :is-visible-label-filter.sync="isVisibleLabelFilterDialog"
+    />
   </div>
 </template>
 
 <script>
 // components
 import CheckGroupField from '@/components/organisms/form/check-group-field';
+import LabelFilterDialog from '@/components/organisms/label-filter-dialog';
 
 export default {
   components: {
     CheckGroupField,
+    LabelFilterDialog,
   },
   props: {
     checkedItemIds: {
@@ -70,6 +78,18 @@ export default {
     },
   },
   computed: {
+    filteredItems() {
+      if (this.checkedLabelIds.length === 0) return this.items;
+
+      const isCheckedLabel = (item) => {
+        const labelIds = item.labels.map(label => label.id);
+        if (labelIds.length < this.checkedLabelIds.length) return false;
+
+        return this.checkedLabelIds.every(id => labelIds.includes(id));
+      };
+
+      return this.items.filter(isCheckedLabel);
+    },
     checkedItems: {
       get() {
         return this.checkedItemIds;
@@ -79,15 +99,29 @@ export default {
       },
     },
   },
+  data() {
+    return {
+      checkedLabelIds: [],
+      isVisibleLabelFilterDialog: false,
+    };
+  },
   methods: {
-    itemLabel(label, limit) {
-      return this.$helpers.truncate(label, limit);
+    truncate(value, limit) {
+      return this.$helpers.truncate(value, limit);
+    },
+    styles(label) {
+      return {
+        '--background-color': label.color,
+      };
     },
     selectAll() {
       this.$emit('update:checkedItemIds', this.items.map(item => item.id));
     },
     unSelectAll() {
       this.$emit('update:checkedItemIds', []);
+    },
+    showLabelFilterDialog() {
+      this.isVisibleLabelFilterDialog = true;
     },
   },
 };
@@ -198,8 +232,12 @@ export default {
 
     &--label-tick {
       padding: 5px 8px;
-      color: $color-white;
-      background-color: #4c7dae;
+      background-color: var(--background-color);
+
+      &__text {
+        color: var(--background-color);
+        filter: invert(100%) grayscale(100%) contrast(100);
+      }
     }
   }
 }
