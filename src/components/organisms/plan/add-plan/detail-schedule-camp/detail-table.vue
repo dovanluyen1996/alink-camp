@@ -75,7 +75,7 @@
             <td class="task">
               <div class="task__text">{{ taskText(date, hour) }}</div>
               <img
-                v-if="isContentEmpty('')"
+                v-if="isContentEmpty(taskText(date, hour))"
                 :src="require('@/assets/images/icon-more.png')"
                 class="task__icon"
                 @click="editTaskAt(date, hour)"
