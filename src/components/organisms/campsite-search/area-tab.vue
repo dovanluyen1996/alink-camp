@@ -143,10 +143,10 @@ export default {
       sunny: false,
       wind: false,
       uv: false,
-      isShowWeather: false,
-      isShowFacility: false,
-      isShowAnnotationWeather: true,
-      isShowAnnotationFacility: true,
+      isShowWeather: true,
+      isShowFacility: true,
+      isShowAnnotationWeather: false,
+      isShowAnnotationFacility: false,
     };
   },
   computed: {
