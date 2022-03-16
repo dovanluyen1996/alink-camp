@@ -48,7 +48,7 @@
         登録確認
       </template>
       <template #message>
-        新たに{{ itemName }}を作成します。<br>
+        新たに{{ params.name }}を作成します。<br>
         よろしいですか？
       </template>
       <template #confirmAction>
