@@ -5,7 +5,7 @@
     <div class="content">
       <v-ons-list>
         <v-ons-list-item
-          v-if="isPurchased"
+          v-if="!isPurchased"
           modifier="nodivider chevron"
           @click="goToPurchaseInformation"
         >
