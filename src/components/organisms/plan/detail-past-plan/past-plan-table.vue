@@ -1,8 +1,9 @@
 <template>
   <div class="table-detail">
-    <div class="card-detail"
+    <div
       v-for="(item, index) in weather"
       :key="index"
+      class="card-detail"
     >
       <v-ons-card class="course-weather-and-image">
         <v-ons-row class="course-weather-and-image-row">
@@ -33,9 +34,10 @@
             <th>気温</th>
             <th>タスク</th>
           </tr>
-          <tr class="detail-row"
+          <tr
             v-for="(detail, i) in item.details"
             :key="i"
+            class="detail-row"
           >
             <td class="target">
               {{ detail.targetAt }}
@@ -65,23 +67,26 @@
                 </span>
               </div>
               <img
-                  v-if="isContentEmpty(detail.content)"
-                  :src="require('@/assets/images/icon-more.png')"
-                  class="task__icon"
-                  @click="showPopup()"
-                >
-                <img
-                  v-else
-                  :src="require('@/assets/images/icon-edit.png')"
-                  class="task__icon"
-                  @click="showPopup()"
-                >
+                v-if="isContentEmpty(detail.content)"
+                :src="require('@/assets/images/icon-more.png')"
+                class="task__icon"
+                @click="showPopup()"
+              >
+              <img
+                v-else
+                :src="require('@/assets/images/icon-edit.png')"
+                class="task__icon"
+                @click="showPopup()"
+              >
             </td>
           </tr>
         </tbody>
       </table>
     </div>
-    <edit-dialog-task :isVisible="updateDataVisible" @close="closePopup" />
+    <edit-dialog-task
+      :is-visible="updateDataVisible"
+      @close="closePopup"
+    />
   </div>
 </template>
 

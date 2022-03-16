@@ -18,33 +18,52 @@
           </th>
         </tr>
         <tr
-          v-for="(item, index) in items"
+          v-for="(date, index) in dateRange"
           :key="index"
         >
           <td class="date-check">
             <span
-              :date-day="item.date"
-              :class="[saturdayCol(item.date), sundayCol(item.date)]"
-              v-html="displayDate(item.date)"
+              :date-day="date"
+              :class="[saturdayCol(date), sundayCol(date)]"
+              v-html="displayDate(date)"
             />
           </td>
           <td>
-            <img
-              :src="require('@/assets/images/weathers/weather/02.png')"
-              class="icon-weather"
-            >
+            <weather-image
+              :weather="items[date]"
+              image-width="35px"
+            />
           </td>
-          <td>{{ item.precipitation }}</td>
+          <td>{{ precipitationText(items[date]) }}</td>
           <td>
-            <span class="text-red">32°C </span>
+            <temperature
+              :value="items[date] ? items[date].maxTemp : ''"
+              class="text-red"
+            />
             &nbsp;/&nbsp;
-            <span class="text-blue">12°C</span>
+            <temperature
+              :value="items[date] ? items[date].minTemp : ''"
+              class="text-blue"
+            />
           </td>
           <td>
-            <div class="wind-direction">
-              <!-- // TODO: change class when do logic -->
-              <div class="wind-speed wind-speed--danger" />
-              <span>{{ item.wind }}</span>
+            <div
+              v-if="items[date]"
+              class="wind-direction"
+            >
+              <template v-if="items[date].windSpeed > 0">
+                <div :class="['wind-speed', windSpeedRate(items[date].windSpeed)]" />
+                <span>{{ items[date].windSpeed }}</span>
+              </template>
+              <template v-else>
+                {{ items[date].windDirection }}
+              </template>
+            </div>
+            <div
+              v-else
+              class="wind-direction"
+            >
+              --
             </div>
           </td>
         </tr>
@@ -54,31 +73,65 @@
 </template>
 
 <script>
+import WeatherImage from '@/components/atoms/weather-image';
+import Temperature from '@/components/atoms/temperature';
 
 export default {
   name: 'ForecastTableDate',
+  components: {
+    WeatherImage,
+    Temperature,
+  },
+  props: {
+    campsite: {
+      type: Object,
+      required: true,
+    },
+    forecasts: {
+      type: Object,
+      required: true,
+    },
+  },
   data() {
     return {
-      items: [
-        {
-          date: '12/31/2021',
-          precipitation: '0',
-          wind: '99',
-        },
-        {
-          date: '01/01/2022',
-          precipitation: '0',
-          wind: '99',
-        },
-        {
-          date: '01/02/2022',
-          precipitation: '0',
-          wind: '99',
-        },
-      ],
+      dateRange: [],
     };
   },
+  computed: {
+    params() {
+      return this.$store.getters['plan/params'];
+    },
+    startedDate() {
+      return this.params.startedDate;
+    },
+    finishedDate() {
+      return this.params.finishedDate;
+    },
+    items() {
+      if (!this.dateRange.length || !this.forecasts.items) return [];
+
+      const { items } = this.forecasts;
+      return items.reduce((acc, cur) => { acc[cur.date] = cur; return acc; }, {});
+    },
+  },
+  watch: {
+    async startedDate() {
+      this.dateRange = await this.getDateRange();
+    },
+    async finishedDate() {
+      this.dateRange = await this.getDateRange();
+    },
+  },
   methods: {
+    getDateRange() {
+      if (this.startedDate && this.finishedDate) {
+        return this.$helpers.getDateRange(this.startedDate, this.finishedDate);
+      }
+      if (this.startedDate) return [this.startedDate];
+      if (this.finishedDate) return [this.finishedDate];
+
+      return [];
+    },
     displayDate(date) {
       return this.$helpers.toShortStringWithZero(date);
     },
@@ -87,6 +140,20 @@ export default {
     },
     sundayCol(date) {
       return this.$helpers.isSunday(date) ? 'date-col__sunday' : '';
+    },
+    precipitationText(forecast) {
+      return this.$helpers.isEmpty(forecast) ? '--' : forecast.precip;
+    },
+    windSpeedRate(windSpeed) {
+      // Unit of measurement: m/s
+      switch (true) {
+      case (windSpeed < 2):
+        return 'wind-speed--normal';
+      case (windSpeed < 5):
+        return 'wind-speed--strong';
+      default:
+        return 'wind-speed--danger';
+      }
     },
   },
 };
@@ -150,11 +217,6 @@ $speed-degrees: 0, 22.5, 45, 67.5, 90, 112.5, 135, 157.5, 180,
       span {
         padding: 0 12px;
       }
-    }
-
-    .icon-weather {
-      width: 35px;
-      height: 21px;
     }
 
     .text-red {

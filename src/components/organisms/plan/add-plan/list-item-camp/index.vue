@@ -18,7 +18,10 @@
         </v-ons-button>
       </div>
 
-      <forecast-table />
+      <forecast-table
+        :campsite="campsite"
+        :forecasts="forecasts"
+      />
       <item-table
         v-if="items.length > 0"
         :checked-item-ids.sync="checkedItemIds"
@@ -105,6 +108,7 @@ export default {
       checkedItemIds: [],
       confirmDialogVisible: false,
       completedDialogVisible: false,
+      forecasts: {},
     };
   },
   computed: {
@@ -142,6 +146,19 @@ export default {
     async closeCompletedDialog() {
       this.completedDialogVisible = false;
       await this.$store.dispatch('plansNavigator/pop');
+    },
+    async getForecast14Days() {
+      const params = {
+        campsite_id: this.campsite.id,
+      };
+
+      const forecast14Days = await this.$store.dispatch('models/weather/getForecast14Days', params);
+      return forecast14Days;
+    },
+    async show() {
+      if (this.$helpers.isEmptyObject(this.forecasts)) {
+        this.forecasts = await this.getForecast14Days();
+      }
     },
   },
 };

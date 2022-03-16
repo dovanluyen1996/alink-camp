@@ -40,6 +40,7 @@ export default {
       return image || this.$helpers.getImage('weathers/weather/00.png');
     },
     alt() {
+      if (!this.weather) return null;
       return (this.isShownName) ? null : this.weather.forecastTelop;
     },
   },

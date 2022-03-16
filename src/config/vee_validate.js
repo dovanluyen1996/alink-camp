@@ -66,6 +66,17 @@ extend('required-one-year-later', (value) => {
   return `${moment().add(1, 'year').format('YYYY/MM/DD')}より前を指定してください`;
 });
 
+extend('required-bwtween-14days', (end, start) => {
+  if (!start[0]) return true;
+
+  const startDate = moment(start[0]);
+  if (end && moment(end).diff(startDate, 'days') <= 14) {
+    return true;
+  }
+
+  return '日付範囲を14日以内で指定してください';
+});
+
 extend('max', {
   ...max,
   message: '{_field_}は{length}文字以内で入力してください',

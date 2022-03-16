@@ -50,6 +50,10 @@ export default {
       type: Boolean,
       default: true,
     },
+    forecasts: {
+      type: Object,
+      default: () => {},
+    },
   },
   data() {
     return {
@@ -62,7 +66,9 @@ export default {
         {
           label: '持ち物',
           page: ListItemCamp,
-          props: { campsite: this.campsite },
+          props: {
+            campsite: this.campsite,
+          },
         },
         {
           label: '予定詳細',
@@ -74,6 +80,17 @@ export default {
       completedDialogVisible: false,
       action: '',
     };
+  },
+  computed: {
+    params() {
+      return this.$store.getters['plan/params'];
+    },
+    startedDate() {
+      return this.params.startedDate;
+    },
+    finishedDate() {
+      return this.params.finishedDate;
+    },
   },
   methods: {
     async show() {
