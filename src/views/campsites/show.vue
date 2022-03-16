@@ -20,8 +20,14 @@
         </div>
 
         <template #footer>
-          <v-ons-button modifier="cta rounded red">
-            <img class="mr-10" src="@/assets/images/red-cross.png">
+          <v-ons-button
+            modifier="cta rounded red"
+            @click="goToAddPlan"
+          >
+            <img
+              class="mr-10"
+              src="@/assets/images/red-cross.png"
+            >
             計画の追加
           </v-ons-button>
         </template>
@@ -43,6 +49,10 @@ import FavoriteCampsite from '@/components/organisms/campsites/favorite';
 import CampsiteForecastTab from '@/components/organisms/campsites/forecast-tab';
 import CampsiteRainyTab from '@/components/organisms/campsites/rainy';
 import CampsiteInformationTab from '@/components/organisms/campsites/information-tab';
+
+// pages
+import AddPlanIndexPage from '@/views/plans/index';
+import AddPlanPage from '@/views/plans/add-plan';
 
 export default {
   name: 'Campsitehow',
@@ -119,6 +129,23 @@ export default {
     },
     async getUsersFavorites() {
       await this.$store.dispatch('models/usersFavorite/getUsersFavorites');
+    },
+    goToAddPlan() {
+      this.$store.commit('plansNavigator/setEnableBusy', false);
+      this.$store.commit('appTabbar/setActiveIndex', settings.views.appTabbar.tabIndexes.plans);
+      this.$store.dispatch('plansNavigator/reset', AddPlanIndexPage);
+
+      this.$store.dispatch('plansNavigator/push', {
+        extends: AddPlanPage,
+        onsNavigatorProps: {
+          campsite: this.campsite,
+        },
+        onsNavigatorOptions: {
+          callback: () => {
+            this.$store.commit('plansNavigator/setEnableBusy', true);
+          },
+        },
+      });
     },
   },
 };
