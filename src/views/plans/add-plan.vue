@@ -73,6 +73,7 @@ export default {
         {
           label: '予定詳細',
           page: DetailScheduleCamp,
+          props: { campsite: this.campsite },
         },
       ],
       activeIndex: 0,
