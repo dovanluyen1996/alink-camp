@@ -49,6 +49,7 @@
 import TimePlan from '@/components/organisms/plan/time-plan';
 import AddPlan from '@/views/plans/add-plan';
 import ConfirmDialog from '@/components/organisms/dialog/confirm-dialog';
+import InformationPurchase from '@/views/purchase-information/index.vue';
 
 import moment from 'moment';
 
@@ -128,7 +129,7 @@ export default {
       this.isPurchased = await this.$store.dispatch('purchase/getIsPurchased');
     },
     goToPurchase() {
-      // TODO: Handle to purchase
+      this.$store.dispatch('plansNavigator/push', InformationPurchase);
 
       this.closeErrorDialog();
     },
