@@ -119,8 +119,7 @@ export default {
       this.$helpers.openPageByUrl(url);
     },
     isPurchased() {
-      const hasPurchased = this.$store.getters['purchase/isPurchased'];
-      return hasPurchased;
+      return this.$store.getters['purchase/isPurchased'];
     },
   },
 };
