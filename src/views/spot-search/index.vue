@@ -72,6 +72,7 @@ import CampsiteList from '@/components/organisms/campsite-list';
 
 // pages
 import SearchResult from '@/views/spot-search/search-result';
+import CampsiteSearchIndex from '@/views/campsite-search/index';
 
 import settings from '@/config/settings';
 
@@ -163,6 +164,17 @@ export default {
     },
     goToSearchCampsite() {
       // TODO: implement redirect to キャンプ場検索 when implement Logic
+      this.$store.commit('campsiteSearchNavigator/setEnableBusy', false);
+      this.$store.dispatch('campsiteSearchNavigator/reset', {
+        extends: CampsiteSearchIndex,
+        onsNavigatorOptions: {
+          callback: () => {
+            this.$store.commit('campsiteSearchNavigator/setEnableBusy', true);
+          },
+        },
+      });
+
+      this.$store.commit('appTabbar/setActiveIndexFromTabName', 'campsiteSearch');
     },
     async show() {
       this.$store.dispatch('appTabbar/setLastVisitedAt', this.$helpers.localDateWithHyphenFrom(new Date()));

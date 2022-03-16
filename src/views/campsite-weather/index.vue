@@ -43,6 +43,7 @@
 // components
 import NoData from '@/components/organisms/no-data';
 import CampsiteWeatherContent from '@/components/organisms/campsite-weather/content';
+import CampsiteSearchIndex from '@/views/campsite-search/index';
 
 export default {
   name: 'CampWeather',
@@ -94,6 +95,17 @@ export default {
     },
     goToCampsiteSearch() {
       // TODO: 検索ページのロジック実装時に、ページ遷移を実装する
+      this.$store.commit('campsiteSearchNavigator/setEnableBusy', false);
+      this.$store.dispatch('campsiteSearchNavigator/reset', {
+        extends: CampsiteSearchIndex,
+        onsNavigatorOptions: {
+          callback: () => {
+            this.$store.commit('campsiteSearchNavigator/setEnableBusy', true);
+          },
+        },
+      });
+
+      this.$store.commit('appTabbar/setActiveIndexFromTabName', 'campsiteSearch');
     },
   },
 };
