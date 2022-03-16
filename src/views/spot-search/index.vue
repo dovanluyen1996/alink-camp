@@ -163,7 +163,6 @@ export default {
         });
     },
     goToSearchCampsite() {
-      // TODO: implement redirect to キャンプ場検索 when implement Logic
       this.$store.commit('campsiteSearchNavigator/setEnableBusy', false);
       this.$store.dispatch('campsiteSearchNavigator/reset', {
         extends: CampsiteSearchIndex,
