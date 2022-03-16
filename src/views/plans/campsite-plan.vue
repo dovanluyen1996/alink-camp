@@ -1,8 +1,8 @@
 <template>
   <v-ons-page @show="show">
+    <loading :visible="isLoading" />
     <custom-toolbar title="計画一覧" />
     <div class="content">
-      <loading :visible="isLoading" />
       <v-ons-col class="text">
         <v-ons-row class="text__desc">
           {{ campsite.name }}
