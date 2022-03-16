@@ -17,7 +17,7 @@
         <template #footer>
           <v-ons-button
             modifier="large--cta yellow rounded"
-            @click="goToRegistration()"
+            @click="showConfirmDialog"
           >
             登録
           </v-ons-button>
@@ -25,13 +25,36 @@
           <v-ons-button
             modifier="large--cta rounded"
             class="button--search-day"
-            @click="goToDetailPlan()"
+            @click="goToListPlan"
           >
             過去の計画一覧
           </v-ons-button>
         </template>
       </content-with-footer>
     </div>
+
+    <confirm-dialog
+      :is-shown.sync="confirmDialogVisible"
+      @clickConfirm="createPlan"
+    >
+      <template #title>
+        登録確認
+      </template>
+
+      <template #message>
+        キャンプ計画を登録します。よろしいですか？
+      </template>
+
+      <template #confirmAction>
+        登録
+      </template>
+    </confirm-dialog>
+
+    <completed-dialog
+      action="createPlan"
+      :is-visible="completedDialogVisible"
+      @close="closeCompletedDialog"
+    />
   </v-ons-page>
 </template>
 
@@ -39,16 +62,22 @@
 // components
 import DetailTable from '@/components/organisms/plan/add-plan/detail-schedule-camp/detail-table';
 import ContentWithFooter from '@/components/organisms/content-with-footer';
+import ConfirmDialog from '@/components/organisms/dialog/confirm-dialog';
+import CompletedDialog from '@/components/organisms/dialog/completed-dialog';
 
 export default {
   components: {
     DetailTable,
     ContentWithFooter,
+    ConfirmDialog,
+    CompletedDialog,
   },
   data() {
     return {
       tasks: {},
       forecasts: {},
+      confirmDialogVisible: false,
+      completedDialogVisible: false,
     };
   },
   props: {
@@ -65,14 +94,30 @@ export default {
     },
   },
   methods: {
+    async createPlan() {
+      this.confirmDialogVisible = false;
+
+      const params = this.$store.getters['plan/params'];
+
+      await this.$store.dispatch('models/userCampsitePlan/createUserCampsitePlan', params);
+
+      this.showCompletedDialog();
+    },
+    async goToListPlan() {
+      await this.$store.dispatch('plansNavigator/pop');
+    },
+    showConfirmDialog() {
+      this.confirmDialogVisible = true;
+    },
+    showCompletedDialog() {
+      this.completedDialogVisible = true;
+    },
+    async closeCompletedDialog() {
+      this.completedDialogVisible = false;
+      await this.$store.dispatch('plansNavigator/pop');
+    },
     updateTasks(tasks) {
       this.tasks = { ...tasks };
-    },
-    goToRegistration() {
-      // TODO: Redirect to Registration
-    },
-    goToDetailPlan() {
-      // TODO: Redirect to Detail Plan
     },
     async getForecastHourly() {
       const params = {
