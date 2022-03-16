@@ -81,7 +81,6 @@ export default {
   data() {
     return {
       forecasts: [],
-      isPurchased: false,
     };
   },
   computed: {
@@ -124,7 +123,6 @@ export default {
     },
   },
   async created() {
-    await this.setIsPurchased();
     const forecast14Days = await this.getForecast14Days();
     this.forecasts = forecast14Days.items;
   },
@@ -154,8 +152,8 @@ export default {
       const forecast14Days = await this.$store.dispatch('models/weather/getForecast14Days', { campsite_id: this.campsite.id });
       return forecast14Days;
     },
-    setIsPurchased() {
-      this.isPurchased = this.$store.getters['purchase/isPurchased'];
+    isPurchased() {
+      return this.$store.getters['purchase/isPurchased'];
     },
   },
 };

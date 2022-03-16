@@ -56,7 +56,6 @@ export default {
           component: CampsiteSearchLocationTab,
         },
       ],
-      isPurchased: false,
     };
   },
   computed: {
@@ -73,7 +72,6 @@ export default {
   },
   async created() {
     this.resetCardWithTab();
-    await this.setIsPurchased();
   },
   methods: {
     show() {
@@ -93,8 +91,8 @@ export default {
     resetCardWithTab() {
       this.$store.commit('components/cardWithTab/resetSearchCampsiteActiveIndex');
     },
-    setIsPurchased() {
-      this.isPurchased = this.$store.getters['purchase/isPurchased'];
+    isPurchased() {
+      return this.$store.getters['purchase/isPurchased'];
     },
   },
 };
