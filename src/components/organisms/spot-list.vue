@@ -17,7 +17,7 @@
                   {{ spot.name }} ({{ Math.round(spot.distance) }}km)
                 </span>
               </div>
-              <span class="list-item__subtitle">{{ spot.address }}</span>
+              <span class="list-item__subtitle">{{ $helpers.spotAddress(spot) }}</span>
             </div>
             <div class="right">
               <slot name="right" />
