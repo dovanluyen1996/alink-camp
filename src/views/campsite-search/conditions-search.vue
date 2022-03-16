@@ -2,8 +2,8 @@
   <v-ons-page @show="show()">
     <custom-toolbar title="キャンプ場検索" />
 
+    <loading :visible="isLoading" />
     <div class="content">
-      <loading :visible="isLoading" />
       <content-with-footer>
         <card-with-tab
           ref="tabContents"
@@ -67,7 +67,8 @@ export default {
       return this.$store.state.components.cardWithTab.searchCampsiteActiveIndex;
     },
     isLoading() {
-      return this.$store.getters['purchase/isLoading'];
+      return this.$store.getters['purchase/isLoading']
+        || this.$store.getters['models/campsite/isLoading'];
     },
   },
   async created() {
