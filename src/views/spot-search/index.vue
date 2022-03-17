@@ -32,9 +32,8 @@
         class="spot-search__note"
       >
         <p>
-          まだお気に入りや予定日設定して <br>
-          いるキャンプ場がありません。キャンプ場検索 <br>
-          より、設定してください
+          まだお気に入りや予定日設定しているキャンプ場がありません。<br>
+          キャンプ場検索より設定してください。
         </p>
         <v-ons-button
           modifier="search"
@@ -216,13 +215,15 @@ export default {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 458px;
-    text-align: center;
+    padding: 15px 10px 20px;
+    text-align: left;
 
     & > p {
+      margin-top: 0;
       margin-bottom: 20px;
-      font-size: 18px;
-      font-weight: 600;
+      font-size: 16px;
+      font-weight: 300;
+      line-height: 27px;
       color: #000;
     }
   }
@@ -233,7 +234,7 @@ export default {
   align-items: center;
   justify-content: center;
   height: 36px;
-  margin: 50px 50px 25px;
+  margin: 50px 50px 15px;
   border-radius: 15px;
 
   &::before {
