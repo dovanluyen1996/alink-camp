@@ -53,7 +53,7 @@
         <campsite-search-conditions-fields
           v-if="isPurchased"
           :sunny.sync="sunny"
-          :temperature.sync="temperature"
+          :temperature.sync="max_temp"
           :wind.sync="wind"
           :uv.sync="uv"
           :date.sync="targetDate"
@@ -87,6 +87,7 @@
 
       <campsite-search-conditions-facility
         v-show="isShowFacility"
+        ref="facilityCondition"
       />
     </validation-observer>
 
@@ -139,7 +140,7 @@ export default {
       searchResultEmptyVisible: false,
       prefecture: -1,
       targetDate: '',
-      temperature: '',
+      max_temp: '',
       sunny: false,
       wind: false,
       uv: false,
@@ -177,13 +178,18 @@ export default {
 
           if (!valid) return;
 
-          const params = {
+          const areaParams = {
             prefecture_id: this.prefecture,
             target_date: this.targetDate,
-            temperature: this.temperature,
+            max_temp: this.max_temp,
             sunny: this.sunny ? 1 : 0,
             wind: this.wind ? 1 : 0,
             uv: this.uv ? 1 : 0,
+          };
+          const facilityParams = this.$refs.facilityCondition.searchParams();
+          const params = {
+            ...areaParams,
+            ...facilityParams,
           };
 
           await this.$store.dispatch('models/campsite/getCampsites', params);

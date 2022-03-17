@@ -2,9 +2,26 @@
   <v-ons-page :infinite-scroll="search">
     <custom-toolbar :title="title" />
     <div class="content">
-      <no-data v-if="campsites.length === 0">
-        条件に合うキャンプ場が見つかりません
-      </no-data>
+      <loading :visible="isLoading" />
+      <template v-if="campsites.length === 0">
+        <content-with-footer v-if="campsites.length === 0">
+          <no-data>
+            条件に合うキャンプ場が見つかりません
+          </no-data>
+          <template
+            v-if="isFiltered"
+            #footer
+          >
+            <v-ons-button
+              class="button--search"
+              modifier="large--cta rounded yellow"
+              @click="showFiltering()"
+            >
+              絞り込み
+            </v-ons-button>
+          </template>
+        </content-with-footer>
+      </template>
 
       <template v-else>
         <content-with-footer>
@@ -13,7 +30,10 @@
             :current-location="currentLocation"
             @click="goToCampsiteShow"
           />
-          <template #footer v-if="isConditionsChangeable()">
+          <template
+            v-if="isConditionsChangeable()"
+            #footer
+          >
             <v-ons-button
               class="button--search"
               modifier="large--cta rounded yellow"
@@ -22,8 +42,25 @@
               条件変更
             </v-ons-button>
           </template>
+          <template
+            v-else-if="isFilteringEnable()"
+            #footer
+          >
+            <v-ons-button
+              class="button--search"
+              modifier="large--cta rounded yellow"
+              @click="showFiltering()"
+            >
+              絞り込み
+            </v-ons-button>
+          </template>
         </content-with-footer>
       </template>
+
+      <campsite-list-filter-dialog
+        :is-visible-filtering.sync="isVisibleFilterDialog"
+        @filter="filter"
+      />
     </div>
   </v-ons-page>
 </template>
@@ -33,6 +70,7 @@
 import NoData from '@/components/organisms/no-data';
 import CampsiteList from '@/components/organisms/campsite-list';
 import ContentWithFooter from '@/components/organisms/content-with-footer';
+import CampsiteListFilterDialog from '@/components/organisms/campsite-search/filter-dialog.vue';
 
 // pages
 import CampsiteShow from '@/views/campsites/show';
@@ -43,6 +81,7 @@ export default {
     NoData,
     CampsiteList,
     ContentWithFooter,
+    CampsiteListFilterDialog,
   },
   props: {
     title: {
@@ -61,6 +100,9 @@ export default {
   data() {
     return {
       page: 2,
+      isVisibleFilterDialog: false,
+      isFiltered: false,
+      facilityFilterParams: {},
     };
   },
   computed: {
@@ -69,6 +111,9 @@ export default {
     },
     totalCount() {
       return this.$store.getters['models/campsite/totalCount'];
+    },
+    isLoading() {
+      return this.$store.state.models.campsite.isLoading;
     },
   },
   methods: {
@@ -90,10 +135,31 @@ export default {
         return;
       }
 
-      await this.$store.dispatch('models/campsite/getCampsites', this.searchParams())
+      const searchParams = {
+        ...this.facilityFilterParams,
+        ...this.searchParams(),
+      };
+
+      await this.$store.dispatch('models/campsite/getCampsites', searchParams)
         .then(() => {
           this.page += 1;
           if (done) done();
+        });
+    },
+    async filter(filterParams) {
+      this.$store.dispatch('models/campsite/resetCampsites');
+      this.page = 1;
+      this.isVisibleFilterDialog = false;
+      this.facilityFilterParams = { ...filterParams };
+
+      const searchParams = {
+        ...this.facilityFilterParams,
+        ...this.searchParams(),
+      };
+      await this.$store.dispatch('models/campsite/getCampsites', searchParams)
+        .then(() => {
+          this.page += 1;
+          this.isFiltered = true;
         });
     },
     searchByNameParams() {
@@ -106,7 +172,7 @@ export default {
       return {
         prefecture_id: this.searchConditions.prefecture,
         target_date: this.searchConditions.targetDate,
-        temperature: this.searchConditions.temperature,
+        max_temp: this.searchConditions.max_temp,
         sunny: this.searchConditions.sunny,
         wind: this.searchConditions.wind,
         uv: this.searchConditions.uv,
@@ -118,7 +184,7 @@ export default {
         lower_rad: this.searchConditions.lower_rad,
         upper_rad: this.searchConditions.upper_rad,
         target_date: this.searchConditions.targetDate,
-        temperature: this.searchConditions.temperature,
+        max_temp: this.searchConditions.max_temp,
         sunny: this.searchConditions.sunny,
         wind: this.searchConditions.wind,
         uv: this.searchConditions.uv,
@@ -144,6 +210,12 @@ export default {
       default:
         return this.searchByNameParams();
       }
+    },
+    isFilteringEnable() {
+      return !['area', 'location', 'prefecture'].includes(this.searchType());
+    },
+    showFiltering() {
+      this.isVisibleFilterDialog = true;
     },
     isConditionsChangeable() {
       return ['area', 'location'].includes(this.searchType());
