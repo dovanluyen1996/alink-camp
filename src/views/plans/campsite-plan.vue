@@ -29,7 +29,7 @@
       </v-ons-card>
 
       <confirm-dialog
-        :is-shown.sync="isErrorDialogVisible"
+        :is-shown.sync="isConfirmDialogVisible"
         @clickConfirm="goToPurchase"
       >
         <template #title>
@@ -68,7 +68,7 @@ export default {
   data() {
     return {
       isPurchased: false,
-      isErrorDialogVisible: false,
+      isConfirmDialogVisible: false,
     };
   },
   computed: {
@@ -109,7 +109,7 @@ export default {
     goToAddPlan() {
       const isShowPremium = !this.isPurchased && this.futurePlans.length;
       if (isShowPremium) {
-        this.showErrorDialog();
+        this.showConfirmDialog();
         return;
       }
 
@@ -120,11 +120,11 @@ export default {
         },
       });
     },
-    showErrorDialog() {
-      this.isErrorDialogVisible = true;
+    showConfirmDialog() {
+      this.isConfirmDialogVisible = true;
     },
-    closeErrorDialog() {
-      this.isErrorDialogVisible = false;
+    closeConfirmDialog() {
+      this.isConfirmDialogVisible = false;
     },
     async setIsPurchased() {
       this.isPurchased = await this.$store.dispatch('purchase/getIsPurchased');
@@ -132,7 +132,7 @@ export default {
     goToPurchase() {
       this.$store.dispatch('plansNavigator/push', InformationPurchase);
 
-      this.closeErrorDialog();
+      this.closeConfirmDialog();
     },
   },
 };
