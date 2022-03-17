@@ -15,6 +15,7 @@ export default {
     all: state => state.campsites.campsites,
     size: state => state.campsites.campsites.length,
     totalCount: state => state.campsites.totalCount,
+    isLoading: state => state.isLoading,
   },
   mutations: {
     setCampsites(state, campsites) {
