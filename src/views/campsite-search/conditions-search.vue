@@ -65,6 +65,9 @@ export default {
     activeIndexTab() {
       return this.$store.state.components.cardWithTab.searchCampsiteActiveIndex;
     },
+    isPurchased() {
+      return this.$store.getters['purchase/isPurchased'];
+    },
     isLoading() {
       return this.$store.getters['purchase/isLoading']
         || this.$store.getters['models/campsite/isLoading'];
@@ -90,9 +93,6 @@ export default {
     },
     resetCardWithTab() {
       this.$store.commit('components/cardWithTab/resetSearchCampsiteActiveIndex');
-    },
-    isPurchased() {
-      return this.$store.getters['purchase/isPurchased'];
     },
   },
 };

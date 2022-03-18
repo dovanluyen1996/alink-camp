@@ -47,7 +47,7 @@ export default {
     ProbPrecipChart,
     AnnualWeatherChart,
   },
-  methods: {
+  computed: {
     isPurchased() {
       return this.$store.getters['purchase/isPurchased'];
     },

@@ -96,8 +96,6 @@ export default {
       const targetDate = this.forecast.targetDate.date;
       return moment(targetDate).format('M/D');
     },
-  },
-  methods: {
     isPurchased() {
       return this.$store.getters['purchase/isPurchased'];
     },

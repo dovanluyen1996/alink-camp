@@ -115,6 +115,9 @@ export default {
     stars() {
       return this.forecasts ? this.forecasts.map(item => item.starImageName) : [];
     },
+    isPurchased() {
+      return this.$store.getters['purchase/isPurchased'];
+    },
   },
   watch: {
     async campsite() {
@@ -151,9 +154,6 @@ export default {
 
       const forecast14Days = await this.$store.dispatch('models/weather/getForecast14Days', { campsite_id: this.campsite.id });
       return forecast14Days;
-    },
-    isPurchased() {
-      return this.$store.getters['purchase/isPurchased'];
     },
   },
 };

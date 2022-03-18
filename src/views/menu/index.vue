@@ -1,5 +1,5 @@
 <template>
-  <v-ons-page @show="show">
+  <v-ons-page>
     <div class="background" />
 
     <div class="content">
@@ -93,10 +93,10 @@ import AboutSubscriptionView from '@/views/about-subscription/index';
 import ItemsView from '@/views/items/index';
 
 export default {
-  data() {
-    return {
-      isPurchased: false,
-    };
+  computed: {
+    isPurchased() {
+      return this.$store.getters['purchase/isPurchased'];
+    },
   },
   methods: {
     goToPurchaseInformation() {
@@ -128,9 +128,6 @@ export default {
     },
     goToItems() {
       this.$store.dispatch('menuNavigator/push', ItemsView);
-    },
-    async show() {
-      this.isPurchased = this.$store.getters['purchase/isPurchased'];
     },
   },
 };
