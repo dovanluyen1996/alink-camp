@@ -6,17 +6,24 @@
 
     <loading :visible="isLoading" />
     <v-ons-list modifier="noborder">
+      <v-ons-list-item modifier="nodivider" v-show="isErrorPushPermisionVisible">
+        <div class="center">
+          <span class="list-item__alert">
+            PUSH通知の許可がされていません。スマートフォンの設定からキャンプ天気を選択し、通知を許可してください。
+          </span>
+        </div>
+      </v-ons-list-item>
       <v-ons-list-item modifier="nodivider">
         <div class="center">
           <span class="list-item__title">
-            天気の通知
-            <v-ons-switch v-model="isReceivableWeatherForecast" />
+            予定日の天気を毎日ご連絡
+            <v-ons-switch v-model="isEnabledWeatherForecastNotification" />
           </span>
           <span class="list-item__subtitle">
-            ※予定日3日前より定期的に該当コースの天気を通知します
+            ※予定日14日前より定期的に該当キャンプ場の天気をご連絡します。
           </span>
           <span class="list-item__subtitle">
-            ※急な変化の際のキャンセルの判断にご利用ください
+            ※キャンセルの判断にご利用ください
           </span>
         </div>
       </v-ons-list-item>
@@ -24,18 +31,65 @@
         <div class="center">
           <span class="list-item__title">
             雨雲の通知
-            <v-ons-switch v-model="isReceivableWarning" />
+            <v-ons-switch v-model="isEnabledWarningNotification" />
           </span>
           <span class="list-item__subtitle">
             ※予定日当日に該当コースに雨雲が近づいた場合に通知します
           </span>
         </div>
       </v-ons-list-item>
-
-      <v-ons-list-item v-show="isErrorPushPermisionVisible">
+      <v-ons-list-item modifier="nodivider">
         <div class="center">
-          <span class="list-item__alert">
-            PUSH通知の許可がされていません。スマートフォンの設定からゴルフ天気を選択し、通知を許可してください
+          <span class="list-item__title">
+            落雷＆突風注意報
+            <v-ons-switch v-model="isEnabledThunderNotification" />
+          </span>
+          <span class="list-item__subtitle">
+            ※予定日当日に該当キャンプ場で落雷警報が出た場合にご連絡します
+          </span>
+        </div>
+      </v-ons-list-item>
+      <v-ons-list-item modifier="nodivider">
+        <div class="center">
+          <span class="list-item__title">
+            予報が晴⇒雨になったら通知
+            <v-ons-switch v-model="isEnabledChangeRainyNotification" />
+          </span>
+          <span class="list-item__subtitle">
+            ※予定日の天気や、設定しているタスクにおいて変化があった場合に通知
+          </span>
+        </div>
+      </v-ons-list-item>
+      <v-ons-list-item modifier="nodivider">
+        <div class="center">
+          <span class="list-item__title">
+            日の出、日の入の通知
+            <v-ons-switch v-model="isEnabledSunriseSunsetNotification" />
+          </span>
+          <span class="list-item__subtitle">
+            ※日の出、日の入の30分前にお知らせする通知
+          </span>
+        </div>
+      </v-ons-list-item>
+      <v-ons-list-item modifier="nodivider">
+        <div class="center">
+          <span class="list-item__title">
+            気温差通知
+            <v-ons-switch v-model="isEnabledTemperatureDifference" />
+          </span>
+          <span class="list-item__subtitle">
+            ※予定日当日に昼から夜にかけて気温差が大きい場合に通知
+          </span>
+        </div>
+      </v-ons-list-item>
+      <v-ons-list-item modifier="nodivider">
+        <div class="center">
+          <span class="list-item__title">
+            忘れ物注意の連絡
+            <v-ons-switch v-model="isEnabledItemsLestBehind" />
+          </span>
+          <span class="list-item__subtitle">
+            ※予定日当日に忘れ物がないかの確認通知
           </span>
         </div>
       </v-ons-list-item>
@@ -63,21 +117,66 @@ export default {
     isLoading() {
       return this.$store.getters['models/userSetting/isLoading'];
     },
-    isReceivableWeatherForecast: {
+    isEnabledWeatherForecastNotification: {
       get() {
-        return this.userSetting && this.userSetting.isReceivableWeatherForecast;
+        return this.userSetting && this.userSetting.isEnabledWeatherForecastNotification;
       },
       async set(newValue) {
-        this.$store.dispatch('models/userSetting/setIsReceivableWeatherForecast', newValue);
+        this.$store.dispatch('models/userSetting/setIsEnabledWeatherForecastNotification', newValue);
         await this.updateUserSetting();
       },
     },
-    isReceivableWarning: {
+    isEnabledWarningNotification: {
       get() {
-        return this.userSetting && this.userSetting.isReceivableWarning;
+        return this.userSetting && this.userSetting.isEnabledWarningNotification;
       },
       async set(newValue) {
-        this.$store.dispatch('models/userSetting/setIsReceivableWarning', newValue);
+        this.$store.dispatch('models/userSetting/setIsEnabledWarningNotification', newValue);
+        await this.updateUserSetting();
+      },
+    },
+    isEnabledThunderNotification: {
+      get() {
+        return this.userSetting && this.userSetting.isEnabledThunderNotification;
+      },
+      async set(newValue) {
+        this.$store.dispatch('models/userSetting/setIsEnabledThunderNotification', newValue);
+        await this.updateUserSetting();
+      },
+    },
+    isEnabledChangeRainyNotification: {
+      get() {
+        return this.userSetting && this.userSetting.isEnabledChangeRainyNotification;
+      },
+      async set(newValue) {
+        this.$store.dispatch('models/userSetting/setIsEnabledChangeRainyNotification', newValue);
+        await this.updateUserSetting();
+      },
+    },
+    isEnabledSunriseSunsetNotification: {
+      get() {
+        return this.userSetting && this.userSetting.isEnabledSunriseSunsetNotification;
+      },
+      async set(newValue) {
+        this.$store.dispatch('models/userSetting/setIsEnabledSunriseSunsetNotification', newValue);
+        await this.updateUserSetting();
+      },
+    },
+    isEnabledTemperatureDifference: {
+      get() {
+        return this.userSetting && this.userSetting.isEnabledTemperatureDifference;
+      },
+      async set(newValue) {
+        this.$store.dispatch('models/userSetting/setIsEnabledTemperatureDifference', newValue);
+        await this.updateUserSetting();
+      },
+    },
+    isEnabledItemsLestBehind: {
+      get() {
+        return this.userSetting && this.userSetting.isEnabledItemsLestBehind;
+      },
+      async set(newValue) {
+        this.$store.dispatch('models/userSetting/setIsEnabledItemsLestBehind', newValue);
         await this.updateUserSetting();
       },
     },
