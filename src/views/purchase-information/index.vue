@@ -2,8 +2,8 @@
   <v-ons-page>
     <custom-toolbar title="プレミアムサービスのご案内" />
 
+    <loading :visible="isLoading" />
     <div class="content">
-      <loading :visible="isLoading" />
       <content-with-footer>
         <greeting />
 
