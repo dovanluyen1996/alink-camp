@@ -137,6 +137,10 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.prob-precip-chart-container {
+  margin-bottom: 5px;
+}
+
 .no-forecast {
   display: flex;
   align-items: center;
