@@ -30,6 +30,20 @@ export default {
     setItemIds(state, itemIds) {
       Vue.set(state.params, 'itemIds', itemIds);
     },
+    setTasks(state, tasks) {
+      Vue.set(state.params, 'tasks', tasks);
+    },
+    resetPlan(state) {
+      const params = {
+        campsiteId: null,
+        startedDate: '',
+        finishedDate: '',
+        itemIds: [],
+        tasks: [],
+      };
+
+      Vue.set(state, 'params', params);
+    },
   },
   actions: {
     setCampsiteId(context, campsiteId) {
@@ -43,6 +57,12 @@ export default {
     },
     setItemIds(context, itemIds) {
       context.commit('setItemIds', itemIds);
+    },
+    setTasks(context, tasks) {
+      context.commit('setTasks', tasks);
+    },
+    resetPlan(context) {
+      context.commit('resetPlan');
     },
   },
 };

@@ -9,13 +9,15 @@
 
       <detail-table
         :forecasts="forecasts"
+        :tasks="tasks"
+        @update-tasks="updateTasks"
       />
 
       <content-with-footer>
         <template #footer>
           <v-ons-button
             modifier="large--cta yellow rounded"
-            @click="goToRegistration()"
+            @click="showConfirmDialog"
           >
             登録
           </v-ons-button>
@@ -23,29 +25,61 @@
           <v-ons-button
             modifier="large--cta rounded"
             class="button--search-day"
-            @click="goToDetailPlan()"
+            @click="goToListPlan"
           >
             過去の計画一覧
           </v-ons-button>
         </template>
       </content-with-footer>
     </div>
+
+    <confirm-dialog
+      :is-shown.sync="confirmDialogVisible"
+      @clickConfirm="createPlan"
+    >
+      <template #title>
+        登録確認
+      </template>
+
+      <template #message>
+        キャンプ計画を登録します。よろしいですか？
+      </template>
+
+      <template #confirmAction>
+        登録
+      </template>
+    </confirm-dialog>
+
+    <completed-dialog
+      action="createPlan"
+      :is-visible="completedDialogVisible"
+      @close="closeCompletedDialog"
+    />
   </v-ons-page>
 </template>
 
 <script>
+import moment from 'moment';
+
 // components
 import DetailTable from '@/components/organisms/plan/add-plan/detail-schedule-camp/detail-table';
 import ContentWithFooter from '@/components/organisms/content-with-footer';
+import ConfirmDialog from '@/components/organisms/dialog/confirm-dialog';
+import CompletedDialog from '@/components/organisms/dialog/completed-dialog';
 
 export default {
   components: {
     DetailTable,
     ContentWithFooter,
+    ConfirmDialog,
+    CompletedDialog,
   },
   data() {
     return {
+      tasks: {},
       forecasts: {},
+      confirmDialogVisible: false,
+      completedDialogVisible: false,
     };
   },
   props: {
@@ -54,12 +88,49 @@ export default {
       required: true,
     },
   },
-  methods: {
-    goToRegistration() {
-      // TODO: Redirect to Registration
+  watch: {
+    async tasks() {
+      const tasksAt = Object.keys(this.tasks);
+      const params = tasksAt.map(at => ({ target_at: at, content: this.tasks[at] }));
+      await this.$store.dispatch('plan/setTasks', params);
     },
-    goToDetailPlan() {
-      // TODO: Redirect to Detail Plan
+  },
+  methods: {
+    inScheduleTasks() {
+      const params = this.$store.getters['plan/params'];
+      const { startedDate, finishedDate } = params;
+
+      if (startedDate === '' || finishedDate === '') return params.tasks;
+
+      const inSchedule = task => moment(task.target_at).isBetween(`${startedDate} 0:00`, `${finishedDate} 23:59`, null, '[]');
+
+      return params.tasks.filter(inSchedule);
+    },
+    async createPlan() {
+      this.confirmDialogVisible = false;
+
+      const params = { ...this.$store.getters['plan/params'] };
+      params.tasks = this.inScheduleTasks();
+
+      await this.$store.dispatch('models/userCampsitePlan/createUserCampsitePlan', params);
+
+      this.showCompletedDialog();
+    },
+    async goToListPlan() {
+      await this.$store.dispatch('plansNavigator/pop');
+    },
+    showConfirmDialog() {
+      this.confirmDialogVisible = true;
+    },
+    showCompletedDialog() {
+      this.completedDialogVisible = true;
+    },
+    async closeCompletedDialog() {
+      this.completedDialogVisible = false;
+      await this.$store.dispatch('plansNavigator/pop');
+    },
+    updateTasks(tasks) {
+      this.tasks = { ...tasks };
     },
     async getForecastHourly() {
       const params = {

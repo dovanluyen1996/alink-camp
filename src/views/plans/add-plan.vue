@@ -95,8 +95,12 @@ export default {
   },
   methods: {
     async show() {
+      await this.resetPlan();
       await this.setCampsiteId();
       await this.getItems();
+    },
+    async resetPlan() {
+      await this.$store.dispatch('plan/resetPlan');
     },
     async setCampsiteId() {
       await this.$store.dispatch('plan/setCampsiteId', this.campsite.id);
