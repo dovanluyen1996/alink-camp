@@ -91,7 +91,7 @@ export default {
       return this.$store.state.components.cardWithTab.showCampsiteActiveIndex;
     },
     isLoading() {
-      return this.$store.getters['campsite/isLoading'] || this.$store.getters['models/usersFavorite/isLoading'] || this.$store.getters['purchase/isLoading'];
+      return this.$store.getters['campsite/isLoading'] || this.$store.getters['models/usersFavorite/isLoading'];
     },
   },
   watch: {

@@ -69,8 +69,7 @@ export default {
       return this.$store.getters['purchase/isPurchased'];
     },
     isLoading() {
-      return this.$store.getters['purchase/isLoading']
-        || this.$store.getters['models/campsite/isLoading'];
+      return this.$store.getters['models/campsite/isLoading'];
     },
   },
   async created() {
