@@ -34,17 +34,22 @@ export default {
   },
   data() {
     return {
-      task: '',
+      newTask: '',
     };
   },
-  watch: {
-    isVisible() {
-      if (this.isVisible) this.task = this.tasks[this.targetAt] || '';
+  computed: {
+    task: {
+      get() {
+        return this.tasks[this.targetAt];
+      },
+      set(task) {
+        this.newTask = task;
+      },
     },
   },
   methods: {
     closeTask() {
-      this.$emit('update-tasks', { ...this.tasks, [this.targetAt]: this.task });
+      this.$emit('update-tasks', { ...this.tasks, [this.targetAt]: this.newTask });
       this.$emit('close');
     },
   },
