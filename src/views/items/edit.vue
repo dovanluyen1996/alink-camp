@@ -63,7 +63,7 @@
         アイテム情報を編集します。よろしいですか？
       </template>
       <template #confirmAction>
-        編集
+        OK
       </template>
     </confirm-dialog>
 
