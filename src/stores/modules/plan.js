@@ -1,10 +1,12 @@
 import Vue from 'vue';
+import moment from 'moment';
 
 export default {
   strict: true,
   namespaced: true,
   state: {
     params: {
+      planId: null,
       campsiteId: null,
       startedDate: '',
       finishedDate: '',
@@ -16,8 +18,32 @@ export default {
   getters: {
     params: state => state.params,
     isLoading: state => state.isLoading,
+    isNew: state => state.params.planId === null,
+    dateRange: (state) => {
+      const { startedDate, finishedDate } = state.params;
+      if (startedDate && finishedDate) {
+        return Vue.prototype.$helpers.getDateRange(startedDate, finishedDate);
+      }
+      if (startedDate) return [startedDate];
+      if (finishedDate) return [finishedDate];
+      return [];
+    },
+    inScheduleTasks: (state, getters) => {
+      const dateRange = [...getters.dateRange];
+      const startedDate = dateRange[0];
+      const finishedDate = dateRange[dateRange.length - 1];
+      const inSchedule = task => moment(task.targetAt).isBetween(`${startedDate} 0:00`, `${finishedDate} 23:59`, null, '[]');
+
+      return state.params.tasks.filter(inSchedule);
+    },
   },
   mutations: {
+    setIsLoading(state, isLoading) {
+      state.isLoading = isLoading;
+    },
+    setPlanId(state, planId) {
+      Vue.set(state.params, 'planId', planId);
+    },
     setCampsiteId(state, campsiteId) {
       Vue.set(state.params, 'campsiteId', campsiteId);
     },
@@ -33,8 +59,9 @@ export default {
     setTasks(state, tasks) {
       Vue.set(state.params, 'tasks', tasks);
     },
-    resetPlan(state) {
+    clean(state) {
       const params = {
+        planId: null,
         campsiteId: null,
         startedDate: '',
         finishedDate: '',
@@ -46,6 +73,9 @@ export default {
     },
   },
   actions: {
+    setPlanId(context, planId) {
+      context.commit('setPlanId', planId);
+    },
     setCampsiteId(context, campsiteId) {
       context.commit('setCampsiteId', campsiteId);
     },
@@ -58,11 +88,48 @@ export default {
     setItemIds(context, itemIds) {
       context.commit('setItemIds', itemIds);
     },
+    setItems(context, items) {
+      const itemIds = items.map(item => item.id);
+      context.commit('setItemIds', itemIds);
+    },
     setTasks(context, tasks) {
       context.commit('setTasks', tasks);
     },
-    resetPlan(context) {
-      context.commit('resetPlan');
+    clean(context) {
+      context.commit('clean');
+    },
+    createPlan({ commit, dispatch, getters }) {
+      commit('setIsLoading', true);
+
+      const params = { ...getters.params };
+      params.tasks = getters.inScheduleTasks;
+
+      try {
+        dispatch('models/userCampsitePlan/createUserCampsitePlan', params, { root: true });
+      } catch (error) {
+        commit('api/setError', error, { root: true });
+        throw error;
+      } finally {
+        commit('setIsLoading', false);
+      }
+    },
+    updatePlan({ commit, dispatch, getters }) {
+      commit('setIsLoading', true);
+
+      const params = { ...getters.params };
+      params.tasks = getters.inScheduleTasks;
+
+      try {
+        dispatch('models/userCampsitePlan/updateUserCampsitePlan', {
+          userCampsitePlanId: params.planId,
+          params,
+        }, { root: true });
+      } catch (error) {
+        commit('api/setError', error, { root: true });
+        throw error;
+      } finally {
+        commit('setIsLoading', false);
+      }
     },
   },
 };

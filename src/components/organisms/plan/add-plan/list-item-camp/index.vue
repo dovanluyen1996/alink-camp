@@ -58,7 +58,7 @@
 
     <confirm-dialog
       :is-shown.sync="confirmDialogVisible"
-      @clickConfirm="createPlan"
+      @clickConfirm="submit"
     >
       <template #title>
         登録確認
@@ -82,8 +82,6 @@
 </template>
 
 <script>
-import moment from 'moment';
-
 // components
 import ItemTable from '@/components/organisms/plan/add-plan/list-item-camp/item-table';
 import ForecastTable from '@/components/organisms/plan/add-plan/list-item-camp/forecast-table';
@@ -107,7 +105,6 @@ export default {
   },
   data() {
     return {
-      checkedItemIds: [],
       confirmDialogVisible: false,
       completedDialogVisible: false,
       forecasts: {},
@@ -124,33 +121,33 @@ export default {
 
       return userItems.concat(consoleItems);
     },
+    isNew() {
+      return this.$store.getters['plan/isNew'];
+    },
+    params() {
+      return this.$store.getters['plan/params'];
+    },
+    checkedItemIds: {
+      get() {
+        return this.params.itemIds;
+      },
+      set(newItemIds) {
+        this.$store.dispatch('plan/setItemIds', newItemIds);
+      },
+    },
     isLoading() {
       return this.$store.getters['models/item/isLoading'];
     },
   },
-  watch: {
-    async checkedItemIds() {
-      await this.$store.dispatch('plan/setItemIds', this.checkedItemIds);
-    },
-  },
   methods: {
-    inScheduleTasks() {
-      const params = this.$store.getters['plan/params'];
-      const { startedDate, finishedDate } = params;
-
-      if (startedDate === '' || finishedDate === '') return params.tasks;
-
-      const inSchedule = task => moment(task.target_at).isBetween(`${startedDate} 0:00`, `${finishedDate} 23:59`, null, '[]');
-
-      return params.tasks.filter(inSchedule);
-    },
-    async createPlan() {
+    async submit() {
       this.confirmDialogVisible = false;
 
-      const params = { ...this.$store.getters['plan/params'] };
-      params.tasks = this.inScheduleTasks();
-
-      await this.$store.dispatch('models/userCampsitePlan/createUserCampsitePlan', params);
+      if (this.isNew) {
+        this.$store.dispatch('plan/createPlan');
+      } else {
+        this.$store.dispatch('plan/updatePlan');
+      }
 
       this.showCompletedDialog();
     },

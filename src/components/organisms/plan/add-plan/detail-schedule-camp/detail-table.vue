@@ -125,7 +125,6 @@ export default {
   },
   data() {
     return {
-      dateRange: [],
       targetAt: '',
       hours: [...Array(24).keys()],
       updateDataVisible: false,
@@ -147,27 +146,13 @@ export default {
 
       return items;
     },
-    params() {
-      return this.$store.getters['plan/params'];
-    },
-    startedDate() {
-      return this.params.startedDate;
-    },
-    finishedDate() {
-      return this.params.finishedDate;
-    },
-  },
-  watch: {
-    async startedDate() {
-      this.dateRange = await this.getDateRange();
-    },
-    async finishedDate() {
-      this.dateRange = await this.getDateRange();
+    dateRange() {
+      return this.$store.getters['plan/dateRange'];
     },
   },
   methods: {
     taskText(date, hour) {
-      const targetAt = `${date} ${hour}:00`;
+      const targetAt = this.$moment(`${date} ${hour}:00`).format('YYYY-MM-DD HH:mm');
       const task = this.tasks[targetAt] || '';
 
       return task;
@@ -177,14 +162,6 @@ export default {
       if (!this.items[date][hour]) return null;
 
       return this.items[date][hour];
-    },
-    getDateRange() {
-      if (this.startedDate && this.finishedDate) {
-        return this.$helpers.getDateRange(this.startedDate, this.finishedDate);
-      }
-      if (this.startedDate) return [this.startedDate];
-      if (this.finishedDate) return [this.finishedDate];
-      return [];
     },
     precipitationText(weather) {
       return this.$helpers.isEmpty(weather) ? '--' : weather.precip;
@@ -202,7 +179,7 @@ export default {
     },
     editTaskAt(date, hour) {
       this.updateDataVisible = true;
-      this.targetAt = `${date} ${hour}:00`;
+      this.targetAt = this.$moment(`${date} ${hour}:00`).format('YYYY-MM-DD HH:mm');
     },
     closePopup() {
       this.$emit('update:tasks', this.tasks);

@@ -11,7 +11,7 @@
       <v-ons-card>
         <v-ons-button
           class="button--red button--more button--more__description"
-          @click="goToAddPlan"
+          @click="goToNewPlan"
         >
           <img
             :src="require('@/assets/images/form/icon-add.png')"
@@ -31,7 +31,7 @@
 
 <script>
 import TimePlan from '@/components/organisms/plan/time-plan';
-import AddPlan from '@/views/plans/add-plan';
+import NewPlanPage from '@/views/plans/new';
 
 import moment from 'moment';
 
@@ -62,12 +62,11 @@ export default {
     },
   },
   methods: {
-    goToAddPlan() {
+    goToNewPlan() {
       this.$store.dispatch('plansNavigator/push', {
-        extends: AddPlan,
+        extends: NewPlanPage,
         onsNavigatorProps: {
           campsite: this.campsite,
-          isShowIconDelete: false,
         },
       });
     },

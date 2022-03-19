@@ -92,20 +92,9 @@ export default {
       required: true,
     },
   },
-  data() {
-    return {
-      dateRange: [],
-    };
-  },
   computed: {
-    params() {
-      return this.$store.getters['plan/params'];
-    },
-    startedDate() {
-      return this.params.startedDate;
-    },
-    finishedDate() {
-      return this.params.finishedDate;
+    dateRange() {
+      return this.$store.getters['plan/dateRange'];
     },
     items() {
       if (!this.dateRange.length || !this.forecasts.items) return [];
@@ -114,24 +103,7 @@ export default {
       return items.reduce((acc, cur) => { acc[cur.date] = cur; return acc; }, {});
     },
   },
-  watch: {
-    async startedDate() {
-      this.dateRange = await this.getDateRange();
-    },
-    async finishedDate() {
-      this.dateRange = await this.getDateRange();
-    },
-  },
   methods: {
-    getDateRange() {
-      if (this.startedDate && this.finishedDate) {
-        return this.$helpers.getDateRange(this.startedDate, this.finishedDate);
-      }
-      if (this.startedDate) return [this.startedDate];
-      if (this.finishedDate) return [this.finishedDate];
-
-      return [];
-    },
     displayDate(date) {
       return this.$helpers.toShortStringWithZero(date);
     },

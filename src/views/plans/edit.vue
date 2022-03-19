@@ -1,6 +1,6 @@
 <template>
   <v-ons-page @show="show">
-    <custom-toolbar title="新規計画" />
+    <custom-toolbar :title="title" />
 
     <v-ons-tabbar
       position="top"
@@ -17,9 +17,9 @@ import ListItemCamp from '@/components/organisms/plan/add-plan/list-item-camp/in
 import DetailScheduleCamp from '@/components/organisms/plan/add-plan/detail-schedule-camp/index';
 
 export default {
-  name: 'NewPlan',
+  name: 'EditPlan',
   props: {
-    campsite: {
+    plan: {
       type: Object,
       required: true,
     },
@@ -30,29 +30,42 @@ export default {
         {
           label: '計画日',
           page: DatePlan,
-          props: { campsite: this.campsite },
+          props: { campsite: this.plan.campsite },
         },
         {
           label: '持ち物',
           page: ListItemCamp,
-          props: { campsite: this.campsite },
+          props: { campsite: this.plan.campsite },
         },
         {
           label: '予定詳細',
           page: DetailScheduleCamp,
-          props: { campsite: this.campsite },
+          props: { campsite: this.plan.campsite },
         },
       ],
       activeIndex: 0,
       action: '',
     };
   },
+  computed: {
+    detailPlan() {
+      return this.$store.getters['models/userCampsitePlan/findById'](this.plan.id);
+    },
+    title() {
+      return `${this.$moment(this.detailPlan.startedDate).format('M/D')}からの計画`;
+    },
+  },
   methods: {
     async show() {
       await this.$store.dispatch('models/item/getItems');
+      await this.$store.dispatch('models/userCampsitePlan/getUserCampsitePlan', { userCampsitePlanId: this.plan.id });
 
       this.$store.dispatch('plan/clean');
-      this.$store.dispatch('plan/setCampsiteId', this.campsite.id);
+      this.$store.dispatch('plan/setPlanId', this.detailPlan.id);
+      this.$store.dispatch('plan/setStartedDate', this.detailPlan.startedDate);
+      this.$store.dispatch('plan/setFinishedDate', this.detailPlan.finishedDate);
+      this.$store.dispatch('plan/setItems', this.detailPlan.items);
+      this.$store.dispatch('plan/setTasks', this.detailPlan.tasks);
     },
   },
 };
