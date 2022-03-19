@@ -56,7 +56,6 @@ export default {
     closeTask() {
       this.$emit('update:tasks', { ...this.tasks, [this.targetAt]: this.newTask });
       this.$emit('close');
-      this.newTask = '';
     },
   },
 };
