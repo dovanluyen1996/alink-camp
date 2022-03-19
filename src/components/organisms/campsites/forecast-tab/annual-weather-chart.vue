@@ -37,6 +37,9 @@ export default {
         maintainAspectRatio: false,
         legend: {
           position: 'bottom',
+          labels: {
+            boxWidth: 18,
+          },
         },
         scales: {
           xAxes: [{
