@@ -47,9 +47,14 @@ export default {
       },
     },
   },
+  watch: {
+    isVisible() {
+      if (this.isVisible) this.newTask = this.tasks[this.targetAt];
+    },
+  },
   methods: {
     closeTask() {
-      this.$emit('update-tasks', { ...this.tasks, [this.targetAt]: this.newTask });
+      this.$emit('update:tasks', { ...this.tasks, [this.targetAt]: this.newTask });
       this.$emit('close');
     },
   },

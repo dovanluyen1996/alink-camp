@@ -93,9 +93,8 @@
     </div>
     <edit-dialog-task
       :is-visible="updateDataVisible"
-      :tasks="tasks"
+      :tasks.sync="tasks"
       :targetAt="targetAt"
-      @update-tasks="updateTasks"
       @close="closePopup"
     />
   </div>
@@ -173,9 +172,6 @@ export default {
 
       return task;
     },
-    updateTasks(tasks) {
-      this.$emit('update-tasks', tasks);
-    },
     getWeather(date, hour) {
       if (!this.items[date]) return null;
       if (!this.items[date][hour]) return null;
@@ -209,6 +205,7 @@ export default {
       this.targetAt = `${date} ${hour}:00`;
     },
     closePopup() {
+      this.$emit('update:tasks', this.tasks);
       this.updateDataVisible = false;
     },
     isContentEmpty(content) {
