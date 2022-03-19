@@ -9,8 +9,7 @@
 
       <detail-table
         :forecasts="forecasts"
-        :tasks="tasks"
-        @update-tasks="updateTasks"
+        :tasks.sync="tasks"
       />
 
       <content-with-footer>
@@ -128,9 +127,6 @@ export default {
     async closeCompletedDialog() {
       this.completedDialogVisible = false;
       await this.$store.dispatch('plansNavigator/pop');
-    },
-    updateTasks(tasks) {
-      this.tasks = { ...tasks };
     },
     async getForecastHourly() {
       const params = {

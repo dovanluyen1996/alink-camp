@@ -49,7 +49,7 @@ export default {
   },
   methods: {
     closeTask() {
-      this.$emit('update-tasks', { ...this.tasks, [this.targetAt]: this.newTask });
+      this.$emit('update:tasks', { ...this.tasks, [this.targetAt]: this.newTask });
       this.$emit('close');
     },
   },
