@@ -38,10 +38,12 @@
     </v-ons-row>
     <div class="campsite-weather-footer">
       <div class="campsite-weather-footer-left">
-        信頼度：
+        信頼度
+        <span class="campsite-weather-footer-left-edge-right"></span>
+        <span class="campsite-weather-footer-left-edge-bottom"></span>
       </div>
       <div class="campsite-weather-footer-right">
-        A～Eの表示は、予報の信頼度です。低い場合は今後の予報が変わる可能性があります。
+        <span>A～E</span> の表示は、予報の信頼度です。<br>低い場合は今後の予報が変わる可能性があります。
       </div>
     </div>
   </div>
@@ -139,6 +141,14 @@ export default {
   border-bottom: 1px solid $color-border;
 }
 
+/deep/ {
+  .weather {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
 .campsite-weather-day-temperature {
   @include colum-style;
 
@@ -192,16 +202,59 @@ export default {
 
 .campsite-weather-footer {
   display: flex;
+  align-items: center;
+  justify-content: space-between;
   min-height: 27px;
-  padding: 5px 15px 5px 5px;
+  padding: 8px 8px 12px 8px;
   font-size: $font-size-small;
   font-weight: 300;
   color: #0d0101;
+  background-color: #f4f4ee;
+  border: 1px solid #d9d9d9;
 }
 
 .campsite-weather-footer-left {
-  width: 50px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  margin-right: 30px;
+  font-size: 10px;
+  font-weight: 600;
+  color: #0d0101;
   white-space: nowrap;
+  background-color: #fff;
+  border: 1px solid #ccc;
+
+  &-edge-right,
+  &-edge-bottom {
+    position: absolute;
+    background-color: #ccc;
+  }
+
+  &-edge-right {
+    top: 3px;
+    right: -6px;
+    width: 5px;
+    height: 27px;
+  }
+
+  &-edge-bottom {
+    bottom: -6px;
+    left: 3px;
+    width: 45px;
+    height: 5px;
+  }
+}
+
+.campsite-weather-footer-right {
+  font-size: 10px;
+  font-weight: 300;
+
+  & span {
+    font-weight: 600;
+  }
 }
 
 .campsite-weather-accuracy-index {

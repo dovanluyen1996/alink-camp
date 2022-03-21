@@ -52,15 +52,19 @@ export default {
 
 .campsite-weather-sun {
   flex-wrap: nowrap;
+  width: 50%;
   height: 100%;
+  margin-bottom: 5px;
+  margin-left: 50%;
   white-space: nowrap;
-  border-right: 1px solid #d9d9d9;
+  transform: translateX(-50%);
 
   &__box {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    height: 53px;
   }
 
   &__top {
@@ -70,7 +74,7 @@ export default {
   }
 
   &__date-time {
-    font-weight: 300;
+    font-weight: 600;
     color: #222;
   }
 }

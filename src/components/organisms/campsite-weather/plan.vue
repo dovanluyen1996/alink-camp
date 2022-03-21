@@ -43,6 +43,7 @@ export default {
 
 .campsite-weather-plan {
   display: flex;
+  align-items: center;
   justify-content: space-around;
   height: 20px;
   padding: 5px 30px;

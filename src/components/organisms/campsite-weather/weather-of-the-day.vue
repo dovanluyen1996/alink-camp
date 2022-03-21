@@ -1,9 +1,9 @@
 <template>
   <div class="campsite-weather-of-the-day">
-    <v-ons-row>
+    <v-ons-row class="campsite-weather-of-the-day-top">
       <v-ons-col
         class="campsite-weather-of-the-day-box"
-        width="30%"
+        width="35%"
       >
         <div class="campsite-weather-of-the-day-title">
           {{ shortDate }}のお天気
@@ -14,45 +14,46 @@
           image-width="66px"
         />
       </v-ons-col>
-      <v-ons-col width="70%">
+      <v-ons-col
+        class="campsite-weather-of-the-day-right"
+        width="65%"
+      >
         <campsite-weather-temperatures
           :forecast="forecast.targetDate"
           font-size="16px"
         />
-      </v-ons-col>
-    </v-ons-row>
-    <v-ons-row class="weather-indexes">
-      <v-ons-col width="36%">
         <campsite-weather-sun
           :sunrise="forecast.sunrise"
           :sunset="forecast.sunset"
         />
       </v-ons-col>
+    </v-ons-row>
+    <v-ons-row class="weather-indexes">
       <div
         v-if="!isPurchased"
         class="campsite-weather-of-the-day-purchase"
       >
         プレミアムプランでご利用可能
       </div>
-      <v-ons-col width="16%">
+      <v-ons-col width="25%">
         <campsite-weather-thunder-index
           :forecast="forecast.targetDate"
           :is-purchased="isPurchased"
         />
       </v-ons-col>
-      <v-ons-col width="16%">
+      <v-ons-col width="25%">
         <campsite-weather-dress-index
           :forecast="forecast.targetDate"
           :is-purchased="isPurchased"
         />
       </v-ons-col>
-      <v-ons-col width="16%">
+      <v-ons-col width="25%">
         <campsite-weather-uv-index
           :forecast="forecast.targetDate"
           :is-purchased="isPurchased"
         />
       </v-ons-col>
-      <v-ons-col width="16%">
+      <v-ons-col width="25%">
         <campsite-weather-star-index
           :forecast="forecast.targetDate"
           :is-purchased="isPurchased"
@@ -111,7 +112,7 @@ export default {
 }
 
 .campsite-weather-of-the-day-title {
-  padding-top: 5px;
+  margin-bottom: 10px;
   font-size: $font-size-small;
   font-weight: 600;
   line-height: 1;
@@ -122,7 +123,7 @@ export default {
   position: relative;
   flex-wrap: nowrap;
   padding: 5px 0;
-  margin-top: 15px;
+  padding-right: 10px;
   color: #017f45;
   border-top: 1px solid #d9d9d9;
 }
@@ -131,23 +132,29 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-left: 30px;
+  justify-content: center;
 }
 
 .campsite-weather-of-the-day-purchase {
   position: absolute;
-  top: 27px;
-  right: 5px;
+  top: 33px;
+  right: 15px;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 60%;
+  width: 88vw;
   height: 13px;
   font-size: 7px;
   font-weight: 600;
   color: #f5f2f2;
   background-color: $color-yellow;
   border-radius: 22px;
+}
+
+.campsite-weather-of-the-day-right {
+  display: flex;
+  flex-direction: column;
+  margin-top: 9px;
 }
 
 /deep/ {
@@ -166,14 +173,29 @@ export default {
   .star-title,
   .star-label {
     font-size: 10px;
-    font-weight: 600;
     color: #007540;
+  }
+
+  .campsite-weather-sun,
+  .thunder-title,
+  .dress-title,
+  .uv-title,
+  .star-title {
+    font-weight: 600;
+  }
+
+  .thunder-label,
+  .dress-label,
+  .uv-label,
+  .star-label {
+    font-weight: 300;
   }
 
   .thunder-title--unpaid,
   .dress-title--unpaid,
   .uv-title--unpaid,
   .star-title--unpaid {
+    padding-bottom: 7px;
     color: #ccc;
   }
 
@@ -184,6 +206,21 @@ export default {
   .temperature__value {
     font-size: 20px;
     font-weight: 600;
+  }
+
+  .thunder,
+  .dress,
+  .uv,
+  .star {
+    height: 100%;
+
+    & > div {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+    }
   }
 }
 

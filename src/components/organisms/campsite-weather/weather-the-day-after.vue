@@ -47,7 +47,6 @@ export default {
 }
 
 .weather-the-day-after-title {
-  margin-left: -10px;
   font-size: 10px;
   font-weight: 600;
 }
