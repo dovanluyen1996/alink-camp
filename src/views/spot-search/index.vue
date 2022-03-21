@@ -35,14 +35,17 @@
           まだお気に入りや予定日設定しているキャンプ場がありません。<br>
           キャンプ場検索より設定してください。
         </p>
+      </v-ons-card>
+
+      <div class="button-search-center">
         <v-ons-button
-          modifier="search"
+          modifier="search yellow"
           @click="goToSearchCampsite"
         >
           <img src="@/assets/images/form/search-top.png">
           キャンプ場検索
         </v-ons-button>
-      </v-ons-card>
+      </div>
     </div>
     <v-ons-alert-dialog
       :visible.sync="geoLocationErrorVisible"
@@ -222,19 +225,15 @@ export default {
   }
 
   &__note {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 15px 10px 20px;
-    text-align: left;
+    padding: 0;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.5);
 
     & > p {
-      margin-top: 0;
-      margin-bottom: 20px;
-      font-size: 16px;
-      font-weight: 300;
-      line-height: 27px;
+      padding: 18px 20px;
+      font-size: 18px;
+      font-weight: 600;
+      line-height: 24px;
       color: #000;
     }
   }
@@ -272,9 +271,8 @@ export default {
     }
   }
 
-  .button--search {
-    display: flex;
-    align-items: center;
+  .button-search-center {
+    text-align: center;
   }
 
   .list-item {
