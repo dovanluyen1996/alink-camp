@@ -89,8 +89,8 @@ export default {
     displayedFuturePlans() {
       if (!this.futurePlans.length) return [];
 
-      const newestPlan = this.futurePlans[this.futurePlans.length - 1];
-      return this.isPurchased ? this.futurePlans : [newestPlan];
+      const oldestPlan = this.futurePlans[0];
+      return this.isPurchased ? this.futurePlans : [oldestPlan];
     },
     displayedPastPlans() {
       if (!this.pastPlans.length) return [];
@@ -127,6 +127,7 @@ export default {
       this.isConfirmDialogVisible = false;
     },
     async setIsPurchased() {
+      // TODO: 判別方法を修正する
       this.isPurchased = await this.$store.dispatch('purchase/getIsPurchased');
     },
     goToPurchase() {
