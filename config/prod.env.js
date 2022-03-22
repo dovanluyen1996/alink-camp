@@ -1,7 +1,7 @@
 'use strict'
 module.exports = {
   NODE_ENV: '"production"',
-  API_URL: '"https://dev.golf.weather-api.jp/api"',
+  API_URL: '"https://dev.camp.weather-api.jp/api"',
   MAP_URL: '"https://dev.camp.weather-api.jp/map"',
   COGNITO_REGION: '"ap-northeast-1"',
   COGNITO_USER_POOL_ID: '"ap-northeast-1_rLveCQoVL"',
