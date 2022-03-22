@@ -90,7 +90,7 @@ export default {
   },
   watch: {
     async lastVisitedAt(value) {
-      if (!await this.isPurchased()) return;
+      if (!this.isPurchased()) return;
 
       const lastGettedAt = localStorage.getItem('userStampLastGettedAt');
       if (!lastGettedAt || this.$helpers.isAfterDate(value, lastGettedAt)) {
