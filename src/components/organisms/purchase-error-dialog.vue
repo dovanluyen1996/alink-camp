@@ -26,10 +26,7 @@ export default {
 
     window.addEventListener('onPurchaserInfoUpdated', async(purchaserInfo) => {
       const isCharged = Object.entries(purchaserInfo.entitlements.active).length > 0;
-
-      // TODO: => #268 で対応する
-      // if (!isCharged) await this.$store.dispatch('appNavigator/reset', PurchaseInformation);
-      console.log(isCharged);
+      this.$store.dispatch('purchase/setIsPurchased', isCharged);
     },
     () => {
       // 全画面共通のエラーメッセージを表示したい
@@ -48,10 +45,7 @@ export default {
       Purchases.getPurchaserInfo(
         async(purchaserInfo) => {
           const isCharged = Object.entries(purchaserInfo.entitlements.active).length > 0;
-
-          // TODO: => #268 で対応する
-          // if (!isCharged) await this.$store.dispatch('appNavigator/reset', PurchaseInformation);
-          console.log(isCharged);
+          this.$store.dispatch('purchase/setIsPurchased', isCharged);
         },
         () => {
           // 全画面共通のエラーメッセージを表示したい

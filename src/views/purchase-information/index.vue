@@ -140,6 +140,7 @@ export default {
                 const params = { app_user_id: purchaserInfo.originalAppUserId };
                 await this.$store.dispatch('models/currentUser/updateUser', params);
 
+                this.$store.dispatch('purchase/setIsPurchased', true);
                 this.purchaseComplete();
               }
               this.isLoading = false;
@@ -174,6 +175,7 @@ export default {
             const params = { app_user_id: restoredInfo.originalAppUserId };
             await this.$store.dispatch('models/currentUser/updateUser', params);
 
+            this.$store.dispatch('purchase/setIsPurchased', true);
             this.purchaseComplete();
           } else {
             this.checkPurchaseErrorVisible = true;
