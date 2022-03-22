@@ -7,7 +7,7 @@
     >
       <div class="date-detail">
         <span>
-          {{ date }}
+          {{ localMonthDateFrom(date) }}
         </span>
         <share-button
           :subject="shareSubject()"
@@ -227,6 +227,9 @@ export default {
 
       // 時間毎に１行空行を入れる
       return messages.join('\n\n');
+    },
+    localMonthDateFrom(date) {
+      return this.$helpers.localMonthDateFrom(date);
     },
   },
 };
