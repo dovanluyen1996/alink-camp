@@ -1,6 +1,6 @@
 <template>
-  <v-ons-page>
-    <custom-toolbar title="12/31からの計画">
+  <v-ons-page @show="show">
+    <custom-toolbar :title="title">
       <template #right>
         <delete-dialog-with-icon
           :is-shown.sync="isShownDeleteDialog"
@@ -30,12 +30,18 @@
 <script>
 // components
 import DeleteDialogWithIcon from '@/components/organisms/dialog/delete-dialog-with-icon';
-import PastPlan from '@/components/organisms/plan/detail-past-plan/past-plan';
-import ListItemCamp from '@/components/organisms/plan/add-plan/list-item-camp/index';
+import PastSchedule from '@/components/organisms/plan/past/schedule';
+import PastScheduleItem from '@/components/organisms/plan/past/item/index';
 import CompletedDialog from '@/components/organisms/dialog/completed-dialog';
 
 export default {
-  name: 'DetailPastPlan',
+  name: 'PastPlan',
+  props: {
+    plan: {
+      type: Object,
+      required: true,
+    },
+  },
   components: {
     DeleteDialogWithIcon,
     CompletedDialog,
@@ -45,11 +51,13 @@ export default {
       tabs: [
         {
           label: '思い出',
-          page: PastPlan,
+          page: PastSchedule,
+          props: { campsite: this.plan.campsite },
         },
         {
           label: '持ち物',
-          page: ListItemCamp,
+          page: PastScheduleItem,
+          props: { campsite: this.plan.campsite },
         },
       ],
       activeIndex: 0,
@@ -58,7 +66,26 @@ export default {
       action: '',
     };
   },
+  computed: {
+    detailPlan() {
+      return this.$store.getters['models/userCampsitePlan/findById'](this.plan.id);
+    },
+    title() {
+      return `${this.$moment(this.detailPlan.startedDate).format('M/D')}からの計画`;
+    },
+  },
   methods: {
+    async show() {
+      await this.$store.dispatch('models/item/getItems');
+      await this.$store.dispatch('models/userCampsitePlan/getUserCampsitePlan', { userCampsitePlanId: this.plan.id });
+
+      this.$store.dispatch('plan/clean');
+      this.$store.dispatch('plan/setPlanId', this.detailPlan.id);
+      this.$store.dispatch('plan/setStartedDate', this.detailPlan.startedDate);
+      this.$store.dispatch('plan/setFinishedDate', this.detailPlan.finishedDate);
+      this.$store.dispatch('plan/setItems', this.detailPlan.items);
+      this.$store.dispatch('plan/setTasks', this.detailPlan.tasks);
+    },
     showCompletedDialog(action) {
       this.action = action;
       this.completedDialogVisible = true;

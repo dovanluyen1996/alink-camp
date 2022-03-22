@@ -1,43 +1,123 @@
 <template>
-  <v-ons-page>
+  <v-ons-page @show="show">
     <div class="content">
       <loading :visible="isLoading" />
       <div class="text">
         <v-ons-row class="text__desc">
-          〇〇〇〇〇〇〇〇〇〇〇〇<br>〇〇〇〇〇〇〇〇〇〇〇〇キャンズ場
+          {{ campsite.name }}
         </v-ons-row>
       </div>
 
-      <detail-past-table />
+      <schedule-table
+        :forecasts="forecasts"
+        :tasks.sync="tasks"
+      />
 
       <content-with-footer>
         <template #footer>
           <v-ons-button
             modifier="large--cta yellow rounded"
-            @click="goToEdit()"
+            @click="showConfirmDialog"
           >
             編集保存
           </v-ons-button>
         </template>
       </content-with-footer>
     </div>
+
+    <confirm-dialog
+      :is-shown.sync="confirmDialogVisible"
+      @clickConfirm="submit"
+    >
+      <template #title>
+        編集確認
+      </template>
+
+      <template #message>
+        このキャンプ計画または思い出を編集します。よろしいですか？
+      </template>
+
+      <template #confirmAction>
+        編集
+      </template>
+    </confirm-dialog>
+
+    <completed-dialog
+      action="updatePlan"
+      :is-visible="completedDialogVisible"
+      @close="closeCompletedDialog"
+    />
   </v-ons-page>
 </template>
 
 <script>
 // components
-
 import ContentWithFooter from '@/components/organisms/content-with-footer';
-import DetailPastTable from '@/components/organisms/plan/detail-past-plan/past-plan-table';
+import ScheduleTable from '@/components/organisms/plan/past/schedule/table';
+import ConfirmDialog from '@/components/organisms/dialog/confirm-dialog';
+import CompletedDialog from '@/components/organisms/dialog/completed-dialog';
 
 export default {
   components: {
-    DetailPastTable,
     ContentWithFooter,
+    ScheduleTable,
+    ConfirmDialog,
+    CompletedDialog,
+  },
+  data() {
+    return {
+      forecasts: {},
+      confirmDialogVisible: false,
+      completedDialogVisible: false,
+    };
+  },
+  props: {
+    campsite: {
+      type: Object,
+      required: true,
+    },
+  },
+  computed: {
+    params() {
+      return this.$store.getters['plan/params'];
+    },
+    tasks: {
+      get() {
+        const fn = (acc, cur) => {
+          const targetAt = this.$moment(cur.targetAt).format('YYYY-MM-DD HH:mm');
+          acc[targetAt] = cur.content;
+          return acc;
+        };
+
+        return this.params.tasks.reduce(fn, {});
+      },
+      set(tasks) {
+        const tasksAt = Object.keys(tasks);
+        const params = tasksAt.map(at => ({ targetAt: at, content: tasks[at] }));
+        this.$store.dispatch('plan/setTasks', params);
+      },
+    },
   },
   methods: {
-    goToEdit() {
-      // TODO: Show edit confirmation dialog
+    async submit() {
+      this.confirmDialogVisible = false;
+
+      this.$store.dispatch('plan/updatePlan');
+
+      this.showCompletedDialog();
+    },
+    showConfirmDialog() {
+      this.confirmDialogVisible = true;
+    },
+    showCompletedDialog() {
+      this.completedDialogVisible = true;
+    },
+    async closeCompletedDialog() {
+      this.completedDialogVisible = false;
+      await this.$store.dispatch('plansNavigator/pop');
+    },
+    show() {
+      // TODO: implement
     },
   },
 };

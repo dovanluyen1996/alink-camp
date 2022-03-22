@@ -1,12 +1,12 @@
 <template>
   <div class="table-detail">
     <div
-      v-for="(item, index) in weather"
+      v-for="(date, index) in dateRange"
       :key="index"
       class="card-detail"
     >
-      <v-ons-card class="course-weather-and-image">
-        <v-ons-row class="course-weather-and-image-row">
+      <v-ons-card class="campsite-weather-and-image">
+        <v-ons-row class="campsite-weather-and-image-row">
           <campsite-plan-weather
             v-if="weather"
             :weather="weather[index]"
@@ -23,7 +23,7 @@
 
       <div class="date-detail">
         <span>
-          {{ item.date }}
+          {{ date }}
         </span>
       </div>
       <table class="table">
@@ -35,48 +35,37 @@
             <th>タスク</th>
           </tr>
           <tr
-            v-for="(detail, i) in item.details"
-            :key="i"
+            v-for="(hour, index) in hours"
+            :key="index"
             class="detail-row"
           >
             <td class="target">
-              {{ detail.targetAt }}
+              {{ hour }}
             </td>
             <td>
-              <div class="weather">
-                <img
-                  :src="require('@/assets/images/weathers/weather/01.png')"
-                  class="icon-weather"
-                >
-              </div>
+              <weather-image
+                :weather="getWeather(date, hour)"
+                image-width="35px"
+              />
             </td>
             <td>
-              <div class="temperature">
-                <span class="temperature__value">
-                  {{ detail.temp }}
-                </span>
-                <span class="temperature__unit">
-                  ℃
-                </span>
-              </div>
+              <temperature
+                :value="getWeather(date, hour) ? getWeather(date, hour).temperature : ''"
+              />
             </td>
             <td class="task">
-              <div class="task__text">
-                <span>
-                  {{ detail.content }}
-                </span>
-              </div>
+              <div class="task__text">{{ taskText(date, hour) }}</div>
               <img
-                v-if="isContentEmpty(detail.content)"
+                v-if="isContentEmpty(taskText(date, hour))"
                 :src="require('@/assets/images/icon-more.png')"
                 class="task__icon"
-                @click="showPopup()"
+                @click="editTaskAt(date, hour)"
               >
               <img
                 v-else
                 :src="require('@/assets/images/icon-edit.png')"
                 class="task__icon"
-                @click="showPopup()"
+                @click="editTaskAt(date, hour)"
               >
             </td>
           </tr>
@@ -85,6 +74,8 @@
     </div>
     <edit-dialog-task
       :is-visible="updateDataVisible"
+      :tasks.sync="tasks"
+      :targetAt="targetAt"
       @close="closePopup"
     />
   </div>
@@ -95,6 +86,8 @@
 import CampsitePlanWeather from '@/components/organisms/campsite-plans/weather';
 import CampsitePlanImage from '@/components/organisms/campsite-plans/image';
 import EditDialogTask from '@/components/organisms/edit-dialog-task';
+import WeatherImage from '@/components/atoms/weather-image';
+import Temperature from '@/components/atoms/temperature';
 
 export default {
   name: 'DetailTable',
@@ -102,220 +95,65 @@ export default {
     CampsitePlanWeather,
     CampsitePlanImage,
     EditDialogTask,
+    WeatherImage,
+    Temperature,
+  },
+  props: {
+    forecasts: {
+      type: Object,
+      required: true,
+    },
+    tasks: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {
-      // TODO: ロジックに合うようにデータ構造を変更する
-      // Change the data structure to fit the logic.
-      weather: [
-        {
-          date: '12/31',
-          maxTemp: '32',
-          minTemp: '18',
-          weatherImageName: '01.png',
-          forecastTelop: '曇のち晴',
-          details: [
-            {
-              targetAt: 0,
-              temp: 10,
-              content: '焚き火の準備と食事の準備をするあああああああ...',
-            },
-            {
-              targetAt: 1,
-              temp: 11,
-              content: '',
-            },
-            {
-              targetAt: 2,
-              temp: 10,
-              content: '焚き火の準備と食事の準備をするあああああああ...',
-            },
-            {
-              targetAt: 3,
-              temp: 11,
-              content: '',
-            },
-            {
-              targetAt: 4,
-              temp: 10,
-              content: '焚き火の準備と食事の準備をするあああああああ...',
-            },
-            {
-              targetAt: 5,
-              temp: 11,
-              content: '',
-            },
-            {
-              targetAt: 6,
-              temp: 10,
-              content: '焚き火の準備と食事の準備をするあああああああ...',
-            },
-            {
-              targetAt: 7,
-              temp: 11,
-              content: '',
-            },
-          ],
-        },
-        {
-          date: '01/01',
-          maxTemp: '32',
-          minTemp: '18',
-          weatherImageName: '01.png',
-          forecastTelop: '曇のち晴',
-          details: [
-            {
-              targetAt: 0,
-              temp: 10,
-              content: '焚き火の準備と食事の準備をするあああああああ...',
-            },
-            {
-              targetAt: 1,
-              temp: 11,
-              content: '',
-            },
-            {
-              targetAt: 2,
-              temp: 10,
-              content: '焚き火の準備と食事の準備をするあああああああ...',
-            },
-            {
-              targetAt: 3,
-              temp: 11,
-              content: '',
-            },
-            {
-              targetAt: 4,
-              temp: 10,
-              content: '焚き火の準備と食事の準備をするあああああああ...',
-            },
-            {
-              targetAt: 5,
-              temp: 11,
-              content: '',
-            },
-            {
-              targetAt: 6,
-              temp: 10,
-              content: '焚き火の準備と食事の準備をするあああああああ...',
-            },
-            {
-              targetAt: 7,
-              temp: 11,
-              content: '',
-            },
-          ],
-        },
-        {
-          date: '01/02',
-          maxTemp: '32',
-          minTemp: '18',
-          weatherImageName: '01.png',
-          forecastTelop: '曇のち晴',
-          details: [
-            {
-              targetAt: 0,
-              temp: 10,
-              content: '焚き火の準備と食事の準備をするあああああああ...',
-            },
-            {
-              targetAt: 1,
-              temp: 11,
-              content: '',
-            },
-            {
-              targetAt: 2,
-              temp: 10,
-              content: '焚き火の準備と食事の準備をするあああああああ...',
-            },
-            {
-              targetAt: 3,
-              temp: 11,
-              content: '',
-            },
-            {
-              targetAt: 4,
-              temp: 10,
-              content: '焚き火の準備と食事の準備をするあああああああ...',
-            },
-            {
-              targetAt: 5,
-              temp: 11,
-              content: '',
-            },
-            {
-              targetAt: 6,
-              temp: 10,
-              content: '焚き火の準備と食事の準備をするあああああああ...',
-            },
-            {
-              targetAt: 7,
-              temp: 11,
-              content: '',
-            },
-          ],
-        },
-        {
-          date: '01/03',
-          maxTemp: '32',
-          minTemp: '18',
-          weatherImageName: '01.png',
-          forecastTelop: '曇のち晴',
-          details: [
-            {
-              targetAt: 0,
-              temp: 10,
-              content: '焚き火の準備と食事の準備をするあああああああ...',
-            },
-            {
-              targetAt: 1,
-              temp: 11,
-              content: '',
-            },
-            {
-              targetAt: 2,
-              temp: 10,
-              content: '焚き火の準備と食事の準備をするあああああああ...',
-            },
-            {
-              targetAt: 3,
-              temp: 11,
-              content: '',
-            },
-            {
-              targetAt: 4,
-              temp: 10,
-              content: '焚き火の準備と食事の準備をするあああああああ...',
-            },
-            {
-              targetAt: 5,
-              temp: 11,
-              content: '',
-            },
-            {
-              targetAt: 6,
-              temp: 10,
-              content: '焚き火の準備と食事の準備をするあああああああ...',
-            },
-            {
-              targetAt: 7,
-              temp: 11,
-              content: '',
-            },
-          ],
-        },
-      ],
-      image: {
-        url: 'https://www.w3schools.com/css/img_5terre.jpg', // TODO: Please delete this mock data when implement Logic
-      },
+      targetAt: '',
+      hours: [...Array(24).keys()],
       updateDataVisible: false,
     };
   },
+  computed: {
+    items() {
+      if (!this.dateRange.length || !this.forecasts.items) return [];
+
+      const items = this.forecasts.items.reduce((dateAcc, dateCur) => {
+        const hourlyData = dateCur.hourlyData.reduce((hourAcc, hourCur) => {
+          hourAcc[parseInt(hourCur.hour, 10)] = hourCur;
+          return hourAcc;
+        }, {});
+
+        dateAcc[dateCur.date] = hourlyData;
+        return dateAcc;
+      }, {});
+
+      return items;
+    },
+    dateRange() {
+      return this.$store.getters['plan/dateRange'];
+    },
+  },
   methods: {
-    showPopup() {
+    taskText(date, hour) {
+      const targetAt = this.$moment(`${date} ${hour}:00`).format('YYYY-MM-DD HH:mm');
+      const task = this.tasks[targetAt] || '';
+
+      return task;
+    },
+    getWeather(date, hour) {
+      if (!this.items[date]) return null;
+      if (!this.items[date][hour]) return null;
+
+      return this.items[date][hour];
+    },
+    editTaskAt(date, hour) {
       this.updateDataVisible = true;
+      this.targetAt = this.$moment(`${date} ${hour}:00`).format('YYYY-MM-DD HH:mm');
     },
     closePopup() {
+      this.$emit('update:tasks', this.tasks);
       this.updateDataVisible = false;
     },
     isContentEmpty(content) {
@@ -417,32 +255,32 @@ export default {
   }
 }
 
-.course-weather-and-image {
+.campsite-weather-and-image {
   text-align: center;
 }
 
-.course-weather-and-image-row {
+.campsite-weather-and-image-row {
   flex-direction: column;
 }
 
-.course-weather-col {
+.campsite-weather-col {
   margin-right: 0;
   margin-bottom: 15px;
 }
 
 @media screen and (min-width: 320px) {
-  .course-weather-and-image-row {
+  .campsite-weather-and-image-row {
     flex-direction: row;
   }
 
-  .course-weather-col {
+  .campsite-weather-col {
     flex: 0 0 50%;
     max-width: 50%;
     padding-right: 0;
     margin-bottom: 0;
   }
 
-  .course-image-col {
+  .campsite-image-col {
     flex: 0 0 50%;
     max-width: 50%;
     padding-left: 5px;
@@ -454,11 +292,11 @@ export default {
 }
 
 @media screen and (min-width: 375px) {
-  .course-weather-col {
+  .campsite-weather-col {
     padding-right: 15px;
   }
 
-  .course-image-col {
+  .campsite-image-col {
     padding-left: 0;
 
     .share-button {
@@ -474,7 +312,7 @@ export default {
 }
 
 @media screen and (min-width: 320px) {
-  .course-image-col {
+  .campsite-image-col {
     .share-button {
       min-width: 95%;
     }
@@ -482,7 +320,7 @@ export default {
 }
 
 @media screen and (min-width: 375px) {
-  .course-image-col {
+  .campsite-image-col {
     .share-button {
       min-width: 140px;
     }
