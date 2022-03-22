@@ -4,7 +4,8 @@
   >
     <img
       class="not-purchased-img"
-      src="@/assets/images/purchase-information/banner-LP.png"
+      src="@/assets/images/campsite-search-weather-purchase.png"
+      alt="weaather-purchase"
     >
   </div>
 </template>

@@ -7,6 +7,8 @@
       <slot name="title" />
     </div>
 
+    <slot name="section" />
+
     <v-ons-card>
       <div class="content">
         <slot />

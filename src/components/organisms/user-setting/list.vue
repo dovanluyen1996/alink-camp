@@ -3,6 +3,15 @@
     <template #title>
       PUSH設定
     </template>
+    <template #section>
+      <div class="banner-wrap">
+        <img
+          class="banner-img"
+          src="@/assets/images/push-notification-weather-purchase.png"
+          alt="weather-purchase"
+        >
+      </div>
+    </template>
 
     <loading :visible="isLoading" />
     <v-ons-list modifier="noborder">
@@ -248,5 +257,13 @@ export default {
 
 .switch {
   margin-left: 20px;
+}
+
+.banner-wrap {
+  margin: 10px 20px 0;
+
+  .banner-img {
+    width: 100%;
+  }
 }
 </style>
