@@ -52,6 +52,7 @@ export default {
 
 .campsite-weather-sun {
   flex-wrap: nowrap;
+  column-gap: 35px;
   width: 50%;
   height: 100%;
   margin-bottom: 5px;

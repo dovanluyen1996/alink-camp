@@ -122,8 +122,7 @@ export default {
 .weather-indexes {
   position: relative;
   flex-wrap: nowrap;
-  padding: 5px 0;
-  padding-right: 10px;
+  padding: 5px 10px 5px 0;
   color: #017f45;
   border-top: 1px solid #d9d9d9;
 }
@@ -206,6 +205,10 @@ export default {
   .temperature__value {
     font-size: 20px;
     font-weight: 600;
+  }
+
+  .temperature-high {
+    margin-right: 5px;
   }
 
   .thunder,

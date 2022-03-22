@@ -44,9 +44,8 @@ export default {
 .campsite-weather-plan {
   display: flex;
   align-items: center;
-  justify-content: space-around;
-  height: 20px;
-  padding: 5px 30px;
+  justify-content: space-between;
+  padding: 6px 22px;
   font-size: $font-size-small;
   font-weight: 300;
   color: #000;

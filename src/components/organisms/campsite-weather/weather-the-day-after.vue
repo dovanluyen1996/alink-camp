@@ -83,9 +83,12 @@ export default {
 
   .campsite-weather-box {
     display: flex;
-    gap: 5px;
     align-items: center;
     height: 100%;
+  }
+
+  .temperature-high {
+    margin-right: 5px;
   }
 }
 

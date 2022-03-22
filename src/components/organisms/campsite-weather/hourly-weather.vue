@@ -46,7 +46,7 @@
       <wind-speed-row
         :wind-speeds="windSpeeds"
         :color-th="false"
-        :display-campsite-weather-top="true"
+        :display-course-weather-top="true"
       />
       <humidity-row
         :humidities="humidities"

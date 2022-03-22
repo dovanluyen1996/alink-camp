@@ -125,7 +125,7 @@ export default {
 .campsite-weather-day-date {
   @include colum-style;
 
-  height: 24px;
+  height: 27px;
   font-size: 10px;
   font-weight: 300;
   color: #100101;
@@ -136,7 +136,7 @@ export default {
   @include colum-style;
 
   position: relative;
-  height: 50px;
+  height: 57px;
   border-top: 1px solid $color-border;
   border-bottom: 1px solid $color-border;
 }
@@ -235,16 +235,16 @@ export default {
 
   &-edge-right {
     top: 3px;
-    right: -6px;
-    width: 5px;
-    height: 27px;
+    right: -3px;
+    width: 2px;
+    height: 25px;
   }
 
   &-edge-bottom {
-    bottom: -6px;
+    bottom: -3px;
     left: 3px;
-    width: 45px;
-    height: 5px;
+    width: 42px;
+    height: 2px;
   }
 }
 
