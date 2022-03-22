@@ -146,6 +146,10 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.annual-weather-container {
+  margin-bottom: 5px;
+}
+
 .image-temp {
   width: 100%;
 }
