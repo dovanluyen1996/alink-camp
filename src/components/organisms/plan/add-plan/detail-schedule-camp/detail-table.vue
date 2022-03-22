@@ -9,12 +9,14 @@
         <span>
           {{ date }}
         </span>
-        <v-ons-button
-          modifier="yellow"
-          class="button--share"
+        <share-button
+          :subject="shareSubject"
+          :message="shareMessage"
         >
-          予定共有
-        </v-ons-button>
+          <template #text>
+            予定共有
+          </template>
+        </share-button>
       </div>
       <table class="table">
         <tbody>
@@ -105,6 +107,7 @@
 import EditDialogTask from '@/components/organisms/edit-dialog-task';
 import WeatherImage from '@/components/atoms/weather-image';
 import Temperature from '@/components/atoms/temperature';
+import ShareButton from '@/components/organisms/share-button';
 
 export default {
   name: 'DetailTable',
@@ -112,6 +115,7 @@ export default {
     EditDialogTask,
     WeatherImage,
     Temperature,
+    ShareButton,
   },
   props: {
     forecasts: {
@@ -148,6 +152,12 @@ export default {
     },
     dateRange() {
       return this.$store.getters['plan/dateRange'];
+    },
+    shareSubject() {
+      return '予定シェアタイトル';
+    },
+    shareMessage() {
+      return '予定シェアメッセージ';
     },
   },
   methods: {
@@ -340,25 +350,7 @@ $speed-degrees: 0, 22.5, 45, 67.5, 90, 112.5, 135, 157.5, 180,
 }
 
 .button--share {
-  position: absolute;
   right: 10px;
-  display: flex;
-  align-items: center;
   width: 110px;
-  height: 29px;
-  font-size: 14px;
-  font-weight: 600;
-  border-radius: 15px;
-
-  &::before {
-    display: inline-block;
-    width: 13px;
-    height: 15px;
-    margin-right: 6px;
-    content: '';
-    background-image: url("~@/assets/images/icon-share.png");
-    background-position: center;
-    background-size: 100%;
-  }
 }
 </style>

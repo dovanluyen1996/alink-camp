@@ -11,11 +11,14 @@
       <div class="title-center">
         <span>天気予報</span>
         <!-- TODO: 持ち物共有は編集時のみ表示する -->
-        <v-ons-button
-          class="button--share button--yellow"
+        <share-button
+          :subject="shareSubject"
+          :message="shareMessage"
         >
-          持ち物共有
-        </v-ons-button>
+          <template #text>
+            持ち物共有
+          </template>
+        </share-button>
       </div>
 
       <forecast-table
@@ -88,6 +91,7 @@ import ForecastTable from '@/components/organisms/plan/add-plan/list-item-camp/f
 import ContentWithFooter from '@/components/organisms/content-with-footer';
 import ConfirmDialog from '@/components/organisms/dialog/confirm-dialog';
 import CompletedDialog from '@/components/organisms/dialog/completed-dialog';
+import ShareButton from '@/components/organisms/share-button';
 
 export default {
   components: {
@@ -96,6 +100,7 @@ export default {
     ContentWithFooter,
     ConfirmDialog,
     CompletedDialog,
+    ShareButton,
   },
   props: {
     campsite: {
@@ -137,6 +142,12 @@ export default {
     },
     isLoading() {
       return this.$store.getters['models/item/isLoading'];
+    },
+    shareSubject() {
+      return '持ち物シェアタイトル';
+    },
+    shareMessage() {
+      return '持ち物シェアメッセージ';
     },
   },
   methods: {
@@ -248,26 +259,7 @@ export default {
 }
 
 .button--share {
-  position: absolute;
   right: 7px;
-  display: flex;
-  align-items: center;
   width: 109px;
-  height: 29px;
-  font-size: 14px;
-  font-weight: 600;
-  background-color: $color-yellow;
-  border-radius: 15px;
-
-  &::before {
-    display: inline-block;
-    width: 13px;
-    height: 15px;
-    margin-right: 6px;
-    content: '';
-    background-image: url("~@/assets/images/icon-share.png");
-    background-position: center;
-    background-size: 100%;
-  }
 }
 </style>
