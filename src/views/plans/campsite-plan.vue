@@ -1,6 +1,8 @@
 <template>
   <v-ons-page @show="show">
     <custom-toolbar title="計画一覧" />
+
+    <loading :visible="isLoading" />
     <div class="content">
       <v-ons-col class="text">
         <v-ons-row class="text__desc">
@@ -21,10 +23,25 @@
         </v-ons-button>
 
         <time-plan
-          :future-plans="futurePlans"
-          :past-plans="pastPlans"
+          :future-plans="displayedFuturePlans"
+          :past-plans="displayedPastPlans"
         />
       </v-ons-card>
+
+      <confirm-dialog
+        :is-shown.sync="isConfirmDialogVisible"
+        @clickConfirm="goToPurchase"
+      >
+        <template #title>
+          拡張機能
+        </template>
+        <template #message>
+          プレミアムサービスにご登録いただくことで、予定を複数作成することができます。
+        </template>
+        <template #confirmAction>
+          プレミアムへ
+        </template>
+      </confirm-dialog>
     </div>
   </v-ons-page>
 </template>
@@ -32,18 +49,27 @@
 <script>
 import TimePlan from '@/components/organisms/plan/time-plan';
 import NewPlanPage from '@/views/plans/new';
+import ConfirmDialog from '@/components/organisms/dialog/confirm-dialog';
+import InformationPurchase from '@/views/purchase-information/index.vue';
 
 import moment from 'moment';
 
 export default {
   components: {
     TimePlan,
+    ConfirmDialog,
   },
   props: {
     campsite: {
       type: Object,
       required: true,
     },
+  },
+  data() {
+    return {
+      isPurchased: false,
+      isConfirmDialogVisible: false,
+    };
   },
   computed: {
     futurePlans() {
@@ -60,15 +86,54 @@ export default {
         (a, b) => (moment(a.startedDate).isAfter(b.startedDate) ? -1 : 1),
       );
     },
+    displayedFuturePlans() {
+      if (!this.futurePlans.length) return [];
+
+      const oldestPlan = this.futurePlans[0];
+      return this.isPurchased ? this.futurePlans : [oldestPlan];
+    },
+    displayedPastPlans() {
+      if (!this.pastPlans.length) return [];
+
+      const newestPlan = this.pastPlans[0];
+      return this.isPurchased ? this.pastPlans : [newestPlan];
+    },
+    isLoading() {
+      return this.$store.getters['purchase/isLoading'];
+    },
+  },
+  async created() {
+    await this.setIsPurchased();
   },
   methods: {
     goToNewPlan() {
+      const isShowPremium = !this.isPurchased && this.futurePlans.length;
+      if (isShowPremium) {
+        this.showConfirmDialog();
+        return;
+      }
+
       this.$store.dispatch('plansNavigator/push', {
         extends: NewPlanPage,
         onsNavigatorProps: {
           campsite: this.campsite,
         },
       });
+    },
+    showConfirmDialog() {
+      this.isConfirmDialogVisible = true;
+    },
+    closeConfirmDialog() {
+      this.isConfirmDialogVisible = false;
+    },
+    async setIsPurchased() {
+      // TODO: 判別方法を修正する
+      this.isPurchased = await this.$store.dispatch('purchase/getIsPurchased');
+    },
+    goToPurchase() {
+      this.$store.dispatch('plansNavigator/push', InformationPurchase);
+
+      this.closeConfirmDialog();
     },
   },
 };

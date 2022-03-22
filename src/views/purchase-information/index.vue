@@ -2,8 +2,8 @@
   <v-ons-page>
     <custom-toolbar title="プレミアムサービスのご案内" />
 
+    <loading :visible="isLoading" />
     <div class="content">
-      <loading :visible="isLoading" />
       <content-with-footer>
         <greeting />
 
@@ -140,6 +140,7 @@ export default {
                 const params = { app_user_id: purchaserInfo.originalAppUserId };
                 await this.$store.dispatch('models/currentUser/updateUser', params);
 
+                this.$store.dispatch('purchase/setIsPurchased', true);
                 this.purchaseComplete();
               }
               this.isLoading = false;
@@ -174,6 +175,7 @@ export default {
             const params = { app_user_id: restoredInfo.originalAppUserId };
             await this.$store.dispatch('models/currentUser/updateUser', params);
 
+            this.$store.dispatch('purchase/setIsPurchased', true);
             this.purchaseComplete();
           } else {
             this.checkPurchaseErrorVisible = true;

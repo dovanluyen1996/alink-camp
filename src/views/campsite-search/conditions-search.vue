@@ -56,7 +56,6 @@ export default {
           component: CampsiteSearchLocationTab,
         },
       ],
-      isPurchased: false,
     };
   },
   computed: {
@@ -66,14 +65,15 @@ export default {
     activeIndexTab() {
       return this.$store.state.components.cardWithTab.searchCampsiteActiveIndex;
     },
+    isPurchased() {
+      return this.$store.getters['purchase/isPurchased'];
+    },
     isLoading() {
-      return this.$store.getters['purchase/isLoading']
-        || this.$store.getters['models/campsite/isLoading'];
+      return this.$store.getters['models/campsite/isLoading'];
     },
   },
   async created() {
     this.resetCardWithTab();
-    await this.setIsPurchased();
   },
   methods: {
     show() {
@@ -92,9 +92,6 @@ export default {
     },
     resetCardWithTab() {
       this.$store.commit('components/cardWithTab/resetSearchCampsiteActiveIndex');
-    },
-    async setIsPurchased() {
-      this.isPurchased = await this.$store.dispatch('purchase/getIsPurchased');
     },
   },
 };

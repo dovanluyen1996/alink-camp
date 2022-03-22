@@ -47,17 +47,9 @@ export default {
     ProbPrecipChart,
     AnnualWeatherChart,
   },
-  data() {
-    return {
-      isPurchased: false,
-    };
-  },
-  async created() {
-    await this.setIsPurchased();
-  },
-  methods: {
-    async setIsPurchased() {
-      this.isPurchased = await this.$store.dispatch('purchase/getIsPurchased');
+  computed: {
+    isPurchased() {
+      return this.$store.getters['purchase/isPurchased'];
     },
   },
 };

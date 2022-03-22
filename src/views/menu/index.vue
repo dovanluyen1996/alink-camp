@@ -1,11 +1,11 @@
 <template>
-  <v-ons-page @show="show">
+  <v-ons-page>
     <div class="background" />
 
     <div class="content">
       <v-ons-list>
         <v-ons-list-item
-          v-if="isPurchased"
+          v-if="!isPurchased"
           modifier="nodivider chevron"
           @click="goToPurchaseInformation"
         >
@@ -93,10 +93,10 @@ import AboutSubscriptionView from '@/views/about-subscription/index';
 import ItemsView from '@/views/items/index';
 
 export default {
-  data() {
-    return {
-      isPurchased: false,
-    };
+  computed: {
+    isPurchased() {
+      return this.$store.getters['purchase/isPurchased'];
+    },
   },
   methods: {
     goToPurchaseInformation() {
@@ -128,11 +128,6 @@ export default {
     },
     goToItems() {
       this.$store.dispatch('menuNavigator/push', ItemsView);
-    },
-    async show() {
-      const isPurchased = await this.$store.dispatch('purchase/getIsPurchased');
-
-      this.isPurchased = isPurchased;
     },
   },
 };

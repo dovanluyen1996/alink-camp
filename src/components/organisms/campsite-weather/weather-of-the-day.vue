@@ -91,23 +91,13 @@ export default {
       required: true,
     },
   },
-  data() {
-    return {
-      isPurchased: true,
-    };
-  },
   computed: {
     shortDate() {
       const targetDate = this.forecast.targetDate.date;
       return moment(targetDate).format('M/D');
     },
-  },
-  async created() {
-    await this.setIsPurchased();
-  },
-  methods: {
-    async setIsPurchased() {
-      this.isPurchased = await this.$store.dispatch('purchase/getIsPurchased');
+    isPurchased() {
+      return this.$store.getters['purchase/isPurchased'];
     },
   },
 };
