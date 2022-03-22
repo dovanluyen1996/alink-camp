@@ -1,6 +1,7 @@
 <template>
   <v-ons-page @show="show">
     <loading :visible="isLoading" />
+
     <div class="content">
       <div class="text">
         <v-ons-row class="text__desc">
@@ -73,6 +74,12 @@ export default {
     ConfirmDialog,
     CompletedDialog,
   },
+  props: {
+    campsite: {
+      type: Object,
+      required: true,
+    },
+  },
   data() {
     return {
       forecasts: {},
@@ -80,12 +87,6 @@ export default {
       confirmDialogVisible: false,
       completedDialogVisible: false,
     };
-  },
-  props: {
-    campsite: {
-      type: Object,
-      required: true,
-    },
   },
   computed: {
     isNew() {
@@ -109,6 +110,9 @@ export default {
         const params = tasksAt.map(at => ({ targetAt: at, content: tasks[at] }));
         this.$store.dispatch('plan/setTasks', params);
       },
+    },
+    isLoading() {
+      return this.$store.getters['models/weather/isForecastHourlyLoading'];
     },
   },
   methods: {
