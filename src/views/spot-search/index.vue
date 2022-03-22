@@ -275,6 +275,16 @@ export default {
     text-align: center;
   }
 
+  .button--search {
+    display: flex;
+    align-items: center;
+
+    img {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
   .list-item {
     border-bottom: 1px solid #d9d9d9;
 

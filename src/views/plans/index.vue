@@ -115,3 +115,9 @@ export default {
   },
 };
 </script>
+<style lang="scss" scoped>
+.button--search img {
+  width: 20px;
+  height: 20px;
+}
+</style>

@@ -170,6 +170,8 @@ export default {
       justify-content: flex-end;
 
       img {
+        width: 34px;
+        height: 34px;
         margin-right: 10px;
       }
     }
@@ -190,6 +192,8 @@ export default {
   }
 
   .mr-10 {
+    width: 20px;
+    height: 20px;
     margin-right: 10px;
   }
 }

@@ -130,6 +130,8 @@ export default {
     background-color: $color-yellow;
 
     img {
+      width: 22px;
+      height: 30px;
       margin-right: 5px;
     }
   }

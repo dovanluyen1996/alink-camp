@@ -45,6 +45,8 @@ export default {
 <style scoped lang="scss">
   .title {
     img {
+      width: 17px;
+      height: 17px;
       margin-left: 5px;
     }
   }
