@@ -62,6 +62,10 @@ export default {
     display: flex;
     justify-content: center;
     padding: 0 20px;
+
+    & img {
+      overflow: hidden;
+    }
   }
 
   &__box {

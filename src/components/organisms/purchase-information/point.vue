@@ -68,7 +68,8 @@ export default {
   }
 
   &__description {
-    padding-top: 40px;
+    width: 200px;
+    padding: 40px 0 35px 0;
     font-size: 16px;
     font-weight: 600;
     line-height: 1.7;

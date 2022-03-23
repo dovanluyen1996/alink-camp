@@ -69,8 +69,6 @@
           また、ログインキャンペーンで特別なプレゼントへの抽選にも参加頂けます。
         </purchase-point>
 
-        <using-note />
-
         <template #footer>
           <div class="purchase">
             <div class="purchase__top">
@@ -111,7 +109,6 @@ import ContentWithFooter from '@/components/organisms/content-with-footer';
 import ErrorDialog from '@/components/organisms/error-dialog';
 import Greeting from '@/components/organisms/purchase-information/greeting';
 import PurchasePoint from '@/components/organisms/purchase-information/point';
-import UsingNote from '@/components/organisms/purchase-information/using-note';
 
 export default {
   name: 'PurchaseInformation',
@@ -120,7 +117,6 @@ export default {
     ErrorDialog,
     Greeting,
     PurchasePoint,
-    UsingNote,
   },
   data() {
     return {
