@@ -93,6 +93,14 @@ export default {
       type: Object,
       required: true,
     },
+    startedDate: {
+      type: String,
+      required: true,
+    },
+    finishedDate: {
+      type: String,
+      required: true,
+    },
   },
   data() {
     return {
@@ -145,8 +153,19 @@ export default {
       this.completedDialogVisible = false;
       await this.$store.dispatch('plansNavigator/pop');
     },
+    async getPast() {
+      const params = {
+        campsite_id: this.campsite.id,
+        target_date_from: this.startedDate,
+        target_date_to: this.finishedDate,
+      };
+      const forecast = await this.$store.dispatch('models/weather/getPast', params);
+      return forecast;
+    },
     async show() {
-      // TODO: implement
+      if (this.$helpers.isEmptyObject(this.forecasts)) {
+        this.forecasts = await this.getPast();
+      }
     },
   },
 };
