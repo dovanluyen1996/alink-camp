@@ -5,11 +5,6 @@
         <tr>
           <th>日程</th>
           <th>天気</th>
-          <th>
-            降水量
-            <br>
-            <span class="text-small">(mm/h)</span>
-          </th>
           <th>気温</th>
         </tr>
         <tr
@@ -29,7 +24,6 @@
               image-width="35px"
             />
           </td>
-          <td>{{ precipitationText(items[date]) }}</td>
           <td>
             <temperature
               :value="items[date] ? items[date].maxTemp : ''"
