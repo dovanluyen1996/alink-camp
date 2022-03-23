@@ -55,27 +55,15 @@
             </td>
             <td>{{ precipitationText(getWeather(date, hour)) }}</td>
             <td>
-              <div
-                v-if="getWeather(date, hour) && getWeather(date, hour).windSpeed"
-                class="wind-direction"
-              >
-                <template v-if="getWeather(date, hour).windSpeed > 0">
-                  <div :class="['wind-speed', windSpeedRate(getWeather(date, hour).windSpeed)]" />
-                  <span>{{ getWeather(date, hour).windSpeed }}</span>
-                </template>
-                <template v-else>
-                  {{ getWeather(date, hour).windDirection }}
-                </template>
-              </div>
-              <div
-                v-else
-                class="wind-direction"
-              >
-                --
-              </div>
+              <wind-direction
+                :wind-speed="getWeather(date, hour) ? getWeather(date, hour).windSpeed : ''"
+                :wind-direction="getWeather(date, hour) ? getWeather(date, hour).windDirection: ''"
+              />
             </td>
             <td class="task">
-              <div class="task__text">{{ taskText(date, hour) }}</div>
+              <div class="task__text">
+                {{ taskText(date, hour) }}
+              </div>
               <img
                 v-if="isContentEmpty(taskText(date, hour))"
                 :src="require('@/assets/images/icon-more.png')"
@@ -108,6 +96,7 @@ import EditDialogTask from '@/components/organisms/edit-dialog-task';
 import WeatherImage from '@/components/atoms/weather-image';
 import Temperature from '@/components/atoms/temperature';
 import ShareButton from '@/components/organisms/share-button';
+import WindDirection from '@/components/organisms/plan/add-plan/list-item-camp/wind-direction';
 
 export default {
   name: 'DetailTable',
@@ -116,6 +105,7 @@ export default {
     WeatherImage,
     Temperature,
     ShareButton,
+    WindDirection,
   },
   props: {
     forecasts: {
@@ -203,17 +193,6 @@ export default {
     },
     windSpeedText(weather) {
       return this.$helpers.isEmpty(weather) ? '--' : weather.windSpeed;
-    },
-    windSpeedRate(windSpeed) {
-      // Unit of measurement: m/s
-      switch (true) {
-      case (windSpeed < 2):
-        return 'wind-speed--normal';
-      case (windSpeed < 5):
-        return 'wind-speed--strong';
-      default:
-        return 'wind-speed--danger';
-      }
     },
     editTaskAt(date, hour) {
       this.updateDataVisible = true;
@@ -362,46 +341,6 @@ $speed-degrees: 0, 22.5, 45, 67.5, 90, 112.5, 135, 157.5, 180,
         width: 24px;
         height: 24px;
         transform: translate(-50%, -50%);
-      }
-    }
-
-    .wind-speed {
-      background-position: center;
-      background-size: cover;
-
-      &--normal {
-        background-image: url('~@/assets/images/weathers/wind-speed/background-normal.png');
-      }
-
-      &--strong {
-        background-image: url('~@/assets/images/weathers/wind-speed/background-strong.png');
-      }
-
-      &--danger {
-        background-image: url('~@/assets/images/weathers/wind-speed/background-danger.png');
-      }
-    }
-
-    .wind-direction {
-      display: grid;
-      align-items: center;
-      justify-content: center;
-
-      @each $degree in $speed-degrees {
-        // generate class has partern: wind-direction--xx-deg
-        &--#{floor($degree)}-deg {
-          transform: rotate(#{$degree}deg);
-        }
-      }
-
-      .wind-speed {
-        width: 15px;
-        height: 24px;
-        margin-left: 2px;
-      }
-
-      span {
-        font-size: 12px;
       }
     }
   }
