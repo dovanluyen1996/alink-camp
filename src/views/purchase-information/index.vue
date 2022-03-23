@@ -9,74 +9,86 @@
 
         <purchase-point>
           <template #title>
-            いつでもゴルフ場の天気傾向を確認
+            長期間の天気傾向データを提供
           </template>
           <template #thumbnail>
             <img
               :src="require('@/assets/images/purchase-information/point-1.png')"
+              class="purchase-information__point"
               alt="purchase-point-1"
+              height="148px"
+              width="115px"
             >
           </template>
-          過去の天気データを活用して最適なコースを検索できます。
+          1ヶ月先の気温や降水量の予測情報をご提供します。また、年間の天気や気温の傾向を確認することができます。
         </purchase-point>
 
-        <purchase-point :content-full-width="true">
+        <purchase-point>
           <template #title>
-            ゴルフ場のピンポイント天気予報を提供
+            最新情報をPUSH通知
           </template>
           <template #thumbnail>
             <img
               :src="require('@/assets/images/purchase-information/point-2.png')"
               alt="purchase-point-1"
+              width="132px"
+              height="146px"
             >
           </template>
-          晴れや雨などの天気予報に加えて、落雷の危険性や、服装提案、紫外線の予測などの詳細情報も提供しています。
+          通知をONにする事で、雨雲が近づいたら、日の入情報など様々な最新情報を確認することができます。
         </purchase-point>
 
         <purchase-point>
           <template #title>
-            コンパス×風予報で「今の風」が分かる
+            予定作成が無制限に
           </template>
           <template #thumbnail>
             <img
               :src="require('@/assets/images/purchase-information/point-3.png')"
               alt="purchase-point-1"
+              width="132px"
+              height="146"
             >
           </template>
-          進行方向に対しての風予報を提供。<br>
-          ゴルフボールを打つ際、コース上空の風を確認できます。
+          キャンプ場ごとに保存できる予定を制限なしに作成、保存できるようになります。
         </purchase-point>
 
         <purchase-point>
           <template #title>
-            急な天気の変化でも安心
+            豊富な気象情報の提供
           </template>
           <template #thumbnail>
             <img
               :src="require('@/assets/images/purchase-information/point-4.png')"
               alt="purchase-point-1"
+              width="130px"
+              height="168px"
             >
           </template>
-          予定日の天気予報やプレイ中に雨雲の接近の危険性が高まった場合もPUSH通知でご案内します。
+          紫外線、落雷、星空の見やすさなどを指数でご提供します。<br>
+          また、ログインキャンペーンで特別なプレゼントへの抽選にも参加頂けます。
         </purchase-point>
 
         <using-note />
 
         <template #footer>
           <div class="purchase">
+            <div class="purchase__top">
+              <p>＼初めてご利用の方限定／</p>
+            </div>
             <div
               class="purchase__content"
               @click="callToPurchase()"
             >
-              <span>利用を開始する</span><br>
-              <span>（初回7日間無料月額￥360）</span>
+              <span>1ヶ月無料で試してみる</span><br>
+              <span>無料期間後：240円/月額</span>
             </div>
             <div class="purchase__action">
               <v-ons-button
-                modifier="rounded"
+                modifier="secondary"
                 @click="restorePurchase()"
               >
-                定期購入中の方はこちらから復元
+                購入状態を復元する方はこちら
               </v-ons-button>
             </div>
           </div>
@@ -209,47 +221,58 @@ export default {
   top: 0 !important;
 }
 
+.purchase-information__point {
+  margin-right: 10px;
+}
+
 .purchase {
-  border-top: 4px solid #fff;
+  text-align: center;
+  background-color: $color-default;
+
+  &__top {
+    padding: 30px 0 17px;
+
+    p {
+      margin: 0;
+      font-size: 17px;
+      font-weight: bold;
+      color: $color-purchase-gold;
+    }
+  }
 
   &__content {
-    padding: 20px 20px 1px;
-    font-size: 30px;
+    padding: 12px 0;
+    margin: 0 28px;
+    font-size: 17px;
     font-weight: 600;
     color: #fff;
-    text-align: center;
-    background-color: $color-orange;
+    background-color: #c0a243;
+    border-radius: 7px;
 
     span:first-child {
-      text-decoration: underline;
-      text-underline-offset: 4px;
+      font-size: 24px;
+      font-weight: bold;
     }
 
     span:last-of-type {
-      font-size: 20px;
+      font-size: 15px;
+      font-weight: normal;
     }
   }
 
   &__action {
-    padding: 1px 25px 20px;
-    font-size: 30px;
+    padding-bottom: 6px;
+    margin-top: 30px;
+    font-size: 12px;
     font-weight: 600;
     color: #fff;
-    text-align: center;
-    background-color: $color-orange;
+    text-decoration: underline;
   }
 }
 
 /deep/ {
   .page__background {
-    background:
-      linear-gradient(
-        180deg,
-        $color-green 0%,
-        $color-green 50%,
-        $color-orange 50%,
-        $color-orange 100%
-      );
+    background: $color-purchase-dark;
   }
 
   .page__content {
@@ -260,6 +283,7 @@ export default {
     &__footer {
       bottom: -1px !important;
       padding: 0 !important;
+      background-color: $color-default;
     }
   }
 
@@ -278,6 +302,14 @@ export default {
     display: flex;
     justify-content: center;
     white-space: nowrap;
+  }
+
+  .button--secondary {
+    font-size: 12px;
+    font-weight: 400;
+    text-align: center;
+    text-decoration: underline;
+    background-color: transparent;
   }
 }
 </style>

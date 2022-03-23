@@ -1,20 +1,16 @@
 <template>
   <div class="greeting">
-    <div class="greeting__logo">
-      <img
-        :src="require('@/assets/images/purchase-information/logo.png')"
-        width="283px"
-        height="107px"
-      >
+    <div class="greeting__subtitle">
+      <p>\豊富なプレミア会員機能/</p>
     </div>
     <div class="greeting__title">
-      <p>天気を把握して、コース予約や準備に</p>
+      <p>プレミア会員メニュー</p>
     </div>
     <div class="greeting__content">
       <img
-        :src="require('@/assets/images/purchase-information/medal.png')"
-        width="124px"
-        height="120px"
+        src="@/assets/images/purchase-information/logo.png"
+        width="344px"
+        height="138px"
       >
     </div>
   </div>
@@ -30,38 +26,48 @@ export default {
 @import '@/assets/scss/_variables.scss';
 
 .greeting {
-  background-image: url('~@/assets/images/purchase-information/background-purchase.png');
+  background-color: #f2ebd3;
   background-position: center;
   background-size: cover;
 
-  &__logo {
-    display: flex;
-    justify-content: center;
-    padding-top: 17px;
-  }
-
-  &__title {
+  &__title,
+  &__subtitle {
     display: flex;
     justify-content: center;
 
     p {
-      padding: 5px 12px;
-      font-size: 16px;
+      margin: 0;
       font-weight: 600;
-      color: white;
-      background-color: $color-green;
-      border: 1px solid white;
+      color: $color-purchase-gold;
+    }
+  }
+
+  &__title {
+    padding: 18px 0 16px 0;
+
+    & > p {
+      font-size: 28px;
+    }
+  }
+
+  &__subtitle {
+    padding-top: 23px;
+
+    & p {
+      font-size: 20px;
     }
   }
 
   &__content {
     display: flex;
     justify-content: center;
+    padding: 0 20px;
+  }
 
-    img {
-      padding-top: 20px;
-      padding-bottom: 35px;
-    }
+  &__box {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
   }
 }
 </style>

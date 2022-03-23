@@ -2,9 +2,10 @@
   <div class="purchase-point">
     <div class="purchase-point__title">
       <img
-        :src="require('@/assets/images/purchase-information/point-icon.png')"
+        :src="require('@/assets/images/purchase-information/crown-icon.png')"
         alt="purchase-point"
-        width="52px"
+        width="28px"
+        height="22px"
       >
       <p>
         <slot name="title" />
@@ -14,11 +15,11 @@
       class="purchase-point__content"
       :class="{ 'purchase-point__content--full-width': contentFullWidth }"
     >
-      <div class="purchase-point__thumbnal">
-        <slot name="thumbnail" />
-      </div>
       <div class="purchase-point__description">
         <slot />
+      </div>
+      <div class="purchase-point__thumbnal">
+        <slot name="thumbnail" />
       </div>
     </div>
   </div>
@@ -44,9 +45,9 @@ export default {
     display: flex;
     align-items: center;
     height: 86px;
-    padding: 0 18px;
-    color: #fff;
-    background-color: $color-green;
+    padding: 0 13px;
+    color: #fdfbf4;
+    background-color: #c83200;
 
     img {
       margin-right: 12px;
@@ -61,30 +62,24 @@ export default {
   }
 
   &__thumbnal {
-    width: 50%;
-    margin-right: 20px;
-
-    img {
-      width: 100%;
-      height: auto;
-    }
+    display: flex;
+    align-items: flex-end;
+    padding-left: 13px;
   }
 
   &__description {
-    display: flex;
-    align-items: center;
-    width: 50%;
+    padding-top: 40px;
     font-size: 16px;
     font-weight: 600;
     line-height: 1.7;
-    color: $color-green;
+    color: $color-purchase-gold;
   }
 
   &__content {
     display: flex;
-    min-height: 210px;
-    padding: 25px 12px;
-    background-color: #fff;
+    min-height: 200px;
+    padding: 0 10px 0 30px;
+    background-color: $color-purchase-dark;
 
     &--full-width {
       display: block;
