@@ -267,15 +267,10 @@ export default {
 }
 
 .items__note {
-  position: absolute;
-  top: 65%;
-  left: 50%;
-  width: 100%;
   font-size: 18px;
   font-weight: 600;
-  color: $color-white;
+  color: #000;
   text-align: center;
-  transform: translate(-50%, -50%);
 }
 
 .button--share {
