@@ -269,7 +269,7 @@ export default {
 .items__note {
   font-size: 18px;
   font-weight: 600;
-  color: #000;
+  color: $color-default;
   text-align: center;
 }
 
