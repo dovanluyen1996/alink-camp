@@ -1,60 +1,20 @@
 <template>
   <v-ons-page :infinite-scroll="search">
+    <loading :visible="isLoading" />
     <custom-toolbar :title="title" />
     <div class="content">
-      <loading :visible="isLoading" />
       <template v-if="campsites.length === 0">
-        <content-with-footer v-if="campsites.length === 0">
-          <no-data>
-            条件に合うキャンプ場が見つかりません
-          </no-data>
-          <template
-            v-if="isFiltered"
-            #footer
-          >
-            <v-ons-button
-              class="button--search"
-              modifier="large--cta rounded yellow"
-              @click="showFiltering()"
-            >
-              絞り込み
-            </v-ons-button>
-          </template>
-        </content-with-footer>
+        <no-data>
+          条件に合うキャンプ場が見つかりません
+        </no-data>
       </template>
 
       <template v-else>
-        <content-with-footer>
-          <campsite-list
-            :campsites="campsites"
-            :current-location="currentLocation"
-            @click="goToCampsiteShow"
-          />
-          <template
-            v-if="isConditionsChangeable()"
-            #footer
-          >
-            <v-ons-button
-              class="button--search"
-              modifier="large--cta rounded yellow"
-              @click="goToConditionsSearch()"
-            >
-              条件変更
-            </v-ons-button>
-          </template>
-          <template
-            v-else-if="isFilteringEnable()"
-            #footer
-          >
-            <v-ons-button
-              class="button--search"
-              modifier="large--cta rounded yellow"
-              @click="showFiltering()"
-            >
-              絞り込み
-            </v-ons-button>
-          </template>
-        </content-with-footer>
+        <campsite-list
+          :campsites="campsites"
+          :current-location="currentLocation"
+          @click="goToCampsiteShow"
+        />
       </template>
 
       <campsite-list-filter-dialog
@@ -62,6 +22,26 @@
         @filter="filter"
       />
     </div>
+
+    <fixed-footer>
+      <v-ons-button
+        v-if="footerType === 'filterd'"
+        class="button--search"
+        modifier="large--cta rounded yellow"
+        @click="showFiltering()"
+      >
+        絞り込み
+      </v-ons-button>
+
+      <v-ons-button
+        v-else-if="footerType === 'conditionsChange'"
+        class="button--search"
+        modifier="large--cta rounded yellow"
+        @click="goToConditionsSearch()"
+      >
+        条件変更
+      </v-ons-button>
+    </fixed-footer>
   </v-ons-page>
 </template>
 
@@ -69,8 +49,8 @@
 // components
 import NoData from '@/components/organisms/no-data';
 import CampsiteList from '@/components/organisms/campsite-list';
-import ContentWithFooter from '@/components/organisms/content-with-footer';
 import CampsiteListFilterDialog from '@/components/organisms/campsite-search/filter-dialog.vue';
+import FixedFooter from '@/components/organisms/fixed-footer';
 
 // pages
 import CampsiteShow from '@/views/campsites/show';
@@ -80,8 +60,8 @@ export default {
   components: {
     NoData,
     CampsiteList,
-    ContentWithFooter,
     CampsiteListFilterDialog,
+    FixedFooter,
   },
   props: {
     title: {
@@ -114,6 +94,19 @@ export default {
     },
     isLoading() {
       return this.$store.state.models.campsite.isLoading;
+    },
+    footerType() {
+      let type = null;
+
+      if (this.campsites.length === 0 && this.isFiltered) {
+        type = 'filterd';
+      } else if (this.isConditionsChangeable()) {
+        type = 'conditionsChange';
+      } else if (this.isFilteringEnable()) {
+        type = 'filterd';
+      }
+
+      return type;
     },
   },
   methods: {
@@ -228,25 +221,23 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.content-with-footer__footer {
-  .button--search {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 48px !important;
-    font-size: 14px !important;
-    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.4);
+.button--search {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 48px !important;
+  font-size: 14px !important;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.4);
 
-    &::before {
-      display: inline-block;
-      width: 20px;
-      height: 20px;
-      margin-right: 6px;
-      content: '';
-      background-image: url("~@/assets/images/form/search-top.png");
-      background-position: center;
-      background-size: 100%;
-    }
+  &::before {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 6px;
+    content: '';
+    background-image: url("~@/assets/images/form/search-top.png");
+    background-position: center;
+    background-size: 100%;
   }
 }
 </style>
