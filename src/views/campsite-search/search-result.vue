@@ -25,7 +25,7 @@
 
     <fixed-footer>
       <v-ons-button
-        v-if="footerType === 'filterd'"
+        v-if="footerType === 'filtering'"
         class="button--search"
         modifier="large--cta rounded yellow"
         @click="showFiltering()"
@@ -99,11 +99,11 @@ export default {
       let type = null;
 
       if (this.campsites.length === 0 && this.isFiltered) {
-        type = 'filterd';
+        type = 'filtering';
       } else if (this.isConditionsChangeable()) {
         type = 'conditionsChange';
       } else if (this.isFilteringEnable()) {
-        type = 'filterd';
+        type = 'filtering';
       }
 
       return type;
