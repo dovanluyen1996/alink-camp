@@ -18,9 +18,7 @@ export default {
       // NOTE: コンテンツにフッターが被らないように.page__contentにpaddingを取る
       const footerHeight = this.$el.offsetHeight;
       const siblingsArray = [...this.$el.closest('.page').childNodes];
-      const pageContent = siblingsArray.find((elm) => {
-        if (elm.classList) return elm.classList.contains('page__content');
-      });
+      const pageContent = siblingsArray.find(elm => elm.classList && elm.classList.contains('page__content'));
 
       pageContent.style.paddingBottom = `${footerHeight}px`;
     },
