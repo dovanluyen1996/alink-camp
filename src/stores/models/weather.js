@@ -4,7 +4,6 @@ export default {
   strict: true,
   namespaced: true,
   state: {
-    isLoading: false,
     isForecastScheduledDateLoading: false,
     isForecast14DaysLoading: false,
     isForecastHourlyLoading: false,
@@ -16,7 +15,6 @@ export default {
     isForecastYearlyWeatherRateLoading: false,
   },
   getters: {
-    isLoading: state => state.isLoading,
     isForecastScheduledDateLoading: state => state.isForecastScheduledDateLoading,
     isForecast14DaysLoading: state => state.isForecast14DaysLoading,
     isForecastHourlyLoading: state => state.isForecastHourlyLoading,
@@ -28,9 +26,6 @@ export default {
     isForecastYearlyWeatherRateLoading: state => state.isForecastYearlyWeatherRateLoading,
   },
   mutations: {
-    setIsLoading(state, isLoading) {
-      state.isLoading = isLoading;
-    },
     setIsForecastScheduledDateLoading(state, isForecastScheduledDateLoading) {
       state.isForecastScheduledDateLoading = isForecastScheduledDateLoading;
     },

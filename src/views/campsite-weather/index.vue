@@ -84,7 +84,7 @@ export default {
       const loadPlan = this.$store.getters['models/userCampsitePlan/isLoading'];
       const loadFavorite = this.$store.getters['models/usersFavorite/isLoading'];
       const loadWeather = this.$store.getters['models/weather/isForecastScheduledDateLoading']
-        || this.$store.getters['models/weather/isForecast14Days'];
+        || this.$store.getters['models/weather/isForecast14DaysLoading'];
 
       return loadPlan || loadFavorite || loadWeather;
     },
