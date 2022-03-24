@@ -16,12 +16,13 @@
           :checked-values.sync="checkedValues"
           :checked-value="label.id"
           :label="label.name"
+          :disable="isDisabled(label.id)"
         />
       </div>
     </div>
     <template #footer>
       <v-ons-button
-        modifier="secondary"
+        modifier="secondary rounded"
         @click="closeLabelList"
       >
         キャンセル
@@ -70,6 +71,9 @@ export default {
     },
   },
   methods: {
+    isDisabled(labelId) {
+      return this.checkedValues.length >= 3 && !this.checkedValues.includes(labelId);
+    },
     closeLabelList() {
       this.checkedValues = [...this.checkedLabelIds];
       this.$emit('update:isVisibleLabelFilter', false);
@@ -95,13 +99,15 @@ export default {
 
   .button {
     &--secondary {
-      color: #222;
-      background-color: #fff;
+      color: #fff;
+      background-color: #beb9b8;
+      box-shadow: 0 5px 5px rgba(0, 0, 0, 0.4);
     }
 
     &--primary {
       color: #fff;
       background-color: #9a3210;
+      box-shadow: 0 5px 5px rgba(0, 0, 0, 0.4);
     }
   }
 
@@ -116,6 +122,14 @@ export default {
 
   .alert-dialog-content {
     padding: 0;
+  }
+
+  .alert-dialog-footer {
+    display: flex;
+
+    & > ons-button {
+      margin: 5px;
+    }
   }
 }
 
@@ -142,6 +156,8 @@ export default {
   }
 
   &__items {
+    max-height: 350px;
+    overflow: scroll;
     background-color: #fff;
   }
 
@@ -151,6 +167,22 @@ export default {
     height: 34px;
     padding-left: 5px;
     border-top: 1px solid #d9d9d9;
+
+    &:last-child {
+      border-bottom: 1px solid #d9d9d9;
+    }
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .label-list__items {
+    max-height: 230px;
+  }
+
+  /deep/ {
+    .alert-dialog-footer ons-button {
+      margin: 2px;
+    }
   }
 }
 </style>
