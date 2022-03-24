@@ -12,8 +12,8 @@
         <span>天気予報</span>
         <!-- TODO: 持ち物共有は編集時のみ表示する -->
         <share-button
-          :subject="shareSubject"
-          :message="shareMessage"
+          :subject="shareSubject()"
+          :message="shareMessage()"
         >
           <template #text>
             持ち物共有
@@ -143,12 +143,6 @@ export default {
     isLoading() {
       return this.$store.getters['models/item/isLoading'];
     },
-    shareSubject() {
-      return '持ち物シェアタイトル';
-    },
-    shareMessage() {
-      return '持ち物シェアメッセージ';
-    },
   },
   methods: {
     async submit() {
@@ -187,6 +181,16 @@ export default {
       if (this.$helpers.isEmptyObject(this.forecasts)) {
         this.forecasts = await this.getForecast14Days();
       }
+    },
+    shareSubject() {
+      return 'キャンプ情報共有';
+    },
+    shareMessage() {
+      const items = this.$store.getters['models/item/all'];
+      const checkedItemIds = this.checkedItemIds;
+      const checkedItems = items.filter(item => checkedItemIds.includes(item.id));
+
+      return checkedItems.map(item => item.name).join('\n');
     },
   },
 };
