@@ -10,8 +10,8 @@
           {{ date }}
         </span>
         <share-button
-          :subject="shareSubject"
-          :message="shareMessage"
+          :subject="shareSubject()"
+          :message="shareMessage(date)"
         >
           <template #text>
             予定共有
@@ -153,12 +153,6 @@ export default {
     dateRange() {
       return this.$store.getters['plan/dateRange'];
     },
-    shareSubject() {
-      return '予定シェアタイトル';
-    },
-    shareMessage() {
-      return '予定シェアメッセージ';
-    },
   },
   methods: {
     taskText(date, hour) {
@@ -197,6 +191,36 @@ export default {
     },
     isContentEmpty(content) {
       return content === '';
+    },
+    shareSubject() {
+      return 'キャンプ情報共有';
+    },
+    shareMessage(date) {
+      const messages = [];
+
+      this.hours.forEach(hour => {
+        const hourlyMessages = [];
+        const weather = this.getWeather(date, hour);
+
+        hourlyMessages.push(`${hour}時`);
+        // 天気情報
+        if (weather && this.$helpers.isPresentObject(weather)) {
+          hourlyMessages.push(weather.forecastTelop);
+          hourlyMessages.push(`${weather.temperature}℃`);
+          hourlyMessages.push(`${this.precipitationText(weather)}mm/h`);
+          hourlyMessages.push(`${weather.windSpeed}m/s`);
+        }
+        // タスク
+        const task = this.taskText(date, hour);
+        if (!this.isContentEmpty(task)) {
+          // 先頭は意図的に空白を挿入していることを考慮して、末尾のみ空白・改行は取り除く
+          hourlyMessages.push(task.trimEnd());
+        }
+        messages.push(hourlyMessages.join('\n'));
+      });
+
+      // 時間毎に１行空行を入れる
+      return messages.join('\n\n');
     },
   },
 };
