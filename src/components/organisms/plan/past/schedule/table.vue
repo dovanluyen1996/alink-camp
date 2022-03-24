@@ -17,7 +17,11 @@
           >
             <label width="150px">No Data</label>
           </v-ons-col>
-          <campsite-plan-image :value="image" />
+          <campsite-plan-image
+            :value="memories[date]"
+            :date="date"
+            @updateImage="updateImage"
+          />
         </v-ons-row>
       </v-ons-card>
 
@@ -107,6 +111,10 @@ export default {
       type: Object,
       required: true,
     },
+    memories: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {
@@ -147,6 +155,9 @@ export default {
     },
   },
   methods: {
+    updateImage(date, memory) {
+      this.$emit('update:memories', { ...this.memories, [date]: memory });
+    },
     taskText(date, hour) {
       const targetAt = this.$moment(`${date} ${hour}:00`).format('YYYY-MM-DD HH:mm');
       const task = this.tasks[targetAt] || '';

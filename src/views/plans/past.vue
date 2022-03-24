@@ -88,6 +88,7 @@ export default {
       this.setFinishedDate();
       this.setItems();
       this.setTasks();
+      this.setMemories();
     },
     async getItems() {
       await this.$store.dispatch('models/item/getItems');
@@ -109,6 +110,9 @@ export default {
     },
     setTasks() {
       this.$store.dispatch('plan/setTasks', this.detailPlan.tasks);
+    },
+    setMemories() {
+      this.$store.dispatch('plan/setMemories', this.detailPlan.userCampsitePlansMemories);
     },
     showCompletedDialog(action) {
       this.action = action;
