@@ -244,7 +244,7 @@ export default {
   }
 
   .content-with-footer {
-    height: 0;
+    height: 21%;
 
     .content-with-footer__content {
       padding-bottom: 0 !important;
