@@ -12,7 +12,6 @@
         <custom-datetime-input
           v-model="inputedValue"
           type="date"
-          placeholder="日にち"
           :errors="errors"
         />
       </validation-provider>
@@ -42,7 +41,9 @@ export default {
   computed: {
     inputedValue: {
       get() {
-        return this.value;
+        const today = this.$helpers.localDateWithHyphenFrom(new Date());
+
+        return this.value || today;
       },
       set(newValue) {
         this.$emit('input', newValue);
