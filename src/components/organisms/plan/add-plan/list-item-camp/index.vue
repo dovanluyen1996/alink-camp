@@ -186,9 +186,9 @@ export default {
       return 'キャンプ情報共有';
     },
     shareMessage() {
-      const items = this.$store.getters['models/item/all'];
+      const { sortedItems } = this;
       const checkedItemIds = this.checkedItemIds;
-      const checkedItems = items.filter(item => checkedItemIds.includes(item.id));
+      const checkedItems = sortedItems.filter(item => checkedItemIds.includes(item.id));
 
       return checkedItems.map(item => item.name).join('\n');
     },
