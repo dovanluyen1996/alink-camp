@@ -198,7 +198,7 @@ export default {
     shareMessage(date) {
       const messages = [];
 
-      this.hours.forEach(hour => {
+      this.hours.forEach((hour) => {
         const hourlyMessages = [];
         const weather = this.getWeather(date, hour);
 

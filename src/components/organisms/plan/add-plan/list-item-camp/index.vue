@@ -187,7 +187,7 @@ export default {
     },
     shareMessage() {
       const { sortedItems } = this;
-      const checkedItemIds = this.checkedItemIds;
+      const { checkedItemIds } = this;
       const checkedItems = sortedItems.filter(item => checkedItemIds.includes(item.id));
 
       return checkedItems.map(item => item.name).join('\n');
