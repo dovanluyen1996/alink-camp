@@ -13,6 +13,15 @@
         保存
       </v-ons-button>
     </template>
+    <div
+      class="close-dialog"
+      @click="closeDialog()"
+    >
+      <img
+        src="@/assets/images/form/delete.png"
+        class="close-dialog--icon"
+      >
+    </div>
   </v-ons-alert-dialog>
 </template>
 
@@ -57,6 +66,9 @@ export default {
       this.$emit('update:tasks', { ...this.tasks, [this.targetAt]: this.newTask });
       this.$emit('close');
     },
+    closeDialog() {
+      this.$emit('close');
+    },
   },
 };
 </script>
@@ -70,6 +82,20 @@ export default {
     justify-content: center;
     height: 32px;
     font-size: 12px;
+  }
+}
+
+.alert-dialog {
+  position: relative;
+}
+
+.close-dialog {
+  position: absolute;
+  top: 6px;
+  right: -9px;
+
+  &--icon {
+    width: 20px;
   }
 }
 </style>
