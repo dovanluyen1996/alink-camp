@@ -114,18 +114,24 @@ export default {
     setTasks() {
       this.$store.dispatch('plan/setTasks', this.detailPlan.tasks);
     },
-    async showCompletedDialog(action) {
+    showCompletedDialog(action) {
       this.action = action;
       this.completedDialogVisible = true;
+    },
+    closeCompletedDialog() {
+      this.completedDialogVisible = false;
+      this.goToPlans();
+    },
+    async deletePlan() {
+      this.closeDeleteDialog();
+      this.showCompletedDialog('deletePlan');
       await this.$store.dispatch('models/userCampsitePlan/deleteUserCampsitePlan', { userCampsitePlanId: this.plan.id });
     },
-    async closeCompletedDialog() {
-      this.completedDialogVisible = false;
-      await this.$store.dispatch('plansNavigator/pop');
+    goToPlans() {
+      this.$store.dispatch('plansNavigator/pop');
     },
-    deletePlan() {
+    closeDeleteDialog() {
       this.isShownDeleteDialog = false;
-      this.showCompletedDialog('deletePlan');
     },
   },
 };
