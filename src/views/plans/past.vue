@@ -84,14 +84,35 @@ export default {
   },
   methods: {
     async show() {
-      await this.$store.dispatch('models/item/getItems');
-      await this.$store.dispatch('models/userCampsitePlan/getUserCampsitePlan', { userCampsitePlanId: this.plan.id });
+      await this.getItems();
+      await this.getUserCampsitePlan();
 
       this.$store.dispatch('plan/clean');
+      this.setPlanId();
+      this.setStartedDate();
+      this.setFinishedDate();
+      this.setItems();
+      this.setTasks();
+    },
+    async getItems() {
+      await this.$store.dispatch('models/item/getItems');
+    },
+    async getUserCampsitePlan() {
+      await this.$store.dispatch('models/userCampsitePlan/getUserCampsitePlan', { userCampsitePlanId: this.plan.id });
+    },
+    setPlanId() {
       this.$store.dispatch('plan/setPlanId', this.detailPlan.id);
+    },
+    setStartedDate() {
       this.$store.dispatch('plan/setStartedDate', this.detailPlan.startedDate);
+    },
+    setFinishedDate() {
       this.$store.dispatch('plan/setFinishedDate', this.detailPlan.finishedDate);
+    },
+    setItems() {
       this.$store.dispatch('plan/setItems', this.detailPlan.items);
+    },
+    setTasks() {
       this.$store.dispatch('plan/setTasks', this.detailPlan.tasks);
     },
     showCompletedDialog(action) {
