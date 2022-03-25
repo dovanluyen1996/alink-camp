@@ -144,9 +144,9 @@ export default {
       this.confirmDialogVisible = false;
 
       if (this.isNew) {
-        this.$store.dispatch('plan/createPlan');
+        await this.$store.dispatch('plan/createPlan');
       } else {
-        this.$store.dispatch('plan/updatePlan');
+        await this.$store.dispatch('plan/updatePlan');
       }
 
       this.showCompletedDialog();

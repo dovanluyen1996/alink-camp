@@ -108,7 +108,7 @@ export default {
     async submit() {
       this.confirmDialogVisible = false;
 
-      this.$store.dispatch('plan/updatePlan');
+      await this.$store.dispatch('plan/updatePlan');
 
       this.showCompletedDialog();
     },
