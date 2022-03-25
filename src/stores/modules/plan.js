@@ -103,21 +103,22 @@ export default {
     storeCheckedItem(_context, itemIds) {
       try {
         localStorage.setItem(LOCAL_STORAGE_KEY_CHECKED_ITEM_IDS, JSON.stringify(itemIds));
-      } catch(error) {
+      } catch (error) {
         // 保存できなくても処理を続行する
         console.log('itemIds store error.', error);
       }
     },
     restoreCheckedItem({ dispatch }, items) {
       try {
-        const storedIds = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_CHECKED_ITEM_IDS)) || [];
+        const ids = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_CHECKED_ITEM_IDS));
+        const storedIds = ids || [];
 
         const validItems = items || [];
         const validIds = validItems.map(item => item.id);
         const itemIds = storedIds.filter(id => validIds.includes(id));
 
         dispatch('setItemIds', itemIds);
-      } catch(error) {
+      } catch (error) {
         // 復元できなくても処理を続行する
         console.log('itemIds restore error.', error);
       }
