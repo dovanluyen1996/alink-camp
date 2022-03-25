@@ -82,9 +82,6 @@ export default {
     sundayCol(date) {
       return this.$helpers.isSunday(date) ? 'date-col__sunday' : '';
     },
-    precipitationText(forecast) {
-      return this.$helpers.isEmpty(forecast) ? '--' : forecast.precip;
-    },
   },
 };
 </script>
