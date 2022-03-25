@@ -196,9 +196,7 @@ export default {
       return 'キャンプ情報共有';
     },
     shareMessage(date) {
-      const messages = [];
-
-      this.hours.forEach((hour) => {
+      const messages = this.hours.map((hour) => {
         const hourlyMessages = [];
         const weather = this.getWeather(date, hour);
 
@@ -216,7 +214,8 @@ export default {
           // 先頭は意図的に空白を挿入していることを考慮して、末尾のみ空白・改行は取り除く
           hourlyMessages.push(task.trimEnd());
         }
-        messages.push(hourlyMessages.join('\n'));
+
+        return hourlyMessages.join('\n');
       });
 
       // 時間毎に１行空行を入れる
