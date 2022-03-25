@@ -205,10 +205,10 @@ export default {
         hourlyMessages.push(`${hour}時`);
         // 天気情報
         if (weather && this.$helpers.isPresentObject(weather)) {
-          hourlyMessages.push(weather.forecastTelop);
-          hourlyMessages.push(`${weather.temperature}℃`);
-          hourlyMessages.push(`${this.precipitationText(weather)}mm/h`);
-          hourlyMessages.push(`${weather.windSpeed}m/s`);
+          hourlyMessages.push(this.shareWeatherText(weather.forecastTelop));
+          hourlyMessages.push(`${this.shareWeatherText(weather.temperature)}℃`);
+          hourlyMessages.push(`${this.shareWeatherText(weather.precip)}mm/h`);
+          hourlyMessages.push(`${this.shareWeatherText(weather.windSpeed)}m/s`);
         }
         // タスク
         const task = this.taskText(date, hour);
@@ -221,6 +221,9 @@ export default {
 
       // 時間毎に１行空行を入れる
       return messages.join('\n\n');
+    },
+    shareWeatherText(value) {
+      return this.$helpers.isEmpty(value) ? '--' : value;
     },
   },
 };
