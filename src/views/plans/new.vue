@@ -44,14 +44,19 @@ export default {
         },
       ],
       activeIndex: 0,
-      action: '',
     };
   },
   methods: {
     async show() {
-      await this.$store.dispatch('models/item/getItems');
+      await this.getItems();
 
       this.$store.dispatch('plan/clean');
+      this.setCampsiteId();
+    },
+    async getItems() {
+      await this.$store.dispatch('models/item/getItems');
+    },
+    setCampsiteId() {
       this.$store.dispatch('plan/setCampsiteId', this.campsite.id);
     },
   },

@@ -30,6 +30,9 @@ export default {
     },
     inScheduleTasks: (state, getters) => {
       const dateRange = [...getters.dateRange];
+
+      if (dateRange.length === 0) return [];
+
       const startedDate = dateRange[0];
       const finishedDate = dateRange[dateRange.length - 1];
       const inSchedule = task => moment(task.targetAt).isBetween(`${startedDate} 0:00`, `${finishedDate} 23:59`, null, '[]');
