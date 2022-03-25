@@ -348,9 +348,4 @@ $speed-degrees: 0, 22.5, 45, 67.5, 90, 112.5, 135, 157.5, 180,
     }
   }
 }
-
-.button--share {
-  right: 10px;
-  width: 110px;
-}
 </style>

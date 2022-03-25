@@ -259,7 +259,7 @@ export default {
 }
 
 .button--share {
-  right: 7px;
-  width: 109px;
+  right: 7px !important;
+  width: 109px !important;
 }
 </style>
