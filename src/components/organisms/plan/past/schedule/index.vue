@@ -38,7 +38,7 @@
       </template>
 
       <template #confirmAction>
-        編集
+        OK
       </template>
     </confirm-dialog>
 
