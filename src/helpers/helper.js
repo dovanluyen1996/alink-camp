@@ -65,8 +65,8 @@ export default {
     return moment(time).format('HH:mm');
   },
 
-  localMonthDateFrom(time) {
-    return moment(time).format('MM/DD');
+  localMonthDateFromWithoutZero(time) {
+    return moment(time).format('M/D');
   },
 
   // 日付を取得するため。javascriptにはyyyy-mm-ddのフォーマットを使わないといけないです。
