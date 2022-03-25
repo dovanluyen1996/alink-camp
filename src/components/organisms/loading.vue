@@ -44,7 +44,7 @@ export default {
 
   img {
     width: 80%;
-    max-width: 115px;
+    max-width: 111px;
     height: auto;
     margin-bottom: 18px;
     font-size: 18px;
