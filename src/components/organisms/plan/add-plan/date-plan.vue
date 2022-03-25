@@ -1,7 +1,7 @@
 <template>
   <v-ons-page>
+    <loading :visible="isLoading" />
     <div class="content">
-      <loading :visible="isLoading" />
       <div class="text">
         <v-ons-row class="text__desc">
           {{ campsite.name }}

@@ -1,5 +1,6 @@
 <template>
   <v-ons-page @show="show">
+    <loading :visible="isLoading" />
     <div class="content">
       <div class="text">
         <v-ons-row class="text__desc">
