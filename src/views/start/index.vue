@@ -4,14 +4,14 @@
       <loading :visible="isLoading" />
       <div class="start-page__top">
         <img
-          src="@/assets/images/start/logo-start.png"
-          width="315px"
-          height="119px"
+          src="@/assets/images/start/camp-logo-start.png"
+          width="285px"
+          height="86px"
           class="app-logo"
         >
         <div class="app-version">
           <small class="value">
-            ver {{ appVersion }}
+            version:{{ appVersion }}
           </small>
         </div>
       </div>
@@ -106,29 +106,53 @@ export default {
   text-align: center;
 
   &__top {
-    margin-bottom: 180px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 135px;
+    background-color: #fff;
+    border-top: 5px solid #c30;
+    border-bottom: 5px solid #c30;
   }
 
   &__bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 212px;
+
     .button {
-      width: 87%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
       max-width: 325px;
+      height: 60px;
       margin-bottom: 20px;
       font-size: 18px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
     }
   }
 }
 
 .app-version {
+  position: absolute;
+  right: 14px;
+  bottom: 6px;
   width: 315px;
   margin: 0 auto;
-  font-size: 18px;
   font-weight: 600;
-  color: white;
-  text-align: left;
+  color: #a82e05;
+  text-align: right;
 
   .value {
     padding-left: 180px;
+    font-size: 10px;
   }
 }
 
