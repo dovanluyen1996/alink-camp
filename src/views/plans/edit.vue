@@ -1,12 +1,28 @@
 <template>
   <v-ons-page @show="show">
-    <custom-toolbar :title="title" />
+    <custom-toolbar :title="title">
+      <template #right>
+        <delete-dialog-with-icon
+          :is-shown.sync="isShownDeleteDialog"
+          @clickDelete="deletePlan"
+        >
+          このキャンプ計画または思い出を削除します。<br>
+          よろしいですか？
+        </delete-dialog-with-icon>
+      </template>
+    </custom-toolbar>
 
     <v-ons-tabbar
       position="top"
       :tabs="tabs"
       :visible="true"
       :index.sync="activeIndex"
+    />
+
+    <completed-dialog
+      :action="action"
+      :is-visible="completedDialogVisible"
+      @close="closeCompletedDialog"
     />
   </v-ons-page>
 </template>
@@ -15,9 +31,15 @@
 import DatePlan from '@/components/organisms/plan/add-plan/date-plan';
 import ListItemCamp from '@/components/organisms/plan/add-plan/list-item-camp/index';
 import DetailScheduleCamp from '@/components/organisms/plan/add-plan/detail-schedule-camp/index';
+import DeleteDialogWithIcon from '@/components/organisms/dialog/delete-dialog-with-icon';
+import CompletedDialog from '@/components/organisms/dialog/completed-dialog';
 
 export default {
   name: 'EditPlan',
+  components: {
+    DeleteDialogWithIcon,
+    CompletedDialog,
+  },
   props: {
     plan: {
       type: Object,
@@ -44,6 +66,8 @@ export default {
         },
       ],
       activeIndex: 0,
+      isShownDeleteDialog: false,
+      completedDialogVisible: false,
       action: '',
     };
   },
@@ -89,6 +113,19 @@ export default {
     },
     setTasks() {
       this.$store.dispatch('plan/setTasks', this.detailPlan.tasks);
+    },
+    async showCompletedDialog(action) {
+      this.action = action;
+      this.completedDialogVisible = true;
+      await this.$store.dispatch('models/userCampsitePlan/deleteUserCampsitePlan', { userCampsitePlanId: this.plan.id });
+    },
+    async closeCompletedDialog() {
+      this.completedDialogVisible = false;
+      await this.$store.dispatch('plansNavigator/pop');
+    },
+    deletePlan() {
+      this.isShownDeleteDialog = false;
+      this.showCompletedDialog('deletePlan');
     },
   },
 };
