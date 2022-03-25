@@ -12,6 +12,9 @@ export default {
   getters: {
     isLoading: state => state.isLoading,
     all: state => state.userCampsitePlans,
+    findById: state => userCampsitePlanId => state.userCampsitePlans.find(
+      userCampsitePlan => userCampsitePlan.id === userCampsitePlanId,
+    ),
     inFuture: state => (object = {}) => {
       let plans = state.userCampsitePlans.filter(
         userCampsitePlan => moment(userCampsitePlan.finishedDate).startOf('days').isSameOrAfter(moment().startOf('days')),

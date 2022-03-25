@@ -22,7 +22,7 @@
         <template #footer>
           <v-ons-button
             modifier="cta rounded red"
-            @click="goToAddPlan"
+            @click="goToNewPlan"
           >
             <img
               class="mr-10"
@@ -51,8 +51,8 @@ import CampsiteRainyTab from '@/components/organisms/campsites/rainy';
 import CampsiteInformationTab from '@/components/organisms/campsites/information-tab';
 
 // pages
-import AddPlanIndexPage from '@/views/plans/index';
-import AddPlanPage from '@/views/plans/add-plan';
+import PlanIndexPage from '@/views/plans/index';
+import NewPlanPage from '@/views/plans/new';
 
 export default {
   name: 'Campsitehow',
@@ -130,13 +130,13 @@ export default {
     async getUsersFavorites() {
       await this.$store.dispatch('models/usersFavorite/getUsersFavorites');
     },
-    goToAddPlan() {
+    goToNewPlan() {
       this.$store.commit('plansNavigator/setEnableBusy', false);
       this.$store.commit('appTabbar/setActiveIndex', settings.views.appTabbar.tabIndexes.plans);
-      this.$store.dispatch('plansNavigator/reset', AddPlanIndexPage);
+      this.$store.dispatch('plansNavigator/reset', PlanIndexPage);
 
       this.$store.dispatch('plansNavigator/push', {
-        extends: AddPlanPage,
+        extends: NewPlanPage,
         onsNavigatorProps: {
           campsite: this.campsite,
         },

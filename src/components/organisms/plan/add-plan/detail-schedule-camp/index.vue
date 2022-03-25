@@ -34,7 +34,7 @@
 
     <confirm-dialog
       :is-shown.sync="confirmDialogVisible"
-      @clickConfirm="createPlan"
+      @clickConfirm="submit"
     >
       <template #title>
         登録確認
@@ -58,8 +58,6 @@
 </template>
 
 <script>
-import moment from 'moment';
-
 // components
 import DetailTable from '@/components/organisms/plan/add-plan/detail-schedule-camp/detail-table';
 import ContentWithFooter from '@/components/organisms/content-with-footer';
@@ -75,7 +73,6 @@ export default {
   },
   data() {
     return {
-      tasks: {},
       forecasts: {},
       confirmDialogVisible: false,
       completedDialogVisible: false,
@@ -87,31 +84,39 @@ export default {
       required: true,
     },
   },
-  watch: {
-    async tasks() {
-      const tasksAt = Object.keys(this.tasks);
-      const params = tasksAt.map(at => ({ target_at: at, content: this.tasks[at] }));
-      await this.$store.dispatch('plan/setTasks', params);
+  computed: {
+    isNew() {
+      return this.$store.getters['plan/isNew'];
+    },
+    params() {
+      return this.$store.getters['plan/params'];
+    },
+    tasks: {
+      get() {
+        const fn = (acc, cur) => {
+          const targetAt = this.$moment(cur.targetAt).format('YYYY-MM-DD HH:mm');
+          acc[targetAt] = cur.content;
+          return acc;
+        };
+
+        return this.params.tasks.reduce(fn, {});
+      },
+      set(tasks) {
+        const tasksAt = Object.keys(tasks);
+        const params = tasksAt.map(at => ({ targetAt: at, content: tasks[at] }));
+        this.$store.dispatch('plan/setTasks', params);
+      },
     },
   },
   methods: {
-    inScheduleTasks() {
-      const params = this.$store.getters['plan/params'];
-      const { startedDate, finishedDate } = params;
-
-      if (startedDate === '' || finishedDate === '') return params.tasks;
-
-      const inSchedule = task => moment(task.target_at).isBetween(`${startedDate} 0:00`, `${finishedDate} 23:59`, null, '[]');
-
-      return params.tasks.filter(inSchedule);
-    },
-    async createPlan() {
+    async submit() {
       this.confirmDialogVisible = false;
 
-      const params = { ...this.$store.getters['plan/params'] };
-      params.tasks = this.inScheduleTasks();
-
-      await this.$store.dispatch('models/userCampsitePlan/createUserCampsitePlan', params);
+      if (this.isNew) {
+        this.$store.dispatch('plan/createPlan');
+      } else {
+        this.$store.dispatch('plan/updatePlan');
+      }
 
       this.showCompletedDialog();
     },

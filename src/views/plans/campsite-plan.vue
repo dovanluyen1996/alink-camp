@@ -13,7 +13,7 @@
       <v-ons-card>
         <v-ons-button
           class="button--red button--more button--more__description"
-          @click="goToAddPlan"
+          @click="goToNewPlan"
         >
           <img
             :src="require('@/assets/images/form/icon-add.png')"
@@ -48,7 +48,7 @@
 
 <script>
 import TimePlan from '@/components/organisms/plan/time-plan';
-import AddPlan from '@/views/plans/add-plan';
+import NewPlanPage from '@/views/plans/new';
 import ConfirmDialog from '@/components/organisms/dialog/confirm-dialog';
 import InformationPurchase from '@/views/purchase-information/index.vue';
 
@@ -106,7 +106,7 @@ export default {
     await this.setIsPurchased();
   },
   methods: {
-    goToAddPlan() {
+    goToNewPlan() {
       const isShowPremium = !this.isPurchased && this.futurePlans.length;
       if (isShowPremium) {
         this.showConfirmDialog();
@@ -114,7 +114,7 @@ export default {
       }
 
       this.$store.dispatch('plansNavigator/push', {
-        extends: AddPlan,
+        extends: NewPlanPage,
         onsNavigatorProps: {
           campsite: this.campsite,
         },
