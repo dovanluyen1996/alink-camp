@@ -86,7 +86,8 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 196px;
+  width: 90%;
+  max-width: 196px;
   height: 21px;
   margin: 8px 0;
   font-size: 10px;

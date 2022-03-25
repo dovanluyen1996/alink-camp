@@ -136,13 +136,13 @@ export default {
 
 .campsite-weather-of-the-day-purchase {
   position: absolute;
-  top: 33px;
   right: 15px;
+  bottom: 7px;
+  left: 15px;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 88vw;
-  height: 13px;
+  height: 21px;
   font-size: 7px;
   font-weight: 600;
   color: #f5f2f2;
