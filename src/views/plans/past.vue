@@ -52,20 +52,12 @@ export default {
         {
           label: '思い出',
           page: PastSchedule,
-          props: {
-            campsite: this.plan.campsite,
-            startedDate: this.plan.startedDate,
-            finishedDate: this.plan.finishedDate,
-          },
+          props: { campsite: this.plan.campsite },
         },
         {
           label: '持ち物',
           page: PastScheduleItem,
-          props: {
-            campsite: this.plan.campsite,
-            startedDate: this.plan.startedDate,
-            finishedDate: this.plan.finishedDate,
-          },
+          props: { campsite: this.plan.campsite },
         },
       ],
       activeIndex: 0,

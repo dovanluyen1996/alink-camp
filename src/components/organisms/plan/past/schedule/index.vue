@@ -76,18 +76,16 @@ export default {
       type: Object,
       required: true,
     },
-    startedDate: {
-      type: String,
-      required: true,
-    },
-    finishedDate: {
-      type: String,
-      required: true,
-    },
   },
   computed: {
     params() {
       return this.$store.getters['plan/params'];
+    },
+    startedDate() {
+      return this.params.startedDate;
+    },
+    finishedDate() {
+      return this.params.finishedDate;
     },
     tasks: {
       get() {
