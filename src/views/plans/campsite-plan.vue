@@ -126,9 +126,8 @@ export default {
     closeConfirmDialog() {
       this.isConfirmDialogVisible = false;
     },
-    async setIsPurchased() {
-      // TODO: 判別方法を修正する
-      this.isPurchased = await this.$store.dispatch('purchase/getIsPurchased');
+    setIsPurchased() {
+      this.isPurchased = this.$store.getters['purchase/isPurchased'];
     },
     goToPurchase() {
       this.$store.dispatch('plansNavigator/push', InformationPurchase);
