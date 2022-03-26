@@ -87,8 +87,8 @@
 
 <script>
 // components
-import CampsitePlanWeather from '@/components/organisms/campsite-plans/weather';
-import CampsitePlanImage from '@/components/organisms/campsite-plans/image';
+import CampsitePlanWeather from '@/components/organisms/plan/past/memory/weather';
+import CampsitePlanImage from '@/components/organisms/plan/past/memory/image';
 import EditDialogTask from '@/components/organisms/edit-dialog-task';
 import WeatherImage from '@/components/atoms/weather-image';
 import Temperature from '@/components/atoms/temperature';
