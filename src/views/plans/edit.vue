@@ -47,6 +47,9 @@ export default {
       action: '',
     };
   },
+  beforeDestroy() {
+    this.$store.dispatch('plan/clean');
+  },
   computed: {
     detailPlan() {
       return this.$store.getters['models/userCampsitePlan/findById'](this.plan.id);
@@ -60,7 +63,6 @@ export default {
       await this.getItems();
       await this.getUserCampsitePlan();
 
-      this.$store.dispatch('plan/clean');
       this.setPlanId();
       this.setStartedDate();
       this.setFinishedDate();

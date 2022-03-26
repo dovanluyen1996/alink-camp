@@ -46,11 +46,13 @@ export default {
       activeIndex: 0,
     };
   },
+  beforeDestroy() {
+    this.$store.dispatch('plan/clean');
+  },
   methods: {
     async show() {
       await this.getItems();
 
-      this.$store.dispatch('plan/clean');
       this.setCampsiteId();
     },
     async getItems() {
