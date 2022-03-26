@@ -115,7 +115,11 @@ export default {
       },
       set(memories) {
         const memoriesDate = Object.keys(memories);
-        const params = memoriesDate.map(date => ({ targetDate: date, image: memories[date] }));
+        const params = memoriesDate.map(date => ({
+          targetDate: date,
+          image: memories[date],
+          removeImage: !memories[date],
+        }));
         this.$store.dispatch('plan/setMemories', params);
       },
     },
