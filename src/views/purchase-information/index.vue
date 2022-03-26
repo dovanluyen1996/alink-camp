@@ -121,6 +121,7 @@ export default {
   methods: {
     callToPurchase() {
       if (BuildInfo.debug || window.device.platform === 'browser') {
+        this.$store.dispatch('purchase/setIsPurchased', true);
         localStorage.setItem('isCharged', true);
         return this.purchaseComplete();
       }
