@@ -45,7 +45,6 @@ export default {
       ],
       activeIndex: 0,
       action: '',
-      isItemRestored: false,
     };
   },
   methods: {
@@ -54,12 +53,9 @@ export default {
 
       this.$store.dispatch('plan/clean');
       this.$store.dispatch('plan/setCampsiteId', this.campsite.id);
-      // 初期表示のとき、前回保存したアイテムのチェックを復元する
-      if (!this.isItemRestored) {
-        const items = this.$store.getters['models/item/all'];
-        this.$store.dispatch('plan/restoreCheckedItem', items);
-        this.isItemRestored = true;
-      }
+      // 前回保存したアイテムのチェックを復元する
+      const items = this.$store.getters['models/item/all'];
+      this.$store.dispatch('plan/restoreCheckedItem', items);
     },
   },
 };
