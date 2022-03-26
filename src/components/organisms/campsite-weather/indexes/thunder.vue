@@ -6,7 +6,7 @@
       </div>
       <img
         :src="image"
-        width="26px"
+        width="44px"
       >
       <div class="thunder-label">
         {{ label }}
@@ -18,7 +18,7 @@
       </div>
       <img
         src="@/assets/images/weathers/thunder/thunder_large_none.png"
-        width="26px"
+        width="44px"
       >
     </div>
   </div>

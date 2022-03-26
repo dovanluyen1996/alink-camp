@@ -6,7 +6,7 @@
       </div>
       <img
         :src="image"
-        width="26px"
+        width="44px"
       >
       <div class="star-label">
         {{ forecast ? forecast.starTelop : '' }}
@@ -18,7 +18,7 @@
       </div>
       <img
         src="@/assets/images/weathers/star/00.png"
-        width="26px"
+        width="44px"
       >
     </div>
   </div>
