@@ -13,7 +13,7 @@
       >
         <validation-provider
           v-slot="{ errors }"
-          rules="required|required-future-day"
+          rules="required"
           name="チェックイン"
         >
           <date-field
@@ -26,7 +26,7 @@
 
         <validation-provider
           v-slot="{ errors }"
-          rules="required|required-future-day-since:@チェックイン"
+          rules="required|required-future-day-since:@チェックイン|required-future-day"
           name="チェックアウト"
         >
           <date-field
