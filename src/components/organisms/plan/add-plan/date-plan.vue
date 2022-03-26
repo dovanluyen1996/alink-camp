@@ -1,7 +1,7 @@
 <template>
   <v-ons-page>
+    <loading :visible="isLoading" />
     <div class="content">
-      <loading :visible="isLoading" />
       <div class="text">
         <v-ons-row class="text__desc">
           {{ campsite.name }}
@@ -140,9 +140,9 @@ export default {
       this.confirmDialogVisible = false;
 
       if (this.isNew) {
-        this.$store.dispatch('plan/createPlan');
+        await this.$store.dispatch('plan/createPlan');
       } else {
-        this.$store.dispatch('plan/updatePlan');
+        await this.$store.dispatch('plan/updatePlan');
       }
 
       this.showCompletedDialog();

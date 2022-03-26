@@ -1,5 +1,5 @@
 <template>
-  <v-ons-page @show="show">
+  <v-ons-page>
     <loading :visible="isLoading" />
     <div class="content">
       <div class="text">
@@ -8,7 +8,7 @@
         </v-ons-row>
       </div>
 
-      <detail-table
+      <schedule-table
         :forecasts="forecasts"
         :tasks.sync="tasks"
       />
@@ -19,15 +19,7 @@
             modifier="large--cta yellow rounded"
             @click="showConfirmDialog"
           >
-            登録
-          </v-ons-button>
-
-          <v-ons-button
-            modifier="large--cta rounded"
-            class="button--search-day"
-            @click="goToListPlan"
-          >
-            過去の計画一覧
+            編集保存
           </v-ons-button>
         </template>
       </content-with-footer>
@@ -38,20 +30,20 @@
       @clickConfirm="submit"
     >
       <template #title>
-        登録確認
+        編集確認
       </template>
 
       <template #message>
-        キャンプ計画を登録します。よろしいですか？
+        このキャンプ計画または思い出を編集します。よろしいですか？
       </template>
 
       <template #confirmAction>
-        登録
+        OK
       </template>
     </confirm-dialog>
 
     <completed-dialog
-      action="createPlan"
+      action="updatePlan"
       :is-visible="completedDialogVisible"
       @close="closeCompletedDialog"
     />
@@ -60,15 +52,15 @@
 
 <script>
 // components
-import DetailTable from '@/components/organisms/plan/add-plan/detail-schedule-camp/detail-table';
 import ContentWithFooter from '@/components/organisms/content-with-footer';
+import ScheduleTable from '@/components/organisms/plan/past/schedule/table';
 import ConfirmDialog from '@/components/organisms/dialog/confirm-dialog';
 import CompletedDialog from '@/components/organisms/dialog/completed-dialog';
 
 export default {
   components: {
-    DetailTable,
     ContentWithFooter,
+    ScheduleTable,
     ConfirmDialog,
     CompletedDialog,
   },
@@ -86,11 +78,14 @@ export default {
     },
   },
   computed: {
-    isNew() {
-      return this.$store.getters['plan/isNew'];
-    },
     params() {
       return this.$store.getters['plan/params'];
+    },
+    startedDate() {
+      return this.params.startedDate;
+    },
+    finishedDate() {
+      return this.params.finishedDate;
     },
     tasks: {
       get() {
@@ -109,20 +104,21 @@ export default {
       },
     },
   },
+  watch: {
+    startedDate() {
+      this.getPast();
+    },
+    finishedDate() {
+      this.getPast();
+    },
+  },
   methods: {
     async submit() {
       this.confirmDialogVisible = false;
 
-      if (this.isNew) {
-        await this.$store.dispatch('plan/createPlan');
-      } else {
-        await this.$store.dispatch('plan/updatePlan');
-      }
+      await this.$store.dispatch('plan/updatePlan');
 
       this.showCompletedDialog();
-    },
-    async goToListPlan() {
-      await this.$store.dispatch('plansNavigator/pop');
     },
     showConfirmDialog() {
       this.confirmDialogVisible = true;
@@ -134,17 +130,16 @@ export default {
       this.completedDialogVisible = false;
       await this.$store.dispatch('plansNavigator/pop');
     },
-    async getForecastHourly() {
+    async getPast() {
+      if (!this.startedDate || !this.finishedDate) return;
+
       const params = {
         campsite_id: this.campsite.id,
+        target_date_from: this.startedDate,
+        target_date_to: this.finishedDate,
       };
-      const forecastHourly = await this.$store.dispatch('models/weather/getForecastHourly', params);
-      return forecastHourly;
-    },
-    async show() {
-      if (this.$helpers.isEmptyObject(this.forecasts)) {
-        this.forecasts = await this.getForecastHourly();
-      }
+
+      this.forecasts = await this.$store.dispatch('models/weather/getPast', params);
     },
   },
 };
@@ -154,10 +149,14 @@ export default {
 @import "@/assets/scss/_variables.scss";
 
 /deep/ {
+  .card {
+    margin: 20px 0;
+  }
+
   .text {
     display: grid;
     justify-content: center;
-    background-color: #fff;
+    background-color: $color-white;
 
     &__desc {
       padding: 15px;
@@ -175,15 +174,12 @@ export default {
 
   .content-with-footer__footer {
     position: fixed;
-    bottom: 0 !important;
+    bottom: 0;
     left: inherit;
 
     .button {
+      margin: 0 55px !important;
       font-size: 14px !important;
-
-      &--search-day {
-        margin-top: 20px !important;
-      }
     }
   }
 }

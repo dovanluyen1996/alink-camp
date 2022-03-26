@@ -1,5 +1,5 @@
 <template>
-  <v-ons-page @show="show">
+  <v-ons-page>
     <loading :visible="isLoading" />
     <div class="content">
       <div class="text">
@@ -10,15 +10,11 @@
 
       <div class="title-center">
         <span>天気予報</span>
-        <!-- TODO: 持ち物共有は編集時のみ表示する -->
-        <share-button
-          :subject="shareSubject()"
-          :message="shareMessage()"
+        <v-ons-button
+          class="button--share button--yellow"
         >
-          <template #text>
-            持ち物共有
-          </template>
-        </share-button>
+          持ち物共有
+        </v-ons-button>
       </div>
 
       <forecast-table
@@ -45,15 +41,7 @@
             modifier="large--cta yellow rounded"
             @click="showConfirmDialog"
           >
-            登録
-          </v-ons-button>
-
-          <v-ons-button
-            modifier="large--cta rounded"
-            class="button--search-day"
-            @click="goToListPlan"
-          >
-            過去の計画一覧
+            編集保存
           </v-ons-button>
         </template>
       </content-with-footer>
@@ -64,20 +52,20 @@
       @clickConfirm="submit"
     >
       <template #title>
-        登録確認
+        編集確認
       </template>
 
       <template #message>
-        キャンプ計画を登録します。よろしいですか？
+        このキャンプ計画または思い出を編集します。よろしいですか？
       </template>
 
       <template #confirmAction>
-        登録
+        OK
       </template>
     </confirm-dialog>
 
     <completed-dialog
-      action="createPlan"
+      action="updatePlan"
       :is-visible="completedDialogVisible"
       @close="closeCompletedDialog"
     />
@@ -87,11 +75,10 @@
 <script>
 // components
 import ItemTable from '@/components/organisms/plan/add-plan/list-item-camp/item-table';
-import ForecastTable from '@/components/organisms/plan/add-plan/list-item-camp/forecast-table';
+import ForecastTable from '@/components/organisms/plan/past/item/forecast-table';
 import ContentWithFooter from '@/components/organisms/content-with-footer';
 import ConfirmDialog from '@/components/organisms/dialog/confirm-dialog';
 import CompletedDialog from '@/components/organisms/dialog/completed-dialog';
-import ShareButton from '@/components/organisms/share-button';
 
 export default {
   components: {
@@ -100,7 +87,6 @@ export default {
     ContentWithFooter,
     ConfirmDialog,
     CompletedDialog,
-    ShareButton,
   },
   props: {
     campsite: {
@@ -126,11 +112,14 @@ export default {
 
       return userItems.concat(consoleItems);
     },
-    isNew() {
-      return this.$store.getters['plan/isNew'];
-    },
     params() {
       return this.$store.getters['plan/params'];
+    },
+    startedDate() {
+      return this.params.startedDate;
+    },
+    finishedDate() {
+      return this.params.finishedDate;
     },
     checkedItemIds: {
       get() {
@@ -144,20 +133,21 @@ export default {
       return this.$store.getters['models/item/isLoading'];
     },
   },
+  watch: {
+    startedDate() {
+      this.getPast();
+    },
+    finishedDate() {
+      this.getPast();
+    },
+  },
   methods: {
     async submit() {
       this.confirmDialogVisible = false;
 
-      if (this.isNew) {
-        await this.$store.dispatch('plan/createPlan');
-      } else {
-        await this.$store.dispatch('plan/updatePlan');
-      }
+      await this.$store.dispatch('plan/updatePlan');
 
       this.showCompletedDialog();
-    },
-    async goToListPlan() {
-      await this.$store.dispatch('plansNavigator/pop');
     },
     showConfirmDialog() {
       this.confirmDialogVisible = true;
@@ -169,26 +159,16 @@ export default {
       this.completedDialogVisible = false;
       await this.$store.dispatch('plansNavigator/pop');
     },
-    async getForecast14Days() {
+    async getPast() {
+      if (!this.startedDate || !this.finishedDate) return;
+
       const params = {
         campsite_id: this.campsite.id,
+        target_date_from: this.startedDate,
+        target_date_to: this.finishedDate,
       };
 
-      const forecast14Days = await this.$store.dispatch('models/weather/getForecast14Days', params);
-      return forecast14Days;
-    },
-    async show() {
-      if (this.$helpers.isEmptyObject(this.forecasts)) {
-        this.forecasts = await this.getForecast14Days();
-      }
-    },
-    shareSubject() {
-      return 'キャンプ情報共有';
-    },
-    shareMessage() {
-      const checkedItems = this.sortedItems.filter(item => this.checkedItemIds.includes(item.id));
-
-      return checkedItems.map(item => item.name).join('\n');
+      this.forecasts = await this.$store.dispatch('models/weather/getPast', params);
     },
   },
 };
@@ -261,7 +241,26 @@ export default {
 }
 
 .button--share {
-  right: 7px !important;
-  width: 109px !important;
+  position: absolute;
+  right: 7px;
+  display: flex;
+  align-items: center;
+  width: 109px;
+  height: 29px;
+  font-size: 14px;
+  font-weight: 600;
+  background-color: $color-yellow;
+  border-radius: 15px;
+
+  &::before {
+    display: inline-block;
+    width: 13px;
+    height: 15px;
+    margin-right: 6px;
+    content: '';
+    background-image: url("~@/assets/images/icon-share.png");
+    background-position: center;
+    background-size: 100%;
+  }
 }
 </style>

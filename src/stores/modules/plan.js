@@ -101,14 +101,14 @@ export default {
     clean(context) {
       context.commit('clean');
     },
-    createPlan({ commit, dispatch, getters }) {
+    async createPlan({ commit, dispatch, getters }) {
       commit('setIsLoading', true);
 
       const params = { ...getters.params };
       params.tasks = getters.inScheduleTasks;
 
       try {
-        dispatch('models/userCampsitePlan/createUserCampsitePlan', params, { root: true });
+        await dispatch('models/userCampsitePlan/createUserCampsitePlan', params, { root: true });
       } catch (error) {
         commit('api/setError', error, { root: true });
         throw error;
@@ -116,14 +116,14 @@ export default {
         commit('setIsLoading', false);
       }
     },
-    updatePlan({ commit, dispatch, getters }) {
+    async updatePlan({ commit, dispatch, getters }) {
       commit('setIsLoading', true);
 
       const params = { ...getters.params };
       params.tasks = getters.inScheduleTasks;
 
       try {
-        dispatch('models/userCampsitePlan/updateUserCampsitePlan', {
+        await dispatch('models/userCampsitePlan/updateUserCampsitePlan', {
           userCampsitePlanId: params.planId,
           params,
         }, { root: true });
