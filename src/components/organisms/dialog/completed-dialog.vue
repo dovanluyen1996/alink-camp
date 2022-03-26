@@ -59,7 +59,7 @@ export default {
       case 'deleteResult':
         return 'スコアを削除しました。';
       case 'updatePlan':
-        return '予定日を編集しました。';
+        return '編集が完了しました。';
       case 'createPlan':
         return '登録が完了しました。';
       case 'createItem':
