@@ -67,7 +67,6 @@ export default {
   },
   data() {
     return {
-      isPurchased: false,
       isConfirmDialogVisible: false,
     };
   },
@@ -101,6 +100,9 @@ export default {
     isLoading() {
       return this.$store.getters['purchase/isLoading'];
     },
+    isPurchased() {
+      return this.$store.getters['purchase/isPurchased'];
+    },
   },
   async created() {
     await this.setIsPurchased();
@@ -125,9 +127,6 @@ export default {
     },
     closeConfirmDialog() {
       this.isConfirmDialogVisible = false;
-    },
-    setIsPurchased() {
-      this.isPurchased = this.$store.getters['purchase/isPurchased'];
     },
     goToPurchase() {
       this.$store.dispatch('plansNavigator/push', InformationPurchase);
