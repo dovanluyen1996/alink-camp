@@ -8,8 +8,8 @@
       <v-ons-card class="campsite-weather-and-image">
         <v-ons-row class="campsite-weather-and-image-row">
           <campsite-plan-weather
-            v-if="weather"
-            :weather="weather[index]"
+            v-if="dayWeathers[date]"
+            :weather="dayWeathers[date]"
           />
           <v-ons-col
             v-else
@@ -130,6 +130,17 @@ export default {
       }, {});
 
       return items;
+    },
+    dayWeathers() {
+      if (!this.dateRange.length || !this.forecasts.items) return [];
+
+      const fn = (acc, cur) => {
+        const { hourlyData, ...dayWeather } = cur;
+        acc[dayWeather.date] = dayWeather;
+        return acc;
+      };
+
+      return this.forecasts.items.reduce(fn, {});
     },
     dateRange() {
       return this.$store.getters['plan/dateRange'];
