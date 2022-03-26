@@ -55,12 +55,14 @@ export default {
       return `${this.$moment(this.detailPlan.startedDate).format('M/D')}からの計画`;
     },
   },
+  beforeDestroy() {
+    this.$store.dispatch('plan/clean');
+  },
   methods: {
     async show() {
       await this.getItems();
       await this.getUserCampsitePlan();
 
-      this.$store.dispatch('plan/clean');
       this.setPlanId();
       this.setStartedDate();
       this.setFinishedDate();
