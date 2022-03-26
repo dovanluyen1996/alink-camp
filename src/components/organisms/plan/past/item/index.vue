@@ -1,5 +1,5 @@
 <template>
-  <v-ons-page @show="show">
+  <v-ons-page>
     <loading :visible="isLoading" />
     <div class="content">
       <div class="text">
@@ -133,6 +133,14 @@ export default {
       return this.$store.getters['models/item/isLoading'];
     },
   },
+  watch: {
+    startedDate() {
+      this.getPast();
+    },
+    finishedDate() {
+      this.getPast();
+    },
+  },
   methods: {
     async submit() {
       this.confirmDialogVisible = false;
@@ -152,18 +160,15 @@ export default {
       await this.$store.dispatch('plansNavigator/pop');
     },
     async getPast() {
+      if (!this.startedDate || !this.finishedDate) return;
+
       const params = {
         campsite_id: this.campsite.id,
         target_date_from: this.startedDate,
         target_date_to: this.finishedDate,
       };
-      const forecast = await this.$store.dispatch('models/weather/getPast', params);
-      return forecast;
-    },
-    async show() {
-      if (this.$helpers.isEmptyObject(this.forecasts)) {
-        this.forecasts = await this.getPast();
-      }
+
+      this.forecasts = await this.$store.dispatch('models/weather/getPast', params);
     },
   },
 };
