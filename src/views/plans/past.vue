@@ -66,6 +66,9 @@ export default {
       action: '',
     };
   },
+  beforeDestroy() {
+    this.$store.dispatch('plan/clean');
+  },
   computed: {
     detailPlan() {
       return this.$store.getters['models/userCampsitePlan/findById'](this.plan.id);
