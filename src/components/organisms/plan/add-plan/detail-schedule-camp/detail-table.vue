@@ -10,8 +10,8 @@
           {{ date }}
         </span>
         <share-button
-          :subject="shareSubject"
-          :message="shareMessage"
+          :subject="shareSubject()"
+          :message="shareMessage(date)"
         >
           <template #text>
             予定共有
@@ -153,12 +153,6 @@ export default {
     dateRange() {
       return this.$store.getters['plan/dateRange'];
     },
-    shareSubject() {
-      return '予定シェアタイトル';
-    },
-    shareMessage() {
-      return '予定シェアメッセージ';
-    },
   },
   methods: {
     taskText(date, hour) {
@@ -175,6 +169,15 @@ export default {
     },
     precipitationText(weather) {
       return this.$helpers.isEmpty(weather) ? '--' : weather.precip;
+    },
+    forecastTelopText(weather) {
+      return this.$helpers.isEmpty(weather) ? '--' : weather.forecastTelop;
+    },
+    temperatureText(weather) {
+      return this.$helpers.isEmpty(weather) ? '--' : weather.temperature;
+    },
+    windSpeedText(weather) {
+      return this.$helpers.isEmpty(weather) ? '--' : weather.windSpeed;
     },
     windSpeedRate(windSpeed) {
       // Unit of measurement: m/s
@@ -197,6 +200,33 @@ export default {
     },
     isContentEmpty(content) {
       return content === '';
+    },
+    shareSubject() {
+      return 'キャンプ情報共有';
+    },
+    shareMessage(date) {
+      const messages = this.hours.map((hour) => {
+        const hourlyMessages = [];
+        const weather = this.getWeather(date, hour);
+
+        hourlyMessages.push(`${hour}時`);
+        // 天気情報
+        hourlyMessages.push(this.forecastTelopText(weather));
+        hourlyMessages.push(`${this.temperatureText(weather)}℃`);
+        hourlyMessages.push(`${this.precipitationText(weather)}mm/h`);
+        hourlyMessages.push(`${this.windSpeedText(weather)}m/s`);
+        // タスク
+        const task = this.taskText(date, hour);
+        if (!this.isContentEmpty(task)) {
+          // 先頭は意図的に空白を挿入していることを考慮して、末尾のみ空白・改行は取り除く
+          hourlyMessages.push(task.trimEnd());
+        }
+
+        return hourlyMessages.join('\n');
+      });
+
+      // 時間毎に１行空行を入れる
+      return messages.join('\n\n');
     },
   },
 };
