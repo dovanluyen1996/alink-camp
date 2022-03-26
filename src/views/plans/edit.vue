@@ -47,9 +47,6 @@ export default {
       action: '',
     };
   },
-  beforeDestroy() {
-    this.$store.dispatch('plan/clean');
-  },
   computed: {
     detailPlan() {
       return this.$store.getters['models/userCampsitePlan/findById'](this.plan.id);
@@ -57,6 +54,9 @@ export default {
     title() {
       return `${this.$moment(this.detailPlan.startedDate).format('M/D')}からの計画`;
     },
+  },
+  beforeDestroy() {
+    this.$store.dispatch('plan/clean');
   },
   methods: {
     async show() {
