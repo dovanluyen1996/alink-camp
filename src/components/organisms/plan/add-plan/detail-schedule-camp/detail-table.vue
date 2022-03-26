@@ -170,6 +170,15 @@ export default {
     precipitationText(weather) {
       return this.$helpers.isEmpty(weather) ? '--' : weather.precip;
     },
+    forecastTelopText(weather) {
+      return this.$helpers.isEmpty(weather) ? '--' : weather.forecastTelop;
+    },
+    temperatureText(weather) {
+      return this.$helpers.isEmpty(weather) ? '--' : weather.temperature;
+    },
+    windSpeedText(weather) {
+      return this.$helpers.isEmpty(weather) ? '--' : weather.windSpeed;
+    },
     windSpeedRate(windSpeed) {
       // Unit of measurement: m/s
       switch (true) {
@@ -202,12 +211,10 @@ export default {
 
         hourlyMessages.push(`${hour}時`);
         // 天気情報
-        if (weather && this.$helpers.isPresentObject(weather)) {
-          hourlyMessages.push(this.shareWeatherText(weather.forecastTelop));
-          hourlyMessages.push(`${this.shareWeatherText(weather.temperature)}℃`);
-          hourlyMessages.push(`${this.shareWeatherText(weather.precip)}mm/h`);
-          hourlyMessages.push(`${this.shareWeatherText(weather.windSpeed)}m/s`);
-        }
+        hourlyMessages.push(this.forecastTelopText(weather));
+        hourlyMessages.push(`${this.temperatureText(weather)}℃`);
+        hourlyMessages.push(`${this.precipitationText(weather)}mm/h`);
+        hourlyMessages.push(`${this.windSpeedText(weather)}m/s`);
         // タスク
         const task = this.taskText(date, hour);
         if (!this.isContentEmpty(task)) {
@@ -220,9 +227,6 @@ export default {
 
       // 時間毎に１行空行を入れる
       return messages.join('\n\n');
-    },
-    shareWeatherText(value) {
-      return this.$helpers.isEmpty(value) ? '--' : value;
     },
   },
 };
