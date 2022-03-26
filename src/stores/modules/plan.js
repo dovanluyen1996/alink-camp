@@ -105,7 +105,7 @@ export default {
         localStorage.setItem(LOCAL_STORAGE_KEY_CHECKED_ITEM_IDS, JSON.stringify(itemIds));
       } catch (error) {
         // 保存できなくても処理を続行する
-        console.log('itemIds store error.', error);
+        console.error('itemIds store error.', error);
       }
     },
     restoreCheckedItem({ dispatch }, items) {
@@ -120,7 +120,7 @@ export default {
         dispatch('setItemIds', itemIds);
       } catch (error) {
         // 復元できなくても処理を続行する
-        console.log('itemIds restore error.', error);
+        console.error('itemIds restore error.', error);
       }
     },
     createPlan({ commit, dispatch, getters }) {
