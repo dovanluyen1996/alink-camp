@@ -122,7 +122,7 @@ export default {
 .weather-indexes {
   position: relative;
   flex-wrap: nowrap;
-  padding: 5px 10px 5px 0;
+  padding: 11px 10px 8px 0;
   color: #017f45;
   border-top: 1px solid #d9d9d9;
 }
@@ -221,8 +221,11 @@ export default {
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
       height: 100%;
+    }
+
+    & img {
+      padding: 8px 0;
     }
   }
 }
