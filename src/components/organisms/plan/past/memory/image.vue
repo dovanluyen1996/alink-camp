@@ -33,6 +33,10 @@ export default {
       default: () => '',
       required: true,
     },
+    date: {
+      type: String,
+      required: true,
+    },
     errors: {
       type: Array,
       default: () => [],
@@ -49,7 +53,7 @@ export default {
         return this.value;
       },
       set(newValue) {
-        this.$emit('input', newValue);
+        this.$emit('updateImage', this.date, newValue);
       },
     },
   },

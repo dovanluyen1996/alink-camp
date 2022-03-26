@@ -11,6 +11,7 @@
       <schedule-table
         :forecasts="forecasts"
         :tasks.sync="tasks"
+        :memories.sync="memories"
       />
 
       <content-with-footer>
@@ -101,6 +102,25 @@ export default {
         const tasksAt = Object.keys(tasks);
         const params = tasksAt.map(at => ({ targetAt: at, content: tasks[at] }));
         this.$store.dispatch('plan/setTasks', params);
+      },
+    },
+    memories: {
+      get() {
+        const fn = (acc, cur) => {
+          acc[cur.targetDate] = cur.image;
+          return acc;
+        };
+
+        return this.params.memories.reduce(fn, {});
+      },
+      set(memories) {
+        const memoriesDate = Object.keys(memories);
+        const params = memoriesDate.map(date => ({
+          targetDate: date,
+          image: memories[date],
+          removeImage: !memories[date],
+        }));
+        this.$store.dispatch('plan/setMemories', params);
       },
     },
   },

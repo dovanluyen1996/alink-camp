@@ -17,7 +17,11 @@
           >
             <label width="150px">No Data</label>
           </v-ons-col>
-          <campsite-plan-image :value="image" />
+          <campsite-plan-image
+            :value="memories[date]"
+            :date="date"
+            @updateImage="updateImage"
+          />
         </v-ons-row>
       </v-ons-card>
 
@@ -83,8 +87,8 @@
 
 <script>
 // components
-import CampsitePlanWeather from '@/components/organisms/campsite-plans/weather';
-import CampsitePlanImage from '@/components/organisms/campsite-plans/image';
+import CampsitePlanWeather from '@/components/organisms/plan/past/memory/weather';
+import CampsitePlanImage from '@/components/organisms/plan/past/memory/image';
 import EditDialogTask from '@/components/organisms/edit-dialog-task';
 import WeatherImage from '@/components/atoms/weather-image';
 import Temperature from '@/components/atoms/temperature';
@@ -104,6 +108,10 @@ export default {
       required: true,
     },
     tasks: {
+      type: Object,
+      required: true,
+    },
+    memories: {
       type: Object,
       required: true,
     },
@@ -147,6 +155,9 @@ export default {
     },
   },
   methods: {
+    updateImage(date, memory) {
+      this.$emit('update:memories', { ...this.memories, [date]: memory });
+    },
     taskText(date, hour) {
       const targetAt = this.$moment(`${date} ${hour}:00`).format('YYYY-MM-DD HH:mm');
       const task = this.tasks[targetAt] || '';

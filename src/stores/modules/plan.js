@@ -12,6 +12,7 @@ export default {
       finishedDate: '',
       itemIds: [],
       tasks: [],
+      memories: [],
     },
     isLoading: false,
   },
@@ -62,6 +63,9 @@ export default {
     setTasks(state, tasks) {
       Vue.set(state.params, 'tasks', tasks);
     },
+    setMemories(state, memories) {
+      Vue.set(state.params, 'memories', memories);
+    },
     clean(state) {
       const params = {
         planId: null,
@@ -70,6 +74,7 @@ export default {
         finishedDate: '',
         itemIds: [],
         tasks: [],
+        memories: [],
       };
 
       Vue.set(state, 'params', params);
@@ -98,6 +103,9 @@ export default {
     setTasks(context, tasks) {
       context.commit('setTasks', tasks);
     },
+    setMemories(context, memories) {
+      context.commit('setMemories', memories);
+    },
     clean(context) {
       context.commit('clean');
     },
@@ -121,6 +129,8 @@ export default {
 
       const params = { ...getters.params };
       params.tasks = getters.inScheduleTasks;
+
+      params.memories = params.memories.filter(memory => memory.image.url === undefined);
 
       try {
         await dispatch('models/userCampsitePlan/updateUserCampsitePlan', {
