@@ -29,6 +29,12 @@ export default {
       if (finishedDate) return [finishedDate];
       return [];
     },
+    pastDates: (state, getters) => {
+      const dateRange = [...getters.dateRange];
+      const today = moment();
+
+      return dateRange.filter(date => moment(date).isBefore(today, 'day'));
+    },
     inScheduleTasks: (state, getters) => {
       const dateRange = [...getters.dateRange];
 

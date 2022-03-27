@@ -48,7 +48,7 @@
           </td>
           <td>
             <div
-              v-if="items[date]"
+              v-if="items[date] && items[date].windSpeed"
               class="wind-direction"
             >
               <template v-if="items[date].windSpeed > 0">
@@ -91,16 +91,34 @@ export default {
       type: Object,
       required: true,
     },
+    pastWeather: {
+      type: Object,
+      required: true,
+    },
   },
   computed: {
     dateRange() {
       return this.$store.getters['plan/dateRange'];
     },
     items() {
+      return { ...this.pastItems, ...this.futureItems };
+    },
+    futureItems() {
       if (!this.dateRange.length || !this.forecasts.items) return [];
 
       const { items } = this.forecasts;
       return items.reduce((acc, cur) => { acc[cur.date] = cur; return acc; }, {});
+    },
+    pastItems() {
+      if (!this.dateRange.length || !this.pastWeather.items) return [];
+
+      const fn = (acc, cur) => {
+        const { hourlyData, ...dayWeather } = cur;
+        acc[dayWeather.date] = dayWeather;
+        return acc;
+      };
+
+      return this.pastWeather.items.reduce(fn, {});
     },
   },
   methods: {
@@ -114,7 +132,10 @@ export default {
       return this.$helpers.isSunday(date) ? 'date-col__sunday' : '';
     },
     precipitationText(forecast) {
-      return this.$helpers.isEmpty(forecast) ? '--' : forecast.precip;
+      if (this.$helpers.isEmpty(forecast)) return '--';
+      if (!forecast.precip) return '--';
+
+      return forecast.precip;
     },
     windSpeedRate(windSpeed) {
       // Unit of measurement: m/s
