@@ -56,7 +56,7 @@
             <td>{{ precipitationText(getWeather(date, hour)) }}</td>
             <td>
               <div
-                v-if="getWeather(date, hour)"
+                v-if="getWeather(date, hour) && getWeather(date, hour).windSpeed"
                 class="wind-direction"
               >
                 <template v-if="getWeather(date, hour).windSpeed > 0">
@@ -122,6 +122,10 @@ export default {
       type: Object,
       required: true,
     },
+    pastWeather: {
+      type: Object,
+      required: true,
+    },
     tasks: {
       type: Object,
       required: true,
@@ -136,9 +140,27 @@ export default {
   },
   computed: {
     items() {
+      return { ...this.pastItems, ...this.futureItems };
+    },
+    futureItems() {
       if (!this.dateRange.length || !this.forecasts.items) return [];
 
       const items = this.forecasts.items.reduce((dateAcc, dateCur) => {
+        const hourlyData = dateCur.hourlyData.reduce((hourAcc, hourCur) => {
+          hourAcc[parseInt(hourCur.hour, 10)] = hourCur;
+          return hourAcc;
+        }, {});
+
+        dateAcc[dateCur.date] = hourlyData;
+        return dateAcc;
+      }, {});
+
+      return items;
+    },
+    pastItems() {
+      if (!this.dateRange.length || !this.pastWeather.items) return [];
+
+      const items = this.pastWeather.items.reduce((dateAcc, dateCur) => {
         const hourlyData = dateCur.hourlyData.reduce((hourAcc, hourCur) => {
           hourAcc[parseInt(hourCur.hour, 10)] = hourCur;
           return hourAcc;
@@ -168,7 +190,10 @@ export default {
       return this.items[date][hour];
     },
     precipitationText(weather) {
-      return this.$helpers.isEmpty(weather) ? '--' : weather.precip;
+      if (this.$helpers.isEmpty(weather)) return '--';
+      if (!weather.precip) return '--';
+
+      return weather.precip;
     },
     forecastTelopText(weather) {
       return this.$helpers.isEmpty(weather) ? '--' : weather.forecastTelop;
