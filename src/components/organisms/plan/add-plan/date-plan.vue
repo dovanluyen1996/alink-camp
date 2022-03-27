@@ -135,7 +135,7 @@ export default {
       },
     },
     checkoutRules() {
-      return 'required|required-future-day-since:@チェックイン|required-future-day';
+      return 'required|required-future-day-since:@チェックイン|required-future-day|required-bwtween-14days:@チェックイン';
     },
   },
   methods: {
