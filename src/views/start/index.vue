@@ -155,12 +155,4 @@ export default {
     font-size: 10px;
   }
 }
-
-/deep/ {
-  .page__background {
-    background-image: url('~@/assets/images/background-start.png');
-    background-position: center;
-    background-size: cover;
-  }
-}
 </style>
