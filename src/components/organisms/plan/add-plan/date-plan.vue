@@ -1,7 +1,7 @@
 <template>
   <v-ons-page>
+    <loading :visible="isLoading" />
     <div class="content">
-      <loading :visible="isLoading" />
       <div class="text">
         <v-ons-row class="text__desc">
           {{ campsite.name }}
@@ -13,7 +13,7 @@
       >
         <validation-provider
           v-slot="{ errors }"
-          rules="required|required-future-day"
+          rules="required"
           name="チェックイン"
         >
           <date-field
@@ -26,7 +26,7 @@
 
         <validation-provider
           v-slot="{ errors }"
-          rules="required|required-future-day-since:@チェックイン"
+          :rules="checkoutRules"
           name="チェックアウト"
         >
           <date-field
@@ -134,15 +134,18 @@ export default {
         this.$store.dispatch('plan/setFinishedDate', newDate);
       },
     },
+    checkoutRules() {
+      return 'required|required-future-day-since:@チェックイン|required-future-day|required-bwtween-14days:@チェックイン';
+    },
   },
   methods: {
     async submit() {
       this.confirmDialogVisible = false;
 
       if (this.isNew) {
-        this.$store.dispatch('plan/createPlan');
+        await this.$store.dispatch('plan/createPlan');
       } else {
-        this.$store.dispatch('plan/updatePlan');
+        await this.$store.dispatch('plan/updatePlan');
       }
 
       this.showCompletedDialog();

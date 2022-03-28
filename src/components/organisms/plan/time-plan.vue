@@ -27,7 +27,7 @@
           v-for="plan in pastPlans"
           :key="plan.id"
           modifier="chevron"
-          @click="goToPlanPast"
+          @click="goToPastPlan(plan)"
         >
           <div class="center">
             <span class="list-item__title">{{ $helpers.toLongString(plan.startedDate) }}</span>
@@ -40,7 +40,7 @@
 
 <script>
 // View
-import DetailPastPlan from '@/views/plans/detail-past-plan';
+import PastPlanPage from '@/views/plans/past';
 import EditPlanPage from '@/views/plans/edit';
 
 export default {
@@ -64,8 +64,13 @@ export default {
         },
       });
     },
-    goToPlanPast() {
-      this.$store.dispatch('plansNavigator/push', DetailPastPlan);
+    goToPastPlan(plan) {
+      this.$store.dispatch('plansNavigator/push', {
+        extends: PastPlanPage,
+        onsNavigatorProps: {
+          plan,
+        },
+      });
     },
   },
 };

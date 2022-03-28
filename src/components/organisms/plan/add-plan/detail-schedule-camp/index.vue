@@ -1,5 +1,6 @@
 <template>
   <v-ons-page @show="show">
+    <loading :visible="isLoading" />
     <div class="content">
       <div class="text">
         <v-ons-row class="text__desc">
@@ -9,6 +10,7 @@
 
       <detail-table
         :forecasts="forecasts"
+        :past-weather="pastWeather"
         :tasks.sync="tasks"
       />
 
@@ -74,6 +76,7 @@ export default {
   data() {
     return {
       forecasts: {},
+      pastWeather: {},
       confirmDialogVisible: false,
       completedDialogVisible: false,
     };
@@ -113,9 +116,9 @@ export default {
       this.confirmDialogVisible = false;
 
       if (this.isNew) {
-        this.$store.dispatch('plan/createPlan');
+        await this.$store.dispatch('plan/createPlan');
       } else {
-        this.$store.dispatch('plan/updatePlan');
+        await this.$store.dispatch('plan/updatePlan');
       }
 
       this.showCompletedDialog();
@@ -140,10 +143,25 @@ export default {
       const forecastHourly = await this.$store.dispatch('models/weather/getForecastHourly', params);
       return forecastHourly;
     },
+    async getPast() {
+      const pastDates = this.$store.getters['plan/pastDates'];
+
+      if (pastDates.length === 0) return {};
+
+      const params = {
+        campsite_id: this.campsite.id,
+        target_date_from: pastDates[0],
+        target_date_to: pastDates[pastDates.length - 1],
+      };
+
+      const past = await this.$store.dispatch('models/weather/getPast', params);
+      return past;
+    },
     async show() {
       if (this.$helpers.isEmptyObject(this.forecasts)) {
         this.forecasts = await this.getForecastHourly();
       }
+      this.pastWeather = await this.getPast();
     },
   },
 };

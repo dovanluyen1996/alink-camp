@@ -65,7 +65,7 @@ export default {
     background: #fff;
     background-image: url('~@/assets/images/form/check-icon.png');
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: 2px -5px;
     background-size: 23px;
     opacity: 0;
 

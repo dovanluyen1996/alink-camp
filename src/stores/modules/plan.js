@@ -14,6 +14,7 @@ export default {
       finishedDate: '',
       itemIds: [],
       tasks: [],
+      memories: [],
     },
     isLoading: false,
   },
@@ -30,8 +31,17 @@ export default {
       if (finishedDate) return [finishedDate];
       return [];
     },
+    pastDates: (state, getters) => {
+      const dateRange = [...getters.dateRange];
+      const today = moment();
+
+      return dateRange.filter(date => moment(date).isBefore(today, 'day'));
+    },
     inScheduleTasks: (state, getters) => {
       const dateRange = [...getters.dateRange];
+
+      if (dateRange.length === 0) return [];
+
       const startedDate = dateRange[0];
       const finishedDate = dateRange[dateRange.length - 1];
       const inSchedule = task => moment(task.targetAt).isBetween(`${startedDate} 0:00`, `${finishedDate} 23:59`, null, '[]');
@@ -61,6 +71,9 @@ export default {
     setTasks(state, tasks) {
       Vue.set(state.params, 'tasks', tasks);
     },
+    setMemories(state, memories) {
+      Vue.set(state.params, 'memories', memories);
+    },
     clean(state) {
       const params = {
         planId: null,
@@ -69,6 +82,7 @@ export default {
         finishedDate: '',
         itemIds: [],
         tasks: [],
+        memories: [],
       };
 
       Vue.set(state, 'params', params);
@@ -97,6 +111,9 @@ export default {
     setTasks(context, tasks) {
       context.commit('setTasks', tasks);
     },
+    setMemories(context, memories) {
+      context.commit('setMemories', memories);
+    },
     clean(context) {
       context.commit('clean');
     },
@@ -123,14 +140,14 @@ export default {
         console.error('itemIds restore error.', error);
       }
     },
-    createPlan({ commit, dispatch, getters }) {
+    async createPlan({ commit, dispatch, getters }) {
       commit('setIsLoading', true);
 
       const params = { ...getters.params };
       params.tasks = getters.inScheduleTasks;
 
       try {
-        dispatch('models/userCampsitePlan/createUserCampsitePlan', params, { root: true });
+        await dispatch('models/userCampsitePlan/createUserCampsitePlan', params, { root: true });
         dispatch('storeCheckedItem', params.itemIds);
       } catch (error) {
         commit('api/setError', error, { root: true });
@@ -139,14 +156,16 @@ export default {
         commit('setIsLoading', false);
       }
     },
-    updatePlan({ commit, dispatch, getters }) {
+    async updatePlan({ commit, dispatch, getters }) {
       commit('setIsLoading', true);
 
       const params = { ...getters.params };
       params.tasks = getters.inScheduleTasks;
 
+      params.memories = params.memories.filter(memory => memory.image.url === undefined);
+
       try {
-        dispatch('models/userCampsitePlan/updateUserCampsitePlan', {
+        await dispatch('models/userCampsitePlan/updateUserCampsitePlan', {
           userCampsitePlanId: params.planId,
           params,
         }, { root: true });

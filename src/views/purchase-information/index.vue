@@ -120,7 +120,7 @@ export default {
   },
   methods: {
     callToPurchase() {
-      if (BuildInfo.debug) {
+      if (BuildInfo.debug || window.device.platform === 'browser') {
         localStorage.setItem('isCharged', true);
         return this.purchaseComplete();
       }
@@ -137,7 +137,10 @@ export default {
             availablePackage, async({ productIdentifier, purchaserInfo }) => {
               if (Object.entries(purchaserInfo.entitlements.active).length > 0) {
                 // 課金の識別子をサーバへ送る
-                const params = { app_user_id: purchaserInfo.originalAppUserId };
+                const params = {
+                  app_user_id: purchaserInfo.originalAppUserId,
+                  app_user_os: window.device.platform.toLowerCase(),
+                };
                 await this.$store.dispatch('models/currentUser/updateUser', params);
 
                 this.$store.dispatch('purchase/setIsPurchased', true);
@@ -172,7 +175,10 @@ export default {
           const targetEntitlement = entitlements[process.env.REVENUE_CAT_ENTITLEMENT_USE_APP];
           if (targetEntitlement.isActive) {
             // 課金の識別子をサーバへ送る
-            const params = { app_user_id: restoredInfo.originalAppUserId };
+            const params = {
+              app_user_id: restoredInfo.originalAppUserId,
+              app_user_os: window.device.platform.toLowerCase(),
+            };
             await this.$store.dispatch('models/currentUser/updateUser', params);
 
             this.$store.dispatch('purchase/setIsPurchased', true);

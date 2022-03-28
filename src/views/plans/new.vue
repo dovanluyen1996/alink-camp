@@ -44,14 +44,21 @@ export default {
         },
       ],
       activeIndex: 0,
-      action: '',
     };
+  },
+  beforeDestroy() {
+    this.$store.dispatch('plan/clean');
   },
   methods: {
     async show() {
-      await this.$store.dispatch('models/item/getItems');
+      await this.getItems();
 
-      this.$store.dispatch('plan/clean');
+      this.setCampsiteId();
+    },
+    async getItems() {
+      await this.$store.dispatch('models/item/getItems');
+    },
+    setCampsiteId() {
       this.$store.dispatch('plan/setCampsiteId', this.campsite.id);
       // 前回保存したアイテムのチェックを復元する
       const items = this.$store.getters['models/item/all'];

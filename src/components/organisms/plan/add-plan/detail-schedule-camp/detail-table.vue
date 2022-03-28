@@ -7,14 +7,16 @@
     >
       <div class="date-detail">
         <span>
-          {{ date }}
+          {{ localMonthDateFromWithoutZero(date) }}
         </span>
-        <v-ons-button
-          modifier="yellow"
-          class="button--share"
+        <share-button
+          :subject="shareSubject()"
+          :message="shareMessage(date)"
         >
-          予定共有
-        </v-ons-button>
+          <template #text>
+            予定共有
+          </template>
+        </share-button>
       </div>
       <table class="table">
         <tbody>
@@ -54,7 +56,7 @@
             <td>{{ precipitationText(getWeather(date, hour)) }}</td>
             <td>
               <div
-                v-if="getWeather(date, hour)"
+                v-if="getWeather(date, hour) && getWeather(date, hour).windSpeed"
                 class="wind-direction"
               >
                 <template v-if="getWeather(date, hour).windSpeed > 0">
@@ -105,6 +107,7 @@
 import EditDialogTask from '@/components/organisms/edit-dialog-task';
 import WeatherImage from '@/components/atoms/weather-image';
 import Temperature from '@/components/atoms/temperature';
+import ShareButton from '@/components/organisms/share-button';
 
 export default {
   name: 'DetailTable',
@@ -112,9 +115,14 @@ export default {
     EditDialogTask,
     WeatherImage,
     Temperature,
+    ShareButton,
   },
   props: {
     forecasts: {
+      type: Object,
+      required: true,
+    },
+    pastWeather: {
       type: Object,
       required: true,
     },
@@ -132,9 +140,27 @@ export default {
   },
   computed: {
     items() {
+      return { ...this.pastItems, ...this.futureItems };
+    },
+    futureItems() {
       if (!this.dateRange.length || !this.forecasts.items) return [];
 
       const items = this.forecasts.items.reduce((dateAcc, dateCur) => {
+        const hourlyData = dateCur.hourlyData.reduce((hourAcc, hourCur) => {
+          hourAcc[parseInt(hourCur.hour, 10)] = hourCur;
+          return hourAcc;
+        }, {});
+
+        dateAcc[dateCur.date] = hourlyData;
+        return dateAcc;
+      }, {});
+
+      return items;
+    },
+    pastItems() {
+      if (!this.dateRange.length || !this.pastWeather.items) return [];
+
+      const items = this.pastWeather.items.reduce((dateAcc, dateCur) => {
         const hourlyData = dateCur.hourlyData.reduce((hourAcc, hourCur) => {
           hourAcc[parseInt(hourCur.hour, 10)] = hourCur;
           return hourAcc;
@@ -164,7 +190,19 @@ export default {
       return this.items[date][hour];
     },
     precipitationText(weather) {
-      return this.$helpers.isEmpty(weather) ? '--' : weather.precip;
+      if (this.$helpers.isEmpty(weather)) return '--';
+      if (!weather.precip) return '--';
+
+      return weather.precip;
+    },
+    forecastTelopText(weather) {
+      return this.$helpers.isEmpty(weather) ? '--' : weather.forecastTelop;
+    },
+    temperatureText(weather) {
+      return this.$helpers.isEmpty(weather) ? '--' : weather.temperature;
+    },
+    windSpeedText(weather) {
+      return this.$helpers.isEmpty(weather) ? '--' : weather.windSpeed;
     },
     windSpeedRate(windSpeed) {
       // Unit of measurement: m/s
@@ -187,6 +225,36 @@ export default {
     },
     isContentEmpty(content) {
       return content === '';
+    },
+    shareSubject() {
+      return 'キャンプ情報共有';
+    },
+    shareMessage(date) {
+      const messages = this.hours.map((hour) => {
+        const hourlyMessages = [];
+        const weather = this.getWeather(date, hour);
+
+        hourlyMessages.push(`${hour}時`);
+        // 天気情報
+        hourlyMessages.push(this.forecastTelopText(weather));
+        hourlyMessages.push(`${this.temperatureText(weather)}℃`);
+        hourlyMessages.push(`${this.precipitationText(weather)}mm/h`);
+        hourlyMessages.push(`${this.windSpeedText(weather)}m/s`);
+        // タスク
+        const task = this.taskText(date, hour);
+        if (!this.isContentEmpty(task)) {
+          // 先頭は意図的に空白を挿入していることを考慮して、末尾のみ空白・改行は取り除く
+          hourlyMessages.push(task.trimEnd());
+        }
+
+        return hourlyMessages.join('\n');
+      });
+
+      // 時間毎に１行空行を入れる
+      return messages.join('\n\n');
+    },
+    localMonthDateFromWithoutZero(date) {
+      return this.$helpers.localMonthDateFromWithoutZero(date);
     },
   },
 };
@@ -336,29 +404,6 @@ $speed-degrees: 0, 22.5, 45, 67.5, 90, 112.5, 135, 157.5, 180,
         font-size: 12px;
       }
     }
-  }
-}
-
-.button--share {
-  position: absolute;
-  right: 10px;
-  display: flex;
-  align-items: center;
-  width: 110px;
-  height: 29px;
-  font-size: 14px;
-  font-weight: 600;
-  border-radius: 15px;
-
-  &::before {
-    display: inline-block;
-    width: 13px;
-    height: 15px;
-    margin-right: 6px;
-    content: '';
-    background-image: url("~@/assets/images/icon-share.png");
-    background-position: center;
-    background-size: 100%;
   }
 }
 </style>

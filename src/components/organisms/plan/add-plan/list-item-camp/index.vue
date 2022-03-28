@@ -1,7 +1,7 @@
 <template>
   <v-ons-page @show="show">
+    <loading :visible="isLoading" />
     <div class="content">
-      <loading :visible="isLoading" />
       <div class="text">
         <v-ons-row class="text__desc">
           {{ campsite.name }}
@@ -11,16 +11,20 @@
       <div class="title-center">
         <span>天気予報</span>
         <!-- TODO: 持ち物共有は編集時のみ表示する -->
-        <v-ons-button
-          class="button--share button--yellow"
+        <share-button
+          :subject="shareSubject()"
+          :message="shareMessage()"
         >
-          持ち物共有
-        </v-ons-button>
+          <template #text>
+            持ち物共有
+          </template>
+        </share-button>
       </div>
 
       <forecast-table
         :campsite="campsite"
         :forecasts="forecasts"
+        :past-weather="pastWeather"
       />
       <item-table
         v-if="sortedItems.length > 0"
@@ -88,6 +92,7 @@ import ForecastTable from '@/components/organisms/plan/add-plan/list-item-camp/f
 import ContentWithFooter from '@/components/organisms/content-with-footer';
 import ConfirmDialog from '@/components/organisms/dialog/confirm-dialog';
 import CompletedDialog from '@/components/organisms/dialog/completed-dialog';
+import ShareButton from '@/components/organisms/share-button';
 
 export default {
   components: {
@@ -96,6 +101,7 @@ export default {
     ContentWithFooter,
     ConfirmDialog,
     CompletedDialog,
+    ShareButton,
   },
   props: {
     campsite: {
@@ -108,6 +114,7 @@ export default {
       confirmDialogVisible: false,
       completedDialogVisible: false,
       forecasts: {},
+      pastWeather: {},
     };
   },
   computed: {
@@ -144,9 +151,9 @@ export default {
       this.confirmDialogVisible = false;
 
       if (this.isNew) {
-        this.$store.dispatch('plan/createPlan');
+        await this.$store.dispatch('plan/createPlan');
       } else {
-        this.$store.dispatch('plan/updatePlan');
+        await this.$store.dispatch('plan/updatePlan');
       }
 
       this.showCompletedDialog();
@@ -172,10 +179,33 @@ export default {
       const forecast14Days = await this.$store.dispatch('models/weather/getForecast14Days', params);
       return forecast14Days;
     },
+    async getPast() {
+      const pastDates = this.$store.getters['plan/pastDates'];
+
+      if (pastDates.length === 0) return {};
+
+      const params = {
+        campsite_id: this.campsite.id,
+        target_date_from: pastDates[0],
+        target_date_to: pastDates[pastDates.length - 1],
+      };
+
+      const past = await this.$store.dispatch('models/weather/getPast', params);
+      return past;
+    },
     async show() {
       if (this.$helpers.isEmptyObject(this.forecasts)) {
         this.forecasts = await this.getForecast14Days();
       }
+      this.pastWeather = await this.getPast();
+    },
+    shareSubject() {
+      return 'キャンプ情報共有';
+    },
+    shareMessage() {
+      const checkedItems = this.sortedItems.filter(item => this.checkedItemIds.includes(item.id));
+
+      return checkedItems.map(item => item.name).join('\n');
     },
   },
 };
@@ -248,26 +278,7 @@ export default {
 }
 
 .button--share {
-  position: absolute;
-  right: 7px;
-  display: flex;
-  align-items: center;
-  width: 109px;
-  height: 29px;
-  font-size: 14px;
-  font-weight: 600;
-  background-color: $color-yellow;
-  border-radius: 15px;
-
-  &::before {
-    display: inline-block;
-    width: 13px;
-    height: 15px;
-    margin-right: 6px;
-    content: '';
-    background-image: url("~@/assets/images/icon-share.png");
-    background-position: center;
-    background-size: 100%;
-  }
+  right: 7px !important;
+  width: 109px !important;
 }
 </style>
