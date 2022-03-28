@@ -13,7 +13,7 @@
       >
         <validation-provider
           v-slot="{ errors }"
-          rules="required|required-future-day"
+          rules="required"
           name="チェックイン"
         >
           <date-field
@@ -26,7 +26,7 @@
 
         <validation-provider
           v-slot="{ errors }"
-          rules="required|required-future-day-since:@チェックイン"
+          :rules="checkoutRules"
           name="チェックアウト"
         >
           <date-field
@@ -133,6 +133,9 @@ export default {
       set(newDate) {
         this.$store.dispatch('plan/setFinishedDate', newDate);
       },
+    },
+    checkoutRules() {
+      return 'required|required-future-day-since:@チェックイン|required-future-day|required-bwtween-14days:@チェックイン';
     },
   },
   methods: {
