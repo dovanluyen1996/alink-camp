@@ -159,7 +159,6 @@ export default {
   /deep/ {
     .temperature__unit {
       margin-left: 0;
-      font-size: 10px;
       font-weight: 300;
     }
 
