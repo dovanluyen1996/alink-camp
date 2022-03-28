@@ -124,6 +124,7 @@ export default {
   data() {
     return {
       isErrorPushPermisionVisible: false,
+      isPurchased: false,
     };
   },
   computed: {
