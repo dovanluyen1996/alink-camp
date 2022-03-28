@@ -49,7 +49,6 @@ export default {
       return windDirections[this.windDirection];
     },
     windDirectionStyle() {
-      console.log(` windDirectionDeg= ${this.windDirectionDeg}`);
       return {
         transform: `rotate(${this.windDirectionDeg}deg)`,
       };

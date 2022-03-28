@@ -242,9 +242,6 @@ export default {
 <style lang="scss" scoped>
 @import "@/assets/scss/_variables.scss";
 
-$speed-degrees: 0, 22.5, 45, 67.5, 90, 112.5, 135, 157.5, 180,
-  202.5, 225, 247.5, 270, 292.5, 315, 337.5;
-
 .table-detail {
   box-sizing: border-box;
   width: 100%;
