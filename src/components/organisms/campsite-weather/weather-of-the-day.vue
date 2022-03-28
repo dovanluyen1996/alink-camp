@@ -137,7 +137,7 @@ export default {
 .campsite-weather-of-the-day-purchase {
   position: absolute;
   right: 15px;
-  bottom: 7px;
+  bottom: 26px;
   left: 15px;
   display: flex;
   align-items: center;

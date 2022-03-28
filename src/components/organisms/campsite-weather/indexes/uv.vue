@@ -6,7 +6,7 @@
       </div>
       <img
         :src="image"
-        width="44px"
+        width="42px"
       >
       <div class="uv-label">
         {{ label }}
@@ -18,7 +18,7 @@
       </div>
       <img
         src="@/assets/images/weathers/uv/uv_large_none.png"
-        width="44px"
+        width="42px"
       >
     </div>
   </div>

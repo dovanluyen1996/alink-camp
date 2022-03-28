@@ -6,7 +6,7 @@
           <span>日の出</span>
           <img
             src="@/assets/images/weathers/sunrise.png"
-            width="25px"
+            width="24px"
           >
         </div>
         <div class="campsite-weather-sun__date-time">
@@ -20,7 +20,7 @@
           <span>日の入</span>
           <img
             src="@/assets/images/weathers/sunset.png"
-            width="25px"
+            width="24px"
           >
         </div>
         <div class="campsite-weather-sun__date-time">
