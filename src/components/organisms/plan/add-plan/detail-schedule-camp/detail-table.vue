@@ -178,7 +178,7 @@ export default {
   },
   methods: {
     taskText(date, hour) {
-      const targetAt = this.$moment(`${date} ${hour}:00`).format('YYYY-MM-DD HH:mm');
+      const targetAt = this.formatDateTime(date, hour);
       const task = this.tasks[targetAt] || '';
 
       return task;
@@ -217,7 +217,11 @@ export default {
     },
     editTaskAt(date, hour) {
       this.updateDataVisible = true;
-      this.targetAt = this.$moment(`${date} ${hour}:00`).format('YYYY-MM-DD HH:mm');
+      this.targetAt = this.formatDateTime(date, hour);
+    },
+    formatDateTime(date, hour) {
+      const padHour = String(hour).padStart(2, '0');
+      return this.$moment(`${date} ${padHour}:00`).format('YYYY-MM-DD HH:mm');
     },
     closePopup() {
       this.$emit('update:tasks', this.tasks);
