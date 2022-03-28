@@ -5,7 +5,10 @@
     </template>
 
     <template #section>
-      <div class="banner-wrap" v-if="!isPurchased">
+      <div
+        v-if="!isPurchased"
+        class="banner-wrap"
+      >
         <img
           class="banner-img"
           src="@/assets/images/push-notification-weather-purchase.png"
@@ -16,7 +19,10 @@
 
     <loading :visible="isLoading" />
     <v-ons-list modifier="noborder">
-      <v-ons-list-item modifier="nodivider" v-show="isErrorPushPermisionVisible">
+      <v-ons-list-item
+        v-show="isErrorPushPermisionVisible"
+        modifier="nodivider"
+      >
         <div class="center">
           <span class="list-item__alert">
             PUSH通知の許可がされていません。スマートフォンの設定からキャンプ天気を選択し、通知を許可してください。

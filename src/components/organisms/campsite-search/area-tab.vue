@@ -49,10 +49,10 @@
         </v-ons-button>
       </div>
 
-        <annotations-block
-          v-show="isShowAnnotationWeather"
-          class="mx-20"
-        >
+      <annotations-block
+        v-show="isShowAnnotationWeather"
+        class="mx-20"
+      >
         天気予報、気温などの気象条件で絞り込めます
       </annotations-block>
 

@@ -49,7 +49,7 @@
         </v-ons-button>
       </div>
 
-        <annotations-block
+      <annotations-block
         v-show="isShowAnnotationWeather"
         class="mx-20"
       >
