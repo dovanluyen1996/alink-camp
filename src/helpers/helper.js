@@ -65,6 +65,10 @@ export default {
     return moment(time).format('HH:mm');
   },
 
+  localMonthDateFromWithoutZero(time) {
+    return moment(time).format('M/D');
+  },
+
   // 日付を取得するため。javascriptにはyyyy-mm-ddのフォーマットを使わないといけないです。
   localDateWithHyphenFrom(targetDate) {
     return moment(targetDate).format('YYYY-MM-DD');
