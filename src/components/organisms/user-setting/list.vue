@@ -3,8 +3,9 @@
     <template #title>
       PUSH設定
     </template>
+
     <template #section>
-      <div class="banner-wrap">
+      <div class="banner-wrap" v-if="!isPurchased">
         <img
           class="banner-img"
           src="@/assets/images/push-notification-weather-purchase.png"
@@ -124,7 +125,8 @@ export default {
       return this.$store.getters['models/userSetting/userSetting'];
     },
     isLoading() {
-      return this.$store.getters['models/userSetting/isLoading'];
+      return this.$store.getters['models/userSetting/isLoading']
+        || this.$store.getters['purchase/isLoading'];
     },
     isEnabledWeatherForecastNotification: {
       get() {
@@ -193,6 +195,7 @@ export default {
   async created() {
     await this.getUserSetting();
     await this.checkPermission();
+    await this.setIsPurchased();
   },
   methods: {
     async getUserSetting() {
@@ -215,6 +218,10 @@ export default {
           }
         });
       }
+    },
+    async setIsPurchased() {
+      const isPurchased = await this.$store.dispatch('purchase/getIsPurchased');
+      this.isPurchased = isPurchased;
     },
   },
 };
