@@ -100,8 +100,8 @@
         <icon src="res/icon/ios/icon-83.5@2x.png" width="167" height="167" />
         <icon src="res/icon/ios/icon-1024.png" width="1024" height="1024" />
 
-        <splash src="res/screen/ios/Default@3xuniversalcomany.png" />
-        <splash src="res/screen/ios/Default@2xuniversalcomany.png" />
+        <splash src="res/screen/ios/Default@3x~universal~comany.png" />
+        <splash src="res/screen/ios/Default@2x~universal~comany.png" />
 
         <config-file target="*-Info.plist" parent="CFBundleDevelopmentRegion">
             <string>Japanese</string>
