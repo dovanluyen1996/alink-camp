@@ -132,6 +132,10 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.temperature-chart-container {
+  margin-bottom: 5px;
+}
+
 .no-forecast {
   display: flex;
   align-items: center;

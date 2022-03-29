@@ -102,6 +102,7 @@ export default {
 .temperature-table {
   width: 100%;
   margin-top: 10px;
+  margin-bottom: 14px;
 
   th,
   td {
