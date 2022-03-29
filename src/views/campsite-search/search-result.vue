@@ -163,8 +163,8 @@ export default {
     },
     searchByAreaParams() {
       return {
-        prefecture_id: this.searchConditions.prefecture,
-        target_date: this.searchConditions.targetDate,
+        prefecture_id: this.searchConditions.prefecture_id,
+        target_date: this.searchConditions.target_date,
         max_temp: this.searchConditions.max_temp,
         sunny: this.searchConditions.sunny,
         wind: this.searchConditions.wind,
@@ -176,7 +176,7 @@ export default {
       return {
         lower_rad: this.searchConditions.lower_rad,
         upper_rad: this.searchConditions.upper_rad,
-        target_date: this.searchConditions.targetDate,
+        target_date: this.searchConditions.target_date,
         max_temp: this.searchConditions.max_temp,
         sunny: this.searchConditions.sunny,
         wind: this.searchConditions.wind,
