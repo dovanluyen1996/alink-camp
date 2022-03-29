@@ -38,24 +38,14 @@ export default {
       required: true,
     },
   },
-  data() {
-    return {
-      windDirectionDeg: 0,
-    };
-  },
   computed: {
     windDirectionHeading() {
       return windDirections[this.windDirection];
     },
     windDirectionStyle() {
       return {
-        transform: `rotate(${this.windDirectionDeg}deg)`,
+        transform: `rotate(${this.windDirectionHeading}deg)`,
       };
-    },
-  },
-  watch: {
-    windDirectionHeading(newValue) {
-      this.windDirectionDeg = newValue + 180;
     },
   },
   methods: {
