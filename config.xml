@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="jp.rights.alink.camptenki.dev" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" android-versionCode="10000" ios-CFBundleVersion="1" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>jp.rights.alink.camptenki_dev</name>
+<widget id="jp.or.jwa.tenkijp.camp.stg" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" android-versionCode="10000" ios-CFBundleVersion="1" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>jp.or.jwa.tenkijp.camp.stg</name>
     <description>
       Alink CampTenki Client
     </description>
@@ -27,6 +27,8 @@
         <edit-config file="AndroidManifest.xml" mode="merge" target="/manifest/application">
             <application android:label="キャンプ天気" />
         </edit-config>
+        <preference name="android-minSdkVersion" value="24" />
+        <preference name="android-targetSdkVersion" value="31" />
         <edit-config file="AndroidManifest.xml" mode="merge" target="/manifest/application/activity">
             <activity android:label="キャンプ天気" />
         </edit-config>
