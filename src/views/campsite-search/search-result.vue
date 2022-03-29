@@ -129,7 +129,7 @@ export default {
       }
 
       const searchParams = {
-        ...this.facilityFilterParams,
+        ...this.searchFacilityParams(),
         ...this.searchParams(),
       };
 
@@ -191,6 +191,22 @@ export default {
         prefecture_id: this.searchConditions.prefecture.value,
         page: this.page,
       };
+    },
+    searchFacilityParams() {
+      if (this.$helpers.isPresentObject(this.facilityFilterParams)) {
+        return this.facilityFilterParams;
+      }
+
+      const searchParamKeys = Object.keys(this.searchParams());
+      searchParamKeys.push('type');
+
+      Object.keys(this.searchConditions).forEach((key) => {
+        if (searchParamKeys.includes(key)) return;
+
+        this.facilityFilterParams[key] = this.searchConditions[key];
+      });
+
+      return this.facilityFilterParams;
     },
     searchParams() {
       switch (this.searchType()) {
