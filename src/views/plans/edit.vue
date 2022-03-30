@@ -1,5 +1,6 @@
 <template>
   <v-ons-page @show="show">
+    <loading :visible="isLoading" />
     <custom-toolbar :title="title">
       <template #right>
         <delete-dialog-with-icon
@@ -72,11 +73,14 @@ export default {
     };
   },
   computed: {
+    isLoading() {
+      return this.$store.getters['models/userCampsitePlan/isLoading'];
+    },
     detailPlan() {
-      return this.$store.getters['models/userCampsitePlan/findById'](this.plan.id);
+      return this.$store.getters['models/userCampsitePlan/findById'](this.plan.id) || {};
     },
     title() {
-      return `${this.$moment(this.detailPlan.startedDate).format('M/D')}からの計画`;
+      return `${this.$moment(this.detailPlan.startedDate).format('M/D')}からの計画` || '';
     },
   },
   beforeDestroy() {
@@ -124,8 +128,8 @@ export default {
     },
     async deletePlan() {
       this.closeDeleteDialog();
-      this.showCompletedDialog('deletePlan');
       await this.$store.dispatch('models/userCampsitePlan/deleteUserCampsitePlan', { userCampsitePlanId: this.plan.id });
+      this.showCompletedDialog('deletePlan');
     },
     goToPlans() {
       this.$store.dispatch('plansNavigator/pop');
