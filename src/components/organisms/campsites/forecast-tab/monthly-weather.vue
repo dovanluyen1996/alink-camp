@@ -25,9 +25,7 @@
       v-else
       class="not-purchase"
     >
-      <!-- TODO: Delete .not-purchase if it is not needed -->
-
-      <img src="@/assets/images/weather-not-purchase.png">
+      <img src="@/assets/images/campsite-forecast-weather-purchase.png">
     </div>
   </div>
 </template>
@@ -78,7 +76,7 @@ export default {
 }
 
 .not-purchase {
-  padding: 30px 10px;
+  padding: 16px 10px;
 
   img {
     width: 100%;

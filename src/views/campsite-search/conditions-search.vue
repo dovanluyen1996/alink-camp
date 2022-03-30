@@ -5,13 +5,15 @@
     <loading :visible="isLoading" />
     <div class="content">
       <content-with-footer>
-        <card-with-tab
-          ref="tabContents"
-          :tabs="tabs"
-          :active-index="activeIndexTab"
-          :is-purchased="isPurchased"
-          @switchTab="switchTab"
-        />
+        <div class="content-wrap">
+          <card-with-tab
+            ref="tabContents"
+            :tabs="tabs"
+            :active-index="activeIndexTab"
+            :is-purchased="isPurchased"
+            @switchTab="switchTab"
+          />
+        </div>
         <template #footer>
           <v-ons-button
             class="button--search"
@@ -123,6 +125,12 @@ export default {
         background-size: 100%;
       }
     }
+  }
+}
+
+/deep/ .content-wrap {
+  .card {
+    padding: 0;
   }
 }
 </style>

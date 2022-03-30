@@ -4,9 +4,25 @@
       PUSH設定
     </template>
 
+    <template #section>
+      <div
+        v-if="!isPurchased"
+        class="banner-wrap"
+      >
+        <img
+          class="banner-img"
+          src="@/assets/images/push-notification-weather-purchase.png"
+          alt="weather-purchase"
+        >
+      </div>
+    </template>
+
     <loading :visible="isLoading" />
     <v-ons-list modifier="noborder">
-      <v-ons-list-item modifier="nodivider" v-show="isErrorPushPermisionVisible">
+      <v-ons-list-item
+        v-show="isErrorPushPermisionVisible"
+        modifier="nodivider"
+      >
         <div class="center">
           <span class="list-item__alert">
             PUSH通知の許可がされていません。スマートフォンの設定からキャンプ天気を選択し、通知を許可してください。
@@ -115,7 +131,8 @@ export default {
       return this.$store.getters['models/userSetting/userSetting'];
     },
     isLoading() {
-      return this.$store.getters['models/userSetting/isLoading'];
+      return this.$store.getters['models/userSetting/isLoading']
+        || this.$store.getters['purchase/isLoading'];
     },
     isEnabledWeatherForecastNotification: {
       get() {
@@ -180,10 +197,14 @@ export default {
         await this.updateUserSetting();
       },
     },
+    isPurchased() {
+      return this.$store.getters['purchase/isPurchased'];
+    },
   },
   async created() {
     await this.getUserSetting();
     await this.checkPermission();
+    await this.setIsPurchased();
   },
   methods: {
     async getUserSetting() {
@@ -248,5 +269,13 @@ export default {
 
 .switch {
   margin-left: 20px;
+}
+
+.banner-wrap {
+  margin: 10px 20px 0;
+
+  .banner-img {
+    width: 100%;
+  }
 }
 </style>

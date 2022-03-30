@@ -3,7 +3,7 @@
     <validation-observer
       ref="searchArea"
     >
-      <div class="card__title card__title--center">
+      <div class="card__title card__title--center mx-20">
         エリアを指定（必須）
       </div>
       <validation-provider
@@ -16,36 +16,43 @@
           :options="prefectures"
           placeholder="都道府県を選択"
           :errors="errors"
+          class="mx-20"
         />
       </validation-provider>
 
       <campsite-search-date-field
         v-model="targetDate"
+        class="mx-20"
       />
 
-      <annotations-block>
+      <annotations-block class="mx-20">
         ※予報は本日から14日目までとなります。それ以上は過去のお天気をもとに予測したデータとなります。<br>
         ※紫外線、風の強さに関しては14日目までの予報となります。
       </annotations-block>
 
-      <v-ons-button
-        class="button--plus button--more button--more__description"
-        @click="toggleWeather()"
-      >
-        <img
-          v-if="isShowWeather"
-          :src="require('@/assets/images/icon-minus.png')"
-          class="icon-minus"
+      <div class="mx-20">
+        <v-ons-button
+          class="button--plus button--more button--more__description"
+          @click="toggleWeather()"
         >
-        <img
-          v-else
-          :src="require('@/assets/images/red-cross.png')"
-          class="icon-plus"
-        >
-        気象条件
-      </v-ons-button>
+          <img
+            v-if="isShowWeather"
+            :src="require('@/assets/images/icon-minus.png')"
+            class="icon-minus"
+          >
+          <img
+            v-else
+            :src="require('@/assets/images/red-cross.png')"
+            class="icon-plus"
+          >
+          気象条件
+        </v-ons-button>
+      </div>
 
-      <annotations-block v-show="isShowAnnotationWeather">
+      <annotations-block
+        v-show="isShowAnnotationWeather"
+        class="mx-20"
+      >
         天気予報、気温などの気象条件で絞り込めます
       </annotations-block>
 
@@ -57,37 +64,45 @@
           :wind.sync="wind"
           :uv.sync="uv"
           :date.sync="targetDate"
+          class="mx-20"
         />
 
         <campsite-search-not-purchased
           v-else
+          class="campsite-search-not-purchased"
         />
       </div>
 
-      <v-ons-button
-        class="button--plus button--more button--more__description"
-        @click="toggleFacility()"
-      >
-        <img
-          v-if="isShowFacility"
-          :src="require('@/assets/images/icon-minus.png')"
-          class="icon-minus"
+      <div class="mx-20">
+        <v-ons-button
+          class="button--plus button--more button--more__description"
+          @click="toggleFacility()"
         >
-        <img
-          v-else
-          :src="require('@/assets/images/red-cross.png')"
-          class="icon-plus"
-        >
-        施設条件
-      </v-ons-button>
+          <img
+            v-if="isShowFacility"
+            :src="require('@/assets/images/icon-minus.png')"
+            class="icon-minus"
+          >
+          <img
+            v-else
+            :src="require('@/assets/images/red-cross.png')"
+            class="icon-plus"
+          >
+          施設条件
+        </v-ons-button>
+      </div>
 
-      <annotations-block v-show="isShowAnnotationFacility">
+      <annotations-block
+        v-show="isShowAnnotationFacility"
+        class="mx-20"
+      >
         ロケーションや周辺施設などの条件を絞り込めます
       </annotations-block>
 
       <campsite-search-conditions-facility
         v-show="isShowFacility"
         ref="facilityCondition"
+        class="mx-20"
       />
     </validation-observer>
 
@@ -231,6 +246,7 @@ export default {
 
 <style scoped lang="scss">
 .campsite-search-area-tab {
+  padding: 20px 0;
   overflow: hidden;
 }
 
@@ -256,6 +272,16 @@ export default {
   }
 }
 
+.campsite-search-not-purchased {
+  margin-top: 2px;
+  margin-bottom: -11px;
+}
+
+.mx-20 {
+  margin-right: 20px;
+  margin-left: 20px;
+}
+
 /deep/ {
   .annotations-block {
     font-size: 12px !important;
@@ -265,6 +291,11 @@ export default {
 
   .card__title {
     color: #000 !important;
+  }
+
+  .facility-flex,
+  .nearby-flex {
+    position: relative;
   }
 }
 </style>
