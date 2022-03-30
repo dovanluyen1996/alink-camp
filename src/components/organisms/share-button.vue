@@ -55,6 +55,7 @@ export default {
   &::before {
     display: inline-block;
     width: 14px;
+    min-width: 14px;
     height: 16px;
     margin-right: 6px;
     content: '';

@@ -31,10 +31,6 @@
       @click="showLabelListDialog"
     >
       <v-ons-button modifier="cta red">
-          <img
-            :src="require('@/assets/images/form/icon-add.png')"
-            class="icon-add"
-          >
         <img
           src="@/assets/images/form/icon-add.png"
           class="item-label__image"
