@@ -129,7 +129,7 @@ export default {
       }
 
       const searchParams = {
-        ...this.facilityFilterParams,
+        ...this.searchFacilityParams(),
         ...this.searchParams(),
       };
 
@@ -163,8 +163,8 @@ export default {
     },
     searchByAreaParams() {
       return {
-        prefecture_id: this.searchConditions.prefecture,
-        target_date: this.searchConditions.targetDate,
+        prefecture_id: this.searchConditions.prefecture_id,
+        target_date: this.searchConditions.target_date,
         max_temp: this.searchConditions.max_temp,
         sunny: this.searchConditions.sunny,
         wind: this.searchConditions.wind,
@@ -176,7 +176,7 @@ export default {
       return {
         lower_rad: this.searchConditions.lower_rad,
         upper_rad: this.searchConditions.upper_rad,
-        target_date: this.searchConditions.targetDate,
+        target_date: this.searchConditions.target_date,
         max_temp: this.searchConditions.max_temp,
         sunny: this.searchConditions.sunny,
         wind: this.searchConditions.wind,
@@ -191,6 +191,22 @@ export default {
         prefecture_id: this.searchConditions.prefecture.value,
         page: this.page,
       };
+    },
+    searchFacilityParams() {
+      if (this.$helpers.isPresentObject(this.facilityFilterParams)) {
+        return this.facilityFilterParams;
+      }
+
+      const searchParamKeys = Object.keys(this.searchParams());
+      searchParamKeys.push('type');
+
+      Object.keys(this.searchConditions).forEach((key) => {
+        if (searchParamKeys.includes(key)) return;
+
+        this.facilityFilterParams[key] = this.searchConditions[key];
+      });
+
+      return this.facilityFilterParams;
     },
     searchParams() {
       switch (this.searchType()) {
