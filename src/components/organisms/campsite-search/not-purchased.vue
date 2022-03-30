@@ -5,7 +5,7 @@
     <img
       class="not-purchased-img"
       src="@/assets/images/campsite-search-weather-purchase.png"
-      alt="weaather-purchase"
+      alt="weather-purchase"
     >
   </div>
 </template>
