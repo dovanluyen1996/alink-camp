@@ -143,7 +143,8 @@ export default {
       },
     },
     isLoading() {
-      return this.$store.getters['models/item/isLoading'];
+      return this.$store.getters['models/item/isLoading']
+        || this.$store.getters['models/weather/isForecast14DaysLoading'];
     },
   },
   methods: {

@@ -98,7 +98,7 @@ export default {
   },
   computed: {
     isLoading() {
-      return this.$store.getters['models/weather/isLoading'];
+      return this.$store.getters['models/weather/isForecastWindLoading'];
     },
   },
   beforeDestroy() {

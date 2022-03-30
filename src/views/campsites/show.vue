@@ -91,7 +91,15 @@ export default {
       return this.$store.state.components.cardWithTab.showCampsiteActiveIndex;
     },
     isLoading() {
-      return this.$store.getters['campsite/isLoading'] || this.$store.getters['models/usersFavorite/isLoading'] || this.$store.getters['models/userCampsitePlan/isLoading'];
+      return this.$store.getters['campsite/isLoading']
+        || this.$store.getters['models/usersFavorite/isLoading']
+        || this.$store.getters['purchase/isLoading']
+        || this.$store.getters['models/weather/isForecastYearlyWeatherRateLoading']
+        || this.$store.getters['models/weather/isForecast14DaysLoading']
+        || this.$store.getters['models/weather/isForecastHourlyLoading']
+        || this.$store.getters['models/weather/isForecastMonthlyPrecipLoading']
+        || this.$store.getters['models/weather/isForecastMonthlyTempLoading']
+        || this.$store.getters['models/weather/isForecastYearlyTempLoading'];
     },
   },
   watch: {
