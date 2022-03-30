@@ -18,6 +18,8 @@
           >
             <img
               :src="require('@/assets/images/form/search-top.png')"
+              width="20px"
+              height="20px"
             >
             キャンプ場検索
           </v-ons-button>
@@ -111,9 +113,3 @@ export default {
   },
 };
 </script>
-<style lang="scss" scoped>
-.button--search img {
-  width: 20px;
-  height: 20px;
-}
-</style>

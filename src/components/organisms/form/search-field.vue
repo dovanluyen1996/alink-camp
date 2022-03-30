@@ -14,6 +14,8 @@
       >
         <img
           :src="require('@/assets/images/form/search-top.png')"
+          width="20px"
+          height="20px"
         >
         検索
       </v-ons-button>
@@ -132,11 +134,6 @@ export default {
   align-items: center;
   justify-content: center;
   width: 149px;
-
-  img {
-    width: 20px;
-    height: 20px;
-  }
 }
 
 .search-detail-button {
