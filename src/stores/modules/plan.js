@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import moment from 'moment';
 
+const LOCAL_STORAGE_KEY_CHECKED_ITEM_IDS = 'checkedItemIds';
+
 export default {
   strict: true,
   namespaced: true,
@@ -115,6 +117,29 @@ export default {
     clean(context) {
       context.commit('clean');
     },
+    storeCheckedItem(_context, itemIds) {
+      try {
+        localStorage.setItem(LOCAL_STORAGE_KEY_CHECKED_ITEM_IDS, JSON.stringify(itemIds));
+      } catch (error) {
+        // 保存できなくても処理を続行する
+        console.error('itemIds store error.', error);
+      }
+    },
+    restoreCheckedItem({ dispatch }, items) {
+      try {
+        const ids = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_CHECKED_ITEM_IDS));
+        const storedIds = ids || [];
+
+        const validItems = items || [];
+        const validIds = validItems.map(item => item.id);
+        const itemIds = storedIds.filter(id => validIds.includes(id));
+
+        dispatch('setItemIds', itemIds);
+      } catch (error) {
+        // 復元できなくても処理を続行する
+        console.error('itemIds restore error.', error);
+      }
+    },
     async createPlan({ commit, dispatch, getters }) {
       commit('setIsLoading', true);
 
@@ -123,6 +148,7 @@ export default {
 
       try {
         await dispatch('models/userCampsitePlan/createUserCampsitePlan', params, { root: true });
+        dispatch('storeCheckedItem', params.itemIds);
       } catch (error) {
         commit('api/setError', error, { root: true });
         throw error;
