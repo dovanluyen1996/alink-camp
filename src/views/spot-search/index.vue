@@ -255,6 +255,7 @@ export default {
     content: '';
     background-image: url("~@/assets/images/location.png");
     background-position: center;
+    background-size: 100%;
   }
 }
 
