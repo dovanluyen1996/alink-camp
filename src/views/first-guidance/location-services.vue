@@ -9,7 +9,7 @@
       <content-with-footer class="guidance-content">
         <div class="guidance-content__box">
           <img
-            src="@/assets/images/guidances/location-service.png"
+            src="@/assets/images/guidances/location-service.svg"
             width="280px"
           >
         </div>

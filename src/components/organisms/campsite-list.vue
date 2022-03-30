@@ -22,7 +22,7 @@
                   {{ campsite.name }}
                   <img
                     v-if="isShowFavoriteMark && isFavorite(campsite)"
-                    src="@/assets/images/user/user-plan/favorite.png"
+                    src="@/assets/images/user/favorite.png"
                     width="18px"
                   >
                 </span>

@@ -16,8 +16,10 @@
           @click="goToNewPlan"
         >
           <img
-            :src="require('@/assets/images/form/icon-add.png')"
+            src="@/assets/images/form/icon-add.png"
             class="icon-add"
+            width="24px"
+            height="24px"
           >
           新規計画の追加
         </v-ons-button>

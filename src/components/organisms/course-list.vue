@@ -22,7 +22,7 @@
                   {{ course.name }}
                   <img
                     v-if="isShowFavoriteMark && isCourseFavorite(course)"
-                    src="@/assets/images/user/user-course/favorite.png"
+                    src="@/assets/images/user/favorite.png"
                     width="18px"
                   >
                 </span>

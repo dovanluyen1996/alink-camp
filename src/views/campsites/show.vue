@@ -25,8 +25,10 @@
             @click="goToNewPlan"
           >
             <img
-              class="mr-10"
+              class="add-plan-icon"
               src="@/assets/images/red-cross.png"
+              width="20px"
+              height="20px"
             >
             計画の追加
           </v-ons-button>
@@ -168,12 +170,7 @@ export default {
       display: flex;
       align-items: center;
       justify-content: flex-end;
-
-      img {
-        width: 34px;
-        height: 34px;
-        margin-right: 10px;
-      }
+      padding-right: 10px;
     }
   }
 
@@ -191,9 +188,7 @@ export default {
     }
   }
 
-  .mr-10 {
-    width: 20px;
-    height: 20px;
+  .add-plan-icon {
     margin-right: 10px;
   }
 }

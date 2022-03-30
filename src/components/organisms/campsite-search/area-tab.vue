@@ -39,11 +39,15 @@
             v-if="isShowWeather"
             :src="require('@/assets/images/icon-minus.png')"
             class="icon-minus"
+            width="20px"
+            height="20px"
           >
           <img
             v-else
             :src="require('@/assets/images/red-cross.png')"
             class="icon-plus"
+            width="20px"
+            height="20px"
           >
           気象条件
         </v-ons-button>
@@ -82,11 +86,15 @@
             v-if="isShowFacility"
             :src="require('@/assets/images/icon-minus.png')"
             class="icon-minus"
+            width="20px"
+            height="20px"
           >
           <img
             v-else
             :src="require('@/assets/images/red-cross.png')"
             class="icon-plus"
+            width="20px"
+            height="20px"
           >
           施設条件
         </v-ons-button>
@@ -248,15 +256,6 @@ export default {
 .campsite-search-area-tab {
   padding: 20px 0;
   overflow: hidden;
-}
-
-.icon-plus {
-  width: 21px;
-  height: 21px;
-}
-
-.icon-minus {
-  height: 24px;
 }
 
 .button--plus {

@@ -6,6 +6,7 @@
     <img
       src="@/assets/images/trash.png"
       width="24px"
+      height="24px"
       alt="削除する"
     >
     <delete-dialog

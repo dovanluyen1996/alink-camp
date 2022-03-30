@@ -10,10 +10,14 @@
       <img
         v-if="isShowContentItem"
         src="@/assets/images/icon-circle-minus.png"
+        width="16px"
+        height="16px"
       >
       <img
         v-else
         src="@/assets/images/icon-circle-plus.png"
+        width="16px"
+        height="16px"
       >
     </div>
 
@@ -45,8 +49,6 @@ export default {
 <style scoped lang="scss">
   .title {
     img {
-      width: 17px;
-      height: 17px;
       margin-left: 5px;
     }
   }

@@ -8,7 +8,7 @@
     <div class="content">
       <content-with-footer class="guidance-content">
         <img
-          src="@/assets/images/guidances/info-setting.png"
+          src="@/assets/images/guidances/info-setting.svg"
           width="280px"
         >
         <p class="guidance-content__text">

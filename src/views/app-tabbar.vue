@@ -138,7 +138,7 @@ $tabs: weather, search, plan, nearby, menu;
     margin-bottom: 6px;
     background-repeat: no-repeat;
     background-position: center;
-    background-size: 28px;
+    background-size: 32px 28px;
   }
 
   @each $tab in $tabs {

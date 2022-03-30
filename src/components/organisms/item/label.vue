@@ -31,9 +31,15 @@
       @click="showLabelListDialog"
     >
       <v-ons-button modifier="cta red">
+          <img
+            :src="require('@/assets/images/form/icon-add.png')"
+            class="icon-add"
+          >
         <img
+          src="@/assets/images/form/icon-add.png"
           class="item-label__image"
-          src="@/assets/images/red-cross.png"
+          width="24px"
+          height="24px"
         >
         ラベル編集
       </v-ons-button>
@@ -116,7 +122,7 @@ export default {
   }
 
   &__image {
-    margin: 5px;
+    margin-right: 5px;
   }
 }
 

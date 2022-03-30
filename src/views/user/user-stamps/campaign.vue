@@ -32,7 +32,7 @@
           <img
             v-if="hasStamp(stampArea)"
             src="@/assets/images/user/stamps/campaign/flag.png"
-            width="75%"
+            width="50px"
           >
         </div>
       </div>

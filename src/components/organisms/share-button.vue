@@ -54,8 +54,8 @@ export default {
 
   &::before {
     display: inline-block;
-    width: 13px;
-    height: 15px;
+    width: 14px;
+    height: 16px;
     margin-right: 6px;
     content: '';
     background-image: url("~@/assets/images/icon-share.png");

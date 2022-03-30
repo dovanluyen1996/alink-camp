@@ -63,12 +63,16 @@
                 v-if="isContentEmpty(taskText(date, hour))"
                 :src="require('@/assets/images/icon-more.png')"
                 class="task__icon"
+                width="24px"
+                height="24px"
                 @click="editTaskAt(date, hour)"
               >
               <img
                 v-else
                 :src="require('@/assets/images/icon-edit.png')"
                 class="task__icon"
+                width="24px"
+                height="24px"
                 @click="editTaskAt(date, hour)"
               >
             </td>
@@ -256,8 +260,6 @@ export default {
         position: absolute;
         top: 50%;
         right: -5px;
-        width: 24px;
-        height: 24px;
         transform: translate(-50%, -50%);
       }
     }

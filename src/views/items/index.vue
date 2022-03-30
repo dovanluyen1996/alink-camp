@@ -23,7 +23,12 @@
             modifier="cta rounded red"
             @click="goToItemsNew"
           >
-            <img src="@/assets/images/red-cross.png">
+            <img
+              class="add-item-icon"
+              src="@/assets/images/red-cross.png"
+              width="20px"
+              height="20px"
+            >
             アイテム追加
           </v-ons-button>
         </template>
@@ -105,5 +110,9 @@ export default {
   font-weight: 600;
   text-align: center;
   transform: translate(-50%, -50%);
+}
+
+.add-item-icon {
+  margin-right: 5px;
 }
 </style>
