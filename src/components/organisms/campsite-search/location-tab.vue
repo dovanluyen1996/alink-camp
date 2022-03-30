@@ -198,7 +198,7 @@ export default {
         },
       ],
       distance: -1,
-      targetDate: '',
+      targetDate: this.$helpers.localDateWithHyphenFrom(new Date()),
       max_temp: '',
       sunny: false,
       wind: false,
