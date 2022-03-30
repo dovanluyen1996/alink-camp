@@ -64,14 +64,12 @@ export default {
       return this.segmentIndex === segmentIndexes.fourteenDays;
     },
     campsites() {
-      // handle choosen campsite
+      return this.$store.getters['campsite/choosenCampsite'];
     },
   },
   methods: {
     reservationUrl() {
-      // TODO: handle reservation Url
-
-      return 'https://google.com';
+      return this.campsites.url;
     },
     openReservationPage() {
       this.$helpers.openPageByUrl(this.reservationUrl());
