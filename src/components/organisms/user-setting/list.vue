@@ -124,7 +124,6 @@ export default {
   data() {
     return {
       isErrorPushPermisionVisible: false,
-      isPurchased: false,
     };
   },
   computed: {
@@ -198,6 +197,9 @@ export default {
         await this.updateUserSetting();
       },
     },
+    isPurchased() {
+      return this.$store.getters['purchase/isPurchased'];
+    },
   },
   async created() {
     await this.getUserSetting();
@@ -225,10 +227,6 @@ export default {
           }
         });
       }
-    },
-    async setIsPurchased() {
-      const isPurchased = await this.$store.dispatch('purchase/getIsPurchased');
-      this.isPurchased = isPurchased;
     },
   },
 };
