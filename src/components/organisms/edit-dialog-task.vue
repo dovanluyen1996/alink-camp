@@ -91,11 +91,11 @@ export default {
 
 .close-dialog {
   position: absolute;
-  top: 6px;
-  right: -9px;
+  top: 7px;
+  right: -5px;
 
   &--icon {
-    width: 20px;
+    width: 18px;
   }
 }
 </style>
