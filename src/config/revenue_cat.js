@@ -1,7 +1,12 @@
 export default {
   init() {
     Purchases.setDebugLogsEnabled(true);
-    Purchases.setup(process.env.REVENUE_CAT_PBK);
+
+    if (window.device.platform === 'iOS') {
+      Purchases.setup(process.env.REVENUE_CAT_API_KEY_IOS);
+    } else if (window.device.platform === 'Android') {
+      Purchases.setup(process.env.REVENUE_CAT_API_KEY_ANDROID);
+    }
   },
 
   // 課金確認
