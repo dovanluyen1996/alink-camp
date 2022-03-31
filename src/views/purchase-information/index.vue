@@ -206,7 +206,7 @@ export default {
     },
 
     purchaseComplete() {
-      this.$store.dispatch('menuNavigator/pop');
+      this.$el.querySelector('ons-back-button').click();
     },
 
     closePurchaseError() {
