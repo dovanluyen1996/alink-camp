@@ -192,26 +192,24 @@ export default {
         background-repeat: no-repeat;
         background-position: center;
         background-size: 40px;
-      }
-    }
 
-    @for $number from 1 through 10 {
-      .has-stamp {
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: #fff2ac;
-        background-image: url('~@/assets/images/user/stamps/campaign/#{$number}-on.png');
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: 40px;
-        border-color: #dedede;
-        opacity: 1;
+        .has-stamp {
+          position: absolute;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background-color: #fff2ac;
+          background-image: url('~@/assets/images/user/stamps/campaign/#{$number}-on.png');
+          background-repeat: no-repeat;
+          background-position: center;
+          background-size: 40px;
+          border-color: #dedede;
+          opacity: 1;
+        }
       }
     }
   }
