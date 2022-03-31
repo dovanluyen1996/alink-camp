@@ -25,7 +25,10 @@
       v-else
       class="not-purchase"
     >
-      <img src="@/assets/images/campsite-forecast-weather-purchase.png">
+      <img
+        src="@/assets/images/campsite-forecast-weather-purchase.png"
+        @click="goToPurchaseInformation"
+      >
     </div>
   </div>
 </template>
@@ -36,6 +39,9 @@ import TemperatureChart from '@/components/organisms/campsites/forecast-tab/temp
 import TemperatureTable from '@/components/organisms/campsites/forecast-tab/temperature-table';
 import ProbPrecipChart from '@/components/organisms/campsites/forecast-tab/prob-precip-chart';
 import AnnualWeatherChart from '@/components/organisms/campsites/forecast-tab/annual-weather-chart';
+
+// pages
+import PurchaseInformation from '@/views/purchase-information/index';
 
 export default {
   name: 'CampsitesForecastTabMonthlyWeather',
@@ -48,6 +54,11 @@ export default {
   computed: {
     isPurchased() {
       return this.$store.getters['purchase/isPurchased'];
+    },
+  },
+  methods: {
+    goToPurchaseInformation() {
+      this.$store.dispatch('campsiteSearchNavigator/push', PurchaseInformation);
     },
   },
 };

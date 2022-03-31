@@ -13,6 +13,7 @@
           class="banner-img"
           src="@/assets/images/push-notification-weather-purchase.png"
           alt="weather-purchase"
+          @click="goToPurchaseInformation"
         >
       </div>
     </template>
@@ -114,7 +115,11 @@
 </template>
 
 <script>
+// components
 import CardWithTitle from '@/components/organisms/card-with-title';
+
+// pages
+import PurchaseInformation from '@/views/purchase-information/index';
 
 export default {
   name: 'UserSettingList',
@@ -227,6 +232,9 @@ export default {
           }
         });
       }
+    },
+    goToPurchaseInformation() {
+      this.$store.dispatch('menuNavigator/push', PurchaseInformation);
     },
   },
 };
