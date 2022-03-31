@@ -129,7 +129,7 @@ export default {
     async deletePlan() {
       this.isShownDeleteDialog = false;
       await this.$store.dispatch('models/userCampsitePlan/deleteUserCampsitePlan', { userCampsitePlanId: this.plan.id });
-      this.showCompletedDialog('deleteItem');
+      this.showCompletedDialog('deletePlan');
     },
     goToPlans() {
       this.$store.dispatch('plansNavigator/pop');
