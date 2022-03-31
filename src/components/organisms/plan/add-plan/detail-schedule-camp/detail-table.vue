@@ -88,7 +88,7 @@
     <edit-dialog-task
       :is-visible="updateDataVisible"
       :tasks.sync="tasks"
-      :targetAt="targetAt"
+      :target-at="targetAt"
       @close="closePopup"
     />
   </div>

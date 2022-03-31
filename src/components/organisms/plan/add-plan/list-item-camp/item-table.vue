@@ -77,6 +77,12 @@ export default {
       default: () => [],
     },
   },
+  data() {
+    return {
+      checkedLabelIds: [],
+      isVisibleLabelFilterDialog: false,
+    };
+  },
   computed: {
     filteredItems() {
       if (this.checkedLabelIds.length === 0) return this.items;
@@ -98,12 +104,6 @@ export default {
         this.$emit('update:checkedItemIds', newValue);
       },
     },
-  },
-  data() {
-    return {
-      checkedLabelIds: [],
-      isVisibleLabelFilterDialog: false,
-    };
   },
   methods: {
     truncate(value, limit) {

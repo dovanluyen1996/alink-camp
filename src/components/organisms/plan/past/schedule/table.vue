@@ -58,7 +58,9 @@
               />
             </td>
             <td class="task">
-              <div class="task__text">{{ taskText(date, hour) }}</div>
+              <div class="task__text">
+                {{ taskText(date, hour) }}
+              </div>
               <img
                 v-if="isContentEmpty(taskText(date, hour))"
                 :src="require('@/assets/images/icon-more.png')"
@@ -83,7 +85,7 @@
     <edit-dialog-task
       :is-visible="updateDataVisible"
       :tasks.sync="tasks"
-      :targetAt="targetAt"
+      :target-at="targetAt"
       @close="closePopup"
     />
   </div>
