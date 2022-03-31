@@ -140,17 +140,20 @@ export default {
     },
   },
   watch: {
-    async startedDate() {
-      const isValid = await this.$refs.observer.validate();
-      console.log(isValid);
-      this.$store.commit('components/planTab/setEnabled', isValid);
+    startedDate() {
+      this.setValidate();
     },
-    async finishedDate() {
-      const isValid = await this.$refs.observer.validate();
-      this.$store.commit('components/planTab/setEnabled', isValid);
+    finishedDate() {
+      this.setValidate();
     },
   },
   methods: {
+    setValidate() {
+      this.$nextTick(async() => {
+        const isValid = await this.$refs.observer.validate();
+        this.$store.commit('components/planTab/setEnabled', isValid);
+      });
+    },
     async submit() {
       this.confirmDialogVisible = false;
 
