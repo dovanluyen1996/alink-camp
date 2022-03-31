@@ -10,6 +10,7 @@
 
       <validation-observer
         v-slot="{ handleSubmit }"
+        ref="observer"
       >
         <validation-provider
           v-slot="{ errors }"
@@ -136,6 +137,17 @@ export default {
     },
     checkoutRules() {
       return 'required|required-future-day-since:@チェックイン|required-future-day|required-bwtween-14days:@チェックイン';
+    },
+  },
+  watch: {
+    async startedDate() {
+      const isValid = await this.$refs.observer.validate();
+      console.log(isValid);
+      this.$store.commit('components/planTab/setEnabled', isValid);
+    },
+    async finishedDate() {
+      const isValid = await this.$refs.observer.validate();
+      this.$store.commit('components/planTab/setEnabled', isValid);
     },
   },
   methods: {
