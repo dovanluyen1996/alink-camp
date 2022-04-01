@@ -18,6 +18,7 @@
       :tabs="tabs"
       :visible="true"
       :index.sync="activeIndex"
+      @prechange="onPreChange"
     />
 
     <completed-dialog
@@ -47,26 +48,27 @@ export default {
       required: true,
     },
   },
+  created() {
+    this.$store.commit('components/planTab/setTabs', [
+      {
+        label: '計画日',
+        page: DatePlan,
+        props: { campsite: this.plan.campsite },
+      },
+      {
+        label: '持ち物',
+        page: ListItemCamp,
+        props: { campsite: this.plan.campsite },
+      },
+      {
+        label: '予定詳細',
+        page: DetailScheduleCamp,
+        props: { campsite: this.plan.campsite },
+      },
+    ]);
+  },
   data() {
     return {
-      tabs: [
-        {
-          label: '計画日',
-          page: DatePlan,
-          props: { campsite: this.plan.campsite },
-        },
-        {
-          label: '持ち物',
-          page: ListItemCamp,
-          props: { campsite: this.plan.campsite },
-        },
-        {
-          label: '予定詳細',
-          page: DetailScheduleCamp,
-          props: { campsite: this.plan.campsite },
-        },
-      ],
-      activeIndex: 0,
       isShownDeleteDialog: false,
       completedDialogVisible: false,
       action: '',
@@ -75,6 +77,15 @@ export default {
   computed: {
     isLoading() {
       return this.$store.getters['models/userCampsitePlan/isLoading'];
+    },
+    tabs() {
+      return this.$store.state.components.planTab.tabs;
+    },
+    activeIndex() {
+      return this.$store.state.components.planTab.activeIndex;
+    },
+    enabled() {
+      return this.$store.state.components.planTab.enabled;
     },
     detailPlan() {
       return this.$store.getters['models/userCampsitePlan/findById'](this.plan.id) || {};
@@ -87,6 +98,9 @@ export default {
     this.$store.dispatch('plan/clean');
   },
   methods: {
+    onPreChange(event) {
+      if (!this.enabled) event.cancel();
+    },
     async show() {
       await this.getItems();
       await this.getUserCampsitePlan();
