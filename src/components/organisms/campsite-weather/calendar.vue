@@ -199,10 +199,10 @@ export default {
 
 .campsite-weather-footer {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   min-height: 27px;
-  padding: 8px 8px;
+  padding: 8px 10px 8px 8px;
   margin-top: -1px;
   font-size: $font-size-small;
   background-color: #f4f4ee;
@@ -211,8 +211,9 @@ export default {
 
 .campsite-weather-footer-left {
   display: inline-block;
-  padding: 7px 8px;
+  padding: 6px 7px;
   font-weight: bold;
+  line-height: 1;
   white-space: nowrap;
   background: #fff;
   border: 1px solid #ccc;
