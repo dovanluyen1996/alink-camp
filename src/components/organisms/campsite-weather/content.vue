@@ -198,37 +198,4 @@ export default {
     border-right: 1px solid #d9d9d9;
   }
 }
-
-@media screen and (min-width: 320px) {
-  .campsite-weather-the-day-before {
-    width: 36%;
-    margin-left: 3%;
-  }
-}
-
-@media screen and (min-width: 375px) {
-  .campsite-weather-the-day-before {
-    width: 32%;
-    margin-left: 7%;
-  }
-}
-
-@media screen and (min-width: 590px) {
-  .campsite-weather-of-the-day {
-    width: 180px;
-    margin-bottom: 0;
-  }
-
-  .campsite-weather-the-day-before {
-    width: 95px;
-    margin-bottom: 0;
-    margin-left: 20px;
-  }
-
-  .campsite-weather-time-table {
-    flex: 1;
-    width: auto;
-    margin-left: 20px;
-  }
-}
 </style>
