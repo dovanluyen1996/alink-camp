@@ -3,7 +3,7 @@
     v-if="windSpeed"
     class="wind-direction"
   >
-    <template v-if="windSpeed > 0">
+    <template v-if="windSpeed > 2">
       <div
         :class="['wind-speed', windSpeedRate(windSpeed)]"
         :style="windDirectionStyle"
@@ -53,11 +53,11 @@ export default {
       // Unit of measurement: m/s
       switch (true) {
       case windSpeed < 2:
-        return 'wind-speed--normal';
+        return 'wind-speed--light';
       case windSpeed < 5:
-        return 'wind-speed--strong';
+        return 'wind-speed--middle';
       default:
-        return 'wind-speed--danger';
+        return 'wind-speed--strong';
       }
     },
   },
@@ -65,36 +65,33 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
-.wind-speed {
-  background-position: center;
-  background-size: cover;
-
-  &--normal {
-    background-image: url("~@/assets/images/weathers/wind-speed/background-normal.png");
-  }
-
-  &--strong {
-    background-image: url("~@/assets/images/weathers/wind-speed/background-strong.png");
-  }
-
-  &--danger {
-    background-image: url("~@/assets/images/weathers/wind-speed/background-danger.png");
-  }
-}
-
 .wind-direction {
   display: grid;
   align-items: center;
   justify-content: center;
 
-  .wind-speed {
-    width: 10px;
-    height: 16px;
-  }
-
   span {
     font-size: 12px;
   }
 }
+
+.wind-speed {
+  width: 14px;
+  height: 14px;
+  background-position: center;
+  background-size: cover;
+
+  &--light {
+    background-image: url("~@/assets/images/weathers/wind-speed/background-light.png");
+  }
+
+  &--middle {
+    background-image: url('~@/assets/images/weathers/wind-speed/background-middle.png');
+  }
+
+  &--strong {
+    background-image: url("~@/assets/images/weathers/wind-speed/background-strong.png");
+  }
+}
+
 </style>

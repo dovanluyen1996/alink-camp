@@ -158,16 +158,16 @@ $speed-degrees: 0, 22.5, 45, 67.5, 90, 112.5, 135, 157.5, 180,
       background-position: center;
       background-size: cover;
 
-      &--normal {
-        background-image: url('~@/assets/images/weathers/wind-speed/background-normal.png');
+      &--light {
+        background-image: url('~@/assets/images/weathers/wind-speed/background-light.png');
+      }
+
+      &--middle {
+        background-image: url('~@/assets/images/weathers/wind-speed/background-middle.png');
       }
 
       &--strong {
         background-image: url('~@/assets/images/weathers/wind-speed/background-strong.png');
-      }
-
-      &--danger {
-        background-image: url('~@/assets/images/weathers/wind-speed/background-danger.png');
       }
     }
 
