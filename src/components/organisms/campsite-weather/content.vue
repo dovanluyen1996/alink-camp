@@ -182,4 +182,11 @@ export default {
     border-right: 1px solid #d9d9d9;
   }
 }
+
+@media screen and (max-width: 374px) {
+  .campsite-weather-detail {
+    // NOTE: iphone5/SEで予定日表示が収まらないので調整
+    margin: 10px;
+  }
+}
 </style>
