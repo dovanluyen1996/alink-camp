@@ -227,7 +227,7 @@ export default {
   background-color: $color-default;
 
   &__top {
-    padding: 30px 0 17px;
+    padding: 15px 0 5px;
 
     p {
       margin: 0;
@@ -238,7 +238,7 @@ export default {
   }
 
   &__content {
-    padding: 12px 0;
+    padding: 6px 0 4px;
     margin: 0 28px;
     font-size: 17px;
     font-weight: 600;
@@ -258,8 +258,7 @@ export default {
   }
 
   &__action {
-    padding-bottom: 6px;
-    margin-top: 30px;
+    padding: 14px 0 6px;
     font-size: 12px;
     font-weight: 600;
     color: #fff;
@@ -301,6 +300,11 @@ export default {
   }
 
   .button--secondary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 18px;
+    padding: 0;
     font-size: 12px;
     font-weight: 400;
     text-align: center;
