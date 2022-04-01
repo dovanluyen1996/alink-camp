@@ -114,7 +114,7 @@ export default {
 
 .campsite-weather-of-the-day-title {
   font-size: $font-size-small;
-  font-weight: 600;
+  font-weight: bold;
   line-height: 1;
   text-align: center;
 }
@@ -124,6 +124,7 @@ export default {
 }
 
 .weather-indexes {
+  position: relative;
   padding: 10px 0;
   border-top: 1px solid #d9d9d9;
 }
@@ -138,14 +139,14 @@ export default {
 .campsite-weather-of-the-day-purchase {
   position: absolute;
   right: 15px;
-  bottom: 26px;
+  bottom: 22px;
   left: 15px;
   display: flex;
   align-items: center;
   justify-content: center;
   height: 21px;
-  font-size: 7px;
-  font-weight: 600;
+  font-size: 10px;
+  font-weight: bold;
   color: #f5f2f2;
   background-color: $color-yellow;
   border-radius: 22px;
