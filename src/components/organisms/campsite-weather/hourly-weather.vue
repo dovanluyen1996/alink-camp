@@ -141,8 +141,8 @@ export default {
 }
 
 /deep/ {
-  .td,
-  .th {
+  td,
+  th {
     padding: 7px 2px;
   }
 }
