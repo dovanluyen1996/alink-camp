@@ -39,8 +39,6 @@
     <div class="campsite-weather-footer">
       <div class="campsite-weather-footer-left">
         信頼度
-        <span class="campsite-weather-footer-left-edge-right"></span>
-        <span class="campsite-weather-footer-left-edge-bottom"></span>
       </div>
       <div class="campsite-weather-footer-right">
         <span>A～E</span> の表示は、予報の信頼度です。<br>低い場合は今後の予報が変わる可能性があります。
@@ -126,7 +124,7 @@ export default {
   @include colum-style;
 
   height: 27px;
-  font-size: 10px;
+  font-size: $font-size-small;
   font-weight: 300;
   color: #100101;
   background: $color-th;
@@ -204,55 +202,27 @@ export default {
   align-items: center;
   justify-content: space-between;
   min-height: 27px;
-  padding: 8px 8px 12px 8px;
+  margin-top: -1px;
+  padding: 8px 8px;
   font-size: $font-size-small;
-  font-weight: 300;
-  color: #0d0101;
   background-color: #f4f4ee;
-  border: 1px solid #d9d9d9;
+  border: 1px solid $color-border;
 }
 
 .campsite-weather-footer-left {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 6px;
-  margin-right: 30px;
-  font-size: 10px;
-  font-weight: 600;
-  color: #0d0101;
-  white-space: nowrap;
-  background-color: #fff;
+  display: inline-block;
+  padding: 7px 8px;
   border: 1px solid #ccc;
-
-  &-edge-right,
-  &-edge-bottom {
-    position: absolute;
-    background-color: #ccc;
-  }
-
-  &-edge-right {
-    top: 3px;
-    right: -3px;
-    width: 2px;
-    height: 25px;
-  }
-
-  &-edge-bottom {
-    bottom: -3px;
-    left: 3px;
-    width: 42px;
-    height: 2px;
-  }
+  box-shadow: #ccc 2px 2px 0;
+  background: #fff;
+  white-space: nowrap;
+  font-weight: bold;
 }
 
 .campsite-weather-footer-right {
-  font-size: 10px;
-  font-weight: 300;
-
+  margin-left: 20px;
   & span {
-    font-weight: 600;
+    font-weight: bold;
   }
 }
 
@@ -262,6 +232,5 @@ export default {
   bottom: 1px;
   font-size: $font-size-small;
   font-weight: 600;
-  color: #0d0101;
 }
 </style>

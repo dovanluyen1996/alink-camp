@@ -59,6 +59,7 @@ export default {
   align-items: center;
   height: 100%;
   white-space: nowrap;
+  line-height: 1;
 }
 
 .temperature-label {

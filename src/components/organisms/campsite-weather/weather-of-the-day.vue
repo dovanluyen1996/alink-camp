@@ -18,10 +18,7 @@
         class="campsite-weather-of-the-day-right"
         width="65%"
       >
-        <campsite-weather-temperatures
-          :forecast="forecast.targetDate"
-          font-size="16px"
-        />
+        <campsite-weather-temperatures :forecast="forecast.targetDate" />
         <campsite-weather-sun
           :sunrise="forecast.sunrise"
           :sunset="forecast.sunset"
@@ -111,19 +108,23 @@ export default {
   text-align: center;
 }
 
+.campsite-weather-of-the-day-top {
+  padding: 10px 0 6px;
+}
+
 .campsite-weather-of-the-day-title {
-  margin-bottom: 10px;
   font-size: $font-size-small;
   font-weight: 600;
   line-height: 1;
   text-align: center;
 }
 
+.weather {
+  margin: 10px 0 7px;
+}
+
 .weather-indexes {
-  position: relative;
-  flex-wrap: nowrap;
-  padding: 11px 10px 8px 0;
-  color: #017f45;
+  padding: 10px 0;
   border-top: 1px solid #d9d9d9;
 }
 
@@ -153,49 +154,15 @@ export default {
 .campsite-weather-of-the-day-right {
   display: flex;
   flex-direction: column;
-  margin-top: 9px;
+
+  /deep/ .temperature__value {
+    font-size: 20px;
+  }
 }
 
 /deep/ {
   .weather-name {
     font-size: $font-size-small;
-    font-weight: 300;
-  }
-
-  .campsite-weather-sun,
-  .thunder-title,
-  .thunder-label,
-  .dress-title,
-  .dress-label,
-  .uv-title,
-  .uv-label,
-  .star-title,
-  .star-label {
-    font-size: 10px;
-    color: #007540;
-  }
-
-  .campsite-weather-sun,
-  .thunder-title,
-  .dress-title,
-  .uv-title,
-  .star-title {
-    font-weight: 600;
-  }
-
-  .thunder-label,
-  .dress-label,
-  .uv-label,
-  .star-label {
-    font-weight: 300;
-  }
-
-  .thunder-title--unpaid,
-  .dress-title--unpaid,
-  .uv-title--unpaid,
-  .star-title--unpaid {
-    padding-bottom: 7px;
-    color: #ccc;
   }
 
   .campsite-weather-temperatures {
@@ -204,29 +171,11 @@ export default {
 
   .temperature__value {
     font-size: 20px;
-    font-weight: 600;
+    font-weight: bold;
   }
 
   .temperature-high {
     margin-right: 5px;
-  }
-
-  .thunder,
-  .dress,
-  .uv,
-  .star {
-    height: 100%;
-
-    & > div {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      height: 100%;
-    }
-
-    & img {
-      padding: 8px 0;
-    }
   }
 }
 
