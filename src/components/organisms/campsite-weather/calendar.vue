@@ -202,8 +202,8 @@ export default {
   align-items: center;
   justify-content: space-between;
   min-height: 27px;
-  margin-top: -1px;
   padding: 8px 8px;
+  margin-top: -1px;
   font-size: $font-size-small;
   background-color: #f4f4ee;
   border: 1px solid $color-border;
@@ -212,15 +212,16 @@ export default {
 .campsite-weather-footer-left {
   display: inline-block;
   padding: 7px 8px;
+  font-weight: bold;
+  white-space: nowrap;
+  background: #fff;
   border: 1px solid #ccc;
   box-shadow: #ccc 2px 2px 0;
-  background: #fff;
-  white-space: nowrap;
-  font-weight: bold;
 }
 
 .campsite-weather-footer-right {
   margin-left: 20px;
+
   & span {
     font-weight: bold;
   }

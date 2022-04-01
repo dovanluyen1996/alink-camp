@@ -42,9 +42,9 @@ export default {
 .campsite-name {
   @include title-style;
 
-  line-height: 1.2;
   margin-bottom: 3px;
   font-size: 16px;
+  line-height: 1.2;
   color: #fff;
   text-align: left;
 

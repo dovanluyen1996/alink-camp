@@ -154,10 +154,6 @@ export default {
 .campsite-weather-of-the-day-right {
   display: flex;
   flex-direction: column;
-
-  /deep/ .temperature__value {
-    font-size: 20px;
-  }
 }
 
 /deep/ {

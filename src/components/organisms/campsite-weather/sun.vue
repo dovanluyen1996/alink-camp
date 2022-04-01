@@ -52,12 +52,12 @@ export default {
 
 .campsite-weather-sun {
   flex-wrap: nowrap;
-  white-space: nowrap;
   max-width: 150px;
   margin: 0 auto;
-  text-align: center;
-  font-weight: bold;
   font-size: $font-size-small;
+  font-weight: bold;
+  text-align: center;
+  white-space: nowrap;
 
   &__title {
     color: #007540;

@@ -43,8 +43,8 @@ export default {
   justify-content: space-around;
   width: 100%;
   height: 30px;
-  background-color: #fff;
   margin: 8px auto;
+  background-color: #fff;
 }
 
 .weather-the-day-after-title {
@@ -89,9 +89,9 @@ export default {
 
   .campsite-weather-box {
     display: flex;
+    gap: 5px;
     align-items: center;
     height: 100%;
-    gap: 5px;
   }
 
   .temperature-high {

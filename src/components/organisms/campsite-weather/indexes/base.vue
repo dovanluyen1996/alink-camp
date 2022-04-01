@@ -45,8 +45,8 @@ export default {
 
 .weather-index {
   flex-wrap: nowrap;
-  color: #007540;
   font-size: $font-size-small;
+  color: #007540;
 }
 
 .weather-index-title {
@@ -60,7 +60,7 @@ export default {
 }
 
 .weather-index-label {
-  margin-top: 10px;
   padding: 0 5px;
+  margin-top: 10px;
 }
 </style>

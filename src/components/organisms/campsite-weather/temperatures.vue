@@ -58,8 +58,8 @@ export default {
   flex-direction: column;
   align-items: center;
   height: 100%;
-  white-space: nowrap;
   line-height: 1;
+  white-space: nowrap;
 }
 
 .temperature-label {
