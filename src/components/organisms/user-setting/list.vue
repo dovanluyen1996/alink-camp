@@ -204,7 +204,6 @@ export default {
   async created() {
     await this.getUserSetting();
     await this.checkPermission();
-    await this.setIsPurchased();
   },
   methods: {
     async getUserSetting() {
