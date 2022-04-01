@@ -104,9 +104,6 @@ export default {
       return this.$store.getters['purchase/isPurchased'];
     },
   },
-  async created() {
-    await this.setIsPurchased();
-  },
   methods: {
     goToNewPlan() {
       const isShowPremium = !this.isPurchased && this.futurePlans.length;
