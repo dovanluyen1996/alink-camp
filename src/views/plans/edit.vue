@@ -1,12 +1,29 @@
 <template>
   <v-ons-page @show="show">
-    <custom-toolbar :title="title" />
+    <loading :visible="isLoading" />
+    <custom-toolbar :title="title">
+      <template #right>
+        <delete-dialog-with-icon
+          :is-shown.sync="isShownDeleteDialog"
+          @clickDelete="deletePlan"
+        >
+          このキャンプ計画または思い出を削除します。<br>
+          よろしいですか？
+        </delete-dialog-with-icon>
+      </template>
+    </custom-toolbar>
 
     <v-ons-tabbar
       position="top"
       :tabs="tabs"
       :visible="true"
       :index.sync="activeIndex"
+    />
+
+    <completed-dialog
+      :action="action"
+      :is-visible="completedDialogVisible"
+      @close="closeCompletedDialog"
     />
   </v-ons-page>
 </template>
@@ -15,9 +32,15 @@
 import DatePlan from '@/components/organisms/plan/add-plan/date-plan';
 import ListItemCamp from '@/components/organisms/plan/add-plan/list-item-camp/index';
 import DetailScheduleCamp from '@/components/organisms/plan/add-plan/detail-schedule-camp/index';
+import DeleteDialogWithIcon from '@/components/organisms/dialog/delete-dialog-with-icon';
+import CompletedDialog from '@/components/organisms/dialog/completed-dialog';
 
 export default {
   name: 'EditPlan',
+  components: {
+    DeleteDialogWithIcon,
+    CompletedDialog,
+  },
   props: {
     plan: {
       type: Object,
@@ -44,15 +67,20 @@ export default {
         },
       ],
       activeIndex: 0,
+      isShownDeleteDialog: false,
+      completedDialogVisible: false,
       action: '',
     };
   },
   computed: {
+    isLoading() {
+      return this.$store.getters['models/userCampsitePlan/isLoading'];
+    },
     detailPlan() {
-      return this.$store.getters['models/userCampsitePlan/findById'](this.plan.id);
+      return this.$store.getters['models/userCampsitePlan/findById'](this.plan.id) || {};
     },
     title() {
-      return `${this.$moment(this.detailPlan.startedDate).format('M/D')}からの計画`;
+      return `${this.$moment(this.detailPlan.startedDate).format('M/D')}からの計画` || '';
     },
   },
   beforeDestroy() {
@@ -89,6 +117,25 @@ export default {
     },
     setTasks() {
       this.$store.dispatch('plan/setTasks', this.detailPlan.tasks);
+    },
+    showCompletedDialog(action) {
+      this.action = action;
+      this.completedDialogVisible = true;
+    },
+    closeCompletedDialog() {
+      this.completedDialogVisible = false;
+      this.goToPlans();
+    },
+    async deletePlan() {
+      this.closeDeleteDialog();
+      await this.$store.dispatch('models/userCampsitePlan/deleteUserCampsitePlan', { userCampsitePlanId: this.plan.id });
+      this.showCompletedDialog('deletePlan');
+    },
+    goToPlans() {
+      this.$store.dispatch('plansNavigator/pop');
+    },
+    closeDeleteDialog() {
+      this.isShownDeleteDialog = false;
     },
   },
 };
