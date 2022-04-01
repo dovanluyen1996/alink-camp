@@ -10,11 +10,14 @@
 
       <div class="title-center">
         <span>天気予報</span>
-        <v-ons-button
-          class="button--share button--yellow"
+        <share-button
+          :subject="shareSubject()"
+          :message="shareMessage()"
         >
-          持ち物共有
-        </v-ons-button>
+          <template #text>
+            持ち物共有
+          </template>
+        </share-button>
       </div>
 
       <forecast-table
@@ -79,6 +82,7 @@ import ForecastTable from '@/components/organisms/plan/past/item/forecast-table'
 import ContentWithFooter from '@/components/organisms/content-with-footer';
 import ConfirmDialog from '@/components/organisms/dialog/confirm-dialog';
 import CompletedDialog from '@/components/organisms/dialog/completed-dialog';
+import ShareButton from '@/components/organisms/share-button';
 
 export default {
   components: {
@@ -87,6 +91,7 @@ export default {
     ContentWithFooter,
     ConfirmDialog,
     CompletedDialog,
+    ShareButton,
   },
   props: {
     campsite: {
@@ -169,6 +174,14 @@ export default {
       };
 
       this.forecasts = await this.$store.dispatch('models/weather/getPast', params);
+    },
+    shareSubject() {
+      return 'キャンプ情報共有';
+    },
+    shareMessage() {
+      const checkedItems = this.sortedItems.filter(item => this.checkedItemIds.includes(item.id));
+
+      return checkedItems.map(item => item.name).join('\n');
     },
   },
 };
