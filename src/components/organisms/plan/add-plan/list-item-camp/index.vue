@@ -244,7 +244,7 @@ export default {
   }
 
   .content-with-footer {
-    height: 0;
+    height: 21%;
 
     .content-with-footer__content {
       padding-bottom: 0 !important;
@@ -267,15 +267,11 @@ export default {
 }
 
 .items__note {
-  position: absolute;
-  top: 65%;
-  left: 50%;
-  width: 100%;
+  margin-bottom: 10px;
   font-size: 18px;
   font-weight: 600;
-  color: $color-white;
+  color: $color-default;
   text-align: center;
-  transform: translate(-50%, -50%);
 }
 
 .button--share {
