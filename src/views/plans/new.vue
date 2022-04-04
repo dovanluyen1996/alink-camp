@@ -7,6 +7,7 @@
       :tabs="tabs"
       :visible="true"
       :index.sync="activeIndex"
+      @prechange="onPreChange"
     />
   </v-ons-page>
 </template>
@@ -24,32 +25,43 @@ export default {
       required: true,
     },
   },
-  data() {
-    return {
-      tabs: [
-        {
-          label: '計画日',
-          page: DatePlan,
-          props: { campsite: this.campsite },
-        },
-        {
-          label: '持ち物',
-          page: ListItemCamp,
-          props: { campsite: this.campsite },
-        },
-        {
-          label: '予定詳細',
-          page: DetailScheduleCamp,
-          props: { campsite: this.campsite },
-        },
-      ],
-      activeIndex: 0,
-    };
+  created() {
+    this.$store.commit('components/planTab/setTabs', [
+      {
+        label: '計画日',
+        page: DatePlan,
+        props: { campsite: this.campsite },
+      },
+      {
+        label: '持ち物',
+        page: ListItemCamp,
+        props: { campsite: this.campsite },
+      },
+      {
+        label: '予定詳細',
+        page: DetailScheduleCamp,
+        props: { campsite: this.campsite },
+      },
+    ]);
+  },
+  computed: {
+    tabs() {
+      return this.$store.state.components.planTab.tabs;
+    },
+    activeIndex() {
+      return this.$store.state.components.planTab.activeIndex;
+    },
+    enabled() {
+      return this.$store.state.components.planTab.enabled;
+    },
   },
   beforeDestroy() {
     this.$store.dispatch('plan/clean');
   },
   methods: {
+    onPreChange(event) {
+      if (!this.enabled) event.cancel();
+    },
     async show() {
       await this.getItems();
 

@@ -10,6 +10,7 @@
 
       <validation-observer
         v-slot="{ handleSubmit }"
+        ref="observer"
       >
         <validation-provider
           v-slot="{ errors }"
@@ -138,7 +139,21 @@ export default {
       return 'required|required-future-day-since:@チェックイン|required-future-day|required-bwtween-14days:@チェックイン';
     },
   },
+  watch: {
+    startedDate() {
+      this.setValidate();
+    },
+    finishedDate() {
+      this.setValidate();
+    },
+  },
   methods: {
+    setValidate() {
+      this.$nextTick(async() => {
+        const isValid = await this.$refs.observer.validate();
+        this.$store.commit('components/planTab/setEnabled', isValid);
+      });
+    },
     async submit() {
       this.confirmDialogVisible = false;
 
