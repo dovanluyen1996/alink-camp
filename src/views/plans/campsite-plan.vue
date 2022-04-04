@@ -67,7 +67,6 @@ export default {
   },
   data() {
     return {
-      isPurchased: false,
       isConfirmDialogVisible: false,
     };
   },
@@ -101,9 +100,9 @@ export default {
     isLoading() {
       return this.$store.getters['purchase/isLoading'];
     },
-  },
-  async created() {
-    await this.setIsPurchased();
+    isPurchased() {
+      return this.$store.getters['purchase/isPurchased'];
+    },
   },
   methods: {
     goToNewPlan() {
@@ -125,10 +124,6 @@ export default {
     },
     closeConfirmDialog() {
       this.isConfirmDialogVisible = false;
-    },
-    async setIsPurchased() {
-      // TODO: 判別方法を修正する
-      this.isPurchased = await this.$store.dispatch('purchase/getIsPurchased');
     },
     goToPurchase() {
       this.$store.dispatch('plansNavigator/push', InformationPurchase);
