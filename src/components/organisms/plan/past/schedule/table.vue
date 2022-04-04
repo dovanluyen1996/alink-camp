@@ -255,11 +255,13 @@ export default {
 
     .task {
       position: relative;
+      width: 70%;
 
       &__text {
         padding-right: 25px;
         font-size: 12px;
         text-align: left;
+        word-break: break-word;
       }
 
       &__icon {
