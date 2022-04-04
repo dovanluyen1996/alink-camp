@@ -6,12 +6,21 @@
       class="not-purchased-img"
       src="@/assets/images/campsite-search-weather-purchase.png"
       alt="weather-purchase"
+      @click="goToPurchaseInformation"
     >
   </div>
 </template>
 
 <script>
+// pages
+import PurchaseInformation from '@/views/purchase-information/index';
+
 export default {
+  methods: {
+    goToPurchaseInformation() {
+      this.$store.dispatch('campsiteSearchNavigator/push', PurchaseInformation);
+    },
+  },
 };
 </script>
 
