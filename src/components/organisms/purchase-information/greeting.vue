@@ -1,10 +1,10 @@
 <template>
   <div class="greeting">
     <div class="greeting__subtitle">
-      <p>\豊富なプレミア会員機能/</p>
+      <p>\豊富な機能/</p>
     </div>
     <div class="greeting__title">
-      <p>プレミア会員メニュー</p>
+      <p>キャンプ天気会員メニュー</p>
     </div>
     <div class="greeting__content">
       <img
@@ -32,13 +32,11 @@ export default {
 
   &__title,
   &__subtitle {
-    display: flex;
-    justify-content: center;
-
     p {
       margin: 0;
       font-weight: 600;
       color: $color-purchase-gold;
+      text-align: center;
     }
   }
 
