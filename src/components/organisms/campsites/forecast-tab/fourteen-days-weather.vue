@@ -140,6 +140,8 @@ export default {
       const table = this.$el.querySelector('.fourteen-days-weather-table');
       if (!table) return;
 
+      if (!this.nearestPlan) return;
+
       const dateRow = table.querySelector('.date-row');
       const th = dateRow.querySelector('th');
 
