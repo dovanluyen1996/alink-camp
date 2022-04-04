@@ -4,7 +4,7 @@
       scope="row"
       :class="{th : colorTh}"
     >
-      <span v-if="displayCourseWeatherTop">
+      <span v-if="displayCampsiteWeatherTop">
         風速 (m/s)
       </span>
       <span v-else>
@@ -32,7 +32,7 @@ export default {
       type: Boolean,
       default: true,
     },
-    displayCourseWeatherTop: {
+    displayCampsiteWeatherTop: {
       type: Boolean,
       default: false,
     },
