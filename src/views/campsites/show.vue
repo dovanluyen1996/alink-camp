@@ -31,6 +31,21 @@
             計画の追加
           </v-ons-button>
         </template>
+
+        <confirm-dialog
+          :is-shown.sync="isConfirmDialogVisible"
+          @clickConfirm="goToPurchase"
+        >
+          <template #title>
+            拡張機能
+          </template>
+          <template #message>
+            プレミアムサービスにご登録いただくことで、予定を複数作成することができます。
+          </template>
+          <template #confirmAction>
+            プレミアムへ
+          </template>
+        </confirm-dialog>
       </content-with-footer>
     </div>
   </v-ons-page>
@@ -44,6 +59,8 @@ import CardWithTab from '@/components/organisms/card-with-tab';
 import ContentWithFooter from '@/components/organisms/content-with-footer';
 import CampsiteName from '@/components/organisms/campsite-name';
 import FavoriteCampsite from '@/components/organisms/campsites/favorite';
+import InformationPurchase from '@/views/purchase-information/index.vue';
+import ConfirmDialog from '@/components/organisms/dialog/confirm-dialog';
 
 // tab contents
 import CampsiteForecastTab from '@/components/organisms/campsites/forecast-tab';
@@ -61,6 +78,7 @@ export default {
     ContentWithFooter,
     CampsiteName,
     FavoriteCampsite,
+    ConfirmDialog,
   },
   props: {
     campsite: {
@@ -84,6 +102,7 @@ export default {
           component: CampsiteInformationTab,
         },
       ],
+      isConfirmDialogVisible: false,
     };
   },
   computed: {
@@ -100,6 +119,9 @@ export default {
         || this.$store.getters['models/weather/isForecastMonthlyPrecipLoading']
         || this.$store.getters['models/weather/isForecastMonthlyTempLoading']
         || this.$store.getters['models/weather/isForecastYearlyTempLoading'];
+    },
+    isPurchased() {
+      return this.$store.getters['purchase/isPurchased'];
     },
   },
   watch: {
@@ -139,6 +161,12 @@ export default {
       await this.$store.dispatch('models/usersFavorite/getUsersFavorites');
     },
     goToNewPlan() {
+      const isShowPremium = !this.isPurchased;
+      if (isShowPremium) {
+        this.showConfirmDialog();
+        return;
+      }
+
       this.$store.commit('plansNavigator/setEnableBusy', false);
       this.$store.commit('appTabbar/setActiveIndex', settings.views.appTabbar.tabIndexes.plans);
       this.$store.dispatch('plansNavigator/reset', PlanIndexPage);
@@ -154,6 +182,21 @@ export default {
           },
         },
       });
+    },
+    showConfirmDialog() {
+      this.isConfirmDialogVisible = true;
+    },
+    closeConfirmDialog() {
+      this.isConfirmDialogVisible = false;
+    },
+    goToPurchase() {
+      this.$store.commit('plansNavigator/setEnableBusy', false);
+      this.$store.commit('appTabbar/setActiveIndex', settings.views.appTabbar.tabIndexes.plans);
+      this.$store.dispatch('plansNavigator/reset', PlanIndexPage);
+
+      this.$store.dispatch('plansNavigator/push', InformationPurchase);
+
+      this.closeConfirmDialog();
     },
   },
 };
