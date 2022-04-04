@@ -233,11 +233,13 @@ export default {
       margin: 0;
       font-size: 17px;
       font-weight: bold;
+      line-height: 18px;
       color: $color-purchase-gold;
     }
   }
 
   &__content {
+    max-height: 54px;
     padding: 6px 0 4px;
     margin: 0 28px;
     font-size: 17px;
