@@ -174,6 +174,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '@/assets/scss/_variables.scss';
+
 .content {
   padding-bottom: 20px;
 }
@@ -181,7 +183,7 @@ export default {
 .text-box {
   padding: 10px 20px;
   margin: 15px 20px;
-  background-color: #fff;
+  background-color: $color-white;
   border-radius: 10px;
 }
 
