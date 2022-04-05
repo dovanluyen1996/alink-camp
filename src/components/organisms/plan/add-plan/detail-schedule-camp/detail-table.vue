@@ -313,6 +313,7 @@ export default {
 
     .temperature {
       display: inline-flex;
+      min-width: 30px;
       padding: 5px;
 
       &__value {
@@ -344,12 +345,6 @@ export default {
         transform: translate(-50%, -50%);
       }
     }
-  }
-}
-
-@media only screen and (max-width: 320px) {
-  .temperature {
-    padding: 0 !important;
   }
 }
 </style>
