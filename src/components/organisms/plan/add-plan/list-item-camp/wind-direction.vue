@@ -11,7 +11,7 @@
         class="wind-speed"
         width="14px"
         height="14px"
-      />
+      >
       <span>{{ windSpeed }}</span>
     </template>
     <template v-else>
@@ -28,6 +28,10 @@
 
 <script>
 import settings from '@/config/settings';
+
+const LightWindImage = require('@/assets/images/weathers/wind-speed/background-light.png');
+const MiddleWindImage = require('@/assets/images/weathers/wind-speed/background-middle.png');
+const StrongWindImage = require('@/assets/images/weathers/wind-speed/background-strong.png');
 
 const { windDirections } = settings.views;
 export default {
@@ -53,13 +57,11 @@ export default {
     },
     image() {
       // Unit of measurement: m/s
-      if (this.windSpeed < 2) {
-        return require('@/assets/images/weathers/wind-speed/background-light.png');
-      } else if (this.windSpeed < 5) {
-        return require('@/assets/images/weathers/wind-speed/background-middle.png');
-      } else {
-        return require('@/assets/images/weathers/wind-speed/background-strong.png');
-      }
+      if (this.windSpeed < 2) return LightWindImage;
+
+      if (this.windSpeed < 5) return MiddleWindImage;
+
+      return StrongWindImage;
     },
   },
 };

@@ -150,7 +150,6 @@ export default {
     .text-blue {
       color: #0097ff;
     }
-
   }
 }
 
