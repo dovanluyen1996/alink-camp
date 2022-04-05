@@ -346,4 +346,10 @@ export default {
     }
   }
 }
+
+@media only screen and (max-width: 320px) {
+  .temperature {
+    padding: 0 !important;
+  }
+}
 </style>
