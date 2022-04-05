@@ -1,5 +1,10 @@
 <template>
   <v-ons-page>
+    <custom-toolbar
+      title="メニュー"
+      :disabled-back-button="true"
+    />
+
     <div class="background" />
 
     <div class="content">
