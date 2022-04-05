@@ -36,7 +36,7 @@
           拡張機能
         </template>
         <template #message>
-          プレミアムサービスにご登録いただくことで、予定を複数作成することができます。
+          キャンプ天気会員にご登録いただくことで、予定を複数作成することができます。
         </template>
         <template #confirmAction>
           プレミアムへ
