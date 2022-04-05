@@ -3,7 +3,7 @@
     v-if="windSpeed"
     class="wind-direction"
   >
-    <template v-if="windSpeed > 2">
+    <template v-if="windSpeed > 0">
       <div
         :class="['wind-speed', windSpeedRate(windSpeed)]"
         :style="windDirectionStyle"
