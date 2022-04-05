@@ -1,7 +1,10 @@
 <template>
   <v-ons-page :infinite-scroll="search">
     <loading :visible="isLoading" />
-    <custom-toolbar :title="title" />
+    <custom-toolbar
+      :title="title"
+      :subtitle="subtitle"
+    />
     <div class="content">
       <template v-if="campsites.length === 0">
         <no-data>
@@ -67,6 +70,10 @@ export default {
     title: {
       type: String,
       default: '検索結果',
+    },
+    subtitle: {
+      type: String,
+      default: '',
     },
     currentLocation: {
       type: Object,
@@ -254,6 +261,13 @@ export default {
     background-image: url("~@/assets/images/form/search-top.png");
     background-position: center;
     background-size: 100%;
+  }
+}
+
+/deep/ {
+  .custom-toolbar-subtitle {
+    font-size: 16px;
+    font-weight: 600;
   }
 }
 </style>

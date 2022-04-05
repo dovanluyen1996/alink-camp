@@ -172,6 +172,9 @@ export default {
     activeIndex() {
       return this.$store.state.components.cardWithTab.searchCampsiteActiveIndex;
     },
+    prefectureHeading() {
+      return this.prefectures[this.prefecture - 1];
+    },
   },
   watch: {
     searched() {
@@ -228,6 +231,7 @@ export default {
         extends: SearchResult,
         onsNavigatorProps: {
           title: 'キャンプ場検索結果',
+          subtitle: `(${this.prefectureHeading.text})`,
           searchConditions,
         },
       });
