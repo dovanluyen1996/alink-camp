@@ -4,9 +4,13 @@
     class="wind-direction"
   >
     <template v-if="windSpeed > 0">
-      <div
-        :class="['wind-speed', windSpeedRate(windSpeed)]"
+      <img
+        :src="image"
         :style="windDirectionStyle"
+        :alt="windDirection"
+        class="wind-speed"
+        width="14px"
+        height="14px"
       />
       <span>{{ windSpeed }}</span>
     </template>
@@ -47,17 +51,14 @@ export default {
         transform: `rotate(${this.windDirectionHeading}deg)`,
       };
     },
-  },
-  methods: {
-    windSpeedRate(windSpeed) {
+    image() {
       // Unit of measurement: m/s
-      switch (true) {
-      case windSpeed < 2:
-        return 'wind-speed--light';
-      case windSpeed < 5:
-        return 'wind-speed--middle';
-      default:
-        return 'wind-speed--strong';
+      if (this.windSpeed < 2) {
+        return require('@/assets/images/weathers/wind-speed/background-light.png');
+      } else if (this.windSpeed < 5) {
+        return require('@/assets/images/weathers/wind-speed/background-middle.png');
+      } else {
+        return require('@/assets/images/weathers/wind-speed/background-strong.png');
       }
     },
   },
@@ -65,33 +66,20 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "@/assets/scss/_variables.scss";
+
 .wind-direction {
   display: grid;
   align-items: center;
   justify-content: center;
 
   span {
-    font-size: 12px;
+    font-size: $font-size-small;
   }
 }
 
 .wind-speed {
-  width: 14px;
-  height: 14px;
-  background-position: center;
-  background-size: cover;
-
-  &--light {
-    background-image: url("~@/assets/images/weathers/wind-speed/background-light.png");
-  }
-
-  &--middle {
-    background-image: url('~@/assets/images/weathers/wind-speed/background-middle.png');
-  }
-
-  &--strong {
-    background-image: url("~@/assets/images/weathers/wind-speed/background-strong.png");
-  }
+  margin-bottom: 3px;
 }
 
 </style>
