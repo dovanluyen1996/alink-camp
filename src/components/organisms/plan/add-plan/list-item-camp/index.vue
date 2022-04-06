@@ -50,6 +50,7 @@
           </v-ons-button>
 
           <v-ons-button
+            v-if="isNew"
             modifier="large--cta rounded"
             class="button--search-day"
             @click="goToListPlan"
