@@ -1,6 +1,5 @@
 <template>
   <v-ons-page @show="show">
-    <loading :visible="isLoading" />
     <div class="content">
       <div class="text">
         <v-ons-row class="text__desc">
@@ -142,10 +141,6 @@ export default {
       set(newItemIds) {
         this.$store.dispatch('plan/setItemIds', newItemIds);
       },
-    },
-    isLoading() {
-      return this.$store.getters['models/item/isLoading']
-        || this.$store.getters['models/weather/isForecast14DaysLoading'];
     },
     displayText() {
       return this.isNew ? {

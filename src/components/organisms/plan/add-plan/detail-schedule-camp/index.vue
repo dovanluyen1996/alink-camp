@@ -1,7 +1,5 @@
 <template>
   <v-ons-page @show="show">
-    <loading :visible="isLoading" />
-
     <div class="content">
       <div class="text">
         <v-ons-row class="text__desc">
@@ -111,9 +109,6 @@ export default {
         const params = tasksAt.map(at => ({ targetAt: at, content: tasks[at] }));
         this.$store.dispatch('plan/setTasks', params);
       },
-    },
-    isLoading() {
-      return this.$store.getters['models/weather/isForecastHourlyLoading'];
     },
     displayText() {
       return this.isNew ? {

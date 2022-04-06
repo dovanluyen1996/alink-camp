@@ -1,8 +1,8 @@
 <template>
   <v-ons-page @show="show">
     <custom-toolbar title="キャンプ計画" />
+    <loading :visible="isLoading" />
     <div class="content">
-      <loading :visible="isLoading" />
       <no-data v-if="campsites.length === 0">
         <p>
           まだキャンプ計画がありません。<br>
