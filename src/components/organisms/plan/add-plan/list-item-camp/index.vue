@@ -46,10 +46,11 @@
             modifier="large--cta yellow rounded"
             @click="showConfirmDialog"
           >
-            登録
+            {{ displayText.saveButton }}
           </v-ons-button>
 
           <v-ons-button
+            v-if="isNew"
             modifier="large--cta rounded"
             class="button--search-day"
             @click="goToListPlan"
@@ -65,20 +66,20 @@
       @clickConfirm="submit"
     >
       <template #title>
-        登録確認
+        {{ displayText.confirmTitle }}
       </template>
 
       <template #message>
-        キャンプ計画を登録します。よろしいですか？
+        キャンプ計画を{{ displayText.confirmType }}します。よろしいですか？
       </template>
 
       <template #confirmAction>
-        登録
+        {{ displayText.confirmSubmit }}
       </template>
     </confirm-dialog>
 
     <completed-dialog
-      action="createPlan"
+      :action="completedAction"
       :is-visible="completedDialogVisible"
       @close="closeCompletedDialog"
     />
@@ -145,6 +146,22 @@ export default {
     isLoading() {
       return this.$store.getters['models/item/isLoading']
         || this.$store.getters['models/weather/isForecast14DaysLoading'];
+    },
+    displayText() {
+      return this.isNew ? {
+        saveButton: '登録',
+        confirmTitle: '登録確認',
+        confirmType: '登録',
+        confirmSubmit: '登録',
+      } : {
+        saveButton: '編集保存',
+        confirmTitle: '編集確認',
+        confirmType: '編集',
+        confirmSubmit: 'OK',
+      };
+    },
+    completedAction() {
+      return this.isNew ? 'createPlan' : 'updatePlan';
     },
   },
   methods: {
