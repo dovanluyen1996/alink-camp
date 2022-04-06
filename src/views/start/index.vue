@@ -1,7 +1,7 @@
 <template>
   <v-ons-page>
+    <loading :visible="isLoading" />
     <div class="content start-page">
-      <loading :visible="isLoading" />
       <div class="start-page__top">
         <img
           src="@/assets/images/start/camp-logo-start.png"
@@ -98,6 +98,11 @@ export default {
 
 </script>
 <style lang="scss" scoped>
+// NOTE: loadingにはtoolbar分topが空けられているがスタート画面だけはtoolbarがない
+.loading {
+  top: 0;
+}
+
 .start-page {
   display: flex;
   flex-direction: column;
