@@ -1,7 +1,7 @@
 <template>
   <v-ons-page>
     <custom-toolbar title="定期購読に関して" />
-
+    <loading :visible="isLoading" />
     <div class="content">
       <card-with-tab
         :tabs="tabs"
@@ -25,6 +25,11 @@ export default {
   name: 'AboutSubscription',
   components: {
     CardWithTab,
+  },
+  computed: {
+    isLoading() {
+      return this.$store.getters['models/subscription/isLoading'];
+    },
   },
   data() {
     return {

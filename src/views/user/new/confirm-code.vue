@@ -3,8 +3,8 @@
     <custom-toolbar
       title="ユーザー情報の登録"
     />
+    <loading :visible="isLoading" />
     <div class="content">
-      <loading :visible="isLoading" />
       <validation-observer v-slot="{ handleSubmit }">
         <base-form>
           <validation-provider

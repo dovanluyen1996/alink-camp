@@ -18,7 +18,6 @@
       </div>
     </template>
 
-    <loading :visible="isLoading" />
     <v-ons-list modifier="noborder">
       <v-ons-list-item
         v-show="isErrorPushPermisionVisible"
@@ -143,10 +142,6 @@ export default {
   computed: {
     userSetting() {
       return this.$store.getters['models/userSetting/userSetting'];
-    },
-    isLoading() {
-      return this.$store.getters['models/userSetting/isLoading']
-        || this.$store.getters['purchase/isLoading'];
     },
     isEnabledWeatherForecastNotification: {
       get() {

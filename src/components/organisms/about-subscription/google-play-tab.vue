@@ -1,6 +1,5 @@
 <template>
   <div class="google-play-tab">
-    <loading :visible="isLoading" />
     <!-- eslint-disable vue/no-v-html -->
     <div
       class="app-store-tab__description"
@@ -14,9 +13,6 @@
 export default {
   name: 'AboutSubscriptionGooglePlayTab',
   computed: {
-    isLoading() {
-      return this.$store.getters['models/subscription/isLoading'];
-    },
     descriptions() {
       const subscription = this.$store.getters['models/subscription/current'];
 

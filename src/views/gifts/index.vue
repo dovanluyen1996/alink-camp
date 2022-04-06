@@ -1,8 +1,8 @@
 <template>
   <v-ons-page>
     <custom-toolbar title="特典交換" />
+    <loading :visible="isLoading" />
     <div class="content">
-      <loading :visible="isLoading" />
       <ticket-info
         :ticket-count="currentUser.ticketCount"
         :user-stamp-number="userStamp.number"

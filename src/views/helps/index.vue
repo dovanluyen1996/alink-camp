@@ -1,7 +1,7 @@
 <template>
   <v-ons-page>
     <custom-toolbar title="ヘルプ" />
-
+    <loading :visible="isLoading" />
     <div class="content">
       <content-with-footer>
         <help-list @click="showHelp" />
@@ -33,6 +33,11 @@ export default {
   components: {
     HelpList,
     ContentWithFooter,
+  },
+  computed: {
+    isLoading() {
+      return this.$store.getters['models/help/isLoading'];
+    },
   },
   methods: {
     showHelp(helpId) {

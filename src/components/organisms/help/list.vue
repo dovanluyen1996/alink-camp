@@ -1,6 +1,5 @@
 <template>
   <div>
-    <loading :visible="isLoading" />
     <v-ons-card v-if="helps.length > 0">
       <div class="content">
         <v-ons-list modifier="noborder">
@@ -26,9 +25,6 @@ export default {
   computed: {
     helps() {
       return this.$store.getters['models/help/all'];
-    },
-    isLoading() {
-      return this.$store.getters['models/help/isLoading'];
     },
   },
   async created() {
