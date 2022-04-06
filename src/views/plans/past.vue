@@ -1,6 +1,5 @@
 <template>
   <v-ons-page @show="show">
-    <loading :visible="isLoading" />
     <custom-toolbar :title="title">
       <template #right>
         <delete-dialog-with-icon
@@ -11,19 +10,21 @@
         </delete-dialog-with-icon>
       </template>
     </custom-toolbar>
+    <loading :visible="isLoading" />
+    <div class="content">
+      <v-ons-tabbar
+        position="top"
+        :tabs="tabs"
+        :visible="true"
+        :index.sync="activeIndex"
+      />
 
-    <v-ons-tabbar
-      position="top"
-      :tabs="tabs"
-      :visible="true"
-      :index.sync="activeIndex"
-    />
-
-    <completed-dialog
-      :action="action"
-      :is-visible="completedDialogVisible"
-      @close="closeCompletedDialog"
-    />
+      <completed-dialog
+        :action="action"
+        :is-visible="completedDialogVisible"
+        @close="closeCompletedDialog"
+      />
+    </div>
   </v-ons-page>
 </template>
 
@@ -68,7 +69,18 @@ export default {
   },
   computed: {
     isLoading() {
-      return this.$store.getters['models/userCampsitePlan/isLoading'];
+      let isTabLoading = false;
+
+      if (this.activeTab === '思い出') {
+        isTabLoading = this.$store.getters['models/weather/isPastLoading'];
+      } else if (this.activeTab === '持ち物') {
+        isTabLoading = this.$store.getters['models/item/isLoading'];
+      };
+
+      return this.$store.getters['models/userCampsitePlan/isLoading'] || isTabLoading;
+    },
+    activeTab() {
+      return this.tabs[this.activeIndex].label;
     },
     detailPlan() {
       return this.$store.getters['models/userCampsitePlan/findById'](this.plan.id) || {};
