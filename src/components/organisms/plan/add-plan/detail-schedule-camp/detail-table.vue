@@ -191,9 +191,9 @@ export default {
       return weather.forecastTelop;
     },
     temperatureText(weather) {
-      if (this.$helpers.isEmpty(weather) || !weather.Temperature) return '--';
+      if (this.$helpers.isEmpty(weather) || !weather.temperature) return '--';
 
-      return weather.Temperature;
+      return weather.temperature;
     },
     windSpeedText(weather) {
       if (this.$helpers.isEmpty(weather) || !weather.windSpeed) return '--';
