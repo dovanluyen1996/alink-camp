@@ -98,10 +98,8 @@ export default {
 
 </script>
 <style lang="scss" scoped>
-// NOTE: loadingにはtoolbar分topが空けられているがスタート画面だけはtoolbarがない
-.loading {
-  top: 0;
-}
+@import '@/assets/scss/onsen-override/base-layout/_variables.scss';
+@import '@/assets/scss/onsen-override/base-layout/iphonex-support/_variables.scss';
 
 .start-page {
   display: flex;
@@ -158,6 +156,21 @@ export default {
   .value {
     padding-left: 180px;
     font-size: 10px;
+  }
+}
+
+// NOTE: loadingにはtoolbar分topが空けられているがスタート画面だけはtoolbarがないので調整が必要
+.loading {
+  top: 0;
+}
+
+.page[status-bar-fill] > .loading {
+  top: 20px;
+}
+
+@media (orientation: portrait) {
+  html[onsflag-iphonex-portrait] .loading {
+    top: $--iphonex-safe-area-inset-top-portrait;
   }
 }
 </style>
