@@ -38,10 +38,10 @@
     </v-ons-row>
     <div class="campsite-weather-footer">
       <div class="campsite-weather-footer-left">
-        信頼度：
+        信頼度
       </div>
       <div class="campsite-weather-footer-right">
-        A～Eの表示は、予報の信頼度です。低い場合は今後の予報が変わる可能性があります。
+        <span>A～E</span> の表示は、予報の信頼度です。<br>低い場合は今後の予報が変わる可能性があります。
       </div>
     </div>
   </div>
@@ -123,8 +123,8 @@ export default {
 .campsite-weather-day-date {
   @include colum-style;
 
-  height: 24px;
-  font-size: 10px;
+  height: 27px;
+  font-size: $font-size-small;
   font-weight: 300;
   color: #100101;
   background: $color-th;
@@ -134,9 +134,17 @@ export default {
   @include colum-style;
 
   position: relative;
-  height: 50px;
+  height: 57px;
   border-top: 1px solid $color-border;
   border-bottom: 1px solid $color-border;
+}
+
+/deep/ {
+  .weather {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 .campsite-weather-day-temperature {
@@ -149,7 +157,6 @@ export default {
   /deep/ {
     .temperature__unit {
       margin-left: 0;
-      font-size: 10px;
       font-weight: 300;
     }
 
@@ -192,16 +199,33 @@ export default {
 
 .campsite-weather-footer {
   display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
   min-height: 27px;
-  padding: 5px 15px 5px 5px;
+  padding: 8px 10px 8px 8px;
+  margin-top: -1px;
   font-size: $font-size-small;
-  font-weight: 300;
-  color: #0d0101;
+  background-color: #f4f4ee;
+  border: 1px solid $color-border;
 }
 
 .campsite-weather-footer-left {
-  width: 50px;
+  display: inline-block;
+  padding: 6px 7px;
+  font-weight: bold;
+  line-height: 1;
   white-space: nowrap;
+  background: #fff;
+  border: 1px solid #ccc;
+  box-shadow: #ccc 2px 2px 0;
+}
+
+.campsite-weather-footer-right {
+  margin-left: 20px;
+
+  & span {
+    font-weight: bold;
+  }
 }
 
 .campsite-weather-accuracy-index {
@@ -210,6 +234,5 @@ export default {
   bottom: 1px;
   font-size: $font-size-small;
   font-weight: 600;
-  color: #0d0101;
 }
 </style>

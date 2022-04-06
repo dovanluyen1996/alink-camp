@@ -40,16 +40,21 @@ export default {
 .weather-the-day-after {
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   width: 100%;
   height: 30px;
+  margin: 8px auto;
   background-color: #fff;
 }
 
 .weather-the-day-after-title {
-  margin-left: -10px;
+  padding: 0 5px 0 10px;
   font-size: 10px;
   font-weight: 600;
+}
+
+.campsite-weather-temperatures {
+  padding: 0 10px 0 5px;
 }
 
 /deep/ {
@@ -64,7 +69,7 @@ export default {
   }
 
   .weather-name {
-    font-size: 9px;
+    font-size: 10px;
     font-weight: 300;
   }
 
@@ -88,11 +93,9 @@ export default {
     align-items: center;
     height: 100%;
   }
-}
 
-@media only screen and (max-width: 375px) {
-  .weather-the-day-after-title {
-    margin-left: -5px;
+  .temperature-high {
+    margin-right: 5px;
   }
 }
 </style>

@@ -1,32 +1,21 @@
 <template>
-  <div class="star">
-    <div v-if="isPurchased">
-      <div class="star-title">
-        星空指数
-      </div>
-      <img
-        :src="image"
-        width="26px"
-      >
-      <div class="star-label">
-        {{ forecast ? forecast.starTelop : '' }}
-      </div>
-    </div>
-    <div v-else>
-      <div class="star-title star-title--unpaid">
-        星空指数
-      </div>
-      <img
-        src="@/assets/images/weathers/star/00.png"
-        width="26px"
-      >
-    </div>
-  </div>
+  <indexes-base
+    :is-purchased="isPurchased"
+    title="星空指数"
+    :image="image"
+    :label="forecast ? forecast.starTelop : ''"
+  />
 </template>
 
 <script>
+// components
+import IndexesBase from '@/components/organisms/campsite-weather/indexes/base';
+
 export default {
   name: 'CampsiteWeatherStarIndex',
+  components: {
+    IndexesBase,
+  },
   props: {
     forecast: {
       type: Object,
@@ -39,7 +28,7 @@ export default {
   },
   computed: {
     image() {
-      if (!this.forecast) return this.$helpers.getImage('weathers/star/00.png');
+      if (!this.forecast || !this.isPurchased) return this.$helpers.getImage('weathers/star/00.png');
 
       const image = this.$helpers.getImage(`weathers/star/${this.forecast.starImageName}`);
       return image || this.$helpers.getImage('weathers/star/00.png');

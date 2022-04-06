@@ -1,32 +1,21 @@
 <template>
-  <div class="uv">
-    <div v-if="isPurchased">
-      <div class="uv-title">
-        紫外線
-      </div>
-      <img
-        :src="image"
-        width="26px"
-      >
-      <div class="uv-label">
-        {{ label }}
-      </div>
-    </div>
-    <div v-else>
-      <div class="uv-title uv-title--unpaid">
-        紫外線
-      </div>
-      <img
-        src="@/assets/images/weathers/uv/uv_large_none.png"
-        width="26px"
-      >
-    </div>
-  </div>
+  <indexes-base
+    :is-purchased="isPurchased"
+    title="紫外線"
+    :image="image"
+    :label="label"
+  />
 </template>
 
 <script>
+// components
+import IndexesBase from '@/components/organisms/campsite-weather/indexes/base';
+
 export default {
   name: 'CampsiteWeatherUvIndex',
+  components: {
+    IndexesBase,
+  },
   props: {
     forecast: {
       type: Object,
@@ -50,7 +39,7 @@ export default {
   },
   computed: {
     image() {
-      if (!this.forecast) return this.$helpers.getImage('weathers/uv/uv_large_none.png');
+      if (!this.forecast || !this.isPurchased) return this.$helpers.getImage('weathers/uv/uv_large_none.png');
 
       const image = this.$helpers.getImage(`weathers/uv/uv_large_${this.forecast.uvIndex}.png`);
       return image || this.$helpers.getImage('weathers/uv/uv_large_none.png');

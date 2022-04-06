@@ -1,32 +1,21 @@
 <template>
-  <div class="dress">
-    <div v-if="isPurchased">
-      <div class="dress-title">
-        服装
-      </div>
-      <img
-        :src="image"
-        width="26px"
-      >
-      <div class="dress-label">
-        {{ forecast ? forecast.dressTelop : '' }}
-      </div>
-    </div>
-    <div v-else>
-      <div class="dress-title dress-title--unpaid">
-        服装
-      </div>
-      <img
-        src="@/assets/images/weathers/dress/00.png"
-        width="26px"
-      >
-    </div>
-  </div>
+  <indexes-base
+    :is-purchased="isPurchased"
+    title="服装"
+    :image="image"
+    :label="forecast ? forecast.dressTelop : ''"
+  />
 </template>
 
 <script>
+// components
+import IndexesBase from '@/components/organisms/campsite-weather/indexes/base';
+
 export default {
   name: 'CampsiteWeatherDressIndex',
+  components: {
+    IndexesBase,
+  },
   props: {
     forecast: {
       type: Object,
@@ -39,7 +28,7 @@ export default {
   },
   computed: {
     image() {
-      if (!this.forecast) return this.$helpers.getImage('weathers/dress/00.png');
+      if (!this.forecast || !this.isPurchased) return this.$helpers.getImage('weathers/dress/00.png');
 
       const image = this.$helpers.getImage(`weathers/dress/${this.forecast.dressImageName}`);
       return image || this.$helpers.getImage('weathers/dress/00.png');

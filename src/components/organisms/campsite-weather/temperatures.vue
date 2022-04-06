@@ -56,9 +56,9 @@ export default {
 .campsite-weather-temperatures {
   display: flex;
   flex-direction: column;
-  gap: 10px;
   align-items: center;
   height: 100%;
+  line-height: 1;
   white-space: nowrap;
 }
 
@@ -85,10 +85,13 @@ export default {
 
 .temperature-heat-stroke {
   display: flex;
+  align-items: center;
   justify-content: center;
-  width: 163px;
-  height: 11px;
-  font-size: 7px;
+  width: 90%;
+  max-width: 196px;
+  height: 21px;
+  margin: 8px 0;
+  font-size: 10px;
   font-weight: 600;
   color: #f5f2f2;
   background-color: #eb4a18;

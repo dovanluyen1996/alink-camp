@@ -11,12 +11,10 @@
         v-if="plan"
         :plan="plan"
       />
-      <div class="campsite-weather-separate"></div>
 
       <template v-if="plan && isPresent(ForecastScheduledDate)">
         <campsite-weather-of-the-day :forecast="ForecastScheduledDate" />
         <campsite-weather-hourly-weather :forecast="ForecastScheduledDate.targetDate" />
-        <div class="campsite-weather-separate"></div>
         <campsite-weather-the-day-after :forecast="ForecastScheduledDate.dayAfter" />
       </template>
       <template v-else-if="isPresent(Forecast14Days)">
@@ -151,13 +149,7 @@ export default {
 }
 
 .campsite-weather-detail {
-  display: flex;
-  flex-wrap: wrap;
-  margin: 6px 9px;
-}
-
-.campsite-weather-plan {
-  width: 100%;
+  margin: 10px 20px;
 }
 
 .campsite-weather-of-the-day {
@@ -172,15 +164,7 @@ export default {
 
 .campsite-weather-time-table {
   width: 100%;
-  font-size: 10px;
-  font-weight: 300;
   background-color: #fff;
-}
-
-.campsite-weather-separate {
-  width: 100%;
-  height: 6px;
-  background-color: transparent;
 }
 
 /deep/ {
@@ -191,6 +175,7 @@ export default {
 
   .temperature__unit {
     margin-left: 0;
+    font-weight: 300;
   }
 
   .campsite-weather-day:last-child {
@@ -198,36 +183,10 @@ export default {
   }
 }
 
-@media screen and (min-width: 320px) {
-  .campsite-weather-the-day-before {
-    width: 36%;
-    margin-left: 3%;
-  }
-}
-
-@media screen and (min-width: 375px) {
-  .campsite-weather-the-day-before {
-    width: 32%;
-    margin-left: 7%;
-  }
-}
-
-@media screen and (min-width: 590px) {
-  .campsite-weather-of-the-day {
-    width: 180px;
-    margin-bottom: 0;
-  }
-
-  .campsite-weather-the-day-before {
-    width: 95px;
-    margin-bottom: 0;
-    margin-left: 20px;
-  }
-
-  .campsite-weather-time-table {
-    flex: 1;
-    width: auto;
-    margin-left: 20px;
+@media screen and (max-width: 374px) {
+  .campsite-weather-detail {
+    // NOTE: iphone5/SEで予定日表示が収まらないので調整
+    margin: 10px;
   }
 }
 </style>
