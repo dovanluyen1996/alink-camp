@@ -55,7 +55,10 @@
           </span>
         </div>
       </v-ons-list-item>
-      <v-ons-list-item modifier="nodivider">
+      <v-ons-list-item
+        modifier="nodivider"
+        v-if="isPurchased"
+      >
         <div class="center">
           <span class="list-item__title">
             落雷＆突風注意報
@@ -66,7 +69,10 @@
           </span>
         </div>
       </v-ons-list-item>
-      <v-ons-list-item modifier="nodivider">
+      <v-ons-list-item
+        modifier="nodivider"
+        v-if="isPurchased"
+      >
         <div class="center">
           <span class="list-item__title">
             予報が晴⇒雨になったら通知
@@ -99,7 +105,10 @@
           </span>
         </div>
       </v-ons-list-item>
-      <v-ons-list-item modifier="nodivider">
+      <v-ons-list-item
+        modifier="nodivider"
+        v-if="isPurchased"
+      >
         <div class="center">
           <span class="list-item__title">
             忘れ物注意の連絡
