@@ -1,7 +1,6 @@
 <template>
   <v-ons-page @show="show()">
     <custom-toolbar title="キャンプ場検索" />
-
     <loading :visible="isLoading" />
     <div class="content">
       <content-with-footer>

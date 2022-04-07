@@ -48,25 +48,6 @@ export default {
       required: true,
     },
   },
-  created() {
-    this.$store.commit('components/planTab/setTabs', [
-      {
-        label: '計画日',
-        page: DatePlan,
-        props: { campsite: this.plan.campsite },
-      },
-      {
-        label: '持ち物',
-        page: ListItemCamp,
-        props: { campsite: this.plan.campsite },
-      },
-      {
-        label: '予定詳細',
-        page: DetailScheduleCamp,
-        props: { campsite: this.plan.campsite },
-      },
-    ]);
-  },
   data() {
     return {
       isShownDeleteDialog: false,
@@ -84,7 +65,7 @@ export default {
         isTabLoading = this.$store.getters['models/item/isLoading'] || this.$store.getters['models/weather/isForecast14DaysLoading'];
       } else if (this.activeTab === '予定詳細') {
         isTabLoading = this.$store.getters['models/weather/isForecastHourlyLoading'];
-      };
+      }
 
       return this.$store.getters['models/userCampsitePlan/isLoading'] || isTabLoading;
     },
@@ -111,6 +92,25 @@ export default {
     title() {
       return `${this.$moment(this.detailPlan.startedDate).format('M/D')}からの計画` || '';
     },
+  },
+  created() {
+    this.$store.commit('components/planTab/setTabs', [
+      {
+        label: '計画日',
+        page: DatePlan,
+        props: { campsite: this.plan.campsite },
+      },
+      {
+        label: '持ち物',
+        page: ListItemCamp,
+        props: { campsite: this.plan.campsite },
+      },
+      {
+        label: '予定詳細',
+        page: DetailScheduleCamp,
+        props: { campsite: this.plan.campsite },
+      },
+    ]);
   },
   beforeDestroy() {
     this.$store.dispatch('plan/clean');

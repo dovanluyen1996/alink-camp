@@ -64,18 +64,18 @@ export default {
     ConfirmDialog,
     CompletedDialog,
   },
+  props: {
+    campsite: {
+      type: Object,
+      required: true,
+    },
+  },
   data() {
     return {
       forecasts: {},
       confirmDialogVisible: false,
       completedDialogVisible: false,
     };
-  },
-  props: {
-    campsite: {
-      type: Object,
-      required: true,
-    },
   },
   computed: {
     params() {

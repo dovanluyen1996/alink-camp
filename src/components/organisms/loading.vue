@@ -7,7 +7,6 @@
     >
       <img
         :src="require('@/assets/images/spinner.png')"
-        alt=""
         class="fa-spin"
       >
       <span>Now Loading...</span>

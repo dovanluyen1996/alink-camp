@@ -26,11 +26,6 @@ export default {
   components: {
     CardWithTab,
   },
-  computed: {
-    isLoading() {
-      return this.$store.getters['models/subscription/isLoading'];
-    },
-  },
   data() {
     return {
       tabs: [
@@ -48,6 +43,9 @@ export default {
     };
   },
   computed: {
+    isLoading() {
+      return this.$store.getters['models/subscription/isLoading'];
+    },
     activeIndexTab() {
       return this.$store.state.components.cardWithTab.aboutSubscriptionActiveIndex;
     },

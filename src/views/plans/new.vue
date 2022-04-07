@@ -27,25 +27,6 @@ export default {
       required: true,
     },
   },
-  created() {
-    this.$store.commit('components/planTab/setTabs', [
-      {
-        label: '計画日',
-        page: DatePlan,
-        props: { campsite: this.campsite },
-      },
-      {
-        label: '持ち物',
-        page: ListItemCamp,
-        props: { campsite: this.campsite },
-      },
-      {
-        label: '予定詳細',
-        page: DetailScheduleCamp,
-        props: { campsite: this.campsite },
-      },
-    ]);
-  },
   computed: {
     tabs() {
       return this.$store.state.components.planTab.tabs;
@@ -73,10 +54,29 @@ export default {
         isTabLoading = this.$store.getters['models/item/isLoading'] || this.$store.getters['models/weather/isForecast14DaysLoading'];
       } else if (this.activeTab === '予定詳細') {
         isTabLoading = this.$store.getters['models/weather/isForecastHourlyLoading'];
-      };
+      }
 
       return isTabLoading;
     },
+  },
+  created() {
+    this.$store.commit('components/planTab/setTabs', [
+      {
+        label: '計画日',
+        page: DatePlan,
+        props: { campsite: this.campsite },
+      },
+      {
+        label: '持ち物',
+        page: ListItemCamp,
+        props: { campsite: this.campsite },
+      },
+      {
+        label: '予定詳細',
+        page: DetailScheduleCamp,
+        props: { campsite: this.campsite },
+      },
+    ]);
   },
   beforeDestroy() {
     this.$store.dispatch('plan/clean');
