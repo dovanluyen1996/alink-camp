@@ -227,11 +227,13 @@ export default {
     },
     goToSearchResult(params) {
       const searchConditions = { ...params, type: 'area' };
+      const subtitle = (this.prefectureHeading && this.prefectureHeading.text) ? `（${this.prefectureHeading.text}）` : '';
+
       this.$store.dispatch('campsiteSearchNavigator/push', {
         extends: SearchResult,
         onsNavigatorProps: {
           title: 'キャンプ場検索結果',
-          subtitle: `(${this.prefectureHeading.text})`,
+          subtitle,
           searchConditions,
         },
       });
