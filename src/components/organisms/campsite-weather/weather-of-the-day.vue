@@ -32,7 +32,7 @@
         v-if="!isPurchased"
         class="campsite-weather-of-the-day-purchase"
       >
-        プレミアムプランでご利用可能
+        キャンプ天気会員でご利用可能
       </div>
       <v-ons-col width="16%">
         <campsite-weather-thunder-index
