@@ -69,18 +69,9 @@ export default {
   },
   computed: {
     isLoading() {
-      let isTabLoading = false;
-
-      if (this.activeTab === '思い出') {
-        isTabLoading = this.$store.getters['models/weather/isPastLoading'];
-      } else if (this.activeTab === '持ち物') {
-        isTabLoading = this.$store.getters['models/item/isLoading'];
-      };
-
-      return this.$store.getters['models/userCampsitePlan/isLoading'] || isTabLoading;
-    },
-    activeTab() {
-      return this.tabs[this.activeIndex].label;
+      // NOTE: 思い出/持ち物タブで天気apiは呼んでいないためタブの判定は不要なのでnew, editと差異がある
+      // FIXME: Apiの取得タイミングがずれているため複数回loadingが出るので要検討
+      return this.$store.getters['models/userCampsitePlan/isLoading'] || this.$store.getters['models/weather/isPastLoading'];
     },
     detailPlan() {
       return this.$store.getters['models/userCampsitePlan/findById'](this.plan.id) || {};
