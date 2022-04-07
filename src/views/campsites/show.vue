@@ -71,6 +71,8 @@ import CampsiteInformationTab from '@/components/organisms/campsites/information
 import PlanIndexPage from '@/views/plans/index';
 import NewPlanPage from '@/views/plans/new';
 
+import moment from 'moment';
+
 export default {
   name: 'Campsitehow',
   components: {
@@ -120,6 +122,13 @@ export default {
         || this.$store.getters['models/weather/isForecastMonthlyTempLoading']
         || this.$store.getters['models/weather/isForecastYearlyTempLoading'];
     },
+    futurePlans() {
+      const plans = this.$store.getters['models/userCampsitePlan/inFuture']({ campsiteId: this.campsite.id });
+
+      return plans.sort(
+        (a, b) => (moment(a.startedDate).isBefore(b.startedDate) ? -1 : 1),
+      );
+    },
     isPurchased() {
       return this.$store.getters['purchase/isPurchased'];
     },
@@ -161,7 +170,7 @@ export default {
       await this.$store.dispatch('models/usersFavorite/getUsersFavorites');
     },
     goToNewPlan() {
-      const isShowPremium = !this.isPurchased;
+      const isShowPremium = !this.isPurchased && this.futurePlans.length;
       if (isShowPremium) {
         this.showConfirmDialog();
         return;
