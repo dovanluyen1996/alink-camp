@@ -18,21 +18,29 @@
           </template>
         </share-button>
       </div>
-      <table class="table">
+      <table class="table time-scedules">
         <tbody>
           <tr>
-            <th>時</th>
-            <th>天気</th>
-            <th>気温</th>
-            <th>
+            <th class="time-scedules__hour-head">
+              時
+            </th>
+            <th class="time-scedules__weather-head">
+              天気
+            </th>
+            <th class="time-scedules__temperature-head">
+              気温
+            </th>
+            <th class="time-scedules__rain-head">
               降水量<br>
               <span class="text-small">(mm/h)</span>
             </th>
-            <th>
+            <th class="time-scedules__wind-head">
               風<br>
               <span class="text-small">(m/s)</span>
             </th>
-            <th>タスク</th>
+            <th class="time-scedules__task-head">
+              タスク
+            </th>
           </tr>
           <tr
             v-for="(hour, index) in hours"
@@ -280,45 +288,57 @@ export default {
 
     span {
       font-size: 14px;
-      font-weight: 600;
+      font-weight: bold;
     }
   }
 
-  .table {
+  .time-scedules {
     width: 100%;
+    font-size: $font-size-small;
     text-align: center;
+    background: #fff;
 
     .detail-row {
       background-color: $color-white;
     }
 
     .text-small {
-      font-size: 12px;
+      // NOTE: font-sizeのルール外だが補足のため情報の優先度は低いとみなして例外的に小さくする
+      font-size: 10px;
     }
 
     th {
-      height: 36px;
-      font-size: 12px;
-      font-weight: 600;
+      padding: 7px 0;
       background-color: #eae5e5;
     }
 
+    .time-scedules__hour-head {
+      width: 35px;
+    }
+
+    .time-scedules__weather-head {
+      width: 40px;
+    }
+
+    .time-scedules__temperature-head {
+      width: 45px;
+    }
+
+    .time-scedules__rain-head {
+      width: 45px;
+    }
+
+    .time-scedules__wind-head {
+      width: 35px;
+    }
+
     td {
-      height: 45px;
-      font-size: 12px;
-      font-weight: 600;
+      padding: 7px 0;
     }
 
     .detail-task,
     .target {
-      font-size: 12px;
-    }
-
-    .weather {
-      .icon-weather {
-        width: 35px;
-        height: 21px;
-      }
+      font-size: $font-size-small;
     }
 
     .temperature {
@@ -327,13 +347,11 @@ export default {
       padding: 5px;
 
       &__value {
-        font-size: 12px;
-        font-weight: 600;
+        font-size: $font-size-small;
       }
 
       &__unit {
-        font-size: 12px;
-        font-weight: 600;
+        font-size: $font-size-small;
       }
     }
 
@@ -341,16 +359,17 @@ export default {
       position: relative;
 
       &__text {
-        padding-right: 25px;
-        font-size: 12px;
+        padding-right: 30px;
+        padding-left: 7px;
         text-align: left;
+        word-break: break-word;
       }
 
       &__icon {
         position: absolute;
         top: 50%;
-        right: -5px;
-        transform: translate(-50%, -50%);
+        right: 5px;
+        transform: translateY(-50%);
       }
     }
   }
