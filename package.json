@@ -150,7 +150,9 @@
       "cordova-plugin-device-orientation": {},
       "cordova-plugin-add-swift-support": {},
       "cordova-plugin-idfa": {},
-      "cordova-plugin-camera": {},
+      "cordova-plugin-camera": {
+        "ANDROID_SUPPORT_V4_VERSION": "24.+"
+      },
       "cordova-plugin-androidx-adapter": {},
       "cordova-plugin-splashscreen": {},
       "cordova-plugin-ionic-keyboard": {},
