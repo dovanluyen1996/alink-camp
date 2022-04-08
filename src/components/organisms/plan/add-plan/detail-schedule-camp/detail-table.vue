@@ -296,6 +296,7 @@ export default {
     width: 100%;
     font-size: $font-size-small;
     text-align: center;
+    background: #fff;
 
     .detail-row {
       background-color: $color-white;

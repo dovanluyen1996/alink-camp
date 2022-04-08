@@ -216,6 +216,7 @@ export default {
     width: 100%;
     margin-bottom: 70px;
     text-align: center;
+    background: #fff;
 
     .detail-row {
       background-color: $color-white;
