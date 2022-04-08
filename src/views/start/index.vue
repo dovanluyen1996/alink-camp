@@ -43,8 +43,12 @@ export default {
     return {
       error: null,
       appVersion: '',
-      isLoading: false,
     };
+  },
+  computed: {
+    isLoading() {
+      return this.$store.getters['models/appStart/isLoading'];
+    },
   },
   async created() {
     // NOTE: Firebase Analytics Sample
