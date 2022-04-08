@@ -1,6 +1,6 @@
 <template>
   <v-ons-page>
-    <custom-toolbar title="プレミアムサービスのご案内" />
+    <custom-toolbar title="キャンプ天気会員登録" />
 
     <loading :visible="isLoading" />
     <div class="content">

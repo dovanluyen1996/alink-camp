@@ -9,7 +9,7 @@
           modifier="nodivider chevron"
           @click="goToPurchaseInformation"
         >
-          プレミアムサービス
+          キャンプ天気会員登録
         </v-ons-list-item>
 
         <v-ons-list-item
