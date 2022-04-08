@@ -7,8 +7,7 @@
           :is-shown.sync="isShownDeleteDialog"
           @clickDelete="deletePlan"
         >
-          このキャンプ計画または思い出を削除します。<br>
-          よろしいですか？
+          このキャンプ計画を削除しますか？
         </delete-dialog-with-icon>
       </template>
     </custom-toolbar>
