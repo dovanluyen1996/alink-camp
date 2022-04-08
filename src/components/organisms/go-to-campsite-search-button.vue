@@ -23,6 +23,7 @@ export default {
       this.$store.dispatch('campsiteSearchNavigator/reset', {
         extends: CampsiteSearchIndex,
         onsNavigatorOptions: {
+          animation: 'none',
           callback: () => {
             this.$store.commit('campsiteSearchNavigator/setEnableBusy', true);
           },
