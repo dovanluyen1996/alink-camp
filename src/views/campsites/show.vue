@@ -203,7 +203,14 @@ export default {
       this.$store.commit('appTabbar/setActiveIndex', settings.views.appTabbar.tabIndexes.plans);
       this.$store.dispatch('plansNavigator/reset', PlanIndexPage);
 
-      this.$store.dispatch('plansNavigator/push', InformationPurchase);
+      this.$store.dispatch('plansNavigator/push', {
+        extends: InformationPurchase,
+        onsNavigatorOptions: {
+          callback: () => {
+            this.$store.commit('plansNavigator/setEnableBusy', true);
+          },
+        },
+      });
 
       this.closeConfirmDialog();
     },
