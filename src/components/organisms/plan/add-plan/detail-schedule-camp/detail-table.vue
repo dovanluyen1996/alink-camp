@@ -319,6 +319,7 @@ export default {
 
     .temperature {
       display: inline-flex;
+      min-width: 30px;
       padding: 5px;
 
       &__value {
