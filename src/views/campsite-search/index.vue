@@ -45,7 +45,9 @@ export default {
   },
   computed: {
     viewedCampsites() {
-      return this.$store.getters['campsite/viewedCampsites'] || [];
+      const viewedCampsites = this.$store.getters['campsite/viewedCampsites'];
+      const campsites = viewedCampsites.map(campsite => ({ ...campsite }));
+      return campsites.reverse();
     },
     isLoading() {
       return this.$store.getters['models/campsite/isLoading'];
