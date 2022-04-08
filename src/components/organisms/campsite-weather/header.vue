@@ -4,7 +4,7 @@
       {{ campsite.name }}
       <img
         v-if="isFavorite"
-        src="@/assets/images/user/campsite/favorite.png"
+        src="@/assets/images/user/favorite.png"
         width="18px"
       >
     </div>

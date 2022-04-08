@@ -12,6 +12,11 @@
         modifier="large rounded orange"
         @click="searchByName"
       >
+        <img
+          :src="require('@/assets/images/form/search-top.png')"
+          width="20px"
+          height="20px"
+        >
         検索
       </v-ons-button>
     </div>
@@ -125,19 +130,10 @@ export default {
 
 .button-search-top {
   display: inline-flex;
+  column-gap: 5px;
   align-items: center;
   justify-content: center;
   width: 149px;
-
-  &::before {
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    margin-right: 6px;
-    content: '';
-    background-image: url("~@/assets/images/form/search-top.png");
-    background-position: center;
-  }
 }
 
 .search-detail-button {

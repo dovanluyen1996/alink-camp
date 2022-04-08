@@ -77,6 +77,12 @@ export default {
       default: () => [],
     },
   },
+  data() {
+    return {
+      checkedLabelIds: [],
+      isVisibleLabelFilterDialog: false,
+    };
+  },
   computed: {
     filteredItems() {
       if (this.checkedLabelIds.length === 0) return this.items;
@@ -98,12 +104,6 @@ export default {
         this.$emit('update:checkedItemIds', newValue);
       },
     },
-  },
-  data() {
-    return {
-      checkedLabelIds: [],
-      isVisibleLabelFilterDialog: false,
-    };
   },
   methods: {
     truncate(value, limit) {
@@ -180,7 +180,7 @@ export default {
       display: inline-block;
       width: 16px;
       height: 16px;
-      margin-right: 6px;
+      margin-right: 5px;
       content: '';
       background-image: url("~@/assets/images/icon-sort.png");
       background-position: center;
@@ -190,9 +190,9 @@ export default {
 
   .items__label--plus::before {
     display: inline-block;
-    width: 16px;
-    height: 16px;
-    margin-right: 6px;
+    width: 12px;
+    height: 12px;
+    margin-right: 5px;
     content: '';
     background-image: url("~@/assets/images/icon-choose-plus.png");
     background-position: center;
@@ -201,9 +201,9 @@ export default {
 
   .items__label--minus::before {
     display: inline-block;
-    width: 16px;
-    height: 16px;
-    margin-right: 6px;
+    width: 12px;
+    height: 12px;
+    margin-right: 5px;
     content: '';
     background-image: url("~@/assets/images/icon-choose-minus.png");
     background-position: center;

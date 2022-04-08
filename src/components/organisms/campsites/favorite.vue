@@ -2,11 +2,15 @@
   <img
     v-if="isFavorite"
     src="@/assets/images/bookmark.png"
+    width="34px"
+    height="34px"
     @click="unfavorite"
   >
   <img
     v-else
     src="@/assets/images/gray-bookmark.png"
+    width="34px"
+    height="34px"
     @click="favorite"
   >
 </template>

@@ -10,10 +10,14 @@
       <img
         v-if="isShowContentItem"
         src="@/assets/images/icon-circle-minus.png"
+        width="16px"
+        height="16px"
       >
       <img
         v-else
         src="@/assets/images/icon-circle-plus.png"
+        width="16px"
+        height="16px"
       >
     </div>
 

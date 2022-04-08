@@ -9,7 +9,7 @@
       <content-with-footer class="guidance-content">
         <div class="guidance-content__box">
           <img
-            src="@/assets/images/guidances/campsite-items.png"
+            src="@/assets/images/guidances/campsite-items.svg"
             width="280px"
           >
         </div>

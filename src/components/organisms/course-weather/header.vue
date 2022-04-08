@@ -4,7 +4,7 @@
       {{ course.name }}
       <img
         v-if="userCourse.isFavorited"
-        src="@/assets/images/user/user-course/favorite.png"
+        src="@/assets/images/user/favorite.png"
         width="18px"
       >
     </div>

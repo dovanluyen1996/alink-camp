@@ -9,7 +9,7 @@
       <content-with-footer class="guidance-content">
         <div class="guidance-content__box">
           <img
-            src="@/assets/images/guidances/push-noti.png"
+            src="@/assets/images/guidances/push-noti.svg"
             width="280px"
           >
         </div>

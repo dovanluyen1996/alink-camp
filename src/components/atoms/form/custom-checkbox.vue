@@ -65,8 +65,8 @@ export default {
     background: #fff;
     background-image: url('~@/assets/images/form/check-icon.png');
     background-repeat: no-repeat;
-    background-position: 2px -5px;
-    background-size: 23px;
+    background-position: center;
+    background-size: 24px;
     opacity: 0;
 
     .custom-input__field:checked + & {

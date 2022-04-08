@@ -21,7 +21,11 @@
           class="reservation-button button button--large--cta button--rounded button--custom"
           @click="openReservationPage()"
         >
-          <img src="@/assets/images/booking.png">
+          <img
+            src="@/assets/images/booking.png"
+            width="22px"
+            height="30px"
+          >
           キャンプ場のホームページへ
         </a>
       </div>

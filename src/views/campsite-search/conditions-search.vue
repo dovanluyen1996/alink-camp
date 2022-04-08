@@ -20,6 +20,11 @@
             :disabled="searched"
             @click="search()"
           >
+            <img
+              :src="require('@/assets/images/form/search-top.png')"
+              width="20px"
+              height="20px"
+            >
             検索
           </v-ons-button>
         </template>
@@ -112,17 +117,6 @@ export default {
       margin: 0 48px !important;
       font-size: 14px !important;
       box-shadow: 0 5px 5px rgba(0, 0, 0, 0.4);
-
-      &::before {
-        display: inline-block;
-        width: 20px;
-        height: 20px;
-        margin-right: 6px;
-        content: '';
-        background-image: url("~@/assets/images/form/search-top.png");
-        background-position: center;
-        background-size: 100%;
-      }
     }
   }
 }
