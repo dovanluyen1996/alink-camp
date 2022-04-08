@@ -1,9 +1,8 @@
 <template>
   <v-ons-page @show="show">
     <custom-toolbar title="アイテム設定" />
-
+    <loading :visible="isLoading" />
     <div class="content">
-      <loading :visible="isLoading" />
       <content-with-footer>
         <item-list
           v-if="sortedItems.length > 0"

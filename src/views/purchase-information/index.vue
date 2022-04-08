@@ -1,7 +1,6 @@
 <template>
   <v-ons-page>
     <custom-toolbar title="キャンプ天気会員登録" />
-
     <loading :visible="isLoading" />
     <div class="content">
       <content-with-footer>
@@ -218,10 +217,6 @@ export default {
 
 <style lang="scss" scoped>
 @import '@/assets/scss/_variables.scss';
-
-/deep/ .loading {
-  top: 0 !important;
-}
 
 .purchase-information__point {
   margin-right: 10px;

@@ -1,8 +1,8 @@
 <template>
   <v-ons-page>
     <custom-toolbar title="データを引き継ぐ" />
+    <loading :visible="isLoading" />
     <div class="content">
-      <loading :visible="isLoading" />
       <base-form>
         <text-field
           v-model="user.code"

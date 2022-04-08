@@ -1,6 +1,5 @@
 <template>
   <v-ons-page>
-    <loading :visible="isLoading" />
     <div class="content">
       <div class="text">
         <v-ons-row class="text__desc">
@@ -133,9 +132,6 @@ export default {
       set(newItemIds) {
         this.$store.dispatch('plan/setItemIds', newItemIds);
       },
-    },
-    isLoading() {
-      return this.$store.getters['models/item/isLoading'];
     },
   },
   watch: {

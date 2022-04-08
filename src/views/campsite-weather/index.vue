@@ -81,6 +81,7 @@ export default {
       return results;
     },
     isLoading() {
+      // FIXME: Apiの取得タイミングがずれているため複数回loadingが出るので要検討
       const loadPlan = this.$store.getters['models/userCampsitePlan/isLoading'];
       const loadFavorite = this.$store.getters['models/usersFavorite/isLoading'];
       const loadWeather = this.$store.getters['models/weather/isForecastScheduledDateLoading']

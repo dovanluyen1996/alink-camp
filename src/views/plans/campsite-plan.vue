@@ -1,7 +1,6 @@
 <template>
   <v-ons-page @show="show">
     <custom-toolbar title="計画一覧" />
-
     <loading :visible="isLoading" />
     <div class="content">
       <v-ons-col class="text">

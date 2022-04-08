@@ -7,7 +7,6 @@
     >
       <img
         :src="require('@/assets/images/spinner.png')"
-        alt=""
         class="fa-spin"
       >
       <span>Now Loading...</span>
@@ -28,6 +27,7 @@ export default {
 
 <style scoped lang="scss">
 @import '@/assets/scss/onsen-override/base-layout/_variables.scss';
+@import '@/assets/scss/onsen-override/base-layout/iphonex-support/_variables.scss';
 
 .loading {
   position: absolute;
@@ -59,5 +59,15 @@ export default {
 .fade-enter,
 .fade-leave-to {
   opacity: 0;
+}
+
+.page[status-bar-fill] > .loading {
+  top: $--toolbar-height + 20px;
+}
+
+@media (orientation: portrait) {
+  html[onsflag-iphonex-portrait] .loading {
+    top: $--iphonex-safe-area-inset-top-portrait + $--toolbar-height;
+  }
 }
 </style>

@@ -1,8 +1,8 @@
 <template>
   <v-ons-page>
     <custom-toolbar title="認証コードを再送する" />
+    <loading :visible="isLoading" />
     <div class="content">
-      <loading :visible="isLoading" />
       <validation-observer
         v-slot="{ handleSubmit }"
       >

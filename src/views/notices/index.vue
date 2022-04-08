@@ -1,8 +1,8 @@
 <template>
   <v-ons-page>
     <custom-toolbar title="お知らせ" />
+    <loading :visible="isLoading" />
     <div class="content">
-      <loading :visible="isLoading" />
       <notice-list
         v-if="notices.length > 0"
         :notices="notices"

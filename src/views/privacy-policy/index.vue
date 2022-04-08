@@ -1,12 +1,13 @@
 <template>
   <v-ons-page>
     <custom-toolbar title="プライバシーポリシー" />
-
-    <v-ons-card fullscreen>
-      <loading :visible="isLoading" />
-      <!-- eslint-disable-next-line vue/no-v-html -->
-      <div v-html="description" />
-    </v-ons-card>
+    <loading :visible="isLoading" />
+    <div class="content">
+      <v-ons-card fullscreen>
+        <!-- eslint-disable-next-line vue/no-v-html -->
+        <div v-html="description" />
+      </v-ons-card>
+    </div>
   </v-ons-page>
 </template>
 

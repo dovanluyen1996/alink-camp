@@ -1,14 +1,16 @@
 <template>
   <v-ons-page @show="show">
     <custom-toolbar title="新規計画" />
-
-    <v-ons-tabbar
-      position="top"
-      :tabs="tabs"
-      :visible="true"
-      :index.sync="activeIndex"
-      @prechange="onPreChange"
-    />
+    <loading :visible="isLoading" />
+    <div class="content">
+      <v-ons-tabbar
+        position="top"
+        :tabs="tabs"
+        :visible="true"
+        :index.sync="activeIndex"
+        @prechange="onPreChange"
+      />
+    </div>
   </v-ons-page>
 </template>
 
@@ -23,6 +25,38 @@ export default {
     campsite: {
       type: Object,
       required: true,
+    },
+  },
+  computed: {
+    tabs() {
+      return this.$store.state.components.planTab.tabs;
+    },
+    activeIndex: {
+      get() {
+        return this.$store.state.components.planTab.activeIndex;
+      },
+      set(value) {
+        this.$store.commit('components/planTab/setActiveIndex', value);
+      },
+    },
+    activeTab() {
+      return this.tabs[this.activeIndex].label;
+    },
+    enabled() {
+      return this.$store.state.components.planTab.enabled;
+    },
+    isLoading() {
+      let isTabLoading = false;
+
+      if (this.activeTab === '計画日') {
+        isTabLoading = this.$store.getters['modules/plan/isLoading'];
+      } else if (this.activeTab === '持ち物') {
+        isTabLoading = this.$store.getters['models/item/isLoading'] || this.$store.getters['models/weather/isForecast14DaysLoading'];
+      } else if (this.activeTab === '予定詳細') {
+        isTabLoading = this.$store.getters['models/weather/isForecastHourlyLoading'];
+      }
+
+      return isTabLoading;
     },
   },
   created() {
@@ -43,17 +77,6 @@ export default {
         props: { campsite: this.campsite },
       },
     ]);
-  },
-  computed: {
-    tabs() {
-      return this.$store.state.components.planTab.tabs;
-    },
-    activeIndex() {
-      return this.$store.state.components.planTab.activeIndex;
-    },
-    enabled() {
-      return this.$store.state.components.planTab.enabled;
-    },
   },
   beforeDestroy() {
     this.$store.dispatch('plan/clean');

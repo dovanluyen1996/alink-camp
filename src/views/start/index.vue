@@ -1,7 +1,7 @@
 <template>
   <v-ons-page>
+    <loading :visible="isLoading" />
     <div class="content start-page">
-      <loading :visible="isLoading" />
       <div class="start-page__top">
         <img
           src="@/assets/images/start/camp-logo-start.png"
@@ -102,6 +102,9 @@ export default {
 
 </script>
 <style lang="scss" scoped>
+@import '@/assets/scss/onsen-override/base-layout/_variables.scss';
+@import '@/assets/scss/onsen-override/base-layout/iphonex-support/_variables.scss';
+
 .start-page {
   display: flex;
   flex-direction: column;
@@ -157,6 +160,21 @@ export default {
   .value {
     padding-left: 180px;
     font-size: 10px;
+  }
+}
+
+// NOTE: loadingにはtoolbar分topが空けられているがスタート画面だけはtoolbarがないので調整が必要
+.loading {
+  top: 0;
+}
+
+.page[status-bar-fill] > .loading {
+  top: 20px;
+}
+
+@media (orientation: portrait) {
+  html[onsflag-iphonex-portrait] .loading {
+    top: $--iphonex-safe-area-inset-top-portrait;
   }
 }
 </style>

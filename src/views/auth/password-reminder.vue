@@ -1,8 +1,8 @@
 <template>
   <v-ons-page>
     <custom-toolbar title="パスワードを忘れた方" />
+    <loading :visible="isLoading" />
     <div class="content">
-      <loading :visible="isLoading" />
       <validation-observer
         v-slot="{ handleSubmit }"
       >

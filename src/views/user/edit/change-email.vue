@@ -1,8 +1,8 @@
 <template>
   <v-ons-page>
     <custom-toolbar title="データ引継ぎ設定" />
+    <loading :visible="isLoading" />
     <div class="content">
-      <loading :visible="isLoading" />
       <validation-observer v-slot="{ handleSubmit }">
         <base-form>
           <validation-provider

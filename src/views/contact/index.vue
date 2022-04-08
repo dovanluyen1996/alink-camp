@@ -1,9 +1,8 @@
 <template>
   <v-ons-page>
     <custom-toolbar title="お問い合わせ" />
-
+    <loading :visible="isLoading" />
     <div class="content">
-      <loading :visible="isLoading" />
       <validation-observer
         ref="guidanceForm"
         v-slot="{ handleSubmit }"

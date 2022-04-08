@@ -1,6 +1,5 @@
 <template>
   <v-ons-page @show="show">
-    <loading :visible="isLoading" />
     <custom-toolbar :title="title">
       <template #right>
         <delete-dialog-with-icon
@@ -11,19 +10,21 @@
         </delete-dialog-with-icon>
       </template>
     </custom-toolbar>
+    <loading :visible="isLoading" />
+    <div class="content">
+      <v-ons-tabbar
+        position="top"
+        :tabs="tabs"
+        :visible="true"
+        :index.sync="activeIndex"
+      />
 
-    <v-ons-tabbar
-      position="top"
-      :tabs="tabs"
-      :visible="true"
-      :index.sync="activeIndex"
-    />
-
-    <completed-dialog
-      :action="action"
-      :is-visible="completedDialogVisible"
-      @close="closeCompletedDialog"
-    />
+      <completed-dialog
+        :action="action"
+        :is-visible="completedDialogVisible"
+        @close="closeCompletedDialog"
+      />
+    </div>
   </v-ons-page>
 </template>
 
@@ -68,7 +69,9 @@ export default {
   },
   computed: {
     isLoading() {
-      return this.$store.getters['models/userCampsitePlan/isLoading'];
+      // NOTE: 思い出/持ち物タブで天気apiは呼んでいないためタブの判定は不要なのでnew, editと差異がある
+      // FIXME: Apiの取得タイミングがずれているため複数回loadingが出るので要検討
+      return this.$store.getters['models/userCampsitePlan/isLoading'] || this.$store.getters['models/weather/isPastLoading'];
     },
     detailPlan() {
       return this.$store.getters['models/userCampsitePlan/findById'](this.plan.id) || {};

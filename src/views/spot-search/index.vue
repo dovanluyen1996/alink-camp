@@ -4,7 +4,7 @@
       title="周辺検索"
       :disabled-back-button="true"
     />
-
+    <loading :visible="isLoading" />
     <div class="content">
       <div class="spot-search">
         <v-ons-button
@@ -18,7 +18,6 @@
           予定日、またはお気に入り設定中のキャンプ場
         </div>
       </div>
-      <loading :visible="isLoading" />
       <campsite-list
         v-if="favoriteOrPlanned.length > 0"
         :is-show-favorite-mark="true"
