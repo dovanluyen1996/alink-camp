@@ -59,11 +59,11 @@ export default {
       // Unit of measurement: m/s
       switch (true) {
       case (speed < 2):
-        return 'wind-speed--normal';
+        return 'wind-speed--light';
       case (speed < 5):
-        return 'wind-speed--strong';
+        return 'wind-speed--middle';
       default:
-        return 'wind-speed--danger';
+        return 'wind-speed--strong';
       }
     },
     windDirectionHeading() {
@@ -232,16 +232,16 @@ $speed-degrees: 0, 22.5, 45, 67.5, 90, 112.5, 135, 157.5, 180,
   background-position: center;
   background-size: cover;
 
-  &--normal {
-    background-image: url('~@/assets/images/weathers/wind-speed/background-normal.png');
+  &--light {
+    background-image: url('~@/assets/images/weathers/wind-speed/background-light.png');
+  }
+
+  &--middle {
+    background-image: url('~@/assets/images/weathers/wind-speed/background-middle.png');
   }
 
   &--strong {
     background-image: url('~@/assets/images/weathers/wind-speed/background-strong.png');
-  }
-
-  &--danger {
-    background-image: url('~@/assets/images/weathers/wind-speed/background-danger.png');
   }
 }
 

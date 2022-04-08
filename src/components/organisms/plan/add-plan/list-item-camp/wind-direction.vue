@@ -4,10 +4,14 @@
     class="wind-direction"
   >
     <template v-if="windSpeed > 0">
-      <div
-        :class="['wind-speed', windSpeedRate(windSpeed)]"
+      <img
+        :src="image"
         :style="windDirectionStyle"
-      />
+        :alt="windDirection"
+        class="wind-speed"
+        width="14px"
+        height="14px"
+      >
       <span>{{ windSpeed }}</span>
     </template>
     <template v-else>
@@ -24,6 +28,10 @@
 
 <script>
 import settings from '@/config/settings';
+
+const LightWindImage = require('@/assets/images/weathers/wind-speed/background-light.png');
+const MiddleWindImage = require('@/assets/images/weathers/wind-speed/background-middle.png');
+const StrongWindImage = require('@/assets/images/weathers/wind-speed/background-strong.png');
 
 const { windDirections } = settings.views;
 export default {
@@ -47,54 +55,33 @@ export default {
         transform: `rotate(${this.windDirectionHeading}deg)`,
       };
     },
-  },
-  methods: {
-    windSpeedRate(windSpeed) {
+    image() {
       // Unit of measurement: m/s
-      switch (true) {
-      case windSpeed < 2:
-        return 'wind-speed--normal';
-      case windSpeed < 5:
-        return 'wind-speed--strong';
-      default:
-        return 'wind-speed--danger';
-      }
+      if (this.windSpeed < 2) return LightWindImage;
+
+      if (this.windSpeed < 5) return MiddleWindImage;
+
+      return StrongWindImage;
     },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-
-.wind-speed {
-  background-position: center;
-  background-size: cover;
-
-  &--normal {
-    background-image: url("~@/assets/images/weathers/wind-speed/background-normal.png");
-  }
-
-  &--strong {
-    background-image: url("~@/assets/images/weathers/wind-speed/background-strong.png");
-  }
-
-  &--danger {
-    background-image: url("~@/assets/images/weathers/wind-speed/background-danger.png");
-  }
-}
+@import "@/assets/scss/_variables.scss";
 
 .wind-direction {
   display: grid;
   align-items: center;
   justify-content: center;
 
-  .wind-speed {
-    width: 10px;
-    height: 16px;
-  }
-
   span {
-    font-size: 12px;
+    font-size: $font-size-small;
   }
 }
+
+.wind-speed {
+  margin-bottom: 3px;
+}
+
 </style>

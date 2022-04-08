@@ -15,7 +15,10 @@
         <div
           class="weather-row-sunrise"
         >
-          <img src="@/assets/images/weathers/sunrise.png">
+          <img
+            src="@/assets/images/weathers/sunrise.svg"
+            width="30px"
+          >
           <div>日の出</div>
         </div>
       </td>
@@ -28,7 +31,10 @@
         <div
           class="weather-row-sunset"
         >
-          <img src="@/assets/images/weathers/sunset.png">
+          <img
+            src="@/assets/images/weathers/sunset.svg"
+            width="30px"
+          >
           <div>日の入</div>
         </div>
       </td>
@@ -87,9 +93,5 @@ export default {
   font-size: $font-size-small;
   text-align: center;
   white-space: nowrap;
-
-  img {
-    width: 30px;
-  }
 }
 </style>

@@ -16,7 +16,7 @@
         <div class="campsite-weather-day-weather">
           <weather-image
             :weather="forecast"
-            image-width="68px"
+            image-width="60px"
           />
           <div class="campsite-weather-accuracy-index">
             {{ accuracyText[forecast.accuracyIndex] }}
@@ -157,16 +157,6 @@ export default {
   /deep/ {
     .temperature__unit {
       margin-left: 0;
-      font-weight: 300;
-    }
-
-    .temperature__unit,
-    .temperature__value {
-      font-weight: 300;
-    }
-
-    .weather-image {
-      height: 41px !important;
     }
 
     .weather {

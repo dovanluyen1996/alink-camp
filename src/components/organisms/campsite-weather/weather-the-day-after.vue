@@ -6,7 +6,7 @@
     <weather-image
       :weather="forecast"
       :is-shown-name="true"
-      image-width="38.5px"
+      image-width="38px"
     />
     <campsite-weather-temperatures
       :forecast="forecast"
@@ -61,11 +61,6 @@ export default {
   .weather {
     display: flex;
     align-items: center;
-  }
-
-  .weather-image {
-    width: 38.5px;
-    height: 24px;
   }
 
   .weather-name {

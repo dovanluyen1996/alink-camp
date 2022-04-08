@@ -49,7 +49,7 @@
             <td>
               <weather-image
                 :weather="getWeather(date, hour)"
-                image-width="35px"
+                image-width="30px"
               />
             </td>
             <td>

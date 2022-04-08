@@ -89,9 +89,6 @@ export default {
 <style lang="scss" scoped>
 @import "@/assets/scss/_variables.scss";
 
-$speed-degrees: 0, 22.5, 45, 67.5, 90, 112.5, 135, 157.5, 180,
-  202.5, 225, 247.5, 270, 292.5, 315, 337.5;
-
 /deep/ {
   table td,
   table th {
@@ -152,45 +149,6 @@ $speed-degrees: 0, 22.5, 45, 67.5, 90, 112.5, 135, 157.5, 180,
 
     .text-blue {
       color: #0097ff;
-    }
-
-    .wind-speed {
-      background-position: center;
-      background-size: cover;
-
-      &--normal {
-        background-image: url('~@/assets/images/weathers/wind-speed/background-normal.png');
-      }
-
-      &--strong {
-        background-image: url('~@/assets/images/weathers/wind-speed/background-strong.png');
-      }
-
-      &--danger {
-        background-image: url('~@/assets/images/weathers/wind-speed/background-danger.png');
-      }
-    }
-
-    .wind-direction {
-      display: grid;
-      align-items: center;
-      justify-content: center;
-
-      @each $degree in $speed-degrees {
-        // generate class has partern: wind-direction--xx-deg
-        &--#{floor($degree)}-deg {
-          transform: rotate(#{$degree}deg);
-        }
-      }
-
-      .wind-speed {
-        width: 10px;
-        height: 16px;
-      }
-
-      span {
-        font-size: 12px;
-      }
     }
   }
 }
