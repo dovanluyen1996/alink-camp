@@ -37,9 +37,6 @@ import NoData from '@/components/organisms/no-data';
 import GoToCampsiteSearchButton from '@/components/organisms/go-to-campsite-search-button';
 import CampsiteWeatherContent from '@/components/organisms/campsite-weather/content';
 
-// pages
-import CampsiteSearchIndex from '@/views/campsite-search/index';
-
 export default {
   name: 'CampWeather',
   components: {

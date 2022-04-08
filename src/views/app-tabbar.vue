@@ -88,13 +88,12 @@ export default {
       // if menu is open other page, reset menu
       // If menu is open menu items only, no reset
       if (this.$store.state.menuNavigator.stack.length > 1) {
-        this.$store.dispatch('menuNavigator/reset', MenuIndexPage);
+        this.$store.dispatch('menuNavigator/reset');
       }
     },
     reactive(event) {
       if (this.isNavigatorBusy) return;
 
-      console.log('reactive tab ----')
       switch (event.activeIndex) {
       case settings.views.appTabbar.tabIndexes.campsiteWeather:
         this.$store.dispatch('courseWeatherNavigator/reset');

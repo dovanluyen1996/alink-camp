@@ -68,7 +68,6 @@ import GoToCampsiteSearchButton from '@/components/organisms/go-to-campsite-sear
 
 // pages
 import SearchResult from '@/views/spot-search/search-result';
-import CampsiteSearchIndex from '@/views/campsite-search/index';
 
 import settings from '@/config/settings';
 
