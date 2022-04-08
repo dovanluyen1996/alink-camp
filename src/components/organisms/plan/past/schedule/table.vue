@@ -248,13 +248,6 @@ export default {
       font-size: $font-size-small;
     }
 
-    .weather {
-      .icon-weather {
-        width: 35px;
-        height: 21px;
-      }
-    }
-
     .temperature {
       display: inline-flex;
       padding: 5px;
