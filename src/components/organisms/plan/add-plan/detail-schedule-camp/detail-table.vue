@@ -186,13 +186,19 @@ export default {
       return weather.precip;
     },
     forecastTelopText(weather) {
-      return this.$helpers.isEmpty(weather) ? '--' : weather.forecastTelop;
+      if (this.$helpers.isEmpty(weather) || !weather.forecastTelop) return '--';
+
+      return weather.forecastTelop;
     },
     temperatureText(weather) {
-      return this.$helpers.isEmpty(weather) ? '--' : weather.temperature;
+      if (this.$helpers.isEmpty(weather) || !weather.temperature) return '--';
+
+      return weather.temperature;
     },
     windSpeedText(weather) {
-      return this.$helpers.isEmpty(weather) ? '--' : weather.windSpeed;
+      if (this.$helpers.isEmpty(weather) || !weather.windSpeed) return '--';
+
+      return weather.windSpeed;
     },
     editTaskAt(date, hour) {
       this.updateDataVisible = true;
