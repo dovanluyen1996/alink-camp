@@ -193,10 +193,8 @@ export default {
         background-position: center;
         background-size: 40px;
       }
-    }
 
-    @for $number from 1 through 10 {
-      .has-stamp {
+      &:nth-child(#{$number}) .has-stamp {
         position: absolute;
         top: 0;
         right: 0;
