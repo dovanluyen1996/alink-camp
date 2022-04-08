@@ -37,17 +37,7 @@
       </v-ons-card>
 
       <div class="button-search-center">
-        <v-ons-button
-          modifier="search yellow"
-          @click="goToSearchCampsite"
-        >
-          <img
-            :src="require('@/assets/images/form/search-top.png')"
-            width="20px"
-            height="20px"
-          >
-          キャンプ場検索
-        </v-ons-button>
+        <go-to-campsite-search-button />
       </div>
     </div>
     <v-ons-alert-dialog
@@ -74,6 +64,7 @@
 <script>
 // components
 import CampsiteList from '@/components/organisms/campsite-list';
+import GoToCampsiteSearchButton from '@/components/organisms/go-to-campsite-search-button';
 
 // pages
 import SearchResult from '@/views/spot-search/search-result';
@@ -84,6 +75,7 @@ import settings from '@/config/settings';
 export default {
   components: {
     CampsiteList,
+    GoToCampsiteSearchButton,
   },
   data() {
     return {
@@ -166,19 +158,6 @@ export default {
         .catch((e) => {
           console.error(e);
         });
-    },
-    goToSearchCampsite() {
-      this.$store.commit('campsiteSearchNavigator/setEnableBusy', false);
-      this.$store.dispatch('campsiteSearchNavigator/reset', {
-        extends: CampsiteSearchIndex,
-        onsNavigatorOptions: {
-          callback: () => {
-            this.$store.commit('campsiteSearchNavigator/setEnableBusy', true);
-          },
-        },
-      });
-
-      this.$store.commit('appTabbar/setActiveIndexFromTabName', 'campsiteSearch');
     },
     async show() {
       this.$store.dispatch('appTabbar/setLastVisitedAt', this.$helpers.localDateWithHyphenFrom(new Date()));
