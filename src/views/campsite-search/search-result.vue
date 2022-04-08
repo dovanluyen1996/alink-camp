@@ -263,11 +263,4 @@ export default {
     background-size: 100%;
   }
 }
-
-/deep/ {
-  .custom-toolbar-subtitle {
-    font-size: 16px;
-    font-weight: 600;
-  }
-}
 </style>
