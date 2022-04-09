@@ -2,7 +2,7 @@
   <v-ons-row class="course-weather-sun">
     <v-ons-col>
       <img
-        src="@/assets/images/weathers/sunrise.png"
+        src="@/assets/images/weathers/sunrise.svg"
         width="12px"
       >
       {{ sunrise || '--:--' }}
@@ -10,7 +10,7 @@
     <v-ons-col>
       &nbsp;
       <img
-        src="@/assets/images/weathers/sunset.png"
+        src="@/assets/images/weathers/sunset.svg"
         width="12px"
       >
       {{ sunset || '--:--' }}
