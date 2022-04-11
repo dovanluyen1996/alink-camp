@@ -138,8 +138,7 @@ export default {
 }
 
 .items-table {
-  padding: 20px 10px;
-  margin-bottom: 100px;
+  margin: 20px 10px;
 
   .items {
     width: 100%;

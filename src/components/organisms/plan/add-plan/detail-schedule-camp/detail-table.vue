@@ -274,10 +274,6 @@ export default {
     margin-top: 10px;
   }
 
-  .card-detail:last-child {
-    margin-bottom: 140px;
-  }
-
   .date-detail {
     position: relative;
     display: flex;
@@ -285,11 +281,8 @@ export default {
     justify-content: center;
     height: 43px;
     background-color: #eae5e5;
-
-    span {
-      font-size: 14px;
-      font-weight: bold;
-    }
+    font-size: $font-size-large;
+    font-weight: bold;
   }
 
   .time-scedules {
@@ -307,8 +300,12 @@ export default {
       font-size: 10px;
     }
 
-    th {
+    th, td {
       padding: 7px 0;
+      font-size: $font-size-small;
+    }
+
+    th {
       background-color: #eae5e5;
     }
 
@@ -330,10 +327,6 @@ export default {
 
     .time-scedules__wind-head {
       width: 35px;
-    }
-
-    td {
-      padding: 7px 0;
     }
 
     .detail-task,

@@ -60,7 +60,7 @@ export default {
       let isTabLoading = false;
 
       if (this.activeTab === '計画日') {
-        isTabLoading = this.$store.getters['modules/plan/isLoading'];
+        isTabLoading = this.$store.getters['models/userCampsitePlan/isLoading'];
       } else if (this.activeTab === '持ち物') {
         isTabLoading = this.$store.getters['models/item/isLoading'] || this.$store.getters['models/weather/isForecast14DaysLoading'];
       } else if (this.activeTab === '予定詳細') {
@@ -205,12 +205,6 @@ export default {
         background-color: #631900;
         border-radius: 15px;
       }
-    }
-  }
-
-  .content-with-footer {
-    &__footer {
-      bottom: 90px;
     }
   }
 }

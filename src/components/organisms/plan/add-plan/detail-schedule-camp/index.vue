@@ -1,19 +1,19 @@
 <template>
   <v-ons-page @show="show">
     <div class="content">
-      <div class="text">
-        <v-ons-row class="text__desc">
-          {{ campsite.name }}
-        </v-ons-row>
-      </div>
+      <content-with-footer ref="contentWithFooter">
+        <div class="text">
+          <v-ons-row class="text__desc">
+            {{ campsite.name }}
+          </v-ons-row>
+        </div>
 
-      <detail-table
-        :forecasts="forecasts"
-        :past-weather="pastWeather"
-        :tasks.sync="tasks"
-      />
+        <detail-table
+          :forecasts="forecasts"
+          :past-weather="pastWeather"
+          :tasks.sync="tasks"
+        />
 
-      <content-with-footer>
         <template #footer>
           <v-ons-button
             modifier="large--cta yellow rounded"
@@ -88,6 +88,9 @@ export default {
     };
   },
   computed: {
+    isLoading() {
+      return this.$store.getters['models/weather/isForecastHourlyLoading'];
+    },
     isNew() {
       return this.$store.getters['plan/isNew'];
     },
@@ -125,6 +128,12 @@ export default {
     },
     completedAction() {
       return this.isNew ? 'createPlan' : 'updatePlan';
+    },
+  },
+  watch: {
+    isLoading() {
+      // NOTE: 新規・編集の判定度でフッターの高さが変わるためコンテンツの余白を再計算させる
+      this.$refs.contentWithFooter.setContentMargin();
     },
   },
   methods: {
@@ -198,21 +207,9 @@ export default {
     }
   }
 
-  .content-with-footer {
-    height: 0;
-
-    .content-with-footer__content {
-      padding-bottom: 0 !important;
-    }
-  }
-
   .content-with-footer__footer {
-    position: fixed;
-    bottom: 0 !important;
-    left: inherit;
-
     .button {
-      font-size: 14px !important;
+      font-size: $font-size-default;
 
       &--search-day {
         margin-top: 20px !important;

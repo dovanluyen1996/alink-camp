@@ -1,45 +1,44 @@
 <template>
   <v-ons-page @show="show">
     <div class="content">
-      <div class="text">
-        <v-ons-row class="text__desc">
-          {{ campsite.name }}
-        </v-ons-row>
-      </div>
+      <content-with-footer ref="contentWithFooter">
+        <div class="text">
+          <v-ons-row class="text__desc">
+            {{ campsite.name }}
+          </v-ons-row>
+        </div>
 
-      <div class="title-center">
-        <span>天気予報</span>
-        <!-- TODO: 持ち物共有は編集時のみ表示する -->
-        <share-button
-          :subject="shareSubject()"
-          :message="shareMessage()"
+        <forecast-table
+          :campsite="campsite"
+          :forecasts="forecasts"
+          :past-weather="pastWeather"
         >
-          <template #text>
-            持ち物共有
+          <template v-slot:shareButton>
+            <!-- TODO: 持ち物共有は編集時のみ表示する -->
+            <share-button
+              :subject="shareSubject()"
+              :message="shareMessage()"
+            >
+              <template #text>
+                持ち物共有
+              </template>
+            </share-button>
           </template>
-        </share-button>
-      </div>
+        </forecast-table>
+        <item-table
+          v-if="sortedItems.length > 0"
+          :checked-item-ids.sync="checkedItemIds"
+          :items="sortedItems"
+        />
 
-      <forecast-table
-        :campsite="campsite"
-        :forecasts="forecasts"
-        :past-weather="pastWeather"
-      />
-      <item-table
-        v-if="sortedItems.length > 0"
-        :checked-item-ids.sync="checkedItemIds"
-        :items="sortedItems"
-      />
+        <div
+          v-else
+          class="items__note"
+        >
+          アイテムが登録されていません。<br>
+          アイテム追加より登録して下さい。
+        </div>
 
-      <div
-        v-else
-        class="items__note"
-      >
-        アイテムが登録されていません。<br>
-        アイテム追加より登録して下さい。
-      </div>
-
-      <content-with-footer>
         <template #footer>
           <v-ons-button
             modifier="large--cta yellow rounded"
@@ -118,6 +117,10 @@ export default {
     };
   },
   computed: {
+    isLoading() {
+      return this.$store.getters['models/item/isLoading']
+        || this.$store.getters['models/weather/isForecast14DaysLoading'];
+    },
     sortedItems() {
       const items = this.$store.getters['models/item/all'];
       const userItems = items.filter(item => item.userId !== null);
@@ -157,6 +160,12 @@ export default {
     },
     completedAction() {
       return this.isNew ? 'createPlan' : 'updatePlan';
+    },
+  },
+  watch: {
+    isLoading() {
+      // NOTE: 新規・編集の判定度でフッターの高さが変わるためコンテンツの余白を再計算させる
+      this.$refs.contentWithFooter.setContentMargin();
     },
   },
   methods: {
@@ -240,36 +249,9 @@ export default {
     }
   }
 
-  .title-center {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 43px;
-    margin: 10px;
-    margin-bottom: -10px;
-    font-size: 16px;
-    font-weight: 600;
-    color: #000;
-    text-align: center;
-    background-color: #eae5e5;
-  }
-
-  .content-with-footer {
-    height: 21%;
-
-    .content-with-footer__content {
-      padding-bottom: 0 !important;
-    }
-  }
-
   .content-with-footer__footer {
-    position: fixed;
-    bottom: 0 !important;
-    left: 100%;
-
     .button {
-      font-size: 14px !important;
+      font-size: $font-size-default;
 
       &--search-day {
         margin-top: 20px !important;
