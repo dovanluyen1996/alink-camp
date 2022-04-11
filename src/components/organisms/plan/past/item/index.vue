@@ -12,7 +12,7 @@
           :campsite="campsite"
           :forecasts="forecasts"
         >
-          <template v-slot:shareButton>
+          <template #shareButton>
             <share-button
               :subject="shareSubject()"
               :message="shareMessage()"

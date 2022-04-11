@@ -146,21 +146,21 @@ export default {
 
     &__header {
       padding: 10px 8px;
-      background-color: #eae5e5;
       overflow: hidden;
+      background-color: #eae5e5;
     }
 
     &__label {
       display: inline-flex;
       align-items: center;
       justify-content: center;
+      float: left;
       height: 24px;
       padding: 0 10px;
       font-weight: 600;
       color: $color-white;
       text-align: center;
       background-color: #742a2a;
-      float: left;
 
       &::before {
         display: inline-block;
@@ -175,10 +175,10 @@ export default {
   }
 
   .items__label--red {
-    font-size: #font-size-small;
+    float: right;
+    font-size: $font-size-small;
     background-color: #a82e05;
     border-radius: 15px;
-    float: right;
 
     &::before {
       width: 16px;
@@ -191,7 +191,8 @@ export default {
     margin-right: 10px;
 
     &::before {
-    background-image: url("~@/assets/images/icon-choose-plus.png");
+      background-image: url("~@/assets/images/icon-choose-plus.png");
+    }
   }
 
   .items__label--minus::before {
@@ -233,7 +234,7 @@ export default {
 @media screen and (max-width: 374px) {
   // TODO: iPhoneSE 1stは画面が狭いのでソートなどのボタンが崩れないようにする
   .items__label {
-    font-size: #font-size-small;
+    font-size: $font-size-small;
   }
 }
 </style>

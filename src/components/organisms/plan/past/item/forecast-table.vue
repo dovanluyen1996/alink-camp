@@ -111,9 +111,9 @@ export default {
     align-items: center;
     justify-content: center;
     height: 43px;
-    background-color: #eae5e5;
     font-size: $font-size-large;
     font-weight: bold;
+    background-color: #eae5e5;
   }
 
   .table {
@@ -125,7 +125,8 @@ export default {
       border: 1px solid $color-border;
     }
 
-    th, td {
+    th,
+    td {
       font-size: $font-size-small;
     }
 

@@ -15,7 +15,7 @@ export default {
     onClick() {
       this.$emit('click');
     },
-  }
+  },
 };
 </script>
 

@@ -220,7 +220,8 @@ export default {
       background-color: $color-white;
     }
 
-    th, td {
+    th,
+    td {
       padding: 7px 0;
       font-size: $font-size-small;
     }
@@ -285,9 +286,9 @@ export default {
     align-items: center;
     justify-content: center;
     height: 43px;
-    background-color: #eae5e5;
     font-size: $font-size-large;
     font-weight: bold;
+    background-color: #eae5e5;
   }
 }
 
@@ -320,7 +321,6 @@ export default {
     flex: 0 0 50%;
     max-width: 50%;
     padding-left: 5px;
-
   }
 }
 

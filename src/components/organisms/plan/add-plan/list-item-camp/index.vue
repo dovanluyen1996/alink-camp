@@ -13,7 +13,7 @@
           :forecasts="forecasts"
           :past-weather="pastWeather"
         >
-          <template v-slot:shareButton>
+          <template #shareButton>
             <!-- TODO: 持ち物共有は編集時のみ表示する -->
             <share-button
               :subject="shareSubject()"
