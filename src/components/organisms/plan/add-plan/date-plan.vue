@@ -163,6 +163,13 @@ export default {
       this.setValidate();
     },
   },
+  created() {
+    const { startedDate, finishedDate } = this.$store.getters['plan/params'];
+
+    if (startedDate === '' || finishedDate === '') {
+      this.$store.commit('components/planTab/setEnabled', false);
+    }
+  },
   methods: {
     setValidate() {
       this.$nextTick(async() => {
