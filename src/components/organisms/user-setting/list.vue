@@ -36,7 +36,7 @@
             <v-ons-switch v-model="isEnabledWeatherForecastNotification" />
           </span>
           <span class="list-item__subtitle">
-            ※予定日14日前より定期的に該当キャンプ場の天気をご連絡します。
+            ※予定日3日前より定期的に該当キャンプ場の天気をご連絡します。
           </span>
           <span class="list-item__subtitle">
             ※キャンセルの判断にご利用ください
