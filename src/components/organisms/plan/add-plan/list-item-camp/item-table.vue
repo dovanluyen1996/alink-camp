@@ -155,7 +155,7 @@ export default {
       align-items: center;
       justify-content: center;
       height: 24px;
-      padding: 5px 0;
+      padding: 0 10px;
       font-weight: 600;
       color: $color-white;
       text-align: center;
