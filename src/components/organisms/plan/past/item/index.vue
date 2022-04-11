@@ -134,7 +134,7 @@ export default {
     },
   },
   watch: {
-    tartedDate() {
+    startedDate() {
       this.getPast();
     },
     finishedDate() {
@@ -200,8 +200,6 @@ export default {
 
   .content-with-footer__footer {
     .button {
-      font-size: $font-size-default;
-
       &--search-day {
         margin-top: 20px !important;
       }

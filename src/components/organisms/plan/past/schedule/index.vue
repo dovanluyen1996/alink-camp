@@ -182,11 +182,5 @@ export default {
       font-size: 18px;
     }
   }
-
-  .content-with-footer__footer {
-    .button {
-      font-size: $font-size-default;
-    }
-  }
 }
 </style>

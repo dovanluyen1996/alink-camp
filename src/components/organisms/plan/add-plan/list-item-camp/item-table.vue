@@ -204,7 +204,7 @@ export default {
     align-items: center;
     justify-content: space-between;
     padding: 10px 5px;
-    font-size: 12px;
+    font-size: $font-size-small;
     font-weight: 600;
     border: 1px solid #d9d9d9;
 

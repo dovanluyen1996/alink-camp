@@ -144,7 +144,7 @@ export default {
 
     .text-small {
       display: block;
-      font-size: 12px;
+      font-size: $font-size-small;
     }
 
     .date-check {
