@@ -1,7 +1,7 @@
 <template>
   <div class="items-table">
     <div class="items">
-      <div class="items__title">
+      <div class="items__header">
         <div
           class="items__label items__label--plus"
           @click="selectAll"
@@ -144,69 +144,58 @@ export default {
     width: 100%;
     background-color: $color-white;
 
-    &__title {
-      position: relative;
-      padding: 10px 5px;
+    &__header {
+      padding: 10px 8px;
       background-color: #eae5e5;
+      overflow: hidden;
     }
 
     &__label {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 22%;
       height: 24px;
-      padding: 5px 10px;
-      margin-right: 10px;
-      font-size: 14px;
+      padding: 5px 0;
       font-weight: 600;
       color: $color-white;
       text-align: center;
       background-color: #742a2a;
+      float: left;
+
+      &::before {
+        display: inline-block;
+        width: 12px;
+        height: 12px;
+        margin-right: 5px;
+        content: '';
+        background-position: center;
+        background-size: 100%;
+      }
     }
   }
 
   .items__label--red {
-    position: absolute;
-    right: 0;
-    width: 28%;
-    margin-right: 5px;
-    font-size: 12px;
+    font-size: #font-size-small;
     background-color: #a82e05;
     border-radius: 15px;
+    float: right;
 
     &::before {
-      display: inline-block;
       width: 16px;
       height: 16px;
-      margin-right: 5px;
-      content: '';
       background-image: url("~@/assets/images/icon-sort.png");
-      background-position: center;
-      background-size: 100%;
     }
   }
 
-  .items__label--plus::before {
-    display: inline-block;
-    width: 12px;
-    height: 12px;
-    margin-right: 5px;
-    content: '';
+  .items__label--plus {
+    margin-right: 10px;
+
+    &::before {
     background-image: url("~@/assets/images/icon-choose-plus.png");
-    background-position: center;
-    background-size: 100%;
   }
 
   .items__label--minus::before {
-    display: inline-block;
-    width: 12px;
-    height: 12px;
-    margin-right: 5px;
-    content: '';
     background-image: url("~@/assets/images/icon-choose-minus.png");
-    background-position: center;
-    background-size: 100%;
   }
 
   .items__list {
@@ -238,6 +227,13 @@ export default {
         filter: invert(100%) grayscale(100%) contrast(100);
       }
     }
+  }
+}
+
+@media screen and (max-width: 374px) {
+  // TODO: iPhoneSE 1stは画面が狭いのでソートなどのボタンが崩れないようにする
+  .items__label {
+    font-size: #font-size-small;
   }
 }
 </style>
