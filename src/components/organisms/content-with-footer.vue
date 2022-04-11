@@ -65,8 +65,7 @@ export default {
       .button[class*="button--large"] {
         width: auto;
         margin: 0 30px;
-        font-size: 20px;
-        font-weight: 600;
+        font-weight: bold;
         color: #fff;
         background-color: #a82e05;
       }

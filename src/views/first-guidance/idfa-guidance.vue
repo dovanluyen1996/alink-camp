@@ -18,12 +18,7 @@
         </p>
 
         <template #footer>
-          <v-ons-button
-            modifier="large"
-            @click="showIdfaAlert()"
-          >
-            次へ
-          </v-ons-button>
+          <next-button @click="showIdfaAlert" />
         </template>
       </content-with-footer>
     </div>
@@ -51,6 +46,7 @@ import ApiClient from '@/api_client';
 
 // components
 import ContentWithFooter from '@/components/organisms/content-with-footer';
+import NextButton from '@/components/atoms/first-guidance/next-button.vue';
 
 // pages
 import AppTabbar from '@/views/app-tabbar';
@@ -62,6 +58,7 @@ export default {
   name: 'FirstGuidanceIDFA',
   components: {
     ContentWithFooter,
+    NextButton,
   },
   data() {
     return {
