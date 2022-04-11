@@ -28,7 +28,7 @@
       <annotations-block class="mx-20 campsite-search-area-tab-note">
         ※予報は本日から14日目までとなります。それ以上は過去のお天気をもとに予測したデータとなります。<br>
         ※紫外線、風の強さに関しては14日目までの予報となります。<br>
-        <template v-if="isPurchased">
+        <template v-if="!isPurchased">
           ※気象条件検索はキャンプ天気会員にご登録頂ければご利用いただけます。
         </template>
       </annotations-block>
