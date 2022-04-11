@@ -321,9 +321,6 @@ export default {
     max-width: 50%;
     padding-left: 5px;
 
-    .share-button {
-      min-width: 90%;
-    }
   }
 }
 
@@ -334,10 +331,6 @@ export default {
 
   .campsite-image-col {
     padding-left: 0;
-
-    .share-button {
-      min-width: 140px;
-    }
   }
 }
 
@@ -345,21 +338,5 @@ export default {
   margin: auto;
   font-size: 16px;
   font-weight: bold;
-}
-
-@media screen and (min-width: 320px) {
-  .campsite-image-col {
-    .share-button {
-      min-width: 95%;
-    }
-  }
-}
-
-@media screen and (min-width: 375px) {
-  .campsite-image-col {
-    .share-button {
-      min-width: 140px;
-    }
-  }
 }
 </style>

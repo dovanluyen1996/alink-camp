@@ -41,15 +41,16 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import "@/assets/scss/_variables.scss";
+
 .button--share {
   position: absolute;
-  right: 10px;
+  right: 7px;
   display: flex;
   align-items: center;
-  width: 110px;
   height: 29px;
-  font-size: 14px;
-  font-weight: 600;
+  padding: 0 12px 0 7px;
+  font-weight: bold;
   border-radius: 15px;
 
   &::before {
@@ -62,6 +63,13 @@ export default {
     background-image: url("~@/assets/images/icon-share.png");
     background-position: center;
     background-size: 100%;
+  }
+}
+
+@media screen and (max-width: 374px) {
+  // NOTE: iPhoneSE 1stでタイトルとボタンが詰まらないようにする
+  .button--share {
+    font-size: $font-size-small;
   }
 }
 </style>

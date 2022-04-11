@@ -267,9 +267,4 @@ export default {
   color: $color-default;
   text-align: center;
 }
-
-.button--share {
-  right: 7px !important;
-  width: 109px !important;
-}
 </style>
