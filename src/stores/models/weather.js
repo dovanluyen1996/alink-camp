@@ -1,10 +1,11 @@
+import Vue from 'vue';
 import ApiClient from '@/api_client';
 
 export default {
   strict: true,
   namespaced: true,
   state: {
-    isForecastScheduledDateLoading: false,
+    isForecastScheduledDateLoading: [],
     isForecast14DaysLoading: false,
     isForecastHourlyLoading: false,
     isForecastMonthlyTempLoading: false,
@@ -15,7 +16,7 @@ export default {
     isForecastYearlyWeatherRateLoading: false,
   },
   getters: {
-    isForecastScheduledDateLoading: state => state.isForecastScheduledDateLoading,
+    isForecastScheduledDateLoading: state => state.isForecastScheduledDateLoading.length > 0,
     isForecast14DaysLoading: state => state.isForecast14DaysLoading,
     isForecastHourlyLoading: state => state.isForecastHourlyLoading,
     isForecastMonthlyTempLoading: state => state.isForecastMonthlyTempLoading,
@@ -26,8 +27,28 @@ export default {
     isForecastYearlyWeatherRateLoading: state => state.isForecastYearlyWeatherRateLoading,
   },
   mutations: {
-    setIsForecastScheduledDateLoading(state, isForecastScheduledDateLoading) {
-      state.isForecastScheduledDateLoading = isForecastScheduledDateLoading;
+    setIsForecastScheduledDateLoading(state, { params, isLoading }) {
+      const findFunc = (camp) => {
+        const campsiteId = camp.campsite_id;
+        const targetDate = camp.target_date;
+
+        return campsiteId === params.campsite_id && targetDate === params.target_date;
+      };
+      const index = state.isForecastScheduledDateLoading.findIndex(findFunc);
+
+      console.log('[setIsForecastScheduledDateLoading]', params, index, isLoading);
+
+      // ローディング状態をクリアするオブジェクトが見つからなければ何もしない
+      if (!isLoading && index < 0) return;
+
+      if (isLoading) {
+        // ローディング中の状態にする
+        // NOTE: 同じ内容の params が既にあっても push する
+        state.isForecastScheduledDateLoading.push(params);
+      } else {
+        // ローディング状態をクリアする
+        Vue.delete(state.isForecastScheduledDateLoading, index);
+      }
     },
     setIsForecast14DaysLoading(state, isForecast14DaysLoading) {
       state.isForecast14DaysLoading = isForecast14DaysLoading;
@@ -56,12 +77,12 @@ export default {
   },
   actions: {
     async getForecastScheduledDate(context, params) {
-      context.commit('setIsForecastScheduledDateLoading', true);
+      context.commit('setIsForecastScheduledDateLoading', { params, isLoading: true });
 
       try {
         return await ApiClient.getForecastScheduledDate(params);
       } finally {
-        context.commit('setIsForecastScheduledDateLoading', false);
+        context.commit('setIsForecastScheduledDateLoading', { params, isLoading: false });
       }
     },
     async getForecast14Days(context, params) {
