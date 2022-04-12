@@ -196,8 +196,8 @@ $button-height--rounded: 36px;
     align-items: center;
     justify-content: center;
     min-width: 150px;
-    padding-left: 35px;
     padding-right: 35px;
+    padding-left: 35px;
 
     &::before {
       display: inline-block;
@@ -218,6 +218,7 @@ $button-height--rounded: 36px;
 
   &--large-search {
     @extend .button--search;
+
     display: flex;
   }
 
