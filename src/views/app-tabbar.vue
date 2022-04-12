@@ -1,7 +1,7 @@
 <template>
   <!-- NOTE: ログインページと行き来するために親にnavigatorがいるのでv-ons-pageは必須 -->
   <v-ons-page>
-  <!-- NOTE: 認証エラーなどでスタート画面に戻るときに何故かonsenUIのコンパイルが走るらしい
+  <!-- WARNING: 認証エラーなどでスタート画面に戻るときに何故かonsenUIのコンパイルが走るらしい
              おそらくappNavigationのreset時にapp-tabbarが消えているのにコンパイルしようとしている
              そのためエラーが走るのでonsenUIに左右されない空のdivも必須
              .contentはコンパイルに巻き込まれるので不可 -->
