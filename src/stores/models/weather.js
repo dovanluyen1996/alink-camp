@@ -6,7 +6,7 @@ export default {
   namespaced: true,
   state: {
     isForecastScheduledDateLoading: [],
-    isForecast14DaysLoading: false,
+    isForecast14DaysLoading: [],
     isForecastHourlyLoading: false,
     isForecastMonthlyTempLoading: false,
     isForecastMonthlyPrecipLoading: false,
@@ -17,7 +17,7 @@ export default {
   },
   getters: {
     isForecastScheduledDateLoading: state => state.isForecastScheduledDateLoading.length > 0,
-    isForecast14DaysLoading: state => state.isForecast14DaysLoading,
+    isForecast14DaysLoading: state => state.isForecast14DaysLoading.length > 0,
     isForecastHourlyLoading: state => state.isForecastHourlyLoading,
     isForecastMonthlyTempLoading: state => state.isForecastMonthlyTempLoading,
     isForecastMonthlyPrecipLoading: state => state.isForecastMonthlyPrecipLoading,
@@ -50,8 +50,23 @@ export default {
         Vue.delete(state.isForecastScheduledDateLoading, index);
       }
     },
-    setIsForecast14DaysLoading(state, isForecast14DaysLoading) {
-      state.isForecast14DaysLoading = isForecast14DaysLoading;
+    setIsForecast14DaysLoading(state, { params, isLoading }) {
+      const findFunc = camp => camp.campsite_id === params.campsite_id;
+      const index = state.isForecast14DaysLoading.findIndex(findFunc);
+
+      console.log('[setIsForecast14DaysLoading]', params, index, isLoading);
+
+      // ローディング状態をクリアするオブジェクトが見つからなければ何もしない
+      if (!isLoading && index < 0) return;
+
+      if (isLoading) {
+        // ローディング中の状態にする
+        // NOTE: 同じ内容の params が既にあっても push する
+        state.isForecast14DaysLoading.push(params);
+      } else {
+        // ローディング状態をクリアする
+        Vue.delete(state.isForecast14DaysLoading, index);
+      }
     },
     setIsForecastHourlyLoading(state, isForecastHourlyLoading) {
       state.isForecastHourlyLoading = isForecastHourlyLoading;
@@ -86,12 +101,12 @@ export default {
       }
     },
     async getForecast14Days(context, params) {
-      context.commit('setIsForecast14DaysLoading', true);
+      context.commit('setIsForecast14DaysLoading', { params, isLoading: true });
 
       try {
         return await ApiClient.getForecast14Days(params);
       } finally {
-        context.commit('setIsForecast14DaysLoading', false);
+        context.commit('setIsForecast14DaysLoading', { params, isLoading: false });
       }
     },
     async getForecastHourly(context, params) {
