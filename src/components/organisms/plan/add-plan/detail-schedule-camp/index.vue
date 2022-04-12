@@ -132,7 +132,7 @@ export default {
   },
   watch: {
     isLoading() {
-      // NOTE: 新規・編集の判定度でフッターの高さが変わるためコンテンツの余白を再計算させる
+      // NOTE: 新規・編集の判定でフッターの高さが変わるためコンテンツの余白を再計算させる
       this.$refs.contentWithFooter.setContentMargin();
     },
   },
