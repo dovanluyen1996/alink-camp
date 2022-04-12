@@ -1,16 +1,22 @@
 <template>
   <!-- NOTE: ログインページと行き来するために親にnavigatorがいるのでv-ons-pageは必須 -->
   <v-ons-page>
-    <v-ons-tabbar
-      :tabs="tabs"
-      :visible="true"
-      :index.sync="activeIndex"
-      animation="none"
-      position="bottom"
-      @prechange="prechange"
-      @reactive="reactive"
-    />
-    <user-stamps-campaign />
+  <!-- NOTE: 認証エラーなどでスタート画面に戻るときに何故かonsenUIのコンパイルが走るらしい
+             おそらくappNavigationのreset時にapp-tabbarが消えているのにコンパイルしようとしている
+             そのためエラーが走るのでonsenUIに左右されない空のdivも必須
+             .contentはコンパイルに巻き込まれるので不可 -->
+    <div>
+      <v-ons-tabbar
+        :tabs="tabs"
+        :visible="true"
+        :index.sync="activeIndex"
+        animation="none"
+        position="bottom"
+        @prechange="prechange"
+        @reactive="reactive"
+      />
+      <user-stamps-campaign />
+    </div>
   </v-ons-page>
 </template>
 
