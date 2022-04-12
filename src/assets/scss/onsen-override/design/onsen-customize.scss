@@ -195,12 +195,30 @@ $button-height--rounded: 36px;
     column-gap: 5px;
     align-items: center;
     justify-content: center;
-    width: 200px;
+    min-width: 150px;
+    padding-left: 35px;
+    padding-right: 35px;
+
+    &::before {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      margin-right: 6px;
+      content: '';
+      background-image: url("~@/assets/images/form/search-top.png");
+      background-position: center;
+      background-size: 100%;
+    }
 
     &__description {
       margin-top: 20px;
       margin-bottom: 150px;
     }
+  }
+
+  &--large-search {
+    @extend .button--search;
+    display: flex;
   }
 
   &--more {

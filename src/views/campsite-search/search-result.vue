@@ -29,8 +29,7 @@
     <fixed-footer>
       <v-ons-button
         v-if="footerType === 'filtering'"
-        class="button--search"
-        modifier="large--cta rounded yellow"
+        modifier="large-search rounded yellow"
         @click="showFiltering()"
       >
         絞り込み
@@ -38,8 +37,7 @@
 
       <v-ons-button
         v-else-if="footerType === 'conditionsChange'"
-        class="button--search"
-        modifier="large--cta rounded yellow"
+        modifier="large-search rounded yellow"
         @click="goToConditionsSearch()"
       >
         条件変更
@@ -242,25 +240,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped>
-.button--search {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 48px !important;
-  font-size: 14px !important;
-  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.4);
-
-  &::before {
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    margin-right: 6px;
-    content: '';
-    background-image: url("~@/assets/images/form/search-top.png");
-    background-position: center;
-    background-size: 100%;
-  }
-}
-</style>
