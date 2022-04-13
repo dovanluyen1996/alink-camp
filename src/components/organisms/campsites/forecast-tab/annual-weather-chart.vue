@@ -8,8 +8,7 @@
       <bar-chart
         :chart-data="chartData"
         :options="options"
-        :height="null"
-        :width="null"
+        class="bar-chart"
       />
     </template>
 
@@ -38,7 +37,6 @@ export default {
       options: {
         responsive: true,
         maintainAspectRatio: false,
-        aspectRatio: 1.2,
         legend: {
           position: 'bottom',
           labels: {
@@ -89,6 +87,8 @@ export default {
   },
   methods: {
     fillData(data) {
+      if (!data) return;
+
       this.chartData = {
         labels: data.map(datum => `${parseInt(datum.month, 10)}月`),
         datasets: [
@@ -164,5 +164,9 @@ export default {
   align-items: center;
   justify-content: center;
   height: 200px;
+}
+
+.bar-chart {
+  height: 250px;
 }
 </style>
