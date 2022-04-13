@@ -36,8 +36,6 @@ export default {
       };
       const index = state.isForecastScheduledDateLoading.findIndex(findFunc);
 
-      console.log('[setIsForecastScheduledDateLoading]', params, index, isLoading);
-
       // ローディング状態をクリアするオブジェクトが見つからなければ何もしない
       if (!isLoading && index < 0) return;
 
@@ -53,8 +51,6 @@ export default {
     setIsForecast14DaysLoading(state, { params, isLoading }) {
       const findFunc = camp => camp.campsite_id === params.campsite_id;
       const index = state.isForecast14DaysLoading.findIndex(findFunc);
-
-      console.log('[setIsForecast14DaysLoading]', params, index, isLoading);
 
       // ローディング状態をクリアするオブジェクトが見つからなければ何もしない
       if (!isLoading && index < 0) return;
