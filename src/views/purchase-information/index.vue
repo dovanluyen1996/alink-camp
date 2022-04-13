@@ -81,12 +81,12 @@
               <span>無料期間後：240円/月額</span>
             </div>
             <div class="purchase__action">
-              <v-ons-button
-                modifier="secondary"
+              <div
+                class="purchase__restore-purchase"
                 @click="restorePurchase()"
               >
                 購入状態を復元する方はこちら
-              </v-ons-button>
+              </div>
             </div>
           </div>
         </template>
@@ -240,7 +240,7 @@ export default {
 
   &__content {
     max-height: 54px;
-    padding: 6px 0 4px;
+    padding: 6px 0 8px;
     margin: 0 28px;
     font-size: 17px;
     font-weight: 600;
@@ -260,11 +260,20 @@ export default {
   }
 
   &__action {
-    padding: 14px 0 6px;
     font-size: 12px;
-    font-weight: 600;
     color: #fff;
     text-decoration: underline;
+  }
+
+  &__restore-purchase {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 18px;
+    padding: 14px 0 6px;
+    font-size: $font-size-small;
+    font-weight: 400;
+    text-align: center;
   }
 }
 
@@ -299,19 +308,6 @@ export default {
     display: flex;
     justify-content: center;
     white-space: nowrap;
-  }
-
-  .button--secondary {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 18px;
-    padding: 0;
-    font-size: 12px;
-    font-weight: 400;
-    text-align: center;
-    text-decoration: underline;
-    background-color: transparent;
   }
 }
 </style>
