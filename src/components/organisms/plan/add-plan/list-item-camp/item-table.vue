@@ -96,6 +96,9 @@ export default {
 
       return this.items.filter(isCheckedLabel);
     },
+    filteredItemIds() {
+      return this.filteredItems.map(item => item.id);
+    },
     checkedItems: {
       get() {
         return this.checkedItemIds;
@@ -115,10 +118,12 @@ export default {
       };
     },
     selectAll() {
-      this.$emit('update:checkedItemIds', this.items.map(item => item.id));
+      const itemIds = this.checkedItemIds.concat(this.filteredItemIds);
+      this.$emit('update:checkedItemIds', [...new Set(itemIds)]);
     },
     unSelectAll() {
-      this.$emit('update:checkedItemIds', []);
+      const fn = itemId => !this.filteredItemIds.includes(itemId);
+      this.$emit('update:checkedItemIds', this.checkedItemIds.filter(fn));
     },
     showLabelFilterDialog() {
       this.isVisibleLabelFilterDialog = true;
