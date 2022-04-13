@@ -100,8 +100,8 @@ export default {
 @media only screen and (max-width: 320px) {
   .content-with-footer[class*="guidance-content"] {
     .content-with-footer__content img {
-      margin-top: 30px;
       width: 75%;
+      margin-top: 30px;
     }
   }
 }
