@@ -116,11 +116,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-
-.content p {
-  white-space: nowrap;
-}
-
-</style>
