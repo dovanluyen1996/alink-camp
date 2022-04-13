@@ -125,23 +125,33 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '@/assets/scss/_variables.scss';
 $tabs: weather, search, plan, nearby, menu;
 
-/deep/ .tabbar {
-  ons-icon {
-    display: none;
+/deep/ {
+  // NOTE: iPhoneX未満で端末のツールバーの背景が赤くなるようにする
+  //       認証エラーでスタート画面に戻るときにコンパイルエラーが発生するのを防止するためにtemlateに.backgroundを追加できない
+  //       そのためdeepにしている
+  > .page__background {
+    background: $color-toolbar;
   }
 
-  .tabbar__item .tabbar__icon {
-    margin-bottom: 6px;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 32px 28px;
-  }
+  .tabbar {
+    ons-icon {
+      display: none;
+    }
 
-  @each $tab in $tabs {
-    .tabbar__item[icon="#{$tab}"] .tabbar__icon {
-      background-image: url('~@/assets/images/tabbar/#{$tab}.png');
+    .tabbar__item .tabbar__icon {
+      margin-bottom: 6px;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 32px 28px;
+    }
+
+    @each $tab in $tabs {
+      .tabbar__item[icon="#{$tab}"] .tabbar__icon {
+        background-image: url('~@/assets/images/tabbar/#{$tab}.png');
+      }
     }
   }
 }
