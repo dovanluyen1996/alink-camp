@@ -55,7 +55,7 @@ export default {
 
 .campsite-address {
   font-size: 12px;
-  font-weight: 300;
+  font-weight: normal;
   color: #ffffff80;
 }
 </style>

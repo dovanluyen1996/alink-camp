@@ -120,18 +120,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 /deep/ {
   .list-item {
     border-bottom: 1px solid #d9d9d9;
 
     &__title {
       font-size: 18px;
-      font-weight: 300;
+      font-weight: normal;
     }
 
     &__subtitle {
-      font-weight: 300;
+      font-weight: normal;
       color: #00000080;
     }
   }

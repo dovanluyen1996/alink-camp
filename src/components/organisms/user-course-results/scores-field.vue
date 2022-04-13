@@ -135,7 +135,7 @@ export default {
 
 /deep/ .card {
   font-size: $font-size-small;
-  font-weight: 600;
+  font-weight: bold;
   color: $color-subtext;
   white-space: nowrap;
 }

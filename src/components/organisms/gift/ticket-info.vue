@@ -71,7 +71,7 @@ export default {
     width: 100%;
     height: 20px;
     font-size: $font-size-small;
-    font-weight: 600;
+    font-weight: bold;
     line-height: 1.7;
     background-color: #f4f4ee;
     border-radius: 22px;
@@ -86,14 +86,14 @@ export default {
     span {
       margin-right: 3px;
       font-size: 24px;
-      font-weight: 600;
+      font-weight: bold;
       color: #f53939;
     }
   }
 
   &__subcontent {
     font-size: $font-size-small;
-    font-weight: 300;
+    font-weight: normal;
   }
 }
 </style>

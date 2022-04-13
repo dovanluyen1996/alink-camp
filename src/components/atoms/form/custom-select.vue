@@ -72,7 +72,7 @@ export default {
 /deep/ .select-input {
   padding-right: 30px;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: bold;
   line-height: 28px;
   background-image: url('~@/assets/images/form/select-arrow.png');
   background-position: right 8px center;

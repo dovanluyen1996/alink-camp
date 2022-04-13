@@ -98,7 +98,7 @@ export default {
   &__title {
     display: block;
     font-size: 18px;
-    font-weight: 600;
+    font-weight: bold;
     text-align: start;
   }
 }

@@ -67,7 +67,7 @@ export default {
 .custom-radio-label {
   display: inline-block;
   padding: 5px 0;
-  font-weight: 600;
+  font-weight: bold;
 }
 
 .radio-button {

@@ -68,7 +68,7 @@ export default {
   .alert-dialog-content {
     min-height: 96px;
     font-size: 15px;
-    font-weight: 300;
+    font-weight: normal;
   }
 }
 </style>

@@ -150,7 +150,7 @@ export default {
     height: 50px;
     padding-left: 5px;
     font-size: 14px;
-    font-weight: 300;
+    font-weight: normal;
     color: #222;
     background-color: #fff;
   }

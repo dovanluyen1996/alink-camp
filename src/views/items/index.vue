@@ -106,7 +106,7 @@ export default {
   left: 50%;
   width: 100%;
   font-size: 18px;
-  font-weight: 600;
+  font-weight: bold;
   text-align: center;
   transform: translate(-50%, -50%);
 }

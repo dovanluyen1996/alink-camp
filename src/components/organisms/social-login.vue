@@ -183,7 +183,7 @@ export default {
   width: 310px;
   padding: 15px 45px;
   margin: 10px auto;
-  font-weight: 600;
+  font-weight: bold;
   line-height: 1;
   border-radius: 10px;
 }

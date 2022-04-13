@@ -414,7 +414,7 @@ export default {
 /deep/ {
   .annotations-block {
     font-size: 12px !important;
-    font-weight: 300;
+    font-weight: normal;
     color: #000 !important;
   }
 

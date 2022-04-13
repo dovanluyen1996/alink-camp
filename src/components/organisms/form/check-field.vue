@@ -55,7 +55,7 @@ export default {
   display: inline-flex;
   align-items: center;
   padding: 5px 0;
-  font-weight: 600;
+  font-weight: bold;
 
   &__label-text {
     margin-left: 8px;

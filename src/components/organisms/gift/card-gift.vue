@@ -50,11 +50,11 @@ export default {
   }
 
   &__subtitle {
-    font-weight: 300;
+    font-weight: normal;
   }
 
   &__content {
-    font-weight: 300;
+    font-weight: normal;
     white-space: pre-line;
 
     img {

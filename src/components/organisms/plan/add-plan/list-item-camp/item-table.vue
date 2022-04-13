@@ -162,7 +162,7 @@ export default {
       float: left;
       height: 24px;
       padding: 0 10px;
-      font-weight: 600;
+      font-weight: bold;
       color: $color-white;
       text-align: center;
       background-color: #742a2a;
@@ -209,8 +209,13 @@ export default {
     align-items: center;
     justify-content: space-between;
     padding: 10px 5px;
+<<<<<<< HEAD
     font-size: $font-size-small;
     font-weight: 600;
+=======
+    font-size: 12px;
+    font-weight: bold;
+>>>>>>> 13e9a993 (update font-weight use keyword)
     border: 1px solid #d9d9d9;
 
     &--active {

@@ -78,7 +78,7 @@ export default {
     align-items: center;
     margin-bottom: 5px;
     font-size: 18px;
-    font-weight: 300;
+    font-weight: normal;
     line-height: 1.2;
   }
 }

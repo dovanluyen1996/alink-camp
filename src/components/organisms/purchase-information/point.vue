@@ -56,7 +56,7 @@ export default {
     p {
       margin: 0;
       font-size: 22px;
-      font-weight: 600;
+      font-weight: bold;
       line-height: 1.2;
     }
   }
@@ -71,7 +71,7 @@ export default {
     width: 200px;
     padding: 40px 0 35px 0;
     font-size: 16px;
-    font-weight: 600;
+    font-weight: bold;
     line-height: 1.7;
     color: $color-purchase-gold;
   }

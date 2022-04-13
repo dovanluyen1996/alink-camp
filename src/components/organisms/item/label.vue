@@ -76,7 +76,7 @@ export default {
     flex-direction: column;
     justify-content: start;
     font-size: 18px;
-    font-weight: 600;
+    font-weight: bold;
   }
 
   &__labels {
@@ -90,7 +90,7 @@ export default {
     height: 20px;
     padding: 2px 5px;
     font-size: 12px;
-    font-weight: 600;
+    font-weight: bold;
     text-align: center;
     background-color: var(--background-color);
 
@@ -108,7 +108,7 @@ export default {
   &__text {
     margin-top: 40px;
     font-size: 14px;
-    font-weight: 600;
+    font-weight: bold;
     text-align: center;
   }
 

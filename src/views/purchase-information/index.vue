@@ -241,7 +241,7 @@ export default {
     padding: 12px 0;
     margin: 0 28px;
     font-size: 17px;
-    font-weight: 600;
+    font-weight: bold;
     color: #fff;
     background-color: #c0a243;
     border-radius: 7px;
@@ -261,7 +261,7 @@ export default {
     padding-bottom: 6px;
     margin-top: 30px;
     font-size: 12px;
-    font-weight: 600;
+    font-weight: bold;
     color: #fff;
     text-decoration: underline;
   }
