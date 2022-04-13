@@ -8,6 +8,8 @@
       <bar-chart
         :chart-data="chartData"
         :options="options"
+        :height="null"
+        :width="null"
       />
     </template>
 
@@ -34,7 +36,9 @@ export default {
       chartData: {},
       pointName: '',
       options: {
+        responsive: true,
         maintainAspectRatio: false,
+        aspectRatio: 1.2,
         legend: {
           position: 'bottom',
           labels: {
@@ -56,6 +60,7 @@ export default {
             ticks: {
               min: 0,
               max: 100,
+              stepSize: 20,
               callback(value) {
                 return `${value}%`;
               },
