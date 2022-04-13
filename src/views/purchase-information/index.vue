@@ -80,13 +80,11 @@
               <span>1ヶ月無料で試してみる</span><br>
               <span>無料期間後：240円/月額</span>
             </div>
-            <div class="purchase__action">
-              <div
-                class="purchase__restore-purchase"
-                @click="restorePurchase()"
-              >
-                購入状態を復元する方はこちら
-              </div>
+            <div
+              class="purchase__action"
+              @click="restorePurchase()"
+            >
+              購入状態を復元する方はこちら
             </div>
           </div>
         </template>
@@ -260,20 +258,17 @@ export default {
   }
 
   &__action {
-    font-size: 12px;
-    color: #fff;
-    text-decoration: underline;
-  }
-
-  &__restore-purchase {
     display: flex;
     align-items: center;
     justify-content: center;
     height: 18px;
-    padding: 14px 0 6px;
+    padding: 14px 0;
+    font-size: 12px;
     font-size: $font-size-small;
     font-weight: 400;
+    color: #fff;
     text-align: center;
+    text-decoration: underline;
   }
 }
 
