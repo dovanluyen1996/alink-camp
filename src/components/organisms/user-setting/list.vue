@@ -211,6 +211,12 @@ export default {
     await this.checkPermission();
     await this.setIsPurchased();
   },
+  beforeDestroy() {
+    document.removeEventListener('resume', this.onResume, false);
+  },
+  mounted() {
+    document.addEventListener('resume', this.onResume, false);
+  },
   methods: {
     async getUserSetting() {
       await this.$store.dispatch('models/userSetting/getUserSetting');
@@ -246,6 +252,9 @@ export default {
           }
         });
       }
+    },
+    async onResume() {
+      await this.checkPermission();
     },
     goToPurchaseInformation() {
       this.$store.dispatch('menuNavigator/push', PurchaseInformation);
