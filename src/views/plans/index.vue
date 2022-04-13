@@ -10,7 +10,19 @@
           計画を作成してください。
         </p>
         <template #actions>
-          <go-to-campsite-search-button />
+          <v-ons-button
+            modifier="search yellow"
+            @click="goToCampsiteSearch"
+          >
+            <img
+              src="@/assets/images/form/search-top.png"
+              width="20px"
+              height="20px"
+            >
+            キャンプ場検索
+          </v-ons-button>
+          <!-- TODO: 何故かコンポーネントがインポートできず、表示されない。 -->
+          <!-- <go-to-campsite-search-button /> -->
         </template>
       </no-data>
 
@@ -27,17 +39,18 @@
 <script>
 // components
 import NoData from '@/components/organisms/no-data';
-import GoToCampsiteSearchButton from '@/components/organisms/go-to-campsite-search-button';
+// import GoToCampsiteSearchButton from '@/components/organisms/go-to-campsite-search-button';
 import CampsiteList from '@/components/organisms/campsite-list';
 
 // pages
 import CampsitePlan from '@/views/plans/campsite-plan';
+import CampsiteSearchIndex from '@/views/campsite-search/index';
 
 export default {
   name: 'CampsitesIndex',
   components: {
     NoData,
-    GoToCampsiteSearchButton,
+    // GoToCampsiteSearchButton,
     CampsiteList,
   },
   computed: {
@@ -92,6 +105,20 @@ export default {
       this.$store.dispatch('appTabbar/setLastVisitedAt', this.$helpers.localDateWithHyphenFrom(new Date()));
       await this.getPlans();
       await this.getUsersFavorites();
+    },
+    goToCampsiteSearch() {
+      this.$store.commit('campsiteSearchNavigator/setEnableBusy', false);
+      this.$store.dispatch('campsiteSearchNavigator/reset', {
+        extends: CampsiteSearchIndex,
+        onsNavigatorOptions: {
+          animation: 'none',
+          callback: () => {
+            this.$store.commit('campsiteSearchNavigator/setEnableBusy', true);
+          },
+        },
+      });
+
+      this.$store.commit('appTabbar/setActiveIndexFromTabName', 'campsiteSearch');
     },
   },
 };
