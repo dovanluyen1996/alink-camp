@@ -10,7 +10,7 @@
       <bar-chart
         :chart-data="chartData"
         :options="options"
-        :height="160"
+        class="bar-chart"
       />
     </template>
 
@@ -91,6 +91,8 @@ export default {
   },
   methods: {
     fillData(data) {
+      if (!data) return;
+
       this.chartData = {
         labels: this.getYAxis(data),
         datasets: [
@@ -146,5 +148,9 @@ export default {
   align-items: center;
   justify-content: center;
   height: 200px;
+}
+
+.bar-chart {
+  height: 160px;
 }
 </style>
