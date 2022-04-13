@@ -1,5 +1,5 @@
 <template>
-  <v-ons-page @show="show">
+  <v-ons-page>
     <custom-toolbar :title="title">
       <template #right>
         <delete-dialog-with-icon
@@ -93,7 +93,7 @@ export default {
       return `${this.$moment(this.detailPlan.startedDate).format('M/D')}からの計画` || '';
     },
   },
-  created() {
+  async created() {
     this.$store.commit('components/planTab/setTabs', [
       {
         label: '計画日',
@@ -112,6 +112,17 @@ export default {
       },
     ]);
     this.$store.commit('components/planTab/setActiveIndex', 0);
+
+    // fetch resources
+    await this.getItems();
+    await this.getUserCampsitePlan();
+
+    // set store
+    this.setPlanId();
+    this.setStartedDate();
+    this.setFinishedDate();
+    this.setItems();
+    this.setTasks();
   },
   beforeDestroy() {
     this.$store.dispatch('plan/clean');
@@ -119,16 +130,6 @@ export default {
   methods: {
     onPreChange(event) {
       if (!this.enabled) event.cancel();
-    },
-    async show() {
-      await this.getItems();
-      await this.getUserCampsitePlan();
-
-      this.setPlanId();
-      this.setStartedDate();
-      this.setFinishedDate();
-      this.setItems();
-      this.setTasks();
     },
     async getItems() {
       await this.$store.dispatch('models/item/getItems');
