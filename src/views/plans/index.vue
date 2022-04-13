@@ -6,7 +6,8 @@
       <no-data v-if="campsites.length === 0">
         <p>
           まだキャンプ計画がありません。<br>
-          キャンプ場検索より、計画を作成してください。
+          キャンプ場検索より、<br>
+          計画を作成してください。
         </p>
         <template #actions>
           <v-ons-button
