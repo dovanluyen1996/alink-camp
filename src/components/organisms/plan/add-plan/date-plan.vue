@@ -102,6 +102,10 @@ export default {
       type: Object,
       required: true,
     },
+    isNew: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -112,9 +116,6 @@ export default {
   computed: {
     isLoading() {
       return this.$store.getters['models/userCampsitePlan/isLoading'];
-    },
-    isNew() {
-      return this.$store.getters['plan/isNew'];
     },
     params() {
       return this.$store.getters['plan/params'];

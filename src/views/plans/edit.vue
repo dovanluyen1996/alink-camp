@@ -47,6 +47,10 @@ export default {
       type: Object,
       required: true,
     },
+    isNew: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -98,7 +102,10 @@ export default {
       {
         label: '計画日',
         page: DatePlan,
-        props: { campsite: this.plan.campsite },
+        props: {
+          campsite: this.plan.campsite,
+          isNew: this.isNew,
+        },
       },
       {
         label: '持ち物',
@@ -123,7 +130,6 @@ export default {
       await this.getItems();
       await this.getUserCampsitePlan();
 
-      this.setPlanId();
       this.setStartedDate();
       this.setFinishedDate();
       this.setItems();
@@ -134,9 +140,6 @@ export default {
     },
     async getUserCampsitePlan() {
       await this.$store.dispatch('models/userCampsitePlan/getUserCampsitePlan', { userCampsitePlanId: this.plan.id });
-    },
-    setPlanId() {
-      this.$store.dispatch('plan/setPlanId', this.detailPlan.id);
     },
     setStartedDate() {
       this.$store.dispatch('plan/setStartedDate', this.detailPlan.startedDate);

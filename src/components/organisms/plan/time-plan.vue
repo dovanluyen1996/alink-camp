@@ -55,12 +55,20 @@ export default {
       default: () => [],
     },
   },
+  computed: {
+    isNew() {
+      return this.$store.getters['plan/isNew'];
+    },
+  },
   methods: {
-    goToEditPlan(plan) {
+    async goToEditPlan(plan) {
+      await this.$store.dispatch('plan/setPlanId', plan.id);
+
       this.$store.dispatch('plansNavigator/push', {
         extends: EditPlanPage,
         onsNavigatorProps: {
           plan,
+          isNew: this.isNew,
         },
       });
     },
