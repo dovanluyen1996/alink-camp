@@ -31,7 +31,7 @@
         </base-form>
       </validation-observer>
 
-      <div class="text-box">
+      <v-ons-card>
         <p class="notice">
           ※パスワードを設定していない場合は、データ引き継ぎはご利用いただけません
         </p>
@@ -43,7 +43,7 @@
         <p class="notice">
           ※再インストールや機種変更時にアプリTOPのデータを引継ぐよりご利用ください
         </p>
-      </div>
+      </v-ons-card>
     </div>
 
     <v-ons-alert-dialog :visible="isShownComfirmDialog">
@@ -178,13 +178,6 @@ export default {
 
 .content {
   padding-bottom: 20px;
-}
-
-.text-box {
-  padding: 10px 20px;
-  margin: 15px 20px;
-  background-color: $color-white;
-  border-radius: 10px;
 }
 
 .notice {
