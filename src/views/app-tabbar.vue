@@ -1,5 +1,10 @@
 <template>
+  <!-- NOTE: ログインページと行き来するために親にnavigatorがいるのでv-ons-pageは必須 -->
   <v-ons-page>
+  <!-- WARNING: 認証エラーなどでスタート画面に戻るときに何故かonsenUIのコンパイルが走るらしい
+             おそらくappNavigationのreset時にapp-tabbarが消えているのにコンパイルしようとしている
+             そのためエラーが走るのでonsenUIに左右されない空のdivも必須
+             .contentはコンパイルに巻き込まれるので不可 -->
     <div>
       <v-ons-tabbar
         :tabs="tabs"
@@ -25,13 +30,6 @@ import PlansNavigator from '@/views/plans/plans-navigator';
 import MenuNavigator from '@/views/menu/menu-navigator';
 import UserStampsCampaign from '@/views/user/user-stamps/campaign';
 import SpotSearchNavigator from '@/views/spot-search/spot-search-navigator';
-
-// pages
-import CampsiteSearchIndexPage from '@/views/campsite-search/index';
-import PlansIndexPage from '@/views/plans/index';
-import CampsiteWeatherIndexPage from '@/views/campsite-weather/index';
-import SpotSearchPage from '@/views/spot-search/index';
-import MenuIndexPage from '@/views/menu/index';
 
 export default {
   components: {
@@ -96,7 +94,7 @@ export default {
       // if menu is open other page, reset menu
       // If menu is open menu items only, no reset
       if (this.$store.state.menuNavigator.stack.length > 1) {
-        this.$store.dispatch('menuNavigator/reset', MenuIndexPage);
+        this.$store.dispatch('menuNavigator/reset');
       }
     },
     reactive(event) {
@@ -104,19 +102,19 @@ export default {
 
       switch (event.activeIndex) {
       case settings.views.appTabbar.tabIndexes.campsiteWeather:
-        this.$store.dispatch('courseWeatherNavigator/reset', CampsiteWeatherIndexPage);
+        this.$store.dispatch('courseWeatherNavigator/reset');
         break;
       case settings.views.appTabbar.tabIndexes.campsiteSearch:
-        this.$store.dispatch('campsiteSearchNavigator/reset', CampsiteSearchIndexPage);
+        this.$store.dispatch('campsiteSearchNavigator/reset');
         break;
       case settings.views.appTabbar.tabIndexes.plans:
-        this.$store.dispatch('plansNavigator/reset', PlansIndexPage);
+        this.$store.dispatch('plansNavigator/reset');
         break;
       case settings.views.appTabbar.tabIndexes.spotSearch:
-        this.$store.dispatch('spotSearchNavigator/reset', SpotSearchPage);
+        this.$store.dispatch('spotSearchNavigator/reset');
         break;
       case settings.views.appTabbar.tabIndexes.menu:
-        this.$store.dispatch('menuNavigator/reset', MenuIndexPage);
+        this.$store.dispatch('menuNavigator/reset');
         break;
       default:
         break;
