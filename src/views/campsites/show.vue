@@ -134,6 +134,9 @@ export default {
     isPurchased() {
       return this.$store.getters['purchase/isPurchased'];
     },
+    isNew() {
+      return this.$store.getters['plan/isNew'];
+    },
   },
   watch: {
     activeIndexTab() {
@@ -186,6 +189,7 @@ export default {
         extends: NewPlanPage,
         onsNavigatorProps: {
           campsite: this.campsite,
+          isNew: this.isNew,
         },
         onsNavigatorOptions: {
           callback: () => {

@@ -26,6 +26,10 @@ export default {
       type: Object,
       required: true,
     },
+    isNew: {
+      type: Boolean,
+      default: false,
+    },
   },
   computed: {
     tabs() {
@@ -58,13 +62,19 @@ export default {
 
       return isTabLoading;
     },
+    // isNew() {
+    //   return this.$store.getters['plan/isNew'];
+    // },
   },
   created() {
     this.$store.commit('components/planTab/setTabs', [
       {
         label: '計画日',
         page: DatePlan,
-        props: { campsite: this.campsite },
+        props: {
+          campsite: this.campsite,
+          isNew: this.isNew,
+        },
       },
       {
         label: '持ち物',
