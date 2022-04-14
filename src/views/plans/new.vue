@@ -62,9 +62,6 @@ export default {
 
       return isTabLoading;
     },
-    // isNew() {
-    //   return this.$store.getters['plan/isNew'];
-    // },
   },
   created() {
     this.$store.commit('components/planTab/setTabs', [
