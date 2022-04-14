@@ -186,7 +186,8 @@ export default {
       nowCol = nowCol || timeRow.querySelector(`[date-time="${targetAt}"]`);
 
       if (!nowCol) return;
-      const x = nowCol.offsetLeft - th.offsetWidth;
+      // NOTE: border がrightからleftに変わったため、その分xを1ずらす
+      const x = nowCol.offsetLeft - th.offsetWidth + 1;
 
       table.scrollTo(x, 0);
     },
