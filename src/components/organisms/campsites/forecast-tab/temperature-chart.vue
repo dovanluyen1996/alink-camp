@@ -91,6 +91,8 @@ export default {
   },
   methods: {
     fillData(data) {
+      if (!data) return;
+
       this.chartData = {
         labels: this.getYAxis(data),
         datasets: [

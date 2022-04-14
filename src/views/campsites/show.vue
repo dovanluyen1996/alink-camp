@@ -138,9 +138,7 @@ export default {
   watch: {
     activeIndexTab() {
       if (this.activeIndexTab === 1) {
-        const storageKey = settings.localStorage.keys.session;
-        const session = JSON.parse(localStorage.getItem(storageKey));
-        const params = `lat=${this.campsite.latitude}&lon=${this.campsite.longitude}&uid=${session.uid}&access-token=${session['access-token']}&client=${session.client}`;
+        const params = `lat=${this.campsite.latitude}&lon=${this.campsite.longitude}`;
         this.$helpers.openPageByUrl(`${process.env.MAP_URL}?${params}`);
       }
     },

@@ -111,6 +111,7 @@ export default {
         props: { campsite: this.plan.campsite },
       },
     ]);
+    this.$store.commit('components/planTab/setActiveIndex', 0);
   },
   beforeDestroy() {
     this.$store.dispatch('plan/clean');

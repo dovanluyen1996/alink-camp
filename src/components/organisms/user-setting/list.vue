@@ -214,6 +214,12 @@ export default {
     await this.getUserSetting();
     await this.checkPermission();
   },
+  beforeDestroy() {
+    document.removeEventListener('resume', this.onResume, false);
+  },
+  mounted() {
+    document.addEventListener('resume', this.onResume, false);
+  },
   methods: {
     async getUserSetting() {
       await this.$store.dispatch('models/userSetting/getUserSetting');
@@ -229,12 +235,29 @@ export default {
       if (window.device.platform !== 'browser') {
         window.FirebasePlugin.hasPermission(async(hasPermission) => {
           if (hasPermission) {
+            // 通知許可されている時の処理
             this.isErrorPushPermisionVisible = false;
           } else {
-            this.isErrorPushPermisionVisible = true;
+            window.FirebasePlugin.grantPermission(async(permissionGranted) => {
+              // 選択直後では設定がまだ反映されていないため、3秒遅延させる（ユーザの操作に影響はない）
+              if (permissionGranted) {
+                setTimeout(async() => {
+                  this.isErrorPushPermisionVisible = false;
+                  // 通知が許可されている時の処理
+                }, 3000);
+              } else {
+                this.isErrorPushPermisionVisible = true;
+              }
+            }, (error) => {
+              // 通知が許可されていない時の処理
+              console.error(error);
+            });
           }
         });
       }
+    },
+    async onResume() {
+      await this.checkPermission();
     },
     goToPurchaseInformation() {
       this.$store.dispatch('menuNavigator/push', PurchaseInformation);
