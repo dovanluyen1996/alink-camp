@@ -305,4 +305,10 @@ export default {
     white-space: nowrap;
   }
 }
+
+@media screen and (max-width: 374px) {
+  .purchase__content {
+    margin: 0 20px;
+  }
+}
 </style>
