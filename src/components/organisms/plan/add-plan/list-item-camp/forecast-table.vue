@@ -174,23 +174,21 @@ export default {
     }
 
     th {
+      padding-right: 2px;
+      padding-left: 2px;
       background-color: #eae5e5;
       border-right: 1px solid $color-border;
     }
 
     td {
+      padding-right: 0;
+      padding-left: 0;
       border-left: 1px solid $color-border;
     }
 
     .text-small {
       display: block;
       font-size: $font-size-small;
-    }
-
-    .date-check {
-      span {
-        padding: 0 12px;
-      }
     }
 
     .text-red {

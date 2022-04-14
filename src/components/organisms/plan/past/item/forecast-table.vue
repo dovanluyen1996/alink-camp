@@ -147,12 +147,6 @@ export default {
       font-size: $font-size-small;
     }
 
-    .date-check {
-      span {
-        padding: 0 12px;
-      }
-    }
-
     .text-red {
       color: #f53939;
     }
