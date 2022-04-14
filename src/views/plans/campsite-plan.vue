@@ -146,10 +146,10 @@ export default {
   .text {
     display: grid;
     justify-content: center;
-    background-color: #fff;
+    background-color: $color-white;
 
     &__desc {
-      padding: 10px;
+      padding: 15px;
       font-size: 18px;
     }
   }

@@ -123,16 +123,19 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "@/assets/scss/_variables.scss";
+
 .search-result {
   &__campsite {
-    padding: 5px 20px;
-    background-color: #fff;
+    display: grid;
+    justify-content: center;
+    background-color: $color-white;
   }
 
   &__campsite-name {
-    margin-left: 20px;
+    padding: 15px;
+    margin: 0;
     font-size: 18px;
-    font-weight: 300;
   }
 }
 
