@@ -322,11 +322,6 @@ export default {
 .facility,
 .nearby-information {
   font-size: 14px;
-  font-weight: normal;
-}
-
-.check-field {
-  font-weight: normal;
 }
 
 .location-grid {

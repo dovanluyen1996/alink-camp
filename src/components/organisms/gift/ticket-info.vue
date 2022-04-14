@@ -93,7 +93,6 @@ export default {
 
   &__subcontent {
     font-size: $font-size-small;
-    font-weight: normal;
   }
 }
 </style>

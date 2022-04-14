@@ -64,7 +64,6 @@ export default {
   &__content {
     padding: 22px;
     font-size: 16px;
-    font-weight: normal;
     line-height: 1.7;
   }
 

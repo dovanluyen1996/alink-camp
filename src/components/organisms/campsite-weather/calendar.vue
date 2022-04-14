@@ -125,7 +125,6 @@ export default {
 
   height: 27px;
   font-size: $font-size-small;
-  font-weight: normal;
   color: #100101;
   background: $color-th;
 }

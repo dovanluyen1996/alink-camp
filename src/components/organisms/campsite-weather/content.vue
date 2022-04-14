@@ -175,7 +175,6 @@ export default {
 
   .temperature__unit {
     margin-left: 0;
-    font-weight: normal;
   }
 
   .campsite-weather-day:last-child {

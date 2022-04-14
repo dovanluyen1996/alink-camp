@@ -65,13 +65,6 @@ export default {
 
   .weather-name {
     font-size: 10px;
-    font-weight: normal;
-  }
-
-  .temperature-label,
-  .temperature__value,
-  .temperature__unit {
-    font-weight: normal;
   }
 
   .temperature__unit {

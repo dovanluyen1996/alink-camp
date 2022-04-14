@@ -184,7 +184,6 @@ export default {
     }
 
     .content {
-      font-weight: normal;
       line-height: 1.7;
     }
   }

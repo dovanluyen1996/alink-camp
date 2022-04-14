@@ -49,12 +49,7 @@ export default {
     text-align: left;
   }
 
-  &__subtitle {
-    font-weight: normal;
-  }
-
   &__content {
-    font-weight: normal;
     white-space: pre-line;
 
     img {

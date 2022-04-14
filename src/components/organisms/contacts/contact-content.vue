@@ -64,7 +64,6 @@ export default {
   .input-field-note {
     display: block;
     margin-bottom: 10px;
-    font-weight: normal;
     line-height: 1.7;
   }
 }

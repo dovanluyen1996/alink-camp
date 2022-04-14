@@ -57,7 +57,6 @@ export default {
   &__title {
     overflow: hidden;
     font-size: 18px;
-    font-weight: normal;
     line-height: 1;
     text-overflow: ellipsis;
     white-space: nowrap;

@@ -126,11 +126,9 @@ export default {
 
     &__title {
       font-size: 18px;
-      font-weight: normal;
     }
 
     &__subtitle {
-      font-weight: normal;
       color: #00000080;
     }
   }
