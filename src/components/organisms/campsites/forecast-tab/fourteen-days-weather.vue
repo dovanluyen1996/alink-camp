@@ -147,7 +147,7 @@ export default {
 
       const plansCol = dateRow.querySelector(`[date-day="${this.nearestPlan.startedDate}"]`);
       if (!plansCol) return;
-      // NOTE: border がrightからleftに変わったため、その分xを1ずらす
+      // NOTE: tdにborder-leftがあるため、その分xを1ずらす
       const x = plansCol.offsetLeft - th.offsetWidth + 1;
 
       table.scrollTo(x, 0);
