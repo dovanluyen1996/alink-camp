@@ -77,32 +77,4 @@ export default {
     }
   }
 }
-
-.content-with-footer[class*="guidance-content"] {
-  padding: 0 16px;
-  color: #000;
-  background-color: #f2ebd3;
-
-  .content-with-footer__content {
-    display: flex;
-    flex-flow: column;
-    align-items: center;
-    justify-content: center;
-
-    p {
-      margin-top: 28px;
-      font-size: 16px;
-      line-height: 1.5;
-    }
-  }
-}
-
-@media only screen and (max-width: 320px) {
-  .content-with-footer[class*="guidance-content"] {
-    .content-with-footer__content img {
-      width: 75%;
-      margin-top: 30px;
-    }
-  }
-}
 </style>

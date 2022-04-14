@@ -6,21 +6,11 @@
     />
 
     <div class="content">
-      <content-with-footer class="guidance-content">
-        <div class="guidance-content__box">
-          <img
-            src="@/assets/images/guidances/campsite-items.svg"
-            width="280px"
-          >
-        </div>
-        <p class="guidance-content__text">
-          キャンプの思い出や、持っていくオリジナルアイテムなどの登録もできるので、ぜひメニューよりデータ引継ぎ設定を行って下さい。
-        </p>
-
-        <template #footer>
-          <next-button @click="showIdfaAlert" />
-        </template>
-      </content-with-footer>
+      <first-guidance-index
+        image-src="guidances/campsite-items.svg"
+        message="キャンプの思い出や、持っていくオリジナルアイテムなどの登録もできるので、ぜひメニューよりデータ引継ぎ設定を行って下さい。"
+        @onClick="showIdfaAlert"
+      />
     </div>
 
     <v-ons-alert-dialog
@@ -45,8 +35,7 @@
 import ApiClient from '@/api_client';
 
 // components
-import ContentWithFooter from '@/components/organisms/content-with-footer';
-import NextButton from '@/components/atoms/first-guidance/next-button.vue';
+import FirstGuidanceIndex from '@/components/organisms/first-guidance';
 
 // pages
 import AppTabbar from '@/views/app-tabbar';
@@ -57,8 +46,7 @@ import IdfaAaidPlugin from '@/config/idfa';
 export default {
   name: 'FirstGuidanceIDFA',
   components: {
-    ContentWithFooter,
-    NextButton,
+    FirstGuidanceIndex,
   },
   data() {
     return {
@@ -93,20 +81,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.guidance-content {
-  &__box {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 280px;
-  }
-
-  &__text {
-    margin-top: 80px !important;
-  }
-}
-
 /deep/ {
   .alert-dialog-content {
     font-size: 16px;
