@@ -335,20 +335,6 @@ export default {
       font-size: $font-size-small;
     }
 
-    .temperature {
-      display: inline-flex;
-      min-width: 30px;
-      padding: 5px;
-
-      &__value {
-        font-size: $font-size-small;
-      }
-
-      &__unit {
-        font-size: $font-size-small;
-      }
-    }
-
     .task {
       position: relative;
 
