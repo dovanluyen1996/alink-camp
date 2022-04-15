@@ -32,7 +32,6 @@
     "cordova-plugin-firebasex": "13.0.0-cli",
     "cordova-plugin-ionic-keyboard": "2.2.0",
     "cordova-plugin-purchases": "2.3.1",
-    "cordova-plugin-x-socialsharing": "^6.0.3",
     "geodesy": "^2.2.1",
     "moment": "^2.19.2",
     "moment-timezone": "^0.5.33",
@@ -80,6 +79,7 @@
     "cordova-plugin-splashscreen": "^6.0.0",
     "cordova-plugin-statusbar": "^3.0.0",
     "cordova-plugin-whitelist": "1",
+    "cordova-plugin-x-socialsharing": "git+https://github.com/FilippiMatteo/SocialSharing-PhoneGap-Plugin.git",
     "cordova-support-android-plugin": "^1.0.2",
     "cross-env": "^5.0.1",
     "css-loader": "^0.28.0",
@@ -137,17 +137,17 @@
       "cordova-plugin-whitelist": {},
       "cordova-plugin-device": {},
       "cordova-plugin-app-version": {},
-      "cordova-plugin-firebasex": {},
+      "cordova-plugin-firebasex": {
+        "FIREBASE_ANALYTICS_COLLECTION_ENABLED": "true",
+        "FIREBASE_PERFORMANCE_COLLECTION_ENABLED": "true",
+        "FIREBASE_CRASHLYTICS_COLLECTION_ENABLED": "true"
+      },
       "com.adjust.sdk": {},
       "cordova-plugin-geolocation": {
         "GPS_REQUIRED": "true"
       },
       "cordova-plugin-buildinfo": {},
       "cordova-plugin-purchases": {},
-      "cordova-plugin-x-socialsharing": {
-        "PHOTO_LIBRARY_ADD_USAGE_DESCRIPTION": "This app requires photo library access to function properly.",
-        "PHOTO_LIBRARY_USAGE_DESCRIPTION": "This app requires photo library access to function properly."
-      },
       "cordova-plugin-device-orientation": {},
       "cordova-plugin-add-swift-support": {},
       "cordova-plugin-idfa": {},
@@ -161,7 +161,11 @@
         "URL_SCHEME": "jp.rights.alink.golftenki.dev"
       },
       "cordova-plugin-screen-orientation": {},
-      "cordova-plugin-safariviewcontroller": {}
+      "cordova-plugin-safariviewcontroller": {},
+      "cordova-plugin-x-socialsharing": {
+        "PHOTO_LIBRARY_ADD_USAGE_DESCRIPTION": "This app requires photo library access to function properly.",
+        "PHOTO_LIBRARY_USAGE_DESCRIPTION": "This app requires photo library access to function properly."
+      }
     },
     "platforms": [
       "android",
