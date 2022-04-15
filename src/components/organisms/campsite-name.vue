@@ -19,16 +19,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "@/assets/scss/_variables.scss";
+
 .campsite-name {
-  padding: 7px 30px;
-  margin-bottom: 30px;
-  font-size: 18px;
-  word-break: break-all;
-  background: #fff;
+  display: grid;
+  justify-content: center;
+  background-color: $color-white;
 
   &__inner {
-    display: inline-block;
-    text-align: left;
+    padding: 15px;
+    font-size: 18px;
   }
 }
 </style>

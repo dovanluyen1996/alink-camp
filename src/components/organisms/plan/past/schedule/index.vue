@@ -2,11 +2,7 @@
   <v-ons-page>
     <div class="content">
       <content-with-footer ref="contentWithFooter">
-        <div class="text">
-          <v-ons-row class="text__desc">
-            {{ campsite.name }}
-          </v-ons-row>
-        </div>
+        <campsite-name :campsite-name="campsite.name" />
 
         <schedule-table
           :forecasts="forecasts"
@@ -56,6 +52,7 @@ import ContentWithFooter from '@/components/organisms/content-with-footer';
 import ScheduleTable from '@/components/organisms/plan/past/schedule/table';
 import ConfirmDialog from '@/components/organisms/dialog/confirm-dialog';
 import CompletedDialog from '@/components/organisms/dialog/completed-dialog';
+import CampsiteName from '@/components/organisms/campsite-name';
 
 export default {
   components: {
@@ -63,6 +60,7 @@ export default {
     ScheduleTable,
     ConfirmDialog,
     CompletedDialog,
+    CampsiteName,
   },
   props: {
     campsite: {
@@ -165,22 +163,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/scss/_variables.scss";
 
 /deep/ {
   .card {
     margin: 20px 0;
-  }
-
-  .text {
-    display: grid;
-    justify-content: center;
-    background-color: $color-white;
-
-    &__desc {
-      padding: 15px;
-      font-size: 18px;
-    }
   }
 }
 </style>

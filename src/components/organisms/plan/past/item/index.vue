@@ -2,11 +2,7 @@
   <v-ons-page>
     <div class="content">
       <content-with-footer ref="contentWithFooter">
-        <div class="text">
-          <v-ons-row class="text__desc">
-            {{ campsite.name }}
-          </v-ons-row>
-        </div>
+        <campsite-name :campsite-name="campsite.name" />
 
         <forecast-table
           :campsite="campsite"
@@ -81,6 +77,7 @@ import ContentWithFooter from '@/components/organisms/content-with-footer';
 import ConfirmDialog from '@/components/organisms/dialog/confirm-dialog';
 import CompletedDialog from '@/components/organisms/dialog/completed-dialog';
 import ShareButton from '@/components/organisms/share-button';
+import CampsiteName from '@/components/organisms/campsite-name';
 
 export default {
   components: {
@@ -90,6 +87,7 @@ export default {
     ConfirmDialog,
     CompletedDialog,
     ShareButton,
+    CampsiteName,
   },
   props: {
     campsite: {
@@ -186,18 +184,6 @@ export default {
 @import "@/assets/scss/_variables.scss";
 
 /deep/ {
-  .text {
-    display: grid;
-    justify-content: center;
-    background-color: #fff;
-
-    &__desc {
-      padding: 15px;
-      font-size: 18px;
-      font-weight: 300;
-    }
-  }
-
   .content-with-footer__footer {
     .button {
       &--search-day {
