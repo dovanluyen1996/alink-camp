@@ -1,9 +1,9 @@
 <template>
-  <div class="table-detail">
+  <div>
     <div
       v-for="(date, index) in dateRange"
       :key="index"
-      class="card-detail"
+      class="table-detail"
     >
       <v-ons-card class="campsite-weather-and-image">
         <v-ons-row class="campsite-weather-and-image-row">
@@ -208,13 +208,11 @@ export default {
 
 .table-detail {
   box-sizing: border-box;
-  width: 100%;
-  padding: 10px;
+  margin: 0 10px 20px;
   overflow: auto;
 
   .time-scedules {
     width: 100%;
-    margin-bottom: 70px;
     text-align: center;
     background: #fff;
 
@@ -222,8 +220,13 @@ export default {
       background-color: $color-white;
     }
 
-    th {
+    th,
+    td {
       padding: 7px 0;
+      font-size: $font-size-small;
+    }
+
+    th {
       background-color: #eae5e5;
     }
 
@@ -237,10 +240,6 @@ export default {
 
     .time-scedules__temperature-head {
       width: 45px;
-    }
-
-    td {
-      padding: 7px 0;
     }
 
     .detail-task,
@@ -287,12 +286,9 @@ export default {
     align-items: center;
     justify-content: center;
     height: 43px;
+    font-size: $font-size-large;
+    font-weight: bold;
     background-color: #eae5e5;
-
-    span {
-      font-size: 14px;
-      font-weight: 600;
-    }
   }
 }
 
@@ -325,10 +321,6 @@ export default {
     flex: 0 0 50%;
     max-width: 50%;
     padding-left: 5px;
-
-    .share-button {
-      min-width: 90%;
-    }
   }
 }
 
@@ -339,10 +331,6 @@ export default {
 
   .campsite-image-col {
     padding-left: 0;
-
-    .share-button {
-      min-width: 140px;
-    }
   }
 }
 
@@ -350,21 +338,5 @@ export default {
   margin: auto;
   font-size: 16px;
   font-weight: bold;
-}
-
-@media screen and (min-width: 320px) {
-  .campsite-image-col {
-    .share-button {
-      min-width: 95%;
-    }
-  }
-}
-
-@media screen and (min-width: 375px) {
-  .campsite-image-col {
-    .share-button {
-      min-width: 140px;
-    }
-  }
 }
 </style>

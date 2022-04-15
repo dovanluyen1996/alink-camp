@@ -15,16 +15,10 @@
         </div>
         <template #footer>
           <v-ons-button
-            class="button--search"
-            modifier="large--cta rounded yellow"
+            modifier="large-search yellow rounded"
             :disabled="searched"
             @click="search()"
           >
-            <img
-              :src="require('@/assets/images/form/search-top.png')"
-              width="20px"
-              height="20px"
-            >
             検索
           </v-ons-button>
         </template>
@@ -107,17 +101,6 @@ export default {
 /deep/ {
   ons-select {
     width: 100%;
-  }
-
-  .content-with-footer__footer {
-    .button--search {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 48px !important;
-      font-size: 14px !important;
-      box-shadow: 0 5px 5px rgba(0, 0, 0, 0.4);
-    }
   }
 }
 

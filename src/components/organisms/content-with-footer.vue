@@ -1,3 +1,4 @@
+<!-- NOTE: 状況によって fixed-footer.vue と使い分け 詳細はfixed-footer.vueに記載 -->
 <template>
   <div class="content-with-footer">
     <div
@@ -62,11 +63,14 @@ export default {
     -webkit-transform: translate3d(0, 0, 0);
 
     /deep/ {
+      .button {
+        box-shadow: 0 5px 5px rgba(0, 0, 0, 0.4);
+      }
+
       .button[class*="button--large"] {
         width: auto;
         margin: 0 30px;
-        font-size: 20px;
-        font-weight: 600;
+        font-weight: bold;
         color: #fff;
         background-color: #a82e05;
       }

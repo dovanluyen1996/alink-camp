@@ -1,43 +1,42 @@
 <template>
   <v-ons-page>
     <div class="content">
-      <div class="text">
-        <v-ons-row class="text__desc">
-          {{ campsite.name }}
-        </v-ons-row>
-      </div>
+      <content-with-footer ref="contentWithFooter">
+        <div class="text">
+          <v-ons-row class="text__desc">
+            {{ campsite.name }}
+          </v-ons-row>
+        </div>
 
-      <div class="title-center">
-        <span>天気予報</span>
-        <share-button
-          :subject="shareSubject()"
-          :message="shareMessage()"
+        <forecast-table
+          :campsite="campsite"
+          :forecasts="forecasts"
         >
-          <template #text>
-            持ち物共有
+          <template #shareButton>
+            <share-button
+              :subject="shareSubject()"
+              :message="shareMessage()"
+            >
+              <template #text>
+                持ち物共有
+              </template>
+            </share-button>
           </template>
-        </share-button>
-      </div>
+        </forecast-table>
+        <item-table
+          v-if="sortedItems.length > 0"
+          :checked-item-ids.sync="checkedItemIds"
+          :items="sortedItems"
+        />
 
-      <forecast-table
-        :campsite="campsite"
-        :forecasts="forecasts"
-      />
-      <item-table
-        v-if="sortedItems.length > 0"
-        :checked-item-ids.sync="checkedItemIds"
-        :items="sortedItems"
-      />
+        <div
+          v-else
+          class="items__note"
+        >
+          アイテムが登録されていません。<br>
+          アイテム追加より登録して下さい。
+        </div>
 
-      <div
-        v-else
-        class="items__note"
-      >
-        アイテムが登録されていません。<br>
-        アイテム追加より登録して下さい。
-      </div>
-
-      <content-with-footer>
         <template #footer>
           <v-ons-button
             modifier="large--cta yellow rounded"
@@ -199,37 +198,8 @@ export default {
     }
   }
 
-  .title-center {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 43px;
-    margin: 10px;
-    margin-bottom: -10px;
-    font-size: 16px;
-    font-weight: 600;
-    color: #000;
-    text-align: center;
-    background-color: #eae5e5;
-  }
-
-  .content-with-footer {
-    height: 0;
-
-    .content-with-footer__content {
-      padding-bottom: 0 !important;
-    }
-  }
-
   .content-with-footer__footer {
-    position: fixed;
-    bottom: 0 !important;
-    left: 100%;
-
     .button {
-      font-size: 14px !important;
-
       &--search-day {
         margin-top: 20px !important;
       }
@@ -247,29 +217,5 @@ export default {
   color: $color-white;
   text-align: center;
   transform: translate(-50%, -50%);
-}
-
-.button--share {
-  position: absolute;
-  right: 7px;
-  display: flex;
-  align-items: center;
-  width: 109px;
-  height: 29px;
-  font-size: 14px;
-  font-weight: 600;
-  background-color: $color-yellow;
-  border-radius: 15px;
-
-  &::before {
-    display: inline-block;
-    width: 14px;
-    height: 16px;
-    margin-right: 6px;
-    content: '';
-    background-image: url("~@/assets/images/icon-share.png");
-    background-position: center;
-    background-size: 100%;
-  }
 }
 </style>

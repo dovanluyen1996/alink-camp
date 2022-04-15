@@ -6,20 +6,12 @@
       class="search-form"
       @keyup.enter="searchByEnter"
     />
-    <div class="search-button">
-      <v-ons-button
-        class="button-search-top"
-        modifier="large rounded orange"
-        @click="searchByName"
-      >
-        <img
-          :src="require('@/assets/images/form/search-top.png')"
-          width="20px"
-          height="20px"
-        >
-        検索
-      </v-ons-button>
-    </div>
+    <v-ons-button
+      modifier="rounded orange search"
+      @click="searchByName"
+    >
+      検索
+    </v-ons-button>
 
     <div class="search-detail-button">
       <v-ons-button
@@ -122,18 +114,6 @@ export default {
 .search-field {
   margin: 20px 20px 25px;
   text-align: center;
-}
-
-.search-button {
-  margin: 0 10px;
-}
-
-.button-search-top {
-  display: inline-flex;
-  column-gap: 5px;
-  align-items: center;
-  justify-content: center;
-  width: 149px;
 }
 
 .search-detail-button {

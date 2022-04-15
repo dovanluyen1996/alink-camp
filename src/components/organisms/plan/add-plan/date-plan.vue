@@ -1,42 +1,42 @@
 <template>
   <v-ons-page>
     <div class="content">
-      <div class="text">
-        <v-ons-row class="text__desc">
-          {{ campsite.name }}
-        </v-ons-row>
-      </div>
-
       <validation-observer
         v-slot="{ handleSubmit }"
         ref="observer"
       >
-        <validation-provider
-          v-slot="{ errors }"
-          rules="required"
-          name="チェックイン"
-        >
-          <date-field
-            v-model="startedDate"
-            title="チェックイン"
-            :errors="errors"
-            class="date-field__des"
-          />
-        </validation-provider>
+        <content-with-footer ref="contentWithFooter">
+          <div class="text">
+            <v-ons-row class="text__desc">
+              {{ campsite.name }}
+            </v-ons-row>
+          </div>
 
-        <validation-provider
-          v-slot="{ errors }"
-          :rules="checkoutRules"
-          name="チェックアウト"
-        >
-          <date-field
-            v-model="finishedDate"
-            title="チェックアウト"
-            :errors="errors"
-          />
-        </validation-provider>
+          <validation-provider
+            v-slot="{ errors }"
+            rules="required"
+            name="チェックイン"
+          >
+            <date-field
+              v-model="startedDate"
+              title="チェックイン"
+              :errors="errors"
+              class="date-field__des"
+            />
+          </validation-provider>
 
-        <content-with-footer>
+          <validation-provider
+            v-slot="{ errors }"
+            :rules="checkoutRules"
+            name="チェックアウト"
+          >
+            <date-field
+              v-model="finishedDate"
+              title="チェックアウト"
+              :errors="errors"
+            />
+          </validation-provider>
+
           <template #footer>
             <v-ons-button
               modifier="large--cta yellow rounded"
@@ -156,6 +156,10 @@ export default {
     },
   },
   watch: {
+    isLoading() {
+      // NOTE: 新規・編集の判定でフッターの高さが変わるためコンテンツの余白を再計算させる
+      this.$refs.contentWithFooter.setContentMargin();
+    },
     startedDate() {
       this.setValidate();
     },
@@ -237,17 +241,8 @@ export default {
     }
   }
 
-  .content-with-footer {
-    height: 0;
-  }
-
   .content-with-footer__footer {
-    position: fixed;
-    bottom: 0 !important;
-
     .button {
-      font-size: 14px !important;
-
       &--search-day {
         margin-top: 20px !important;
       }

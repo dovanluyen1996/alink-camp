@@ -18,12 +18,7 @@
         </p>
 
         <template #footer>
-          <v-ons-button
-            modifier="large"
-            @click="callToPushNotificationDialog"
-          >
-            次へ
-          </v-ons-button>
+          <next-button @click="callToPushNotificationDialog" />
         </template>
       </content-with-footer>
     </div>
@@ -33,6 +28,7 @@
 <script>
 // components
 import ContentWithFooter from '@/components/organisms/content-with-footer';
+import NextButton from '@/components/atoms/first-guidance/next-button.vue';
 
 // pages
 import IdfaGuidance from '@/views/first-guidance/idfa-guidance';
@@ -41,6 +37,7 @@ export default {
   name: 'FirstGuidancePushNotification',
   components: {
     ContentWithFooter,
+    NextButton,
   },
   methods: {
     callToPushNotificationDialog() {

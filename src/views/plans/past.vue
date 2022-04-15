@@ -169,11 +169,5 @@ export default {
       }
     }
   }
-
-  .content-with-footer {
-    &__footer {
-      bottom: 90px;
-    }
-  }
 }
 </style>

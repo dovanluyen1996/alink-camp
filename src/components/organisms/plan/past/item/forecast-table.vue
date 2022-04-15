@@ -1,5 +1,10 @@
 <template>
   <div class="table-weather">
+    <div class="date-detail">
+      <span>天気予報</span>
+      <slot name="shareButton" />
+    </div>
+
     <table class="table">
       <tbody>
         <tr>
@@ -97,50 +102,49 @@ export default {
 }
 
 .table-weather {
-  box-sizing: border-box;
-  width: 100%;
-  padding: 10px;
+  margin: 20px 10px;
   overflow: auto;
+
+  .date-detail {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 43px;
+    font-size: $font-size-large;
+    font-weight: bold;
+    background-color: #eae5e5;
+  }
 
   .table {
     width: 100%;
     text-align: center;
     background-color: #fff;
 
-    th {
-      height: 31px;
-      font-size: 12px;
-      font-weight: 600;
-      color: #100101;
-      background-color: #eae5e5;
-      border-right: 1px solid $color-border !important;
-    }
-
-    .text-small {
-      display: block;
-      font-size: 12px;
-    }
-
     tr {
       border: 1px solid $color-border;
+    }
+
+    th,
+    td {
+      font-size: $font-size-small;
+    }
+
+    th {
+      background-color: #eae5e5;
+      border-right: 1px solid $color-border;
     }
 
     td {
       height: 34px;
       font-size: 14px;
       font-weight: 300;
-      border-left: 1px solid $color-border !important;
+      border-left: 1px solid $color-border;
     }
 
-    th,
-    td {
-      padding: 0;
-    }
-
-    .date-check {
-      span {
-        padding: 0 12px;
-      }
+    .text-small {
+      display: block;
+      font-size: $font-size-small;
     }
 
     .text-red {
