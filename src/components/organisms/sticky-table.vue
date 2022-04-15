@@ -35,12 +35,16 @@ export default {
   border-collapse: separate;
 
   /deep/ {
-    th,
-    td {
-      border-top: 1px solid $color-border;
-      border-right: 1px solid $color-border;
+    th {
+      border: 1px solid $color-border;
       border-bottom: none;
       border-left: none;
+    }
+
+    td {
+      border: 1px solid $color-border;
+      border-right: none;
+      border-bottom: none;
     }
 
     th:first-child {
@@ -49,9 +53,8 @@ export default {
       left: 0;
     }
 
-    th:last-child,
-    td:last-child {
-      border-right: none;
+    th + td {
+      border-left: none;
     }
 
     tr:first-child {
