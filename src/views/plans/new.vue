@@ -26,10 +26,6 @@ export default {
       type: Object,
       required: true,
     },
-    isNew: {
-      type: Boolean,
-      default: false,
-    },
   },
   computed: {
     tabs() {
@@ -70,7 +66,7 @@ export default {
         page: DatePlan,
         props: {
           campsite: this.campsite,
-          isNew: this.isNew,
+          isNew: true,
         },
       },
       {

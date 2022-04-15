@@ -47,10 +47,6 @@ export default {
       type: Object,
       required: true,
     },
-    isNew: {
-      type: Boolean,
-      default: false,
-    },
   },
   data() {
     return {
@@ -104,7 +100,7 @@ export default {
         page: DatePlan,
         props: {
           campsite: this.plan.campsite,
-          isNew: this.isNew,
+          isNew: false,
         },
       },
       {
