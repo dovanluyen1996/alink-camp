@@ -1,5 +1,5 @@
 <template>
-  <v-ons-page @show="show">
+  <v-ons-page>
     <custom-toolbar title="新規計画" />
     <loading :visible="isLoading" />
     <div class="content">
@@ -59,7 +59,7 @@ export default {
       return isTabLoading;
     },
   },
-  created() {
+  async created() {
     this.$store.commit('components/planTab/setTabs', [
       {
         label: '計画日',
@@ -78,6 +78,12 @@ export default {
       },
     ]);
     this.$store.commit('components/planTab/setActiveIndex', 0);
+
+    // fetch
+    await this.getItems();
+
+    // set store
+    this.setCampsiteId();
   },
   beforeDestroy() {
     this.$store.dispatch('plan/clean');
