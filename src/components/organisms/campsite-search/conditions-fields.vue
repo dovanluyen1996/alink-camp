@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="conditions-fields">
     <div class="card__title">
       天気
     </div>
@@ -162,10 +162,10 @@ export default {
   border-bottom: 1px solid $color-border;
 }
 
-/deep/ {
+.conditions-fields /deep/ {
   .custom-radio-label,
   .check-field {
-    font-weight: 300 !important;
+    font-weight: normal;
   }
 }
 </style>
