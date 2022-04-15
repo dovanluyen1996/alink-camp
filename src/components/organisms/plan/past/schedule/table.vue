@@ -27,7 +27,7 @@
 
       <div class="date-detail">
         <span>
-          {{ date }}
+          {{ localMonthDateFromWithoutZero(date) }}
         </span>
       </div>
       <table class="table time-scedules">
@@ -198,6 +198,9 @@ export default {
     },
     isContentEmpty(content) {
       return content === '';
+    },
+    localMonthDateFromWithoutZero(date) {
+      return this.$helpers.localMonthDateFromWithoutZero(date);
     },
   },
 };
