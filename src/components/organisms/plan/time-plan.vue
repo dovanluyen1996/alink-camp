@@ -55,11 +55,6 @@ export default {
       default: () => [],
     },
   },
-  computed: {
-    isNew() {
-      return this.$store.getters['plan/isNew'];
-    },
-  },
   methods: {
     async goToEditPlan(plan) {
       await this.$store.dispatch('plan/setPlanId', plan.id);
@@ -68,7 +63,7 @@ export default {
         extends: EditPlanPage,
         onsNavigatorProps: {
           plan,
-          isNew: this.isNew,
+          isNew: false,
         },
       });
     },
