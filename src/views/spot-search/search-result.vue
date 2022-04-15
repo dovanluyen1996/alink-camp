@@ -5,13 +5,8 @@
   >
     <custom-toolbar title="周辺検索" />
     <div class="content">
-      <div
-        v-if="campsite"
-        class="search-result__campsite"
-      >
-        <p class="search-result__campsite-name">
-          {{ campsite.name }}
-        </p>
+      <div v-if="campsite">
+        <campsite-name :campsite-name="campsite.name" />
       </div>
 
       <spot-list
@@ -43,11 +38,13 @@
 <script>
 // components
 import SpotList from '@/components/organisms/spot-list';
+import CampsiteName from '@/components/organisms/campsite-name';
 
 export default {
   name: 'SpotSearchResult',
   components: {
     SpotList,
+    CampsiteName,
   },
   props: {
     location: {
@@ -123,21 +120,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/scss/_variables.scss";
-
-.search-result {
-  &__campsite {
-    display: grid;
-    justify-content: center;
-    background-color: $color-white;
-  }
-
-  &__campsite-name {
-    padding: 15px;
-    margin: 0;
-    font-size: 18px;
-  }
-}
 
 /deep/ {
   .list-item {

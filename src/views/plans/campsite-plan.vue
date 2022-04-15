@@ -3,11 +3,7 @@
     <custom-toolbar title="計画一覧" />
     <loading :visible="isLoading" />
     <div class="content">
-      <v-ons-col class="text">
-        <v-ons-row class="text__desc">
-          {{ campsite.name }}
-        </v-ons-row>
-      </v-ons-col>
+      <campsite-name :campsite-name="campsite.name" />
 
       <v-ons-card>
         <v-ons-button
@@ -52,6 +48,7 @@ import TimePlan from '@/components/organisms/plan/time-plan';
 import NewPlanPage from '@/views/plans/new';
 import ConfirmDialog from '@/components/organisms/dialog/confirm-dialog';
 import InformationPurchase from '@/views/purchase-information/index.vue';
+import CampsiteName from '@/components/organisms/campsite-name';
 
 import moment from 'moment';
 
@@ -59,6 +56,7 @@ export default {
   components: {
     TimePlan,
     ConfirmDialog,
+    CampsiteName,
   },
   props: {
     campsite: {
@@ -141,17 +139,6 @@ export default {
 /deep/ {
   .card {
     text-align: center;
-  }
-
-  .text {
-    display: grid;
-    justify-content: center;
-    background-color: $color-white;
-
-    &__desc {
-      padding: 15px;
-      font-size: 18px;
-    }
   }
 }
 </style>
