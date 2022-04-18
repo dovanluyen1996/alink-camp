@@ -44,10 +44,6 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-// TODO: local styles here
-</style>
-
 <style lang="scss">
 // global styles
 @import '@/assets/scss/_variables.scss';
