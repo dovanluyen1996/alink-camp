@@ -25,6 +25,13 @@ export default {
     document.addEventListener('resume', this.onResume, false);
 
     window.addEventListener('onPurchaserInfoUpdated', async(purchaserInfo) => {
+      // 課金の識別子をサーバへ送る
+      const params = {
+        app_user_id: purchaserInfo.originalAppUserId,
+        app_user_os: window.device.platform.toLowerCase(),
+      };
+      await this.$store.dispatch('models/currentUser/updateUser', params);
+
       const isCharged = Object.entries(purchaserInfo.entitlements.active).length > 0;
       this.$store.dispatch('purchase/setIsPurchased', isCharged);
     },
@@ -44,6 +51,13 @@ export default {
     async checkChargedStatus() {
       Purchases.getPurchaserInfo(
         async(purchaserInfo) => {
+          // 課金の識別子をサーバへ送る
+          const params = {
+            app_user_id: purchaserInfo.originalAppUserId,
+            app_user_os: window.device.platform.toLowerCase(),
+          };
+          await this.$store.dispatch('models/currentUser/updateUser', params);
+
           const isCharged = Object.entries(purchaserInfo.entitlements.active).length > 0;
           this.$store.dispatch('purchase/setIsPurchased', isCharged);
         },
