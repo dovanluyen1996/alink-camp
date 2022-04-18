@@ -100,7 +100,6 @@ export default {
         page: DatePlan,
         props: {
           campsite: this.plan.campsite,
-          isNew: false,
         },
       },
       {
@@ -108,7 +107,6 @@ export default {
         page: ListItemCamp,
         props: {
           campsite: this.plan.campsite,
-          isNew: false,
         },
       },
       {
@@ -116,7 +114,6 @@ export default {
         page: DetailScheduleCamp,
         props: {
           campsite: this.plan.campsite,
-          isNew: false,
         },
       },
     ]);
