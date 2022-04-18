@@ -45,6 +45,9 @@ export default {
 .content-with-footer {
   position: relative;
   height: 100%;
+  // NOTE: iOS対策
+  //       footerがbottom: -1のためスワイプについて来てしまう
+  overflow: hidden;
 
   &__content {
     box-sizing: border-box;
@@ -54,7 +57,9 @@ export default {
 
   &__footer {
     position: absolute;
-    bottom: 0;
+    // NOTE: 背景色がついた場合にdevice pixel ratioによって
+    //       後ろが見切れるのを防止するため-1
+    bottom: -1px;
     left: 0;
     z-index: 10;
     width: 100%;
