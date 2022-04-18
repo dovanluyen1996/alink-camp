@@ -45,13 +45,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+// TODO: local styles here
+</style>
+
+<style lang="scss">
+// global styles
+@import '@/assets/scss/_variables.scss';
+
 .content-with-footer {
   padding: 0 16px;
   color: #000;
   background-color: #f2ebd3;
-}
 
-/deep/ {
   .content-with-footer__content {
     display: flex;
     flex-flow: column;
@@ -60,15 +65,14 @@ export default {
 
     div {
       margin-top: 80px;
-      font-size: 16px;
-      font-weight: 300;
+      font-size: $font-size-large;
       line-height: 1.5;
     }
   }
 }
 
 @media only screen and (max-width: 320px) {
-  /deep/ {
+  .content-with-footer {
     .content-with-footer__content {
       img {
         width: 75%;
