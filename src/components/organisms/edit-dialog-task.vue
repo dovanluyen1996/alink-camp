@@ -1,10 +1,25 @@
 <template>
-  <v-ons-alert-dialog
+  <v-ons-modal
     :visible.sync="isVisible"
-    class="custom-edit-alert-dialog"
+    class="edit-dialog-task"
+    animation="fade"
   >
-    <textarea v-model="task" class="textarea_dialog" />
-    <template #footer>
+    <div class="edit-dialog-task__box">
+      <div class="edit-dialog-task__content">
+        <textarea
+          v-model="task"
+          class="edit-dialog-task__textarea"
+        />
+        <div
+          class="close-dialog"
+          @click="closeDialog()"
+        >
+          <img
+            src="@/assets/images/form/delete.png"
+            class="close-dialog--icon"
+          >
+        </div>
+      </div>
       <v-ons-button
         modifier="yellow"
         class="button--edit-dialog"
@@ -12,17 +27,8 @@
       >
         保存
       </v-ons-button>
-    </template>
-    <div
-      class="close-dialog"
-      @click="closeDialog()"
-    >
-      <img
-        src="@/assets/images/form/delete.png"
-        class="close-dialog--icon"
-      >
     </div>
-  </v-ons-alert-dialog>
+  </v-ons-modal>
 </template>
 
 <script>
@@ -74,28 +80,49 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '@/assets/scss/_variables.scss';
 
-/deep/ {
-  .button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    height: 32px;
-    font-size: 12px;
-  }
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+  font-size: $font-size-small;
 }
 
-.alert-dialog {
-  position: relative;
+.edit-dialog-task {
+  &__box {
+    position: absolute;
+    top: 15%;
+    width: 100%;
+  }
+
+  &__content {
+    position: relative;
+    display: inline-block;
+    width: 90%;
+  }
+
+  &__textarea {
+    width: 100%;
+    height: 150px;
+    padding: 0;
+    resize: none;
+    border: none;
+  }
 }
 
 .close-dialog {
   position: absolute;
-  top: 7px;
-  right: -5px;
+  top: -9px;
+  right: -9px;
 
   &--icon {
     width: 18px;
   }
+}
+
+.button--edit-dialog {
+  margin-top: 14px;
 }
 </style>

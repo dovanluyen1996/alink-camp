@@ -89,31 +89,6 @@ $alert-dialog-radius: 8px;
   }
 }
 
-.custom-edit-alert-dialog {
-  margin-top: -200px;
-
-  .alert-dialog {
-    background: none;
-    border-radius: 0;
-  }
-
-  .alert-dialog-title {
-    display: none !important;
-  }
-
-  .alert-dialog-content {
-    background: $color-white;
-    border: 1px solid $color-border-dark;
-
-    .textarea_dialog {
-      width: 98%;
-      height: 150px;
-      resize: none;
-      border: none;
-    }
-  }
-}
-
 /* ----------
  Form
 ---------- */
