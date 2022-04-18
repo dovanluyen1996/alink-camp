@@ -35,6 +35,7 @@
             />
             <template #footer>
               <v-ons-button
+                v-show="isShowUpdateItemButton"
                 modifier="cta rounded"
                 class="add-button"
                 @click="handleSubmit(showEditConfirmDialog)"
@@ -115,6 +116,7 @@ export default {
       isShowCompletedDialogVisible: false,
       action: '',
       isVisibleLabelListDialog: false,
+      isShowUpdateItemButton: true,
     };
   },
   computed: {
@@ -124,6 +126,14 @@ export default {
     title() {
       return this.isUserItem ? 'オリジナルアイテム' : '基本アイテム';
     },
+  },
+  mounted() {
+    document.addEventListener('deviceready', this.onDeviceReady, false);
+  },
+  beforeDestroy() {
+    document.removeEventListener('deviceready', this.onDeviceReady, false);
+    window.removeEventListener('native.keyboardshow', this.onKeyBoardShow);
+    window.removeEventListener('native.keyboardhide', this.onKeyBoardHide);
   },
   methods: {
     async updateItem() {
@@ -187,6 +197,16 @@ export default {
     },
     goToItems() {
       this.$store.dispatch('menuNavigator/pop');
+    },
+    onDeviceReady() {
+      window.addEventListener('native.keyboardshow', this.onKeyBoardShow);
+      window.addEventListener('native.keyboardhide', this.onKeyBoardHide);
+    },
+    onKeyBoardShow() {
+      this.isShowUpdateItemButton = false;
+    },
+    onKeyBoardHide() {
+      this.isShowUpdateItemButton = true;
     },
   },
 };

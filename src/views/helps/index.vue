@@ -1,6 +1,6 @@
 <template>
   <v-ons-page>
-    <custom-toolbar title="ヘルプ" />
+    <custom-toolbar title="ヘルプ&amp;サポート" />
     <loading :visible="isLoading" />
     <div class="content">
       <content-with-footer>

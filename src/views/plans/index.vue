@@ -6,20 +6,18 @@
       <no-data v-if="campsites.length === 0">
         <p>
           まだキャンプ計画がありません。<br>
-          キャンプ場検索より、計画を作成してください。
+          キャンプ場検索より、<br>
+          計画を作成してください。
         </p>
         <template #actions>
           <v-ons-button
-            modifier="orange search"
-            @click="goToPlanSearch"
+            modifier="search yellow"
+            @click="goToCampsiteSearch"
           >
-            <img
-              :src="require('@/assets/images/form/search-top.png')"
-              width="20px"
-              height="20px"
-            >
             キャンプ場検索
           </v-ons-button>
+          <!-- TODO: 何故かコンポーネントがインポートできず、表示されない。 -->
+          <!-- <go-to-campsite-search-button /> -->
         </template>
       </no-data>
 
@@ -36,6 +34,7 @@
 <script>
 // components
 import NoData from '@/components/organisms/no-data';
+// import GoToCampsiteSearchButton from '@/components/organisms/go-to-campsite-search-button';
 import CampsiteList from '@/components/organisms/campsite-list';
 
 // pages
@@ -46,6 +45,7 @@ export default {
   name: 'CampsitesIndex',
   components: {
     NoData,
+    // GoToCampsiteSearchButton,
     CampsiteList,
   },
   computed: {
@@ -88,19 +88,6 @@ export default {
     async getUsersFavorites() {
       await this.$store.dispatch('models/usersFavorite/getUsersFavorites');
     },
-    goToPlanSearch() {
-      this.$store.commit('campsiteSearchNavigator/setEnableBusy', false);
-      this.$store.dispatch('campsiteSearchNavigator/reset', {
-        extends: CampsiteSearchIndex,
-        onsNavigatorOptions: {
-          callback: () => {
-            this.$store.commit('campsiteSearchNavigator/setEnableBusy', true);
-          },
-        },
-      });
-
-      this.$store.commit('appTabbar/setActiveIndexFromTabName', 'campsiteSearch');
-    },
     goToPlanDetail(campsite) {
       this.$store.dispatch('plansNavigator/push', {
         extends: CampsitePlan,
@@ -113,6 +100,20 @@ export default {
       this.$store.dispatch('appTabbar/setLastVisitedAt', this.$helpers.localDateWithHyphenFrom(new Date()));
       await this.getPlans();
       await this.getUsersFavorites();
+    },
+    goToCampsiteSearch() {
+      this.$store.commit('campsiteSearchNavigator/setEnableBusy', false);
+      this.$store.dispatch('campsiteSearchNavigator/reset', {
+        extends: CampsiteSearchIndex,
+        onsNavigatorOptions: {
+          animation: 'none',
+          callback: () => {
+            this.$store.commit('campsiteSearchNavigator/setEnableBusy', true);
+          },
+        },
+      });
+
+      this.$store.commit('appTabbar/setActiveIndexFromTabName', 'campsiteSearch');
     },
   },
 };

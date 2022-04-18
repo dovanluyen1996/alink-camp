@@ -1,5 +1,5 @@
 <template>
-  <v-ons-page @show="show">
+  <v-ons-page>
     <custom-toolbar :title="title">
       <template #right>
         <delete-dialog-with-icon
@@ -60,7 +60,7 @@ export default {
       let isTabLoading = false;
 
       if (this.activeTab === '計画日') {
-        isTabLoading = this.$store.getters['modules/plan/isLoading'];
+        isTabLoading = this.$store.getters['models/userCampsitePlan/isLoading'];
       } else if (this.activeTab === '持ち物') {
         isTabLoading = this.$store.getters['models/item/isLoading'] || this.$store.getters['models/weather/isForecast14DaysLoading'];
       } else if (this.activeTab === '予定詳細') {
@@ -93,7 +93,7 @@ export default {
       return `${this.$moment(this.detailPlan.startedDate).format('M/D')}からの計画` || '';
     },
   },
-  created() {
+  async created() {
     this.$store.commit('components/planTab/setTabs', [
       {
         label: '計画日',
@@ -111,6 +111,18 @@ export default {
         props: { campsite: this.plan.campsite },
       },
     ]);
+    this.$store.commit('components/planTab/setActiveIndex', 0);
+
+    // fetch resources
+    await this.getItems();
+    await this.getUserCampsitePlan();
+
+    // set store
+    this.setPlanId();
+    this.setStartedDate();
+    this.setFinishedDate();
+    this.setItems();
+    this.setTasks();
   },
   beforeDestroy() {
     this.$store.dispatch('plan/clean');
@@ -118,16 +130,6 @@ export default {
   methods: {
     onPreChange(event) {
       if (!this.enabled) event.cancel();
-    },
-    async show() {
-      await this.getItems();
-      await this.getUserCampsitePlan();
-
-      this.setPlanId();
-      this.setStartedDate();
-      this.setFinishedDate();
-      this.setItems();
-      this.setTasks();
     },
     async getItems() {
       await this.$store.dispatch('models/item/getItems');
@@ -205,12 +207,6 @@ export default {
         background-color: #631900;
         border-radius: 15px;
       }
-    }
-  }
-
-  .content-with-footer {
-    &__footer {
-      bottom: 90px;
     }
   }
 }

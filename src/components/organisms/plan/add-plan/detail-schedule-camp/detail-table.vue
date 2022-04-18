@@ -274,22 +274,15 @@ export default {
     margin-top: 10px;
   }
 
-  .card-detail:last-child {
-    margin-bottom: 140px;
-  }
-
   .date-detail {
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     height: 43px;
+    font-size: $font-size-large;
+    font-weight: bold;
     background-color: #eae5e5;
-
-    span {
-      font-size: 14px;
-      font-weight: bold;
-    }
   }
 
   .time-scedules {
@@ -307,8 +300,13 @@ export default {
       font-size: 10px;
     }
 
-    th {
+    th,
+    td {
       padding: 7px 0;
+      font-size: $font-size-small;
+    }
+
+    th {
       background-color: #eae5e5;
     }
 
@@ -332,27 +330,9 @@ export default {
       width: 35px;
     }
 
-    td {
-      padding: 7px 0;
-    }
-
     .detail-task,
     .target {
       font-size: $font-size-small;
-    }
-
-    .temperature {
-      display: inline-flex;
-      min-width: 30px;
-      padding: 5px;
-
-      &__value {
-        font-size: $font-size-small;
-      }
-
-      &__unit {
-        font-size: $font-size-small;
-      }
     }
 
     .task {

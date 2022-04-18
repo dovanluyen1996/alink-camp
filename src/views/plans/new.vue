@@ -1,5 +1,5 @@
 <template>
-  <v-ons-page @show="show">
+  <v-ons-page>
     <custom-toolbar title="新規計画" />
     <loading :visible="isLoading" />
     <div class="content">
@@ -49,7 +49,7 @@ export default {
       let isTabLoading = false;
 
       if (this.activeTab === '計画日') {
-        isTabLoading = this.$store.getters['modules/plan/isLoading'];
+        isTabLoading = this.$store.getters['models/userCampsitePlan/isLoading'];
       } else if (this.activeTab === '持ち物') {
         isTabLoading = this.$store.getters['models/item/isLoading'] || this.$store.getters['models/weather/isForecast14DaysLoading'];
       } else if (this.activeTab === '予定詳細') {
@@ -59,7 +59,7 @@ export default {
       return isTabLoading;
     },
   },
-  created() {
+  async created() {
     this.$store.commit('components/planTab/setTabs', [
       {
         label: '計画日',
@@ -86,6 +86,13 @@ export default {
         },
       },
     ]);
+    this.$store.commit('components/planTab/setActiveIndex', 0);
+
+    // fetch
+    await this.getItems();
+
+    // set store
+    this.setCampsiteId();
   },
   beforeDestroy() {
     this.$store.dispatch('plan/clean');
@@ -144,12 +151,6 @@ export default {
         background-color: #631900;
         border-radius: 15px;
       }
-    }
-  }
-
-  .content-with-footer {
-    &__footer {
-      bottom: 90px;
     }
   }
 }

@@ -18,12 +18,7 @@
         </p>
 
         <template #footer>
-          <v-ons-button
-            modifier="large"
-            @click="callToLocationServicesDialog()"
-          >
-            次へ
-          </v-ons-button>
+          <next-button @click="callToLocationServicesDialog" />
         </template>
       </content-with-footer>
 
@@ -52,6 +47,7 @@
 <script>
 // components
 import ContentWithFooter from '@/components/organisms/content-with-footer';
+import NextButton from '@/components/atoms/first-guidance/next-button.vue';
 
 // pages
 import PushNotification from '@/views/first-guidance/push-notification';
@@ -62,6 +58,7 @@ export default {
   name: 'FirstGuidanceLocationServices',
   components: {
     ContentWithFooter,
+    NextButton,
   },
   data() {
     return {

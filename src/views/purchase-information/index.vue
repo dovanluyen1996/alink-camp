@@ -288,7 +288,6 @@ export default {
     width: 100%;
     height: 44px;
     margin: 22px 0 0 0;
-    font-size: 14px;
     line-height: 36px;
     color: #fff;
     background-color: #9f9a97;

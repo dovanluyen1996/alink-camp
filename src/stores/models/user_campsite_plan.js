@@ -36,7 +36,29 @@ export default {
   },
   mutations: {
     setUserCampsitePlans(state, userCampsitePlans) {
-      Vue.set(state, 'userCampsitePlans', userCampsitePlans);
+      const partition = ([updatePlans, addPlans], plan) => {
+        const index = state.userCampsitePlans.findIndex(currentPlan => currentPlan.id === plan.id);
+
+        if (index < 0) {
+          addPlans.push(plan);
+        } else {
+          updatePlans.push({ index, plan });
+        }
+
+        return [updatePlans, addPlans];
+      };
+
+      const [updatePlans, addPlans] = userCampsitePlans.reduce(partition, [[], []]);
+
+      // update plans
+      updatePlans.forEach((object) => {
+        Vue.set(state.userCampsitePlans, object.index, object.plan);
+      });
+
+      // add plans
+      addPlans.forEach((plan) => {
+        state.userCampsitePlans.push(plan);
+      });
     },
     setUserCampsitePlan(state, userCampsitePlan) {
       const index = state.userCampsitePlans.findIndex(

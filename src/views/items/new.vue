@@ -23,6 +23,7 @@
             />
             <template #footer>
               <v-ons-button
+                v-show="isShowCreateItemButton"
                 modifier="cta rounded"
                 class="add-button"
                 @click="handleSubmit(showConfirmCreateItemDialog)"
@@ -95,7 +96,16 @@ export default {
       isShowCompletedDialogVisible: false,
       action: '',
       isVisibleLabelListDialog: false,
+      isShowCreateItemButton: true,
     };
+  },
+  mounted() {
+    document.addEventListener('deviceready', this.onDeviceReady, false);
+  },
+  beforeDestroy() {
+    document.removeEventListener('deviceready', this.onDeviceReady, false);
+    window.removeEventListener('native.keyboardshow', this.onKeyBoardShow);
+    window.removeEventListener('native.keyboardhide', this.onKeyBoardHide);
   },
   methods: {
     async createItem() {
@@ -131,6 +141,16 @@ export default {
     },
     goToItems() {
       this.$store.dispatch('menuNavigator/pop');
+    },
+    onDeviceReady() {
+      window.addEventListener('native.keyboardshow', this.onKeyBoardShow);
+      window.addEventListener('native.keyboardhide', this.onKeyBoardHide);
+    },
+    onKeyBoardShow() {
+      this.isShowCreateItemButton = false;
+    },
+    onKeyBoardHide() {
+      this.isShowCreateItemButton = true;
     },
   },
 };

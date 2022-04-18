@@ -1,42 +1,38 @@
 <template>
   <v-ons-page>
     <div class="content">
-      <div class="text">
-        <v-ons-row class="text__desc">
-          {{ campsite.name }}
-        </v-ons-row>
-      </div>
-
       <validation-observer
         v-slot="{ handleSubmit }"
         ref="observer"
       >
-        <validation-provider
-          v-slot="{ errors }"
-          rules="required"
-          name="チェックイン"
-        >
-          <date-field
-            v-model="startedDate"
-            title="チェックイン"
-            :errors="errors"
-            class="date-field__des"
-          />
-        </validation-provider>
+        <content-with-footer ref="contentWithFooter">
+          <campsite-name :campsite-name="campsite.name" />
 
-        <validation-provider
-          v-slot="{ errors }"
-          :rules="checkoutRules"
-          name="チェックアウト"
-        >
-          <date-field
-            v-model="finishedDate"
-            title="チェックアウト"
-            :errors="errors"
-          />
-        </validation-provider>
+          <validation-provider
+            v-slot="{ errors }"
+            rules="required"
+            name="チェックイン"
+          >
+            <date-field
+              v-model="startedDate"
+              title="チェックイン"
+              :errors="errors"
+              class="date-field__des"
+            />
+          </validation-provider>
 
-        <content-with-footer>
+          <validation-provider
+            v-slot="{ errors }"
+            :rules="checkoutRules"
+            name="チェックアウト"
+          >
+            <date-field
+              v-model="finishedDate"
+              title="チェックアウト"
+              :errors="errors"
+            />
+          </validation-provider>
+
           <template #footer>
             <v-ons-button
               modifier="large--cta yellow rounded"
@@ -89,6 +85,7 @@ import DateField from '@/components/organisms/form/date-field';
 import ContentWithFooter from '@/components/organisms/content-with-footer';
 import ConfirmDialog from '@/components/organisms/dialog/confirm-dialog';
 import CompletedDialog from '@/components/organisms/dialog/completed-dialog';
+import CampsiteName from '@/components/organisms/campsite-name';
 
 export default {
   components: {
@@ -96,6 +93,7 @@ export default {
     ContentWithFooter,
     ConfirmDialog,
     CompletedDialog,
+    CampsiteName,
   },
   props: {
     campsite: {
@@ -157,6 +155,10 @@ export default {
     },
   },
   watch: {
+    isLoading() {
+      // NOTE: 新規・編集の判定でフッターの高さが変わるためコンテンツの余白を再計算させる
+      this.$refs.contentWithFooter.setContentMargin();
+    },
     startedDate() {
       this.setValidate();
     },
@@ -207,7 +209,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/scss/_variables.scss";
 
 /deep/ {
   .card {
@@ -227,28 +228,8 @@ export default {
     margin-top: 25px;
   }
 
-  .text {
-    display: grid;
-    justify-content: center;
-    background-color: $color-white;
-
-    &__desc {
-      padding: 15px;
-      font-size: 18px;
-    }
-  }
-
-  .content-with-footer {
-    height: 0;
-  }
-
   .content-with-footer__footer {
-    position: fixed;
-    bottom: 0 !important;
-
     .button {
-      font-size: 14px !important;
-
       &--search-day {
         margin-top: 20px !important;
       }

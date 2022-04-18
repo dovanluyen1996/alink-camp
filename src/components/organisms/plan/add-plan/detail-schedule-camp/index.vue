@@ -1,19 +1,15 @@
 <template>
   <v-ons-page @show="show">
     <div class="content">
-      <div class="text">
-        <v-ons-row class="text__desc">
-          {{ campsite.name }}
-        </v-ons-row>
-      </div>
+      <content-with-footer ref="contentWithFooter">
+        <campsite-name :campsite-name="campsite.name" />
 
-      <detail-table
-        :forecasts="forecasts"
-        :past-weather="pastWeather"
-        :tasks.sync="tasks"
-      />
+        <detail-table
+          :forecasts="forecasts"
+          :past-weather="pastWeather"
+          :tasks.sync="tasks"
+        />
 
-      <content-with-footer>
         <template #footer>
           <v-ons-button
             modifier="large--cta yellow rounded"
@@ -65,6 +61,7 @@ import DetailTable from '@/components/organisms/plan/add-plan/detail-schedule-ca
 import ContentWithFooter from '@/components/organisms/content-with-footer';
 import ConfirmDialog from '@/components/organisms/dialog/confirm-dialog';
 import CompletedDialog from '@/components/organisms/dialog/completed-dialog';
+import CampsiteName from '@/components/organisms/campsite-name';
 
 export default {
   components: {
@@ -72,6 +69,7 @@ export default {
     ContentWithFooter,
     ConfirmDialog,
     CompletedDialog,
+    CampsiteName,
   },
   props: {
     campsite: {
@@ -92,6 +90,9 @@ export default {
     };
   },
   computed: {
+    isLoading() {
+      return this.$store.getters['models/weather/isForecastHourlyLoading'];
+    },
     params() {
       return this.$store.getters['plan/params'];
     },
@@ -126,6 +127,12 @@ export default {
     },
     completedAction() {
       return this.isNew ? 'createPlan' : 'updatePlan';
+    },
+  },
+  watch: {
+    isLoading() {
+      // NOTE: 新規・編集の判定でフッターの高さが変わるためコンテンツの余白を再計算させる
+      this.$refs.contentWithFooter.setContentMargin();
     },
   },
   methods: {
@@ -188,32 +195,9 @@ export default {
 @import "@/assets/scss/_variables.scss";
 
 /deep/ {
-  .text {
-    display: grid;
-    justify-content: center;
-    background-color: #fff;
-
-    &__desc {
-      padding: 15px;
-      font-size: 18px;
-    }
-  }
-
-  .content-with-footer {
-    height: 0;
-
-    .content-with-footer__content {
-      padding-bottom: 0 !important;
-    }
-  }
-
   .content-with-footer__footer {
-    position: fixed;
-    bottom: 0 !important;
-    left: inherit;
-
     .button {
-      font-size: 14px !important;
+      font-size: $font-size-default;
 
       &--search-day {
         margin-top: 20px !important;

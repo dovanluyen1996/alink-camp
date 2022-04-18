@@ -107,12 +107,6 @@ export default {
         },
         {
           value: 1,
-          name: 'parking',
-          text: '駐車場有',
-          checked: false,
-        },
-        {
-          value: 1,
           name: 'near_station',
           text: '駅から徒歩5分以内',
           checked: false,

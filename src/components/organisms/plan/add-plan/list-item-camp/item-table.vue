@@ -1,7 +1,7 @@
 <template>
   <div class="items-table">
     <div class="items">
-      <div class="items__title">
+      <div class="items__header">
         <div
           class="items__label items__label--plus"
           @click="selectAll"
@@ -96,6 +96,9 @@ export default {
 
       return this.items.filter(isCheckedLabel);
     },
+    filteredItemIds() {
+      return this.filteredItems.map(item => item.id);
+    },
     checkedItems: {
       get() {
         return this.checkedItemIds;
@@ -115,10 +118,12 @@ export default {
       };
     },
     selectAll() {
-      this.$emit('update:checkedItemIds', this.items.map(item => item.id));
+      const itemIds = this.checkedItemIds.concat(this.filteredItemIds);
+      this.$emit('update:checkedItemIds', [...new Set(itemIds)]);
     },
     unSelectAll() {
-      this.$emit('update:checkedItemIds', []);
+      const fn = itemId => !this.filteredItemIds.includes(itemId);
+      this.$emit('update:checkedItemIds', this.checkedItemIds.filter(fn));
     },
     showLabelFilterDialog() {
       this.isVisibleLabelFilterDialog = true;
@@ -138,16 +143,15 @@ export default {
 }
 
 .items-table {
-  padding: 20px 10px;
-  margin-bottom: 100px;
+  margin: 20px 10px;
 
   .items {
     width: 100%;
     background-color: $color-white;
 
-    &__title {
-      position: relative;
-      padding: 10px 5px;
+    &__header {
+      padding: 10px 8px;
+      overflow: hidden;
       background-color: #eae5e5;
     }
 
@@ -155,59 +159,49 @@ export default {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 22%;
+      float: left;
       height: 24px;
-      padding: 5px 10px;
-      margin-right: 10px;
-      font-size: 14px;
+      padding: 0 10px;
       font-weight: 600;
       color: $color-white;
       text-align: center;
       background-color: #742a2a;
+
+      &::before {
+        display: inline-block;
+        width: 12px;
+        height: 12px;
+        margin-right: 5px;
+        content: '';
+        background-position: center;
+        background-size: 100%;
+      }
     }
   }
 
   .items__label--red {
-    position: absolute;
-    right: 0;
-    width: 28%;
-    margin-right: 5px;
-    font-size: 12px;
+    float: right;
+    font-size: $font-size-small;
     background-color: #a82e05;
     border-radius: 15px;
 
     &::before {
-      display: inline-block;
       width: 16px;
       height: 16px;
-      margin-right: 5px;
-      content: '';
       background-image: url("~@/assets/images/icon-sort.png");
-      background-position: center;
-      background-size: 100%;
     }
   }
 
-  .items__label--plus::before {
-    display: inline-block;
-    width: 12px;
-    height: 12px;
-    margin-right: 5px;
-    content: '';
-    background-image: url("~@/assets/images/icon-choose-plus.png");
-    background-position: center;
-    background-size: 100%;
+  .items__label--plus {
+    margin-right: 10px;
+
+    &::before {
+      background-image: url("~@/assets/images/icon-choose-plus.png");
+    }
   }
 
   .items__label--minus::before {
-    display: inline-block;
-    width: 12px;
-    height: 12px;
-    margin-right: 5px;
-    content: '';
     background-image: url("~@/assets/images/icon-choose-minus.png");
-    background-position: center;
-    background-size: 100%;
   }
 
   .items__list {
@@ -215,7 +209,7 @@ export default {
     align-items: center;
     justify-content: space-between;
     padding: 10px 5px;
-    font-size: 12px;
+    font-size: $font-size-small;
     font-weight: 600;
     border: 1px solid #d9d9d9;
 
@@ -239,6 +233,13 @@ export default {
         filter: invert(100%) grayscale(100%) contrast(100);
       }
     }
+  }
+}
+
+@media screen and (max-width: 374px) {
+  // TODO: iPhoneSE 1stは画面が狭いのでソートなどのボタンが崩れないようにする
+  .items__label {
+    font-size: $font-size-small;
   }
 }
 </style>

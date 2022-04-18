@@ -32,6 +32,12 @@ export default {
   text-align: center;
 }
 
+@media screen and (max-width: 330px) {
+  .no-data {
+    padding: 0 20px;
+  }
+}
+
 .no-data-contents {
   position: relative;
   width: 100%;

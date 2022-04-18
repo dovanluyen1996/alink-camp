@@ -16,12 +16,7 @@
         </p>
 
         <template #footer>
-          <v-ons-button
-            modifier="large"
-            @click="goToLocationServices"
-          >
-            次へ
-          </v-ons-button>
+          <next-button @click="goToLocationServices" />
         </template>
       </content-with-footer>
     </div>
@@ -31,6 +26,7 @@
 <script>
 // components
 import ContentWithFooter from '@/components/organisms/content-with-footer';
+import NextButton from '@/components/atoms/first-guidance/next-button.vue';
 
 // pages
 import LocationServices from '@/views/first-guidance/location-services';
@@ -39,6 +35,7 @@ export default {
   name: 'FirstGuidance',
   components: {
     ContentWithFooter,
+    NextButton,
   },
   methods: {
     goToLocationServices() {
