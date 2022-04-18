@@ -23,7 +23,7 @@ export default {
 
   .sub-title {
     font-size: 12px;
-    font-weight: 600;
+    font-weight: bold;
     border-bottom: 1px solid #c83200;
   }
 

@@ -50,7 +50,7 @@ export default {
 .weather-the-day-after-title {
   padding: 0 5px 0 10px;
   font-size: 10px;
-  font-weight: 600;
+  font-weight: bold;
 }
 
 .campsite-weather-temperatures {
@@ -65,13 +65,6 @@ export default {
 
   .weather-name {
     font-size: 10px;
-    font-weight: 300;
-  }
-
-  .temperature-label,
-  .temperature__value,
-  .temperature__unit {
-    font-weight: 300;
   }
 
   .temperature__unit {

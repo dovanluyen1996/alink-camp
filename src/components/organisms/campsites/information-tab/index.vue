@@ -73,7 +73,7 @@ export default {
       justify-content: center;
       height: 30px;
       font-size: 12px;
-      font-weight: 600;
+      font-weight: bold;
       line-height: 20px;
       border-top: 4px solid #c83200;
       border-bottom: 1px solid #c83200;

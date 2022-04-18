@@ -206,7 +206,7 @@ export default {
   justify-content: center;
   height: 40px;
   font-size: $font-size-small;
-  font-weight: 600;
+  font-weight: bold;
   color: #0061ca;
 }
 

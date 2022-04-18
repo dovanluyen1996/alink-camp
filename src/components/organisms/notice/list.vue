@@ -60,7 +60,6 @@ export default {
   &__title {
     overflow: hidden;
     font-size: 18px;
-    font-weight: 300;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
@@ -73,7 +72,6 @@ export default {
   width: 100%;
   margin-bottom: 12px;
   font-size: $font-size-small;
-  font-weight: 300;
   color: $color-subtext;
 }
 

@@ -80,7 +80,7 @@ export default {
 
   &__sub-title {
     font-size: 12px;
-    font-weight: 600;
+    font-weight: bold;
     color: #222;
   }
 
@@ -101,7 +101,7 @@ export default {
   &__note {
     padding-left: 5px;
     font-size: 18px;
-    font-weight: 600;
+    font-weight: bold;
   }
 }
 

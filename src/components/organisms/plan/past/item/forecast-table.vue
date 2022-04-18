@@ -138,7 +138,6 @@ export default {
     td {
       height: 34px;
       font-size: 14px;
-      font-weight: 300;
       border-left: 1px solid $color-border;
     }
 

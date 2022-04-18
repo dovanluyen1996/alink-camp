@@ -203,7 +203,7 @@ export default {
         display: inline;
         padding: 2px 15px;
         font-size: 16px;
-        font-weight: 600;
+        font-weight: bold;
         background-color: #631900;
         border-radius: 15px;
       }

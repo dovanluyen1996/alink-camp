@@ -46,7 +46,7 @@ export default {
 .chart-title {
   align-self: center;
   padding-left: 10px;
-  font-weight: 600;
+  font-weight: bold;
 }
 
 .chart-update {

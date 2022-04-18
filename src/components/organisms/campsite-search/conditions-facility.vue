@@ -313,7 +313,7 @@ export default {
   margin-top: 20px;
   margin-bottom: 10px;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: bold;
   color: #000;
   border-bottom: 1px solid $color-border;
 }
@@ -322,11 +322,6 @@ export default {
 .facility,
 .nearby-information {
   font-size: 14px;
-  font-weight: 300;
-}
-
-.check-field {
-  font-weight: 300;
 }
 
 .location-grid {

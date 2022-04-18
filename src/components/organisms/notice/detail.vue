@@ -49,7 +49,6 @@ export default {
     display: block;
     margin-bottom: 20px;
     font-size: $font-size-small;
-    font-weight: 300;
     line-height: 1;
     color: $color-subtext;
     text-align: right;
@@ -57,7 +56,6 @@ export default {
 
   &__description {
     display: block;
-    font-weight: 300;
     line-height: 1.7;
     white-space: pre-line;
   }

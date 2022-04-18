@@ -107,7 +107,7 @@ export default {
   th,
   td {
     font-size: 14px;
-    font-weight: 600;
+    font-weight: bold;
     text-align: center;
   }
 }

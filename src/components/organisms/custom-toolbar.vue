@@ -62,7 +62,7 @@ export default {
 
 .custom-toolbar-title {
   font-size: 16px;
-  font-weight: 600;
+  font-weight: bold;
 }
 
 .custom-toolbar-subtitle {

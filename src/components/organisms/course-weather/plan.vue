@@ -50,7 +50,7 @@ export default {
 
   &__count-down {
     margin-left: 10px;
-    font-weight: 600;
+    font-weight: bold;
   }
 
   &.is-today {

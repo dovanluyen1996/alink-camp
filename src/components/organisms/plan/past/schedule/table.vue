@@ -253,12 +253,12 @@ export default {
 
       &__value {
         font-size: $font-size-small;
-        font-weight: 600;
+        font-weight: bold;
       }
 
       &__unit {
         font-size: $font-size-small;
-        font-weight: 600;
+        font-weight: bold;
       }
     }
 

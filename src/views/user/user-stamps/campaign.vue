@@ -160,7 +160,7 @@ export default {
 
 .user_stamps-number {
   margin-bottom: 25px;
-  font-weight: 600;
+  font-weight: bold;
   text-align: center;
 
   span {

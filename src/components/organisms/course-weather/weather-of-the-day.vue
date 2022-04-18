@@ -79,7 +79,7 @@ export default {
 .course-weather-of-the-day-title {
   padding: 9px;
   margin-bottom: 10px;
-  font-weight: 600;
+  font-weight: bold;
   line-height: 1;
   text-align: center;
   background: $color-th;

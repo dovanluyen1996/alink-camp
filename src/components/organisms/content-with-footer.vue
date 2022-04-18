@@ -92,7 +92,6 @@ export default {
     p {
       margin-top: 28px;
       font-size: 16px;
-      font-weight: 300;
       line-height: 1.5;
     }
   }

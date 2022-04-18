@@ -57,7 +57,7 @@ export default {
   padding-top: 13px;
   padding-bottom: 13px;
   font-size: $font-size-large;
-  font-weight: 600;
+  font-weight: bold;
   word-break: break-all;
 }
 

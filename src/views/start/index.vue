@@ -153,7 +153,7 @@ export default {
   bottom: 6px;
   width: 315px;
   margin: 0 auto;
-  font-weight: 600;
+  font-weight: bold;
   color: #a82e05;
   text-align: right;
 
