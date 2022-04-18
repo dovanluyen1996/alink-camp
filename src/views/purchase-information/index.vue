@@ -271,9 +271,7 @@ export default {
     align-items: center;
     justify-content: center;
     height: 38px;
-    font-size: 12px;
     font-size: $font-size-small;
-    font-weight: 400;
     line-height: 1;
     color: #fff;
     text-align: center;
