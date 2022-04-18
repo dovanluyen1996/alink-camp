@@ -2,6 +2,7 @@
   <v-ons-button
     modifier="yellow"
     class="button--share"
+    :disabled="isSharing"
     @click="shareMessage"
   >
     <slot name="text" />
@@ -20,16 +21,24 @@ export default {
       required: true,
     },
   },
+  data() {
+    return {
+      isSharing: false,
+    };
+  },
   methods: {
     shareMessage() {
+      this.isSharing = true;
       const options = {
         message: this.message, // not supported on some apps (Facebook, Instagram)
         subject: this.subject, // for email
       };
       const onSuccess = (result) => {
+        this.isSharing = false;
         console.log('SNS Sharing complete:', result.completed, result.app);
       };
       const onError = (message) => {
+        this.isSharing = false;
         console.error('SNS Sharing failed:', message);
       };
 
