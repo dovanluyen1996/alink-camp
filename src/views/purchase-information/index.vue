@@ -35,7 +35,7 @@
               height="146px"
             >
           </template>
-          通知をONにする事で、雨雲が近づいたら、日の入情報など様々な最新情報を確認することができます。
+          通知をONにする事で、キャンプ中の雨雲の接近や落雷＆突風注意報など、様々な最新の情報をお知らせします。
         </purchase-point>
 
         <purchase-point>
@@ -50,7 +50,7 @@
               height="146"
             >
           </template>
-          キャンプ場ごとに保存できる予定を制限なしに作成、保存できるようになります。
+          キャンプ場ごとに保存できる計画や思い出を、個数の制限なしに作成・保存できるようになります。
         </purchase-point>
 
         <purchase-point>
@@ -79,7 +79,7 @@
               @click="callToPurchase()"
             >
               <span>1ヶ月無料で試してみる</span><br>
-              <span>無料期間後：240円/月額</span>
+              <span>無料期間後：月額240円</span>
             </div>
             <div
               class="purchase__action"
