@@ -14,6 +14,7 @@
     <custom-radio
       v-model="inputedTemperatureValue"
       :labels="temperatureLabels"
+      class="custom-radio"
     />
 
     <div class="card__title">
@@ -149,6 +150,21 @@ export default {
 };
 </script>
 
+<style lang="scss">
+/* global styles */
+.conditions-fields {
+  .check-field {
+    font-weight: normal;
+  }
+
+  .custom-radio {
+    .custom-radio-label {
+      font-weight: normal;
+    }
+  }
+}
+</style>
+
 <style scoped lang="scss">
 @import '@/assets/scss/_variables.scss';
 
@@ -160,12 +176,5 @@ export default {
   font-weight: bold;
   color: #000;
   border-bottom: 1px solid $color-border;
-}
-
-.conditions-fields /deep/ {
-  .custom-radio-label,
-  .check-field {
-    font-weight: normal;
-  }
 }
 </style>
