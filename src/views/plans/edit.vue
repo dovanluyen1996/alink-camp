@@ -98,23 +98,17 @@ export default {
       {
         label: '計画日',
         page: DatePlan,
-        props: {
-          campsite: this.plan.campsite,
-        },
+        props: { campsite: this.plan.campsite },
       },
       {
         label: '持ち物',
         page: ListItemCamp,
-        props: {
-          campsite: this.plan.campsite,
-        },
+        props: { campsite: this.plan.campsite },
       },
       {
         label: '予定詳細',
         page: DetailScheduleCamp,
-        props: {
-          campsite: this.plan.campsite,
-        },
+        props: { campsite: this.plan.campsite },
       },
     ]);
   },

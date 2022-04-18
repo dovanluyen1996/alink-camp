@@ -61,7 +61,6 @@ export default {
         extends: EditPlanPage,
         onsNavigatorProps: {
           plan,
-          isNew: false,
         },
       });
     },
