@@ -283,7 +283,6 @@ export default {
 
   .content-with-footer {
     &__footer {
-      bottom: -1px !important;
       padding: 0 !important;
       background-color: $color-default;
     }
