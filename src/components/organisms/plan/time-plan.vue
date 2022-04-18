@@ -56,9 +56,7 @@ export default {
     },
   },
   methods: {
-    async goToEditPlan(plan) {
-      await this.$store.dispatch('plan/setPlanId', plan.id);
-
+    goToEditPlan(plan) {
       this.$store.dispatch('plansNavigator/push', {
         extends: EditPlanPage,
         onsNavigatorProps: {

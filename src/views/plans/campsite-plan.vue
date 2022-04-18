@@ -117,7 +117,6 @@ export default {
         extends: NewPlanPage,
         onsNavigatorProps: {
           campsite: this.campsite,
-          isNew: true,
         },
       });
     },

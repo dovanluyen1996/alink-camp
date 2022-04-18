@@ -72,12 +72,18 @@ export default {
       {
         label: '持ち物',
         page: ListItemCamp,
-        props: { campsite: this.campsite },
+        props: {
+          campsite: this.campsite,
+          isNew: true,
+        },
       },
       {
         label: '予定詳細',
         page: DetailScheduleCamp,
-        props: { campsite: this.campsite },
+        props: {
+          campsite: this.campsite,
+          isNew: true,
+        },
       },
     ]);
   },

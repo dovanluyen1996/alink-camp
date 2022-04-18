@@ -106,12 +106,18 @@ export default {
       {
         label: '持ち物',
         page: ListItemCamp,
-        props: { campsite: this.plan.campsite },
+        props: {
+          campsite: this.plan.campsite,
+          isNew: false,
+        },
       },
       {
         label: '予定詳細',
         page: DetailScheduleCamp,
-        props: { campsite: this.plan.campsite },
+        props: {
+          campsite: this.plan.campsite,
+          isNew: false,
+        },
       },
     ]);
   },
@@ -126,6 +132,7 @@ export default {
       await this.getItems();
       await this.getUserCampsitePlan();
 
+      this.setPlanId();
       this.setStartedDate();
       this.setFinishedDate();
       this.setItems();
@@ -136,6 +143,9 @@ export default {
     },
     async getUserCampsitePlan() {
       await this.$store.dispatch('models/userCampsitePlan/getUserCampsitePlan', { userCampsitePlanId: this.plan.id });
+    },
+    setPlanId() {
+      this.$store.dispatch('plan/setPlanId', this.detailPlan.id);
     },
     setStartedDate() {
       this.$store.dispatch('plan/setStartedDate', this.detailPlan.startedDate);
