@@ -5,8 +5,8 @@
       <div class="start-page__top">
         <img
           src="@/assets/images/start/camp-logo-start.png"
-          width="285px"
-          height="86px"
+          width="302px"
+          height="92px"
           class="app-logo"
         >
         <div class="app-version">
