@@ -80,13 +80,11 @@
               <span>1ヶ月無料で試してみる</span><br>
               <span>無料期間後：240円/月額</span>
             </div>
-            <div class="purchase__action">
-              <v-ons-button
-                modifier="secondary"
-                @click="restorePurchase()"
-              >
-                購入状態を復元する方はこちら
-              </v-ons-button>
+            <div
+              class="purchase__action"
+              @click="restorePurchase()"
+            >
+              購入状態を復元する方はこちら
             </div>
           </div>
         </template>
@@ -227,18 +225,20 @@ export default {
   background-color: $color-default;
 
   &__top {
-    padding: 30px 0 17px;
+    padding: 15px 0 5px;
 
     p {
       margin: 0;
       font-size: 17px;
       font-weight: bold;
+      line-height: 18px;
       color: $color-purchase-gold;
     }
   }
 
   &__content {
-    padding: 12px 0;
+    max-height: 54px;
+    padding: 6px 0 8px;
     margin: 0 28px;
     font-size: 17px;
     font-weight: bold;
@@ -258,11 +258,14 @@ export default {
   }
 
   &__action {
-    padding-bottom: 6px;
-    margin-top: 30px;
-    font-size: 12px;
-    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 38px;
+    font-size: $font-size-small;
+    line-height: 1;
     color: #fff;
+    text-align: center;
     text-decoration: underline;
   }
 }
@@ -299,13 +302,11 @@ export default {
     justify-content: center;
     white-space: nowrap;
   }
+}
 
-  .button--secondary {
-    font-size: 12px;
-    font-weight: 400;
-    text-align: center;
-    text-decoration: underline;
-    background-color: transparent;
+@media screen and (max-width: 374px) {
+  .purchase__content {
+    margin: 0 20px;
   }
 }
 </style>
