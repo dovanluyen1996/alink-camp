@@ -1,28 +1,33 @@
 <template>
-  <v-ons-alert-dialog
+  <v-ons-modal
     :visible.sync="isVisible"
-    class="custom-edit-alert-dialog"
+    class="edit-dialog-task"
+    animation="fade"
   >
-    <textarea v-model="task" class="textarea_dialog" />
-    <template #footer>
+    <div class="edit-dialog-task__box">
+      <div class="edit-dialog-task__content">
+        <textarea
+          v-model="task"
+          class="edit-dialog-task__textarea"
+        />
+        <div class="edit-dialog-task__close-button">
+          <img
+            src="@/assets/images/form/delete.png"
+            width="18px"
+            height="18px"
+            @click="closeDialog()"
+          >
+        </div>
+      </div>
       <v-ons-button
-        modifier="yellow"
-        class="button--edit-dialog"
+        modifier="yellow rounded"
+        class="edit-dialog-task__save-button"
         @click="closeTask()"
       >
         保存
       </v-ons-button>
-    </template>
-    <div
-      class="close-dialog"
-      @click="closeDialog()"
-    >
-      <img
-        src="@/assets/images/form/delete.png"
-        class="close-dialog--icon"
-      >
     </div>
-  </v-ons-alert-dialog>
+  </v-ons-modal>
 </template>
 
 <script>
@@ -74,28 +79,43 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '@/assets/scss/_variables.scss';
+$edit-area-margin: 5%;
 
-/deep/ {
-  .button {
-    display: inline-flex;
+.edit-dialog-task {
+  &__box {
+    position: absolute;
+    top: 15%;
+    width: 100%;
+  }
+
+  &__content {
+    margin: 0 $edit-area-margin 14px;
+  }
+
+  &__textarea {
+    box-sizing: border-box;
+    width: 100%;
+    height: 150px;
+    resize: none;
+    border-radius: 0;
+  }
+
+  &__save-button {
+    width: 190px;
+  }
+
+  &__close-button {
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    display: flex;
     align-items: center;
     justify-content: center;
-    height: 32px;
-    font-size: 12px;
+    width: 40px;
+    height: 40px;
+    margin-right: $edit-area-margin;
   }
 }
 
-.alert-dialog {
-  position: relative;
-}
-
-.close-dialog {
-  position: absolute;
-  top: 7px;
-  right: -5px;
-
-  &--icon {
-    width: 18px;
-  }
-}
 </style>
