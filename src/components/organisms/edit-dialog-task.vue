@@ -10,19 +10,18 @@
           v-model="task"
           class="edit-dialog-task__textarea"
         />
-        <div
-          class="close-dialog"
-          @click="closeDialog()"
-        >
+        <div class="edit-dialog-task__close-button">
           <img
             src="@/assets/images/form/delete.png"
-            class="close-dialog--icon"
+            width="18px"
+            height="18px"
+            @click="closeDialog()"
           >
         </div>
       </div>
       <v-ons-button
         modifier="yellow"
-        class="button--edit-dialog"
+        class="edit-dialog-task__save-button"
         @click="closeTask()"
       >
         保存
@@ -81,14 +80,7 @@ export default {
 
 <style lang="scss" scoped>
 @import '@/assets/scss/_variables.scss';
-
-.button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  height: 32px;
-  font-size: $font-size-small;
-}
+$edit-area-margin: 5%;
 
 .edit-dialog-task {
   &__box {
@@ -98,31 +90,37 @@ export default {
   }
 
   &__content {
-    position: relative;
-    display: inline-block;
-    width: 90%;
+    margin: 0 $edit-area-margin 14px;
   }
 
   &__textarea {
+    box-sizing: border-box;
     width: 100%;
     height: 150px;
-    padding: 0;
     resize: none;
     border: none;
   }
-}
 
-.close-dialog {
-  position: absolute;
-  top: -9px;
-  right: -9px;
+  &__save-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 32px;
+    margin-top: 14px;
+    font-size: $font-size-small;
+  }
 
-  &--icon {
-    width: 18px;
+  &__close-button {
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    margin-right: $edit-area-margin;
   }
 }
 
-.button--edit-dialog {
-  margin-top: 14px;
-}
 </style>
