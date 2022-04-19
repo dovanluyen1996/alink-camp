@@ -45,8 +45,7 @@ export default {
 .content-with-footer {
   position: relative;
   height: 100%;
-  // NOTE: iOS対策
-  //       footerがbottom: -1のためスワイプについて来てしまう
+  // NOTE: contentの見切れ対策のためfooterをbottom: -1してるためスワイプについて来てしまうのを防止
   overflow: hidden;
 
   &__content {
