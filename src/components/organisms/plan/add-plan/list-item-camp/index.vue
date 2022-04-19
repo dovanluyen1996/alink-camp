@@ -105,6 +105,10 @@ export default {
       type: Object,
       required: true,
     },
+    isNew: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -128,9 +132,6 @@ export default {
       consoleItems.sort((a, b) => a.id - b.id);
 
       return userItems.concat(consoleItems);
-    },
-    isNew() {
-      return this.$store.getters['plan/isNew'];
     },
     params() {
       return this.$store.getters['plan/params'];

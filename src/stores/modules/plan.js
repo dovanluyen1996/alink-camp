@@ -21,7 +21,6 @@ export default {
   getters: {
     params: state => state.params,
     isLoading: state => state.isLoading,
-    isNew: state => state.params.planId === null,
     dateRange: (state) => {
       const { startedDate, finishedDate } = state.params;
       if (startedDate && finishedDate) {
