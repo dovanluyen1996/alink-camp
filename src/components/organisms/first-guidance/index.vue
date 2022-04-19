@@ -1,10 +1,14 @@
 <template>
   <content-with-footer>
-    <img
-      :src="image"
-      width="280px"
-    >
-    <div v-html="message" />
+    <div class="first-guidance">
+      <img
+        :src="image"
+        class="first-guidance__image"
+      >
+      <div class="first-guidance__message">
+        {{ message }}
+      </div>
+    </div>
 
     <template #footer>
       <next-button @click="onClick" />
@@ -44,40 +48,34 @@ export default {
 };
 </script>
 
-<style lang="scss">
-// global styles
+<style lang="scss" scoped>
 @import '@/assets/scss/_variables.scss';
 
-.content-with-footer {
-  padding: 0 16px;
-  color: #000;
-  background-color: #f2ebd3;
+.first-guidance {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
 
-  .content-with-footer__content {
-    display: flex;
-    flex-flow: column;
-    align-items: center;
-    justify-content: center;
+  &__image {
+    // NOTE: iPhone SE 1stでも画面内にコンテンツを収まらせたいのでwidthを割合指定にしている
+    width: 75%;
+    max-width: 280px;
+    margin-bottom: 15%;
+  }
 
-    div {
-      margin-top: 80px;
-      font-size: $font-size-large;
-      line-height: 1.5;
-    }
+  &__message {
+    // NOTE: テキストの量で高さが変わると画像に位置もずれてるので高さ固定で対策
+    height: 5em;
+    padding: 0 23px;
+    font-size: $font-size-large;
   }
 }
 
-@media only screen and (max-width: 320px) {
-  .content-with-footer {
-    .content-with-footer__content {
-      img {
-        width: 75%;
-      }
-
-      div {
-        margin-top: 40px;
-      }
-    }
+@media only screen and (max-width: 374px) {
+  .first-guidance__image {
+    margin-bottom: 10%;
   }
 }
 </style>

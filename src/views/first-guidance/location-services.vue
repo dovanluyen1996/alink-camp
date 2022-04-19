@@ -4,7 +4,7 @@
       modifier="green"
       title="位置情報取得"
     />
-
+    <div class="background" />
     <div class="content">
       <first-guidance-index
         image-src="guidances/location-service.svg"
@@ -76,3 +76,11 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+@import '@/assets/scss/_variables.scss';
+
+.background {
+  background: $bg-first-guidance;
+}
+</style>

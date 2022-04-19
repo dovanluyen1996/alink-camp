@@ -4,7 +4,7 @@
       modifier="green"
       title="PUSH通知許可"
     />
-
+    <div class="background" />
     <div class="content">
       <first-guidance-index
         image-src="guidances/push-noti.svg"
@@ -54,3 +54,11 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+@import '@/assets/scss/_variables.scss';
+
+.background {
+  background: $bg-first-guidance;
+}
+</style>

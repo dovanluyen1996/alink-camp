@@ -4,6 +4,7 @@
       modifier="green"
       title="情報登録・設定"
     />
+    <div class="background" />
     <div class="content">
       <first-guidance-index
         image-src="guidances/info-setting.svg"
@@ -33,3 +34,11 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+@import '@/assets/scss/_variables.scss';
+
+.background {
+  background: $bg-first-guidance;
+}
+</style>

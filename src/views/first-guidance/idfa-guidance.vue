@@ -4,7 +4,7 @@
       modifier="green"
       title="キャンプ計画の保存"
     />
-
+    <div class="background" />
     <div class="content">
       <first-guidance-index
         image-src="guidances/campsite-items.svg"
@@ -81,6 +81,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '@/assets/scss/_variables.scss';
+
+.background {
+  background: $bg-first-guidance;
+}
+
 /deep/ {
   .alert-dialog-content {
     font-size: 16px;
