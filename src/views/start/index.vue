@@ -146,10 +146,10 @@ export default {
 }
 
 .app-logo {
-  max-width: 302px;
   // NOTE: 幅375pxで最適に見えるようにしている
   //       そのため302 / 372 ≈ 80.5% なので81％と半端にしている
   width: 81%;
+  max-width: 302px;
 }
 
 .app-version {
