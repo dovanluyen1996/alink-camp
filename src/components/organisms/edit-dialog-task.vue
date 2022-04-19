@@ -20,7 +20,7 @@
         </div>
       </div>
       <v-ons-button
-        modifier="yellow"
+        modifier="yellow rounded"
         class="edit-dialog-task__save-button"
         @click="closeTask()"
       >
@@ -98,16 +98,11 @@ $edit-area-margin: 5%;
     width: 100%;
     height: 150px;
     resize: none;
-    border: none;
+    border-radius: 0;
   }
 
   &__save-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    height: 32px;
-    margin-top: 14px;
-    font-size: $font-size-small;
+    width: 190px;
   }
 
   &__close-button {
