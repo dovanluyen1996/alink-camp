@@ -5,8 +5,6 @@
       <div class="start-page__top">
         <img
           src="@/assets/images/start/camp-logo-start.png"
-          width="302px"
-          height="92px"
           class="app-logo"
         >
         <div class="app-version">
@@ -134,7 +132,7 @@ export default {
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 100%;
+      width: 86%;
       max-width: 325px;
       height: 60px;
       margin-bottom: 20px;
@@ -145,6 +143,13 @@ export default {
       }
     }
   }
+}
+
+.app-logo {
+  max-width: 302px;
+  // NOTE: 幅375pxで最適に見えるようにしている
+  //       そのため302 / 372 ≈ 80.5% なので81％と半端にしている
+  width: 81%;
 }
 
 .app-version {
