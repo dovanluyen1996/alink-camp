@@ -3,21 +3,23 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>851322130660-f85plnag26p9upnkknelvkm891cirkbb.apps.googleusercontent.com</string>
+	<string>1076933641634-cduveme31nog5iuprb4732ntu080prgl.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.851322130660-f85plnag26p9upnkknelvkm891cirkbb</string>
+	<string>com.googleusercontent.apps.1076933641634-cduveme31nog5iuprb4732ntu080prgl</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>1076933641634-engadmlen9jhevur2vodidm55fo7o529.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
-	<string>AIzaSyAc4H89WGCEvj14shKipdNhKtMCmSW9jSA</string>
+	<string>AIzaSyDofVlVac5BZzPfeHkG7D5tIayIYY92EMM</string>
 	<key>GCM_SENDER_ID</key>
-	<string>851322130660</string>
+	<string>1076933641634</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>jp.rights.alink.golftenki.dev</string>
+	<string>jp.or.jwa.tenkijp.camp.stg</string>
 	<key>PROJECT_ID</key>
-	<string>alinkgolfweather</string>
+	<string>tenkijp-dev-4b95f</string>
 	<key>STORAGE_BUCKET</key>
-	<string>alinkgolfweather.appspot.com</string>
+	<string>tenkijp-dev-4b95f.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +31,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:851322130660:ios:1963a8bd12f5479aae1cf1</string>
+	<string>1:1076933641634:ios:e7e691b2784c612af45efb</string>
+	<key>DATABASE_URL</key>
+	<string>https://tenkijp-dev-4b95f.firebaseio.com</string>
 </dict>
 </plist>
