@@ -4,7 +4,7 @@
   >
     <img
       class="not-purchased-img"
-      src="@/assets/images/campsite-search-weather-purchase.png"
+      src="@/assets/images/campsite-search-weather-purchase.jpg"
       alt="weather-purchase"
       @click="goToPurchaseInformation"
     >

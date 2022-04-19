@@ -13,11 +13,10 @@
           </template>
           <template #thumbnail>
             <img
-              :src="require('@/assets/images/purchase-information/point-1.png')"
+              src="@/assets/images/purchase-information/point-1.png"
               class="purchase-information__point"
-              alt="purchase-point-1"
-              height="148px"
-              width="115px"
+              height="150px"
+              width="116px"
             >
           </template>
           1ヶ月先の気温や降水量の予測情報をご提供します。また、年間の天気や気温の傾向を確認することができます。
@@ -29,10 +28,9 @@
           </template>
           <template #thumbnail>
             <img
-              :src="require('@/assets/images/purchase-information/point-2.png')"
-              alt="purchase-point-1"
+              src="@/assets/images/purchase-information/point-2.png"
               width="132px"
-              height="146px"
+              height="148px"
             >
           </template>
           通知をONにする事で、キャンプ中の雨雲の接近や落雷＆突風注意報など、様々な最新の情報をお知らせします。
@@ -44,10 +42,9 @@
           </template>
           <template #thumbnail>
             <img
-              :src="require('@/assets/images/purchase-information/point-3.png')"
-              alt="purchase-point-1"
+              src="@/assets/images/purchase-information/point-3.png"
               width="132px"
-              height="146"
+              height="148px"
             >
           </template>
           キャンプ場ごとに保存できる計画や思い出を、個数の制限なしに作成・保存できるようになります。
@@ -59,10 +56,9 @@
           </template>
           <template #thumbnail>
             <img
-              :src="require('@/assets/images/purchase-information/point-4.png')"
-              alt="purchase-point-1"
-              width="130px"
-              height="168px"
+              src="@/assets/images/purchase-information/point-4.png"
+              width="132px"
+              height="172px"
             >
           </template>
           紫外線、落雷、星空の見やすさなどを指数でご提供します。<br>
