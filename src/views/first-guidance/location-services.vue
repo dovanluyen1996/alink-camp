@@ -9,7 +9,7 @@
       <first-guidance-index
         image-src="guidances/location-service.svg"
         message="位置情報をONにすることで、最適なキャンプ場や周辺の施設のご案内を利用頂けます。"
-        @onClick="callToLocationServicesDialog"
+        @clickNextButton="callToLocationServicesDialog"
       />
 
       <v-ons-alert-dialog

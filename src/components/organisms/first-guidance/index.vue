@@ -11,7 +11,7 @@
     </div>
 
     <template #footer>
-      <next-button @click="onClick" />
+      <next-button @click="clickNextButton" />
     </template>
   </content-with-footer>
 </template>
@@ -41,8 +41,8 @@ export default {
     },
   },
   methods: {
-    onClick() {
-      this.$emit('onClick');
+    clickNextButton() {
+      this.$emit('clickNextButton');
     },
   },
 };
@@ -66,7 +66,7 @@ export default {
   }
 
   &__message {
-    // NOTE: テキストの量で高さが変わると画像に位置もずれてるので高さ固定で対策
+    // NOTE: テキストの量で高さが変わると画像の位置もずれるので高さ固定で対策
     height: 5em;
     padding: 0 23px;
     font-size: $font-size-large;

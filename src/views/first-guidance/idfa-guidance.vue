@@ -9,7 +9,7 @@
       <first-guidance-index
         image-src="guidances/campsite-items.svg"
         message="キャンプの思い出や、持っていくオリジナルアイテムなどの登録もできるので、ぜひメニューよりデータ引継ぎ設定を行って下さい。"
-        @onClick="showIdfaAlert"
+        @clickNextButton="showIdfaAlert"
       />
     </div>
 

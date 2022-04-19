@@ -9,7 +9,7 @@
       <first-guidance-index
         image-src="guidances/push-noti.svg"
         message="PUSH通知をONにすることで、予定日の天気予報、キャンプ場に近づく雨雲や、雷、突風などの情報をご確認いただけます。"
-        @onClick="callToPushNotificationDialog"
+        @clickNextButton="callToPushNotificationDialog"
       />
     </div>
   </v-ons-page>

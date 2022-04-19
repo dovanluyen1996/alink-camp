@@ -9,7 +9,7 @@
       <first-guidance-index
         image-src="guidances/info-setting.svg"
         message="天気の傾向や施設情報を踏まえたキャンプ場検索で、目的地を決め、予定日設定をする事で、詳細な天気予報をお届けします。"
-        @onClick="goToLocationServices"
+        @clickNextButton="goToLocationServices"
       />
     </div>
   </v-ons-page>
