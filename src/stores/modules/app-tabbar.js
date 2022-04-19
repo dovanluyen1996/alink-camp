@@ -4,7 +4,7 @@ export default {
   strict: true,
   namespaced: true,
   state: {
-    activeIndex: settings.views.appTabbar.tabIndexes.courseWeather,
+    activeIndex: settings.views.appTabbar.tabIndexes.campsiteWeather,
     lastVisitedAt: null,
   },
   mutations: {

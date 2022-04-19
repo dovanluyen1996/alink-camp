@@ -102,7 +102,7 @@ export default {
 
       switch (event.activeIndex) {
       case settings.views.appTabbar.tabIndexes.campsiteWeather:
-        this.$store.dispatch('courseWeatherNavigator/reset');
+        this.$store.dispatch('campsiteWeatherNavigator/reset');
         break;
       case settings.views.appTabbar.tabIndexes.campsiteSearch:
         this.$store.dispatch('campsiteSearchNavigator/reset');
