@@ -4,23 +4,13 @@
       modifier="green"
       title="位置情報取得"
     />
-
+    <div class="background" />
     <div class="content">
-      <content-with-footer class="guidance-content">
-        <div class="guidance-content__box">
-          <img
-            src="@/assets/images/guidances/location-service.svg"
-            width="280px"
-          >
-        </div>
-        <p class="guidance-content__text">
-          位置情報をONにすることで、最適なキャンプ場や周辺の施設のご案内を利用頂けます。
-        </p>
-
-        <template #footer>
-          <next-button @click="callToLocationServicesDialog" />
-        </template>
-      </content-with-footer>
+      <first-guidance-index
+        image-src="guidances/location-service.svg"
+        message="位置情報をONにすることで、最適なキャンプ場や周辺の施設のご案内を利用頂けます。"
+        @clickNextButton="callToLocationServicesDialog"
+      />
 
       <v-ons-alert-dialog
         :visible.sync="geoLocationErrorVisible"
@@ -46,8 +36,7 @@
 
 <script>
 // components
-import ContentWithFooter from '@/components/organisms/content-with-footer';
-import NextButton from '@/components/atoms/first-guidance/next-button.vue';
+import FirstGuidanceIndex from '@/components/organisms/first-guidance';
 
 // pages
 import PushNotification from '@/views/first-guidance/push-notification';
@@ -57,8 +46,7 @@ import settings from '@/config/settings';
 export default {
   name: 'FirstGuidanceLocationServices',
   components: {
-    ContentWithFooter,
-    NextButton,
+    FirstGuidanceIndex,
   },
   data() {
     return {
@@ -90,22 +78,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.call-to-purchase {
-  height: auto;
-}
+@import '@/assets/scss/_variables.scss';
 
-.guidance-content {
-  &__box {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 280px;
-    background-color: transparent;
-  }
-
-  &__text {
-    margin-top: 80px !important;
-  }
+.background {
+  background: $bg-first-guidance;
 }
 </style>
