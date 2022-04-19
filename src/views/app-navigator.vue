@@ -46,7 +46,7 @@ export default {
       // -> check is open other page in each tab
       //    -> If open other page -> back to previous screen like button 「<」
       //    -> If is openning Top Page of Tab -> set Active Tab to App Top
-      if (tabbarActiveIndex === settings.views.appTabbar.tabIndexes.courseWeather) {
+      if (tabbarActiveIndex === settings.views.appTabbar.tabIndexes.campsiteWeather) {
         this.confirmAppExitVisible = true;
       } else {
         this.resetTabPage(tabbarActiveIndex);
@@ -56,32 +56,32 @@ export default {
     },
     resetTabPage(tabbarActiveIndex) {
       switch (tabbarActiveIndex) {
-      case settings.views.appTabbar.tabIndexes.courseSearch:
-        if (this.$store.state.courseSearchNavigator.stack.length > 1) {
-          this.$store.dispatch('courseSearchNavigator/pop');
+      case settings.views.appTabbar.tabIndexes.campsiteSearch:
+        if (this.$store.state.campsiteSearchNavigator.stack.length > 1) {
+          this.$store.dispatch('campsiteSearchNavigator/pop');
         } else {
-          this.$store.commit('appTabbar/setActiveIndex', settings.views.appTabbar.tabIndexes.courseWeather);
+          this.$store.commit('appTabbar/setActiveIndex', settings.views.appTabbar.tabIndexes.campsiteWeather);
         }
         break;
-      case settings.views.appTabbar.tabIndexes.scores:
-        if (this.$store.state.scoresNavigator.stack.length > 1) {
-          this.$store.dispatch('scoresNavigator/pop');
+      case settings.views.appTabbar.tabIndexes.plans:
+        if (this.$store.state.plansNavigator.stack.length > 1) {
+          this.$store.dispatch('plansNavigator/pop');
         } else {
-          this.$store.commit('appTabbar/setActiveIndex', settings.views.appTabbar.tabIndexes.courseWeather);
+          this.$store.commit('appTabbar/setActiveIndex', settings.views.appTabbar.tabIndexes.campsiteWeather);
         }
         break;
-      case settings.views.appTabbar.tabIndexes.windForecast:
-        if (this.$store.state.windForecastNavigator.stack.length > 1) {
-          this.$store.dispatch('windForecastNavigator/pop');
+      case settings.views.appTabbar.tabIndexes.spotSearch:
+        if (this.$store.state.spotSearchNavigator.stack.length > 1) {
+          this.$store.dispatch('spotSearchNavigator/pop');
         } else {
-          this.$store.commit('appTabbar/setActiveIndex', settings.views.appTabbar.tabIndexes.courseWeather);
+          this.$store.commit('appTabbar/setActiveIndex', settings.views.appTabbar.tabIndexes.campsiteWeather);
         }
         break;
       case settings.views.appTabbar.tabIndexes.menu:
         if (this.$store.state.menuNavigator.stack.length > 1) {
           this.$store.dispatch('menuNavigator/pop');
         } else {
-          this.$store.commit('appTabbar/setActiveIndex', settings.views.appTabbar.tabIndexes.courseWeather);
+          this.$store.commit('appTabbar/setActiveIndex', settings.views.appTabbar.tabIndexes.campsiteWeather);
         }
         break;
       default:
