@@ -202,7 +202,7 @@ export default {
 
   &__text {
     font-size: 14px;
-    font-weight: 600;
+    font-weight: bold;
   }
 
   &__note {
@@ -213,7 +213,7 @@ export default {
     & > p {
       padding: 18px 20px;
       font-size: 18px;
-      font-weight: 600;
+      font-weight: bold;
       line-height: 24px;
       color: #000;
     }
@@ -260,12 +260,7 @@ export default {
   .list-item {
     border-bottom: 1px solid #d9d9d9;
 
-    &__title {
-      font-weight: 300;
-    }
-
     &__subtitle {
-      font-weight: 300;
       color: #00000080;
     }
   }

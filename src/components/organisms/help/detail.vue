@@ -46,7 +46,6 @@ export default {
 
   &__description {
     display: block;
-    font-weight: 300;
     line-height: 1.7;
     white-space: pre-line;
   }

@@ -286,7 +286,7 @@ export default {
     justify-content: space-between;
     margin-bottom: 12px;
     font-size: $font-size-large;
-    font-weight: 600;
+    font-weight: bold;
     line-height: 1.5;
   }
 

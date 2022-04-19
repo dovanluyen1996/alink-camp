@@ -166,7 +166,6 @@ export default {
 
 .course-info {
   margin-bottom: 30px;
-  font-weight: 300;
   text-align: center;
 }
 </style>

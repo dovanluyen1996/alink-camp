@@ -47,12 +47,11 @@ export default {
   justify-content: space-between;
   padding: 6px 22px;
   font-size: $font-size-small;
-  font-weight: 300;
   color: #000;
   background: #f5e9e6;
 
   &__count-down {
-    font-weight: 600;
+    font-weight: bold;
     color: #eb2727;
   }
 

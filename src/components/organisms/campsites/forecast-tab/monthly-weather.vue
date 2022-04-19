@@ -74,7 +74,7 @@ export default {
   width: 100%;
   height: 50px;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: bold;
   color: $color-white;
   background-color: #f29678;
 }
@@ -104,7 +104,7 @@ export default {
 .chart-title {
   align-self: center;
   padding-left: 10px;
-  font-weight: 600;
+  font-weight: bold;
 }
 
 .chart-update {

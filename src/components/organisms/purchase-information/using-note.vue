@@ -64,7 +64,6 @@ export default {
   &__content {
     padding: 22px;
     font-size: 16px;
-    font-weight: 300;
     line-height: 1.7;
   }
 
@@ -76,7 +75,7 @@ export default {
         height: auto;
         padding: 0 8px 0 0;
         font-size: 14px;
-        font-weight: 600;
+        font-weight: bold;
         line-height: 1.7;
         color: #000;
         text-decoration: underline;

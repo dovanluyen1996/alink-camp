@@ -34,7 +34,7 @@ export default {
   &__subtitle {
     p {
       margin: 0;
-      font-weight: 600;
+      font-weight: bold;
       color: $color-purchase-gold;
       text-align: center;
     }

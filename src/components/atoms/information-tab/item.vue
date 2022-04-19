@@ -64,7 +64,7 @@ export default {
       height: 30px;
       padding-right: calc(50% - 35px);
       font-size: 12px;
-      font-weight: 600;
+      font-weight: bold;
       border-top: 4px solid #c83200;
       border-bottom: 1px solid #c83200;
     }

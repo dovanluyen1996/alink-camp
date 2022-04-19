@@ -125,7 +125,6 @@ export default {
 
   height: 27px;
   font-size: $font-size-small;
-  font-weight: 300;
   color: #100101;
   background: $color-th;
 }
@@ -223,6 +222,6 @@ export default {
   right: 5px;
   bottom: 1px;
   font-size: $font-size-small;
-  font-weight: 600;
+  font-weight: bold;
 }
 </style>

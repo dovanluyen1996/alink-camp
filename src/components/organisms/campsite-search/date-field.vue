@@ -1,7 +1,7 @@
 <template>
   <div class="campsite-search-date-field">
     <div class="card__title card__title--center">
-      天候を知りたい日付選択（必須）
+      キャンプの計画予定日（必須）
     </div>
     <div>
       <validation-provider

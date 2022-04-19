@@ -27,7 +27,7 @@
 
       <div class="date-detail">
         <span>
-          {{ date }}
+          {{ localMonthDateFromWithoutZero(date) }}
         </span>
       </div>
       <table class="table time-scedules">
@@ -199,6 +199,9 @@ export default {
     isContentEmpty(content) {
       return content === '';
     },
+    localMonthDateFromWithoutZero(date) {
+      return this.$helpers.localMonthDateFromWithoutZero(date);
+    },
   },
 };
 </script>
@@ -253,12 +256,12 @@ export default {
 
       &__value {
         font-size: $font-size-small;
-        font-weight: 600;
+        font-weight: bold;
       }
 
       &__unit {
         font-size: $font-size-small;
-        font-weight: 600;
+        font-weight: bold;
       }
     }
 

@@ -110,7 +110,6 @@ export default {
 /deep/ {
   .alert-dialog-content {
     font-size: 16px;
-    font-weight: 300;
   }
 }
 </style>

@@ -158,7 +158,7 @@ export default {
 
 .list-item {
   padding-left: 0;
-  font-weight: 600;
+  font-weight: bold;
   color: #000;
 
   &--chevron::before,

@@ -65,7 +65,6 @@ export default {
 .temperature-label {
   margin-right: 3px;
   font-size: 11px;
-  font-weight: 300;
 }
 
 .temperature-high {
@@ -92,7 +91,7 @@ export default {
   height: 21px;
   margin: 8px 0;
   font-size: 10px;
-  font-weight: 600;
+  font-weight: bold;
   color: #f5f2f2;
   background-color: #eb4a18;
   border-radius: 22px;

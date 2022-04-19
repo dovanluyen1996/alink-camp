@@ -39,7 +39,7 @@ export default {
   align-self: center;
   width: 100%;
   padding-left: 10px;
-  font-weight: 600;
+  font-weight: bold;
 }
 
 .table-update {

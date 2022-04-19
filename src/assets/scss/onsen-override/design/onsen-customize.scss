@@ -17,7 +17,7 @@ $segment-height: 34px;
 .segment {
   &__button {
     height: $segment-height;
-    font-weight: 600;
+    font-weight: bold;
     line-height: $segment-height - 1px;
     border-width: 2px !important;
   }
@@ -53,7 +53,7 @@ $alert-dialog-radius: 8px;
   margin-top: -16px;
   margin-bottom: 15px;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: bold;
   color: #fff;
   background: #c83200;
   border-top-left-radius: $alert-dialog-radius;
@@ -124,7 +124,7 @@ $button-height--rounded: 36px;
   min-width: $button-height;
   height: $button-height;
   font-size: $font-size-default;
-  font-weight: 600;
+  font-weight: bold;
   line-height: 36px;
   border-radius: 4px;
 
@@ -171,7 +171,6 @@ $button-height--rounded: 36px;
   &--white {
     height: 26px;
     padding: 6px 30px;
-    font-weight: 300;
     line-height: 1;
     color: #000;
     background-color: #fff;
@@ -271,7 +270,7 @@ $button-height--rounded: 36px;
 .textarea-input {
   padding: 0 5px;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: bold;
   border: 2px solid #d9d9d9;
 }
 
@@ -368,7 +367,7 @@ $button-height--rounded: 36px;
 
   &__title {
     font-size: $font-size-large;
-    font-weight: 600;
+    font-weight: bold;
     color: $color-subtext;
 
     &--center {

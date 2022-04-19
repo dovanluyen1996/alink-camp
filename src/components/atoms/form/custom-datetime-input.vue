@@ -105,7 +105,7 @@ export default {
       align-items: center;
       padding-left: 5px;
       font-size: 16px;
-      font-weight: 600;
+      font-weight: bold;
       pointer-events: none;
       content: attr(placeholder);
     }

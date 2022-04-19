@@ -241,7 +241,7 @@ export default {
     padding: 6px 0 8px;
     margin: 0 28px;
     font-size: 17px;
-    font-weight: 600;
+    font-weight: bold;
     color: #fff;
     background-color: #c0a243;
     border-radius: 7px;
@@ -262,9 +262,7 @@ export default {
     align-items: center;
     justify-content: center;
     height: 38px;
-    font-size: 12px;
     font-size: $font-size-small;
-    font-weight: 400;
     line-height: 1;
     color: #fff;
     text-align: center;
