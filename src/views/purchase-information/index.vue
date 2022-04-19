@@ -65,6 +65,14 @@
           また、ログインキャンペーンで特別なプレゼントへの抽選にも参加頂けます。
         </purchase-point>
 
+        <div class="purchase-information__price">
+          <!-- TODO: 画像のためiPhone11以上(width:375px超)でボケる、後々HTMLに修正が必要 -->
+          <img
+            src="@/assets/images/purchase-information/price.png"
+            width="100%"
+          >
+        </div>
+
         <template #footer>
           <div class="purchase">
             <div class="purchase__top">
@@ -273,6 +281,11 @@ export default {
     text-align: center;
     text-decoration: underline;
   }
+}
+
+.purchase-information__price {
+  padding: 10px;
+  background: #f2ebd3;
 }
 
 /deep/ {
