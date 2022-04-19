@@ -2,6 +2,7 @@
   <v-ons-page>
     <custom-toolbar title="キャンプ天気会員登録" />
     <loading :visible="isLoading" />
+    <div class="background" />
     <div class="content">
       <content-with-footer>
         <greeting />
@@ -216,6 +217,14 @@ export default {
 <style lang="scss" scoped>
 @import '@/assets/scss/_variables.scss';
 
+.background {
+  background: $color-purchase-dark;
+}
+
+.content {
+  font-size: 0;
+}
+
 .purchase-information__point {
   margin-right: 10px;
 }
@@ -271,36 +280,15 @@ export default {
 }
 
 /deep/ {
-  .page__background {
-    background: $color-purchase-dark;
-  }
-
-  .page__content {
-    font-size: 0;
-  }
-
-  .content-with-footer {
-    &__footer {
-      bottom: -1px !important;
-      padding: 0 !important;
-      background-color: $color-default;
-    }
-  }
-
-  .purchase .button[class*="button--rounded"] {
-    width: 100%;
-    height: 44px;
-    margin: 22px 0 0 0;
-    line-height: 36px;
-    color: #fff;
-    background-color: #9f9a97;
-    border-radius: 30px;
-  }
-
   .custom-toolbar-title {
     display: flex;
     justify-content: center;
     white-space: nowrap;
+  }
+
+  .content-with-footer__footer {
+    padding: 0;
+    background-color: $color-default;
   }
 }
 
