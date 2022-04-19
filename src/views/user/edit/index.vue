@@ -31,17 +31,19 @@
         </base-form>
       </validation-observer>
 
-      <p class="notice">
-        ※パスワードを設定していない場合は、データ引き継ぎはご利用いただけません
-      </p>
+      <v-ons-card>
+        <p class="notice">
+          ※パスワードを設定していない場合は、データ引き継ぎはご利用いただけません
+        </p>
 
-      <p class="notice">
-        ※データを引継ぐのに大切なIDです、メモを残すなど必ず保存をしてください
-      </p>
+        <p class="notice">
+          ※データを引継ぐのに大切なIDです、メモを残すなど必ず保存をしてください
+        </p>
 
-      <p class="notice">
-        ※再インストールや機種変更時にアプリTOPのデータを引継ぐよりご利用ください
-      </p>
+        <p class="notice">
+          ※再インストールや機種変更時にアプリTOPのデータを引継ぐよりご利用ください
+        </p>
+      </v-ons-card>
     </div>
 
     <v-ons-alert-dialog :visible="isShownComfirmDialog">
@@ -161,8 +163,7 @@ export default {
     },
     help() {
       if (this.currentUser.hasPassword) {
-        return `
-          ※6文字以上の半角英数字で登録して下さい
+        return `※6文字以上の半角英数字で登録して下さい
           ※既にパスワードは登録済みです
         `;
       }
@@ -173,15 +174,45 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '@/assets/scss/_variables.scss';
+
 .content {
   padding-bottom: 20px;
 }
 
 .notice {
-  margin: 20px;
+  margin-top: 0;
+  margin-bottom: 5px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
 
-/deep/ .form-buttons {
-  padding-bottom: 10px;
+/deep/ {
+  .form-buttons {
+    padding-bottom: 10px;
+    margin-top: 25px !important;
+  }
+
+  .has-editable-button-field .card {
+    height: 71px;
+  }
+
+  .password-field .text-input {
+    height: 50px;
+  }
+
+  .password-field .input-field-card {
+    padding-bottom: 27px;
+  }
+
+  .password-field .password-field-help {
+    margin: 0 0 0 32px;
+  }
+
+  .password-field .check-field {
+    font-weight: 300;
+  }
 }
 </style>
