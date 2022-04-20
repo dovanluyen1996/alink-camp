@@ -26,7 +26,7 @@
       class="not-purchase"
     >
       <img
-        src="@/assets/images/campsite-forecast-weather-purchase.png"
+        src="@/assets/images/campsite-forecast-weather-purchase.jpg"
         @click="goToPurchaseInformation"
       >
     </div>
