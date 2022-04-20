@@ -174,7 +174,7 @@ export default {
     },
     taskText(date, hour) {
       const targetAt = this.formatDateTime(date, hour);
-      const task = this.$helpers.truncate(this.tasks[targetAt] || '', 23);
+      const task = this.$helpers.truncate(this.tasks[targetAt] || '', 15);
 
       return task;
     },
