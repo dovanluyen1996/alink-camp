@@ -55,7 +55,7 @@ export default {
           member: '◎',
         },
         {
-          name: '時間ごとの天気予報',
+          name: '時間毎の天気予報',
           free: '◎',
           member: '◎',
         },
