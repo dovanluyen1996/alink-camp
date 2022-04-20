@@ -65,13 +65,7 @@
           また、ログインキャンペーンで特別なプレゼントへの抽選にも参加頂けます。
         </purchase-point>
 
-        <div class="purchase-information__price">
-          <!-- TODO: 画像のためiPhone11以上(width:375px超)でボケる、後々HTMLに修正が必要 -->
-          <img
-            src="@/assets/images/purchase-information/price.png"
-            width="100%"
-          >
-        </div>
+        <purchase-information-price />
 
         <template #footer>
           <div class="purchase">
@@ -111,6 +105,7 @@ import ContentWithFooter from '@/components/organisms/content-with-footer';
 import ErrorDialog from '@/components/organisms/error-dialog';
 import Greeting from '@/components/organisms/purchase-information/greeting';
 import PurchasePoint from '@/components/organisms/purchase-information/point';
+import PurchaseInformationPrice from '@/components/organisms/purchase-information/price';
 
 export default {
   name: 'PurchaseInformation',
@@ -119,6 +114,7 @@ export default {
     ErrorDialog,
     Greeting,
     PurchasePoint,
+    PurchaseInformationPrice,
   },
   data() {
     return {
@@ -225,10 +221,6 @@ export default {
   background: $color-purchase-dark;
 }
 
-.content {
-  font-size: 0;
-}
-
 .purchase-information__point {
   margin-right: 10px;
 }
@@ -281,11 +273,6 @@ export default {
     text-align: center;
     text-decoration: underline;
   }
-}
-
-.purchase-information__price {
-  padding: 10px;
-  background: #f2ebd3;
 }
 
 /deep/ {
