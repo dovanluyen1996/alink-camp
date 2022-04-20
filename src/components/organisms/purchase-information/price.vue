@@ -1,6 +1,5 @@
 <template>
   <div class="purchase-information-price">
-    <!-- TODO: 画像のためiPhone11以上(width:375px超)でボケる、後々HTMLに修正が必要 -->
     <table class="purchase-information-price__table">
       <tr>
         <th
