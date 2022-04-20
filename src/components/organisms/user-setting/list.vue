@@ -36,7 +36,7 @@
             <v-ons-switch v-model="isEnabledWeatherForecastNotification" />
           </span>
           <span class="list-item__subtitle">
-            ※予定日3日前より定期的に該当キャンプ場の天気をご連絡します。
+            ※計画日3日前より定期的に該当キャンプ場の天気をご連絡します。
           </span>
           <span class="list-item__subtitle">
             ※キャンセルの判断にご利用ください
@@ -50,7 +50,7 @@
             <v-ons-switch v-model="isEnabledWarningNotification" />
           </span>
           <span class="list-item__subtitle">
-            ※予定日当日に該当コースに雨雲が近づいた場合に通知します
+            ※計画日に該当キャンプ場に雨雲が近づいた場合に通知します
           </span>
         </div>
       </v-ons-list-item>
@@ -64,7 +64,7 @@
             <v-ons-switch v-model="isEnabledThunderNotification" />
           </span>
           <span class="list-item__subtitle">
-            ※予定日当日に該当キャンプ場で落雷警報が出た場合にご連絡します
+            ※計画日に該当キャンプ場で落雷警報が出た場合にご連絡します
           </span>
         </div>
       </v-ons-list-item>
@@ -78,18 +78,18 @@
             <v-ons-switch v-model="isEnabledChangeRainyNotification" />
           </span>
           <span class="list-item__subtitle">
-            ※予定日の天気や、設定しているタスクにおいて変化があった場合に通知
+            ※計画日の天気が晴れ予報から雨予報に変わった場合に通知します
           </span>
         </div>
       </v-ons-list-item>
       <v-ons-list-item modifier="nodivider">
         <div class="center">
           <span class="list-item__title">
-            日の出、日の入の通知
+            日の入通知
             <v-ons-switch v-model="isEnabledSunriseSunsetNotification" />
           </span>
           <span class="list-item__subtitle">
-            ※日の出、日の入の30分前にお知らせする通知
+            ※計画日のキャンプ場の日の入1時間前となった事を通知します
           </span>
         </div>
       </v-ons-list-item>
@@ -100,7 +100,7 @@
             <v-ons-switch v-model="isEnabledTemperatureDifference" />
           </span>
           <span class="list-item__subtitle">
-            ※予定日当日に昼から夜にかけて気温差が大きい場合に通知
+            ※計画日に昼から夜にかけて気温差が大きい場合に通知
           </span>
         </div>
       </v-ons-list-item>
@@ -114,7 +114,7 @@
             <v-ons-switch v-model="isEnabledItemsLestBehind" />
           </span>
           <span class="list-item__subtitle">
-            ※予定日当日に忘れ物がないかの確認通知
+            ※計画日に忘れ物がないかの確認通知をします
           </span>
         </div>
       </v-ons-list-item>
