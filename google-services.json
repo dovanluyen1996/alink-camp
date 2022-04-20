@@ -1,40 +1,513 @@
 {
   "project_info": {
-    "project_number": "851322130660",
-    "project_id": "alinkgolfweather",
-    "storage_bucket": "alinkgolfweather.appspot.com"
+    "project_number": "1076933641634",
+    "firebase_url": "https://tenkijp-dev-4b95f.firebaseio.com",
+    "project_id": "tenkijp-dev-4b95f",
+    "storage_bucket": "tenkijp-dev-4b95f.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:851322130660:android:cc971bc85091867fae1cf1",
+        "mobilesdk_app_id": "1:1076933641634:android:bdb0bcc6d545d549",
         "android_client_info": {
-          "package_name": "jp.rights.alink.golftenki.dev"
+          "package_name": "jp.ne.alink.anyfeaturetrial4android"
         }
       },
       "oauth_client": [
         {
-          "client_id": "851322130660-jg98a719ri19lk6pt5eapov6l77vj23f.apps.googleusercontent.com",
+          "client_id": "1076933641634-1prl3nn7s8c76p4l1te5j97uhld6bq8f.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBYTnJfc9LJXFf_KdzOEb0iVBiLIApnwDQ"
+          "current_key": "AIzaSyAKzDELGE1CEh_Mla89k_0RQ0V3vjABkeE"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "851322130660-jg98a719ri19lk6pt5eapov6l77vj23f.apps.googleusercontent.com",
+              "client_id": "1076933641634-1prl3nn7s8c76p4l1te5j97uhld6bq8f.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "851322130660-f85plnag26p9upnkknelvkm891cirkbb.apps.googleusercontent.com",
+              "client_id": "1076933641634-cduveme31nog5iuprb4732ntu080prgl.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "jp.rights.alink.golftenki.dev"
+                "bundle_id": "jp.or.jwa.tenkijp.camp.stg"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1076933641634:android:bb1e193838764122",
+        "android_client_info": {
+          "package_name": "jp.ne.alink.gamcloseoutsample"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1076933641634-1prl3nn7s8c76p4l1te5j97uhld6bq8f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKzDELGE1CEh_Mla89k_0RQ0V3vjABkeE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1076933641634-1prl3nn7s8c76p4l1te5j97uhld6bq8f.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1076933641634-cduveme31nog5iuprb4732ntu080prgl.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "jp.or.jwa.tenkijp.camp.stg"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1076933641634:android:2fbf303c60e58c67",
+        "android_client_info": {
+          "package_name": "jp.ne.alink.okhttppractice"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1076933641634-l2bceuaub3b9pcnrj110qet7vt2mjeqh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "jp.ne.alink.okhttppractice",
+            "certificate_hash": "4b00fcd97fb03032095744d203c769a50b8ce082"
+          }
+        },
+        {
+          "client_id": "1076933641634-1prl3nn7s8c76p4l1te5j97uhld6bq8f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKzDELGE1CEh_Mla89k_0RQ0V3vjABkeE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1076933641634-1prl3nn7s8c76p4l1te5j97uhld6bq8f.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1076933641634-cduveme31nog5iuprb4732ntu080prgl.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "jp.or.jwa.tenkijp.camp.stg"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1076933641634:android:8b0f5a94c447d73c",
+        "android_client_info": {
+          "package_name": "jp.ne.alink.okhttppractice.debug"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1076933641634-r9tfpuvcds2peee9fial34o313lm2cvc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "jp.ne.alink.okhttppractice.debug",
+            "certificate_hash": "f172ec94fc322e9cae267d147739717c874eb7f4"
+          }
+        },
+        {
+          "client_id": "1076933641634-1prl3nn7s8c76p4l1te5j97uhld6bq8f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKzDELGE1CEh_Mla89k_0RQ0V3vjABkeE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1076933641634-1prl3nn7s8c76p4l1te5j97uhld6bq8f.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1076933641634-cduveme31nog5iuprb4732ntu080prgl.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "jp.or.jwa.tenkijp.camp.stg"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1076933641634:android:c54ee341eb932b04",
+        "android_client_info": {
+          "package_name": "jp.ne.alink.okhttppractice.staging"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1076933641634-s3etj3foat1dep82s7fe0mem9pji0644.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "jp.ne.alink.okhttppractice.staging",
+            "certificate_hash": "4b00fcd97fb03032095744d203c769a50b8ce082"
+          }
+        },
+        {
+          "client_id": "1076933641634-1prl3nn7s8c76p4l1te5j97uhld6bq8f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKzDELGE1CEh_Mla89k_0RQ0V3vjABkeE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1076933641634-1prl3nn7s8c76p4l1te5j97uhld6bq8f.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1076933641634-cduveme31nog5iuprb4732ntu080prgl.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "jp.or.jwa.tenkijp.camp.stg"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1076933641634:android:a6c470f06c6c1dd2f45efb",
+        "android_client_info": {
+          "package_name": "jp.or.jwa.tenkijp.camp.stg"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1076933641634-1prl3nn7s8c76p4l1te5j97uhld6bq8f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKzDELGE1CEh_Mla89k_0RQ0V3vjABkeE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1076933641634-1prl3nn7s8c76p4l1te5j97uhld6bq8f.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1076933641634-cduveme31nog5iuprb4732ntu080prgl.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "jp.or.jwa.tenkijp.camp.stg"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1076933641634:android:db8b3a837950f03ef45efb",
+        "android_client_info": {
+          "package_name": "jp.or.jwa.tenkijp.golf.stg"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1076933641634-oqc5tlp6mrant86rtvacda8371va667d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "jp.or.jwa.tenkijp.golf.stg",
+            "certificate_hash": "3277c069f6c5c45975bc869c0f9f45e562a04ac6"
+          }
+        },
+        {
+          "client_id": "1076933641634-1prl3nn7s8c76p4l1te5j97uhld6bq8f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKzDELGE1CEh_Mla89k_0RQ0V3vjABkeE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1076933641634-1prl3nn7s8c76p4l1te5j97uhld6bq8f.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1076933641634-cduveme31nog5iuprb4732ntu080prgl.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "jp.or.jwa.tenkijp.camp.stg"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1076933641634:android:dfaeb85720657302",
+        "android_client_info": {
+          "package_name": "jp.or.jwa.tenkijp_map.debug"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1076933641634-1prl3nn7s8c76p4l1te5j97uhld6bq8f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKzDELGE1CEh_Mla89k_0RQ0V3vjABkeE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1076933641634-1prl3nn7s8c76p4l1te5j97uhld6bq8f.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1076933641634-cduveme31nog5iuprb4732ntu080prgl.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "jp.or.jwa.tenkijp.camp.stg"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1076933641634:android:f7ae493d71f87874",
+        "android_client_info": {
+          "package_name": "jp.or.jwa.tenkijpyama.debug"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1076933641634-1prl3nn7s8c76p4l1te5j97uhld6bq8f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKzDELGE1CEh_Mla89k_0RQ0V3vjABkeE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1076933641634-1prl3nn7s8c76p4l1te5j97uhld6bq8f.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1076933641634-cduveme31nog5iuprb4732ntu080prgl.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "jp.or.jwa.tenkijp.camp.stg"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1076933641634:android:b271f9ff8b553050",
+        "android_client_info": {
+          "package_name": "jp.or.jwa.tenkijpyama.staging"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1076933641634-1prl3nn7s8c76p4l1te5j97uhld6bq8f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKzDELGE1CEh_Mla89k_0RQ0V3vjABkeE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1076933641634-1prl3nn7s8c76p4l1te5j97uhld6bq8f.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1076933641634-cduveme31nog5iuprb4732ntu080prgl.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "jp.or.jwa.tenkijp.camp.stg"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1076933641634:android:b51b7867603b30d6f45efb",
+        "android_client_info": {
+          "package_name": "jp.or.jwa.tenkiparandroid.debug"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1076933641634-1prl3nn7s8c76p4l1te5j97uhld6bq8f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKzDELGE1CEh_Mla89k_0RQ0V3vjABkeE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1076933641634-1prl3nn7s8c76p4l1te5j97uhld6bq8f.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1076933641634-cduveme31nog5iuprb4732ntu080prgl.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "jp.or.jwa.tenkijp.camp.stg"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1076933641634:android:155f2a1ce4fceeb5",
+        "android_client_info": {
+          "package_name": "jwa.or.jp.tenkijp3"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1076933641634-1prl3nn7s8c76p4l1te5j97uhld6bq8f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKzDELGE1CEh_Mla89k_0RQ0V3vjABkeE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1076933641634-1prl3nn7s8c76p4l1te5j97uhld6bq8f.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1076933641634-cduveme31nog5iuprb4732ntu080prgl.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "jp.or.jwa.tenkijp.camp.stg"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1076933641634:android:fd496b7cdcd30d6b",
+        "android_client_info": {
+          "package_name": "jwa.or.jp.tenkijp3.debug"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1076933641634-engadmlen9jhevur2vodidm55fo7o529.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "jwa.or.jp.tenkijp3.debug",
+            "certificate_hash": "d7bdf717ae6a30db31c5e3e32c659e2011a064a7"
+          }
+        },
+        {
+          "client_id": "1076933641634-1prl3nn7s8c76p4l1te5j97uhld6bq8f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKzDELGE1CEh_Mla89k_0RQ0V3vjABkeE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1076933641634-1prl3nn7s8c76p4l1te5j97uhld6bq8f.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1076933641634-cduveme31nog5iuprb4732ntu080prgl.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "jp.or.jwa.tenkijp.camp.stg"
               }
             }
           ]
