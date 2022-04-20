@@ -32,6 +32,7 @@ import UserStampsCampaign from '@/views/user/user-stamps/campaign';
 import SpotSearchNavigator from '@/views/spot-search/spot-search-navigator';
 
 export default {
+  name: 'AppTabbar',
   components: {
     UserStampsCampaign,
   },

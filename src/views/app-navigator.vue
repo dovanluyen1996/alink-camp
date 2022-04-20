@@ -28,6 +28,12 @@ export default {
     pageStack() {
       return this.$store.state.appNavigator.stack;
     },
+    campsiteWeatherStack() {
+      return this.$store.state.campsiteWeatherNavigator.stack;
+    },
+    tabbarActiveIndex() {
+      return this.$store.state.appTabbar.activeIndex;
+    },
   },
   created() {
     this.$store.dispatch('appNavigator/push', StartIndex);
@@ -38,7 +44,6 @@ export default {
     },
     deviceBackButton(event) {
       // check appTabbar index
-      const tabbarActiveIndex = this.$store.state.appTabbar.activeIndex;
 
       // If active index is App Top -> move to background
       //
@@ -46,16 +51,18 @@ export default {
       // -> check is open other page in each tab
       //    -> If open other page -> back to previous screen like button 「<」
       //    -> If is openning Top Page of Tab -> set Active Tab to App Top
-      if (tabbarActiveIndex === settings.views.appTabbar.tabIndexes.campsiteWeather) {
+      if (this.isStartIndexPage() || this.isCampWeatherPage()) {
         this.confirmAppExitVisible = true;
+      } else if (!this.isShowAppTabbar && this.pageStack.length > 1) {
+        this.$store.dispatch('appNavigator/pop');
       } else {
-        this.resetTabPage(tabbarActiveIndex);
+        this.resetTabPage();
       }
 
       return event.preventDefault();
     },
-    resetTabPage(tabbarActiveIndex) {
-      switch (tabbarActiveIndex) {
+    resetTabPage() {
+      switch (this.tabbarActiveIndex) {
       case settings.views.appTabbar.tabIndexes.campsiteSearch:
         if (this.$store.state.campsiteSearchNavigator.stack.length > 1) {
           this.$store.dispatch('campsiteSearchNavigator/pop');
@@ -87,6 +94,26 @@ export default {
       default:
         break;
       }
+    },
+    isStartIndexPage() {
+      const currentPageName = this.pageStack[this.pageStack.length - 1].name;
+
+      return currentPageName === 'StartIndex';
+    },
+    isShowAppTabbar() {
+      const currentPageName = this.pageStack[this.pageStack.length - 1].name;
+
+      return currentPageName === 'AppTabbar';
+    },
+    isSelectedCampsiteWeatherTab() {
+      return this.tabbarActiveIndex === settings.views.appTabbar.tabIndexes.campsiteWeather;
+    },
+    isCampWeatherPage() {
+      const currentPageName = this.campsiteWeatherStack[this.campsiteWeatherStack.length - 1].name;
+
+      return this.isShowAppTabbar()
+        && this.isSelectedCampsiteWeatherTab()
+        && currentPageName === 'CampWeather';
     },
   },
 };
