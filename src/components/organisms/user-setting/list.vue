@@ -50,7 +50,7 @@
             <v-ons-switch v-model="isEnabledWarningNotification" />
           </span>
           <span class="list-item__subtitle">
-            ※計画日にに該当キャンプ場に雨雲が近づいた場合に通知します
+            ※計画日に該当キャンプ場に雨雲が近づいた場合に通知します
           </span>
         </div>
       </v-ons-list-item>
