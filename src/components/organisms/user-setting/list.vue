@@ -11,7 +11,7 @@
       >
         <img
           class="banner-img"
-          src="@/assets/images/push-notification-weather-purchase.png"
+          src="@/assets/images/push-notification-weather-purchase.jpg"
           alt="weather-purchase"
           @click="goToPurchaseInformation"
         >
