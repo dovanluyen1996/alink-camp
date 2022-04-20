@@ -41,11 +41,11 @@ export default {
     clear(context) {
       context.commit('clear');
       context.commit('appTabbar/setActiveIndex', 0, { root: true });
-      context.dispatch('courseWeatherNavigator/clear', null, { root: true });
-      context.dispatch('courseSearchNavigator/clear', null, { root: true });
+      context.dispatch('campsiteWeatherNavigator/clear', null, { root: true });
+      context.dispatch('campsiteSearchNavigator/clear', null, { root: true });
       context.dispatch('menuNavigator/clear', null, { root: true });
-      context.dispatch('scoresNavigator/clear', null, { root: true });
-      context.dispatch('windForecastNavigator/clear', null, { root: true });
+      context.dispatch('plansNavigator/clear', null, { root: true });
+      context.dispatch('spotSearchNavigator/clear', null, { root: true });
     },
   },
 };
