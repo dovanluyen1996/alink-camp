@@ -105,6 +105,7 @@ export default {
 
 @mixin header-text {
   font-size: $font-size-large;
+  font-weight: bold;
   border-top: none;
 }
 
@@ -134,28 +135,34 @@ export default {
 
   th,
   td {
-    padding: 10px 5px;
+    padding: 6px 5px;
     text-align: center;
     vertical-align: middle;
   }
 
   &__service {
+    font-weight: normal;
     background: $color-th;
     border-left: none;
 
     &--header {
       @include header-text;
 
+      background: #ddddd6;
       border-top-left-radius: 6px;
     }
   }
 
   &__free {
-    @include header-text;
-
     color: $color-purchase-gold;
     white-space: nowrap;
     background: #fff;
+
+    &--header {
+      @include header-text;
+
+      background: #eee;
+    }
   }
 
   &__member {
