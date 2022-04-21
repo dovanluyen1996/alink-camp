@@ -107,14 +107,14 @@ import ContentStatusItem from '@/components/atoms/information-tab/content-status
 
 export default {
   name: 'CampsitesInformationNearbyFacility',
+  components: {
+    InformationTabItem,
+    ContentStatusItem,
+  },
   computed: {
     campsite() {
       return this.$store.getters['campsite/choosenCampsite'];
     },
-  },
-  components: {
-    InformationTabItem,
-    ContentStatusItem,
   },
 };
 </script>

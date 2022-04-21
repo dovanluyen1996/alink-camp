@@ -153,6 +153,10 @@ import ContentItem from '@/components/atoms/information-tab/content-item';
 
 export default {
   name: 'CampsitesBasicInformation',
+  components: {
+    InformationTabItem,
+    ContentItem,
+  },
   computed: {
     campsite() {
       return this.$store.getters['campsite/choosenCampsite'];
@@ -231,10 +235,6 @@ export default {
     openPage(url) {
       this.$helpers.openPageByUrl(url);
     },
-  },
-  components: {
-    InformationTabItem,
-    ContentItem,
   },
 };
 </script>
