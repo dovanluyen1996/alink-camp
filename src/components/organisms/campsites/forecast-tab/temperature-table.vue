@@ -1,8 +1,7 @@
 <template>
   <div class="temperature-table-container">
     <table-header
-      title="月毎の気温予測詳細"
-      :point-name="pointName"
+      title="月毎の気温傾向"
     />
     <template v-if="$helpers.isPresentObject(temperatureData)">
       <custom-select
@@ -50,7 +49,6 @@ export default {
       temperatureData: {},
       optionMonths: [],
       selectedMonth: '',
-      pointName: '',
     };
   },
   computed: {
@@ -66,7 +64,6 @@ export default {
         this.temperatureData = Object.fromEntries(convertData);
         this.optionMonths = forecastYearlyTemp.items.map(item => item.month);
         this.selectedMonth = moment().format('M').padStart(2, '0');
-        this.pointName = forecastYearlyTemp.pointName;
       }
     },
   },

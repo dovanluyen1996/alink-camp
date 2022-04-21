@@ -3,9 +3,6 @@
     <v-ons-col class="table-title">
       {{ title }}
     </v-ons-col>
-    <v-ons-col class="table-update">
-      <div>（地点 : {{ pointName || '--' }}）</div>
-    </v-ons-col>
   </v-ons-row>
 </template>
 

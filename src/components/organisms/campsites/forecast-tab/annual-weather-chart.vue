@@ -2,7 +2,6 @@
   <div class="annual-weather-container">
     <chart-header
       title="年間の天気傾向"
-      :point-name="pointName"
     />
     <template v-if="$helpers.isPresentObject(chartData)">
       <bar-chart
@@ -33,7 +32,6 @@ export default {
   data() {
     return {
       chartData: {},
-      pointName: '',
       options: {
         responsive: true,
         maintainAspectRatio: false,
@@ -80,7 +78,6 @@ export default {
         (a, b) => parseInt(a.month, 10) - parseInt(b.month, 10),
       );
       if (forecastYearlyWeatherRate) {
-        this.pointName = forecastYearlyWeatherRate.pointName;
         this.fillData(sortItems);
       }
     },
