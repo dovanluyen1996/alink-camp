@@ -30,16 +30,16 @@ import Traffic from '@/components/organisms/campsites/information-tab/traffic';
 
 export default {
   name: 'CampsiteInformationTab',
-  computed: {
-    campsite() {
-      return this.$store.getters['campsite/choosenCampsite'];
-    },
-  },
   components: {
     BasicInformation,
     FacilityDetail,
     NearbyFacility,
     Traffic,
+  },
+  computed: {
+    campsite() {
+      return this.$store.getters['campsite/choosenCampsite'];
+    },
   },
 };
 </script>

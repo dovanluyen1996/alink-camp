@@ -18,13 +18,13 @@ import InformationTabItem from '@/components/atoms/information-tab/item';
 
 export default {
   name: 'CampsitesInformationTraffic',
+  components: {
+    InformationTabItem,
+  },
   computed: {
     campsite() {
       return this.$store.getters['campsite/choosenCampsite'];
     },
-  },
-  components: {
-    InformationTabItem,
   },
 };
 </script>

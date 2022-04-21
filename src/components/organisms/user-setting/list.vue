@@ -55,8 +55,8 @@
         </div>
       </v-ons-list-item>
       <v-ons-list-item
-        modifier="nodivider"
         v-if="isPurchased"
+        modifier="nodivider"
       >
         <div class="center">
           <span class="list-item__title">
@@ -69,8 +69,8 @@
         </div>
       </v-ons-list-item>
       <v-ons-list-item
-        modifier="nodivider"
         v-if="isPurchased"
+        modifier="nodivider"
       >
         <div class="center">
           <span class="list-item__title">
@@ -105,8 +105,8 @@
         </div>
       </v-ons-list-item>
       <v-ons-list-item
-        modifier="nodivider"
         v-if="isPurchased"
+        modifier="nodivider"
       >
         <div class="center">
           <span class="list-item__title">

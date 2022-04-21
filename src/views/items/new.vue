@@ -15,7 +15,7 @@
             <item-name
               v-model="params.name"
               :errors="errors"
-              :isUserItem="true"
+              :is-user-item="true"
             />
             <item-label
               :labels="params.labels"
