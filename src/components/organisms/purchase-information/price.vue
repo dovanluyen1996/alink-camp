@@ -87,7 +87,7 @@ export default {
         {
           name: 'PUSH通知の種類',
           free: '予定日の天気<br>日の入<br>気温差',
-          member: '予定日の天気<br>雨雲の接近<br>落雷突風注意<br>予報の変化<br>日の入<br>気温差<br>忘れ物',
+          member: '予定日の天気<br>雨雲の接近<br>落雷突風危険度<br>予報の変化<br>日の入<br>気温差<br>忘れ物',
         },
         {
           name: 'ログインキャンペーン',

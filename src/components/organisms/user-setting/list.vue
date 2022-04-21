@@ -11,7 +11,7 @@
       >
         <img
           class="banner-img"
-          src="@/assets/images/push-notification-weather-purchase.png"
+          src="@/assets/images/push-notification-weather-purchase.jpg"
           alt="weather-purchase"
           @click="goToPurchaseInformation"
         >
@@ -60,11 +60,11 @@
       >
         <div class="center">
           <span class="list-item__title">
-            落雷＆突風注意報
+            落雷＆突風危険度
             <v-ons-switch v-model="isEnabledThunderNotification" />
           </span>
           <span class="list-item__subtitle">
-            ※計画日に該当キャンプ場で落雷警報が出た場合にご連絡します
+            ※計画日に該当キャンプ場で落雷の危険度が高まった場合にご連絡します
           </span>
         </div>
       </v-ons-list-item>
