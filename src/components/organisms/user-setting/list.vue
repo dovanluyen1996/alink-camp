@@ -43,7 +43,10 @@
           </span>
         </div>
       </v-ons-list-item>
-      <v-ons-list-item modifier="nodivider">
+      <v-ons-list-item
+        v-if="isPurchased"
+        modifier="nodivider"
+      >
         <div class="center">
           <span class="list-item__title">
             雨雲の通知
