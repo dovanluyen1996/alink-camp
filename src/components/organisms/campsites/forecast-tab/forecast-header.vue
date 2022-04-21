@@ -14,10 +14,6 @@ export default {
       type: String,
       default: '',
     },
-    pointName: {
-      type: String,
-      default: '',
-    },
   },
 };
 </script>
