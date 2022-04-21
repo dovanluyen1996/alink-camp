@@ -11,6 +11,8 @@ import PurchaseInformation from '@/views/purchase-information';
 
 import ErrorDialog from '@/components/organisms/error-dialog';
 
+import ApiClient from '@/api_client';
+
 export default {
   name: 'ApiErrorDialog',
   components: {
@@ -25,12 +27,14 @@ export default {
     document.addEventListener('resume', this.onResume, false);
 
     window.addEventListener('onPurchaserInfoUpdated', async(purchaserInfo) => {
-      // 課金の識別子をサーバへ送る
-      const params = {
-        app_user_id: purchaserInfo.originalAppUserId,
-        app_user_os: window.device.platform.toLowerCase(),
-      };
-      await this.$store.dispatch('models/currentUser/updateUser', params);
+      if (await this.isAuthenticated()) {
+        // 課金の識別子をサーバへ送る
+        const params = {
+          app_user_id: purchaserInfo.originalAppUserId,
+          app_user_os: window.device.platform.toLowerCase(),
+        };
+        await this.$store.dispatch('models/currentUser/updateUser', params);
+      }
 
       const isCharged = Object.entries(purchaserInfo.entitlements.active).length > 0;
       this.$store.dispatch('purchase/setIsPurchased', isCharged);
@@ -51,12 +55,14 @@ export default {
     async checkChargedStatus() {
       Purchases.getPurchaserInfo(
         async(purchaserInfo) => {
-          // 課金の識別子をサーバへ送る
-          const params = {
-            app_user_id: purchaserInfo.originalAppUserId,
-            app_user_os: window.device.platform.toLowerCase(),
-          };
-          await this.$store.dispatch('models/currentUser/updateUser', params);
+          if (await this.isAuthenticated()) {
+            // 課金の識別子をサーバへ送る
+            const params = {
+              app_user_id: purchaserInfo.originalAppUserId,
+              app_user_os: window.device.platform.toLowerCase(),
+            };
+            await this.$store.dispatch('models/currentUser/updateUser', params);
+          }
 
           const isCharged = Object.entries(purchaserInfo.entitlements.active).length > 0;
           this.$store.dispatch('purchase/setIsPurchased', isCharged);
@@ -70,6 +76,11 @@ export default {
     },
     closeCheckChargedStatusError() {
       this.checkChargedStatusErrorVisible = false;
+    },
+    async isAuthenticated() {
+      const sessionHeaders = await ApiClient.buildSessionHeaders();
+
+      return this.$helpers.isPresentObject(sessionHeaders);
     },
   },
 };

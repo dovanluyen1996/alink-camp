@@ -1,6 +1,7 @@
 import AppTabbar from '@/views/app-tabbar';
 import IdfaAaidPlugin from '@/config/idfa';
 import PurchaseInformation from '@/views/purchase-information';
+import ApiClient from '@/api_client';
 
 export default {
   methods: {
@@ -15,12 +16,14 @@ export default {
     async checkChargedStatus() {
       Purchases.getPurchaserInfo(
         async(purchaserInfo) => {
-          // 課金の識別子をサーバへ送る
-          const params = {
-            app_user_id: purchaserInfo.originalAppUserId,
-            app_user_os: window.device.platform.toLowerCase(),
-          };
-          await this.$store.dispatch('models/currentUser/updateUser', params);
+          if (await this.isAuthenticated()) {
+            // 課金の識別子をサーバへ送る
+            const params = {
+              app_user_id: purchaserInfo.originalAppUserId,
+              app_user_os: window.device.platform.toLowerCase(),
+            };
+            await this.$store.dispatch('models/currentUser/updateUser', params);
+          }
 
           const isCharged = Object.entries(purchaserInfo.entitlements.active).length > 0;
           this.$store.dispatch('purchase/setIsPurchased', isCharged);
@@ -31,6 +34,11 @@ export default {
           this.$store.dispatch('appNavigator/reset', PurchaseInformation);
         },
       );
+    },
+    async isAuthenticated() {
+      const sessionHeaders = await ApiClient.buildSessionHeaders();
+
+      return this.$helpers.isPresentObject(sessionHeaders);
     },
   },
 };
