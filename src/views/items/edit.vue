@@ -199,8 +199,8 @@ export default {
       this.$store.dispatch('menuNavigator/pop');
     },
     onDeviceReady() {
-      window.addEventListener('native.keyboardshow', this.onKeyBoardShow);
-      window.addEventListener('native.keyboardhide', this.onKeyBoardHide);
+      window.addEventListener('keyboardWillShow', this.onKeyBoardShow);
+      window.addEventListener('keyboardDidHide', this.onKeyBoardHide);
     },
     onKeyBoardShow() {
       this.isShowUpdateItemButton = false;
