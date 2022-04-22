@@ -12,8 +12,7 @@ export default {
   name: 'GoToCampsiteSearchButton',
   methods: {
     goToCampsiteSearch() {
-      this.$store.commit('campsiteSearchNavigator/setEnableBusy', false);
-      this.$store.dispatch('campsiteSearchNavigator/resetFromOtherNavigator');
+      this.$store.dispatch('campsiteSearchNavigator/resetFromOtherTab');
     },
   },
 };

@@ -54,7 +54,7 @@ export default {
     reset({ commit }, page) {
       commit('reset', page);
     },
-    resetFromOtherNavigator({ commit }) {
+    resetFromOtherTab({ commit }) {
       commit('setEnableBusy', false);
 
       commit('reset', {
