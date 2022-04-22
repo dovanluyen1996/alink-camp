@@ -120,13 +120,13 @@ export default {
   methods: {
     show() {
       // NOTE: 前のページ(検索フォーム)に戻ったときにページ一番上が表示されているようにする
-      //       アニメーション中に戻る動作が見えないようにこのページが表示されてから行う必要がある
+      //       アニメーション中に戻る動作が見えないようにこのページのshow、またはnavigatorのprePopで行う必要がある
       //       そのため、前のページでは処理を作れない
-      const prevPage = this.$parent.$children[this.$parent.$children.length - 2];
-
-      this.movePrevPageToTop(prevPage);
+      //       prePopで行うと、前のページが表示されない(ons-navigatorが裏でやってる何かとぶつかってるかも？)のでここで行う
+      this.movePrevPageToTop();
     },
-    movePrevPageToTop(prevPage) {
+    movePrevPageToTop() {
+      const prevPage = this.$parent.$children[this.$parent.$children.length - 2];
       const scrollContent = prevPage.$el.querySelector('.content-with-footer__content');
 
       if (!scrollContent) return;
