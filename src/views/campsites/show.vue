@@ -176,6 +176,7 @@ export default {
         return;
       }
 
+      this.$store.dispatch('plan/clean');
       this.$store.commit('plansNavigator/setEnableBusy', false);
       this.$store.commit('appTabbar/setActiveIndex', settings.views.appTabbar.tabIndexes.plans);
       this.$store.dispatch('plansNavigator/reset', PlanIndexPage);
