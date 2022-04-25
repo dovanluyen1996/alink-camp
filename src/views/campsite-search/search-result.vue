@@ -125,7 +125,7 @@ export default {
       //       prePopで行うと、前のページが表示されない(ons-navigatorが裏でやってる何かとぶつかってるかも？)のでここで行う
       this.movePrevPageToTop();
     },
-    movePrevPageToTop() {
+    async movePrevPageToTop() {
       const prevPage = this.$parent.$children[this.$parent.$children.length - 2];
       const scrollContent = prevPage.$el.querySelector('.content-with-footer__content');
 
@@ -133,11 +133,9 @@ export default {
 
       // NOTE: visibleな要素でないとscrollTopの値は取得できないので、一度検索結果の裏に表示させてから再度非表示にする
       prevPage.$el.style.display = 'block';
-      scrollContent.scrollTo(0, 0);
+      await scrollContent.scrollTo(0, 0);
 
-      setTimeout(() => {
-        prevPage.$el.style.display = 'none';
-      }, 10);
+      prevPage.$el.style.display = 'none';
     },
     goToCampsiteShow(campsite) {
       this.$store.dispatch('campsiteSearchNavigator/push', {
