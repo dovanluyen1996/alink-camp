@@ -1,3 +1,8 @@
+// NOTE: goToCampsiteSearchでCampsiteSearchIndexをimportすると
+//       なぜかボタンがimportできない場合があるのでこちらでCampsiteSearchIndexをimportしてactionを作った
+//       詳細はissue #562
+import CampsiteSearchIndex from '@/views/campsite-search/index';
+
 export default {
   strict: true,
   namespaced: true,
@@ -48,6 +53,21 @@ export default {
     },
     reset({ commit }, page) {
       commit('reset', page);
+    },
+    resetFromOtherTab({ commit }) {
+      commit('setEnableBusy', false);
+
+      commit('reset', {
+        extends: CampsiteSearchIndex,
+        onsNavigatorOptions: {
+          animation: 'none',
+          callback: () => {
+            commit('setEnableBusy', true);
+          },
+        },
+      });
+
+      commit('appTabbar/setActiveIndexFromTabName', 'campsiteSearch', { root: true });
     },
     clear({ commit }) {
       commit('clear');

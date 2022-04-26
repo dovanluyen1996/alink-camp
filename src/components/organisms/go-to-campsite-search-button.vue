@@ -8,24 +8,11 @@
 </template>
 
 <script>
-// pages
-import CampsiteSearchIndex from '@/views/campsite-search/index';
-
 export default {
+  name: 'GoToCampsiteSearchButton',
   methods: {
     goToCampsiteSearch() {
-      this.$store.commit('campsiteSearchNavigator/setEnableBusy', false);
-      this.$store.dispatch('campsiteSearchNavigator/reset', {
-        extends: CampsiteSearchIndex,
-        onsNavigatorOptions: {
-          animation: 'none',
-          callback: () => {
-            this.$store.commit('campsiteSearchNavigator/setEnableBusy', true);
-          },
-        },
-      });
-
-      this.$store.commit('appTabbar/setActiveIndexFromTabName', 'campsiteSearch');
+      this.$store.dispatch('campsiteSearchNavigator/resetFromOtherTab');
     },
   },
 };
