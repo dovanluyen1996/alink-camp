@@ -1,5 +1,8 @@
 <template>
-  <v-ons-page :infinite-scroll="search">
+  <v-ons-page
+    :infinite-scroll="search"
+    @show="show"
+  >
     <loading :visible="isLoading" />
     <custom-toolbar
       :title="title"
@@ -115,6 +118,25 @@ export default {
     },
   },
   methods: {
+    show() {
+      // NOTE: 前のページ(検索フォーム)に戻ったときにページ一番上が表示されているようにする
+      //       アニメーション中に戻る動作が見えないようにこのページのshow、またはnavigatorのprePopで行う必要がある
+      //       そのため、前のページでは処理を作れない
+      //       prePopで行うと、前のページが表示されない(ons-navigatorが裏でやってる何かとぶつかってるかも？)のでここで行う
+      this.movePrevPageToTop();
+    },
+    async movePrevPageToTop() {
+      const prevPage = this.$parent.$children[this.$parent.$children.length - 2];
+      const scrollContent = prevPage.$el.querySelector('.content-with-footer__content');
+
+      if (!scrollContent) return;
+
+      // NOTE: visibleな要素でないとscrollTopの値は取得できないので、一度検索結果の裏に表示させてから再度非表示にする
+      prevPage.$el.style.display = 'block';
+      await scrollContent.scrollTo(0, 0);
+
+      prevPage.$el.style.display = 'none';
+    },
     goToCampsiteShow(campsite) {
       this.$store.dispatch('campsiteSearchNavigator/push', {
         extends: CampsiteShow,
