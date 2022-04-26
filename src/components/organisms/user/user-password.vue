@@ -49,7 +49,7 @@ export default {
       },
     },
     help() {
-      return this.hasHelp ? '※6文字以上の半角英数字で登録して下さい' : null;
+      return this.hasHelp ? '※半角英字と数字をどちらも含む6文字以上でパスワード登録して下さい' : null;
     },
   },
 };
