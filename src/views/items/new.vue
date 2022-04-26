@@ -104,8 +104,8 @@ export default {
   },
   beforeDestroy() {
     document.removeEventListener('deviceready', this.onDeviceReady, false);
-    window.removeEventListener('native.keyboardshow', this.onKeyBoardShow);
-    window.removeEventListener('native.keyboardhide', this.onKeyBoardHide);
+    window.removeEventListener('keyboardWillShow', this.onKeyBoardShow);
+    window.removeEventListener('keyboardDidHide', this.onKeyBoardHide);
   },
   methods: {
     async createItem() {
