@@ -63,6 +63,17 @@ export default {
             },
           }],
         },
+        tooltips: {
+          enabled: true,
+          callbacks: {
+            label: ((tooltipItem = {}, data = { datasets: [] }) => {
+              const dataset = data.datasets[tooltipItem.datasetIndex] || {};
+              const datasetLabel = dataset.label || '';
+              const ylabel = tooltipItem.yLabel || '';
+              return `${datasetLabel}: ${ylabel}%`;
+            }),
+          },
+        },
       },
     };
   },
