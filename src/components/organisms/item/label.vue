@@ -87,8 +87,7 @@ export default {
   }
 
   &__label {
-    height: 20px;
-    padding: 2px 5px;
+    padding: 5px 8px;
     font-size: 12px;
     font-weight: bold;
     text-align: center;
