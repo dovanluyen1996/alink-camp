@@ -71,8 +71,8 @@ export default {
         },
         {
           name: 'キャンプ場検索',
-          free: '都道府県<br>施設条件',
-          member: '都道府県<br>施設条件<br>気象条件',
+          free: '都道府県<br>施設条件<br>現在位置',
+          member: '都道府県<br>施設条件<br>気象条件<br>現在位置',
         },
         {
           name: '雨雲レーダー',
