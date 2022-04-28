@@ -2,7 +2,7 @@
   <password-field
     v-model="inputedValue"
     :can-show-password="true"
-    help="※6文字以上の半角英数字で登録して下さい"
+    help="※半角英字と数字をどちらも含む6文字以上でパスワード登録して下さい"
     title="新しいパスワード"
     class="password-new"
     :errors="errors"
