@@ -132,8 +132,8 @@ export default {
   },
   beforeDestroy() {
     document.removeEventListener('deviceready', this.onDeviceReady, false);
-    window.removeEventListener('native.keyboardshow', this.onKeyBoardShow);
-    window.removeEventListener('native.keyboardhide', this.onKeyBoardHide);
+    window.removeEventListener('keyboardWillShow', this.onKeyBoardShow);
+    window.removeEventListener('keyboardDidHide', this.onKeyBoardHide);
   },
   methods: {
     async updateItem() {
@@ -199,8 +199,8 @@ export default {
       this.$store.dispatch('menuNavigator/pop');
     },
     onDeviceReady() {
-      window.addEventListener('native.keyboardshow', this.onKeyBoardShow);
-      window.addEventListener('native.keyboardhide', this.onKeyBoardHide);
+      window.addEventListener('keyboardWillShow', this.onKeyBoardShow);
+      window.addEventListener('keyboardDidHide', this.onKeyBoardHide);
     },
     onKeyBoardShow() {
       this.isShowUpdateItemButton = false;
