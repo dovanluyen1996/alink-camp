@@ -15,7 +15,7 @@
             class="icon-add"
             width="24px"
             height="24px"
-          >
+          />
           新規計画の追加
         </v-ons-button>
 
@@ -29,28 +29,24 @@
         :is-shown.sync="isConfirmDialogVisible"
         @clickConfirm="goToPurchase"
       >
-        <template #title>
-          拡張機能
-        </template>
+        <template #title> 拡張機能 </template>
         <template #message>
           キャンプ天気会員にご登録いただくことで、予定を複数作成することができます。
         </template>
-        <template #confirmAction>
-          会員登録へ
-        </template>
+        <template #confirmAction> 会員登録へ </template>
       </confirm-dialog>
     </div>
   </v-ons-page>
 </template>
 
 <script>
-import TimePlan from '@/components/organisms/plan/time-plan';
-import NewPlanPage from '@/views/plans/new';
-import ConfirmDialog from '@/components/organisms/dialog/confirm-dialog';
-import InformationPurchase from '@/views/purchase-information/index.vue';
-import CampsiteName from '@/components/organisms/campsite-name';
+import TimePlan from "@/components/organisms/plan/time-plan";
+import NewPlanPage from "@/views/plans/new";
+import ConfirmDialog from "@/components/organisms/dialog/confirm-dialog";
+import InformationPurchase from "@/views/purchase-information/index.vue";
+import CampsiteName from "@/components/organisms/campsite-name";
 
-import moment from 'moment';
+import moment from "moment";
 
 export default {
   components: {
@@ -71,17 +67,21 @@ export default {
   },
   computed: {
     futurePlans() {
-      const plans = this.$store.getters['models/userCampsitePlan/inFuture']({ campsiteId: this.campsite.id });
+      const plans = this.$store.getters["models/userCampsitePlan/inFuture"]({
+        campsiteId: this.campsite.id,
+      });
 
-      return plans.sort(
-        (a, b) => (moment(a.startedDate).isBefore(b.startedDate) ? -1 : 1),
+      return plans.sort((a, b) =>
+        moment(a.startedDate).isBefore(b.startedDate) ? -1 : 1
       );
     },
     pastPlans() {
-      const plans = this.$store.getters['models/userCampsitePlan/inPast']({ campsiteId: this.campsite.id });
+      const plans = this.$store.getters["models/userCampsitePlan/inPast"]({
+        campsiteId: this.campsite.id,
+      });
 
-      return plans.sort(
-        (a, b) => (moment(a.startedDate).isAfter(b.startedDate) ? -1 : 1),
+      return plans.sort((a, b) =>
+        moment(a.startedDate).isAfter(b.startedDate) ? -1 : 1
       );
     },
     displayedFuturePlans() {
@@ -97,10 +97,10 @@ export default {
       return this.isPurchased ? this.pastPlans : [newestPlan];
     },
     isLoading() {
-      return this.$store.getters['purchase/isLoading'];
+      return this.$store.getters["purchase/isLoading"];
     },
     isPurchased() {
-      return this.$store.getters['purchase/isPurchased'];
+      return this.$store.getters["purchase/isPurchased"];
     },
   },
   methods: {
@@ -111,7 +111,7 @@ export default {
         return;
       }
 
-      this.$store.dispatch('plansNavigator/push', {
+      this.$store.dispatch("plansNavigator/push", {
         extends: NewPlanPage,
         onsNavigatorProps: {
           campsite: this.campsite,
@@ -125,7 +125,7 @@ export default {
       this.isConfirmDialogVisible = false;
     },
     goToPurchase() {
-      this.$store.dispatch('plansNavigator/push', InformationPurchase);
+      this.$store.dispatch("plansNavigator/push", InformationPurchase);
 
       this.closeConfirmDialog();
     },
