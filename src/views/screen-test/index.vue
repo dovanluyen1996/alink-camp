@@ -4,7 +4,7 @@
     <loading :visible="isLoading" />
     <div class="content">
       <div class="content">
-        <!-- <no-data v-if="campsites.length === 0">
+        <no-data v-if="campsites.length === 0">
           <p>
             まだキャンプ計画がありません。<br />
             キャンプ場検索より、<br />
@@ -13,7 +13,7 @@
           <template #actions>
             <go-to-campsite-search-button />
           </template>
-        </no-data> -->
+        </no-data>
 
         <campsite-list
           :is-show-favorite-mark="true"
@@ -39,7 +39,7 @@ export default {
   components: {
     NoData,
     GoToCampsiteSearchButton,
-    CampsiteList,
+    CampsiteList
   },
   data() {
     return {};
@@ -48,40 +48,42 @@ export default {
     isLoading() {
       return this.$store.getters["models/subscription/isLoading"];
     },
-    // campsites() {
-    //   // お気に入りまたは予定ありのキャンプ場
-    //   const favoritedCampsites =
-    //     this.$store.getters["models/usersFavorite/all"];
-    //   let campsites = this.$store.getters["models/userCampsitePlan/all"].map(
-    //     (plan) => plan.campsite
-    //   );
 
-    //   // uniq campsites
-    //   campsites = campsites.filter(
-    //     (campsite, index) =>
-    //       campsites.findIndex((element) => element.id === campsite.id) === index
-    //   );
+    campsites() {
+      // お気に入りまたは予定ありのキャンプ場
+      const favoritedCampsites = this.$store.getters[
+        "models/usersFavorite/all"
+      ];
+      let campsites = this.$store.getters["models/userCampsitePlan/all"].map(
+        plan => plan.campsite
+      );
 
-    //   // 順番: 1.予定日あり+お気に入り, 2.予定あり, 3.お気に入り
-    //   campsites = campsites.sort((a, b) => {
-    //     const aIsFavorited = favoritedCampsites.some(
-    //       (campsite) => a.id === campsite.id
-    //     );
-    //     const bIsFavorited = favoritedCampsites.some(
-    //       (campsite) => b.id === campsite.id
-    //     );
+      // uniq campsites
+      campsites = campsites.filter(
+        (campsite, index) =>
+          campsites.findIndex(element => element.id === campsite.id) === index
+      );
 
-    //     if (aIsFavorited === bIsFavorited) return 0;
-    //     return aIsFavorited ? -1 : 1;
-    //   });
+      // 順番: 1.予定日あり+お気に入り, 2.予定あり, 3.お気に入り
+      campsites = campsites.sort((a, b) => {
+        const aIsFavorited = favoritedCampsites.some(
+          campsite => a.id === campsite.id
+        );
+        const bIsFavorited = favoritedCampsites.some(
+          campsite => b.id === campsite.id
+        );
 
-    //   const campsiteIds = campsites.map((campsite) => campsite.id);
-    //   const noPlanFavorites = favoritedCampsites.filter(
-    //     (favorite) => !campsiteIds.includes(favorite.id)
-    //   );
+        if (aIsFavorited === bIsFavorited) return 0;
+        return aIsFavorited ? -1 : 1;
+      });
 
-    //   return campsites.concat(noPlanFavorites);
-    // },
+      const campsiteIds = campsites.map(campsite => campsite.id);
+      const noPlanFavorites = favoritedCampsites.filter(
+        favorite => !campsiteIds.includes(favorite.id)
+      );
+
+      return campsites.concat(noPlanFavorites);
+    }
   },
   methods: {
     async getPlans() {
@@ -96,8 +98,8 @@ export default {
       this.$store.dispatch("plansNavigator/push", {
         extends: CampsitePlan,
         onsNavigatorProps: {
-          campsite,
-        },
+          campsite
+        }
       });
     },
     async show() {
@@ -107,7 +109,7 @@ export default {
       );
       await this.getPlans();
       await this.getUsersFavorites();
-    },
-  },
+    }
+  }
 };
 </script>
