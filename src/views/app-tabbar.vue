@@ -21,50 +21,50 @@
 </template>
 
 <script>
-import settings from '@/config/settings';
+import settings from "@/config/settings";
 
 // tabs
-import CampsiteWeatherNavigator from '@/views/campsite-weather/campsite-weather-navigator';
-import CampsiteSearchNavigator from '@/views/campsite-search/campsite-search-navigator';
-import PlansNavigator from '@/views/plans/plans-navigator';
-import MenuNavigator from '@/views/menu/menu-navigator';
-import UserStampsCampaign from '@/views/user/user-stamps/campaign';
-import SpotSearchNavigator from '@/views/spot-search/spot-search-navigator';
+import CampsiteWeatherNavigator from "@/views/campsite-weather/campsite-weather-navigator";
+import CampsiteSearchNavigator from "@/views/campsite-search/campsite-search-navigator";
+import PlansNavigator from "@/views/plans/plans-navigator";
+import MenuNavigator from "@/views/menu/menu-navigator";
+import UserStampsCampaign from "@/views/user/user-stamps/campaign";
+import SpotSearchNavigator from "@/views/spot-search/spot-search-navigator";
 
 export default {
-  name: 'AppTabbar',
+  name: "AppTabbar",
   components: {
-    UserStampsCampaign,
+    UserStampsCampaign
   },
   data() {
     return {
       tabs: [
         {
-          label: 'キャンプ天気',
-          icon: 'weather',
-          page: CampsiteWeatherNavigator,
+          label: "キャンプ天気",
+          icon: "weather",
+          page: CampsiteWeatherNavigator
         },
         {
-          label: 'キャンプ場検索',
-          icon: 'search',
-          page: CampsiteSearchNavigator,
+          label: "キャンプ場検索",
+          icon: "search",
+          page: CampsiteSearchNavigator
         },
         {
-          label: 'キャンプ計画',
-          icon: 'plan',
-          page: PlansNavigator,
+          label: "キャンプ計画",
+          icon: "plan",
+          page: PlansNavigator
         },
         {
-          label: '周辺情報',
-          icon: 'nearby',
-          page: SpotSearchNavigator,
+          label: "周辺情報",
+          icon: "nearby",
+          page: SpotSearchNavigator
         },
         {
-          label: 'メニュー',
-          icon: 'menu',
-          page: MenuNavigator,
-        },
-      ],
+          label: "メニュー",
+          icon: "menu",
+          page: MenuNavigator
+        }
+      ]
     };
   },
   computed: {
@@ -73,16 +73,18 @@ export default {
         return this.$store.state.appTabbar.activeIndex;
       },
       set(index) {
-        this.$store.commit('appTabbar/setActiveIndex', index);
-      },
+        this.$store.commit("appTabbar/setActiveIndex", index);
+      }
     },
     isNavigatorBusy() {
-      return this.$store.state.campsiteWeatherNavigator.isBusy
-        || this.$store.state.campsiteSearchNavigator.isBusy
-        || this.$store.state.plansNavigator.isBusy
-        || this.$store.state.spotSearchNavigator.isBusy
-        || this.$store.state.menuNavigator.isBusy;
-    },
+      return (
+        this.$store.state.campsiteWeatherNavigator.isBusy ||
+        this.$store.state.campsiteSearchNavigator.isBusy ||
+        this.$store.state.plansNavigator.isBusy ||
+        this.$store.state.spotSearchNavigator.isBusy ||
+        this.$store.state.menuNavigator.isBusy
+      );
+    }
   },
   methods: {
     prechange(event) {
@@ -95,38 +97,38 @@ export default {
       // if menu is open other page, reset menu
       // If menu is open menu items only, no reset
       if (this.$store.state.menuNavigator.stack.length > 1) {
-        this.$store.dispatch('menuNavigator/reset');
+        this.$store.dispatch("menuNavigator/reset");
       }
     },
     reactive(event) {
       if (this.isNavigatorBusy) return;
 
       switch (event.activeIndex) {
-      case settings.views.appTabbar.tabIndexes.campsiteWeather:
-        this.$store.dispatch('campsiteWeatherNavigator/reset');
-        break;
-      case settings.views.appTabbar.tabIndexes.campsiteSearch:
-        this.$store.dispatch('campsiteSearchNavigator/reset');
-        break;
-      case settings.views.appTabbar.tabIndexes.plans:
-        this.$store.dispatch('plansNavigator/reset');
-        break;
-      case settings.views.appTabbar.tabIndexes.spotSearch:
-        this.$store.dispatch('spotSearchNavigator/reset');
-        break;
-      case settings.views.appTabbar.tabIndexes.menu:
-        this.$store.dispatch('menuNavigator/reset');
-        break;
-      default:
-        break;
+        case settings.views.appTabbar.tabIndexes.campsiteWeather:
+          this.$store.dispatch("campsiteWeatherNavigator/reset");
+          break;
+        case settings.views.appTabbar.tabIndexes.campsiteSearch:
+          this.$store.dispatch("campsiteSearchNavigator/reset");
+          break;
+        case settings.views.appTabbar.tabIndexes.plans:
+          this.$store.dispatch("plansNavigator/reset");
+          break;
+        case settings.views.appTabbar.tabIndexes.spotSearch:
+          this.$store.dispatch("spotSearchNavigator/reset");
+          break;
+        case settings.views.appTabbar.tabIndexes.menu:
+          this.$store.dispatch("menuNavigator/reset");
+          break;
+        default:
+          break;
       }
-    },
-  },
+    }
+  }
 };
 </script>
 
 <style lang="scss" scoped>
-@import '@/assets/scss/_variables.scss';
+@import "@/assets/scss/_variables.scss";
 $tabs: weather, search, plan, nearby, menu;
 
 /deep/ {
@@ -151,7 +153,7 @@ $tabs: weather, search, plan, nearby, menu;
 
     @each $tab in $tabs {
       .tabbar__item[icon="#{$tab}"] .tabbar__icon {
-        background-image: url('~@/assets/images/tabbar/#{$tab}.png');
+        background-image: url("~@/assets/images/tabbar/#{$tab}.png");
       }
     }
   }

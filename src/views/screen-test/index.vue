@@ -1,26 +1,25 @@
 <template>
   <v-ons-page @show="show">
-    <custom-toolbar title="Screen Test Camp" />
+    <custom-toolbar title="キャンプ計画" />
     <loading :visible="isLoading" />
     <div class="content">
-      <div class="content">
-        <no-data v-if="campsites.length === 0">
-          <p>
-            まだキャンプ計画がありません。<br />
-            キャンプ場検索より、<br />
-            計画を作成してください。
-          </p>
-          <template #actions>
-            <go-to-campsite-search-button />
-          </template>
-        </no-data>
+      <no-data v-if="campsites.length === 0">
+        <p>
+          まだキャンプ計画がありません。<br />
+          キャンプ場検索より、<br />
+          計画を作成してください。
+        </p>
+        <template #actions>
+          <go-to-campsite-search-button />
+        </template>
+      </no-data>
 
-        <campsite-list
-          :is-show-favorite-mark="true"
-          :campsites="campsites"
-          @click="goToPlanDetail"
-        />
-      </div>
+      <campsite-list
+        v-else
+        :is-show-favorite-mark="true"
+        :campsites="campsites"
+        @click="goToPlanDetail"
+      />
     </div>
   </v-ons-page>
 </template>
@@ -31,24 +30,20 @@ import NoData from "@/components/organisms/no-data";
 import GoToCampsiteSearchButton from "@/components/organisms/go-to-campsite-search-button";
 import CampsiteList from "@/components/organisms/campsite-list";
 
-// tab contents
+// pages
 import CampsitePlan from "@/views/plans/campsite-plan";
 
 export default {
-  name: "CampsitesPlan",
+  name: "CampsitesIndex",
   components: {
     NoData,
     GoToCampsiteSearchButton,
     CampsiteList
   },
-  data() {
-    return {};
-  },
   computed: {
     isLoading() {
-      return this.$store.getters["models/subscription/isLoading"];
+      return this.$store.getters["models/userCampsitePlan/isLoading"];
     },
-
     campsites() {
       // お気に入りまたは予定ありのキャンプ場
       const favoritedCampsites = this.$store.getters[
@@ -95,7 +90,7 @@ export default {
       await this.$store.dispatch("models/usersFavorite/getUsersFavorites");
     },
     goToPlanDetail(campsite) {
-      this.$store.dispatch("plansNavigator/push", {
+      this.$store.dispatch("menuNavigator/push", {
         extends: CampsitePlan,
         onsNavigatorProps: {
           campsite
