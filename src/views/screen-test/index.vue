@@ -1,26 +1,25 @@
 <template>
   <v-ons-page @show="show">
-    <custom-toolbar title="Screen Test Camp" />
+    <custom-toolbar title="キャンプ計画" />
     <loading :visible="isLoading" />
     <div class="content">
-      <div class="content">
-        <!-- <no-data v-if="campsites.length === 0">
-          <p>
-            まだキャンプ計画がありません。<br />
-            キャンプ場検索より、<br />
-            計画を作成してください。
-          </p>
-          <template #actions>
-            <go-to-campsite-search-button />
-          </template>
-        </no-data> -->
+      <no-data v-if="campsites.length === 0">
+        <p>
+          まだキャンプ計画がありません。<br />
+          キャンプ場検索より、<br />
+          計画を作成してください。
+        </p>
+        <template #actions>
+          <go-to-campsite-search-button />
+        </template>
+      </no-data>
 
-        <campsite-list
-          :is-show-favorite-mark="true"
-          :campsites="campsites"
-          @click="goToPlanDetail"
-        />
-      </div>
+      <campsite-list
+        v-else
+        :is-show-favorite-mark="true"
+        :campsites="campsites"
+        @click="goToPlanDetail"
+      />
     </div>
   </v-ons-page>
 </template>
@@ -31,57 +30,55 @@ import NoData from "@/components/organisms/no-data";
 import GoToCampsiteSearchButton from "@/components/organisms/go-to-campsite-search-button";
 import CampsiteList from "@/components/organisms/campsite-list";
 
-// tab contents
+// pages
 import CampsitePlan from "@/views/plans/campsite-plan";
 
 export default {
-  name: "CampsitesPlan",
+  name: "CampsitesIndex",
   components: {
     NoData,
     GoToCampsiteSearchButton,
-    CampsiteList,
-  },
-  data() {
-    return {};
+    CampsiteList
   },
   computed: {
     isLoading() {
-      return this.$store.getters["models/subscription/isLoading"];
+      return this.$store.getters["models/userCampsitePlan/isLoading"];
     },
-    // campsites() {
-    //   // お気に入りまたは予定ありのキャンプ場
-    //   const favoritedCampsites =
-    //     this.$store.getters["models/usersFavorite/all"];
-    //   let campsites = this.$store.getters["models/userCampsitePlan/all"].map(
-    //     (plan) => plan.campsite
-    //   );
+    campsites() {
+      // お気に入りまたは予定ありのキャンプ場
+      const favoritedCampsites = this.$store.getters[
+        "models/usersFavorite/all"
+      ];
+      let campsites = this.$store.getters["models/userCampsitePlan/all"].map(
+        plan => plan.campsite
+      );
 
-    //   // uniq campsites
-    //   campsites = campsites.filter(
-    //     (campsite, index) =>
-    //       campsites.findIndex((element) => element.id === campsite.id) === index
-    //   );
+      // uniq campsites
+      campsites = campsites.filter(
+        (campsite, index) =>
+          campsites.findIndex(element => element.id === campsite.id) === index
+      );
 
-    //   // 順番: 1.予定日あり+お気に入り, 2.予定あり, 3.お気に入り
-    //   campsites = campsites.sort((a, b) => {
-    //     const aIsFavorited = favoritedCampsites.some(
-    //       (campsite) => a.id === campsite.id
-    //     );
-    //     const bIsFavorited = favoritedCampsites.some(
-    //       (campsite) => b.id === campsite.id
-    //     );
+      // 順番: 1.予定日あり+お気に入り, 2.予定あり, 3.お気に入り
+      campsites = campsites.sort((a, b) => {
+        const aIsFavorited = favoritedCampsites.some(
+          campsite => a.id === campsite.id
+        );
+        const bIsFavorited = favoritedCampsites.some(
+          campsite => b.id === campsite.id
+        );
 
-    //     if (aIsFavorited === bIsFavorited) return 0;
-    //     return aIsFavorited ? -1 : 1;
-    //   });
+        if (aIsFavorited === bIsFavorited) return 0;
+        return aIsFavorited ? -1 : 1;
+      });
 
-    //   const campsiteIds = campsites.map((campsite) => campsite.id);
-    //   const noPlanFavorites = favoritedCampsites.filter(
-    //     (favorite) => !campsiteIds.includes(favorite.id)
-    //   );
+      const campsiteIds = campsites.map(campsite => campsite.id);
+      const noPlanFavorites = favoritedCampsites.filter(
+        favorite => !campsiteIds.includes(favorite.id)
+      );
 
-    //   return campsites.concat(noPlanFavorites);
-    // },
+      return campsites.concat(noPlanFavorites);
+    }
   },
   methods: {
     async getPlans() {
@@ -93,11 +90,11 @@ export default {
       await this.$store.dispatch("models/usersFavorite/getUsersFavorites");
     },
     goToPlanDetail(campsite) {
-      this.$store.dispatch("plansNavigator/push", {
+      this.$store.dispatch("menuNavigator/push", {
         extends: CampsitePlan,
         onsNavigatorProps: {
-          campsite,
-        },
+          campsite
+        }
       });
     },
     async show() {
@@ -107,7 +104,7 @@ export default {
       );
       await this.getPlans();
       await this.getUsersFavorites();
-    },
-  },
+    }
+  }
 };
 </script>
