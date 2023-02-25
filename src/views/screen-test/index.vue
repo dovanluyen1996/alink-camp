@@ -20,6 +20,20 @@
         :campsites="campsites"
         @click="goToPlanDetail"
       />
+      <v-ons-card>
+        <v-ons-button
+          class="button--red button--more button--more__description"
+          @click="goToNewPlanScreen"
+        >
+          <img
+            src="@/assets/images/form/icon-add.png"
+            class="icon-add"
+            width="24px"
+            height="24px"
+          />
+          新規計画の追加
+        </v-ons-button>
+      </v-ons-card>
     </div>
   </v-ons-page>
 </template>
@@ -29,6 +43,7 @@
 import NoData from "@/components/organisms/no-data";
 import GoToCampsiteSearchButton from "@/components/organisms/go-to-campsite-search-button";
 import CampsiteList from "@/components/organisms/campsite-list";
+import NewPlanScreen from "@/views/screen-test/new";
 
 // pages
 import CampsitePlan from "@/views/plans/campsite-plan";
@@ -104,7 +119,30 @@ export default {
       );
       await this.getPlans();
       await this.getUsersFavorites();
+    },
+    goToNewPlanScreen() {
+      // const isShowPremium = !this.isPurchased && this.futurePlans.length;
+      // if (isShowPremium) {
+      //   this.showConfirmDialog();
+      //   return;
+      // }
+
+      this.$store.dispatch("menuNavigator/push", {
+        extends: NewPlanScreen,
+        onsNavigatorProps: {
+          campsite: this.campsite
+        }
+      });
     }
   }
 };
 </script>
+<style lang="scss" scoped>
+@import "@/assets/scss/_variables.scss";
+
+/deep/ {
+  .card {
+    text-align: center;
+  }
+}
+</style>

@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import ScreenTestIndexPage from "@/views/screen-test/index";
+// import ScreenTestIndexPage from "@/views/screen-test/index";
 
 export default {
   computed: {
