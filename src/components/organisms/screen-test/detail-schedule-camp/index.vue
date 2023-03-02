@@ -1,55 +1,34 @@
 <template>
-  <v-ons-page>
+  <v-ons-page @show="show">
     <div class="content">
-      <!-- <validation-observer v-slot="{ handleSubmit }" ref="observer">
-        <content-with-footer ref="contentWithFooter">
-          <campsite-name :campsite-name="campsite.name" />
+      <h1>Do van luyen</h1>
+      <!-- <content-with-footer ref="contentWithFooter">
+        <campsite-name :campsite-name="campsite.name" />
 
-          <validation-provider
-            v-slot="{ errors }"
-            rules="required"
-            name="チェックイン"
+        <detail-table
+          :forecasts="forecasts"
+          :past-weather="pastWeather"
+          :tasks.sync="tasks"
+        />
+
+        <template #footer>
+          <v-ons-button
+            modifier="large--cta yellow rounded"
+            @click="showConfirmDialog"
           >
-            <date-field
-              v-model="startedDate"
-              title="チェックイン"
-              :errors="errors"
-              class="date-field__des"
-            />
-          </validation-provider>
+            {{ displayText.saveButton }}
+          </v-ons-button>
 
-          <validation-provider
-            v-slot="{ errors }"
-            :rules="checkoutRules"
-            name="チェックアウト"
+          <v-ons-button
+            v-if="isNew"
+            modifier="large--cta rounded"
+            class="button--search-day"
+            @click="goToListPlan"
           >
-            <date-field
-              v-model="finishedDate"
-              title="チェックアウト"
-              :errors="errors"
-            />
-          </validation-provider>
-
-          <template #footer>
-            <v-ons-button
-              modifier="large--cta yellow rounded"
-              @click="handleSubmit(showConfirmDialog)"
-            >
-              {{ displayText.saveButton }}
-            </v-ons-button>
-
-            <v-ons-button
-              v-if="isNew"
-              modifier="large--cta rounded"
-              class="button--search-day"
-              @click="goToListPlan"
-            >
-              過去の計画一覧
-            </v-ons-button>
-          </template>
-        </content-with-footer>
-      </validation-observer> -->
-      <p>Luyen Luyen Alo ALo</p>
+            過去の計画一覧
+          </v-ons-button>
+        </template>
+      </content-with-footer> -->
     </div>
 
     <!-- <confirm-dialog
@@ -79,7 +58,7 @@
 
 <script>
 // components
-import DateField from "@/components/organisms/form/date-field";
+import DetailTable from "@/components/organisms/plan/add-plan/detail-schedule-camp/detail-table";
 import ContentWithFooter from "@/components/organisms/content-with-footer";
 import ConfirmDialog from "@/components/organisms/dialog/confirm-dialog";
 import CompletedDialog from "@/components/organisms/dialog/completed-dialog";
@@ -87,7 +66,7 @@ import CampsiteName from "@/components/organisms/campsite-name";
 
 export default {
   components: {
-    DateField,
+    DetailTable,
     ContentWithFooter,
     ConfirmDialog,
     CompletedDialog,
@@ -105,35 +84,39 @@ export default {
   },
   data() {
     return {
+      forecasts: {},
+      pastWeather: {},
       confirmDialogVisible: false,
       completedDialogVisible: false
     };
   },
   computed: {
     isLoading() {
-      return this.$store.getters["models/userCampsitePlan/isLoading"];
+      return this.$store.getters["models/weather/isForecastHourlyLoading"];
     },
     params() {
       return this.$store.getters["plan/params"];
     },
-    startedDate: {
+    tasks: {
       get() {
-        return this.params.startedDate;
+        const fn = (acc, cur) => {
+          const targetAt = this.$moment(cur.targetAt).format(
+            "YYYY-MM-DD HH:mm"
+          );
+          acc[targetAt] = cur.content;
+          return acc;
+        };
+
+        return this.params.tasks.reduce(fn, {});
       },
-      set(newDate) {
-        this.$store.dispatch("plan/setStartedDate", newDate);
+      set(tasks) {
+        const tasksAt = Object.keys(tasks);
+        const params = tasksAt.map(at => ({
+          targetAt: at,
+          content: tasks[at]
+        }));
+        this.$store.dispatch("plan/setTasks", params);
       }
-    },
-    finishedDate: {
-      get() {
-        return this.params.finishedDate;
-      },
-      set(newDate) {
-        this.$store.dispatch("plan/setFinishedDate", newDate);
-      }
-    },
-    checkoutRules() {
-      return "required|required-future-day-since:@チェックイン|required-future-day|required-bwtween-14days:@チェックイン";
     },
     displayText() {
       return this.isNew
@@ -158,28 +141,9 @@ export default {
     isLoading() {
       // NOTE: 新規・編集の判定でフッターの高さが変わるためコンテンツの余白を再計算させる
       this.$refs.contentWithFooter.setContentMargin();
-    },
-    startedDate() {
-      this.setValidate();
-    },
-    finishedDate() {
-      this.setValidate();
-    }
-  },
-  created() {
-    const { startedDate, finishedDate } = this.$store.getters["plan/params"];
-
-    if (startedDate === "" || finishedDate === "") {
-      this.$store.commit("components/planTab/setEnabled", false);
     }
   },
   methods: {
-    setValidate() {
-      this.$nextTick(async () => {
-        const isValid = await this.$refs.observer.validate();
-        this.$store.commit("components/planTab/setEnabled", isValid);
-      });
-    },
     async submit() {
       this.confirmDialogVisible = false;
 
@@ -203,41 +167,53 @@ export default {
     async closeCompletedDialog() {
       this.completedDialogVisible = false;
       await this.$store.dispatch("plansNavigator/pop");
+    },
+    async getForecastHourly() {
+      const params = {
+        campsite_id: this.campsite.id
+      };
+      const forecastHourly = await this.$store.dispatch(
+        "models/weather/getForecastHourly",
+        params
+      );
+      return forecastHourly;
+    },
+    async getPast() {
+      const pastDates = this.$store.getters["plan/pastDates"];
+
+      if (pastDates.length === 0) return {};
+
+      const params = {
+        campsite_id: this.campsite.id,
+        target_date_from: pastDates[0],
+        target_date_to: pastDates[pastDates.length - 1]
+      };
+
+      const past = await this.$store.dispatch("models/weather/getPast", params);
+      return past;
+    },
+    async show() {
+      if (this.$helpers.isEmptyObject(this.forecasts)) {
+        this.forecasts = await this.getForecastHourly();
+      }
+      this.pastWeather = await this.getPast();
     }
   }
 };
 </script>
 
 <style lang="scss" scoped>
+@import "@/assets/scss/_variables.scss";
+
 /deep/ {
-  .card {
-    text-align: center;
-
-    .custom-input-date {
-      width: auto;
-      min-width: 180px;
-    }
-  }
-
-  .card__title {
-    color: #000;
-  }
-
-  .card__title--top {
-    margin-top: 25px;
-  }
-
   .content-with-footer__footer {
     .button {
+      font-size: $font-size-default;
+
       &--search-day {
         margin-top: 20px !important;
       }
     }
-  }
-
-  .custom-input-date input {
-    display: flex;
-    text-align: center !important;
   }
 }
 </style>
