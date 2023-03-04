@@ -191,15 +191,16 @@ $button-height--rounded: 36px;
   }
 
   &--shadow {
+    box-shadow: 0 0 25px rgb(255, 77, 0);
     transition: 0.5s;
     transition-property: box-shadow;
-    box-shadow: 0 0 25px rgb(255, 77, 0);
 
     &:hover {
-      box-shadow: 0 0 5px rgb(0,140,255),
-              0 0 25px rgb(0,140,255),
-              0 0 50px rgb(0,140,255),
-              0 0 100px rgb(0,140,255);
+      box-shadow:
+        0 0 5px rgb(0, 140, 255),
+        0 0 25px rgb(0, 140, 255),
+        0 0 50px rgb(0, 140, 255),
+        0 0 100px rgb(0, 140, 255);
     }
   }
 

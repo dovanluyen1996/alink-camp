@@ -193,15 +193,18 @@ export default {
     position: fixed;
     bottom: 0;
     width: 100%;
-    text-align: right;
     margin-bottom: 20px;
+    text-align: right;
+
     .button--red {
       margin-right: 20px;
     }
   }
+
   .card {
     text-align: center;
   }
+
   .card-version {
     /* GENERAL */
 
@@ -218,13 +221,13 @@ export default {
 
     /* Main Circle */
     .main-circle {
+      position: absolute;
+      left: 50%;
+      z-index: 1;
       width: 40rem;
       height: 40rem;
-      border-radius: 100%;
       background: linear-gradient(40deg, #ff0080, #ff8c00 70%);
-      position: absolute;
-      z-index: 1;
-      left: 50%;
+      border-radius: 100%;
       -webkit-transform: translate(-50%, -70%);
       -ms-transform: translate(-50%, -70%);
       transform: translate(-50%, -70%);
@@ -234,36 +237,37 @@ export default {
     .phone {
       position: relative;
       z-index: 2;
-      // width: 18rem;
-      height: 17rem;
-      background-color: inherit;
-      -webkit-box-shadow: 0 4px 35px rgba(0, 0, 0, 0.1);
-      box-shadow: 0 4px 35px rgba(0, 0, 0, 0.1);
-      border-radius: 40px;
       display: -webkit-box;
       display: -ms-flexbox;
       display: flex;
-      -webkit-box-orient: vertical;
-      -webkit-box-direction: normal;
       -ms-flex-direction: column;
       flex-direction: column;
+      // width: 18rem;
+      height: 17rem;
+      background-color: inherit;
+      border-radius: 40px;
+      -webkit-box-shadow: 0 4px 35px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 35px rgba(0, 0, 0, 0.1);
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
     }
 
     /* Top */
     .menu {
-      /*   background-color: blue; */
-      font-size: 80%;
-      opacity: 0.4;
-      padding: 0.8rem 1.8rem;
       display: -webkit-box;
       display: -ms-flexbox;
       display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.8rem 1.8rem;
+
+      /*   background-color: blue; */
+      font-size: 80%;
+      opacity: 0.4;
       -webkit-box-pack: justify;
       -ms-flex-pack: justify;
-      justify-content: space-between;
       -webkit-box-align: center;
       -ms-flex-align: center;
-      align-items: center;
     }
 
     .icons {
@@ -282,13 +286,13 @@ export default {
     .network {
       width: 0;
       height: 0;
+      margin: 0.12rem 0.5rem;
+      border-color: transparent transparent black transparent;
       border-style: solid;
       border-width: 0 6.8px 7.2px 6.8px;
-      border-color: transparent transparent black transparent;
       -webkit-transform: rotate(135deg);
       -ms-transform: rotate(135deg);
       transform: rotate(135deg);
-      margin: 0.12rem 0.5rem;
     }
 
     /* Middle */
@@ -296,46 +300,48 @@ export default {
       display: -webkit-box;
       display: -ms-flexbox;
       display: flex;
-      -webkit-box-orient: vertical;
-      -webkit-box-direction: normal;
       -ms-flex-direction: column;
       flex-direction: column;
+      width: 70%;
       margin: auto;
       text-align: center;
-      width: 70%;
       -webkit-transform: translateY(5%);
       -ms-transform: translateY(5%);
       transform: translateY(5%);
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
     }
 
     .circle {
       position: relative;
-      border-radius: 100%;
       width: 8rem;
       height: 8rem;
-      background: linear-gradient(40deg, #ff0080, #ff8c00 70%);
       margin: auto;
+      background: linear-gradient(40deg, #ff0080, #ff8c00 70%);
+      border-radius: 100%;
     }
 
     .crescent {
       position: absolute;
-      border-radius: 100%;
       right: 0;
       width: 6rem;
       height: 6rem;
       background: white;
+      border-radius: 100%;
+      -webkit-transition:
+        -webkit-transform 0.6s
+        cubic-bezier(0.645, 0.045, 0.355, 1);
+      transition: -webkit-transform 0.6s cubic-bezier(0.645, 0.045, 0.355, 1);
+      transition: transform 0.6s cubic-bezier(0.645, 0.045, 0.355, 1);
+      transition:
+        transform 0.6s cubic-bezier(0.645, 0.045, 0.355, 1),
+        -webkit-transform 0.6s cubic-bezier(0.645, 0.045, 0.355, 1);
       -webkit-transform: scale(0);
       -ms-transform: scale(0);
       transform: scale(0);
       -webkit-transform-origin: top right;
       -ms-transform-origin: top right;
       transform-origin: top right;
-      -webkit-transition: -webkit-transform 0.6s
-        cubic-bezier(0.645, 0.045, 0.355, 1);
-      transition: -webkit-transform 0.6s cubic-bezier(0.645, 0.045, 0.355, 1);
-      transition: transform 0.6s cubic-bezier(0.645, 0.045, 0.355, 1);
-      transition: transform 0.6s cubic-bezier(0.645, 0.045, 0.355, 1),
-        -webkit-transform 0.6s cubic-bezier(0.645, 0.045, 0.355, 1);
     }
 
     label,
@@ -345,12 +351,12 @@ export default {
     }
 
     label {
-      width: 100%;
-      background-color: rgba(0, 0, 0, 0.1);
-      border-radius: 100px;
       position: relative;
+      width: 100%;
       margin: 1.8rem 0 4rem 0;
       cursor: pointer;
+      background-color: rgba(0, 0, 0, 0.1);
+      border-radius: 100px;
     }
 
     .toggle {
@@ -359,31 +365,33 @@ export default {
       background-color: #fff;
       -webkit-box-shadow: 0 2px 15px rgba(0, 0, 0, 0.15);
       box-shadow: 0 2px 15px rgba(0, 0, 0, 0.15);
-      -webkit-transition: -webkit-transform 0.3s
+      -webkit-transition:
+        -webkit-transform 0.3s
         cubic-bezier(0.25, 0.46, 0.45, 0.94);
       transition: -webkit-transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
       transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+      transition:
+        transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
         -webkit-transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
 
     .names {
-      font-size: 90%;
-      font-weight: bolder;
-      color: black;
-      width: 65%;
-      margin-left: 17.5%;
       position: absolute;
       display: -webkit-box;
       display: -ms-flexbox;
       display: flex;
-      -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
       justify-content: space-between;
+      width: 65%;
+      margin-left: 17.5%;
+      font-size: 90%;
+      font-weight: bolder;
+      color: black;
       -webkit-user-select: none;
       -moz-user-select: none;
       -ms-user-select: none;
       user-select: none;
+      -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
     }
 
     .dark {
@@ -391,45 +399,49 @@ export default {
     }
 
     .mark {
-      border-radius: 100px;
       background-color: black;
+      border-radius: 100px;
     }
 
     .time {
       color: black;
     }
-    /* -------- Switch Styles ------------*/
+
+    /* -------- Switch Styles ------------ */
     [type="checkbox"] {
       display: none;
     }
+
     /* Toggle */
     [type="checkbox"]:checked + .app .toggle {
+      background-color: #34323d;
       -webkit-transform: translateX(100%);
       -ms-transform: translateX(100%);
       transform: translateX(100%);
-      background-color: #34323d;
     }
 
     [type="checkbox"]:checked + .app .dark {
-      opacity: 1;
       color: white;
+      opacity: 1;
     }
 
     [type="checkbox"]:checked + .app .light {
-      opacity: 1;
       color: white;
+      opacity: 1;
     }
+
     /* App */
     [type="checkbox"]:checked + .app .body {
-      background-color: #26242e;
       color: white;
+      background-color: #26242e;
     }
+
     /* Circle */
     [type="checkbox"]:checked + .app .crescent {
+      background: #26242e;
       -webkit-transform: scale(1);
       -ms-transform: scale(1);
       transform: scale(1);
-      background: #26242e;
     }
 
     [type="checkbox"]:checked + .app .circle {
@@ -446,6 +458,7 @@ export default {
 
     [type="checkbox"]:checked + .app .body .phone .menu .time {
       color: white;
+      border-radius: 40px;
     }
 
     [type="checkbox"]:checked + .app .body .phone .menu .icons .network {
@@ -456,25 +469,22 @@ export default {
       background-color: white;
     }
 
-    [type="checkbox"]:checked + .app .body {
-      border-radius: 40px;
-    }
+    // .menu {
+    //   display: -webkit-box;
+    //   display: -ms-flexbox;
+    //   display: flex;
+    //   align-items: center;
+    //   justify-content: space-between;
+    //   padding: 0.8rem 1.8rem;
 
-    .menu {
-      /*   background-color: blue; */
-      font-size: 80%;
-      opacity: 0.4;
-      padding: 0.8rem 1.8rem;
-      display: -webkit-box;
-      display: -ms-flexbox;
-      display: flex;
-      -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-      justify-content: space-between;
-      -webkit-box-align: center;
-      -ms-flex-align: center;
-      align-items: center;
-    }
+    //   /*   background-color: blue; */
+    //   font-size: 80%;
+    //   opacity: 0.4;
+    //   -webkit-box-pack: justify;
+    //   -ms-flex-pack: justify;
+    //   -webkit-box-align: center;
+    //   -ms-flex-align: center;
+    // }
   }
 }
 </style>
