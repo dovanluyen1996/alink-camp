@@ -15,24 +15,24 @@ export default {
   computed: {
     pageStack() {
       return this.$store.state.plansNavigator.stack;
-    }
+    },
   },
   beforeCreate() {
-    this.$store.dispatch("plansNavigator/push", ScreenTestIndexPage);
+    // this.$store.dispatch('plansNavigator/push', ScreenTestIndexPage);
   },
   methods: {
     onPrePush() {
-      this.$store.commit("plansNavigator/setIsBusy", true);
+      this.$store.commit('plansNavigator/setIsBusy', true);
     },
     onPostPush() {
-      this.$store.commit("plansNavigator/setIsBusy", false);
+      this.$store.commit('plansNavigator/setIsBusy', false);
     },
     onPrePop() {
-      this.$store.commit("plansNavigator/setIsBusy", true);
+      this.$store.commit('plansNavigator/setIsBusy', true);
     },
     onPostPop() {
-      this.$store.commit("plansNavigator/setIsBusy", false);
-    }
-  }
+      this.$store.commit('plansNavigator/setIsBusy', false);
+    },
+  },
 };
 </script>

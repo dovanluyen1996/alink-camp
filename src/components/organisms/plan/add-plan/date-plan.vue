@@ -1,7 +1,10 @@
 <template>
   <v-ons-page>
     <div class="content">
-      <validation-observer v-slot="{ handleSubmit }" ref="observer">
+      <validation-observer
+        v-slot="{ handleSubmit }"
+        ref="observer"
+      >
         <content-with-footer ref="contentWithFooter">
           <campsite-name :campsite-name="campsite.name" />
 
@@ -78,11 +81,11 @@
 
 <script>
 // components
-import DateField from "@/components/organisms/form/date-field";
-import ContentWithFooter from "@/components/organisms/content-with-footer";
-import ConfirmDialog from "@/components/organisms/dialog/confirm-dialog";
-import CompletedDialog from "@/components/organisms/dialog/completed-dialog";
-import CampsiteName from "@/components/organisms/campsite-name";
+import DateField from '@/components/organisms/form/date-field';
+import ContentWithFooter from '@/components/organisms/content-with-footer';
+import ConfirmDialog from '@/components/organisms/dialog/confirm-dialog';
+import CompletedDialog from '@/components/organisms/dialog/completed-dialog';
+import CampsiteName from '@/components/organisms/campsite-name';
 
 export default {
   components: {
@@ -90,68 +93,68 @@ export default {
     ContentWithFooter,
     ConfirmDialog,
     CompletedDialog,
-    CampsiteName
+    CampsiteName,
   },
   props: {
     campsite: {
       type: Object,
-      required: true
+      required: true,
     },
     isNew: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   data() {
     return {
       confirmDialogVisible: false,
-      completedDialogVisible: false
+      completedDialogVisible: false,
     };
   },
   computed: {
     isLoading() {
-      return this.$store.getters["models/userCampsitePlan/isLoading"];
+      return this.$store.getters['models/userCampsitePlan/isLoading'];
     },
     params() {
-      return this.$store.getters["plan/params"];
+      return this.$store.getters['plan/params'];
     },
     startedDate: {
       get() {
         return this.params.startedDate;
       },
       set(newDate) {
-        this.$store.dispatch("plan/setStartedDate", newDate);
-      }
+        this.$store.dispatch('plan/setStartedDate', newDate);
+      },
     },
     finishedDate: {
       get() {
         return this.params.finishedDate;
       },
       set(newDate) {
-        this.$store.dispatch("plan/setFinishedDate", newDate);
-      }
+        this.$store.dispatch('plan/setFinishedDate', newDate);
+      },
     },
     checkoutRules() {
-      return "required|required-future-day-since:@チェックイン|required-future-day|required-bwtween-14days:@チェックイン";
+      return 'required|required-future-day-since:@チェックイン|required-future-day|required-bwtween-14days:@チェックイン';
     },
     displayText() {
       return this.isNew
         ? {
-            saveButton: "登録",
-            confirmTitle: "登録確認",
-            confirmType: "登録",
-            confirmSubmit: "登録"
-          }
+          saveButton: '登録',
+          confirmTitle: '登録確認',
+          confirmType: '登録',
+          confirmSubmit: '登録',
+        }
         : {
-            saveButton: "編集保存",
-            confirmTitle: "編集確認",
-            confirmType: "編集",
-            confirmSubmit: "OK"
-          };
+          saveButton: '編集保存',
+          confirmTitle: '編集確認',
+          confirmType: '編集',
+          confirmSubmit: 'OK',
+        };
     },
     completedAction() {
-      return this.isNew ? "createPlan" : "updatePlan";
-    }
+      return this.isNew ? 'createPlan' : 'updatePlan';
+    },
   },
   watch: {
     isLoading() {
@@ -163,35 +166,35 @@ export default {
     },
     finishedDate() {
       this.setValidate();
-    }
+    },
   },
   created() {
-    const { startedDate, finishedDate } = this.$store.getters["plan/params"];
+    const { startedDate, finishedDate } = this.$store.getters['plan/params'];
 
-    if (startedDate === "" || finishedDate === "") {
-      this.$store.commit("components/planTab/setEnabled", false);
+    if (startedDate === '' || finishedDate === '') {
+      this.$store.commit('components/planTab/setEnabled', false);
     }
   },
   methods: {
     setValidate() {
-      this.$nextTick(async () => {
+      this.$nextTick(async() => {
         const isValid = await this.$refs.observer.validate();
-        this.$store.commit("components/planTab/setEnabled", isValid);
+        this.$store.commit('components/planTab/setEnabled', isValid);
       });
     },
     async submit() {
       this.confirmDialogVisible = false;
 
       if (this.isNew) {
-        await this.$store.dispatch("plan/createPlan");
+        await this.$store.dispatch('plan/createPlan');
       } else {
-        await this.$store.dispatch("plan/updatePlan");
+        await this.$store.dispatch('plan/updatePlan');
       }
 
       this.showCompletedDialog();
     },
     async goToListPlan() {
-      await this.$store.dispatch("plansNavigator/pop");
+      await this.$store.dispatch('plansNavigator/pop');
     },
     showConfirmDialog() {
       this.confirmDialogVisible = true;
@@ -201,9 +204,9 @@ export default {
     },
     async closeCompletedDialog() {
       this.completedDialogVisible = false;
-      await this.$store.dispatch("plansNavigator/pop");
-    }
-  }
+      await this.$store.dispatch('plansNavigator/pop');
+    },
+  },
 };
 </script>
 

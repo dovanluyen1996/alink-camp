@@ -15,17 +15,17 @@
 </template>
 
 <script>
-import DatePlan from "@/components/organisms/plan/add-plan/date-plan";
-import ListItemCamp from "@/components/organisms/plan/add-plan/list-item-camp/index";
-import DetailScheduleCamp from "@/components/organisms/plan/add-plan/detail-schedule-camp/index";
+import DatePlan from '@/components/organisms/plan/add-plan/date-plan';
+import ListItemCamp from '@/components/organisms/plan/add-plan/list-item-camp/index';
+import DetailScheduleCamp from '@/components/organisms/plan/add-plan/detail-schedule-camp/index';
 
 export default {
-  name: "NewPlan",
+  name: 'NewPlan',
   props: {
     campsite: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
   computed: {
     tabs() {
@@ -36,8 +36,8 @@ export default {
         return this.$store.state.components.planTab.activeIndex;
       },
       set(value) {
-        this.$store.commit("components/planTab/setActiveIndex", value);
-      }
+        this.$store.commit('components/planTab/setActiveIndex', value);
+      },
     },
     activeTab() {
       return this.tabs[this.activeIndex].label;
@@ -48,49 +48,48 @@ export default {
     isLoading() {
       let isTabLoading = false;
 
-      if (this.activeTab === "計画日") {
-        isTabLoading = this.$store.getters["models/userCampsitePlan/isLoading"];
-      } else if (this.activeTab === "持ち物") {
-        isTabLoading =
-          this.$store.getters["models/item/isLoading"] ||
-          this.$store.getters["models/weather/isForecast14DaysLoading"];
-      } else if (this.activeTab === "予定詳細") {
+      if (this.activeTab === '計画日') {
+        isTabLoading = this.$store.getters['models/userCampsitePlan/isLoading'];
+      } else if (this.activeTab === '持ち物') {
+        isTabLoading = this.$store.getters['models/item/isLoading']
+          || this.$store.getters['models/weather/isForecast14DaysLoading'];
+      } else if (this.activeTab === '予定詳細') {
         isTabLoading = this.$store.getters[
-          "models/weather/isForecastHourlyLoading"
+          'models/weather/isForecastHourlyLoading'
         ];
       }
 
       return isTabLoading;
-    }
+    },
   },
   async created() {
-    this.$store.commit("components/planTab/setTabs", [
+    this.$store.commit('components/planTab/setTabs', [
       {
-        label: "計画日",
+        label: '計画日',
         page: DatePlan,
         props: {
           campsite: this.campsite,
-          isNew: true
-        }
+          isNew: true,
+        },
       },
       {
-        label: "持ち物",
+        label: '持ち物',
         page: ListItemCamp,
         props: {
           campsite: this.campsite,
-          isNew: true
-        }
+          isNew: true,
+        },
       },
       {
-        label: "予定詳細",
+        label: '予定詳細',
         page: DetailScheduleCamp,
         props: {
           campsite: this.campsite,
-          isNew: true
-        }
-      }
+          isNew: true,
+        },
+      },
     ]);
-    this.$store.commit("components/planTab/setActiveIndex", 0);
+    this.$store.commit('components/planTab/setActiveIndex', 0);
 
     // fetch
     await this.getItems();
@@ -99,7 +98,7 @@ export default {
     this.setCampsiteId();
   },
   beforeDestroy() {
-    this.$store.dispatch("plan/clean");
+    this.$store.dispatch('plan/clean');
   },
   methods: {
     onPreChange(event) {
@@ -111,15 +110,15 @@ export default {
       this.setCampsiteId();
     },
     async getItems() {
-      await this.$store.dispatch("models/item/getItems");
+      await this.$store.dispatch('models/item/getItems');
     },
     setCampsiteId() {
-      this.$store.dispatch("plan/setCampsiteId", this.campsite.id);
+      this.$store.dispatch('plan/setCampsiteId', this.campsite.id);
       // 前回保存したアイテムのチェックを復元する
-      const items = this.$store.getters["models/item/all"];
-      this.$store.dispatch("plan/restoreCheckedItem", items);
-    }
-  }
+      const items = this.$store.getters['models/item/all'];
+      this.$store.dispatch('plan/restoreCheckedItem', items);
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>

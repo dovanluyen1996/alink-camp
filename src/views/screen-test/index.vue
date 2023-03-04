@@ -15,12 +15,17 @@
       </no-data> -->
       <v-ons-card>
         <div class="card-version">
-          <input id="switch" type="checkbox" />
+          <input
+            id="switch"
+            type="checkbox"
+          >
           <div class="app">
             <div class="body">
               <div class="phone">
                 <div class="menu">
-                  <div class="time">4:20</div>
+                  <div class="time">
+                    4:20
+                  </div>
                   <div class="icons">
                     <div class="network"></div>
                     <div class="battery"></div>
@@ -61,7 +66,7 @@
             class="icon-add"
             width="24px"
             height="24px"
-          />
+          >
           新規計画の追加
         </v-ons-button>
       </div>
@@ -71,135 +76,94 @@
 
 <script>
 // components
-import NoData from "@/components/organisms/no-data";
-import GoToCampsiteSearchButton from "@/components/organisms/go-to-campsite-search-button";
-import CampsiteList from "@/components/organisms/campsite-list";
-import NewPlanScreen from "@/views/screen-test/new";
+import CampsiteList from '@/components/organisms/campsite-list';
+import NewPlanScreen from '@/views/screen-test/new';
 
-import ContentWithFooter from "@/components/organisms/content-with-footer";
 // import DatePlan from "@/components/organisms/screen-test/date-plan";
 // import TimePlan from "@/components/organisms/screen-test/time-plan";
 // import ListItemCamp from "@/components/organisms/screen-test/list-item-camp/index";
 // import DetailScheduleCamp from "@/components/organisms/screen-test/detail-schedule-camp/index";
 
 // pages
-import CampsitePlan from "@/views/plans/campsite-plan";
+import CampsitePlan from '@/views/plans/campsite-plan';
 
 export default {
-  name: "CampsitesIndex",
+  name: 'CampsitesIndex',
+  components: {
+    CampsiteList,
+  },
   data() {
     return {
       campsites: [
         {
           id: 1,
-          name: "Luyen",
-          address: "Danang",
+          name: 'Luyen',
+          address: 'Danang',
           latitude: 1,
           longitude: 1,
-          isFavorited: false
+          isFavorited: false,
         },
         {
           id: 2,
-          name: "Minh Long",
-          address: "Danang",
+          name: 'Minh Long',
+          address: 'Danang',
           latitude: 1,
           longitude: 1,
-          isFavorited: true
+          isFavorited: true,
         },
         {
           id: 3,
-          name: "Lan Anh",
-          address: "Danang",
+          name: 'Lan Anh',
+          address: 'Danang',
           latitude: 1,
           longitude: 1,
-          isFavorited: true
+          isFavorited: true,
         },
         {
           id: 4,
-          name: "Minh Long",
-          address: "Danang",
+          name: 'Minh Long',
+          address: 'Danang',
           latitude: 1,
           longitude: 1,
-          isFavorited: true
+          isFavorited: true,
         },
         {
           id: 5,
-          name: "Lan Anh",
-          address: "Danang",
+          name: 'Lan Anh',
+          address: 'Danang',
           latitude: 1,
           longitude: 1,
-          isFavorited: true
-        }
-      ]
+          isFavorited: true,
+        },
+      ],
     };
-  },
-  components: {
-    NoData,
-    GoToCampsiteSearchButton,
-    CampsiteList,
-    ContentWithFooter
   },
   computed: {
     isLoading() {
-      return this.$store.getters["models/userCampsitePlan/isLoading"];
+      return this.$store.getters['models/userCampsitePlan/isLoading'];
     },
-    campsites() {
-      // お気に入りまたは予定ありのキャンプ場
-      const favoritedCampsites = this.$store.getters[
-        "models/usersFavorite/all"
-      ];
-      let campsites = this.$store.getters["models/userCampsitePlan/all"].map(
-        plan => plan.campsite
-      );
-
-      // uniq campsites
-      campsites = campsites.filter(
-        (campsite, index) =>
-          campsites.findIndex(element => element.id === campsite.id) === index
-      );
-
-      // 順番: 1.予定日あり+お気に入り, 2.予定あり, 3.お気に入り
-      campsites = campsites.sort((a, b) => {
-        const aIsFavorited = favoritedCampsites.some(
-          campsite => a.id === campsite.id
-        );
-        const bIsFavorited = favoritedCampsites.some(
-          campsite => b.id === campsite.id
-        );
-
-        if (aIsFavorited === bIsFavorited) return 0;
-        return aIsFavorited ? -1 : 1;
-      });
-
-      const campsiteIds = campsites.map(campsite => campsite.id);
-      const noPlanFavorites = favoritedCampsites.filter(
-        favorite => !campsiteIds.includes(favorite.id)
-      );
-
-      return campsites.concat(noPlanFavorites);
-    }
   },
   methods: {
     async getPlans() {
       await this.$store.dispatch(
-        "models/userCampsitePlan/getUserCampsitePlans"
+        'models/userCampsitePlan/getUserCampsitePlans',
       );
     },
     async getUsersFavorites() {
-      await this.$store.dispatch("models/usersFavorite/getUsersFavorites");
+      await this.$store.dispatch('models/usersFavorite/getUsersFavorites');
     },
     goToPlanDetail(campsite) {
-      this.$store.dispatch("menuNavigator/push", {
+      this.$store.dispatch('menuNavigator/push', {
         extends: CampsitePlan,
         onsNavigatorProps: {
-          campsite
-        }
+          campsite,
+        },
       });
     },
     async show() {
       this.$store.dispatch(
-        "appTabbar/setLastVisitedAt",
-        this.$helpers.localDateWithHyphenFrom(new Date())
+        'appTabbar/setLastVisitedAt',
+        this.$helpers.localDateWithHyphenFrom(new Date()),
       );
       await this.getPlans();
       await this.getUsersFavorites();
@@ -211,14 +175,14 @@ export default {
       //   return;
       // }
 
-      this.$store.dispatch("menuNavigator/push", {
+      this.$store.dispatch('menuNavigator/push', {
         extends: NewPlanScreen,
         onsNavigatorProps: {
-          campsite: this.campsite
-        }
+          campsite: this.campsite,
+        },
       });
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>
