@@ -194,11 +194,7 @@ export default {
     bottom: 0;
     width: 100%;
     margin-bottom: 20px;
-    text-align: right;
-
-    .button--red {
-      margin-right: 20px;
-    }
+    text-align: center;
   }
 
   .card {
@@ -468,23 +464,6 @@ export default {
     [type="checkbox"]:checked + .app .body .phone .menu .icons .battery {
       background-color: white;
     }
-
-    // .menu {
-    //   display: -webkit-box;
-    //   display: -ms-flexbox;
-    //   display: flex;
-    //   align-items: center;
-    //   justify-content: space-between;
-    //   padding: 0.8rem 1.8rem;
-
-    //   /*   background-color: blue; */
-    //   font-size: 80%;
-    //   opacity: 0.4;
-    //   -webkit-box-pack: justify;
-    //   -ms-flex-pack: justify;
-    //   -webkit-box-align: center;
-    //   -ms-flex-align: center;
-    // }
   }
 }
 </style>
