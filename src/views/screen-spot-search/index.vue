@@ -292,7 +292,7 @@ export default {
       }
     }
 
-    .click-hover:not(hover) {
+    .click-hover:not(:hover) {
       transition: all 1s;
     }
 
