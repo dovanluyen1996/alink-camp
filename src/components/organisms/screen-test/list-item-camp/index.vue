@@ -4,11 +4,36 @@
       <content-with-footer ref="contentWithFooter">
         <campsite-name :campsite-name="campsite.name" />
 
-        <detail-table
+        <forecast-table
+          :campsite="campsite"
           :forecasts="forecasts"
           :past-weather="pastWeather"
-          :tasks.sync="tasks"
+        >
+          <template #shareButton>
+            <!-- TODO: 持ち物共有は編集時のみ表示する -->
+            <share-button
+              :subject="shareSubject()"
+              :message="shareMessage()"
+            >
+              <template #text>
+                持ち物共有
+              </template>
+            </share-button>
+          </template>
+        </forecast-table>
+        <item-table
+          v-if="sortedItems.length > 0"
+          :checked-item-ids.sync="checkedItemIds"
+          :items="sortedItems"
         />
+
+        <div
+          v-else
+          class="items__note"
+        >
+          アイテムが登録されていません。<br>
+          アイテム追加より登録して下さい。
+        </div>
 
         <template #footer>
           <v-ons-button
@@ -57,18 +82,22 @@
 
 <script>
 // components
-import DetailTable from '@/components/organisms/plan/add-plan/detail-schedule-camp/detail-table';
+import ItemTable from '@/components/organisms/plan/add-plan/list-item-camp/item-table';
+import ForecastTable from '@/components/organisms/plan/add-plan/list-item-camp/forecast-table';
 import ContentWithFooter from '@/components/organisms/content-with-footer';
 import ConfirmDialog from '@/components/organisms/dialog/confirm-dialog';
 import CompletedDialog from '@/components/organisms/dialog/completed-dialog';
+import ShareButton from '@/components/organisms/share-button';
 import CampsiteName from '@/components/organisms/campsite-name';
 
 export default {
   components: {
-    DetailTable,
+    ForecastTable,
+    ItemTable,
     ContentWithFooter,
     ConfirmDialog,
     CompletedDialog,
+    ShareButton,
     CampsiteName,
   },
   props: {
@@ -83,54 +112,50 @@ export default {
   },
   data() {
     return {
-      forecasts: {},
-      pastWeather: {},
       confirmDialogVisible: false,
       completedDialogVisible: false,
+      forecasts: {},
+      pastWeather: {},
     };
   },
   computed: {
     isLoading() {
-      return this.$store.getters['models/weather/isForecastHourlyLoading'];
+      return this.$store.getters['models/item/isLoading']
+        || this.$store.getters['models/weather/isForecast14DaysLoading'];
+    },
+    sortedItems() {
+      const items = this.$store.getters['models/item/all'];
+      const userItems = items.filter(item => item.userId !== null);
+      const consoleItems = items.filter(item => item.userId === null);
+
+      userItems.sort((a, b) => b.id - a.id);
+      consoleItems.sort((a, b) => a.id - b.id);
+
+      return userItems.concat(consoleItems);
     },
     params() {
       return this.$store.getters['plan/params'];
     },
-    tasks: {
+    checkedItemIds: {
       get() {
-        const fn = (acc, cur) => {
-          const targetAt = this.$moment(cur.targetAt).format(
-            'YYYY-MM-DD HH:mm',
-          );
-          acc[targetAt] = cur.content;
-          return acc;
-        };
-
-        return this.params.tasks.reduce(fn, {});
+        return this.params.itemIds;
       },
-      set(tasks) {
-        const tasksAt = Object.keys(tasks);
-        const params = tasksAt.map(at => ({
-          targetAt: at,
-          content: tasks[at],
-        }));
-        this.$store.dispatch('plan/setTasks', params);
+      set(newItemIds) {
+        this.$store.dispatch('plan/setItemIds', newItemIds);
       },
     },
     displayText() {
-      return this.isNew
-        ? {
-          saveButton: '登録',
-          confirmTitle: '登録確認',
-          confirmType: '登録',
-          confirmSubmit: '登録',
-        }
-        : {
-          saveButton: '編集保存',
-          confirmTitle: '編集確認',
-          confirmType: '編集',
-          confirmSubmit: 'OK',
-        };
+      return this.isNew ? {
+        saveButton: '登録',
+        confirmTitle: '登録確認',
+        confirmType: '登録',
+        confirmSubmit: '登録',
+      } : {
+        saveButton: '編集保存',
+        confirmTitle: '編集確認',
+        confirmType: '編集',
+        confirmSubmit: 'OK',
+      };
     },
     completedAction() {
       return this.isNew ? 'createPlan' : 'updatePlan';
@@ -167,15 +192,13 @@ export default {
       this.completedDialogVisible = false;
       await this.$store.dispatch('plansNavigator/pop');
     },
-    async getForecastHourly() {
+    async getForecast14Days() {
       const params = {
         campsite_id: this.campsite.id,
       };
-      const forecastHourly = await this.$store.dispatch(
-        'models/weather/getForecastHourly',
-        params,
-      );
-      return forecastHourly;
+
+      const forecast14Days = await this.$store.dispatch('models/weather/getForecast14Days', params);
+      return forecast14Days;
     },
     async getPast() {
       const pastDates = this.$store.getters['plan/pastDates'];
@@ -193,9 +216,17 @@ export default {
     },
     async show() {
       if (this.$helpers.isEmptyObject(this.forecasts)) {
-        this.forecasts = await this.getForecastHourly();
+        this.forecasts = await this.getForecast14Days();
       }
       this.pastWeather = await this.getPast();
+    },
+    shareSubject() {
+      return 'キャンプ情報共有';
+    },
+    shareMessage() {
+      const checkedItems = this.sortedItems.filter(item => this.checkedItemIds.includes(item.id));
+
+      return checkedItems.map(item => item.name).join('\n');
     },
   },
 };
@@ -214,5 +245,13 @@ export default {
       }
     }
   }
+}
+
+.items__note {
+  margin-bottom: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  color: $color-default;
+  text-align: center;
 }
 </style>

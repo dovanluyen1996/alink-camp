@@ -77,11 +77,13 @@ export default {
       },
     },
     isNavigatorBusy() {
-      return this.$store.state.campsiteWeatherNavigator.isBusy
+      return (
+        this.$store.state.campsiteWeatherNavigator.isBusy
         || this.$store.state.campsiteSearchNavigator.isBusy
         || this.$store.state.plansNavigator.isBusy
         || this.$store.state.spotSearchNavigator.isBusy
-        || this.$store.state.menuNavigator.isBusy;
+        || this.$store.state.menuNavigator.isBusy
+      );
     },
   },
   methods: {
@@ -126,7 +128,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '@/assets/scss/_variables.scss';
+@import "@/assets/scss/_variables.scss";
 $tabs: weather, search, plan, nearby, menu;
 
 /deep/ {
@@ -151,7 +153,7 @@ $tabs: weather, search, plan, nearby, menu;
 
     @each $tab in $tabs {
       .tabbar__item[icon="#{$tab}"] .tabbar__icon {
-        background-image: url('~@/assets/images/tabbar/#{$tab}.png');
+        background-image: url("~@/assets/images/tabbar/#{$tab}.png");
       }
     }
   }

@@ -15,12 +15,12 @@
 </template>
 
 <script>
-import DatePlan from '@/components/organisms/plan/add-plan/date-plan';
-import ListItemCamp from '@/components/organisms/plan/add-plan/list-item-camp/index';
-import DetailScheduleCamp from '@/components/organisms/plan/add-plan/detail-schedule-camp/index';
+import DatePlan from '@/components/organisms/screen-test/date-plan';
+// import ListItemCamp from "@/components/organisms/plan/add-plan/list-item-camp/index";
+import DetailScheduleCamp from '@/components/organisms/screen-test/detail-schedule-camp/index';
 
 export default {
-  name: 'NewPlan',
+  name: 'NewPlanScreen',
   props: {
     campsite: {
       type: Object,
@@ -74,7 +74,7 @@ export default {
       },
       {
         label: '持ち物',
-        page: ListItemCamp,
+        page: DetailScheduleCamp,
         props: {
           campsite: this.campsite,
           isNew: true,
@@ -106,7 +106,6 @@ export default {
     },
     async show() {
       await this.getItems();
-
       this.setCampsiteId();
     },
     async getItems() {
@@ -129,7 +128,7 @@ export default {
     display: flex;
     align-items: center;
     height: 36px;
-    background-color: #ef6539;
+    background-color: #394eef;
 
     &__button {
       height: auto;
@@ -151,7 +150,7 @@ export default {
         padding: 2px 15px;
         font-size: 16px;
         font-weight: bold;
-        background-color: #631900;
+        background-color: #630000;
         border-radius: 15px;
       }
     }

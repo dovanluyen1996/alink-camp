@@ -138,17 +138,19 @@ export default {
       return 'required|required-future-day-since:@チェックイン|required-future-day|required-bwtween-14days:@チェックイン';
     },
     displayText() {
-      return this.isNew ? {
-        saveButton: '登録',
-        confirmTitle: '登録確認',
-        confirmType: '登録',
-        confirmSubmit: '登録',
-      } : {
-        saveButton: '編集保存',
-        confirmTitle: '編集確認',
-        confirmType: '編集',
-        confirmSubmit: 'OK',
-      };
+      return this.isNew
+        ? {
+          saveButton: '登録',
+          confirmTitle: '登録確認',
+          confirmType: '登録',
+          confirmSubmit: '登録',
+        }
+        : {
+          saveButton: '編集保存',
+          confirmTitle: '編集確認',
+          confirmType: '編集',
+          confirmSubmit: 'OK',
+        };
     },
     completedAction() {
       return this.isNew ? 'createPlan' : 'updatePlan';
@@ -209,7 +211,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 /deep/ {
   .card {
     text-align: center;

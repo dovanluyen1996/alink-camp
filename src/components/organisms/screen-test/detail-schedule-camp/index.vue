@@ -1,6 +1,7 @@
 <template>
   <v-ons-page @show="show">
     <div class="content">
+      <h1>Do van luyen</h1>
       <content-with-footer ref="contentWithFooter">
         <campsite-name :campsite-name="campsite.name" />
 
