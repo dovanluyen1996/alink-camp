@@ -255,46 +255,51 @@ export default {
   .button-search-center {
     display: flex;
     justify-content: center;
+
     .button-click {
       display: contents;
-      padding: 0.1em 0.25em;
       height: 4.2em;
+      padding: 0.1em 0.25em;
       background-color: #212121;
       border: 0.08em solid #fff;
       border-radius: 0.3em;
-      .click-hover {
-        position: relative;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        bottom: 0.4em;
-        width: 12em;
-        height: 2.5em;
-        background-color: $color-yellow;
-        border-radius: 0.2em;
-        font-size: 1.5em;
-        color: #fff;
-        border: 0.08em solid #fff;
-        box-shadow: 0 0.4em 0.1em 0.019em #fff;
-        &::before {
-          display: inline-block;
-          width: 20px;
-          height: 20px;
-          margin-right: 6px;
-          content: '';
-          background-image: url("~@/assets/images/form/search-top.png");
-          background-position: center;
-          background-size: 100%;
-        }
+    }
+
+    .click-hover {
+      position: relative;
+      bottom: 0.4em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 12em;
+      height: 2.5em;
+      font-size: 1.5em;
+      color: #fff;
+      background-color: $color-yellow;
+      border: 0.08em solid #fff;
+      border-radius: 0.2em;
+      box-shadow: 0 0.4em 0.1em 0.019em #fff;
+
+      &::before {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        margin-right: 6px;
+        content: '';
+        background-image: url("~@/assets/images/form/search-top.png");
+        background-position: center;
+        background-size: 100%;
       }
-      .click-hover:hover {
-        transition: all 0.5s;
-        transform: translate(0, 0.4em);
-        box-shadow: 0 0 0 0 #fff;
-      }
-      .click-hover:not(hover){
-        transition: all 1s;
-      }
+    }
+
+    .click-hover:not(hover) {
+      transition: all 1s;
+    }
+
+    .click-hover:hover {
+      box-shadow: 0 0 0 0 #fff;
+      transition: all 0.5s;
+      transform: translate(0, 0.4em);
     }
   }
 
