@@ -59,7 +59,7 @@
       <div class="button-fixed">
         <v-ons-button
           class="button--red button--more button--more__description button--shadow"
-          @click="goToNewPlanScreen"
+          @click="goToSpotSearch"
         >
           <img
             src="@/assets/images/form/icon-add.png"
@@ -67,7 +67,21 @@
             width="24px"
             height="24px"
           >
-          新規計画の追加
+          周辺情報
+        </v-ons-button>
+
+        <!-- Button Detail Camp -->
+        <v-ons-button
+          class="button--red button--more button--more__description button--shadow"
+          @click="goToDeatailCamp"
+        >
+          <img
+            src="@/assets/images/form/icon-add.png"
+            class="icon-add"
+            width="24px"
+            height="24px"
+          >
+          予定詳細
         </v-ons-button>
       </div>
     </div>
@@ -77,15 +91,13 @@
 <script>
 // components
 import CampsiteList from '@/components/organisms/campsite-list';
-import NewPlanScreen from '@/views/screen-test/new';
-
-// import DatePlan from "@/components/organisms/screen-test/date-plan";
-// import TimePlan from "@/components/organisms/screen-test/time-plan";
-// import ListItemCamp from "@/components/organisms/screen-test/list-item-camp/index";
-// import DetailScheduleCamp from "@/components/organisms/screen-test/detail-schedule-camp/index";
+// import NewPlanScreen from '@/views/screen-test/new';
+import DetailScheduleCamp from '@/components/organisms/screen-test/detail-schedule-camp/index';
 
 // pages
 import CampsitePlan from '@/views/plans/campsite-plan';
+// import SpotSearchNavigator from '@/views/screen-spot-search/spot-search-navigator';
+import SpotSearchPage from '@/views/screen-spot-search/index';
 
 export default {
   name: 'CampsitesIndex',
@@ -168,15 +180,17 @@ export default {
       await this.getPlans();
       await this.getUsersFavorites();
     },
-    goToNewPlanScreen() {
-      // const isShowPremium = !this.isPurchased && this.futurePlans.length;
-      // if (isShowPremium) {
-      //   this.showConfirmDialog();
-      //   return;
-      // }
-
+    goToSpotSearch() {
       this.$store.dispatch('menuNavigator/push', {
-        extends: NewPlanScreen,
+        extends: SpotSearchPage,
+        onsNavigatorProps: {
+          campsite: this.campsite,
+        },
+      });
+    },
+    goToDeatailCamp() {
+      this.$store.dispatch('menuNavigator/push', {
+        extends: DetailScheduleCamp,
         onsNavigatorProps: {
           campsite: this.campsite,
         },

@@ -1,8 +1,19 @@
 <template>
   <v-ons-page @show="show">
+    <custom-toolbar title="Detail Camp" />
+    <loading :visible="isLoading" />
     <div class="content">
       <h1>Do van luyen</h1>
-      <content-with-footer ref="contentWithFooter">
+      <edit-dialog-task
+        :is-visible="updateDataVisible"
+        :tasks.sync="tasks"
+        :target-at="targetAt"
+        @close="closePopup"
+      />
+
+      <detail-table />
+
+      <!-- <content-with-footer ref="contentWithFooter">
         <campsite-name :campsite-name="campsite.name" />
 
         <detail-table
@@ -28,7 +39,7 @@
             過去の計画一覧
           </v-ons-button>
         </template>
-      </content-with-footer>
+      </content-with-footer> -->
     </div>
 
     <confirm-dialog
@@ -58,19 +69,21 @@
 
 <script>
 // components
-import DetailTable from '@/components/organisms/plan/add-plan/detail-schedule-camp/detail-table';
-import ContentWithFooter from '@/components/organisms/content-with-footer';
+import DetailTable from '@/components/organisms/screen-test/detail-schedule-camp/detail-table';
+// import ContentWithFooter from '@/components/organisms/content-with-footer';
 import ConfirmDialog from '@/components/organisms/dialog/confirm-dialog';
 import CompletedDialog from '@/components/organisms/dialog/completed-dialog';
-import CampsiteName from '@/components/organisms/campsite-name';
+// import CampsiteName from '@/components/organisms/campsite-name';
+import EditDialogTask from '@/components/organisms/edit-dialog-task';
 
 export default {
   components: {
     DetailTable,
-    ContentWithFooter,
+    // ContentWithFooter,
     ConfirmDialog,
     CompletedDialog,
-    CampsiteName,
+    EditDialogTask,
+    // CampsiteName,
   },
   props: {
     campsite: {
@@ -88,6 +101,7 @@ export default {
       pastWeather: {},
       confirmDialogVisible: false,
       completedDialogVisible: false,
+      updateDataVisible: true,
     };
   },
   computed: {
@@ -141,6 +155,7 @@ export default {
     isLoading() {
       // NOTE: 新規・編集の判定でフッターの高さが変わるためコンテンツの余白を再計算させる
       this.$refs.contentWithFooter.setContentMargin();
+      console.log('Detail Test Esttttt');
     },
   },
   methods: {
@@ -197,6 +212,10 @@ export default {
         this.forecasts = await this.getForecastHourly();
       }
       this.pastWeather = await this.getPast();
+    },
+    closePopup() {
+      this.$emit('update:tasks', this.tasks);
+      this.updateDataVisible = false;
     },
   },
 };

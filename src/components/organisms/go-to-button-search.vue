@@ -1,9 +1,11 @@
 <template>
   <v-ons-button
-    modifier="search yellow"
+    class="button-click"
     @click="goToCampsiteSearch"
   >
-    <p>キャンプ場検索</p>
+    <p class="click-hover">
+      キャンプ場検索
+    </p>
   </v-ons-button>
 </template>
 

@@ -64,6 +64,11 @@ export default {
           icon: 'menu',
           page: MenuNavigator,
         },
+        {
+          label: '周辺情報',
+          icon: 'lion',
+          page: SpotSearchNavigator,
+        },
       ],
     };
   },
@@ -129,7 +134,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "@/assets/scss/_variables.scss";
-$tabs: weather, search, plan, nearby, menu;
+$tabs: weather, search, plan, nearby, lion, menu;
 
 /deep/ {
   // NOTE: iPhoneX未満で端末のツールバーの背景が赤くなるようにする
