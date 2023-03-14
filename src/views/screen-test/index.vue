@@ -69,6 +69,20 @@
           >
           周辺情報
         </v-ons-button>
+
+        <!-- Button Detail Camp -->
+        <v-ons-button
+          class="button--red button--more button--more__description button--shadow"
+          @click="goToDeatailCamp"
+        >
+          <img
+            src="@/assets/images/form/icon-add.png"
+            class="icon-add"
+            width="24px"
+            height="24px"
+          >
+          予定詳細
+        </v-ons-button>
       </div>
     </div>
   </v-ons-page>
@@ -78,6 +92,7 @@
 // components
 import CampsiteList from '@/components/organisms/campsite-list';
 // import NewPlanScreen from '@/views/screen-test/new';
+import DetailScheduleCamp from '@/components/organisms/screen-test/detail-schedule-camp/index';
 
 // pages
 import CampsitePlan from '@/views/plans/campsite-plan';
@@ -168,6 +183,14 @@ export default {
     goToSpotSearch() {
       this.$store.dispatch('menuNavigator/push', {
         extends: SpotSearchPage,
+        onsNavigatorProps: {
+          campsite: this.campsite,
+        },
+      });
+    },
+    goToDeatailCamp() {
+      this.$store.dispatch('menuNavigator/push', {
+        extends: DetailScheduleCamp,
         onsNavigatorProps: {
           campsite: this.campsite,
         },
