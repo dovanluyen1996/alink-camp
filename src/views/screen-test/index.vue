@@ -3,16 +3,6 @@
     <custom-toolbar title="キャンプ計画" />
     <loading :visible="isLoading" />
     <div class="content">
-      <!-- <no-data v-if="campsites.length === 0">
-      <p>
-        まだキャンプ計画がありません。<br />
-        キャンプ場検索より、<br />
-        計画を作成してください。
-      </p>
-      <template #actions>
-        <go-to-campsite-search-button />
-      </template>
-      </no-data> -->
       <v-ons-card>
         <div class="card-version">
           <input
@@ -113,7 +103,7 @@ export default {
           address: 'Danang',
           latitude: 1,
           longitude: 1,
-          isFavorited: false,
+          isFavorited: true,
         },
         {
           id: 2,
@@ -165,7 +155,7 @@ export default {
       await this.$store.dispatch('models/usersFavorite/getUsersFavorites');
     },
     goToPlanDetail(campsite) {
-      this.$store.dispatch('menuNavigator/push', {
+      this.$store.dispatch('screenTestNavigator/push', {
         extends: CampsitePlan,
         onsNavigatorProps: {
           campsite,
@@ -181,7 +171,7 @@ export default {
       await this.getUsersFavorites();
     },
     goToSpotSearch() {
-      this.$store.dispatch('menuNavigator/push', {
+      this.$store.dispatch('screenTestNavigator/push', {
         extends: SpotSearchPage,
         onsNavigatorProps: {
           campsite: this.campsite,
@@ -189,7 +179,7 @@ export default {
       });
     },
     goToDeatailCamp() {
-      this.$store.dispatch('menuNavigator/push', {
+      this.$store.dispatch('screenTestNavigator/push', {
         extends: DetailScheduleCamp,
         onsNavigatorProps: {
           campsite: this.campsite,

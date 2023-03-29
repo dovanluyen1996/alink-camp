@@ -5,6 +5,6 @@ export default {
     plans: 2,
     spotSearch: 3,
     menu: 4,
-    lion: 5,
+    screenTest: 5,
   },
 };

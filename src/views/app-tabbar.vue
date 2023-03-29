@@ -30,6 +30,7 @@ import PlansNavigator from '@/views/plans/plans-navigator';
 import MenuNavigator from '@/views/menu/menu-navigator';
 import UserStampsCampaign from '@/views/user/user-stamps/campaign';
 import SpotSearchNavigator from '@/views/spot-search/spot-search-navigator';
+import ScreenTest from '@/views/screen-test/screen-test-navigator';
 
 export default {
   name: 'AppTabbar',
@@ -67,7 +68,7 @@ export default {
         {
           label: '周辺情報',
           icon: 'lion',
-          page: SpotSearchNavigator,
+          page: ScreenTest,
         },
       ],
     };
@@ -120,6 +121,9 @@ export default {
         break;
       case settings.views.appTabbar.tabIndexes.spotSearch:
         this.$store.dispatch('spotSearchNavigator/reset');
+        break;
+      case settings.views.appTabbar.tabIndexes.screenTest:
+        this.$store.dispatch('screenTestNavigator/reset');
         break;
       case settings.views.appTabbar.tabIndexes.menu:
         this.$store.dispatch('menuNavigator/reset');
