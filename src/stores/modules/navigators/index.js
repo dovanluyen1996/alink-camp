@@ -5,6 +5,7 @@ import menuNavigator from './menu-navigator';
 import campsiteWeatherNavigator from './campsite-weather-navigator';
 import campsiteSearchNavigator from './campsite-search-navigator';
 import spotSearchNavigator from './spot-search-navigator';
+import screenTestNavigator from './screen-test-navigator';
 
 export default {
   appNavigator,
@@ -13,4 +14,5 @@ export default {
   campsiteWeatherNavigator,
   campsiteSearchNavigator,
   spotSearchNavigator,
+  screenTestNavigator,
 };
