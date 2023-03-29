@@ -433,7 +433,7 @@ export default {
     /* App */
     [type="checkbox"]:checked + .app .body {
       color: white;
-      background-color: #26242e;
+      // background-color: #26242e;
     }
 
     /* Circle */
